@@ -62,7 +62,7 @@
 <section bind:this={section} id="features" class="px-4 py-20">
 	<div class="mx-auto max-w-[550px]">
 		<div class="mb-10" data-feature>
-			<h2 class="mb-3 text-surface">Everything you need to send email</h2>
+			<h2 class="mb-3 text-surface">Built for <span class="text-primary">developers</span></h2>
 			<p class="text-body text-muted">
 				A complete email delivery platform built for developers who value simplicity.
 			</p>

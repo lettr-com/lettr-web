@@ -1,5 +1,7 @@
 @import 'tailwindcss';
 
+@custom-variant narrow (@media (max-width: 500px));
+
 @theme {
 	--color-background: #F7F1F3;
 	--color-primary: #EC104B;
@@ -72,10 +74,11 @@
 	code,
 	pre {
 		font-family: var(--font-code);
+		font-weight: 300;
 	}
 }
 
 @utility glass {
 	backdrop-filter: blur(12px);
-	background-color: rgba(255, 255, 255, 0.2);
+	background-color: rgba(247, 241, 243, 0.7);
 }

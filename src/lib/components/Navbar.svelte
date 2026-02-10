@@ -30,13 +30,13 @@
 	];
 </script>
 
-<div class="fixed border border-border/30 top-[-1px] right-0 left-0 z-50 flex justify-center px-4">
+<div class="fixed border border-border/30 top-[-1px] right-0 left-0 z-50 flex justify-center px-4 narrow:px-0">
 	<nav
 		bind:this={nav}
-		class="glass flex h-[60px] w-full items-center max-w-[600px] border-r border-l border-border/30 shadow-[0_0_40px_-10px_rgba(236,16,75,0.15)]"
+		class="glass flex flex-col w-full max-w-[600px] narrow:max-w-none border-r border-l border-border/30 narrow:border-x-0 shadow-[0_0_40px_-10px_rgba(236,16,75,0.15)]"
 		aria-label="Main navigation"
 	>
-		<div class="flex w-full items-center justify-between px-4 py-2.5">
+		<div class="flex h-[60px] w-full items-center justify-between px-4 py-2.5">
 			<div class="hidden w-[120px] md:flex">
 				<a href="/" class="flex items-center">
 					<img src="/logo.svg" alt="Lettr" class="h-5" />
@@ -86,12 +86,12 @@
 		</div>
 
 		{#if mobileOpen}
-			<div class="border-t border-border/30 px-4 pb-4 md:hidden">
-				<div class="flex flex-col gap-3 pt-3">
+			<div class="border-t border-border/30 px-4 pb-6 md:hidden">
+				<div class="flex flex-col gap-5 pt-5">
 					{#each [...navLinks, ...rightLinks] as link}
 						<a
 							href={link.href}
-							class="text-sm font-bold text-muted transition-colors hover:text-surface"
+							class="text-base transition-colors hover:text-surface {'primary' in link && link.primary ? 'font-bold text-primary' : 'font-normal text-muted'}"
 							onclick={closeMobile}
 						>
 							{link.label}

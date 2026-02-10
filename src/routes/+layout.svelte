@@ -13,7 +13,7 @@
 
 <Navbar />
 
-<div class="relative mx-auto min-h-screen max-w-[600px] border-x border-border/30">
+<div class="relative mx-auto min-h-screen max-w-[600px] narrow:max-w-none border-x border-border/30 narrow:border-x-0">
 	<BorderLinesCanvas />
 	<main class="relative z-10">
 		{@render children()}

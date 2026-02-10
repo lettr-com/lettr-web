@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import gsap from 'gsap';
-	import { GithubLogo, BookOpen } from 'phosphor-svelte';
+	import { GithubLogo, BookOpen, BookOpenIcon, GithubLogoIcon } from 'phosphor-svelte';
 	import Button from './Button.svelte';
 	import CodeSnippet from './CodeSnippet.svelte';
 
@@ -21,47 +21,48 @@
 	});
 </script>
 
-<section bind:this={section} class="px-4 pt-28 pb-20 border-b border-border/30" id="hero">
+<section bind:this={section} class="px-4 pt-30 pb-20 border-b border-border/30" id="hero">
 	<div class="mx-auto max-w-[550px]">
 		<div class="grid gap-12 lg:grid-cols-1">
-			<div class="flex flex-col gap-6">
-				<h1 data-animate class="text-surface">
+			<div class="flex flex-col">
+				<h1 data-animate class="text-surface mb-4">
 					Transactional emails that<br />
 					<span class="text-primary">feel like Laravel</span>
 				</h1>
 
-				<p data-animate class="max-w-md text-body text-muted">
+				<p data-animate class="max-w-md text-body text-muted mb-10">
 					Lettr is the developer-first email API. Send transactional emails at scale with a simple
 					REST API, SDKs for every language, and real-time delivery analytics.
 				</p>
 
-				<div data-animate class="flex flex-wrap items-center mt-4 gap-2">
+				<div data-animate class="flex flex-wrap items-center mb-3 gap-2">
 					<Button variant="primary" href="#signup">Register</Button>
 					<Button variant="secondary" href="#pricing">See the editor </Button>
 				</div>
-				<p data-animate class="max-w-md mt-[-12px] text-sm text-gray-400">
-					3,000 emails/month free. No credit card required.
+				<p data-animate class="max-w-md text-sm text-gray-400">
+					4,000 emails/month free. No credit card required.
 				</p>
 
-				<div data-animate class="mt-4">
+				<div data-animate class="mt-12">
 					<CodeSnippet />
 				</div>
 
-				<div data-animate class="flex items-center gap-4">
+				<div data-animate class="flex items-center gap-4 mt-5">
 					<a
 						href="#docs"
-						class="inline-flex items-center gap-1.5 text-sm text-muted transition-colors hover:text-surface"
+						class="inline-flex items-center gap-1.5 text-sm transition-colors text-surface hover:underline"
 					>
-						<BookOpen size={16}  />
+						<BookOpenIcon size={18} class="text-primary" />
 						Read the docs
 					</a>
+					<span class="text-sm text-gray-400">or</span>
 					<a
 						href="https://github.com"
-						class="inline-flex items-center gap-1.5 text-sm text-muted transition-colors hover:text-surface"
+						class="inline-flex items-center gap-1.5 text-sm transition-colors text-surface hover:underline"
 						target="_blank"
 						rel="noopener noreferrer"
 					>
-						<GithubLogo size={16} />
+						<GithubLogoIcon size={18} class="text-primary" />
 						view on GitHub
 					</a>
 				</div>

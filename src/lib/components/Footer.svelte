@@ -1,10 +1,10 @@
 <script lang="ts">
-	import { GithubLogo, BookOpen, EnvelopeSimple } from 'phosphor-svelte';
+	import { GithubLogo, BookOpen, EnvelopeSimple, BookOpenIcon, EnvelopeSimpleIcon, GithubLogoIcon } from 'phosphor-svelte';
 </script>
 
-<footer id="docs" class="border-t border-border/30 px-4 py-12">
+<footer id="docs" class="border-t border-border/30 bg-white px-4 py-12">
 	<div class="mx-auto max-w-[550px]">
-		<div class="flex flex-col gap-8 sm:flex-row sm:items-start sm:justify-between">
+		<div class="flex flex-col gap-8 sm:items-start sm:justify-between">
 			<div>
 				<a href="/" class="flex items-center">
 					<img src="/logo.svg" alt="Lettr" class="h-5" />
@@ -20,7 +20,7 @@
 					href="#docs"
 					class="inline-flex items-center gap-1.5 text-sm text-muted transition-colors hover:text-surface"
 				>
-					<BookOpen size={14} />
+					<BookOpenIcon size={14} class="text-primary" />
 					Documentation
 				</a>
 				<a
@@ -29,14 +29,14 @@
 					target="_blank"
 					rel="noopener noreferrer"
 				>
-					<GithubLogo size={14} />
+					<GithubLogoIcon size={14} class="text-primary" />
 					GitHub
 				</a>
 				<a
 					href="mailto:hello@lettr.dev"
 					class="inline-flex items-center gap-1.5 text-sm text-muted transition-colors hover:text-surface"
 				>
-					<EnvelopeSimple size={14} />
+					<EnvelopeSimpleIcon size={14} class="text-primary" />
 					Contact
 				</a>
 			</div>
