@@ -21,7 +21,7 @@
 	});
 </script>
 
-<section bind:this={section} class="px-4 pt-30 pb-20 border-b border-border/30" id="hero">
+<section bind:this={section} class="px-4 pt-30 pb-16 border-b border-border/30" id="hero">
 	<div class="mx-auto max-w-[550px]">
 		<div class="grid gap-12 lg:grid-cols-1">
 			<div class="flex flex-col">

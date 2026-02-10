@@ -2,7 +2,7 @@
 	import { onMount } from 'svelte';
 	import gsap from 'gsap';
 	import { ScrollTrigger } from 'gsap/ScrollTrigger';
-	import { LinkIcon, FileTextIcon, ChartLineUpIcon, SparkleIcon, LightningIcon, PaperclipIcon } from 'phosphor-svelte';
+	import { TranslateIcon, GitForkIcon, ChartLineUpIcon, PaintBrushIcon } from 'phosphor-svelte';
 
 	gsap.registerPlugin(ScrollTrigger);
 
@@ -10,33 +10,23 @@
 
 	const features = [
 		{
-			icon: LinkIcon,
-			title: 'Fluent builder API',
+			icon: PaintBrushIcon,
+			title: 'Non-dev visual editor',
 			description: 'Chainable methods for building emails. Clean, readable, intuitive.'
 		},
 		{
-			icon: FileTextIcon,
-			title: 'Template support',
+			icon: TranslateIcon,
+			title: 'Multi-language',
 			description: 'Send using pre-built templates with substitution data for personalization.'
 		},
 		{
-			icon: PaperclipIcon,
-			title: 'Attachments made easy',
+			icon: GitForkIcon,
+			title: 'Version control',
 			description: 'Attach files by path or raw data. PDF, CSV, images - all supported.'
 		},
 		{
 			icon: ChartLineUpIcon,
 			title: 'Event tracking',
-			description: 'Track opens, clicks, bounces, and deliveries. Full visibility.'
-		},
-		{
-			icon: SparkleIcon,
-			title: 'Smart inlining',
-			description: 'CSS is automatically inlined for maximum email client compatibility.'
-		},
-		{
-			icon: LightningIcon,
-			title: 'Click & open tracking',
 			description: 'Track opens, clicks, bounces, and deliveries. Full visibility.'
 		}
 	];
@@ -59,10 +49,10 @@
 	});
 </script>
 
-<section bind:this={section} id="features" class="px-4 pt-16">
+<section bind:this={section} class="px-4 py-16 border-b border-border/30">
 	<div class="mx-auto max-w-[550px]">
 		<div class="mb-8" data-feature>
-			<h2 class="mb-3 text-surface">Built for <span class="text-primary">developers</span></h2>
+			<h2 class="mb-3 text-surface">Works for the <span class="text-primary">whole team</span></h2>
 		</div>
 
 		<div class="grid grid-cols-2 gap-x-4 gap-y-12">

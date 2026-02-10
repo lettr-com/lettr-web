@@ -15,7 +15,7 @@
 
 	--text-h1: 2.25rem;
 	--text-h1--line-height: 1.2;
-	--text-h2: 1.75rem;
+	--text-h2: 1.5rem;
 	--text-h2--line-height: 1.3;
 	--text-h3: 1.25rem;
 	--text-h3--line-height: 1.4;
@@ -68,7 +68,7 @@
 		font-family: var(--font-heading);
 		font-size: var(--text-h3);
 		line-height: var(--text-h3--line-height);
-		font-weight: 400;
+		font-weight: 500;
 	}
 
 	code,

@@ -146,7 +146,7 @@
 	});
 </script>
 
-<section bind:this={section} id="pricing" class="px-4 py-20">
+<section bind:this={section} id="pricing" class="px-4 py-16">
 	<div class="mx-auto max-w-[550px]">
 		<div class="mb-10" data-pricing-animate>
 			<h2 class="mb-3 text-surface">Simple, transparent pricing</h2>

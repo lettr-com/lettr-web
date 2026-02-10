@@ -77,7 +77,7 @@ await Lettr.send('welcome-email', {
 	});
 </script>
 
-<section bind:this={section} class="px-4 py-20 border-b border-border/30">
+<section bind:this={section} class="px-4 py-16 border-b border-border/30">
 	<div class="mx-auto max-w-[550px]">
 		<div class="mb-10" data-animate>
 			<h2 class="mb-3 text-surface">
@@ -115,6 +115,7 @@ await Lettr.send('welcome-email', {
 					<div class="absolute inset-0 p-[6px]">
 						<div class="bg-gray-800 border-t border-gray-700 h-full p-4 pb-8">
 							<div class="font-code [&_pre]:!bg-transparent [&_pre]:!p-0 [&_pre]:!leading-[1.4] [&_code]:!text-[13px] [&_code]:!leading-[1.4]" data-animate-in>
+								<p class="text-xs text-gray-500 mb-6">example.js</p>
 								{@html highlightedCode}
 							</div>
 						</div>

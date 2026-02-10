@@ -2,6 +2,7 @@
 	import Hero from '$lib/components/Hero.svelte';
 	import Comparison from '$lib/components/Comparison.svelte';
 	import Features from '$lib/components/Features.svelte';
+	import TeamFeatures from '$lib/components/TeamFeatures.svelte';
 	import Pricing from '$lib/components/Pricing.svelte';
 	import Footer from '$lib/components/Footer.svelte';
 </script>
@@ -9,5 +10,6 @@
 <Hero />
 <Comparison />
 <Features />
+<TeamFeatures />
 <Pricing />
 <Footer />
