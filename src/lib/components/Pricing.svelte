@@ -111,7 +111,7 @@
 		}
 	];
 
-	const sliderLabels = ['Free', '50k', '100k', '200k', '500k', '1M', 'Enterprise'];
+	const sliderLabels = ['Free', '50k', '100k', '200k', '500k', '1M', '2M+'];
 
 	const proEmailsMap: Record<number, string> = {
 		1: '50K emails',
@@ -213,7 +213,7 @@
 			</div>
 		</div>
 		<!-- Compare plans table -->
-		<div data-pricing-animate class="mt-8">	
+		<div data-pricing-animate class="mt-6 border border-border/30 bg-white">
 			<div class="p-6">
 				<h3 class="mb-6 text-sm font-bold text-surface">Compare plans</h3>
 
