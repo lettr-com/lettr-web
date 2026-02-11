@@ -59,7 +59,7 @@
 					</a>
 					<span class="text-sm text-gray-400">or</span>
 					<a
-						href="https://github.com"
+						href="https://github.com/lettr-com"
 						class="inline-flex items-center gap-1.5 text-sm transition-colors text-surface hover:underline"
 						target="_blank"
 						rel="noopener noreferrer"
