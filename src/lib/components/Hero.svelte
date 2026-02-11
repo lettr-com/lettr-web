@@ -40,7 +40,7 @@
 					<Button variant="secondary" href="#pricing">See the editor </Button>
 				</div>
 				<p data-animate class="max-w-md text-sm text-gray-400">
-					4,000 emails/month free. No credit card required.
+					3,000 emails/month free. No credit card required.
 				</p>
 
 				<div data-animate class="mt-12">
@@ -49,8 +49,10 @@
 
 				<div data-animate class="flex items-center gap-4 mt-5">
 					<a
-						href="#docs"
+						href="https://docs.lettr.com/introduction"
 						class="inline-flex items-center gap-1.5 text-sm transition-colors text-surface hover:underline"
+						target="_blank"
+						rel="noopener noreferrer"
 					>
 						<BookOpenIcon size={18} class="text-primary" />
 						Read the docs

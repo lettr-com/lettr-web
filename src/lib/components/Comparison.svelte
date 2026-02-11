@@ -92,7 +92,7 @@ await Lettr.send('welcome-email', {
 			<div class="flex">
 				<button
 					class="flex flex-1 items-center justify-center gap-2 py-3 text-md transition-colors {activeTab === 'developer'
-						? 'bg-gray-900 text-white'
+						? 'bg-gray-950 text-white'
 						: 'bg-gray-200 text-gray-500 hover:text-gray-700'}"
 					onclick={() => switchTab('developer')}
 				>
@@ -110,7 +110,7 @@ await Lettr.send('welcome-email', {
 				</button>
 			</div>
 
-			<div bind:this={containerEl} class="relative h-[250px] overflow-hidden {activeTab === 'developer' ? 'bg-gray-900' : 'bg-white'}">
+			<div bind:this={containerEl} class="relative h-[250px] overflow-hidden {activeTab === 'developer' ? 'bg-gray-950' : 'bg-white'}">
 				{#if activeTab === 'developer'}
 					<div class="absolute inset-0 p-[6px]">
 						<div class="bg-gray-800 border-t border-gray-700 h-full p-4 pb-8">

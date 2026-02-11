@@ -79,6 +79,6 @@
 }
 
 @utility glass {
-	backdrop-filter: blur(12px);
+	backdrop-filter: blur(8px);
 	background-color: rgba(247, 241, 243, 0.7);
 }

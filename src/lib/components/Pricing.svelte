@@ -2,7 +2,7 @@
 	import { onMount } from 'svelte';
 	import gsap from 'gsap';
 	import { ScrollTrigger } from 'gsap/ScrollTrigger';
-	import { Check } from 'phosphor-svelte';
+	import { Check, X } from 'phosphor-svelte';
 	import Slider from './Slider.svelte';
 
 	gsap.registerPlugin(ScrollTrigger);
@@ -16,7 +16,7 @@
 			name: 'Free',
 			price: '$0',
 			period: '/mo',
-			description: '4,000 emails/mo · 100/day',
+			description: '3,000 emails/mo · 100/day',
 			features: [
 				'Shared IP pool',
 				'Basic analytics',
@@ -55,9 +55,9 @@
 		},
 		{
 			name: 'Pro',
-			price: '$125',
+			price: '$110',
 			period: '/mo',
-			description: '250k emails · $0.80/1k extra',
+			description: '200k emails · $0.80/1k extra',
 			features: [
 				'Dedicated sending domain',
 				'Advanced analytics',
@@ -111,7 +111,18 @@
 		}
 	];
 
-	const sliderLabels = ['Free', '50k', '100k', '250k', '500k', '1M', 'Enterprise'];
+	const sliderLabels = ['Free', '50k', '100k', '200k', '500k', '1M', 'Enterprise'];
+
+	const proEmailsMap: Record<number, string> = {
+		1: '50K emails',
+		2: '100K emails',
+		3: '200K emails',
+		4: '500K emails',
+		5: '1M emails'
+	};
+
+	let proMonthlyEmails = $derived(proEmailsMap[sliderValue] ?? '100K emails');
+	let proSendingDomains = $derived(sliderValue >= 3 ? 'Unlimited' : '10 domains');
 
 	let activePlan = $derived(plans[sliderValue]);
 
@@ -164,12 +175,8 @@
 				step={1}
 				bind:value={sliderValue}
 				onchange={onSliderChange}
+				labels={sliderLabels}
 			/>
-			<div class="mt-2 flex justify-between text-xs text-muted">
-				{#each sliderLabels as label}
-					<span>{label}</span>
-				{/each}
-			</div>
 		</div>
 
 		<div data-pricing-animate>
@@ -203,6 +210,105 @@
 				>
 					{activePlan.cta}
 				</a>
+			</div>
+		</div>
+		<!-- Compare plans table -->
+		<div data-pricing-animate class="mt-8">	
+			<div class="p-6">
+				<h3 class="mb-6 text-sm font-bold text-surface">Compare plans</h3>
+
+				<div class="overflow-x-auto">
+					<table class="w-full table-fixed text-[13px]">
+						<colgroup>
+							<col class="w-[34%]" />
+							<col class="w-[22%]" />
+							<col class="w-[22%]" />
+							<col class="w-[22%]" />
+						</colgroup>
+						<thead>
+							<tr class="border-b border-border/30">
+								<th class="pb-3 pr-4 text-left font-normal text-gray-500">Feature</th>
+								<th class="pb-3 px-4 text-center font-normal text-gray-500">Free</th>
+								<th class="pb-3 px-4 text-center font-semibold text-primary">Pro</th>
+								<th class="pb-3 pl-4 text-center font-normal text-gray-500">Enterprise</th>
+							</tr>
+						</thead>
+						<tbody class="text-muted">
+							<tr class="border-b border-border/20">
+								<td class="py-3 pr-4 font-medium text-surface">Monthly emails</td>
+								<td class="py-3 px-4 text-center">3,000</td>
+								<td class="py-3 px-4 text-center">{proMonthlyEmails}</td>
+								<td class="py-3 pl-4 text-center">Unlimited</td>
+							</tr>
+							<tr class="border-b border-border/20">
+								<td class="py-3 pr-4 font-medium text-surface">Daily limit</td>
+								<td class="py-3 px-4 text-center">100 / day</td>
+								<td class="py-3 px-4 text-center">No limit</td>
+								<td class="py-3 pl-4 text-center">No limit</td>
+							</tr>
+							<tr class="border-b border-border/20">
+								<td class="py-3 pr-4 font-medium text-surface">Sending domains</td>
+								<td class="py-3 px-4 text-center">1 domain</td>
+								<td class="py-3 px-4 text-center">{proSendingDomains}</td>
+								<td class="py-3 pl-4 text-center">Unlimited</td>
+							</tr>
+							<tr class="border-b border-border/20">
+								<td class="py-3 pr-4 font-medium text-surface">Email API & SMTP</td>
+								<td class="py-3 px-4 text-center"><Check size={16} class="inline text-primary" weight="bold" /></td>
+								<td class="py-3 px-4 text-center"><Check size={16} class="inline text-primary" weight="bold" /></td>
+								<td class="py-3 pl-4 text-center"><Check size={16} class="inline text-primary" weight="bold" /></td>
+							</tr>
+							<tr class="border-b border-border/20">
+								<td class="py-3 pr-4 font-medium text-surface">Webhook events</td>
+								<td class="py-3 px-4 text-center"><Check size={16} class="inline text-primary" weight="bold" /></td>
+								<td class="py-3 px-4 text-center"><Check size={16} class="inline text-primary" weight="bold" /></td>
+								<td class="py-3 pl-4 text-center"><Check size={16} class="inline text-primary" weight="bold" /></td>
+							</tr>
+							<tr class="border-b border-border/20">
+								<td class="py-3 pr-4 font-medium text-surface">Analytics</td>
+								<td class="py-3 px-4 text-center">Basic</td>
+								<td class="py-3 px-4 text-center">Advanced</td>
+								<td class="py-3 pl-4 text-center">Advanced</td>
+							</tr>
+							<tr class="border-b border-border/20">
+								<td class="py-3 pr-4 font-medium text-surface">Data retention</td>
+								<td class="py-3 px-4 text-center">7 days</td>
+								<td class="py-3 px-4 text-center">30 days</td>
+								<td class="py-3 pl-4 text-center">30 days</td>
+							</tr>
+							<tr class="border-b border-border/20">
+								<td class="py-3 pr-4 font-medium text-surface">Team members</td>
+								<td class="py-3 px-4 text-center"><Check size={16} class="inline text-primary" weight="bold" /></td>
+								<td class="py-3 px-4 text-center"><Check size={16} class="inline text-primary" weight="bold" /></td>
+								<td class="py-3 pl-4 text-center"><Check size={16} class="inline text-primary" weight="bold" /></td>
+							</tr>
+							<tr class="border-b border-border/20">
+								<td class="py-3 pr-4 font-medium text-surface">Dedicated IPs</td>
+								<td class="py-3 px-4 text-center"><X size={16} class="inline text-border" /></td>
+								<td class="py-3 px-4 text-center"><X size={16} class="inline text-border" /></td>
+								<td class="py-3 pl-4 text-center"><Check size={16} class="inline text-primary" weight="bold" /></td>
+							</tr>
+							<tr class="border-b border-border/20">
+								<td class="py-3 pr-4 font-medium text-surface">Priority support</td>
+								<td class="py-3 px-4 text-center"><X size={16} class="inline text-border" /></td>
+								<td class="py-3 px-4 text-center"><Check size={16} class="inline text-primary" weight="bold" /></td>
+								<td class="py-3 pl-4 text-center"><Check size={16} class="inline text-primary" weight="bold" /></td>
+							</tr>
+							<tr class="border-b border-border/20">
+								<td class="py-3 pr-4 font-medium text-surface">SLA guarantee</td>
+								<td class="py-3 px-4 text-center"><X size={16} class="inline text-border" /></td>
+								<td class="py-3 px-4 text-center"><X size={16} class="inline text-border" /></td>
+								<td class="py-3 pl-4 text-center"><Check size={16} class="inline text-primary" weight="bold" /></td>
+							</tr>
+							<tr>
+								<td class="py-3 pr-4 font-medium text-surface">SSO / SAML</td>
+								<td class="py-3 px-4 text-center"><X size={16} class="inline text-border" /></td>
+								<td class="py-3 px-4 text-center"><X size={16} class="inline text-border" /></td>
+								<td class="py-3 pl-4 text-center text-muted text-xs">TBA</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
 			</div>
 		</div>
 	</div>

@@ -85,16 +85,14 @@ export const codeTabs: CodeTab[] = [
 	{
 		label: 'Laravel',
 		lang: 'php',
-		code: `use Lettr\\Mail\\LettrMailer;
+		code: `use Illuminate\\Support\\Facades\\Mail;
 
-$mailer = new LettrMailer(env('LETTR_API_KEY'));
-
-$mailer->send([
-    'from'    => 'hello@yourapp.com',
-    'to'      => 'user@example.com',
-    'subject' => 'Welcome to Lettr',
-    'html'    => '<h1>Hello!</h1>',
-]);`
+Mail::lettr()
+    ->to('user@example.com')
+    ->sendTemplate('welcome-email', [
+        'name' => 'John',
+        'company' => 'Acme Inc',
+    ]);`
 	},
 	{
 		label: 'PHP',

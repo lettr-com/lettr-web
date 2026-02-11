@@ -25,7 +25,7 @@
 	];
 
 	const rightLinks = [
-		{ label: 'Docs', href: '#docs' },
+		{ label: 'Docs', href: 'https://docs.lettr.com/introduction' },
 		{ label: 'Sign Up', href: '#signup', primary: true }
 	];
 </script>
@@ -59,12 +59,19 @@
 					{#if link.primary}
 						<a
 							href={link.href}
+							target={link.href.startsWith('http') ? '_blank' : undefined}
+							rel={link.href.startsWith('http') ? 'noopener noreferrer' : undefined}
 							class="text-primary text-sm font-bold transition-colors hover:text-primary/90"
 						>
 							{link.label}
 						</a>
 					{:else}
-						<a href={link.href} class="text-sm text-muted transition-colors hover:text-surface">
+						<a
+							href={link.href}
+							target={link.href.startsWith('http') ? '_blank' : undefined}
+							rel={link.href.startsWith('http') ? 'noopener noreferrer' : undefined}
+							class="text-sm text-muted transition-colors hover:text-surface"
+						>
 							{link.label}
 						</a>
 					{/if}

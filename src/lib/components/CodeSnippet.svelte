@@ -118,7 +118,7 @@
 						{#each moreTabIndices as tabIndex}
 							<button
 								class="block w-full px-3 py-1.5 text-left text-[13px] transition-colors {activeTab === tabIndex
-									? 'text-primary'
+									? 'text-white'
 									: 'text-gray-400 hover:text-white'}"
 								onclick={() => selectTab(tabIndex)}
 							>

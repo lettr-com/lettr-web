@@ -5,9 +5,10 @@
 		step?: number;
 		value?: number;
 		onchange?: (value: number) => void;
+		labels?: string[];
 	}
 
-	let { min = 0, max = 100, step = 1, value = $bindable(50), onchange }: Props = $props();
+	let { min = 0, max = 100, step = 1, value = $bindable(50), onchange, labels = [] }: Props = $props();
 
 	function handleInput(e: Event) {
 		const target = e.target as HTMLInputElement;
@@ -16,9 +17,10 @@
 	}
 
 	let percentage = $derived(((value - min) / (max - min)) * 100);
+	let trackWidth: number = $state(500);
 </script>
 
-<div class="flex w-full flex-col gap-2">
+<div class="flex w-full flex-col gap-2" bind:clientWidth={trackWidth}>
 	<input
 		type="range"
 		{min}
@@ -31,6 +33,23 @@
 		aria-label="Email volume slider"
 	/>
 </div>
+
+{#if labels.length}
+	<div class="relative mt-2 h-4">
+		{#each labels as label, i}
+			{@const thumbWidth = 20}
+			{@const usable = trackWidth - thumbWidth}
+			{@const steps = (max - min) / step}
+			{@const left = thumbWidth / 2 + (i / steps) * usable}
+			<span
+				class="absolute text-xs text-muted -translate-x-1/2"
+				style="left: {left}px"
+			>
+				{label}
+			</span>
+		{/each}
+	</div>
+{/if}
 
 <style>
 	.slider-input::-webkit-slider-runnable-track {

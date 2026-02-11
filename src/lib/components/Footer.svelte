@@ -17,8 +17,10 @@
 			<div class="flex flex-col gap-3">
 				<span class="text-xs font-semibold uppercase tracking-wider text-muted">Resources</span>
 				<a
-					href="#docs"
+					href="https://docs.lettr.com/introduction"
 					class="inline-flex items-center gap-1.5 text-sm text-muted transition-colors hover:text-surface"
+					target="_blank"
+					rel="noopener noreferrer"
 				>
 					<BookOpenIcon size={14} class="text-primary" />
 					Documentation
