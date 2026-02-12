@@ -4,6 +4,7 @@
 	import { CopyIcon, CheckIcon, CaretDownIcon } from 'phosphor-svelte';
 	import { codeTabs as defaultTabs, type CodeTab } from '$lib/utils/shiki';
 	import { getHighlighter } from '$lib/utils/shiki';
+	import { createSingleTimeoutManager } from '$lib/utils/timeoutManager';
 
 	interface Props {
 		tabs?: CodeTab[];
@@ -27,6 +28,7 @@
 	let container: HTMLElement | undefined = $state();
 	let codeEl: HTMLElement | undefined = $state();
 	let moreOpen: boolean = $state(false);
+	const copyResetTimeout = createSingleTimeoutManager();
 
 	let isMoreActive = $derived(moreTabIndices.includes(activeTab));
 
@@ -86,7 +88,7 @@
 	async function copyCode() {
 		await navigator.clipboard.writeText(tabs[activeTab].code);
 		copied = true;
-		setTimeout(() => {
+		copyResetTimeout.schedule(() => {
 			copied = false;
 		}, 3000);
 	}
@@ -94,7 +96,10 @@
 	onMount(() => {
 		highlight(tabs[0]);
 		document.addEventListener('click', handleClickOutside);
-		return () => document.removeEventListener('click', handleClickOutside);
+		return () => {
+			document.removeEventListener('click', handleClickOutside);
+			copyResetTimeout.clear();
+		};
 	});
 </script>
 

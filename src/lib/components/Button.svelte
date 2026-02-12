@@ -16,14 +16,25 @@
 
 	onMount(() => {
 		if (!el) return;
-		gsap.set(el, { y: 0 });
+		const target = el;
+		gsap.set(target, { y: 0 });
 
-		el.addEventListener('mouseenter', () => {
-			gsap.to(el!, { y: -2, duration: 0.2, ease: 'power2.out' });
-		});
-		el.addEventListener('mouseleave', () => {
-			gsap.to(el!, { y: 0, duration: 0.2, ease: 'power2.out' });
-		});
+		const handleMouseEnter = () => {
+			gsap.to(target, { y: -2, duration: 0.2, ease: 'power2.out' });
+		};
+
+		const handleMouseLeave = () => {
+			gsap.to(target, { y: 0, duration: 0.2, ease: 'power2.out' });
+		};
+
+		target.addEventListener('mouseenter', handleMouseEnter);
+		target.addEventListener('mouseleave', handleMouseLeave);
+
+		return () => {
+			target.removeEventListener('mouseenter', handleMouseEnter);
+			target.removeEventListener('mouseleave', handleMouseLeave);
+			gsap.killTweensOf(target);
+		};
 	});
 
 	const baseClasses =

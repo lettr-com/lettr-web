@@ -1,5 +1,7 @@
 <script lang="ts">
+	import { onDestroy } from 'svelte';
 	import { CopyIcon, CheckIcon, TerminalWindowIcon } from 'phosphor-svelte';
+	import { createSingleTimeoutManager } from '$lib/utils/timeoutManager';
 
 	interface Props {
 		commands: string[];
@@ -8,14 +10,19 @@
 	let { commands }: Props = $props();
 
 	let copied: boolean = $state(false);
+	const copyResetTimeout = createSingleTimeoutManager();
 
 	async function copyCommands() {
 		await navigator.clipboard.writeText(commands.join('\n'));
 		copied = true;
-		setTimeout(() => {
+		copyResetTimeout.schedule(() => {
 			copied = false;
 		}, 3000);
 	}
+
+	onDestroy(() => {
+		copyResetTimeout.clear();
+	});
 </script>
 
 <div class="w-full px-[6px] pb-[6px] pt-[2px] border border-border/30 bg-white">
