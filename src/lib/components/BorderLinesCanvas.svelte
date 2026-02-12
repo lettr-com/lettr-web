@@ -1,6 +1,11 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import * as THREE from 'three';
+	import {
+		getEffectivePixelRatio,
+		shouldAnimate,
+		shouldRenderFrame
+	} from '$lib/utils/canvasPerformance';
 
 	let canvas: HTMLCanvasElement | undefined = $state();
 
@@ -12,7 +17,7 @@
 			alpha: true,
 			antialias: true
 		});
-		renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+		renderer.setPixelRatio(getEffectivePixelRatio(window.devicePixelRatio));
 
 		const scene = new THREE.Scene();
 		const camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0.1, 10);
@@ -59,6 +64,7 @@
 			if (!parent) return;
 			const w = parent.clientWidth;
 			const h = parent.clientHeight;
+			renderer.setPixelRatio(getEffectivePixelRatio(window.devicePixelRatio));
 			renderer.setSize(w, h);
 			const aspect = w / h;
 			camera.left = -aspect;
@@ -72,11 +78,49 @@
 		window.addEventListener('resize', resize);
 
 		let time = 0;
-		let animId: number;
+		let animId: number | undefined;
+		let lastFrameTime = 0;
+		let isTabVisible = document.visibilityState === 'visible';
+		let isInViewport = true;
+		let observer: IntersectionObserver | undefined;
 
-		function animate() {
+		const targetFps = 30;
+		const timeIncrementPerMs = 0.00048;
+
+		function startAnimation() {
+			if (animId !== undefined) return;
+			lastFrameTime = performance.now();
 			animId = requestAnimationFrame(animate);
-			time += 0.008;
+		}
+
+		function stopAnimation() {
+			if (animId === undefined) return;
+			cancelAnimationFrame(animId);
+			animId = undefined;
+		}
+
+		function syncAnimationState() {
+			if (shouldAnimate({ isTabVisible, isInViewport })) {
+				startAnimation();
+				return;
+			}
+
+			stopAnimation();
+		}
+
+		function handleVisibilityChange() {
+			isTabVisible = document.visibilityState === 'visible';
+			syncAnimationState();
+		}
+
+		function animate(now: number) {
+			animId = requestAnimationFrame(animate);
+
+			if (!shouldRenderFrame(now, lastFrameTime, targetFps)) return;
+
+			const deltaMs = now - lastFrameTime;
+			lastFrameTime = now;
+			time += deltaMs * timeIncrementPerMs;
 
 			for (const l of lines) {
 				const positions = l.mesh.geometry.attributes.position;
@@ -97,11 +141,21 @@
 			renderer.render(scene, camera);
 		}
 
-		animate();
+		document.addEventListener('visibilitychange', handleVisibilityChange);
+
+		observer = new IntersectionObserver((entries) => {
+			isInViewport = entries.some((entry) => entry.isIntersecting);
+			syncAnimationState();
+		});
+		observer.observe(canvas);
+
+		syncAnimationState();
 
 		return () => {
-			cancelAnimationFrame(animId);
+			stopAnimation();
 			window.removeEventListener('resize', resize);
+			document.removeEventListener('visibilitychange', handleVisibilityChange);
+			observer?.disconnect();
 			renderer.dispose();
 			for (const l of lines) {
 				l.mesh.geometry.dispose();
