@@ -54,7 +54,7 @@
 				{/each}
 			</div>
 
-			<div class="hidden w-[120px] items-center justify-end gap-4 md:flex">
+			<div class="hidden w-[120px] items-center justify-end gap-6 md:flex">
 				{#each rightLinks as link}
 					{#if link.primary}
 						<a
@@ -66,6 +66,7 @@
 							{link.label}
 						</a>
 					{:else}
+					<div class="relative">
 						<a
 							href={link.href}
 							target={link.href.startsWith('http') ? '_blank' : undefined}
@@ -74,6 +75,8 @@
 						>
 							{link.label}
 						</a>
+						<div class="absolute top-0 right-[-8px] h-[6px] w-[6px] rotate-45 bg-primary"></div>
+					</div>
 					{/if}
 				{/each}
 			</div>
@@ -96,13 +99,36 @@
 			<div class="border-t border-border/30 px-4 pb-6 md:hidden">
 				<div class="flex flex-col gap-5 pt-5">
 					{#each [...navLinks, ...rightLinks] as link}
-						<a
-							href={link.href}
-							class="text-base transition-colors hover:text-surface {'primary' in link && link.primary ? 'font-bold text-primary' : 'font-normal text-muted'}"
-							onclick={closeMobile}
-						>
-							{link.label}
-						</a>
+						{#if 'primary' in link && link.primary}
+							<a
+								href={link.href}
+								class="font-bold text-primary transition-colors hover:text-primary/90"
+								onclick={closeMobile}
+							>
+								{link.label}
+							</a>
+						{:else if link.label === 'Docs'}
+							<div class="relative w-fit">
+								<a
+									href={link.href}
+									target={link.href.startsWith('http') ? '_blank' : undefined}
+									rel={link.href.startsWith('http') ? 'noopener noreferrer' : undefined}
+									class="font-normal text-surface transition-colors"
+									onclick={closeMobile}
+								>
+									{link.label}
+								</a>
+								<div class="absolute top-0 right-[-8px] h-[6px] w-[6px] rotate-45 bg-primary"></div>
+							</div>
+						{:else}
+							<a
+								href={link.href}
+								class="font-normal text-surface transition-colors"
+								onclick={closeMobile}
+							>
+								{link.label}
+							</a>
+						{/if}
 					{/each}
 				</div>
 			</div>
