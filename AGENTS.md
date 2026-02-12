@@ -12,10 +12,11 @@ Operational guide for coding agents working in `lettr-web`.
 
 ## Source Layout
 
-- `src/routes/+layout.svelte`: global page shell, SEO/meta tags, navbar, canvas, spline footer scene.
+- `src/routes/+layout.svelte`: global page shell, SEO/meta tags, navbar, canvas, spline footer wrapper.
 - `src/routes/+page.svelte`: homepage composition of section components.
 - `src/lib/components/*.svelte`: reusable UI sections and widgets.
 - `src/lib/utils/shiki.ts`: syntax highlighting theme + singleton highlighter + sample code tabs.
+- `src/lib/utils/spline.ts`: spline loader + visibility gating helpers.
 - `src/styles/app.css`: Tailwind import, custom theme tokens, base rules, and utility classes.
 
 ## Setup & Core Commands
@@ -32,16 +33,15 @@ Operational guide for coding agents working in `lettr-web`.
 - Primary static check (acts as lint+type gate here): `pnpm check`
 - Continuous checking during edits: `pnpm check:watch`
 - There is no dedicated linter script (`lint`) configured right now.
-- There is no unit/integration test runner configured right now.
-- There are currently no `*.test.*` or `*.spec.*` files in the repo.
+- Unit tests: `pnpm test:unit`
+- Unit tests in watch mode: `pnpm test:unit:watch`
+- Current test scope is light and focused; add tests near related utilities/components.
 
 ## Single-Test Guidance (Important)
 
-- Current status: single-test execution is **not available** because no test framework is configured.
-- If you need test coverage in a PR, add a runner first (recommended: Vitest for unit tests).
-- After adding Vitest, run one test file with: `pnpm vitest path/to/file.test.ts`
-- After adding Vitest, run one test by name with: `pnpm vitest -t "test name"`
-- Until then, use `pnpm check` + `pnpm build` as the minimum validation baseline.
+- Run one test file with: `pnpm vitest src/path/to/file.test.ts`
+- Run one test by name with: `pnpm vitest -t "test name"`
+- CI baseline for risky changes: `pnpm check` + `pnpm test:unit` + `pnpm build`.
 
 ## Agent Workflow Expectations
 
@@ -153,6 +153,6 @@ Operational guide for coding agents working in `lettr-web`.
 
 - Need validation? Run `pnpm check` first.
 - Need production confidence? Run `pnpm build` next.
-- Need a single test? Not supported yet; add Vitest first.
+- Need a single test? Use `pnpm vitest src/path/to/file.test.ts`.
 - Need styling direction? Reuse existing Tailwind utilities and theme tokens.
 - Need new architecture? Keep it incremental and aligned with current SvelteKit structure.

@@ -2,8 +2,11 @@
 	import '../styles/app.css';
 	import Navbar from '$lib/components/Navbar.svelte';
 	import BorderLinesCanvas from '$lib/components/BorderLinesCanvas.svelte';
+	import SplineFooter from '$lib/components/SplineFooter.svelte';
 
 	let { children } = $props();
+
+	const splineSceneUrl = 'https://prod.spline.design/dMdfll98hZskLD9o/scene.splinecode';
 </script>
 
 <svelte:head>
@@ -64,7 +67,6 @@
 		}
 	})}</script>`}
 
-	<script type="module" src="https://unpkg.com/@splinetool/viewer@1.12.52/build/spline-viewer.js"></script>
 </svelte:head>
 
 <Navbar />
@@ -78,6 +80,4 @@
 	</div>
 </div>
 
-<div class="fixed inset-x-0 bottom-0 z-0 h-[30vh]">
-	<spline-viewer url="https://prod.spline.design/dMdfll98hZskLD9o/scene.splinecode" style="width: 100%; height: 100%;"></spline-viewer>
-</div>
+<SplineFooter sceneUrl={splineSceneUrl} />
