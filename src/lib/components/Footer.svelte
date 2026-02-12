@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { GithubLogo, BookOpen, EnvelopeSimple, BookOpenIcon, EnvelopeSimpleIcon, GithubLogoIcon } from 'phosphor-svelte';
+	import { BookOpenIcon, EnvelopeSimpleIcon, GithubLogoIcon } from 'phosphor-svelte';
 </script>
 
 <footer id="docs" class="border-t border-border/30 bg-white px-4 py-12">
@@ -57,8 +57,11 @@
 			</div>
 		</div>
 
-		<div class="mt-8 text-xs text-muted">
-			&copy; {new Date().getFullYear()} Lettr. All rights reserved.
+		<div class="mt-8 flex flex-wrap items-center gap-x-4 gap-y-2 text-xs text-muted">
+			<span>&copy; {new Date().getFullYear()} Lettr. All rights reserved.</span>
+			<a href="/privacy-policy/" class="transition-colors hover:text-surface">Privacy Policy</a>
+			<a href="/terms/" class="transition-colors hover:text-surface">Terms of Use</a>
+			<a href="/accessibility-statement/" class="transition-colors hover:text-surface">Accessibility Statement</a>
 		</div>
 	</div>
 </footer>

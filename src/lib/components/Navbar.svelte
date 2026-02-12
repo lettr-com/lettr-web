@@ -25,8 +25,8 @@
 	}
 
 	const navLinks = [
-		{ label: 'Features', href: '#features' },
-		{ label: 'Pricing', href: '#pricing' }
+		{ label: 'Features', href: '/#features' },
+		{ label: 'Pricing', href: '/#pricing' }
 	];
 
 	const rightLinks = [
@@ -53,12 +53,12 @@
 
 			<div class="hidden flex-1 items-center justify-center gap-4 pr-3 md:flex">
 				<div class="flex items-center justify-center w-[60px]">
-					<a href="#features" class="text-sm text-muted transition-colors hover:text-surface">
+					<a href="/#features" class="text-sm text-muted transition-colors hover:text-surface">
 						Features
 					</a>
 				</div>
 				<div class="flex items-center justify-center w-[60px]">
-					<a href="#pricing" class="text-sm text-muted transition-colors hover:text-surface">
+					<a href="/#pricing" class="text-sm text-muted transition-colors hover:text-surface">
 						Pricing
 					</a>
 				</div>
