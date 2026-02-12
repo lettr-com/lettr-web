@@ -61,7 +61,8 @@
 		<div class="mx-auto max-w-[600px] narrow:max-w-none px-6 py-4 flex items-start justify-between gap-4 narrow:flex-col narrow:items-stretch">
 			<div class="min-w-0">
 				<p class="text-sm text-muted">
-					Essential cookies run the site. Optional cookies are for analytics and ads.
+					We need essential cookies to run the site. Accept optional cookies to help us make it
+					better for you.
 				</p>
 				<button
 					onclick={openServicesModal}
