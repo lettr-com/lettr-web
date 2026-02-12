@@ -6,6 +6,7 @@ export interface ConsentState {
 }
 
 const COOKIE_NAME = 'cookie_consent';
+export const consentChangedEventName = 'cookie-consent:changed';
 
 export function getCookieValue(cookieString: string, name: string): string | null {
 	if (!cookieString) return null;
@@ -45,5 +46,10 @@ export function writeConsentCookie(
 	maxAgeDays?: number,
 ): ConsentValue {
 	doc.cookie = buildConsentCookieString(value, maxAgeDays);
+
+	if (typeof window !== 'undefined' && typeof document !== 'undefined' && doc === document) {
+		window.dispatchEvent(new CustomEvent<ConsentValue>(consentChangedEventName, { detail: value }));
+	}
+
 	return value;
 }
