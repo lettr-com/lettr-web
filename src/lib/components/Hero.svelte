@@ -1,22 +1,25 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import gsap from 'gsap';
-	import { GithubLogo, BookOpen, BookOpenIcon, GithubLogoIcon } from 'phosphor-svelte';
+	import { BookOpenIcon, GithubLogoIcon } from 'phosphor-svelte';
 	import Button from './Button.svelte';
 	import CodeSnippet from './CodeSnippet.svelte';
+	import { createFromAnimationCleanup } from '$lib/utils/gsap';
 
 	let section: HTMLElement | undefined = $state();
 
 	onMount(() => {
 		if (!section) return;
 
-		const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
-
-		tl.from(section.querySelectorAll('[data-animate]'), {
-			y: 30,
-			opacity: 0,
-			duration: 0.7,
-			stagger: 0.12
+		return createFromAnimationCleanup({
+			scope: section,
+			targets: '[data-animate]',
+			vars: {
+				y: 30,
+				opacity: 0,
+				duration: 0.7,
+				stagger: 0.12,
+				ease: 'power3.out'
+			}
 		});
 	});
 </script>

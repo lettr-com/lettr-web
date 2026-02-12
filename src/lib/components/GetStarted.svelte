@@ -1,14 +1,10 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import gsap from 'gsap';
-	import { ScrollTrigger } from 'gsap/ScrollTrigger';
 	import { ArrowSquareOutIcon } from 'phosphor-svelte';
 	import CodeSnippet from './CodeSnippet.svelte';
 	import TerminalCommand from './TerminalCommand.svelte';
-	import { createGsapContextCleanup } from '$lib/utils/gsapContext';
+	import { createScrollRevealCleanup } from '$lib/utils/gsap';
 	import type { CodeTab } from '$lib/utils/shiki';
-
-	gsap.registerPlugin(ScrollTrigger);
 
 	let section: HTMLElement | undefined = $state();
 
@@ -110,26 +106,14 @@ console.log(response.requestId);`,
 
 	onMount(() => {
 		if (!section) return;
-		const sectionEl = section;
 
-		return createGsapContextCleanup(
-			gsap,
-			() => {
-				gsap.from(sectionEl.querySelectorAll('[data-step]'), {
-					scrollTrigger: {
-						trigger: sectionEl,
-						start: 'top 80%',
-						toggleActions: 'play none none none'
-					},
-					y: 30,
-					opacity: 0,
-					duration: 0.6,
-					stagger: 0.12,
-					ease: 'power3.out'
-				});
-			},
-			sectionEl
-		);
+		return createScrollRevealCleanup({
+			scope: section,
+			targets: '[data-step]',
+			vars: {
+				stagger: 0.12
+			}
+		});
 	});
 </script>
 

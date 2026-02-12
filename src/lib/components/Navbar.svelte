@@ -1,14 +1,19 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import gsap from 'gsap';
 	import { List, X } from 'phosphor-svelte';
+	import { createFromAnimationCleanup } from '$lib/utils/gsap';
 
 	let nav: HTMLElement | undefined = $state();
 	let mobileOpen: boolean = $state(false);
 
 	onMount(() => {
 		if (!nav) return;
-		gsap.from(nav, { y: -20, opacity: 0, duration: 0.6, ease: 'power2.out' });
+
+		return createFromAnimationCleanup({
+			scope: nav,
+			targets: nav,
+			vars: { y: -20, opacity: 0, duration: 0.6, ease: 'power2.out' }
+		});
 	});
 
 	function toggleMobile() {

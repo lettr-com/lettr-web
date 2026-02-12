@@ -1,12 +1,9 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import gsap from 'gsap';
-	import { ScrollTrigger } from 'gsap/ScrollTrigger';
 	import { CodeIcon, CursorClickIcon, CaretDownIcon, MinusIcon, PlusIcon, TextBIcon, TextItalicIcon, TextUnderlineIcon, TextStrikethroughIcon, TextTIcon, TextAlignLeftIcon, TextAlignCenterIcon, TextAlignRightIcon, TextAlignJustifyIcon, LinkIcon, ListNumbersIcon, ListBulletsIcon } from 'phosphor-svelte';
 	import { getHighlighter } from '$lib/utils/shiki';
-	import { createGsapContextCleanup } from '$lib/utils/gsapContext';
-
-	gsap.registerPlugin(ScrollTrigger);
+	import { createScrollRevealCleanup } from '$lib/utils/gsap';
 
 	let section: HTMLElement | undefined = $state();
 	let containerEl: HTMLElement | undefined = $state();
@@ -63,26 +60,14 @@ Mail::lettr()
 		highlightCode();
 
 		if (!section) return;
-		const sectionEl = section;
 
-		return createGsapContextCleanup(
-			gsap,
-			() => {
-				gsap.from(sectionEl.querySelectorAll('[data-animate]'), {
-					scrollTrigger: {
-						trigger: sectionEl,
-						start: 'top 80%',
-						toggleActions: 'play none none none'
-					},
-					y: 30,
-					opacity: 0,
-					duration: 0.6,
-					stagger: 0.1,
-					ease: 'power3.out'
-				});
-			},
-			sectionEl
-		);
+		return createScrollRevealCleanup({
+			scope: section,
+			targets: '[data-animate]',
+			vars: {
+				stagger: 0.1
+			}
+		});
 	});
 </script>
 

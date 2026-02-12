@@ -1,12 +1,9 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import gsap from 'gsap';
-	import { ScrollTrigger } from 'gsap/ScrollTrigger';
 	import { Check, X } from 'phosphor-svelte';
 	import Slider from './Slider.svelte';
-	import { createGsapContextCleanup } from '$lib/utils/gsapContext';
-
-	gsap.registerPlugin(ScrollTrigger);
+	import { createScrollRevealCleanup } from '$lib/utils/gsap';
 
 	let section: HTMLElement | undefined = $state();
 	let sliderValue: number = $state(0);
@@ -142,26 +139,16 @@
 
 	onMount(() => {
 		if (!section) return;
-		const sectionEl = section;
 
-		return createGsapContextCleanup(
-			gsap,
-			() => {
-				gsap.from(sectionEl.querySelectorAll('[data-pricing-animate]'), {
-					scrollTrigger: {
-						trigger: sectionEl,
-						start: 'top 80%',
-						toggleActions: 'play none none none'
-					},
-					y: 40,
-					opacity: 0,
-					duration: 0.7,
-					stagger: 0.1,
-					ease: 'power3.out'
-				});
-			},
-			sectionEl
-		);
+		return createScrollRevealCleanup({
+			scope: section,
+			targets: '[data-pricing-animate]',
+			vars: {
+				y: 40,
+				duration: 0.7,
+				stagger: 0.1
+			}
+		});
 	});
 </script>
 

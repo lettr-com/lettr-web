@@ -1,11 +1,7 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import gsap from 'gsap';
-	import { ScrollTrigger } from 'gsap/ScrollTrigger';
 	import { LinkIcon, FileTextIcon, ChartLineUpIcon, SparkleIcon, LightningIcon, PaperclipIcon } from 'phosphor-svelte';
-	import { createGsapContextCleanup } from '$lib/utils/gsapContext';
-
-	gsap.registerPlugin(ScrollTrigger);
+	import { createScrollRevealCleanup } from '$lib/utils/gsap';
 
 	let section: HTMLElement | undefined = $state();
 
@@ -44,26 +40,11 @@
 
 	onMount(() => {
 		if (!section) return;
-		const sectionEl = section;
 
-		return createGsapContextCleanup(
-			gsap,
-			() => {
-				gsap.from(sectionEl.querySelectorAll('[data-feature]'), {
-					scrollTrigger: {
-						trigger: sectionEl,
-						start: 'top 80%',
-						toggleActions: 'play none none none'
-					},
-					y: 30,
-					opacity: 0,
-					duration: 0.6,
-					stagger: 0.08,
-					ease: 'power3.out'
-				});
-			},
-			sectionEl
-		);
+		return createScrollRevealCleanup({
+			scope: section,
+			targets: '[data-feature]'
+		});
 	});
 </script>
 
