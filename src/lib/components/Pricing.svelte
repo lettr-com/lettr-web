@@ -4,10 +4,12 @@
 	import { Check, X } from 'phosphor-svelte';
 	import Slider from './Slider.svelte';
 	import { createScrollRevealCleanup } from '$lib/utils/gsap';
+	import { buildRegisterUrl, registerUrl } from '$lib/utils/utm';
 
 	let section: HTMLElement | undefined = $state();
 	let sliderValue: number = $state(0);
 	let card: HTMLElement | undefined = $state();
+	let registerHref: string = $state(registerUrl);
 
 	const plans = [
 		{
@@ -138,6 +140,8 @@
 	}
 
 	onMount(() => {
+		registerHref = buildRegisterUrl(new URL(window.location.href), document.cookie);
+
 		if (!section) return;
 
 		return createScrollRevealCleanup({
@@ -200,7 +204,7 @@
 				</ul>
 
 				<a
-					href="https://app.lettr.com/register"
+					href={registerHref}
 					class="flex items-center justify-center py-3 text-sm font-semibold bg-primary text-white transition-colors hover:bg-primary/90"
 				>
 					{activePlan.cta}

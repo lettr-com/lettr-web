@@ -1,5 +1,13 @@
 <script lang="ts">
+	import { onMount } from 'svelte';
 	import { BookOpenIcon, EnvelopeSimpleIcon, GithubLogoIcon } from 'phosphor-svelte';
+	import { buildRegisterUrl, registerUrl } from '$lib/utils/utm';
+
+	let registerHref: string = $state(registerUrl);
+
+	onMount(() => {
+		registerHref = buildRegisterUrl(new URL(window.location.href), document.cookie);
+	});
 </script>
 
 <footer id="docs" class="border-t border-border/30 bg-white px-4 py-12">
@@ -49,7 +57,7 @@
 				<h3 class="text-surface">Ready to get started?</h3>
 				<p class="text-sm text-muted">Start sending emails in under 5 minutes. No credit card required.</p>
 				<a
-					href="https://app.lettr.com/register"
+					href={registerHref}
 					class="bg-primary px-6 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-primary/90"
 				>
 					Create free account

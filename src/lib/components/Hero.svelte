@@ -4,10 +4,14 @@
 	import Button from './Button.svelte';
 	import CodeSnippet from './CodeSnippet.svelte';
 	import { createFromAnimationCleanup } from '$lib/utils/gsap';
+	import { buildRegisterUrl, registerUrl } from '$lib/utils/utm';
 
 	let section: HTMLElement | undefined = $state();
+	let registerHref: string = $state(registerUrl);
 
 	onMount(() => {
+		registerHref = buildRegisterUrl(new URL(window.location.href), document.cookie);
+
 		if (!section) return;
 
 		return createFromAnimationCleanup({
@@ -39,7 +43,7 @@
 				</p>
 
 				<div data-animate class="flex flex-wrap items-center mb-3 gap-2">
-					<Button variant="primary" href="https://app.lettr.com/register">Register</Button>
+					<Button variant="primary" href={registerHref}>Register</Button>
 					<Button variant="secondary" href="#pricing">Book a demo </Button>
 				</div>
 				<p data-animate class="max-w-md text-sm text-gray-400">

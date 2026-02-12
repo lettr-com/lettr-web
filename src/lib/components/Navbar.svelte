@@ -2,11 +2,15 @@
 	import { onMount } from 'svelte';
 	import { List, X } from 'phosphor-svelte';
 	import { createFromAnimationCleanup } from '$lib/utils/gsap';
+	import { buildRegisterUrl, registerUrl } from '$lib/utils/utm';
 
 	let nav: HTMLElement | undefined = $state();
 	let mobileOpen: boolean = $state(false);
+	let registerHref: string = $state(registerUrl);
 
 	onMount(() => {
+		registerHref = buildRegisterUrl(new URL(window.location.href), document.cookie);
+
 		if (!nav) return;
 
 		return createFromAnimationCleanup({
@@ -29,10 +33,10 @@
 		{ label: 'Pricing', href: '/#pricing' }
 	];
 
-	const rightLinks = [
+	const rightLinks = $derived([
 		{ label: 'Docs', href: 'https://docs.lettr.com/introduction' },
-		{ label: 'Sign Up', href: 'https://app.lettr.com/register', primary: true }
-	];
+		{ label: 'Sign Up', href: registerHref, primary: true }
+	]);
 </script>
 
 <div class="fixed border border-border/30 top-[-1px] right-0 left-0 z-50 flex justify-center px-4 narrow:px-0">

@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { onMount } from 'svelte';
 	import { page } from '$app/state';
 
 	import '../styles/app.css';
@@ -6,11 +7,16 @@
 	import BorderLinesCanvas from '$lib/components/BorderLinesCanvas.svelte';
 	import SplineFooter from '$lib/components/SplineFooter.svelte';
 	import CookieBanner from '$lib/components/CookieBanner.svelte';
+	import { persistUtmParamsFromUrl } from '$lib/utils/utm';
 
 	let { children } = $props();
 
 	const splineSceneUrl = 'https://prod.spline.design/dMdfll98hZskLD9o/scene.splinecode';
 	const isHomeRoute = $derived(page.url.pathname === '/');
+
+	onMount(() => {
+		persistUtmParamsFromUrl(new URL(window.location.href));
+	});
 </script>
 
 <svelte:head>
