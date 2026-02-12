@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { dev } from '$app/environment';
 	import { onMount } from 'svelte';
 	import { getConsentState, shouldShowBanner, writeConsentCookie } from '$lib/utils/cookieConsent';
 	import { fetchGeoDetection } from '$lib/utils/geoDetection';
@@ -18,6 +19,11 @@
 	onMount(() => {
 		const consentState = getConsentState(document.cookie);
 		if (consentState.hasConsented) return;
+
+		if (dev) {
+			visible = true;
+			return;
+		}
 
 		fetchGeoDetection('/api/geo').then((geo) => {
 			if (shouldShowBanner(consentState, geo.requiresConsent)) {
