@@ -4,6 +4,7 @@
 	import { ScrollTrigger } from 'gsap/ScrollTrigger';
 	import { CodeIcon, CursorClickIcon, CaretDownIcon, MinusIcon, PlusIcon, TextBIcon, TextItalicIcon, TextUnderlineIcon, TextStrikethroughIcon, TextTIcon, TextAlignLeftIcon, TextAlignCenterIcon, TextAlignRightIcon, TextAlignJustifyIcon, LinkIcon, ListNumbersIcon, ListBulletsIcon } from 'phosphor-svelte';
 	import { getHighlighter } from '$lib/utils/shiki';
+	import { createGsapContextCleanup } from '$lib/utils/gsapContext';
 
 	gsap.registerPlugin(ScrollTrigger);
 
@@ -62,19 +63,26 @@ Mail::lettr()
 		highlightCode();
 
 		if (!section) return;
+		const sectionEl = section;
 
-		gsap.from(section.querySelectorAll('[data-animate]'), {
-			scrollTrigger: {
-				trigger: section,
-				start: 'top 80%',
-				toggleActions: 'play none none none'
+		return createGsapContextCleanup(
+			gsap,
+			() => {
+				gsap.from(sectionEl.querySelectorAll('[data-animate]'), {
+					scrollTrigger: {
+						trigger: sectionEl,
+						start: 'top 80%',
+						toggleActions: 'play none none none'
+					},
+					y: 30,
+					opacity: 0,
+					duration: 0.6,
+					stagger: 0.1,
+					ease: 'power3.out'
+				});
 			},
-			y: 30,
-			opacity: 0,
-			duration: 0.6,
-			stagger: 0.1,
-			ease: 'power3.out'
-		});
+			sectionEl
+		);
 	});
 </script>
 
