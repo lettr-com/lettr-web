@@ -1,42 +1,67 @@
-# sv
+# lettr-web
 
-Everything you need to build a Svelte project, powered by [`sv`](https://github.com/sveltejs/cli).
+Landing site for Lettr, built with SvelteKit 2, Svelte 5, TypeScript, and Tailwind CSS v4.
 
-## Creating a project
+## Stack
 
-If you're seeing this, you've probably already done this step. Congrats!
+- SvelteKit + Svelte 5 (runes)
+- TypeScript (strict mode)
+- Tailwind CSS v4
+- GSAP animations
+- Three.js canvas effects
+- Vitest unit tests
 
-```sh
-# create a new project
-npx sv create my-app
-```
-
-To recreate this project with the same configuration:
-
-```sh
-# recreate this project
-npx sv create --template minimal --types ts --install npm lettr-site
-```
-
-## Developing
-
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+## Setup
 
 ```sh
-npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
+pnpm install
 ```
 
-## Building
-
-To create a production version of your app:
+## Development
 
 ```sh
-npm run build
+pnpm dev
+
+# expose dev server on local network
+pnpm dev -- --host
 ```
 
-You can preview the production build with `npm run preview`.
+## Quality checks
 
-> To deploy your app, you may need to install an [adapter](https://svelte.dev/docs/kit/adapters) for your target environment.
+```sh
+# static checks (Svelte + TypeScript)
+pnpm check
+
+# unit tests
+pnpm test:unit
+
+# watch mode for unit tests
+pnpm test:unit:watch
+```
+
+Run a single test file:
+
+```sh
+pnpm vitest src/path/to/file.test.ts
+```
+
+Run one test by name:
+
+```sh
+pnpm vitest -t "test name"
+```
+
+## Build and preview
+
+```sh
+pnpm build
+pnpm preview
+```
+
+## Notable structure
+
+- `src/routes/+layout.svelte`: global layout shell and page metadata
+- `src/lib/components/SplineFooter.svelte`: lazy-loaded Spline footer scene wrapper
+- `src/lib/utils/spline.ts`: Spline visibility gating and script loader utilities
+- `src/lib/components/BorderLinesCanvas.svelte`: animated Three.js border lines
+- `src/lib/utils/shiki.ts`: syntax highlighting setup and singleton highlighter
