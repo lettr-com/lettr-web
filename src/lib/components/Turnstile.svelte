@@ -32,7 +32,7 @@
 	let loadError: string = $state('');
 	let handledResetKey: number = $state(0);
 
-	let { token = $bindable(''), siteKey = '', resetKey = 0, label = 'Verification' }: Props = $props();
+	let { token = $bindable(''), siteKey = '', resetKey = 0, label = '' }: Props = $props();
 
 	const activeSiteKey = $derived(siteKey.trim());
 
@@ -162,7 +162,9 @@
 </script>
 
 <div class="space-y-2">
-	<Label for="turnstile-widget">{label}</Label>
+	{#if label}
+		<Label for="turnstile-widget">{label}</Label>
+	{/if}
 	<div id="turnstile-widget" bind:this={container}></div>
 	{#if loadError}
 		<p class="text-sm text-primary">{loadError}</p>

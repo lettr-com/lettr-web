@@ -84,7 +84,6 @@
 			bind:token={turnstileToken}
 			siteKey={turnstileSiteKey}
 			resetKey={turnstileResetKey}
-			label="Verification"
 		/>
 	</CardContent>
 
