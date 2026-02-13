@@ -70,6 +70,8 @@ pnpm preview
 
 The `/demo` flow is instrumented with PostHog events in `src/routes/demo/+page.svelte`.
 
+`book_slot_selected` is emitted for both user-driven and auto-selected slots so slot selection is always represented before confirmation.
+
 ```mermaid
 flowchart TD
     A[book_page_viewed] --> B[book_volume_selected]
@@ -81,8 +83,10 @@ flowchart TD
 
     C -->|demo or priorityDemo| G[book_config_loaded]
     G --> H[book_slots_loaded]
+    H -->|auto_initial| J[book_slot_selected]
     H --> I[book_day_selected]
-    I --> J[book_slot_selected]
+    I -->|auto_day_pick| J
+    I -->|manual click| J
     J --> K[book_confirm_started]
     K --> L[book_reservation_confirmed]
 
@@ -99,3 +103,7 @@ Shared event properties are attached to each event:
 - `funnel_version`: `1`
 - `page`: `/demo`
 - `timezone`: client timezone
+
+`book_slot_selected` includes an additional property:
+
+- `selection_source`: one of `manual`, `auto_initial`, or `auto_day_pick`

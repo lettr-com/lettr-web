@@ -80,6 +80,26 @@
 		});
 	}
 
+	function setSelectedSlot(
+		slot: TimeSlot,
+		source: 'manual' | 'auto_initial' | 'auto_day_pick'
+	) {
+		const previousSlotStart = selectedSlot?.start;
+		selectedSlot = slot;
+		confirmationUuid = null;
+
+		if (previousSlotStart === slot.start) {
+			return;
+		}
+
+		trackBookingEvent('book_slot_selected', {
+			step_number: 7,
+			slot_start: slot.start,
+			slot_end: slot.end,
+			selection_source: source
+		});
+	}
+
 	const slotGroups = $derived.by(() => {
 		const grouped = new Map<string, TimeSlot[]>();
 
@@ -246,7 +266,7 @@
 
 			if (slots.length > 0) {
 				selectedDay = toDayKey(slots[0].start);
-				selectedSlot = slots[0];
+				setSelectedSlot(slots[0], 'auto_initial');
 			}
 		} catch (error) {
 			const message = toErrorMessage(error, 'Could not load available booking slots.');
@@ -262,7 +282,6 @@
 
 	function selectDay(day: string) {
 		selectedDay = day;
-		confirmationUuid = null;
 		trackBookingEvent('book_day_selected', {
 			step_number: 6,
 			day,
@@ -271,18 +290,14 @@
 
 		const firstSlotForDay = slotGroups.get(day)?.[0];
 		if (firstSlotForDay) {
-			selectedSlot = firstSlotForDay;
+			setSelectedSlot(firstSlotForDay, 'auto_day_pick');
+		} else {
+			confirmationUuid = null;
 		}
 	}
 
 	function selectSlot(slot: TimeSlot) {
-		selectedSlot = slot;
-		confirmationUuid = null;
-		trackBookingEvent('book_slot_selected', {
-			step_number: 7,
-			slot_start: slot.start,
-			slot_end: slot.end
-		});
+		setSelectedSlot(slot, 'manual');
 	}
 
 	async function confirmReservation() {
