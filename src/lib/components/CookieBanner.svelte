@@ -82,7 +82,7 @@
 					onclick={reject}
 					class="px-4 py-2 text-sm font-bold border border-border/30 text-surface hover:bg-surface/5 cursor-pointer"
 				>
-					Reject
+					Accept only essential
 				</button>
 				<button
 					onclick={accept}
