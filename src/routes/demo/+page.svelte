@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { env } from '$env/dynamic/public';
+	import { PUBLIC_TURNSTILE_SITE_KEY } from '$env/static/public';
 	import { onMount } from 'svelte';
 	import { capturePosthogEvent, identifyPosthogUser } from '$lib/analytics/posthog';
 	import BookingAlerts from '$lib/components/booking/BookingAlerts.svelte';
@@ -511,7 +511,7 @@
 				bind:lastName
 				bind:phone
 				bind:turnstileToken
-				turnstileSiteKey={env.PUBLIC_TURNSTILE_SITE_KEY}
+				turnstileSiteKey={PUBLIC_TURNSTILE_SITE_KEY}
 				{turnstileResetKey}
 				{canConfirm}
 				{isConfirming}
