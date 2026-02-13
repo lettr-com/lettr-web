@@ -1,4 +1,5 @@
 <script lang="ts">
+	import Turnstile from '$lib/components/Turnstile.svelte';
 	import { Button } from '$lib/components/ui/button';
 	import {
 		Card,
@@ -17,6 +18,9 @@
 		firstName?: string;
 		lastName?: string;
 		phone?: string;
+		turnstileToken?: string;
+		turnstileSiteKey?: string;
+		turnstileResetKey?: number;
 		canConfirm: boolean;
 		isConfirming: boolean;
 		isConfirmed: boolean;
@@ -29,12 +33,24 @@
 		firstName = $bindable(''),
 		lastName = $bindable(''),
 		phone = $bindable(''),
+		turnstileToken = $bindable(''),
+		turnstileSiteKey = '',
+		turnstileResetKey = 0,
 		canConfirm,
 		isConfirming,
 		isConfirmed,
 		redirectUrl,
 		onconfirm
 	}: Props = $props();
+
+	const hasTurnstileSiteKey = $derived(Boolean(turnstileSiteKey.trim()));
+	const canSubmit = $derived(
+		canConfirm &&
+			!isConfirming &&
+			!isConfirmed &&
+			Boolean(turnstileToken) &&
+			hasTurnstileSiteKey
+	);
 </script>
 
 <Card>
@@ -63,12 +79,19 @@
 			<Label for="phone">Phone (optional)</Label>
 			<Input id="phone" type="tel" bind:value={phone} placeholder="+1 555 555 5555" />
 		</div>
+
+		<Turnstile
+			bind:token={turnstileToken}
+			siteKey={turnstileSiteKey}
+			resetKey={turnstileResetKey}
+			label="Verification"
+		/>
 	</CardContent>
 
 	<Separator />
 
 	<CardFooter class="flex flex-col items-stretch gap-2 narrow:gap-3">
-		<Button onclick={onconfirm} disabled={!canConfirm || isConfirming || isConfirmed}>
+		<Button onclick={onconfirm} disabled={!canSubmit}>
 			{#if isConfirmed}
 				Confirmed
 			{:else}

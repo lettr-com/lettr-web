@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { env } from '$env/dynamic/public';
 	import { onMount } from 'svelte';
 	import { capturePosthogEvent, identifyPosthogUser } from '$lib/analytics/posthog';
 	import BookingAlerts from '$lib/components/booking/BookingAlerts.svelte';
@@ -24,6 +25,8 @@
 	let firstName: string = $state('');
 	let lastName: string = $state('');
 	let phone: string = $state('');
+	let turnstileToken: string = $state('');
+	let turnstileResetKey: number = $state(0);
 
 	let confirmationUuid: string | null = $state(null);
 
@@ -301,6 +304,15 @@
 			return;
 		}
 
+		if (!turnstileToken) {
+			errorMessage = 'Please complete the verification challenge.';
+			trackBookingEvent('book_confirm_validation_failed', {
+				step_number: 8,
+				reason: 'missing_turnstile_token'
+			});
+			return;
+		}
+
 		errorMessage = '';
 		infoMessage = '';
 		isConfirming = true;
@@ -322,7 +334,8 @@
 					lastName,
 					phone,
 					timeSlot: selectedSlot,
-					timezone
+					timezone,
+					turnstileToken
 				})
 			});
 
@@ -340,6 +353,8 @@
 		} catch (error) {
 			const message = toErrorMessage(error, 'Could not confirm reservation.');
 			errorMessage = message;
+			turnstileToken = '';
+			turnstileResetKey += 1;
 			trackBookingEvent('book_reservation_failed', {
 				step_number: 9,
 				error_message: message,
@@ -480,6 +495,9 @@
 				bind:firstName
 				bind:lastName
 				bind:phone
+				bind:turnstileToken
+				turnstileSiteKey={env.PUBLIC_TURNSTILE_SITE_KEY}
+				{turnstileResetKey}
 				{canConfirm}
 				{isConfirming}
 				{isConfirmed}

@@ -64,6 +64,7 @@ export interface ReservationPayload {
 	email: string;
 	timeSlot: TimeSlot;
 	timezone: string;
+	turnstileToken: string;
 	firstName?: string;
 	lastName?: string;
 	seats?: number;
