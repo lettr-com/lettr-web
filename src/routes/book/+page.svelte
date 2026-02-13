@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
+	import { capturePosthogEvent, identifyPosthogUser } from '$lib/analytics/posthog';
 	import BookingAlerts from '$lib/components/booking/BookingAlerts.svelte';
 	import ContactFormCard from '$lib/components/booking/ContactFormCard.svelte';
 	import SelfServeCard from '$lib/components/booking/SelfServeCard.svelte';
@@ -61,6 +62,20 @@
 	] as const;
 
 	const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone || 'UTC';
+	const funnelName = 'booking_funnel';
+	const funnelVersion = 1;
+
+	type BookingEventProperties = Record<string, string | number | boolean | null | undefined>;
+
+	function trackBookingEvent(eventName: string, properties: BookingEventProperties = {}) {
+		void capturePosthogEvent(eventName, {
+			funnel_name: funnelName,
+			funnel_version: funnelVersion,
+			page: '/book',
+			timezone,
+			...properties
+		});
+	}
 
 	const slotGroups = $derived.by(() => {
 		const grouped = new Map<string, TimeSlot[]>();
@@ -116,6 +131,10 @@
 	onMount(() => {
 		let animationCleanup = () => {};
 
+		trackBookingEvent('book_page_viewed', {
+			step_number: 1
+		});
+
 		if (section) {
 			animationCleanup = createFromAnimationCleanup({
 				scope: section,
@@ -142,8 +161,16 @@
 		try {
 			const configResponse = await requestJson<InitResponse>('/api/zaptime/config');
 			config = configResponse.data;
+			trackBookingEvent('book_config_loaded', {
+				step_number: 4
+			});
 		} catch (error) {
-			errorMessage = toErrorMessage(error, 'Could not load booking configuration.');
+			const message = toErrorMessage(error, 'Could not load booking configuration.');
+			errorMessage = message;
+			trackBookingEvent('book_config_load_failed', {
+				step_number: 4,
+				error_message: message
+			});
 		} finally {
 			isLoadingConfig = false;
 		}
@@ -156,6 +183,10 @@
 
 		if (!activeRange) {
 			errorMessage = 'Please choose your monthly transactional email volume.';
+			trackBookingEvent('book_routing_validation_failed', {
+				step_number: 3,
+				reason: 'missing_volume_range'
+			});
 			return;
 		}
 
@@ -163,8 +194,18 @@
 		infoMessage = '';
 
 		isPriorityRoutingVolume = activeRange.route === 'priorityDemo';
+		trackBookingEvent('book_routing_decided', {
+			step_number: 3,
+			volume_range: activeRange.value,
+			route: activeRange.route,
+			is_priority_routing: activeRange.route === 'priorityDemo'
+		});
 
 		if (activeRange.route === 'selfServe') {
+			trackBookingEvent('book_routed_self_serve', {
+				step_number: 4,
+				volume_range: activeRange.value
+			});
 			routingDecision = 'selfServe';
 			return;
 		}
@@ -195,13 +236,22 @@
 			);
 
 			slots = response.data;
+			trackBookingEvent('book_slots_loaded', {
+				step_number: 5,
+				slot_count: slots.length
+			});
 
 			if (slots.length > 0) {
 				selectedDay = toDayKey(slots[0].start);
 				selectedSlot = slots[0];
 			}
 		} catch (error) {
-			errorMessage = toErrorMessage(error, 'Could not load available booking slots.');
+			const message = toErrorMessage(error, 'Could not load available booking slots.');
+			errorMessage = message;
+			trackBookingEvent('book_slots_load_failed', {
+				step_number: 5,
+				error_message: message
+			});
 		} finally {
 			isLoadingSlots = false;
 		}
@@ -210,6 +260,11 @@
 	function selectDay(day: string) {
 		selectedDay = day;
 		confirmationUuid = null;
+		trackBookingEvent('book_day_selected', {
+			step_number: 6,
+			day,
+			slot_count_for_day: getDaySlotCount(day)
+		});
 
 		const firstSlotForDay = slotGroups.get(day)?.[0];
 		if (firstSlotForDay) {
@@ -220,22 +275,40 @@
 	function selectSlot(slot: TimeSlot) {
 		selectedSlot = slot;
 		confirmationUuid = null;
+		trackBookingEvent('book_slot_selected', {
+			step_number: 7,
+			slot_start: slot.start,
+			slot_end: slot.end
+		});
 	}
 
 	async function confirmReservation() {
 		if (!selectedSlot) {
 			errorMessage = 'Please select a time slot first.';
+			trackBookingEvent('book_confirm_validation_failed', {
+				step_number: 8,
+				reason: 'missing_slot'
+			});
 			return;
 		}
 
 		if (!email.trim()) {
 			errorMessage = 'Email is required to confirm booking.';
+			trackBookingEvent('book_confirm_validation_failed', {
+				step_number: 8,
+				reason: 'missing_email'
+			});
 			return;
 		}
 
 		errorMessage = '';
 		infoMessage = '';
 		isConfirming = true;
+		trackBookingEvent('book_confirm_started', {
+			step_number: 8,
+			volume_range: selectedVolumeRange,
+			is_priority_routing: isPriorityRoutingVolume
+		});
 
 		try {
 			const confirmation = await requestJson<ReservationResponse>('/api/zaptime/book', {
@@ -255,8 +328,24 @@
 
 			confirmationUuid = confirmation.data.uuid;
 			infoMessage = 'Booking confirmed. We have sent your booking details to your email.';
+			trackBookingEvent('book_reservation_confirmed', {
+				step_number: 9,
+				confirmation_uuid: confirmation.data.uuid,
+				slot_start: selectedSlot.start,
+				slot_end: selectedSlot.end,
+				is_priority_routing: isPriorityRoutingVolume,
+				volume_range: selectedVolumeRange
+			});
+			void identifyPosthogUser(email.trim().toLowerCase());
 		} catch (error) {
-			errorMessage = toErrorMessage(error, 'Could not confirm reservation.');
+			const message = toErrorMessage(error, 'Could not confirm reservation.');
+			errorMessage = message;
+			trackBookingEvent('book_reservation_failed', {
+				step_number: 9,
+				error_message: message,
+				volume_range: selectedVolumeRange,
+				is_priority_routing: isPriorityRoutingVolume
+			});
 		} finally {
 			isConfirming = false;
 		}
@@ -265,9 +354,27 @@
 	async function selectVolumeRange(rangeValue: string) {
 		selectedVolumeRange = rangeValue;
 		isVolumePickerCollapsed = true;
+		trackBookingEvent('book_volume_selected', {
+			step_number: 2,
+			volume_range: rangeValue
+		});
 
 		const pickedRange = volumeRanges.find((range) => range.value === rangeValue);
 		await routeRequest(pickedRange);
+	}
+
+	function handleSelfServeCreateAccountClick() {
+		trackBookingEvent('book_self_serve_create_account_clicked', {
+			step_number: 5,
+			volume_range: selectedVolumeRange
+		});
+	}
+
+	function handleSelfServeDocsClick() {
+		trackBookingEvent('book_self_serve_docs_clicked', {
+			step_number: 5,
+			volume_range: selectedVolumeRange
+		});
 	}
 
 	function getDaySlotCount(day: string) {
@@ -344,7 +451,10 @@
 		/>
 
 		{#if routingDecision === 'selfServe'}
-			<SelfServeCard />
+			<SelfServeCard
+				oncreateaccountclick={handleSelfServeCreateAccountClick}
+				ondocsclick={handleSelfServeDocsClick}
+			/>
 		{/if}
 
 		{#if routingDecision === 'qualified'}

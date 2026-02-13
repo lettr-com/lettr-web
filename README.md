@@ -65,3 +65,37 @@ pnpm preview
 - `src/lib/utils/spline.ts`: Spline visibility gating and script loader utilities
 - `src/lib/components/BorderLinesCanvas.svelte`: animated Three.js border lines
 - `src/lib/utils/shiki.ts`: syntax highlighting setup and singleton highlighter
+
+## Booking analytics funnel (PostHog)
+
+The `/book` flow is instrumented with PostHog events in `src/routes/book/+page.svelte`.
+
+```mermaid
+flowchart TD
+    A[book_page_viewed] --> B[book_volume_selected]
+    B --> C[book_routing_decided]
+
+    C -->|selfServe| D[book_routed_self_serve]
+    D --> E[book_self_serve_create_account_clicked]
+    D --> F[book_self_serve_docs_clicked]
+
+    C -->|demo or priorityDemo| G[book_config_loaded]
+    G --> H[book_slots_loaded]
+    H --> I[book_day_selected]
+    I --> J[book_slot_selected]
+    J --> K[book_confirm_started]
+    K --> L[book_reservation_confirmed]
+
+    C --> X1[book_routing_validation_failed]
+    G --> X2[book_config_load_failed]
+    H --> X3[book_slots_load_failed]
+    J --> X4[book_confirm_validation_failed]
+    K --> X5[book_reservation_failed]
+```
+
+Shared event properties are attached to each event:
+
+- `funnel_name`: `booking_funnel`
+- `funnel_version`: `1`
+- `page`: `/book`
+- `timezone`: client timezone

@@ -11,6 +11,7 @@ const posthogConfig = {
 } as const;
 
 type PosthogClient = typeof posthogJs;
+type PosthogProperties = Record<string, string | number | boolean | null | undefined>;
 
 let posthogClient: PosthogClient | null = null;
 let initPromise: Promise<void> | null = null;
@@ -56,4 +57,24 @@ export async function initPosthog(): Promise<void> {
 	})();
 
 	return initPromise;
+}
+
+export async function capturePosthogEvent(
+	eventName: string,
+	properties?: PosthogProperties
+): Promise<void> {
+	if (!browser) return;
+
+	await initPosthog();
+	posthogClient?.capture(eventName, properties);
+}
+
+export async function identifyPosthogUser(
+	distinctId: string,
+	properties?: PosthogProperties
+): Promise<void> {
+	if (!browser || !distinctId) return;
+
+	await initPosthog();
+	posthogClient?.identify(distinctId, properties);
 }
