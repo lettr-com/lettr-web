@@ -4,7 +4,6 @@
 
 	import '../styles/app.css';
 	import Navbar from '$lib/components/Navbar.svelte';
-	import BorderLinesCanvas from '$lib/components/BorderLinesCanvas.svelte';
 	import SplineFooter from '$lib/components/SplineFooter.svelte';
 	import CookieBanner from '$lib/components/CookieBanner.svelte';
 	import { persistUtmParamsFromUrl } from '$lib/utils/utm';
@@ -85,7 +84,6 @@
 
 <div class="relative z-10 mb-[30vh] bg-background">
 	<div class="relative mx-auto min-h-screen max-w-[600px] narrow:max-w-none border-x border-border/30 narrow:border-x-0">
-		<BorderLinesCanvas />
 		<main class="relative z-10">
 			{@render children()}
 		</main>

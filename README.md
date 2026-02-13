@@ -8,7 +8,6 @@ Landing site for Lettr, built with SvelteKit 2, Svelte 5, TypeScript, and Tailwi
 - TypeScript (strict mode)
 - Tailwind CSS v4
 - GSAP animations
-- Three.js canvas effects
 - Vitest unit tests
 
 ## Setup
@@ -63,7 +62,6 @@ pnpm preview
 - `src/routes/+layout.svelte`: global layout shell and page metadata
 - `src/lib/components/SplineFooter.svelte`: lazy-loaded Spline footer scene wrapper
 - `src/lib/utils/spline.ts`: Spline visibility gating and script loader utilities
-- `src/lib/components/BorderLinesCanvas.svelte`: animated Three.js border lines
 - `src/lib/utils/shiki.ts`: syntax highlighting setup and singleton highlighter
 
 ## Booking analytics funnel (PostHog)
