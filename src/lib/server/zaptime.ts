@@ -1,4 +1,4 @@
-import { env } from '$env/dynamic/private';
+import { getCurrentZaptimeConfig } from '$lib/server/zaptime-config';
 import { error } from '@sveltejs/kit';
 
 const defaultBaseUrl = 'https://api.zaptime.app/';
@@ -8,13 +8,9 @@ function withTrailingSlash(url: string) {
 }
 
 export function getZaptimeConfig() {
-	const token = env.ZAPTIME_TOKEN;
-
-	if (!token) {
-		throw error(500, 'Missing ZAPTIME_TOKEN environment variable');
-	}
-
-	const baseUrl = withTrailingSlash(env.ZAPTIME_API_BASE_URL ?? defaultBaseUrl);
+	const config = getCurrentZaptimeConfig();
+	const token = config.apiToken.trim();
+	const baseUrl = withTrailingSlash(config.apiBaseUrl || defaultBaseUrl);
 
 	return { token, baseUrl };
 }

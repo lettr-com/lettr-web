@@ -17,7 +17,7 @@
 		email?: string;
 		firstName?: string;
 		lastName?: string;
-		phone?: string;
+		companyName?: string;
 		turnstileToken?: string;
 		turnstileSiteKey?: string;
 		turnstileResetKey?: number;
@@ -32,7 +32,7 @@
 		email = $bindable(''),
 		firstName = $bindable(''),
 		lastName = $bindable(''),
-		phone = $bindable(''),
+		companyName = $bindable(''),
 		turnstileToken = $bindable(''),
 		turnstileSiteKey = '',
 		turnstileResetKey = 0,
@@ -76,8 +76,8 @@
 		</div>
 
 		<div class="space-y-2">
-			<Label for="phone">Phone (optional)</Label>
-			<Input id="phone" type="tel" bind:value={phone} placeholder="+1 555 555 5555" />
+			<Label for="company-name">Company name</Label>
+			<Input id="company-name" bind:value={companyName} placeholder="Acme Inc." required />
 		</div>
 
 		<Turnstile

@@ -24,7 +24,7 @@
 	let email: string = $state('');
 	let firstName: string = $state('');
 	let lastName: string = $state('');
-	let phone: string = $state('');
+	let companyName: string = $state('');
 	let turnstileToken: string = $state('');
 	let turnstileResetKey: number = $state(0);
 
@@ -80,10 +80,7 @@
 		});
 	}
 
-	function setSelectedSlot(
-		slot: TimeSlot,
-		source: 'manual' | 'auto_initial' | 'auto_day_pick'
-	) {
+	function setSelectedSlot(slot: TimeSlot, source: 'manual') {
 		const previousSlotStart = selectedSlot?.start;
 		selectedSlot = slot;
 		confirmationUuid = null;
@@ -266,7 +263,7 @@
 
 			if (slots.length > 0) {
 				selectedDay = toDayKey(slots[0].start);
-				setSelectedSlot(slots[0], 'auto_initial');
+				selectedSlot = null;
 			}
 		} catch (error) {
 			const message = toErrorMessage(error, 'Could not load available booking slots.');
@@ -282,18 +279,14 @@
 
 	function selectDay(day: string) {
 		selectedDay = day;
+		selectedSlot = null;
+		confirmationUuid = null;
+
 		trackBookingEvent('book_day_selected', {
 			step_number: 6,
 			day,
 			slot_count_for_day: getDaySlotCount(day)
 		});
-
-		const firstSlotForDay = slotGroups.get(day)?.[0];
-		if (firstSlotForDay) {
-			setSelectedSlot(firstSlotForDay, 'auto_day_pick');
-		} else {
-			confirmationUuid = null;
-		}
 	}
 
 	function selectSlot(slot: TimeSlot) {
@@ -315,6 +308,15 @@
 			trackBookingEvent('book_confirm_validation_failed', {
 				step_number: 8,
 				reason: 'missing_email'
+			});
+			return;
+		}
+
+		if (!companyName.trim()) {
+			errorMessage = 'Company name is required to confirm booking.';
+			trackBookingEvent('book_confirm_validation_failed', {
+				step_number: 8,
+				reason: 'missing_company_name'
 			});
 			return;
 		}
@@ -347,7 +349,8 @@
 					email,
 					firstName,
 					lastName,
-					phone,
+					companyName,
+					emailsVolume: selectedVolumeRange,
 					timeSlot: selectedSlot,
 					timezone,
 					turnstileToken
@@ -470,55 +473,57 @@
 
 		<BookingAlerts {errorMessage} {infoMessage} />
 
-		<VolumePicker
-			{volumeRanges}
-			{selectedVolumeRange}
-			{isVolumePickerCollapsed}
-			onselectrange={selectVolumeRange}
-			onexpand={() => {
-				isVolumePickerCollapsed = false;
-			}}
-		/>
-
-		{#if routingDecision === 'selfServe'}
-			<SelfServeCard
-				oncreateaccountclick={handleSelfServeCreateAccountClick}
-				ondocsclick={handleSelfServeDocsClick}
-			/>
-		{/if}
-
-		{#if routingDecision === 'qualified'}
-			<SlotPicker
-				{isPriorityRoutingVolume}
-				isLoading={isLoadingConfig || isLoadingSlots}
-				{slots}
-				{selectedDay}
-				{selectedDayLabel}
-				{dayOptions}
-				{visibleSlots}
-				{selectedSlot}
-				{selectedSlotSummary}
-				{formatDay}
-				{formatTime}
-				{getDaySlotCount}
-				onselectday={selectDay}
-				onselectslot={selectSlot}
+		{#if !isConfirmed}
+			<VolumePicker
+				{volumeRanges}
+				{selectedVolumeRange}
+				{isVolumePickerCollapsed}
+				onselectrange={selectVolumeRange}
+				onexpand={() => {
+					isVolumePickerCollapsed = false;
+				}}
 			/>
 
-			<ContactFormCard
-				bind:email
-				bind:firstName
-				bind:lastName
-				bind:phone
-				bind:turnstileToken
-				turnstileSiteKey={PUBLIC_TURNSTILE_SITE_KEY}
-				{turnstileResetKey}
-				{canConfirm}
-				{isConfirming}
-				{isConfirmed}
-				redirectUrl={config?.configuration.redirectAfterBookingUrl}
-				onconfirm={confirmReservation}
-			/>
+			{#if routingDecision === 'selfServe'}
+				<SelfServeCard
+					oncreateaccountclick={handleSelfServeCreateAccountClick}
+					ondocsclick={handleSelfServeDocsClick}
+				/>
+			{/if}
+
+			{#if routingDecision === 'qualified'}
+				<SlotPicker
+					{isPriorityRoutingVolume}
+					isLoading={isLoadingConfig || isLoadingSlots}
+					{slots}
+					{selectedDay}
+					{selectedDayLabel}
+					{dayOptions}
+					{visibleSlots}
+					{selectedSlot}
+					{selectedSlotSummary}
+					{formatDay}
+					{formatTime}
+					{getDaySlotCount}
+					onselectday={selectDay}
+					onselectslot={selectSlot}
+				/>
+
+				<ContactFormCard
+					bind:email
+					bind:firstName
+					bind:lastName
+					bind:companyName
+					bind:turnstileToken
+					turnstileSiteKey={PUBLIC_TURNSTILE_SITE_KEY}
+					{turnstileResetKey}
+					{canConfirm}
+					{isConfirming}
+					{isConfirmed}
+					redirectUrl={config?.configuration.redirectAfterBookingUrl}
+					onconfirm={confirmReservation}
+				/>
+			{/if}
 		{/if}
 	</div>
 </section>

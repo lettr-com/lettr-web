@@ -62,6 +62,8 @@ export interface ZaptimeErrorResponse {
 
 export interface ReservationPayload {
 	email: string;
+	companyName: string;
+	emailsVolume?: string;
 	timeSlot: TimeSlot;
 	timezone: string;
 	turnstileToken: string;

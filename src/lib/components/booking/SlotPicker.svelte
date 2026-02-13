@@ -126,6 +126,10 @@
 
 			{#if !isSlotPickerCollapsed}
 				<div transition:slide={{ duration: 180 }} class="space-y-4">
+					{#if !selectedSlot}
+						<p class="text-sm text-muted">No slot selected yet. Choose a time to continue.</p>
+					{/if}
+
 					{#if dayOptions.length > 0}
 						<div class="space-y-2">
 							<Label for="day-picker">Day</Label>
@@ -173,11 +177,17 @@
 
 						<div class="grid grid-cols-2 gap-2 narrow:grid-cols-1">
 							{#each visibleSlots as slot}
+								{@const isSelected = selectedSlot?.start === slot.start}
 								<Button
-									variant={selectedSlot?.start === slot.start ? 'default' : 'outline'}
+									variant={isSelected ? 'default' : 'outline'}
 									size="sm"
+									class={isSelected ? 'ring-2 ring-primary/30 ring-offset-1' : 'bg-white'}
+									aria-pressed={isSelected}
 									onclick={() => handleSelectSlot(slot)}
 								>
+									{#if isSelected}
+										<Check size={14} weight="bold" aria-hidden="true" />
+									{/if}
 									{formatTime(slot.start)}
 								</Button>
 							{/each}

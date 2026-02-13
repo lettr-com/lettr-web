@@ -1,9 +1,32 @@
 import { error, json, type RequestHandler } from '@sveltejs/kit';
+import { getCurrentZaptimeConfig } from '$lib/server/zaptime-config';
 import { verifyTurnstileToken } from '$lib/server/turnstile';
 import type { ReservationPayload, ReservationResponse } from '$lib/zaptime/types';
 import { getZaptimeConfig, getZaptimeHeaders, parseJsonResponse } from '$lib/server/zaptime';
 
 export const prerender = false;
+
+function buildCustomFields(payload: Partial<ReservationPayload>) {
+	const customFields: NonNullable<ReservationPayload['customFields']> = [];
+	const { customFieldIds } = getCurrentZaptimeConfig();
+	const companyFieldId = customFieldIds.company;
+	if (companyFieldId && payload.companyName?.trim()) {
+		customFields.push({
+			uuid: companyFieldId,
+			value: payload.companyName.trim()
+		});
+	}
+
+	const emailsVolumeFieldId = customFieldIds.emailsVolume;
+	if (emailsVolumeFieldId && payload.emailsVolume?.trim()) {
+		customFields.push({
+			uuid: emailsVolumeFieldId,
+			value: payload.emailsVolume.trim()
+		});
+	}
+
+	return customFields;
+}
 
 function getRequestIp(request: Request) {
 	const cloudflareIp = request.headers.get('CF-Connecting-IP');
@@ -26,6 +49,7 @@ export const POST: RequestHandler = async ({ fetch, request }) => {
 
 	if (
 		!payload.email ||
+		!payload.companyName?.trim() ||
 		!payload.timeSlot?.start ||
 		!payload.timeSlot?.end ||
 		!payload.timezone ||
@@ -49,10 +73,10 @@ export const POST: RequestHandler = async ({ fetch, request }) => {
 			seats: payload.seats ?? 1,
 			firstname: payload.firstName,
 			lastname: payload.lastName,
-			phone: payload.phone,
+			phone: payload.companyName ?? payload.phone,
 			location: payload.location,
 			timezone: payload.timezone,
-			customFields: payload.customFields
+			customFields: buildCustomFields(payload)
 		})
 	});
 
