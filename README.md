@@ -68,7 +68,7 @@ pnpm preview
 
 ## Booking analytics funnel (PostHog)
 
-The `/book` flow is instrumented with PostHog events in `src/routes/book/+page.svelte`.
+The `/demo` flow is instrumented with PostHog events in `src/routes/demo/+page.svelte`.
 
 ```mermaid
 flowchart TD
@@ -97,5 +97,5 @@ Shared event properties are attached to each event:
 
 - `funnel_name`: `booking_funnel`
 - `funnel_version`: `1`
-- `page`: `/book`
+- `page`: `/demo`
 - `timezone`: client timezone

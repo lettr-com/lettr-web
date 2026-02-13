@@ -74,7 +74,7 @@
 		void capturePosthogEvent(eventName, {
 			funnel_name: funnelName,
 			funnel_version: funnelVersion,
-			page: '/book',
+			page: '/demo',
 			timezone,
 			...properties
 		});
