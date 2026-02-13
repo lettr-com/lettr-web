@@ -13,12 +13,16 @@ interface TurnstileVerifyResponse {
 const turnstileVerifyUrl = 'https://challenges.cloudflare.com/turnstile/v0/siteverify';
 
 export async function verifyTurnstileToken(token: string, remoteIp?: string | null) {
-	const secretKey = env.TURNSTILE_SECRET_KEY;
+	const secretKey = env.TURNSTILE_SECRET_KEY?.trim() ?? '';
 
 	if (!secretKey) {
 		throw error(500, 'Missing TURNSTILE_SECRET_KEY environment variable');
 	}
 
+	return verifyWithSecret(secretKey, token, remoteIp);
+}
+
+async function verifyWithSecret(secretKey: string, token: string, remoteIp?: string | null) {
 	const body = new URLSearchParams({
 		secret: secretKey,
 		response: token
