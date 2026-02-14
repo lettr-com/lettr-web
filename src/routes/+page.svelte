@@ -5,7 +5,6 @@
 	import TeamFeatures from '$lib/components/TeamFeatures.svelte';
 	import GetStarted from '$lib/components/GetStarted.svelte';
 	import Pricing from '$lib/components/Pricing.svelte';
-	import Footer from '$lib/components/Footer.svelte';
 </script>
 
 <Hero />
@@ -14,4 +13,3 @@
 <TeamFeatures />
 <GetStarted />
 <Pricing />
-<Footer />

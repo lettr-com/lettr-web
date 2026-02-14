@@ -32,6 +32,15 @@
 	<div class="mx-auto max-w-[550px]">
 		<div class="grid gap-12 lg:grid-cols-1">
 			<div class="flex flex-col">
+				<a
+					data-animate
+					href="/changelog/"
+					class="group mb-6 inline-flex w-fit items-center gap-2 border border-primary/20 bg-primary/5 px-4 py-1.5 text-sm text-primary transition-colors hover:bg-primary/10"
+				>
+					<span class="bg-primary px-2 py-0.5 text-xs font-bold text-white">New</span>
+					Announcing Lettr
+					<span class="transition-transform group-hover:translate-x-0.5">&rarr;</span>
+				</a>
 				<h1 data-animate class="text-surface mb-4">
 					Transactional emails that<br />
 					<span class="text-primary">feel like Laravel</span>
