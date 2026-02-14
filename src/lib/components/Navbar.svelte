@@ -167,7 +167,7 @@
 
 <div class="fixed top-[-1px] right-0 left-0 z-50 flex items-start justify-center px-4 narrow:px-0 border-b border-border/30">
 	<!-- Desktop logo (outer left) -->
-	<div class="hidden h-[60px] w-[120px] shrink-0 items-center pr-4 md:flex">
+	<div class="hidden h-[60px] w-[120px] shrink-0 items-center pr-4 justify-end md:flex">
 		<a href="/" class="flex items-center">
 			<img src="/logo.svg" alt="Lettr" class="h-5" />
 		</a>
