@@ -83,7 +83,7 @@
 <Navbar />
 
 <div class="relative z-10 mb-[30vh] bg-background">
-	<div class="relative mx-auto min-h-screen max-w-[600px] narrow:max-w-none border-x border-border/30 narrow:border-x-0">
+	<div class="relative mx-auto min-h-screen max-w-[624px] narrow:max-w-none border-x border-border/30 narrow:border-x-0">
 		<main class="relative z-10">
 			{@render children()}
 		</main>
