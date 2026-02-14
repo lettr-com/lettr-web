@@ -123,7 +123,7 @@
 	<!-- Hero -->
 	<div bind:this={hero} class="mx-auto max-w-[550px]">
 		<span data-animate class="mb-4 inline-block font-heading text-xs tracking-[0.15em] text-primary uppercase">
-			// ABOUT
+			ABOUT
 		</span>
 		<h1 data-animate>
 			We've been doing<br />email for a while

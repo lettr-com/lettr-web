@@ -150,7 +150,7 @@
 <FeaturePageLayout
 	title="Email Analytics"
 	metaDescription="Real-time analytics for every transactional email. Track delivery rates, open rates, bounces, and per-template performance."
-	label="// ANALYTICS"
+	label="ANALYTICS"
 	description="Real-time visibility into every email your app sends. Per-template analytics, smart alerts, and deliverability monitoring."
 >
 	{#snippet heading()}
@@ -227,11 +227,11 @@
 					<span class="text-sm font-medium text-surface">Delivery Rate</span>
 					<span class="font-code text-xs text-muted">Last 7 days</span>
 				</div>
-				<div class="flex items-end justify-between gap-3" style="height: 160px;">
+				<div class="flex items-end gap-3" style="height: 160px;">
 					{#each chartBars as bar}
-						<div class="flex flex-1 flex-col items-center gap-2">
-							<div class="w-full bg-primary/80 transition-all" style="height: {bar.height}%;"></div>
-							<span class="text-[10px] text-muted">{bar.day}</span>
+						<div class="flex h-full flex-1 flex-col items-center justify-end gap-2">
+							<div class="w-full rounded-sm bg-primary/80" style="height: {bar.height}%;"></div>
+							<span class="shrink-0 text-[10px] text-muted">{bar.day}</span>
 						</div>
 					{/each}
 				</div>

@@ -165,25 +165,27 @@
 	});
 </script>
 
-<div class="fixed border border-border/30 top-[-1px] right-0 left-0 z-50 flex justify-center px-4 narrow:px-0">
+<div class="fixed top-[-1px] right-0 left-0 z-50 flex items-start justify-center px-4 narrow:px-0">
+	<!-- Desktop logo (outer left) -->
+	<div class="hidden h-[60px] shrink-0 items-center pr-4 md:flex">
+		<a href="/" class="flex items-center">
+			<img src="/logo.svg" alt="Lettr" class="h-5" />
+		</a>
+	</div>
+
 	<nav
 		bind:this={nav}
 		class="glass flex flex-col w-full max-w-[624px] narrow:max-w-none border-r border-l border-border/30 narrow:border-x-0 shadow-[0_0_40px_-10px_rgba(236,16,75,0.15)]"
 		aria-label="Main navigation"
 	>
-		<div class="flex h-[60px] w-full items-center justify-between px-4 py-2.5">
-			<!-- Logo -->
-			<div class="hidden w-[100px] md:flex">
-				<a href="/" class="flex items-center">
-					<img src="/logo.svg" alt="Lettr" class="h-5" />
-				</a>
-			</div>
+		<div class="flex h-[60px] w-full items-center justify-between px-4 py-2.5 md:justify-center">
+			<!-- Mobile logo -->
 			<a href="/" class="flex items-center md:hidden">
 				<img src="/logo.svg" alt="Lettr" class="h-5" />
 			</a>
 
 			<!-- Desktop nav links -->
-			<div class="hidden flex-1 items-center justify-center gap-1 md:flex">
+			<div class="hidden items-center justify-center gap-1 md:flex">
 				{#each navLinks as link}
 					{#if link.dropdownKey}
 						<!-- svelte-ignore a11y_no_static_element_interactions -->
@@ -312,27 +314,19 @@
 						</a>
 					{/if}
 				{/each}
-			</div>
 
-			<!-- Right side -->
-			<div class="hidden w-[100px] items-center justify-end gap-4 md:flex">
-				<div class="relative">
+				<!-- Docs link -->
+				<div class="relative ml-1">
 					<a
 						href="https://docs.lettr.com/introduction"
 						target="_blank"
 						rel="noopener noreferrer"
-						class="text-sm text-muted transition-colors hover:text-surface"
+						class="px-2.5 py-2 text-sm text-muted transition-colors hover:text-surface"
 					>
 						Docs
 					</a>
-					<div class="absolute top-0 right-[-8px] h-[6px] w-[6px] rotate-45 bg-primary"></div>
+					<div class="absolute top-1.5 right-0 h-[6px] w-[6px] rotate-45 bg-primary"></div>
 				</div>
-				<a
-					href={registerHref}
-					class="text-primary text-sm font-bold transition-colors hover:text-primary/90"
-				>
-					Sign Up
-				</a>
 			</div>
 
 			<!-- Mobile toggle -->
@@ -448,4 +442,14 @@
 			</div>
 		{/if}
 	</nav>
+
+	<!-- Desktop right side (outer right) -->
+	<div class="hidden h-[60px] shrink-0 items-center pl-4 md:flex">
+		<a
+			href={registerHref}
+			class="text-primary text-sm font-bold transition-colors hover:text-primary/90"
+		>
+			Sign Up
+		</a>
+	</div>
 </div>

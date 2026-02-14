@@ -94,7 +94,7 @@ Mail::to($user->email)->send(new WelcomeEmail($user));`;
 <FeaturePageLayout
 	title="Laravel Integration"
 	metaDescription="Send transactional emails from Laravel in under 60 seconds. Native mail driver, zero configuration, and built-in artisan commands."
-	label="// LARAVEL"
+	label="LARAVEL"
 	description="Send transactional emails from your Laravel app in under 60 seconds. Native mail driver, zero config, artisan commands included."
 >
 	{#snippet heading()}
@@ -139,14 +139,16 @@ Mail::to($user->email)->send(new WelcomeEmail($user));`;
 
 		<!-- Feature Cards -->
 		<div bind:this={featuresSection} class="mx-auto mt-20 max-w-2xl md:mt-28">
-			<div class="grid gap-5 sm:grid-cols-3">
+			<div class="grid gap-5">
 				{#each features as feature}
-					<div data-reveal class="border border-border/50 bg-white p-6">
-						<div class="mb-3 flex h-10 w-10 items-center justify-center border border-border/50 bg-background">
+					<div data-reveal class="flex items-start gap-5 border border-border/50 bg-white p-6">
+						<div class="flex h-10 w-10 shrink-0 items-center justify-center border border-border/50 bg-background">
 							<feature.icon size={20} class="text-primary" />
 						</div>
-						<h3 class="mb-2 text-base font-semibold text-surface">{feature.title}</h3>
-						<p class="text-sm leading-relaxed text-muted">{feature.description}</p>
+						<div>
+							<h3 class="mb-1 text-base font-semibold text-surface">{feature.title}</h3>
+							<p class="text-sm leading-relaxed text-muted">{feature.description}</p>
+						</div>
 					</div>
 				{/each}
 			</div>

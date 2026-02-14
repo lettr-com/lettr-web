@@ -5,6 +5,7 @@
 	import '../styles/app.css';
 	import Navbar from '$lib/components/Navbar.svelte';
 	import SplineFooter from '$lib/components/SplineFooter.svelte';
+	import Footer from '$lib/components/Footer.svelte';
 	import CookieBanner from '$lib/components/CookieBanner.svelte';
 	import { persistUtmParamsFromUrl } from '$lib/utils/utm';
 
@@ -87,6 +88,7 @@
 		<main class="relative z-10">
 			{@render children()}
 		</main>
+		<Footer />
 	</div>
 </div>
 

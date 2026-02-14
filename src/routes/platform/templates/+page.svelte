@@ -105,7 +105,7 @@
 <FeaturePageLayout
 	title="Email Templates"
 	metaDescription="Design beautiful transactional email templates with a drag-and-drop editor. AI copywriting, 200+ templates, and one-click Blade export."
-	label="// TEMPLATES"
+	label="TEMPLATES"
 	description="Design, edit, and manage your transactional email templates visually. Export to Blade with one click."
 >
 	{#snippet heading()}

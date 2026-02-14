@@ -116,7 +116,7 @@
 <FeaturePageLayout
 	title="Deliverability"
 	metaDescription="Maximize email deliverability with automated DNS setup, DMARC monitoring, blocklist checks, and dedicated IPs. 99.9% inbox placement."
-	label="// DELIVERABILITY"
+	label="DELIVERABILITY"
 	description="Automated DNS authentication, blocklist monitoring, and dedicated IPs. Everything you need to reach the inbox."
 >
 	{#snippet heading()}
@@ -126,46 +126,62 @@
 	{#snippet children()}
 		<!-- Deliverability Score -->
 		<div bind:this={scoreSection} class="mx-auto max-w-3xl">
-			<div data-reveal class="border border-border/50 bg-white p-8 text-center md:p-12">
-				<p class="mb-6 text-sm font-medium text-muted uppercase">Deliverability Score</p>
-				<div class="mx-auto mb-6 inline-block">
-					<svg width="200" height="200" viewBox="0 0 200 200" class="block">
-						<!-- Background circle -->
-						<circle
-							cx="100"
-							cy="100"
-							r="80"
-							fill="none"
-							stroke="currentColor"
-							stroke-width="8"
-							class="text-border/30"
-						/>
-						<!-- Score arc -->
-						<circle
-							cx="100"
-							cy="100"
-							r="80"
-							fill="none"
-							stroke="currentColor"
-							stroke-width="8"
-							stroke-linecap="square"
-							stroke-dasharray={circumference}
-							stroke-dashoffset={dashOffset}
-							transform="rotate(-90 100 100)"
-							class="text-primary"
-						/>
-						<!-- Score text -->
-						<text x="100" y="92" text-anchor="middle" class="fill-surface font-heading text-[2.5rem]">
-							{scorePercentage}%
-						</text>
-						<text x="100" y="118" text-anchor="middle" class="fill-muted text-xs">
-							Inbox Placement
-						</text>
-					</svg>
+			<div data-reveal class="border border-border/50 bg-white p-8 md:p-12">
+				<div class="flex flex-col items-center gap-8 sm:flex-row sm:gap-12">
+					<div class="shrink-0">
+						<svg width="180" height="180" viewBox="0 0 200 200" class="block">
+							<!-- Background circle -->
+							<circle
+								cx="100"
+								cy="100"
+								r="80"
+								fill="none"
+								stroke="currentColor"
+								stroke-width="6"
+								class="text-border/20"
+							/>
+							<!-- Score arc -->
+							<circle
+								cx="100"
+								cy="100"
+								r="80"
+								fill="none"
+								stroke="currentColor"
+								stroke-width="6"
+								stroke-linecap="round"
+								stroke-dasharray={circumference}
+								stroke-dashoffset={dashOffset}
+								transform="rotate(-90 100 100)"
+								class="text-primary"
+							/>
+							<!-- Score text -->
+							<text x="100" y="96" text-anchor="middle" dominant-baseline="central" class="fill-surface font-heading text-[2.75rem]">
+								{scorePercentage}%
+							</text>
+						</svg>
+					</div>
+					<div class="text-center sm:text-left">
+						<p class="text-xs font-medium tracking-wider text-muted uppercase">Deliverability Score</p>
+						<p class="mt-2 font-heading text-2xl text-surface">Inbox Placement</p>
+						<p class="mt-2 text-sm leading-relaxed text-muted">
+							Based on authentication, reputation, and infrastructure health across all sending domains.
+						</p>
+						<div class="mt-4 flex flex-wrap justify-center gap-4 sm:justify-start">
+							<div class="flex items-center gap-1.5">
+								<div class="h-1.5 w-1.5 rounded-full bg-green-500"></div>
+								<span class="text-xs text-muted">SPF verified</span>
+							</div>
+							<div class="flex items-center gap-1.5">
+								<div class="h-1.5 w-1.5 rounded-full bg-green-500"></div>
+								<span class="text-xs text-muted">DKIM verified</span>
+							</div>
+							<div class="flex items-center gap-1.5">
+								<div class="h-1.5 w-1.5 rounded-full bg-green-500"></div>
+								<span class="text-xs text-muted">DMARC pass</span>
+							</div>
+						</div>
+					</div>
 				</div>
-				<p class="text-sm text-muted">
-					Based on authentication, reputation, and infrastructure health across all sending domains.
-				</p>
 			</div>
 		</div>
 

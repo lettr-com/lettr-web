@@ -58,7 +58,7 @@
 	<!-- Hero -->
 	<div bind:this={hero} class="mx-auto max-w-[550px]">
 		<span data-animate class="mb-4 inline-block font-heading text-xs tracking-[0.15em] text-primary uppercase">
-			// COMPARE & MIGRATE
+			COMPARE & MIGRATE
 		</span>
 		<h1 data-animate>
 			Switch to Lettr from<br />any provider

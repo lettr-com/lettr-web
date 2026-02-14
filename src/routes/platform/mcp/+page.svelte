@@ -132,7 +132,7 @@
 <FeaturePageLayout
 	title="MCP Server"
 	metaDescription="Control Lettr from any AI assistant. Send emails, debug delivery, and monitor your infrastructure through natural language via MCP."
-	label="// MCP"
+	label="MCP"
 	description="Control your email infrastructure from any AI assistant. Send emails, debug delivery, and monitor domains through natural language."
 >
 	{#snippet heading()}

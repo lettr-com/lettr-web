@@ -79,7 +79,7 @@
 <FeaturePageLayout
 	title="Template Sync"
 	metaDescription="Keep your Laravel Blade templates and Lettr dashboard in perfect sync. Two-way sync, version control, and seamless collaboration."
-	label="// SYNC"
+	label="SYNC"
 	description="Two-way sync between your Laravel Blade templates and the Lettr dashboard. Code locally, edit visually, version everything."
 >
 	{#snippet heading()}

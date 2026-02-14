@@ -98,7 +98,7 @@
 <FeaturePageLayout
 	title="Email Channel"
 	metaDescription="Enterprise-grade email delivery infrastructure. Multi-region, adaptive routing, 99.99% uptime, and sub-3-second delivery times."
-	label="// EMAIL"
+	label="EMAIL"
 	description="Enterprise-grade email delivery infrastructure built for transactional email. Multi-region, adaptive routing, and sub-3-second delivery."
 >
 	{#snippet heading()}

@@ -158,7 +158,7 @@
 			data-animate
 			class="mb-4 inline-block font-heading text-xs tracking-[0.15em] text-primary uppercase"
 		>
-			// SUPPORT
+			SUPPORT
 		</span>
 		<h1 data-animate>
 			How can we<br />help you?
@@ -201,173 +201,158 @@
 		{/each}
 	</div>
 
-	<!-- Form + Sidebar -->
-	<div bind:this={formSection} class="mx-auto mt-20 max-w-[550px] md:mt-28">
-		<div class="grid gap-12 lg:grid-cols-[1fr_320px] lg:gap-16">
-			<!-- Form -->
-			<div data-reveal>
-				<h2 class="mb-2">Send us a message</h2>
-				<p class="mb-8 text-muted">Fill out the form below and we'll get back to you shortly.</p>
-
-				{#if submitted}
-					<div class="flex flex-col items-center justify-center border border-primary/20 bg-primary/5 px-6 py-16 text-center">
-						<div class="mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-primary/10">
-							<CheckCircleIcon size={28} class="text-primary" />
-						</div>
-						<h3 class="text-xl font-semibold text-surface">Message sent!</h3>
-						<p class="mt-2 max-w-sm text-sm leading-relaxed text-muted">
-							We'll get back to you as soon as possible. You can also reach us directly at
-							<a href="mailto:hello@lettr.com" class="text-primary underline underline-offset-4">
-								hello@lettr.com
-							</a>
-						</p>
-						<button
-							onclick={() => (submitted = false)}
-							class="mt-6 text-sm font-medium text-primary transition-colors hover:text-primary/80"
+	<!-- Form + FAQ -->
+	<div bind:this={formSection} class="mx-auto mt-20 max-w-3xl md:mt-28">
+		<!-- Common questions -->
+		<div data-reveal class="mb-16">
+			<div class="border border-border/50 bg-white p-6">
+				<h3 class="mb-4 text-sm font-semibold text-surface">Common questions</h3>
+				<div class="space-y-3">
+					{#each faqs as faq}
+						<a
+							href={faq.href}
+							target="_blank"
+							rel="noopener noreferrer"
+							class="flex items-center justify-between px-3 py-2 text-sm text-muted transition-all duration-200 hover:bg-background hover:text-surface"
 						>
-							Send another message
-						</button>
+							{faq.q}
+							<ArrowSquareOutIcon size={12} class="shrink-0 text-muted" />
+						</a>
+					{/each}
+				</div>
+			</div>
+		</div>
+
+		<!-- Form -->
+		<div data-reveal>
+			<h2 class="mb-2">Send us a message</h2>
+			<p class="mb-8 text-muted">Fill out the form below and we'll get back to you shortly.</p>
+
+			{#if submitted}
+				<div class="flex flex-col items-center justify-center border border-primary/20 bg-primary/5 px-6 py-16 text-center">
+					<div class="mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-primary/10">
+						<CheckCircleIcon size={28} class="text-primary" />
 					</div>
-				{:else}
-					<form onsubmit={handleSubmit} class="space-y-5">
-						{#if error}
-							<div class="flex items-center gap-2 border border-red-500/20 bg-red-500/5 px-4 py-3 text-sm text-red-600">
-								<WarningCircleIcon size={16} class="shrink-0" />
-								{error}
-							</div>
-						{/if}
-
-						<!-- Category -->
-						<div>
-							<label class="mb-2 block text-sm font-medium text-surface">What can we help with?</label>
-							<div class="flex flex-wrap gap-2">
-								{#each categories as opt}
-									<button
-										type="button"
-										onclick={() => (category = opt.value)}
-										class="border px-4 py-2 text-sm font-medium transition-all duration-200 {category ===
-										opt.value
-											? 'border-primary bg-primary/10 text-primary'
-											: 'border-border/50 bg-white text-muted hover:border-primary/30 hover:text-surface'}"
-									>
-										{opt.label}
-									</button>
-								{/each}
-							</div>
+					<h3 class="text-xl font-semibold text-surface">Message sent!</h3>
+					<p class="mt-2 max-w-sm text-sm leading-relaxed text-muted">
+						We'll get back to you as soon as possible. You can also reach us directly at
+						<a href="mailto:hello@lettr.com" class="text-primary underline underline-offset-4">
+							hello@lettr.com
+						</a>
+					</p>
+					<button
+						onclick={() => (submitted = false)}
+						class="mt-6 text-sm font-medium text-primary transition-colors hover:text-primary/80"
+					>
+						Send another message
+					</button>
+				</div>
+			{:else}
+				<form onsubmit={handleSubmit} class="space-y-5">
+					{#if error}
+						<div class="flex items-center gap-2 border border-red-500/20 bg-red-500/5 px-4 py-3 text-sm text-red-600">
+							<WarningCircleIcon size={16} class="shrink-0" />
+							{error}
 						</div>
+					{/if}
 
-						<!-- Name & Email -->
-						<div class="grid gap-4 sm:grid-cols-2">
-							<div>
-								<label for="name" class="mb-2 block text-sm font-medium text-surface">Name</label>
-								<input
-									id="name"
-									type="text"
-									required
-									bind:value={name}
-									placeholder="Your name"
-									class="w-full border border-border/50 bg-white px-4 py-3 text-sm text-surface placeholder-muted/60 transition-all duration-200 outline-none focus:border-primary/50"
-								/>
-							</div>
-							<div>
-								<label for="email" class="mb-2 block text-sm font-medium text-surface">Email</label>
-								<input
-									id="email"
-									type="email"
-									required
-									bind:value={email}
-									placeholder="you@company.com"
-									class="w-full border border-border/50 bg-white px-4 py-3 text-sm text-surface placeholder-muted/60 transition-all duration-200 outline-none focus:border-primary/50"
-								/>
-							</div>
+					<!-- Category -->
+					<div>
+						<label class="mb-2 block text-sm font-medium text-surface">What can we help with?</label>
+						<div class="flex flex-wrap gap-2">
+							{#each categories as opt}
+								<button
+									type="button"
+									onclick={() => (category = opt.value)}
+									class="border px-4 py-2 text-sm font-medium transition-all duration-200 {category ===
+									opt.value
+										? 'border-primary bg-primary/10 text-primary'
+										: 'border-border/50 bg-white text-muted hover:border-primary/30 hover:text-surface'}"
+								>
+									{opt.label}
+								</button>
+							{/each}
 						</div>
+					</div>
 
-						<!-- Subject -->
+					<!-- Name & Email -->
+					<div class="grid gap-4 sm:grid-cols-2">
 						<div>
-							<label for="subject" class="mb-2 block text-sm font-medium text-surface">Subject</label>
+							<label for="name" class="mb-2 block text-sm font-medium text-surface">Name</label>
 							<input
-								id="subject"
+								id="name"
 								type="text"
 								required
-								bind:value={subject}
-								placeholder="How can we help?"
+								bind:value={name}
+								placeholder="Your name"
 								class="w-full border border-border/50 bg-white px-4 py-3 text-sm text-surface placeholder-muted/60 transition-all duration-200 outline-none focus:border-primary/50"
 							/>
 						</div>
-
-						<!-- Message -->
 						<div>
-							<label for="message" class="mb-2 block text-sm font-medium text-surface">Message</label>
-							<textarea
-								id="message"
+							<label for="email" class="mb-2 block text-sm font-medium text-surface">Email</label>
+							<input
+								id="email"
+								type="email"
 								required
-								rows="5"
-								bind:value={message}
-								placeholder="Tell us more about your question or issue..."
-								class="w-full resize-none border border-border/50 bg-white px-4 py-3 text-sm leading-relaxed text-surface placeholder-muted/60 transition-all duration-200 outline-none focus:border-primary/50"
-							></textarea>
+								bind:value={email}
+								placeholder="you@company.com"
+								class="w-full border border-border/50 bg-white px-4 py-3 text-sm text-surface placeholder-muted/60 transition-all duration-200 outline-none focus:border-primary/50"
+							/>
 						</div>
-
-						<!-- Submit -->
-						<button
-							type="submit"
-							disabled={submitting}
-							class="flex w-full items-center justify-center gap-2 bg-primary px-6 py-3.5 text-[15px] font-semibold text-white transition-colors hover:bg-primary/90 disabled:cursor-not-allowed disabled:opacity-60"
-						>
-							{#if submitting}
-								<div class="h-4 w-4 animate-spin rounded-full border-2 border-white/30 border-t-white"></div>
-								Sending...
-							{:else}
-								<PaperPlaneRightIcon size={16} />
-								Send message
-							{/if}
-						</button>
-
-						<p class="text-center text-[13px] text-muted">
-							Or email us directly at
-							<a
-								href="mailto:hello@lettr.com"
-								class="text-primary underline underline-offset-4 transition-colors hover:text-primary/80"
-							>
-								hello@lettr.com
-							</a>
-						</p>
-					</form>
-				{/if}
-			</div>
-
-			<!-- Sidebar -->
-			<div data-reveal class="space-y-6">
-				<!-- FAQ -->
-				<div class="border border-border/50 bg-white p-6">
-					<h3 class="mb-4 text-sm font-semibold text-surface">Common questions</h3>
-					<div class="space-y-3">
-						{#each faqs as faq}
-							<a
-								href={faq.href}
-								target="_blank"
-								rel="noopener noreferrer"
-								class="flex items-center justify-between px-3 py-2 text-sm text-muted transition-all duration-200 hover:bg-background hover:text-surface"
-							>
-								{faq.q}
-								<ArrowSquareOutIcon size={12} class="shrink-0 text-muted" />
-							</a>
-						{/each}
 					</div>
-				</div>
 
-				<!-- Email fallback -->
-				<div class="border border-border/50 bg-white p-6 text-center">
-					<EnvelopeSimpleIcon size={20} class="mx-auto mb-3 text-muted" />
-					<p class="text-sm text-muted">You can always email us at</p>
-					<a
-						href="mailto:hello@lettr.com"
-						class="mt-1 inline-block font-code text-sm text-primary underline underline-offset-4 transition-colors hover:text-primary/80"
+					<!-- Subject -->
+					<div>
+						<label for="subject" class="mb-2 block text-sm font-medium text-surface">Subject</label>
+						<input
+							id="subject"
+							type="text"
+							required
+							bind:value={subject}
+							placeholder="How can we help?"
+							class="w-full border border-border/50 bg-white px-4 py-3 text-sm text-surface placeholder-muted/60 transition-all duration-200 outline-none focus:border-primary/50"
+						/>
+					</div>
+
+					<!-- Message -->
+					<div>
+						<label for="message" class="mb-2 block text-sm font-medium text-surface">Message</label>
+						<textarea
+							id="message"
+							required
+							rows="5"
+							bind:value={message}
+							placeholder="Tell us more about your question or issue..."
+							class="w-full resize-none border border-border/50 bg-white px-4 py-3 text-sm leading-relaxed text-surface placeholder-muted/60 transition-all duration-200 outline-none focus:border-primary/50"
+						></textarea>
+					</div>
+
+					<!-- Submit -->
+					<button
+						type="submit"
+						disabled={submitting}
+						class="flex w-full items-center justify-center gap-2 bg-primary px-6 py-3.5 text-[15px] font-semibold text-white transition-colors hover:bg-primary/90 disabled:cursor-not-allowed disabled:opacity-60"
 					>
-						hello@lettr.com
-					</a>
-				</div>
-			</div>
+						{#if submitting}
+							<div class="h-4 w-4 animate-spin rounded-full border-2 border-white/30 border-t-white"></div>
+							Sending...
+						{:else}
+							<PaperPlaneRightIcon size={16} />
+							Send message
+						{/if}
+					</button>
+
+					<p class="text-center text-[13px] text-muted">
+						Or email us directly at
+						<a
+							href="mailto:hello@lettr.com"
+							class="text-primary underline underline-offset-4 transition-colors hover:text-primary/80"
+						>
+							hello@lettr.com
+						</a>
+					</p>
+				</form>
+			{/if}
 		</div>
 	</div>
 </section>

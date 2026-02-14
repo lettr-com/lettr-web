@@ -128,71 +128,44 @@ Welcome to Lettr. Let's make email not suck.
 		<!-- Entries -->
 		<div bind:this={entriesSection} class="space-y-10">
 			{#each changelog as entry}
-				<article data-reveal class="relative grid gap-6 md:grid-cols-[200px_1fr]">
-					<!-- Left: date column + timeline -->
-					<div class="relative">
-						<div class="absolute top-0 -bottom-8 left-[5px] hidden w-px bg-border/50 md:block"></div>
-						<div
-							class="absolute top-[6px] left-0 hidden h-[11px] w-[11px] rounded-full border-2 border-primary bg-background md:block"
-						></div>
-
-						<div class="md:pl-7">
-							<time class="font-code text-[13px] text-muted">{entry.date}</time>
-							{#if entry.tag}
-								<div class="mt-2">
-									<span
-										class="bg-primary/10 px-3 py-0.5 font-heading text-[11px] tracking-[0.05em] text-primary"
-									>
-										{entry.tag}
-									</span>
-								</div>
-							{/if}
-							<!-- Authors on desktop -->
-							<div class="mt-4 hidden md:block">
-								{#each entry.authors as author}
-									<div class="flex items-center gap-2">
-										{#if author.avatar}
-											<img src={author.avatar} alt={author.name} class="h-7 w-7 rounded-full object-cover" />
-										{:else}
-											<div
-												class="flex h-7 w-7 items-center justify-center rounded-full bg-background font-code text-[10px] font-semibold text-muted"
-											>
-												{author.initials}
-											</div>
-										{/if}
-										<span class="text-[13px] text-muted">{author.name}</span>
-									</div>
-								{/each}
-							</div>
-						</div>
+				<article data-reveal>
+					<!-- Meta -->
+					<div class="mb-4 flex items-center gap-3">
+						<time class="font-code text-[13px] text-muted">{entry.date}</time>
+						{#if entry.tag}
+							<span
+								class="bg-primary/10 px-3 py-0.5 font-heading text-[11px] tracking-[0.05em] text-primary"
+							>
+								{entry.tag}
+							</span>
+						{/if}
 					</div>
 
-					<!-- Right: content card -->
-					<div class="border border-border/50 bg-white p-6 transition-colors hover:border-primary/20 md:p-8">
-						<h2 class="mb-3 text-2xl leading-tight font-semibold text-surface">{entry.title}</h2>
-						<p class="mb-6 text-body leading-[1.7] text-muted">{entry.summary}</p>
+					<!-- Title -->
+					<h2 class="mb-6 text-2xl leading-tight font-semibold text-surface">{entry.title}</h2>
 
-						<div class="changelog-content">
-							{@html `<p class="mt-4 leading-[1.8] text-muted">${formatContent(entry.content)}</p>`}
-						</div>
+					<!-- Content -->
+					<div class="changelog-content">
+						<p class="leading-[1.8] text-muted">{entry.summary}</p>
+						{@html `<p class="mt-4 leading-[1.8] text-muted">${formatContent(entry.content)}</p>`}
+					</div>
 
-						<!-- Authors on mobile -->
-						<div class="mt-8 flex items-center gap-3 border-t border-border/30 pt-6 md:hidden">
-							{#each entry.authors as author}
-								<div class="flex items-center gap-2">
-									{#if author.avatar}
-										<img src={author.avatar} alt={author.name} class="h-8 w-8 rounded-full object-cover" />
-									{:else}
-										<div
-											class="flex h-8 w-8 items-center justify-center rounded-full bg-background font-code text-[11px] font-semibold text-muted"
-										>
-											{author.initials}
-										</div>
-									{/if}
-									<span class="text-sm font-medium text-surface">{author.name}</span>
-								</div>
-							{/each}
-						</div>
+					<!-- Author -->
+					<div class="mt-8 flex items-center gap-3 border-t border-border/30 pt-6">
+						{#each entry.authors as author}
+							<div class="flex items-center gap-2">
+								{#if author.avatar}
+									<img src={author.avatar} alt={author.name} class="h-7 w-7 rounded-full object-cover" />
+								{:else}
+									<div
+										class="flex h-7 w-7 items-center justify-center rounded-full bg-background font-code text-[10px] font-semibold text-muted"
+									>
+										{author.initials}
+									</div>
+								{/if}
+								<span class="text-[13px] text-muted">{author.name}</span>
+							</div>
+						{/each}
 					</div>
 				</article>
 			{/each}
