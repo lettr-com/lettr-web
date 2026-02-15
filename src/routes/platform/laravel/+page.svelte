@@ -38,36 +38,23 @@
 		},
 		{
 			number: '3',
-			label: 'Test your setup',
-			command: 'php artisan lettr:test'
+			label: 'Send your first email',
+			command: 'php artisan lettr:test hello@example.com'
 		}
 	];
 
-	const codeExample = `use Lettr\\Mail\\LettrMessage;
+	const codeExample = `use Illuminate\\Support\\Facades\\Mail;
 
-class WelcomeEmail extends Mailable
-{
-    public function envelope(): Envelope
-    {
-        return new Envelope(
-            subject: 'Welcome to ' . config('app.name'),
-        );
-    }
+// Send a simple email
+Mail::lettr()
+    ->to('user@example.com')
+    ->sendTemplate('welcome-email', 'Welcome!', [
+        'name' => 'John',
+        'company' => 'Acme Inc',
+    ]);
 
-    public function content(): Content
-    {
-        return new Content(
-            view: 'emails.welcome',
-            with: [
-                'user' => $this->user,
-                'activationUrl' => $this->activationUrl,
-            ],
-        );
-    }
-}
-
-// Send it
-Mail::to($user->email)->send(new WelcomeEmail($user));`;
+// Or use Laravel's Mailables
+Mail::to($user)->send(new WelcomeMail($user));`;
 
 	const features = [
 		{
