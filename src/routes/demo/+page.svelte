@@ -3,6 +3,7 @@
 	import { onMount } from 'svelte';
 	import { capturePosthogEvent, identifyPosthogUser } from '$lib/analytics/posthog';
 	import BookingAlerts from '$lib/components/booking/BookingAlerts.svelte';
+	import BookingSuccessCard from '$lib/components/booking/BookingSuccessCard.svelte';
 	import ContactFormCard from '$lib/components/booking/ContactFormCard.svelte';
 	import SelfServeCard from '$lib/components/booking/SelfServeCard.svelte';
 	import SlotPicker from '$lib/components/booking/SlotPicker.svelte';
@@ -467,13 +468,25 @@
 
 <section class="border-b border-border/30 px-4 pb-16 pt-30">
 	<div bind:this={section} class="mx-auto max-w-[550px] space-y-5">
-		<header data-animate-intro class="space-y-3">
-			<p class="text-sm font-medium uppercase tracking-[0.14em] text-primary">Step 2 of 3</p>
-		</header>
+		{#if isConfirmed}
+			<BookingSuccessCard
+				slotSummary={selectedSlotSummary}
+				{timezone}
+				redirectUrl={config?.configuration.redirectAfterBookingUrl}
+				resources={[
+					{
+						name: 'Getting started guide',
+						description: 'Learn how to set up Lettr and send your first email',
+						href: 'https://docs.lettr.email'
+					}
+				]}
+			/>
+		{:else}
+			<header data-animate-intro class="space-y-3">
+				<p class="text-sm font-medium uppercase tracking-[0.14em] text-primary">Step 2 of 3</p>
+			</header>
 
-		<BookingAlerts {errorMessage} {infoMessage} />
-
-		{#if !isConfirmed}
+			<BookingAlerts {errorMessage} {infoMessage} />
 			<VolumePicker
 				{volumeRanges}
 				{selectedVolumeRange}

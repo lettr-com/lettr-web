@@ -34,6 +34,16 @@
 		oncontinueclick
 	}: Props = $props();
 
+	const shortTimezone = $derived.by(() => {
+		try {
+			const formatter = new Intl.DateTimeFormat('en', { timeZoneName: 'short', timeZone: timezone });
+			const parts = formatter.formatToParts(new Date());
+			return parts.find((p) => p.type === 'timeZoneName')?.value ?? timezone;
+		} catch {
+			return timezone;
+		}
+	});
+
 	function handleContinue() {
 		oncontinueclick?.();
 
@@ -45,44 +55,44 @@
 	}
 </script>
 
-<Card data-animate-intro class="overflow-hidden border-primary/25 bg-gradient-to-br from-white to-primary/5">
-	<CardHeader class="space-y-3 border-b border-border/60 bg-white/70">
-		<div class="inline-flex w-fit items-center gap-2 border border-primary/25 bg-primary/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.12em] text-primary">
-			<CheckCircle size={14} weight="fill" />
+<Card data-animate-intro class="overflow-hidden border-border/60">
+	<CardHeader class="space-y-2 border-b border-border/40 pb-4">
+		<div class="inline-flex w-fit items-center gap-1.5 border border-primary/20 bg-primary/5 px-2 py-0.5 text-[11px] font-semibold uppercase tracking-[0.12em] text-primary">
+			<CheckCircle size={12} weight="fill" />
 			Booking confirmed
 		</div>
-		<CardTitle class="text-2xl">Thanks for booking with Lettr</CardTitle>
-		<CardDescription class="text-base">
-			Your call is scheduled. While you wait, here are practical resources to help you ship faster.
+		<CardTitle class="text-lg">You're all set</CardTitle>
+		<CardDescription class="text-sm">
+			Here are a few things to check out before your call.
 		</CardDescription>
 	</CardHeader>
 
-	<CardContent class="space-y-5 pt-5">
-		<div class="flex items-center gap-2 bg-white p-3 text-sm text-surface shadow-[0_8px_25px_-20px_rgba(17,24,39,0.5)]">
-			<Clock size={16} class="text-primary" />
+	<CardContent class="space-y-4 pt-4">
+		<div class="flex items-center gap-2 rounded bg-muted/10 px-3 py-2 text-xs text-surface">
+			<Clock size={14} class="shrink-0 text-primary" />
 			<span class="font-medium">{slotSummary}</span>
-			<span class="text-muted">({timezone})</span>
+			<span class="text-muted">({shortTimezone})</span>
 		</div>
 
-		<div class="space-y-3">
-			<p class="text-sm font-semibold uppercase tracking-[0.1em] text-muted">Before the call</p>
-			<div class="grid gap-3">
+		<div class="space-y-2">
+			<p class="text-[11px] font-semibold uppercase tracking-[0.1em] text-muted">Before the call</p>
+			<div class="grid gap-2">
 				{#each resources as resource}
 					<a
 						href={resource.href}
 						target="_blank"
 						rel="noopener noreferrer"
 						onclick={() => onresourceclick?.(resource)}
-						class="group border border-border/80 bg-white p-4 transition-colors hover:border-primary/40 hover:bg-primary/5"
+						class="group border border-border/60 bg-white px-3 py-2.5 transition-colors hover:border-primary/40 hover:bg-primary/5"
 					>
-						<div class="flex items-start justify-between gap-3">
-							<div class="space-y-1">
-								<p class="text-sm font-semibold text-surface">{resource.name}</p>
-								<p class="text-sm text-muted">{resource.description}</p>
+						<div class="flex items-center justify-between gap-3">
+							<div class="space-y-0.5">
+								<p class="text-xs font-semibold text-surface">{resource.name}</p>
+								<p class="text-xs text-muted">{resource.description}</p>
 							</div>
 							<ArrowSquareOut
-								size={16}
-								class="mt-0.5 shrink-0 text-muted transition-colors group-hover:text-primary"
+								size={14}
+								class="shrink-0 text-muted transition-colors group-hover:text-primary"
 							/>
 						</div>
 					</a>
@@ -92,8 +102,8 @@
 	</CardContent>
 
 	{#if redirectUrl}
-		<CardFooter class="border-t border-border/60 bg-white/60">
-			<Button class="w-full" onclick={handleContinue}>Continue in app</Button>
+		<CardFooter class="border-t border-border/40 bg-white/60 pt-4">
+			<Button class="w-full" size="sm" onclick={handleContinue}>Continue in app</Button>
 		</CardFooter>
 	{/if}
 </Card>
