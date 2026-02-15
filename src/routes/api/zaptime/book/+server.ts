@@ -63,22 +63,31 @@ export const POST: RequestHandler = async ({ fetch, request }) => {
 		throw error(400, 'Please complete the captcha challenge');
 	}
 
+	const requestBody = {
+		start: payload.timeSlot.start,
+		end: payload.timeSlot.end,
+		email: payload.email,
+		seats: payload.seats ?? 1,
+		firstname: payload.firstName,
+		lastname: payload.lastName,
+		phone: payload.companyName ?? payload.phone,
+		location: payload.location,
+		timezone: payload.timezone,
+		customFields: buildCustomFields(payload)
+	};
+
 	const response = await fetch(`${baseUrl}reservations`, {
 		method: 'POST',
 		headers: getZaptimeHeaders(token),
-		body: JSON.stringify({
-			start: payload.timeSlot.start,
-			end: payload.timeSlot.end,
-			email: payload.email,
-			seats: payload.seats ?? 1,
-			firstname: payload.firstName,
-			lastname: payload.lastName,
-			phone: payload.companyName ?? payload.phone,
-			location: payload.location,
-			timezone: payload.timezone,
-			customFields: buildCustomFields(payload)
-		})
+		body: JSON.stringify(requestBody)
 	});
+
+	if (!response.ok) {
+		const responseText = await response.text();
+		console.error('[zaptime] 422 response:', responseText);
+		console.error('[zaptime] request body:', JSON.stringify(requestBody, null, 2));
+		throw error(response.status, responseText || 'Could not book time slot');
+	}
 
 	const data = await parseJsonResponse<ReservationResponse>(response, 'Could not book time slot');
 

@@ -39,28 +39,28 @@
 
 	const volumeRanges = [
 		{
-			value: 'under-100k',
+			value: 'Under 100K',
 			label: 'Under 100K',
-			description: 'Fast self-serve onboarding',
-			route: 'selfServe'
-		},
-		{
-			value: '100k-1m',
-			label: '100K-1M',
 			description: 'Great fit for a regular demo',
 			route: 'demo'
 		},
 		{
-			value: '2m-5m',
-			label: '2M-5M',
-			description: 'Regular demo with our team',
+			value: '100K-500K',
+			label: '100K-500K',
+			description: 'Great fit for a regular demo',
 			route: 'demo'
 		},
 		{
-			value: '5m-plus',
-			label: '5M+',
-			description: 'Priority routing volume',
-			route: 'priorityDemo'
+			value: '500K-1M',
+			label: '500K-1M',
+			description: 'Great fit for a regular demo',
+			route: 'demo'
+		},
+		{
+			value: '1M+',
+			label: '1M+',
+			description: 'Great fit for a regular demo',
+			route: 'demo'
 		}
 	] as const;
 
