@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import Button from './Button.svelte';
+	import EditorPreview from './EditorPreview.svelte';
 	import { createFromAnimationCleanup } from '$lib/utils/gsap';
 	import { buildRegisterUrl, registerUrl } from '$lib/utils/utm';
 
@@ -54,7 +55,10 @@
 				<p data-animate class="max-w-md text-sm text-gray-400">
 					3,000 emails/month free. No credit card required.
 				</p>
+		</div>
 
+		<div data-animate class="mt-12">
+			<EditorPreview />
 		</div>
 	</div>
 </section>

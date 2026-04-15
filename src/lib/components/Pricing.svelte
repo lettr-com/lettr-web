@@ -157,15 +157,9 @@
 </script>
 
 <section bind:this={section} id="pricing" class="py-16">
-		<div class="mb-4" data-pricing-animate>
-			<h2 class="mb-3 text-surface">Startup-friendly pricing. <span class="text-primary">Enterprise-grade infrastructure.</span></h2>
-			<p class="text-body text-muted max-w-[55ch]">Start free. Scale as you grow. Backed by 12 years of Ecomail infrastructure serving 12,000+ organizations.</p>
-		</div>
-
-		<div class="mb-10 flex flex-wrap gap-6 text-sm text-muted" data-pricing-animate>
-			<span><span class="font-semibold text-surface">40,000+</span> companies trust the Topol editor</span>
-			<span><span class="font-semibold text-surface">12,000+</span> organizations on Ecomail</span>
-			<span><span class="font-semibold text-surface">12 years</span> of email infrastructure</span>
+		<div class="mb-10" data-pricing-animate>
+			<h2 class="mb-3 text-surface">Simple, transparent <span class="text-primary">pricing.</span></h2>
+			<p class="text-body text-muted">Start free. Scale as you grow. No hidden fees.</p>
 		</div>
 
 		<div class="mb-8" data-pricing-animate>
@@ -213,6 +207,12 @@
 					class="flex items-center justify-center py-3 text-sm font-semibold bg-primary text-white transition-colors hover:bg-primary/90"
 				>
 					{activePlan.cta}
+				</a>
+				<a
+					href="/demo/"
+					class="mt-3 flex items-center justify-center py-3 text-sm font-medium text-muted transition-colors hover:text-surface"
+				>
+					Talk to an expert
 				</a>
 			</div>
 		</div>

@@ -106,17 +106,26 @@
 
 	const dropdownConfigs: Record<string, DropdownConfig> = {
 		platform: { items: platformItems, footer: { label: 'View all features', href: '/#features' } },
-		integrations: { sections: integrationsSections, wide: true, footer: { label: 'View documentation', href: 'https://docs.lettr.com' } },
+		docs: { sections: [
+			{
+				label: 'Documentation',
+				items: [
+					{ icon: BookOpenIcon, label: 'Getting Started', description: 'Quick start guides', href: 'https://docs.lettr.com/introduction', external: true },
+					{ icon: CodeIcon, label: 'API Reference', description: 'Full API documentation', href: 'https://docs.lettr.com/api-reference/introduction', external: true },
+					{ icon: EnvelopeSimpleIcon, label: 'Changelog', description: 'Latest updates', href: '/changelog' }
+				]
+			},
+			...integrationsSections
+		], wide: true, footer: { label: 'View full documentation', href: 'https://docs.lettr.com' } },
 		company: { items: companyItems },
 		resources: { items: resourcesItems, footer: { label: 'Visit documentation', href: 'https://docs.lettr.com' } }
 	};
 
 	const navLinks: NavLink[] = [
 		{ label: 'Platform', href: '/#features', dropdownKey: 'platform' },
-		{ label: 'Integrations', href: '/#code', dropdownKey: 'integrations' },
+		{ label: 'Docs', href: 'https://docs.lettr.com', dropdownKey: 'docs' },
 		{ label: 'Pricing', href: '/#pricing' },
-		{ label: 'Company', href: '#', dropdownKey: 'company' },
-		{ label: 'Resources', href: '#', dropdownKey: 'resources' }
+		{ label: 'Company', href: '#', dropdownKey: 'company' }
 	];
 
 	function getAllItems(config: DropdownConfig): DropdownItem[] {
@@ -210,10 +219,10 @@
 							{#if openDropdown === link.dropdownKey && link.dropdownKey}
 								{@const ddConfig = dropdownConfigs[link.dropdownKey]}
 								<div
-									class="absolute top-full left-1/2 mt-2 -translate-x-1/2 border border-border/50 bg-white shadow-[0_16px_48px_rgba(0,0,0,0.1)] {ddConfig?.wide ? 'w-[480px]' : 'w-[300px]'}"
+									class="absolute top-full left-1/2 mt-2 -translate-x-1/2 border border-border/50 bg-white shadow-[0_16px_48px_rgba(0,0,0,0.1)] {ddConfig?.wide ? 'w-[580px]' : 'w-[300px]'}"
 								>
 									{#if ddConfig?.sections}
-										<div class="grid {ddConfig.sections.length > 1 ? 'sm:grid-cols-2' : ''}">
+										<div class="grid {ddConfig.sections.length > 2 ? 'sm:grid-cols-3' : ddConfig.sections.length > 1 ? 'sm:grid-cols-2' : ''}">
 											{#each ddConfig.sections as section, si}
 												<div class="p-3 {si > 0 ? 'border-t border-border/30 sm:border-t-0 sm:border-l' : ''}">
 													<div class="mb-1 px-3 py-1.5 font-heading text-[10px] tracking-[0.12em] text-muted uppercase">
@@ -246,6 +255,8 @@
 																<div class="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center border border-border/50 bg-background transition-colors group-hover:border-primary/30 group-hover:bg-primary/5">
 																	{#if item.iconSrc}
 																		<img src={item.iconSrc} alt="" class="h-4 w-4" />
+																	{:else if item.icon}
+																		<svelte:component this={item.icon} size={14} class="text-muted transition-colors group-hover:text-primary" />
 																	{/if}
 																</div>
 																<div>
@@ -315,18 +326,6 @@
 					{/if}
 				{/each}
 
-				<!-- Docs link -->
-				<div class="relative ml-1">
-					<a
-						href="https://docs.lettr.com/introduction"
-						target="_blank"
-						rel="noopener noreferrer"
-						class="px-2.5 py-2 text-sm text-muted transition-colors hover:text-surface"
-					>
-						Docs
-					</a>
-					<div class="absolute top-1.5 right-0 h-[6px] w-[6px] rotate-45 bg-primary"></div>
-				</div>
 			</div>
 
 			<!-- Mobile toggle -->
@@ -418,24 +417,12 @@
 					{/each}
 
 					<div class="mt-2 border-t border-border/30 pt-4">
-						<div class="relative w-fit">
-							<a
-								href="https://docs.lettr.com/introduction"
-								target="_blank"
-								rel="noopener noreferrer"
-								class="text-surface transition-colors"
-								onclick={closeMobile}
-							>
-								Docs
-							</a>
-							<div class="absolute top-0 right-[-8px] h-[6px] w-[6px] rotate-45 bg-primary"></div>
-						</div>
 						<a
 							href={registerHref}
-							class="mt-4 block font-bold text-primary transition-colors hover:text-primary/90"
+							class="block font-bold text-primary transition-colors hover:text-primary/90"
 							onclick={closeMobile}
 						>
-							Sign Up
+							Start sending
 						</a>
 					</div>
 				</div>
@@ -449,7 +436,7 @@
 			href={registerHref}
 			class="text-primary text-sm font-bold transition-colors hover:text-primary/90"
 		>
-			Sign Up
+			Start sending
 		</a>
 	</div>
 </div>
