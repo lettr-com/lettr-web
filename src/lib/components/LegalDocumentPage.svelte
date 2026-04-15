@@ -16,7 +16,7 @@
 	<link rel="canonical" href={`https://lettr.com${document.href}`} />
 </svelte:head>
 
-<section class="px-4 pb-20 pt-28">
+<section class="pb-20 pt-28">
 	<div class="rounded border border-border/50 bg-white/80 p-5 shadow-[0_20px_50px_-45px_rgba(17,24,39,0.6)]">
 		<p class="font-heading text-xs tracking-[0.12em] text-primary uppercase">Legal</p>
 		<h1 class="mt-2 text-3xl text-surface">{document.title}</h1>

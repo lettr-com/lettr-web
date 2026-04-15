@@ -64,8 +64,7 @@
 	/>
 </svelte:head>
 
-<section class="px-4 pt-32 pb-24">
-	<div class="mx-auto max-w-[550px]">
+<section class="pt-32 pb-24">
 		<!-- Back Link -->
 		<a
 			href="/compare"
@@ -195,5 +194,4 @@
 				</div>
 			</div>
 		</div>
-	</div>
 </section>

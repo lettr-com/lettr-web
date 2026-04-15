@@ -47,8 +47,8 @@
 	<meta name="twitter:description" content={metaDescription} />
 </svelte:head>
 
-<section class="px-4 pt-32 pb-24">
-	<div bind:this={hero} class="mx-auto max-w-[550px] text-center">
+<section class="pt-32 pb-24">
+	<div bind:this={hero} class="text-center">
 		<span data-animate class="mb-4 inline-block font-heading text-xs tracking-[0.15em] text-primary uppercase">
 			{label}
 		</span>
@@ -64,7 +64,7 @@
 		{@render children()}
 	</div>
 
-	<div class="mx-auto mt-20 max-w-[550px] text-center md:mt-32">
+	<div class="mt-20 text-center md:mt-32">
 		<a
 			href={registerHref}
 			class="inline-flex items-center gap-2 bg-primary px-8 py-3.5 text-[15px] font-semibold text-white transition-colors hover:bg-primary/90"

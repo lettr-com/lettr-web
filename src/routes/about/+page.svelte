@@ -119,9 +119,9 @@
 	/>
 </svelte:head>
 
-<section class="px-4 pt-32 pb-24">
+<section class="pt-32 pb-24">
 	<!-- Hero -->
-	<div bind:this={hero} class="mx-auto max-w-[550px]">
+	<div bind:this={hero}>
 		<span data-animate class="mb-4 inline-block font-heading text-xs tracking-[0.15em] text-primary uppercase">
 			ABOUT
 		</span>
@@ -136,7 +136,7 @@
 	</div>
 
 	<!-- Stats -->
-	<div bind:this={statsSection} class="mx-auto mt-16 grid max-w-[550px] gap-4 sm:grid-cols-3">
+	<div bind:this={statsSection} class="mt-16 grid gap-4 sm:grid-cols-3">
 		{#each stats as stat}
 			<div data-reveal class="border border-border/50 bg-white p-6 text-center">
 				<div class="font-heading text-3xl text-primary">{stat.value}</div>
@@ -146,7 +146,7 @@
 	</div>
 
 	<!-- Story: Where we come from -->
-	<div bind:this={storySection} class="mx-auto mt-20 max-w-[550px] md:mt-28">
+	<div bind:this={storySection} class="mt-20 md:mt-28">
 		<div data-reveal class="space-y-6 text-body leading-[1.8] text-muted">
 			<h2>Where we come from</h2>
 			<p>

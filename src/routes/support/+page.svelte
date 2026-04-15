@@ -151,9 +151,9 @@
 	/>
 </svelte:head>
 
-<section class="px-4 pt-32 pb-24">
+<section class="pt-32 pb-24">
 	<!-- Hero -->
-	<div bind:this={hero} class="mx-auto max-w-[550px] text-center">
+	<div bind:this={hero} class="text-center">
 		<span
 			data-animate
 			class="mb-4 inline-block font-heading text-xs tracking-[0.15em] text-primary uppercase"
@@ -170,7 +170,7 @@
 	</div>
 
 	<!-- Channel Cards -->
-	<div bind:this={channelsSection} class="mx-auto mt-16 grid max-w-[550px] gap-5 md:mt-20">
+	<div bind:this={channelsSection} class="mt-16 grid gap-5 md:mt-20">
 		{#each channels as channel}
 			<a
 				data-reveal

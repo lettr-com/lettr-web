@@ -28,10 +28,9 @@
 	});
 </script>
 
-<section bind:this={section} class="px-4 pt-30 pb-16 border-b border-border/30" id="hero">
-	<div class="mx-auto max-w-[550px]">
-		<div class="grid gap-12 lg:grid-cols-1">
-			<div class="flex flex-col">
+<section bind:this={section} class="pt-30 pb-16 border-b border-border/30" id="hero">
+	<div class="grid gap-12 lg:grid-cols-1">
+		<div class="flex flex-col">
 				<a
 					data-animate
 					href="/changelog/"
@@ -84,7 +83,7 @@
 						view on GitHub
 					</a>
 				</div>
-			</div>
 		</div>
 	</div>
 </section>
+

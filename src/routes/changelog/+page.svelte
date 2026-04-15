@@ -115,8 +115,7 @@ Welcome to Lettr. Let's make email not suck.
 	<meta property="og:description" content="All the latest updates, improvements, and fixes to Lettr." />
 </svelte:head>
 
-<section class="px-4 pt-32 pb-24">
-	<div class="mx-auto max-w-[550px]">
+<section class="pt-32 pb-24">
 		<!-- Header -->
 		<div bind:this={header} class="mb-16">
 			<h1 data-animate class="font-heading text-4xl text-surface">Changelog</h1>
@@ -170,5 +169,4 @@ Welcome to Lettr. Let's make email not suck.
 				</article>
 			{/each}
 		</div>
-	</div>
 </section>

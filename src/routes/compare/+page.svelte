@@ -54,9 +54,9 @@
 	/>
 </svelte:head>
 
-<section class="px-4 pt-32 pb-24">
+<section class="pt-32 pb-24">
 	<!-- Hero -->
-	<div bind:this={hero} class="mx-auto max-w-[550px]">
+	<div bind:this={hero}>
 		<span data-animate class="mb-4 inline-block font-heading text-xs tracking-[0.15em] text-primary uppercase">
 			COMPARE & MIGRATE
 		</span>
@@ -70,7 +70,7 @@
 	</div>
 
 	<!-- Provider Grid -->
-	<div bind:this={gridSection} class="mx-auto mt-16 max-w-[550px]">
+	<div bind:this={gridSection} class="mt-16">
 		<div class="grid gap-4 sm:grid-cols-2">
 			{#each providerList as provider}
 				<a
@@ -105,7 +105,7 @@
 	</div>
 
 	<!-- CTA -->
-	<div bind:this={ctaSection} class="mx-auto mt-20 max-w-[550px]">
+	<div bind:this={ctaSection} class="mt-20">
 		<div data-reveal class="border border-border/50 bg-white p-8 text-center md:p-12">
 			<h2>Ready to switch?</h2>
 			<p class="mx-auto mt-3 max-w-lg text-body leading-[1.7] text-muted">

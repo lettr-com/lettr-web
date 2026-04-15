@@ -71,8 +71,7 @@ Mail::lettr()
 	});
 </script>
 
-<section bind:this={section} class="px-4 py-16 border-b border-border/30">
-	<div class="mx-auto max-w-[550px]">
+<section bind:this={section} class="py-16 border-b border-border/30">
 		<div class="mb-10" data-animate>
 			<h2 class="mb-3 text-surface">
 				Set it up <span class="text-primary">once</span> — never be<br />the bottleneck again
@@ -162,5 +161,4 @@ Mail::lettr()
 				{/if}
 			</div>
 		</div>
-	</div>
 </section>

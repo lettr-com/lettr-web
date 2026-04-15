@@ -103,7 +103,7 @@
 	});
 </script>
 
-<div bind:this={container} class="relative w-full overflow-visible bg-gray-950 p-[6px] pt-[2px] {shadow ? 'shadow-[0_0_40px_-10px_rgba(236,16,75,0.15)]' : ''}">
+<div bind:this={container} class="relative mx-auto max-w-2xl w-full overflow-visible bg-gray-950 p-[6px] pt-[2px] {shadow ? 'shadow-[0_0_40px_-10px_rgba(236,16,75,0.15)]' : ''}">
 	<div class="flex items-center justify-between">
 		{#if filename}
 			<div class="px-3 py-2 text-[12px] text-gray-400">{filename}</div>

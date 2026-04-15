@@ -48,8 +48,7 @@
 	});
 </script>
 
-<section bind:this={section} id="features" class="px-4 pt-16">
-	<div class="mx-auto max-w-[550px]">
+<section bind:this={section} id="features" class="pt-16">
 		<div class="mb-8" data-feature>
 			<h2 class="mb-3 text-surface">Built for <span class="text-primary">developers</span></h2>
 		</div>
@@ -58,10 +57,9 @@
 			{#each features as feature}
 				<div data-feature>
 					<feature.icon size={18} class="text-primary mb-2" />
-					<h3 class="text-sm text-surface font-medium mb-1">{feature.title}</h3>
-					<p class="max-w-[30ch] text-xs text-muted leading-relaxed">{feature.description}</p>
+					<h3 class="text-base text-surface font-medium mb-1">{feature.title}</h3>
+					<p class="max-w-[30ch] text-sm text-muted leading-relaxed">{feature.description}</p>
 				</div>
 			{/each}
 		</div>
-	</div>
 </section>

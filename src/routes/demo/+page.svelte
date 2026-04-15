@@ -466,8 +466,8 @@
 	}
 </script>
 
-<section class="border-b border-border/30 px-4 pb-16 pt-30">
-	<div bind:this={section} class="mx-auto max-w-[550px] space-y-5">
+<section class="border-b border-border/30 pb-16 pt-30">
+	<div bind:this={section} class="space-y-5">
 		{#if isConfirmed}
 			<BookingSuccessCard
 				slotSummary={selectedSlotSummary}

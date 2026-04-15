@@ -117,8 +117,7 @@ console.log(response.requestId);`,
 	});
 </script>
 
-<section bind:this={section} class="px-4 py-16 border-b border-border/30">
-	<div class="mx-auto max-w-[550px]">
+<section bind:this={section} class="py-16 border-b border-border/30">
 		<div class="mb-12" data-step>
 			<h2 class="mb-3 text-surface">Get started <span class="text-primary">in minutes</span></h2>
 			<p class="text-body text-muted">
@@ -171,5 +170,4 @@ console.log(response.requestId);`,
 			</div>
 		{/key}
 
-	</div>
 </section>

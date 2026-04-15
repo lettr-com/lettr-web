@@ -25,7 +25,7 @@
 	});
 </script>
 
-<div class="w-full px-[6px] pb-[6px] pt-[2px] border border-border/30 bg-white">
+<div class="mx-auto max-w-2xl w-full px-[6px] pb-[6px] pt-[2px] border border-border/30 bg-white">
 	<div class="flex items-center justify-between py-2">
 		<div class="flex items-center gap-1.5 pl-3 text-[12px] text-muted">
 			<TerminalWindowIcon size={14} />
