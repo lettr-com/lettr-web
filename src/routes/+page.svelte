@@ -3,7 +3,9 @@
 	import Comparison from '$lib/components/Comparison.svelte';
 	import Features from '$lib/components/Features.svelte';
 	import TeamFeatures from '$lib/components/TeamFeatures.svelte';
-	import GetStarted from '$lib/components/GetStarted.svelte';
+	import SaaSUseCases from '$lib/components/SaaSUseCases.svelte';
+	import UnifiedPlatform from '$lib/components/UnifiedPlatform.svelte';
+
 	import Pricing from '$lib/components/Pricing.svelte';
 </script>
 
@@ -11,5 +13,7 @@
 <Comparison />
 <Features />
 <TeamFeatures />
-<GetStarted />
+<SaaSUseCases />
+<UnifiedPlatform />
+
 <Pricing />

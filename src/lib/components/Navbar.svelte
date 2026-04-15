@@ -58,11 +58,11 @@
 	let registerHref: string = $state(registerUrl);
 
 	const platformItems: DropdownItem[] = [
-		{ icon: CodeIcon, label: 'Laravel Integration', description: 'One-line install, native facade, zero config', href: '/platform/laravel' },
-		{ icon: SparkleIcon, label: 'Email Templates', description: 'Drag-and-drop editor, AI copy, 200+ templates', href: '/platform/templates' },
-		{ icon: ArrowsLeftRightIcon, label: 'Template Sync', description: 'Two-way sync between Blade and Lettr', href: '/platform/sync' },
+		{ icon: CodeIcon, label: 'Developer API', description: 'Clean REST API and SMTP relay for fast integration', href: '/platform/laravel' },
+		{ icon: SparkleIcon, label: 'Visual Editor', description: 'Drag-and-drop editor your whole team can use', href: '/platform/templates' },
+		{ icon: ArrowsLeftRightIcon, label: 'Template Sync', description: 'Synced sections, version history, draft/publish', href: '/platform/sync' },
 		{ icon: ChartBarIcon, label: 'Analytics & Monitoring', description: 'Real-time delivery metrics and alerts', href: '/platform/analytics' },
-		{ icon: ShieldCheckIcon, label: 'Deliverability', description: 'DKIM, DMARC, dedicated IPs, blocklist monitoring', href: '/platform/deliverability' },
+		{ icon: ShieldCheckIcon, label: 'Deliverability', description: 'SPF, DKIM, DMARC, dedicated IPs, domain control', href: '/platform/deliverability' },
 		{ icon: RobotIcon, label: 'MCP Integration', description: 'Connect AI agents and LLMs to Lettr', href: '/platform/mcp' }
 	];
 
@@ -76,9 +76,9 @@
 
 	const companyItems: DropdownItem[] = [
 		{ icon: InfoIcon, label: 'About', description: 'Our story, team, and mission', href: '/about' },
-		{ iconSrc: '/images/logos/lettr-icon.svg', label: 'Lettr', description: 'Email API for developer artisans', href: '/' },
-		{ iconSrc: '/images/logos/topol-icon.svg', label: 'Topol', description: 'Email builder for beautiful templates', href: 'https://topol.io', external: true },
-		{ iconSrc: '/images/logos/dmarceye-icon.svg', label: 'DMARCeye', description: 'Email security and deliverability', href: 'https://dmarceye.com', external: true }
+		{ iconSrc: '/images/logos/lettr-icon.svg', label: 'Lettr', description: 'The email platform built for SaaS', href: '/' },
+		{ iconSrc: '/images/logos/topol-icon.svg', label: 'Topol', description: 'Email editor trusted by 40,000+ companies', href: 'https://topol.io', external: true },
+		{ iconSrc: '/images/logos/dmarceye-icon.svg', label: 'DMARCeye', description: 'DMARC monitoring and reporting', href: 'https://dmarceye.com', external: true }
 	];
 
 	const integrationsSections: DropdownSection[] = [

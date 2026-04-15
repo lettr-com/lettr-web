@@ -119,9 +119,9 @@ console.log(response.requestId);`,
 
 <section bind:this={section} class="py-16 border-b border-border/30">
 		<div class="mb-12" data-step>
-			<h2 class="mb-3 text-surface">Get started <span class="text-primary">in minutes</span></h2>
+			<h2 class="mb-3 text-surface">Integrate <span class="text-primary">in minutes</span></h2>
 			<p class="text-body text-muted">
-				Four steps to sending your first email. <br /> No complicated setup.
+				Four steps to sending your first email. No complicated setup.
 			</p>
 		</div>
 

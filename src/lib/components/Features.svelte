@@ -1,40 +1,40 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import { LinkIcon, FileTextIcon, ChartLineUpIcon, SparkleIcon, LightningIcon, PaperclipIcon } from 'phosphor-svelte';
+	import { LinkIcon, SparkleIcon, LightningIcon, CodeIcon, ShieldCheckIcon, MagnifyingGlassIcon } from 'phosphor-svelte';
 	import { createScrollRevealCleanup } from '$lib/utils/gsap';
 
 	let section: HTMLElement | undefined = $state();
 
 	const features = [
 		{
-			icon: LinkIcon,
-			title: 'Fluent builder API',
-			description: 'Chainable methods for building emails. Clean, readable, intuitive.'
-		},
-		{
-			icon: FileTextIcon,
-			title: 'Template support',
-			description: 'Send using pre-built templates with substitution data for personalization.'
-		},
-		{
-			icon: PaperclipIcon,
-			title: 'Attachments made easy',
-			description: 'Attach files by path or raw data. PDF, CSV, images - all supported.'
-		},
-		{
-			icon: ChartLineUpIcon,
-			title: 'Event tracking',
-			description: 'Track opens, clicks, bounces, and deliveries. Full visibility.'
-		},
-		{
-			icon: SparkleIcon,
-			title: 'Smart inlining',
-			description: 'CSS is automatically inlined for maximum email client compatibility.'
+			icon: CodeIcon,
+			title: 'Clean REST API + SMTP',
+			description: 'Simple, well-documented API. Or just point your SMTP config and go.'
 		},
 		{
 			icon: LightningIcon,
-			title: 'Click & open tracking',
-			description: 'Track opens, clicks, bounces, and deliveries. Full visibility.'
+			title: 'SDKs for every language',
+			description: 'Laravel, PHP, Node.js, Python, Go, Java, Rust. First-class support.'
+		},
+		{
+			icon: SparkleIcon,
+			title: 'Automatic queuing & retries',
+			description: 'Delivery optimization built in. Your emails land, every time.'
+		},
+		{
+			icon: ShieldCheckIcon,
+			title: 'SPF, DKIM, DMARC setup',
+			description: 'Guided authentication setup. Custom tracking domains from day one.'
+		},
+		{
+			icon: LinkIcon,
+			title: 'Webhooks for every event',
+			description: 'Delivered, opened, clicked, bounced. Real-time event notifications.'
+		},
+		{
+			icon: MagnifyingGlassIcon,
+			title: 'Searchable logs',
+			description: 'Find any email instantly. Debug delivery issues in seconds, not hours.'
 		}
 	];
 
@@ -50,7 +50,10 @@
 
 <section bind:this={section} id="features" class="pt-16">
 		<div class="mb-8" data-feature>
-			<h2 class="mb-3 text-surface">Built for <span class="text-primary">developers</span></h2>
+			<h2 class="mb-3 text-surface">Integrate in minutes. <span class="text-primary">Forget about it forever.</span></h2>
+			<p class="text-body text-muted max-w-[50ch]">
+				Everything you need to send emails from your SaaS. Nothing you don't.
+			</p>
 		</div>
 
 		<div class="grid grid-cols-2 gap-x-4 gap-y-12">

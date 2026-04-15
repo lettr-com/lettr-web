@@ -2,29 +2,12 @@
 	import { onMount } from 'svelte';
 	import gsap from 'gsap';
 	import { CodeIcon, CursorClickIcon, CaretDownIcon, MinusIcon, PlusIcon, TextBIcon, TextItalicIcon, TextUnderlineIcon, TextStrikethroughIcon, TextTIcon, TextAlignLeftIcon, TextAlignCenterIcon, TextAlignRightIcon, TextAlignJustifyIcon, LinkIcon, ListNumbersIcon, ListBulletsIcon } from 'phosphor-svelte';
-	import { getHighlighter } from '$lib/utils/shiki';
+	import CodeSnippet from './CodeSnippet.svelte';
 	import { createScrollRevealCleanup } from '$lib/utils/gsap';
 
 	let section: HTMLElement | undefined = $state();
 	let containerEl: HTMLElement | undefined = $state();
 	let activeTab: 'developer' | 'team' = $state('developer');
-	let highlightedCode: string = $state('');
-
-	const code = `use Illuminate\Support\Facades\Mail;
-
-Mail::lettr()
-    ->to($user->email)
-    ->sendTemplate('welcome-email', [
-        'name' => $user->name,
-    ]);`;
-
-	async function highlightCode() {
-		const highlighter = await getHighlighter();
-		highlightedCode = highlighter.codeToHtml(code, {
-			lang: 'php',
-			theme: 'lettr'
-		});
-	}
 
 	function animateIn(tab: 'developer' | 'team') {
 		if (!containerEl) return;
@@ -57,8 +40,6 @@ Mail::lettr()
 	}
 
 	onMount(() => {
-		highlightCode();
-
 		if (!section) return;
 
 		return createScrollRevealCleanup({
@@ -74,10 +55,10 @@ Mail::lettr()
 <section bind:this={section} class="py-16 border-b border-border/30">
 		<div class="mb-10" data-animate>
 			<h2 class="mb-3 text-surface">
-				Set it up <span class="text-primary">once</span> — never be<br />the bottleneck again
+				Devs integrate. <span class="text-primary">Teams create.</span>
 			</h2>
 			<p class="text-body text-muted max-w-[50ch]">
-				The visual editor isn't just for marketers — it's a developer benefit. Let your team iterate on emails while you ship features.
+				A clean API that developers enjoy, connected to a visual editor your whole team can use independently. Nobody files a ticket to change a button color.
 			</p>
 		</div>
 
@@ -103,18 +84,13 @@ Mail::lettr()
 				</button>
 			</div>
 
-			<div bind:this={containerEl} class="relative h-[250px] overflow-hidden {activeTab === 'developer' ? 'bg-gray-950' : 'bg-white'}">
+			<div bind:this={containerEl} class="relative overflow-hidden {activeTab === 'developer' ? 'bg-gray-950' : 'bg-white'}">
 				{#if activeTab === 'developer'}
-					<div class="absolute inset-0 p-[6px]">
-						<div class="bg-gray-800 border-t border-gray-700 h-full p-4 pb-8">
-							<div class="font-code [&_pre]:!bg-transparent [&_pre]:!p-0 [&_pre]:!leading-[1.4] [&_code]:!text-[13px] [&_code]:!leading-[1.4]" data-animate-in>
-								<p class="text-xs text-gray-500 mb-6">example/WelcomeMail.php</p>
-								{@html highlightedCode}
-							</div>
-						</div>
+					<div data-animate-in>
+						<CodeSnippet shadow={false} />
 					</div>
 				{:else}
-					<div class="absolute inset-0 overflow-y-auto">
+					<div>
 						<!-- Toolbar row 1: font, size, formatting -->
 						<div data-animate-in class="flex items-center gap-1 border-b border-border/30 p-[6px]">
 							<div class="flex items-center gap-1 bg-gray-50 px-2 py-1 text-xs text-gray-500">
@@ -148,13 +124,13 @@ Mail::lettr()
 
 						<!-- Email template content -->
 						<div class="p-4">
-							<p data-animate-in class="text-[10px] tracking-widest text-gray-800 uppercase">Welcome</p>
-							<p data-animate-in class="mt-1 text-xl font-bold text-gray-900">Your order is confirmed!</p>
+							<p data-animate-in class="text-[10px] tracking-widest text-gray-800 uppercase">Onboarding</p>
+							<p data-animate-in class="mt-1 text-xl font-bold text-gray-900">Welcome to your trial!</p>
 							<p data-animate-in class="mt-2 text-sm text-gray-500">
-								Hi <span class="inline-flex items-center gap-0.5 rounded bg-gray-100 px-1.5 py-0.5 font-code text-xs text-gray-600">{'{{ name }}'}</span>, thanks for your order.
+								Hi <span class="inline-flex items-center gap-0.5 rounded bg-gray-100 px-1.5 py-0.5 font-code text-xs text-gray-600">{'{{ name }}'}</span>, your 14-day free trial is live.
 							</p>
 							<button data-animate-in class="mt-5 bg-surface px-5 py-2 rounded-lg text-sm font-semibold text-white">
-								View Order
+								Get Started
 							</button>
 						</div>
 					</div>

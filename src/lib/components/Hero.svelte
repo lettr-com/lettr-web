@@ -1,8 +1,6 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import { BookOpenIcon, GithubLogoIcon } from 'phosphor-svelte';
 	import Button from './Button.svelte';
-	import CodeSnippet from './CodeSnippet.svelte';
 	import { createFromAnimationCleanup } from '$lib/utils/gsap';
 	import { buildRegisterUrl, registerUrl } from '$lib/utils/utm';
 
@@ -41,48 +39,22 @@
 					<span class="transition-transform group-hover:translate-x-0.5">&rarr;</span>
 				</a>
 				<h1 data-animate class="text-surface mb-4">
-					Transactional emails that<br />
-					<span class="text-primary">feel like Laravel</span>
+					The email platform<br />
+					<span class="text-primary">built for SaaS</span>
 				</h1>
 
-				<p data-animate class="max-w-md text-body text-muted mb-10">
-					Lettr is the developer-first email API. Send transactional emails at scale with a simple
-					REST API, SDKs for every language, and real-time delivery analytics.
+				<p data-animate class="max-w-lg text-body text-muted mb-10">
+					Developers integrate once. Your team takes over — transactional and marketing emails, zero dev tickets for content changes.
 				</p>
 
 				<div data-animate class="flex flex-wrap items-center mb-3 gap-2">
-					<Button variant="primary" href={registerHref}>Register</Button>
-					<Button variant="secondary" href="/demo/">Book a demo </Button>
+					<Button variant="primary" href={registerHref}>Start sending</Button>
+					<Button variant="secondary" href="https://docs.lettr.com/introduction" target="_blank" rel="noopener noreferrer">See docs</Button>
 				</div>
 				<p data-animate class="max-w-md text-sm text-gray-400">
 					3,000 emails/month free. No credit card required.
 				</p>
 
-				<div data-animate class="mt-12">
-					<CodeSnippet />
-				</div>
-
-				<div data-animate class="flex items-center gap-4 mt-5">
-					<a
-						href="https://docs.lettr.com/introduction"
-						class="inline-flex items-center gap-1.5 text-sm transition-colors text-surface hover:underline"
-						target="_blank"
-						rel="noopener noreferrer"
-					>
-						<BookOpenIcon size={18} class="text-primary" />
-						Read the docs
-					</a>
-					<span class="text-sm text-gray-400">or</span>
-					<a
-						href="https://github.com/lettr-com"
-						class="inline-flex items-center gap-1.5 text-sm transition-colors text-surface hover:underline"
-						target="_blank"
-						rel="noopener noreferrer"
-					>
-						<GithubLogoIcon size={18} class="text-primary" />
-						view on GitHub
-					</a>
-				</div>
 		</div>
 	</div>
 </section>

@@ -22,21 +22,21 @@
 <svelte:head>
 	<link rel="icon" href="/logo-icon.svg" type="image/svg+xml" />
 	{#if isHomeRoute}
-		<title>Lettr — Developer-Friendly Transactional Email API for Laravel</title>
+		<title>Lettr — The Email Platform Built for SaaS</title>
 		<link rel="canonical" href="https://lettr.com" />
 
 		<!-- Primary Meta Tags -->
-		<meta name="title" content="Lettr — Developer-Friendly Transactional Email API for Laravel" />
-		<meta name="description" content="Send transactional emails at scale with Lettr. A developer-first email delivery API built for Laravel developers. Reliable, fast, and easy to integrate." />
-		<meta name="keywords" content="transactional email, email API, Laravel email, email delivery, developer email, Laravel mail driver, email service provider, SMTP alternative, email infrastructure, send email API" />
+		<meta name="title" content="Lettr — The Email Platform Built for SaaS" />
+		<meta name="description" content="Developers integrate once. Your team takes over. Transactional and marketing emails in one platform — clean API, drag-and-drop editor, zero dev tickets for content changes." />
+		<meta name="keywords" content="SaaS email platform, transactional email API, email for SaaS, developer email API, marketing email SaaS, email delivery, REST API email, SMTP relay, drag-and-drop email editor, email infrastructure" />
 		<meta name="author" content="Lettr" />
 		<meta name="robots" content="index, follow" />
 
 		<!-- Open Graph / Facebook -->
 		<meta property="og:type" content="website" />
 		<meta property="og:url" content="https://lettr.com" />
-		<meta property="og:title" content="Lettr — Developer-Friendly Transactional Email API for Laravel" />
-		<meta property="og:description" content="Send transactional emails at scale with Lettr. A developer-first email delivery API built for Laravel developers. Reliable, fast, and easy to integrate." />
+		<meta property="og:title" content="Lettr — The Email Platform Built for SaaS" />
+		<meta property="og:description" content="Developers integrate once. Your team takes over. Transactional and marketing emails in one platform — clean API, drag-and-drop editor, zero dev tickets for content changes." />
 		<meta property="og:image" content="https://lettr.com/og-image.png" />
 		<meta property="og:image:width" content="1200" />
 		<meta property="og:image:height" content="630" />
@@ -46,8 +46,8 @@
 		<!-- Twitter -->
 		<meta name="twitter:card" content="summary_large_image" />
 		<meta name="twitter:url" content="https://lettr.com" />
-		<meta name="twitter:title" content="Lettr — Developer-Friendly Transactional Email API for Laravel" />
-		<meta name="twitter:description" content="Send transactional emails at scale with Lettr. A developer-first email delivery API built for Laravel developers. Reliable, fast, and easy to integrate." />
+		<meta name="twitter:title" content="Lettr — The Email Platform Built for SaaS" />
+		<meta name="twitter:description" content="Developers integrate once. Your team takes over. Transactional and marketing emails in one platform — clean API, drag-and-drop editor, zero dev tickets for content changes." />
 		<meta name="twitter:image" content="https://lettr.com/og-image.png" />
 
 		<!-- Structured Data -->
@@ -57,7 +57,7 @@
 			"name": "Lettr",
 			"url": "https://lettr.com",
 			"logo": "https://lettr.com/logo.svg",
-			"description": "Developer-friendly transactional email API built for Laravel developers. Send emails at scale with a reliable, fast, and easy-to-integrate email delivery service.",
+			"description": "The email platform built for SaaS. Developers integrate once, your team takes over. Transactional and marketing emails — one platform, one reputation, zero dev tickets for content changes.",
 			"applicationCategory": "DeveloperApplication",
 			"operatingSystem": "Web",
 			"offers": {
