@@ -104,8 +104,7 @@
 		{ feature: 'Team members', values: [true, true, true, true] },
 		{ feature: 'Dedicated IPs', values: [false, false, 'Add-on', true] },
 		{ feature: 'Priority support', values: [false, false, true, true] },
-		{ feature: 'SLA guarantee', values: [false, false, false, true] },
-		{ feature: 'SSO / SAML', values: [false, false, false, 'TBA'] }
+		{ feature: 'SLA guarantee', values: [false, false, false, true] }
 	];
 
 	onMount(() => {

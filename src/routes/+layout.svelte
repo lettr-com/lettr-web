@@ -53,29 +53,77 @@
 		<!-- Structured Data -->
 		{@html `<script type="application/ld+json">${JSON.stringify({
 			"@context": "https://schema.org",
-			"@type": "SoftwareApplication",
-			"name": "Lettr",
-			"url": "https://lettr.com",
-			"logo": "https://lettr.com/logo.svg",
-			"description": "The email platform built for SaaS. Developers integrate once, your team takes over. Transactional and marketing emails — one platform, one reputation, zero dev tickets for content changes.",
-			"applicationCategory": "DeveloperApplication",
-			"operatingSystem": "Web",
-			"offers": {
-				"@type": "Offer",
-				"price": "0",
-				"priceCurrency": "USD"
-			},
-			"creator": {
-				"@type": "Organization",
-				"name": "Lettr",
-				"url": "https://lettr.com",
-				"logo": "https://lettr.com/logo.svg",
-				"contactPoint": {
-					"@type": "ContactPoint",
-					"email": "support@lettr.com",
-					"contactType": "customer support"
+			"@graph": [
+				{
+					"@type": "Organization",
+					"@id": "https://lettr.com/#organization",
+					"name": "Lettr",
+					"url": "https://lettr.com",
+					"logo": {
+						"@type": "ImageObject",
+						"url": "https://lettr.com/logo.svg"
+					},
+					"description": "Lettr is built by the Big Good group — the team behind Topol (40,000+ companies), Ecomail (12,000+ organizations, 12 years of infrastructure), and DMARCeye.",
+					"contactPoint": {
+						"@type": "ContactPoint",
+						"email": "support@lettr.com",
+						"contactType": "customer support"
+					}
+				},
+				{
+					"@type": "WebSite",
+					"@id": "https://lettr.com/#website",
+					"name": "Lettr",
+					"url": "https://lettr.com",
+					"publisher": { "@id": "https://lettr.com/#organization" }
+				},
+				{
+					"@type": "SoftwareApplication",
+					"@id": "https://lettr.com/#software",
+					"name": "Lettr",
+					"url": "https://lettr.com",
+					"description": "Lettr is an email platform built exclusively for SaaS companies, combining a clean REST API for developers with a drag-and-drop visual editor for marketing and product teams. Send both transactional and marketing emails from one platform, one domain, one sending reputation.",
+					"applicationCategory": "DeveloperApplication",
+					"operatingSystem": "Web",
+					"offers": [
+						{
+							"@type": "Offer",
+							"name": "Free",
+							"price": "0",
+							"priceCurrency": "USD",
+							"description": "3,000 emails per month, 100 per day limit"
+						},
+						{
+							"@type": "Offer",
+							"name": "Pro",
+							"price": "15",
+							"priceCurrency": "USD",
+							"description": "Up to 100,000 emails per month, 10 sending domains"
+						},
+						{
+							"@type": "Offer",
+							"name": "Business",
+							"price": "110",
+							"priceCurrency": "USD",
+							"description": "Up to 200,000 emails per month, unlimited domains, dedicated IPs"
+						}
+					],
+					"featureList": [
+						"REST API and SMTP relay",
+						"Drag-and-drop email editor powered by Topol",
+						"SDKs for Laravel, PHP, Node.js, Python, Go, Java, and Rust",
+						"Transactional and marketing emails from one platform",
+						"SPF, DKIM, and DMARC authentication",
+						"Real-time webhooks for delivery events",
+						"Searchable email logs",
+						"Multilingual template management",
+						"Synced sections across templates",
+						"Draft and publish workflow with version history",
+						"Custom tracking domains"
+					],
+					"creator": { "@id": "https://lettr.com/#organization" }
 				}
-			}
+			]
 		})}</script>`}
 	{/if}
 

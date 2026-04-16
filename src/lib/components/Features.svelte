@@ -9,32 +9,32 @@
 		{
 			icon: CodeIcon,
 			title: 'Clean REST API + SMTP',
-			description: 'Simple, well-documented API. Or just point your SMTP config and go.'
+			description: 'Send your first email with a single API call. Or swap your SMTP credentials and keep your existing setup — no code changes needed.'
 		},
 		{
 			icon: LightningIcon,
 			title: 'SDKs for every language',
-			description: 'Laravel, PHP, Node.js, Python, Go, Java, Rust.'
+			description: 'First-class Laravel package with one-command install. Official SDKs for PHP, Node.js, Python, Go, Java, and Rust — all typed and documented.'
 		},
 		{
 			icon: GlobeIcon,
 			title: 'One domain, one reputation',
-			description: 'Transactional and marketing from the same domain.'
+			description: 'Stop splitting transactional and marketing across two vendors. One sending domain, one deliverability reputation, one place to monitor it all.'
 		},
 		{
 			icon: ShieldCheckIcon,
 			title: 'SPF, DKIM, DMARC',
-			description: 'Guided auth setup. Custom tracking domains from day one.'
+			description: 'Step-by-step DNS wizard walks you through authentication in minutes. Custom tracking domains included on every plan — no CNAME guesswork.'
 		},
 		{
 			icon: LinkIcon,
 			title: 'Webhooks for every event',
-			description: 'Delivered, opened, clicked, bounced. Real-time.'
+			description: 'Get notified the moment an email is delivered, opened, clicked, or bounced. Build automations, sync with your database, or trigger in-app flows.'
 		},
 		{
 			icon: MagnifyingGlassIcon,
 			title: 'Searchable logs',
-			description: 'Find any email instantly. Debug in seconds.'
+			description: 'Full-text search across every email you have sent. Filter by recipient, status, or tag. Find exactly why that one email bounced — in seconds, not hours.'
 		}
 	];
 

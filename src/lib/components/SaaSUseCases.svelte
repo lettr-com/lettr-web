@@ -9,32 +9,32 @@
 		{
 			icon: UserPlusIcon,
 			title: 'Onboarding sequences',
-			description: 'Welcome new users, guide them through setup, and drive activation.'
+			description: 'Welcome emails, setup guides, activation nudges. Build the full sequence visually, then let your product team tweak copy without filing a ticket.'
 		},
 		{
 			icon: LockKeyIcon,
 			title: 'Password resets & security',
-			description: 'Transactional emails that land instantly. Every time.'
+			description: 'Sub-second delivery for the emails users are staring at their inbox waiting for. Automatic retries and priority queuing built in.'
 		},
 		{
 			icon: HourglassHighIcon,
 			title: 'Trial expiry & upgrade nudges',
-			description: 'Convert free users to paid with perfectly timed emails.'
+			description: 'Trigger emails based on trial days remaining, usage thresholds, or custom events. Your marketing team designs the email — your API decides when it fires.'
 		},
 		{
 			icon: BellIcon,
 			title: 'Usage alerts & billing',
-			description: 'Keep users informed about limits, invoices, and account changes.'
+			description: 'Quota warnings, invoice receipts, failed payment notices. Template them once with dynamic variables, and every customer gets the right numbers.'
 		},
 		{
 			icon: MegaphoneIcon,
 			title: 'Product updates & changelogs',
-			description: 'Share what you shipped. Keep your users engaged and informed.'
+			description: 'Ship a feature, then send a beautiful changelog digest — designed in the drag-and-drop editor by anyone on your team. No deploy required.'
 		},
 		{
 			icon: RocketLaunchIcon,
 			title: 'Feature announcements',
-			description: 'Launch new features with targeted campaigns to the right audience.'
+			description: 'Target campaigns by plan, usage, or custom attributes. Announce your new Pro feature only to users who would actually care about it.'
 		}
 	];
 

@@ -62,7 +62,7 @@
 			<EditorPreview />
 		</div>
 
-		<div data-animate class="flex flex-wrap items-center gap-4 mt-8 pt-6 border-t border-border/30 text-sm text-muted">
+		<div data-animate class="flex flex-wrap items-center gap-4 mt-8 pt-6 text-sm text-muted">
 			<span>Sending millions of emails for the <a href="https://biggood.io/" target="_blank" rel="noopener noreferrer" class="font-semibold text-surface hover:text-primary transition-colors">Big Good</a> group</span>
 			<img src="/images/logos/ecomail-icon.svg" alt="Ecomail" class="h-5" />
 			<img src="/images/logos/topol-icon.svg" alt="Topol" class="h-6" />
