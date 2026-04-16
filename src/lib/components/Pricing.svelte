@@ -9,27 +9,32 @@
 	let sliderValue: number = $state(1);
 	let registerHref: string = $state(registerUrl);
 
-	const sliderLabels = ['Free', '50k', '100k', '200k', '500k', '1M', '2M+'];
+	const sliderLabels = ['3K', '50K', '100K', '200K', '500K', '1M', '2M+'];
 
-	type PlanKey = 'free' | 'pro' | 'business';
+	type PlanKey = 'free' | 'pro' | 'business' | 'enterprise';
+	type PlanFeature = string | { text: string; excluded: true };
 
 	let highlightedPlan: PlanKey = $derived(
 		sliderValue === 0 ? 'free' :
 		sliderValue <= 2 ? 'pro' :
-		'business'
+		sliderValue <= 5 ? 'business' :
+		'enterprise'
 	);
 
-	const plans: Array<{
-		key: PlanKey;
-		name: string;
-		price: string;
-		period: string;
-		description: string;
-		features: string[];
-		cta: string;
-	}> = [
+	const proTier = $derived.by(() => {
+		if (sliderValue <= 1) return { price: '$15', desc: '50K emails · $0.80 / 1,000 extra' };
+		return { price: '$30', desc: '100K emails · $0.80 / 1,000 extra' };
+	});
+
+	const businessTier = $derived.by(() => {
+		if (sliderValue <= 3) return { price: '$110', desc: '200K emails · $0.80 / 1,000 extra' };
+		if (sliderValue === 4) return { price: '$250', desc: '500K emails · $0.80 / 1,000 extra' };
+		return { price: '$450', desc: '1M emails · $0.80 / 1,000 extra' };
+	});
+
+	const plans = $derived.by(() => [
 		{
-			key: 'free',
+			key: 'free' as PlanKey,
 			name: 'Free',
 			price: '$0',
 			period: '/mo',
@@ -41,45 +46,46 @@
 				'Email API & SMTP',
 				'Basic analytics',
 				'7-day data retention'
-			],
+			] as PlanFeature[],
 			cta: 'Start for free'
 		},
 		{
-			key: 'pro',
+			key: 'pro' as PlanKey,
 			name: 'Pro',
-			price: '$15',
+			price: proTier.price,
 			period: '/mo',
-			description: '50K emails · $0.60 / 1,000 extra',
+			description: proTier.desc,
 			features: [
 				'Up to 10 sending domains',
 				'1 inbound route',
 				'Up to 10 webhook endpoints',
 				'No daily sending limit',
 				'Advanced analytics',
-				'30-day data retention'
-			],
+				'30-day data retention',
+				{ text: 'No dedicated IPs', excluded: true }
+			] as PlanFeature[],
 			cta: 'Get started'
 		},
 		{
-			key: 'business',
+			key: 'business' as PlanKey,
 			name: 'Business',
-			price: '$110',
+			price: businessTier.price,
 			period: '/mo',
-			description: '200K emails · $0.55 / 1,000 extra',
+			description: businessTier.desc,
 			features: [
 				'Unlimited sending domains',
 				'10 inbound routes',
 				'Unlimited webhook endpoints',
 				'Everything in Pro',
 				'30-day data retention',
-				'Dedicated IP (add-on)',
+				'Dedicated IPs (add-on)',
 				'Priority support',
 				'Dedicated account manager',
 				'Deliverability consultation'
-			],
+			] as PlanFeature[],
 			cta: 'Get started'
 		}
-	];
+	]);
 
 	type CellValue = string | boolean;
 
@@ -87,7 +93,7 @@
 		feature: string;
 		values: [CellValue, CellValue, CellValue, CellValue];
 	}> = [
-		{ feature: 'Monthly emails', values: ['3,000', '50K emails', '200K emails', 'Unlimited'] },
+		{ feature: 'Monthly emails', values: ['3,000', '100K emails', '200K emails', 'Unlimited'] },
 		{ feature: 'Daily limit', values: ['100 / day', 'No limit', 'No limit', 'No limit'] },
 		{ feature: 'Sending domains', values: ['1 domain', '10 domains', 'Unlimited', 'Unlimited'] },
 		{ feature: 'Inbound routes', values: [false, '1', '10', 'Unlimited'] },
@@ -154,10 +160,17 @@
 
 				<ul class="flex flex-col gap-2 mb-6 flex-1">
 					{#each plan.features as feature}
-						<li class="flex items-start gap-2 text-[13px] text-muted">
-							<span class="mt-1.5 block w-1 h-1 rounded-full bg-border shrink-0"></span>
-							{feature}
-						</li>
+						{#if typeof feature === 'string'}
+							<li class="flex items-start gap-2 text-[13px] text-muted">
+								<span class="mt-1.5 block w-1 h-1 rounded-full bg-border shrink-0"></span>
+								{feature}
+							</li>
+						{:else}
+							<li class="flex items-start gap-2 text-[13px] text-muted/40">
+								<span class="mt-0.5 text-border">—</span>
+								{feature.text}
+							</li>
+						{/if}
 					{/each}
 				</ul>
 
@@ -175,16 +188,19 @@
 	</div>
 
 	<!-- Enterprise row -->
-	<div data-pricing-animate class="mt-3 border border-border/30 bg-white p-5 flex items-center justify-between">
+	<div data-pricing-animate class="mt-3 border bg-white p-5 flex items-center justify-between transition-all duration-300 {highlightedPlan === 'enterprise' ? 'border-primary shadow-lg shadow-primary/5' : 'border-border/30'}">
 		<div>
-			<h3 class="text-sm font-semibold text-surface mb-1">Enterprise</h3>
+			<h3 class="text-sm font-semibold mb-1 {highlightedPlan === 'enterprise' ? 'text-primary' : 'text-surface'}">Enterprise</h3>
 			<p class="text-[13px] text-muted">
 				Unlimited emails, dedicated IPs, SLA guarantee, SSO/SAML, and a dedicated account manager.
 			</p>
 		</div>
 		<a
 			href="/demo/"
-			class="shrink-0 flex items-center gap-2 px-5 py-2.5 text-sm font-medium border border-border/50 text-surface transition-colors hover:border-primary/30 hover:text-primary"
+			class="shrink-0 flex items-center gap-2 px-5 py-2.5 text-sm font-medium transition-colors
+				{highlightedPlan === 'enterprise'
+				? 'bg-primary text-white hover:bg-primary/90'
+				: 'border border-border/50 text-surface hover:border-primary/30 hover:text-primary'}"
 		>
 			Contact sales
 			<ArrowRight size={14} />
