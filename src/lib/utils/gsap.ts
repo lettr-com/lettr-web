@@ -57,23 +57,30 @@ export function createScrollRevealCleanup({
 
 	const animationVars = vars ?? ({} as GsapFromVars);
 	const scrollTriggerVars = (animationVars.scrollTrigger ?? {}) as Record<string, unknown>;
+	const resolvedTargets = resolveTargets(scope, targets);
 
-	return createFromAnimationCleanup({
-		scope,
-		targets,
-		vars: {
-			y: 30,
-			opacity: 0,
-			duration: 0.6,
-			stagger: 0.08,
-			ease: 'power3.out',
-			...animationVars,
-			scrollTrigger: {
-				trigger,
-				start: 'top 80%',
-				toggleActions: 'play none none none',
-				...scrollTriggerVars
-			}
-		}
-	});
+	return createGsapContextCleanup(
+		gsap,
+		() => {
+			gsap.fromTo(
+				resolvedTargets,
+				{ y: 20, opacity: 0 },
+				{
+					y: 0,
+					opacity: 1,
+					duration: 0.4,
+					stagger: 0.04,
+					ease: 'power3.out',
+					...animationVars,
+					scrollTrigger: {
+						trigger,
+						start: 'top 80%',
+						toggleActions: 'play none none none',
+						...scrollTriggerVars
+					}
+				}
+			);
+		},
+		scope
+	);
 }

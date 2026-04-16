@@ -56,12 +56,12 @@
 			</p>
 		</div>
 
-		<div class="grid grid-cols-2 gap-x-4 gap-y-12">
+		<div class="grid grid-cols-2 gap-x-6 gap-y-8">
 			{#each useCases as useCase}
 				<div data-usecase>
-					<useCase.icon size={18} class="text-primary mb-2" />
-					<h3 class="text-base text-surface font-medium mb-1">{useCase.title}</h3>
-					<p class="max-w-[30ch] text-sm text-muted leading-relaxed">{useCase.description}</p>
+					<useCase.icon size={20} class="text-primary mb-3" />
+					<h3 class="text-sm text-surface font-medium mb-1">{useCase.title}</h3>
+					<p class="text-[13px] text-muted leading-relaxed">{useCase.description}</p>
 				</div>
 			{/each}
 		</div>

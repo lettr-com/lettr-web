@@ -1,9 +1,19 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import { TranslateIcon, GitForkIcon, PaintBrushIcon, ArrowsClockwiseIcon, TextboxIcon, SquaresFourIcon } from 'phosphor-svelte';
+	import { fade } from 'svelte/transition';
+	import {
+		TranslateIcon,
+		GitForkIcon,
+		PaintBrushIcon,
+		ArrowsClockwiseIcon,
+		TextboxIcon,
+		SquaresFourIcon
+	} from 'phosphor-svelte';
 	import { createScrollRevealCleanup } from '$lib/utils/gsap';
 
 	let section: HTMLElement | undefined = $state();
+	let activeIndex = $state(0);
+	let intervalId: ReturnType<typeof setInterval> | undefined;
 
 	const features = [
 		{
@@ -38,31 +48,265 @@
 		}
 	];
 
-	onMount(() => {
-		if (!section) return;
+	function selectFeature(index: number) {
+		activeIndex = index;
+		startAutoRotation();
+	}
 
-		return createScrollRevealCleanup({
-			scope: section,
-			targets: '[data-feature]'
-		});
+	function startAutoRotation() {
+		if (intervalId) clearInterval(intervalId);
+		intervalId = setInterval(() => {
+			activeIndex = (activeIndex + 1) % features.length;
+		}, 5000);
+	}
+
+	onMount(() => {
+		startAutoRotation();
+
+		let cleanup: (() => void) | undefined;
+		if (section) {
+			cleanup = createScrollRevealCleanup({
+				scope: section,
+				targets: '[data-feature]'
+			});
+		}
+
+		return () => {
+			if (intervalId) clearInterval(intervalId);
+			cleanup?.();
+		};
 	});
 </script>
 
 <section bind:this={section} class="py-16 border-b border-border/30">
-		<div class="mb-8" data-feature>
-			<h2 class="mb-3 text-surface">Your team edits. <span class="text-primary">No dev tickets required.</span></h2>
-			<p class="text-body text-muted max-w-[50ch]">
-				A full visual editor your marketing and product team can use independently.
-			</p>
-		</div>
+	<div class="mb-10" data-feature>
+		<h2 class="mb-3 text-surface">
+			Your team edits. <span class="text-primary">No dev tickets required.</span>
+		</h2>
+		<p class="text-body text-muted max-w-[50ch]">
+			A full visual editor your marketing and product team can use independently.
+		</p>
+	</div>
 
-		<div class="grid grid-cols-2 gap-x-4 gap-y-12">
-			{#each features as feature}
-				<div data-feature>
-					<feature.icon size={18} class="text-primary mb-2" />
-					<h3 class="text-base text-surface font-medium mb-1">{feature.title}</h3>
-					<p class="max-w-[30ch] text-sm text-muted leading-relaxed">{feature.description}</p>
-				</div>
+	<div class="grid grid-cols-[260px_1fr] gap-6 items-start" data-feature>
+		<!-- Feature selector -->
+		<div class="flex flex-col">
+			{#each features as feature, i}
+				<button
+					onclick={() => selectFeature(i)}
+					class="text-left px-4 py-3 border-l-2 transition-all duration-200
+						{activeIndex === i
+						? 'border-primary bg-primary/[0.04]'
+						: 'border-transparent hover:bg-background'}"
+				>
+					<div class="flex items-start gap-3">
+						<feature.icon
+							size={16}
+							class="shrink-0 mt-0.5 transition-colors {activeIndex === i ? 'text-primary' : 'text-muted/60'}"
+						/>
+						<div>
+							<span class="text-sm font-medium transition-colors block {activeIndex === i ? 'text-surface' : 'text-muted'}">
+								{feature.title}
+							</span>
+							{#if activeIndex === i}
+								<p class="text-[12px] text-muted mt-1 leading-relaxed" in:fade={{ duration: 150 }}>
+									{feature.description}
+								</p>
+							{/if}
+						</div>
+					</div>
+				</button>
 			{/each}
 		</div>
+
+		<!-- Preview panel -->
+		<div class="border border-border/30 rounded-lg overflow-hidden bg-[#fafafa]">
+			<!-- Window chrome -->
+			<div class="flex items-center gap-1.5 px-4 py-2.5 border-b border-border/20 bg-white">
+				<div class="w-2 h-2 rounded-full bg-[#e5e5e5]"></div>
+				<div class="w-2 h-2 rounded-full bg-[#e5e5e5]"></div>
+				<div class="w-2 h-2 rounded-full bg-[#e5e5e5]"></div>
+				<span class="ml-3 text-[10px] text-muted/60 font-medium">Lettr Editor</span>
+			</div>
+
+			<div class="relative" style="min-height: 350px">
+				{#key activeIndex}
+					<div class="absolute inset-0 p-6" in:fade={{ duration: 180 }}>
+
+						{#if activeIndex === 0}
+							<!-- Drag-and-drop editor -->
+							<div class="space-y-2.5">
+								<div class="flex items-center gap-2">
+									<div class="flex flex-col gap-[3px] opacity-30"><span class="block w-1 h-1 rounded-full bg-current"></span><span class="block w-1 h-1 rounded-full bg-current"></span><span class="block w-1 h-1 rounded-full bg-current"></span></div>
+									<div class="flex-1 h-14 rounded border border-primary/20 bg-primary/[0.06] p-3 flex items-center">
+										<div class="h-3 w-24 rounded bg-primary/20"></div>
+									</div>
+								</div>
+								<div class="flex items-center gap-2">
+									<div class="flex flex-col gap-[3px] opacity-30"><span class="block w-1 h-1 rounded-full bg-current"></span><span class="block w-1 h-1 rounded-full bg-current"></span><span class="block w-1 h-1 rounded-full bg-current"></span></div>
+									<div class="flex-1 rounded border border-border/20 bg-white p-3 space-y-1.5">
+										<div class="h-2 w-full rounded bg-border/20"></div>
+										<div class="h-2 w-4/5 rounded bg-border/15"></div>
+										<div class="h-2 w-3/5 rounded bg-border/10"></div>
+									</div>
+								</div>
+								<div class="flex items-center gap-2">
+									<div class="flex flex-col gap-[3px] opacity-30"><span class="block w-1 h-1 rounded-full bg-current"></span><span class="block w-1 h-1 rounded-full bg-current"></span><span class="block w-1 h-1 rounded-full bg-current"></span></div>
+									<div class="flex-1 h-20 rounded border border-border/20 bg-white flex items-center justify-center">
+										<div class="w-12 h-12 rounded bg-border/10 flex items-center justify-center text-border/40 text-lg">&#9634;</div>
+									</div>
+								</div>
+								<div class="flex items-center gap-2">
+									<div class="flex flex-col gap-[3px] opacity-30"><span class="block w-1 h-1 rounded-full bg-current"></span><span class="block w-1 h-1 rounded-full bg-current"></span><span class="block w-1 h-1 rounded-full bg-current"></span></div>
+									<div class="flex-1 rounded border border-border/20 bg-white p-3 flex justify-center">
+										<div class="px-5 py-2 rounded bg-primary text-white text-[10px] font-medium">Get Started</div>
+									</div>
+								</div>
+							</div>
+
+						{:else if activeIndex === 1}
+							<!-- Synced sections -->
+							<div class="grid grid-cols-2 gap-4">
+								{#each ['Welcome Email', 'Trial Ending'] as label}
+									<div class="rounded border border-border/30 bg-white overflow-hidden">
+										<div class="px-3 py-1.5 border-b border-border/15 text-[10px] text-muted font-medium">{label}</div>
+										<div class="p-3 space-y-2">
+											<div class="h-7 rounded bg-primary/10 border border-primary/20 flex items-center justify-center">
+												<span class="text-[9px] text-primary font-medium">Synced Header</span>
+											</div>
+											<div class="space-y-1">
+												<div class="h-1.5 w-full rounded bg-border/15"></div>
+												<div class="h-1.5 w-3/4 rounded bg-border/10"></div>
+											</div>
+											<div class="h-5 w-14 rounded bg-border/15 mx-auto"></div>
+											<div class="space-y-1">
+												<div class="h-1.5 w-full rounded bg-border/15"></div>
+												<div class="h-1.5 w-1/2 rounded bg-border/10"></div>
+											</div>
+											<div class="h-7 rounded bg-primary/10 border border-primary/20 flex items-center justify-center">
+												<span class="text-[9px] text-primary font-medium">Synced Footer</span>
+											</div>
+										</div>
+									</div>
+								{/each}
+							</div>
+							<p class="text-center text-[11px] text-muted/70 mt-4">Edit once, synced across all templates</p>
+
+						{:else if activeIndex === 2}
+							<!-- Draft & publish workflow -->
+							<div class="pt-2">
+								<div class="flex items-center justify-between mb-8 px-6">
+									{#each [
+										{ label: 'Draft', done: true },
+										{ label: 'Review', active: true },
+										{ label: 'Published' }
+									] as step, i}
+										{#if i > 0}
+											<div class="flex-1 h-px mx-3 {step.done || step.active ? 'bg-primary/30' : 'bg-border/30'}"></div>
+										{/if}
+										<div class="flex flex-col items-center gap-2">
+											<div class="w-8 h-8 rounded-full flex items-center justify-center text-[10px] font-medium
+												{step.done ? 'bg-primary text-white' : step.active ? 'border-2 border-primary text-primary' : 'border-2 border-border/30 text-muted'}">
+												{step.done ? '✓' : i + 1}
+											</div>
+											<span class="text-[11px] {step.done || step.active ? 'text-surface font-medium' : 'text-muted'}">{step.label}</span>
+										</div>
+									{/each}
+								</div>
+								<div class="rounded border border-border/30 bg-white p-4 space-y-3">
+									<div class="flex items-center justify-between">
+										<span class="text-[12px] font-medium text-surface">Welcome Email v3</span>
+										<span class="text-[10px] px-2 py-0.5 rounded-full bg-amber-50 text-amber-600 font-medium">In Review</span>
+									</div>
+									<div class="space-y-1.5">
+										<div class="h-2 w-full rounded bg-border/15"></div>
+										<div class="h-2 w-2/3 rounded bg-border/10"></div>
+									</div>
+									<div class="flex gap-2 pt-1">
+										<div class="px-3 py-1.5 rounded bg-primary text-white text-[10px] font-medium">Approve & Publish</div>
+										<div class="px-3 py-1.5 rounded border border-border/30 text-[10px] text-muted">Request Changes</div>
+									</div>
+								</div>
+							</div>
+
+						{:else if activeIndex === 3}
+							<!-- Multilingual templates -->
+							<div>
+								<div class="flex gap-1 mb-4">
+									{#each ['EN', 'ES', 'DE', 'FR'] as lang, i}
+										<div class="px-3 py-1.5 rounded text-[11px] font-medium transition-colors
+											{i === 0 ? 'bg-primary text-white' : 'bg-white border border-border/30 text-muted'}">
+											{lang}
+										</div>
+									{/each}
+								</div>
+								<div class="rounded border border-border/30 bg-white p-4 space-y-3">
+									<div class="h-3 w-28 rounded bg-primary/15"></div>
+									<div class="space-y-1.5">
+										<div class="h-2 w-full rounded bg-border/20"></div>
+										<div class="h-2 w-5/6 rounded bg-border/15"></div>
+										<div class="h-2 w-4/5 rounded bg-border/10"></div>
+									</div>
+									<div class="h-px bg-border/15"></div>
+									<div class="space-y-1.5">
+										<div class="h-2 w-full rounded bg-border/20"></div>
+										<div class="h-2 w-3/4 rounded bg-border/15"></div>
+									</div>
+									<div class="px-4 py-2 rounded bg-primary/80 text-white text-[10px] font-medium w-fit">Confirm</div>
+								</div>
+								<div class="flex items-center gap-2 mt-3 text-[10px] text-muted/60">
+									<span class="w-1.5 h-1.5 rounded-full bg-green-400"></span>
+									4 languages configured
+								</div>
+							</div>
+
+						{:else if activeIndex === 4}
+							<!-- Dynamic placeholders -->
+							<div class="space-y-4">
+								<div class="rounded border border-border/30 bg-white p-4">
+									<div class="text-[10px] text-muted font-medium mb-2 uppercase tracking-wide">Template</div>
+									<div class="text-[12px] text-surface leading-loose space-y-1">
+										<p>Hi <span class="inline-flex px-1.5 py-0.5 rounded bg-primary/10 text-primary text-[10px] font-mono font-medium">{'{{first_name}}'}</span>,</p>
+										<p>Your <span class="inline-flex px-1.5 py-0.5 rounded bg-primary/10 text-primary text-[10px] font-mono font-medium">{'{{plan_name}}'}</span> trial ends in <span class="inline-flex px-1.5 py-0.5 rounded bg-primary/10 text-primary text-[10px] font-mono font-medium">{'{{days_left}}'}</span> days.</p>
+										<p>Upgrade to keep your <span class="inline-flex px-1.5 py-0.5 rounded bg-primary/10 text-primary text-[10px] font-mono font-medium">{'{{feature_count}}'}</span> active features.</p>
+									</div>
+								</div>
+								<div class="rounded border border-primary/20 bg-primary/[0.03] p-4">
+									<div class="text-[10px] text-primary font-medium mb-2 uppercase tracking-wide">Preview</div>
+									<div class="text-[12px] text-surface leading-loose space-y-1">
+										<p>Hi <strong>Sarah</strong>,</p>
+										<p>Your <strong>Growth</strong> trial ends in <strong>3</strong> days.</p>
+										<p>Upgrade to keep your <strong>12</strong> active features.</p>
+									</div>
+								</div>
+							</div>
+
+						{:else if activeIndex === 5}
+							<!-- SaaS template library -->
+							<div class="grid grid-cols-3 gap-2.5">
+								{#each [
+									{ title: 'Welcome', accent: 'bg-blue-50 border-blue-100' },
+									{ title: 'Password Reset', accent: 'bg-emerald-50 border-emerald-100' },
+									{ title: 'Invoice', accent: 'bg-violet-50 border-violet-100' },
+									{ title: 'Trial Ending', accent: 'bg-amber-50 border-amber-100' },
+									{ title: 'Changelog', accent: 'bg-pink-50 border-pink-100' },
+									{ title: 'Usage Alert', accent: 'bg-orange-50 border-orange-100' }
+								] as tmpl}
+									<div class="rounded border {tmpl.accent} p-2.5 hover:shadow-sm transition-shadow cursor-pointer">
+										<div class="h-14 rounded bg-white/70 border border-white/80 p-2 space-y-1 mb-2">
+											<div class="h-1.5 w-full rounded bg-current opacity-[0.08]"></div>
+											<div class="h-1.5 w-3/4 rounded bg-current opacity-[0.06]"></div>
+											<div class="h-3 w-8 rounded bg-current opacity-[0.08] mt-1"></div>
+										</div>
+										<div class="text-[10px] font-medium text-surface">{tmpl.title}</div>
+									</div>
+								{/each}
+							</div>
+						{/if}
+
+					</div>
+				{/key}
+			</div>
+		</div>
+	</div>
 </section>
