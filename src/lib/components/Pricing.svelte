@@ -137,7 +137,7 @@
 			<div
 				class="flex flex-col p-5 border transition-all duration-300
 					{isHighlighted
-					? 'border-primary bg-primary/[0.03] shadow-lg shadow-primary/5'
+					? 'border-primary bg-white shadow-lg shadow-primary/5'
 					: 'border-border/30 bg-white'}"
 			>
 				<h3 class="text-sm font-semibold mb-3 {isHighlighted ? 'text-primary' : 'text-muted'}">

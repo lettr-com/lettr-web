@@ -69,7 +69,7 @@
 			live: true
 		},
 		{
-			name: 'Shipping Notification',
+			name: 'Trial Expiry Reminder',
 			sent: '18,740',
 			delivered: '18,722',
 			opened: '11,580',
@@ -128,15 +128,15 @@
 		},
 		{
 			icon: LightningIcon,
-			title: 'Real-Time Feed',
+			title: 'Webhooks for Every Event',
 			description:
-				'Watch emails being sent, delivered, opened, and bounced in real time. A live stream of your email activity as it happens.'
+				'Get notified in real time when emails are sent, delivered, opened, bounced, or complained. Stream events to your app or any third-party service.'
 		},
 		{
 			icon: EyeIcon,
-			title: 'Email Preview',
+			title: 'Searchable Logs',
 			description:
-				'See exactly what was sent to each recipient. Full email content, headers, metadata, and delivery timeline in a single view.'
+				'Search by recipient, template, status, or date. See exactly what was sent, full email content, headers, metadata, and the complete delivery timeline.'
 		},
 		{
 			icon: ShieldWarningIcon,
@@ -148,10 +148,10 @@
 </script>
 
 <FeaturePageLayout
-	title="Email Analytics"
-	metaDescription="Real-time analytics for every transactional email. Track delivery rates, open rates, bounces, and per-template performance."
-	label="ANALYTICS"
-	description="Real-time visibility into every email your app sends. Per-template analytics, smart alerts, and deliverability monitoring."
+	title="Analytics & Logs"
+	metaDescription="Real-time delivery metrics, searchable logs, and webhooks for every email event. Know exactly what your SaaS emails are doing."
+	label="ANALYTICS & LOGS"
+	description="Delivery metrics, searchable logs for debugging, and webhooks for every event. Real-time visibility into every email — transactional and marketing."
 >
 	{#snippet heading()}
 		Know what your<br />emails are doing.

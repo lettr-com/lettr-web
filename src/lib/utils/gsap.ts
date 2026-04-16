@@ -74,7 +74,7 @@ export function createScrollRevealCleanup({
 					...animationVars,
 					scrollTrigger: {
 						trigger,
-						start: 'top 80%',
+						start: 'top 95%',
 						toggleActions: 'play none none none',
 						...scrollTriggerVars
 					}

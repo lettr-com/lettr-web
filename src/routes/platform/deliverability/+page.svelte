@@ -106,18 +106,18 @@
 		},
 		{
 			icon: LockKeyIcon,
-			title: 'Custom SSL Tracking Domains',
+			title: 'First-Party Domain Control',
 			description:
-				'Use your own branded tracking domain with full SSL support. Links and open tracking look like they come from your domain, not a third party.'
+				'Custom tracking domains and hosted asset domains from day one. Links and open tracking come from your domain, not a third party — rare among competitors at this price point.'
 		}
 	];
 </script>
 
 <FeaturePageLayout
 	title="Deliverability"
-	metaDescription="Maximize email deliverability with automated DNS setup, DMARC monitoring, blocklist checks, and dedicated IPs. 99.9% inbox placement."
+	metaDescription="Enterprise-grade email deliverability backed by 12 years of infrastructure. Guided DNS setup, DMARC monitoring, dedicated IPs, and custom tracking domains from day one."
 	label="DELIVERABILITY"
-	description="Automated DNS authentication, blocklist monitoring, and dedicated IPs. Everything you need to reach the inbox."
+	description="Enterprise-grade infrastructure backed by 12 years of Ecomail operations. Guided DNS setup, dedicated IPs, and first-party domain control from day one."
 >
 	{#snippet heading()}
 		Every email.<br />Every inbox.
@@ -164,7 +164,7 @@
 						<p class="text-xs font-medium tracking-wider text-muted uppercase">Deliverability Score</p>
 						<p class="mt-2 font-heading text-2xl text-surface">Inbox Placement</p>
 						<p class="mt-2 text-sm leading-relaxed text-muted">
-							Based on authentication, reputation, and infrastructure health across all sending domains.
+							Based on authentication, reputation, and infrastructure health. Backed by the same infrastructure serving 12,000+ organizations for over 12 years.
 						</p>
 						<div class="mt-4 flex flex-wrap justify-center gap-4 sm:justify-start">
 							<div class="flex items-center gap-1.5">

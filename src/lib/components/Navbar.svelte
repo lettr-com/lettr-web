@@ -59,11 +59,11 @@
 	let registerHref: string = $state(registerUrl);
 
 	const platformItems: DropdownItem[] = [
-		{ icon: CodeIcon, label: 'Developer API', description: 'Clean REST API and SMTP relay for fast integration', href: '/platform/laravel' },
-		{ icon: SparkleIcon, label: 'Visual Editor', description: 'Drag-and-drop editor your whole team can use', href: '/platform/templates' },
-		{ icon: ArrowsLeftRightIcon, label: 'Template Sync', description: 'Synced sections, version history, draft/publish', href: '/platform/sync' },
-		{ icon: ChartBarIcon, label: 'Analytics & Monitoring', description: 'Real-time delivery metrics and alerts', href: '/platform/analytics' },
-		{ icon: ShieldCheckIcon, label: 'Deliverability', description: 'SPF, DKIM, DMARC, dedicated IPs, domain control', href: '/platform/deliverability' },
+		{ icon: CodeIcon, label: 'Developer API', description: 'REST API, SMTP, and SDKs — integrate once, forget forever', href: '/platform/laravel' },
+		{ icon: SparkleIcon, label: 'Visual Editor', description: 'Best-in-class drag-and-drop editor powered by Topol', href: '/platform/templates' },
+		{ icon: ArrowsLeftRightIcon, label: 'Transactional + Marketing', description: 'One platform, one domain, one sending reputation', href: '/platform/sync' },
+		{ icon: ChartBarIcon, label: 'Analytics & Logs', description: 'Delivery metrics, searchable logs, and webhooks', href: '/platform/analytics' },
+		{ icon: ShieldCheckIcon, label: 'Deliverability', description: 'SPF, DKIM, DMARC, dedicated IPs, custom domains', href: '/platform/deliverability' },
 		{ icon: RobotIcon, label: 'MCP Integration', description: 'Connect AI agents and LLMs to Lettr', href: '/platform/mcp' }
 	];
 
@@ -176,27 +176,20 @@
 	});
 </script>
 
-<div class="fixed top-[-1px] right-0 left-0 z-50 flex items-start justify-center px-4 narrow:px-0 border-b border-border/30">
-	<!-- Desktop logo (outer left) -->
-	<div class="hidden h-[60px] w-[120px] shrink-0 items-center pr-4 justify-end md:flex">
-		<a href="/" class="flex items-center">
+<div class="fixed top-0 right-0 left-0 z-50 flex justify-center">
+<nav
+	bind:this={nav}
+	class="flex flex-col w-full max-w-4xl narrow:max-w-none bg-white border-x border-b border-border/30 narrow:border-x-0"
+	aria-label="Main navigation"
+>
+	<div class="flex h-[60px] w-full items-center justify-between px-6">
+		<!-- Logo -->
+		<a href="/" class="flex items-center shrink-0">
 			<img src="/logo.svg" alt="Lettr" class="h-5" />
 		</a>
-	</div>
 
-	<nav
-		bind:this={nav}
-		class="glass flex flex-col w-full max-w-[624px] narrow:max-w-none border-r border-l border-border/30 narrow:border-x-0 shadow-[0_0_40px_-10px_rgba(236,16,75,0.15)]"
-		aria-label="Main navigation"
-	>
-		<div class="flex h-[60px] w-full items-center justify-between px-4 py-2.5 md:justify-center">
-			<!-- Mobile logo -->
-			<a href="/" class="flex items-center md:hidden">
-				<img src="/logo.svg" alt="Lettr" class="h-5" />
-			</a>
-
-			<!-- Desktop nav links -->
-			<div class="hidden items-center justify-center gap-1 md:flex">
+		<!-- Desktop nav links -->
+		<div class="hidden items-center gap-1 md:flex ml-8 flex-1">
 				{#each navLinks as link}
 					{#if link.dropdownKey}
 						<!-- svelte-ignore a11y_no_static_element_interactions -->
@@ -357,6 +350,28 @@
 
 			</div>
 
+			<!-- Desktop CTAs -->
+			<div class="hidden md:flex items-center gap-5">
+				<a
+					href="/demo"
+					class="text-sm text-muted transition-colors hover:text-surface"
+				>
+					Talk to expert
+				</a>
+				<a
+					href="https://app.lettr.com"
+					class="text-sm text-muted transition-colors hover:text-surface"
+				>
+					Sign in
+				</a>
+				<a
+					href={registerHref}
+					class="flex items-center justify-center px-4 py-2 text-sm font-semibold bg-primary text-white transition-colors hover:bg-primary/90"
+				>
+					Start sending
+				</a>
+			</div>
+
 			<!-- Mobile toggle -->
 			<button
 				class="ml-auto flex items-center justify-center md:hidden"
@@ -458,14 +473,4 @@
 			</div>
 		{/if}
 	</nav>
-
-	<!-- Desktop right side (outer right) -->
-	<div class="hidden h-[60px] w-[120px]  items-center justify-start pl-4 md:flex">
-		<a
-			href={registerHref}
-			class="text-primary text-sm font-bold transition-colors hover:text-primary/90"
-		>
-			Start sending
-		</a>
-	</div>
 </div>

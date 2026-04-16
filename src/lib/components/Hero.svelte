@@ -44,22 +44,29 @@
 					<span class="text-primary">built for SaaS</span>
 				</h1>
 
-				<p data-animate class="max-w-lg text-body text-muted mb-10">
-					Developers integrate once. Your team takes over — transactional and marketing emails, zero dev tickets for content changes.
+				<p data-animate class="max-w-[650px] text-body text-muted mb-10">
+					Our marketing team couldn't touch emails without dev tickets. We couldn't tell which transactional email failed or why. Nothing fit — so we built it.
 				</p>
 
 				<div data-animate class="flex flex-wrap items-center mb-3 gap-2">
 					<Button variant="primary" href={registerHref}>Start sending</Button>
 					<Button variant="secondary" href="https://docs.lettr.com/introduction" target="_blank" rel="noopener noreferrer">See docs</Button>
 				</div>
-				<p data-animate class="max-w-md text-sm text-gray-400">
+				<p data-animate class="max-w-md text-sm text-muted">
 					3,000 emails/month free. No credit card required.
 				</p>
+
 		</div>
 
 		<div data-animate class="mt-12">
 			<EditorPreview />
 		</div>
+
+		<div data-animate class="flex flex-wrap items-center gap-4 mt-8 pt-6 border-t border-border/30 text-sm text-muted">
+			<span>Sending millions of emails for the <a href="https://biggood.io/" target="_blank" rel="noopener noreferrer" class="font-semibold text-surface hover:text-primary transition-colors">Big Good</a> group</span>
+			<img src="/images/logos/ecomail-icon.svg" alt="Ecomail" class="h-5" />
+			<img src="/images/logos/topol-icon.svg" alt="Topol" class="h-6" />
+			<img src="/images/logos/dmarceye-icon.svg" alt="DMARCeye" class="h-6" />
+		</div>
 	</div>
 </section>
-

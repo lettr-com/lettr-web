@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import { buildRegisterUrl, registerUrl } from '$lib/utils/utm';
+	import { EnvelopeSimpleIcon, GithubLogoIcon, XLogoIcon } from 'phosphor-svelte';
 
 	let registerHref: string = $state(registerUrl);
 
@@ -14,11 +15,9 @@
 			links: [
 				{ label: 'Laravel Integration', href: '/platform/laravel' },
 				{ label: 'Template Builder', href: '/platform/templates' },
-				{ label: 'Template Sync', href: '/platform/sync' },
 				{ label: 'Analytics', href: '/platform/analytics' },
 				{ label: 'Deliverability', href: '/platform/deliverability' },
-				{ label: 'MCP Server', href: '/platform/mcp' },
-				{ label: 'Email Channel', href: '/channels/email' }
+				{ label: 'MCP Server', href: '/platform/mcp' }
 			]
 		},
 		{
@@ -35,37 +34,47 @@
 			title: 'Company',
 			links: [
 				{ label: 'About', href: '/about' },
-				{ label: 'Support', href: '/support' },
-				{ label: 'Privacy Policy', href: '/privacy-policy/' },
-				{ label: 'Terms of Use', href: '/terms/' },
-				{ label: 'Accessibility', href: '/accessibility-statement/' }
-			]
-		},
-		{
-			title: 'Connect',
-			links: [
-				{ label: 'hello@lettr.com', href: 'mailto:hello@lettr.com' },
-				{ label: 'GitHub', href: 'https://github.com', external: true },
-				{ label: 'X / Twitter', href: 'https://x.com', external: true }
+				{ label: 'Support', href: '/support' }
 			]
 		}
+	];
+
+	const socials = [
+		{ label: 'Email', href: 'mailto:hello@lettr.com', icon: EnvelopeSimpleIcon },
+		{ label: 'GitHub', href: 'https://github.com', icon: GithubLogoIcon, external: true },
+		{ label: 'X', href: 'https://x.com', icon: XLogoIcon, external: true }
 	];
 </script>
 
 <footer class="border-t border-border/30 bg-white px-4 py-12">
 	<div class="mx-auto max-w-[550px]">
 		<!-- Logo + Columns -->
-		<div class="flex flex-col gap-10">
-			<div>
-				<a href="/" class="flex items-center">
-					<img src="/logo.svg" alt="Lettr" class="h-5" />
-				</a>
-				<p class="mt-2 max-w-xs text-sm text-muted">
-					The email platform built for SaaS. Developers integrate once. Your team takes over.
-				</p>
+		<div class="flex flex-col gap-8">
+			<div class="flex items-start justify-between">
+				<div>
+					<a href="/" class="flex items-center">
+						<img src="/logo.svg" alt="Lettr" class="h-5" />
+					</a>
+					<p class="mt-2 max-w-xs text-sm text-muted">
+						The email platform built for SaaS.
+					</p>
+				</div>
+				<div class="flex items-center gap-3">
+					{#each socials as social}
+						<a
+							href={social.href}
+							class="text-muted transition-colors hover:text-surface"
+							target={social.external ? '_blank' : undefined}
+							rel={social.external ? 'noopener noreferrer' : undefined}
+							aria-label={social.label}
+						>
+							<social.icon size={20} />
+						</a>
+					{/each}
+				</div>
 			</div>
 
-			<div class="grid grid-cols-2 gap-8 sm:grid-cols-4">
+			<div class="grid grid-cols-3 gap-8">
 				{#each columns as column}
 					<div>
 						<span class="mb-3 block text-xs font-semibold uppercase tracking-wider text-surface">
@@ -89,7 +98,7 @@
 		</div>
 
 		<!-- CTA -->
-		<div id="signup" class="mt-10 border-t border-border/30 pt-6">
+		<div id="signup" class="mt-8 border-t border-border/30 pt-6">
 			<div class="flex flex-col items-start gap-4">
 				<h3 class="text-surface">Ready to get started?</h3>
 				<p class="text-sm text-muted">Start sending for free. No credit card required.</p>
@@ -97,7 +106,7 @@
 					href={registerHref}
 					class="bg-primary px-6 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-primary/90"
 				>
-					Create free account
+					Start sending in minutes
 				</a>
 			</div>
 		</div>

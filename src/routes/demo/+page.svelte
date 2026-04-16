@@ -483,7 +483,7 @@
 			/>
 		{:else}
 			<header data-animate-intro class="space-y-3">
-				<p class="text-sm font-medium uppercase tracking-[0.14em] text-primary">Step 2 of 3</p>
+				<p class="text-sm font-medium uppercase tracking-[0.14em] text-primary">Step {isVolumePickerCollapsed ? '2 of 2' : '1 of 2'}</p>
 			</header>
 
 			<BookingAlerts {errorMessage} {infoMessage} />

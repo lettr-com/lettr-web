@@ -67,25 +67,25 @@ Mail::to($user)->send(new WelcomeMail($user));`;
 			icon: PackageIcon,
 			title: 'Native Mail Support',
 			description:
-				'Use standard Laravel Mailables and Notifications as you always have. Lettr works with the native Mail facade, Markdown mailables, and queued mail out of the box.'
+				'Use standard Laravel Mailables and Notifications as you always have. Lettr works with the native Mail facade, Markdown mailables, and queued mail — with automatic retries and delivery optimization built in.'
 		},
 		{
 			icon: LightningIcon,
 			title: 'Artisan Commands',
 			description:
-				'Test your connection, verify your domain, and inspect delivery status directly from the terminal. Built-in artisan commands for every step of the workflow.'
+				'Test your connection, verify your domain, and inspect delivery status directly from the terminal. Built-in artisan commands for every step of the integration.'
 		}
 	];
 </script>
 
 <FeaturePageLayout
 	title="Laravel Integration"
-	metaDescription="Send transactional emails from Laravel in under 60 seconds. Native mail driver, zero configuration, and built-in artisan commands."
+	metaDescription="Send emails from Laravel in under 60 seconds. Native mail driver, zero configuration, automatic queuing and retries. Integrate once, forget about it forever."
 	label="LARAVEL"
-	description="Send transactional emails from your Laravel app in under 60 seconds. Native mail driver, zero config, artisan commands included."
+	description="Install the package, set your API key, start sending. Lettr handles queuing, retries, and delivery optimization — so you can forget about email infrastructure."
 >
 	{#snippet heading()}
-		Built for Laravel.<br />Loved by artisans.
+		Integrate once.<br />Never touch email again.
 	{/snippet}
 
 	{#snippet children()}

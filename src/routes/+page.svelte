@@ -4,7 +4,7 @@
 	import Features from '$lib/components/Features.svelte';
 	import TeamFeatures from '$lib/components/TeamFeatures.svelte';
 	import SaaSUseCases from '$lib/components/SaaSUseCases.svelte';
-
+	import TalkToExpert from '$lib/components/TalkToExpert.svelte';
 
 	import Pricing from '$lib/components/Pricing.svelte';
 </script>
@@ -14,5 +14,5 @@
 <TeamFeatures />
 <Features />
 <SaaSUseCases />
-
+<TalkToExpert />
 <Pricing />

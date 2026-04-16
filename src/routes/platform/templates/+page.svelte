@@ -58,25 +58,25 @@
 			icon: DotsSixVerticalIcon,
 			title: 'Drag & Drop Editor',
 			description:
-				'Build email templates visually. Drag components onto the canvas, rearrange blocks, and preview across devices in real time.'
+				'Build email templates visually. Drag components onto the canvas, rearrange blocks, and preview across devices — no HTML knowledge needed.'
 		},
 		{
 			icon: SparkleIcon,
 			title: 'AI-Powered Copywriting',
 			description:
-				'Generate subject lines, preview text, and body copy with AI. Trained on high-performing transactional emails to match your tone.'
+				'Generate subject lines, preview text, and body copy with AI. Tuned for the emails SaaS companies actually send.'
 		},
 		{
 			icon: StackIcon,
-			title: '200+ Templates',
+			title: 'SaaS Template Library',
 			description:
-				'Start from a library of professionally designed templates. Welcome emails, password resets, invoices, shipping notifications and more.'
+				'Start from professionally designed templates for onboarding, password resets, trial expiry, product updates, and feature announcements.'
 		},
 		{
 			icon: ExportIcon,
-			title: 'Export to Blade',
+			title: 'Synced Sections',
 			description:
-				'One-click export to Laravel Blade templates. Your designs become production-ready code that syncs back to your repository.'
+				'Update a header, footer, or any shared block once — changes apply everywhere. No more editing 40 templates to change your logo.'
 		},
 		{
 			icon: PaletteIcon,
@@ -86,36 +86,36 @@
 		},
 		{
 			icon: BracketsAngleIcon,
-			title: 'Smart Variables',
+			title: 'Dynamic Placeholders',
 			description:
-				'Use Blade syntax directly in the editor. Variables like {{ $user->name }} are highlighted and validated before sending.'
+				'Add personalization variables directly in the editor. Your team can insert and preview {{ name }}, {{ company }}, and custom data without touching code.'
 		}
 	];
 
 	const templatePreviews = [
 		{ name: 'Welcome Email', category: 'Onboarding' },
-		{ name: 'Password Reset', category: 'Authentication' },
-		{ name: 'Invoice', category: 'Billing' },
-		{ name: 'Shipping Update', category: 'E-commerce' },
+		{ name: 'Password Reset', category: 'Security' },
+		{ name: 'Trial Expiry', category: 'Conversion' },
+		{ name: 'Product Update', category: 'Changelog' },
 		{ name: 'Team Invite', category: 'Collaboration' },
-		{ name: 'Verify Email', category: 'Authentication' }
+		{ name: 'Usage Alert', category: 'Notifications' }
 	];
 </script>
 
 <FeaturePageLayout
-	title="Email Templates"
-	metaDescription="Design beautiful transactional email templates with a drag-and-drop editor. AI copywriting, 200+ templates, and one-click Blade export."
-	label="TEMPLATES"
-	description="Design, edit, and manage your transactional email templates visually. Export to Blade with one click."
+	title="Visual Editor"
+	metaDescription="Best-in-class drag-and-drop email editor powered by Topol. Your team designs, edits, and manages templates — no dev tickets required."
+	label="VISUAL EDITOR"
+	description="The same drag-and-drop editor trusted by 40,000+ companies. Your team manages templates, content, and campaigns — without filing a single dev ticket."
 >
 	{#snippet heading()}
-		Beautiful emails.<br />Zero HTML tables.
+		Your team edits.<br />No dev tickets required.
 	{/snippet}
 
 	{#snippet children()}
 		<!-- Editor Mockup -->
 		<div bind:this={editorSection} class="mx-auto max-w-3xl">
-			<h2 data-reveal class="mb-8 text-center">Visual editor built for developers</h2>
+			<h2 data-reveal class="mb-8 text-center">Drag-and-drop editor powered by Topol</h2>
 			<div data-reveal class="border border-border/50 bg-white">
 				<!-- Editor toolbar -->
 				<div class="flex items-center justify-between border-b border-border/50 px-4 py-2.5">
@@ -186,9 +186,9 @@
 
 		<!-- Feature Cards -->
 		<div bind:this={featuresSection} class="mx-auto mt-20 max-w-3xl md:mt-28">
-			<h2 data-reveal class="mb-3 text-center">Everything you need to build emails</h2>
+			<h2 data-reveal class="mb-3 text-center">Everything your team needs</h2>
 			<p data-reveal class="mx-auto mb-8 max-w-lg text-center text-body text-muted">
-				A complete template toolkit designed for transactional emails, not marketing campaigns.
+				A complete template toolkit your whole team can use — designers, marketers, and product people. Powered by the Topol editor trusted by 40,000+ companies.
 			</p>
 			<div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
 				{#each features as feature}
