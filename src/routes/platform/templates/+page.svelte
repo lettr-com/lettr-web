@@ -9,6 +9,7 @@
 		BracketsAngleIcon
 	} from 'phosphor-svelte';
 	import FeaturePageLayout from '$lib/components/FeaturePageLayout.svelte';
+	import EditorPreview from '$lib/components/EditorPreview.svelte';
 	import { createScrollRevealCleanup } from '$lib/utils/gsap';
 
 	let editorSection: HTMLElement | undefined = $state();
@@ -31,27 +32,6 @@
 
 		return () => cleanups.forEach((fn) => fn());
 	});
-
-	const sidebarComponents = [
-		'Header',
-		'Hero Image',
-		'Text Block',
-		'Button',
-		'Divider',
-		'Two Columns',
-		'Product Card',
-		'Footer',
-		'Social Links',
-		'Spacer'
-	];
-
-	const canvasBlocks = [
-		{ type: 'header', label: 'Company Logo', height: 'h-12' },
-		{ type: 'hero', label: 'Hero Image', height: 'h-32' },
-		{ type: 'text', label: 'Welcome, {{ name }}', height: 'h-16' },
-		{ type: 'button', label: 'Verify Email', height: 'h-10' },
-		{ type: 'footer', label: 'Footer & Unsubscribe', height: 'h-14' }
-	];
 
 	const features = [
 		{
@@ -92,13 +72,165 @@
 		}
 	];
 
-	const templatePreviews = [
-		{ name: 'Welcome Email', category: 'Onboarding' },
-		{ name: 'Password Reset', category: 'Security' },
-		{ name: 'Trial Expiry', category: 'Conversion' },
-		{ name: 'Product Update', category: 'Changelog' },
-		{ name: 'Team Invite', category: 'Collaboration' },
-		{ name: 'Usage Alert', category: 'Notifications' }
+	type DetailBlock =
+		| { kind: 'link'; label: string; url: string }
+		| { kind: 'list'; label: string; items: { key: string; value: string }[] };
+
+	interface Template {
+		category: 'Teams' | 'Subscriptions' | 'Authentication' | 'Payments';
+		cardLabel: string;
+		title: string;
+		greeting: string;
+		body: string;
+		cta: string;
+		detail: DetailBlock;
+		notice: { highlight: string; rest: string };
+		disclaimer: string;
+	}
+
+	const templates: Template[] = [
+		{
+			category: 'Teams',
+			cardLabel: 'Team invitation',
+			title: "You've been invited to a team",
+			greeting: 'Hi {{email}},',
+			body: '{{inviter_name}} has invited you to join the {{team_name}} team on {{company_name}}.',
+			cta: 'Accept invitation',
+			detail: { kind: 'link', label: 'Confirmation link', url: '{{team_invite_url}}' },
+			notice: {
+				highlight: 'This invitation expires in {{expiry_time}}.',
+				rest: " After that, you'll need to request a new invite."
+			},
+			disclaimer:
+				"If you weren't expecting this invitation, you can safely ignore this email."
+		},
+		{
+			category: 'Subscriptions',
+			cardLabel: 'Trial expired',
+			title: 'Your free trial has ended',
+			greeting: 'Hi {{name}},',
+			body: 'Your free trial of {{plan_name}} has ended. To keep using all features and avoid losing access, you can upgrade to a paid plan at any time.',
+			cta: 'Upgrade now',
+			detail: {
+				kind: 'list',
+				label: 'Trial details',
+				items: [
+					{ key: 'Plan', value: '{{plan_name}}' },
+					{ key: 'Trial ended on', value: '{{trial_end_date}}' }
+				]
+			},
+			notice: {
+				highlight: 'No charges have been made.',
+				rest: " You'll only be billed once you choose a paid plan."
+			},
+			disclaimer:
+				'Not ready yet? You can continue browsing limited features or upgrade later from your account.'
+		},
+		{
+			category: 'Subscriptions',
+			cardLabel: 'Subscription renewal',
+			title: 'Your subscription has been renewed',
+			greeting: 'Hi {{name}},',
+			body: "Thanks! We've successfully renewed your {{plan_name}} subscription. You'll continue to have uninterrupted access to your account.",
+			cta: 'View billing details',
+			detail: {
+				kind: 'list',
+				label: 'Renewal details',
+				items: [
+					{ key: 'Plan', value: '{{plan_name}}' },
+					{ key: 'Amount', value: '{{amount}}' },
+					{ key: 'Next billing', value: '{{next_billing_date}}' }
+				]
+			},
+			notice: {
+				highlight: 'Need to make changes?',
+				rest: ' You can update your plan or payment method from billing settings.'
+			},
+			disclaimer:
+				"If you don't recognize this renewal, please contact our support team immediately."
+		},
+		{
+			category: 'Authentication',
+			cardLabel: 'Email confirmation',
+			title: 'Confirm your email address',
+			greeting: 'Hi {{name}},',
+			body: 'Thanks for signing up! Please confirm your email address to activate your account and get full access.',
+			cta: 'Confirm email',
+			detail: { kind: 'link', label: 'Confirmation link', url: '{{email_confirmation_url}}' },
+			notice: {
+				highlight: 'This link expires in {{expiry_time}}.',
+				rest: " After that, you'll need to request a new confirmation."
+			},
+			disclaimer:
+				"If you didn't create an account with {{company_name}}, you can safely ignore this email."
+		},
+		{
+			category: 'Authentication',
+			cardLabel: 'Password reset',
+			title: 'Reset your password',
+			greeting: 'Hi {{name}},',
+			body: 'We received a request to reset the password for your account. Click the button below to create a new password.',
+			cta: 'Reset password',
+			detail: { kind: 'link', label: 'Reset link', url: '{{reset_password_url}}' },
+			notice: {
+				highlight: 'This link expires in {{expiry_time}}.',
+				rest: " After that, you'll need to request a new password reset."
+			},
+			disclaimer:
+				"If you didn't request a password reset, you can safely ignore this email. Your password will remain unchanged."
+		},
+		{
+			category: 'Payments',
+			cardLabel: 'Invoice ready',
+			title: 'Your invoice is ready',
+			greeting: 'Hi {{name}},',
+			body: 'Thanks for your business. Your invoice for the recent billing period is now available. You can view or download it using the link below.',
+			cta: 'View invoice',
+			detail: {
+				kind: 'list',
+				label: 'Invoice',
+				items: [
+					{ key: 'Invoice #', value: '{{invoice_number}}' },
+					{ key: 'Due date', value: '{{due_date}}' },
+					{ key: 'Amount due', value: '{{amount_due}}' }
+				]
+			},
+			notice: {
+				highlight: 'Status: {{invoice_status}}.',
+				rest: ' If you have already paid this invoice, you can ignore this email.'
+			},
+			disclaimer: 'Questions about your invoice? Reply to this email and our team will help.'
+		},
+		{
+			category: 'Payments',
+			cardLabel: 'Card expired',
+			title: 'Your card has expired',
+			greeting: 'Hi {{name}},',
+			body: 'We were unable to process your recent payment because the card on file has expired. To avoid any interruption to your service, please update your payment details.',
+			cta: 'Update payment method',
+			detail: { kind: 'link', label: 'Billing portal', url: '{{update_payment_url}}' },
+			notice: {
+				highlight: 'Your subscription may be paused if payment is not updated.',
+				rest: ' Please update your card as soon as possible to continue uninterrupted access.'
+			},
+			disclaimer:
+				"If you've already updated your payment details, you can safely ignore this email."
+		},
+		{
+			category: 'Payments',
+			cardLabel: 'Payment failed',
+			title: "We couldn't process your payment",
+			greeting: 'Hi {{name}},',
+			body: 'We attempted to process your recent payment, but it was declined by your bank or card provider. This can happen for a variety of reasons, such as insufficient funds or temporary authorization issues.',
+			cta: 'Update payment method',
+			detail: { kind: 'link', label: 'Confirmation link', url: '{{update_payment_url}}' },
+			notice: {
+				highlight: "Your access may be interrupted if payment isn't resolved.",
+				rest: ' Please update your payment details or contact your bank to avoid service disruption.'
+			},
+			disclaimer:
+				"If you've already updated your payment details, you can safely ignore this email."
+		}
 	];
 </script>
 
@@ -114,78 +246,15 @@
 
 	{#snippet children()}
 		<!-- Editor Mockup -->
-		<div bind:this={editorSection} class="mx-auto max-w-3xl">
+		<div bind:this={editorSection} class="mx-auto">
 			<h2 data-reveal class="mb-8 text-center">Drag-and-drop editor powered by Topol</h2>
-			<div data-reveal class="border border-border/50 bg-white">
-				<!-- Editor toolbar -->
-				<div class="flex items-center justify-between border-b border-border/50 px-4 py-2.5">
-					<div class="flex items-center gap-3">
-						<div class="h-2.5 w-2.5 bg-primary/60"></div>
-						<span class="font-code text-xs text-muted">welcome-email.blade.php</span>
-					</div>
-					<div class="flex items-center gap-2">
-						<span class="border border-border/50 px-2 py-0.5 text-xs text-muted">Desktop</span>
-						<span class="border border-border/50 px-2 py-0.5 text-xs text-muted">Mobile</span>
-						<span class="bg-primary px-2 py-0.5 text-xs text-white">Preview</span>
-					</div>
-				</div>
-				<div class="flex">
-					<!-- Sidebar -->
-					<div class="w-48 shrink-0 border-r border-border/50 p-4">
-						<p class="mb-3 font-heading text-xs tracking-wide text-muted uppercase">Components</p>
-						<div class="space-y-1.5">
-							{#each sidebarComponents as component}
-								<div class="border border-border/30 bg-background px-3 py-2 text-xs text-surface transition-colors hover:border-primary/30">
-									{component}
-								</div>
-							{/each}
-						</div>
-					</div>
-					<!-- Canvas -->
-					<div class="flex-1 bg-background/50 p-6">
-						<div class="mx-auto max-w-sm space-y-2">
-							{#each canvasBlocks as block}
-								<div class="border border-dashed border-border/60 bg-white p-3 transition-colors hover:border-primary/40">
-									<div class="flex items-center justify-between">
-										<span class="text-xs text-muted">{block.label}</span>
-										{#if block.type === 'button'}
-											<span class="bg-primary px-4 py-1.5 text-xs text-white">Verify Email</span>
-										{/if}
-									</div>
-									{#if block.type === 'hero'}
-										<div class="mt-2 flex h-24 items-center justify-center bg-background">
-											<span class="text-xs text-muted">1200 x 400</span>
-										</div>
-									{/if}
-									{#if block.type === 'text'}
-										<div class="mt-2 space-y-1">
-											<div class="h-2 w-3/4 bg-border/30"></div>
-											<div class="h-2 w-full bg-border/30"></div>
-											<div class="h-2 w-1/2 bg-border/30"></div>
-										</div>
-									{/if}
-									{#if block.type === 'header'}
-										<div class="mt-2 flex items-center justify-center">
-											<div class="h-6 w-20 bg-border/30"></div>
-										</div>
-									{/if}
-									{#if block.type === 'footer'}
-										<div class="mt-2 flex items-center justify-center gap-2">
-											<div class="h-2 w-16 bg-border/30"></div>
-											<span class="text-[10px] text-muted">|</span>
-											<div class="h-2 w-16 bg-border/30"></div>
-										</div>
-									{/if}
-								</div>
-							{/each}
-						</div>
-					</div>
-				</div>
+			<div data-reveal>
+				<EditorPreview />
 			</div>
 		</div>
 
 		<!-- Feature Cards -->
-		<div bind:this={featuresSection} class="mx-auto mt-20 max-w-3xl md:mt-28">
+		<div bind:this={featuresSection} class="mx-auto mt-20 md:mt-28">
 			<h2 data-reveal class="mb-3 text-center">Everything your team needs</h2>
 			<p data-reveal class="mx-auto mb-8 max-w-lg text-center text-body text-muted">
 				A complete template toolkit your whole team can use — designers, marketers, and product people. Powered by the Topol editor trusted by 40,000+ companies.
@@ -203,31 +272,85 @@
 			</div>
 		</div>
 
-		<!-- Template Gallery Preview -->
-		<div bind:this={gallerySection} class="mx-auto mt-20 max-w-3xl md:mt-28">
+		<!-- Template Gallery -->
+		<div bind:this={gallerySection} class="mx-auto mt-20 md:mt-28">
 			<h2 data-reveal class="mb-3 text-center">Start from a template</h2>
-			<p data-reveal class="mx-auto mb-8 max-w-lg text-center text-body text-muted">
-				Pick a professionally designed starting point. Customize it to match your brand in minutes.
+			<p data-reveal class="mx-auto mb-10 max-w-lg text-center text-body text-muted">
+				Professionally designed SaaS emails — ready to customize for onboarding, billing, authentication, and team workflows.
 			</p>
-			<div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-				{#each templatePreviews as template}
-					<div data-reveal class="group border border-border/50 bg-white transition-colors hover:border-primary/30">
-						<!-- Template preview placeholder -->
-						<div class="border-b border-border/50 bg-background p-4">
-							<div class="mx-auto max-w-[120px] space-y-2">
-								<div class="h-3 w-full bg-border/40"></div>
-								<div class="h-12 w-full bg-border/30"></div>
-								<div class="h-2 w-3/4 bg-border/40"></div>
-								<div class="h-2 w-full bg-border/40"></div>
-								<div class="h-2 w-1/2 bg-border/40"></div>
-								<div class="mx-auto mt-2 h-4 w-16 bg-primary/20"></div>
-								<div class="h-2 w-full bg-border/30"></div>
+			<div class="grid gap-6 sm:grid-cols-2">
+				{#each templates as template}
+					<div data-reveal class="flex flex-col">
+						<article class="flex flex-1 flex-col border border-border/50 bg-white transition-colors hover:border-primary/40">
+							<div class="flex-1 p-5 text-[11px] leading-relaxed text-muted">
+								<!-- Category pill + divider -->
+								<div class="mb-4 flex items-center gap-2">
+									<span class="bg-background border border-border/50 px-2 py-0.5 text-[9px] font-medium tracking-wide text-surface uppercase">{template.category}</span>
+									<div class="h-px flex-1 bg-border/50"></div>
+								</div>
+
+								<!-- Heading -->
+								<h3 class="mb-2 text-[13px] font-bold text-surface">{template.title}</h3>
+
+								<!-- Greeting -->
+								<p class="mb-2">{template.greeting}</p>
+
+								<!-- Body -->
+								<p class="mb-4">{template.body}</p>
+
+								<!-- CTA -->
+								<div class="mb-4">
+									<span class="inline-block bg-surface px-3 py-1.5 text-[10px] font-semibold text-white">{template.cta}</span>
+								</div>
+
+								<!-- Divider -->
+								<div class="my-4 flex items-center gap-2">
+									<div class="h-px flex-1 bg-border/40"></div>
+									<span class="text-[8px] font-semibold tracking-[0.15em] text-muted uppercase">Or click the link below</span>
+									<div class="h-px flex-1 bg-border/40"></div>
+								</div>
+
+								<!-- Detail block -->
+								<div class="mb-3 border border-border/40 bg-background/60 p-2.5">
+									<p class="mb-1 text-[8px] font-semibold tracking-[0.12em] text-muted uppercase">{template.detail.label}</p>
+									{#if template.detail.kind === 'link'}
+										<p class="font-code text-[9px] break-all text-surface">{template.detail.url}</p>
+									{:else}
+										<div class="space-y-0.5">
+											{#each template.detail.items as item}
+												<p class="text-[9px] text-surface">
+													<span class="text-muted">{item.key}:</span>
+													<span class="font-code">{item.value}</span>
+												</p>
+											{/each}
+										</div>
+									{/if}
+								</div>
+
+								<!-- Notice -->
+								<div class="mb-3 border-l-2 border-border/60 py-0.5 pl-2.5">
+									<p class="text-[9px]">
+										<span class="font-semibold text-surface">{template.notice.highlight}</span>{template.notice.rest}
+									</p>
+								</div>
+
+								<!-- Disclaimer -->
+								<p class="mb-3 text-[9px] text-muted/80">{template.disclaimer}</p>
+
+								<!-- Contact + company -->
+								<p class="mb-2 text-[9px]">Questions? Contact us at {'{{support_email}}'}</p>
+								<p class="text-[9px] text-muted/80">{'{{company_name}}'}</p>
+								<p class="mb-3 text-[9px] text-muted/80">{'{{company_address}}'}</p>
+
+								<!-- Footer links -->
+								<div class="flex flex-wrap gap-x-3 gap-y-1 border-t border-border/40 pt-3 text-[9px] font-medium text-surface">
+									<span>Help Center</span>
+									<span>Privacy Policy</span>
+									<span>Terms of Service</span>
+								</div>
 							</div>
-						</div>
-						<div class="p-4">
-							<p class="text-sm font-semibold text-surface">{template.name}</p>
-							<p class="mt-0.5 text-xs text-muted">{template.category}</p>
-						</div>
+						</article>
+						<p class="mt-3 text-sm font-medium text-surface">{template.cardLabel}</p>
 					</div>
 				{/each}
 			</div>
