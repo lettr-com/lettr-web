@@ -172,7 +172,9 @@
 							</li>
 						{:else}
 							<li class="flex items-start gap-2 text-[13px] leading-5 text-muted/40">
-								<span class="mt-[9px] block w-2 h-0.5 bg-border shrink-0"></span>
+								<span class="relative mt-2 block h-1 w-1 shrink-0">
+									<X size={10} class="absolute -left-[3px] -top-[3px] text-border" />
+								</span>
 								<span>{feature.text}</span>
 							</li>
 						{/if}
