@@ -1,10 +1,9 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import gsap from 'gsap';
-	import { CopyIcon, CheckIcon, CaretDownIcon } from 'phosphor-svelte';
+	import { CaretDownIcon } from 'phosphor-svelte';
 	import { codeTabs as defaultTabs, type CodeTab } from '$lib/utils/shiki';
 	import { getHighlighter } from '$lib/utils/shiki';
-	import { createSingleTimeoutManager } from '$lib/utils/timeoutManager';
 
 	interface Props {
 		tabs?: CodeTab[];
@@ -24,11 +23,9 @@
 
 	let activeTab: number = $state(0);
 	let highlightedCode: string = $state('');
-	let copied: boolean = $state(false);
 	let container: HTMLElement | undefined = $state();
 	let codeEl: HTMLElement | undefined = $state();
 	let moreOpen: boolean = $state(false);
-	const copyResetTimeout = createSingleTimeoutManager();
 
 	let isMoreActive = $derived(moreTabIndices.includes(activeTab));
 
@@ -85,20 +82,11 @@
 		}
 	}
 
-	async function copyCode() {
-		await navigator.clipboard.writeText(tabs[activeTab].code);
-		copied = true;
-		copyResetTimeout.schedule(() => {
-			copied = false;
-		}, 3000);
-	}
-
 	onMount(() => {
 		highlight(tabs[0]);
 		document.addEventListener('click', handleClickOutside);
 		return () => {
 			document.removeEventListener('click', handleClickOutside);
-			copyResetTimeout.clear();
 		};
 	});
 </script>
@@ -146,19 +134,6 @@
 				</div>
 			</div>
 		{/if}
-		<button
-			class="ml-2 flex shrink-0 items-center gap-1.5 p-1.5 text-gray-300 transition-colors hover:text-white text-[12px]"
-			onclick={copyCode}
-			aria-label="Copy code"
-		>
-			{#if copied}
-				<CheckIcon size={14} />
-				Copied
-			{:else}
-				<CopyIcon size={14} />
-				Copy code
-			{/if}
-		</button>
 	</div>
 
 	<div class="overflow-x-auto border-t border-gray-700 p-4 pb-8 bg-gray-800">

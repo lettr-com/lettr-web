@@ -15,7 +15,7 @@
 	});
 </script>
 
-<section bind:this={section} class="border-b border-border/30 py-16">
+<section bind:this={section} class="border-b border-border/30 py-8 md:py-16">
 	<div data-reveal class="flex flex-col items-center text-center">
 		<ChatCircleDotsIcon size={24} class="mb-4 text-primary" />
 		<h2 class="mb-2 text-surface">Need help deciding?</h2>
