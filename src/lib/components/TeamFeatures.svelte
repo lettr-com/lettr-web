@@ -7,7 +7,14 @@
 		PaintBrushIcon,
 		ArrowsClockwiseIcon,
 		TextboxIcon,
-		SquaresFourIcon
+		SquaresFourIcon,
+		PencilSimpleIcon,
+		ArrowCounterClockwiseIcon,
+		ArrowClockwiseIcon,
+		EyeIcon,
+		CaretDownIcon,
+		DeviceMobileIcon,
+		MonitorIcon
 	} from 'phosphor-svelte';
 	import { createScrollRevealCleanup } from '$lib/utils/gsap';
 
@@ -88,7 +95,7 @@
 		</p>
 	</div>
 
-	<div class="grid grid-cols-[260px_1fr] gap-6 items-start" data-feature>
+	<div class="grid grid-cols-1 md:grid-cols-[260px_1fr] gap-6 items-start" data-feature>
 		<!-- Feature selector -->
 		<div class="flex flex-col">
 			{#each features as feature, i}
@@ -121,12 +128,32 @@
 
 		<!-- Preview panel -->
 		<div class="border border-border/30 overflow-hidden bg-[#fafafa]">
-			<!-- Window chrome -->
-			<div class="flex items-center gap-1.5 px-4 py-2.5 border-b border-border/20 bg-white">
-				<div class="w-2 h-2 bg-[#e5e5e5]"></div>
-				<div class="w-2 h-2 bg-[#e5e5e5]"></div>
-				<div class="w-2 h-2 bg-[#e5e5e5]"></div>
-				<span class="ml-3 text-[10px] text-muted/60 font-medium">Lettr Editor</span>
+			<!-- Editor toolbar -->
+			<div class="flex items-center justify-between border-b border-border/20 bg-white px-3 py-2">
+				<div class="flex min-w-0 items-center gap-2">
+					<span class="truncate text-[11px] font-medium text-surface">trial-welcome-email</span>
+					<PencilSimpleIcon size={11} class="shrink-0 text-muted" />
+					<span class="hidden shrink-0 border border-green-200 bg-green-50 px-1.5 py-0.5 text-[8px] font-semibold tracking-wide text-green-600 uppercase sm:inline">Draft</span>
+				</div>
+				<div class="flex items-center gap-1.5">
+					<div class="flex items-center gap-0.5 border border-border/30 bg-gray-50">
+						<span class="flex h-5 w-5 items-center justify-center text-muted"><ArrowCounterClockwiseIcon size={10} /></span>
+						<span class="h-3 w-px bg-border/40"></span>
+						<span class="flex h-5 w-5 items-center justify-center text-muted"><ArrowClockwiseIcon size={10} /></span>
+					</div>
+					<div class="hidden items-center gap-1 border border-border/30 bg-gray-50 px-1.5 py-0.5 text-[9px] font-medium text-surface md:flex">
+						<EyeIcon size={10} />
+						<span>Preview</span>
+					</div>
+					<div class="hidden items-center gap-1 border border-border/30 bg-gray-50 px-1.5 py-0.5 text-[9px] font-medium text-surface lg:flex">
+						<span>Create mutation</span>
+						<CaretDownIcon size={9} />
+					</div>
+					<div class="flex items-center gap-0.5 border border-border/30 bg-gray-50">
+						<span class="flex h-5 w-5 items-center justify-center text-muted"><DeviceMobileIcon size={10} /></span>
+						<span class="flex h-5 w-5 items-center justify-center border border-primary/60 bg-primary/5 text-primary"><MonitorIcon size={10} /></span>
+					</div>
+				</div>
 			</div>
 
 			<div class="relative" style="min-height: 350px">
@@ -195,14 +222,14 @@
 						{:else if activeIndex === 2}
 							<!-- Draft & publish workflow -->
 							<div class="pt-2">
-								<div class="flex items-center justify-between mb-8 px-6">
+								<div class="flex items-start justify-between mb-8 px-6">
 									{#each [
 										{ label: 'Draft', done: true },
 										{ label: 'Review', active: true },
 										{ label: 'Published' }
 									] as step, i}
 										{#if i > 0}
-											<div class="flex-1 h-px mx-3 {step.done || step.active ? 'bg-primary/30' : 'bg-border/30'}"></div>
+											<div class="flex-1 h-px mx-3 mt-4 {step.done || step.active ? 'bg-primary/30' : 'bg-border/30'}"></div>
 										{/if}
 										<div class="flex flex-col items-center gap-2">
 											<div class="w-8 h-8 flex items-center justify-center text-[10px] font-medium

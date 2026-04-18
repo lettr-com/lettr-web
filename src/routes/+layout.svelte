@@ -111,7 +111,7 @@
 					"featureList": [
 						"REST API and SMTP relay",
 						"Drag-and-drop email editor powered by Topol",
-						"SDKs for Laravel, PHP, Node.js, Python, Go, Java, and Rust",
+						"SDKs for Laravel, PHP, Node.js, Go, Java, and Rust",
 						"Transactional and marketing emails from one platform",
 						"SPF, DKIM, and DMARC authentication",
 						"Real-time webhooks for delivery events",
@@ -136,8 +136,8 @@
 		<main class="relative z-10 ">
 			{@render children()}
 		</main>
-		<Footer />
 	</div>
+	<Footer />
 </div>
 
 <SplineFooter sceneUrl={splineSceneUrl} />

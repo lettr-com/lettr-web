@@ -69,7 +69,7 @@ export async function getHighlighter(): Promise<Highlighter> {
 	if (!highlighter) {
 		highlighter = await createHighlighter({
 			themes: [lettrTheme],
-			langs: ['php', 'javascript', 'python', 'go', 'ruby', 'bash', 'shell']
+			langs: ['php', 'javascript', 'go', 'ruby', 'java', 'bash', 'shell']
 		});
 	}
 	return highlighter;
@@ -121,19 +121,6 @@ await lettr.sendTemplate('welcome-email', {
 });`
 	},
 	{
-		label: 'Python',
-		lang: 'python',
-		code: `import lettr
-
-client = lettr.Client(api_key="your_api_key")
-
-client.send_template("welcome-email", {
-    "to": "user@example.com",
-    "name": "John",
-    "company": "Acme Inc",
-})`
-	},
-	{
 		label: 'Go',
 		lang: 'go',
 		code: `package main
@@ -175,5 +162,19 @@ client.send_template('welcome-email',
     "name": "John",
     "company": "Acme Inc"
   }'`
+	},
+	{
+		label: 'Java',
+		lang: 'java',
+		code: `import com.lettr.Lettr;
+import java.util.Map;
+
+Lettr lettr = new Lettr(System.getenv("LETTR_API_KEY"));
+
+lettr.sendTemplate("welcome-email", Map.of(
+    "to", "user@example.com",
+    "name", "John",
+    "company", "Acme Inc"
+));`
 	}
 ];

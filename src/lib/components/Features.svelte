@@ -14,7 +14,7 @@
 		{
 			icon: LightningIcon,
 			title: 'SDKs for every language',
-			description: 'First-class Laravel package with one-command install. Official SDKs for PHP, Node.js, Python, Go, Java, and Rust — all typed and documented.'
+			description: 'First-class Laravel package with one-command install. Official SDKs for PHP, Node.js, Go, Java, and Rust — all typed and documented.'
 		},
 		{
 			icon: GlobeIcon,
@@ -56,7 +56,7 @@
 			</p>
 		</div>
 
-		<div class="grid grid-cols-2 gap-3">
+		<div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
 			{#each features as feature}
 				<div data-feature class="border border-white/[0.06] bg-white/[0.03] p-5">
 					<div class="mb-3 flex h-8 w-8 items-center justify-center border border-white/10 bg-white/[0.05]">

@@ -90,7 +90,6 @@
 				{ iconSrc: '/images/icons/laravel.svg', label: 'Laravel', description: 'First-class Laravel package', href: 'https://docs.lettr.com/quickstart/laravel/introduction', external: true },
 				{ iconSrc: '/images/icons/php.svg', label: 'PHP', description: 'Standalone PHP SDK', href: 'https://docs.lettr.com/quickstart/php/introduction', external: true },
 				{ iconSrc: '/images/icons/node-js.svg', label: 'Node.js', description: 'JavaScript & TypeScript', href: 'https://docs.lettr.com/quickstart/nodejs/introduction', external: true },
-				{ iconSrc: '/images/icons/python.svg', label: 'Python', description: 'Python client library', href: 'https://github.com/lettr-com/lettr-python', external: true },
 				{ iconSrc: '/images/icons/golang.svg', label: 'Go', description: 'Go client library', href: 'https://github.com/lettr-com/lettr-go', external: true },
 				{ iconSrc: '/images/icons/java.svg', label: 'Java', description: 'Java client library', href: 'https://github.com/lettr-com/lettr-java', external: true },
 				{ iconSrc: '/images/icons/rust.svg', label: 'Rust', description: 'Rust client library', href: 'https://github.com/lettr-com/lettr-rust', external: true }

@@ -21,6 +21,10 @@
 		'enterprise'
 	);
 
+	let mobileVisiblePlan: PlanKey = $derived(
+		highlightedPlan === 'enterprise' ? 'business' : highlightedPlan
+	);
+
 	const proTier = $derived.by(() => {
 		if (sliderValue <= 1) return { price: '$15', desc: '50K emails · $0.80 / 1,000 extra' };
 		return { price: '$30', desc: '100K emails · $0.80 / 1,000 extra' };
@@ -136,11 +140,13 @@
 	</div>
 
 	<!-- Pricing cards -->
-	<div class="grid grid-cols-3 gap-3 items-stretch" data-pricing-animate>
+	<div class="grid grid-cols-1 sm:grid-cols-3 gap-3 items-stretch" data-pricing-animate>
 		{#each plans as plan}
 			{@const isHighlighted = highlightedPlan === plan.key}
+			{@const isMobileVisible = mobileVisiblePlan === plan.key}
 			<div
-				class="flex flex-col p-5 border transition-all duration-300
+				class="flex-col p-5 border transition-all duration-300
+					{isMobileVisible ? 'flex' : 'hidden sm:flex'}
 					{isHighlighted
 					? 'border-primary bg-white shadow-lg shadow-primary/5'
 					: 'border-border/30 bg-white'}"
@@ -160,14 +166,14 @@
 				<ul class="flex flex-col gap-2 mb-6 flex-1">
 					{#each plan.features as feature}
 						{#if typeof feature === 'string'}
-							<li class="flex items-start gap-2 text-[13px] text-muted">
-								<span class="mt-1.5 block w-1 h-1 rounded-full bg-border shrink-0"></span>
-								{feature}
+							<li class="flex items-start gap-2 text-[13px] leading-5 text-muted">
+								<span class="mt-2 block w-1 h-1 rounded-full bg-border shrink-0"></span>
+								<span>{feature}</span>
 							</li>
 						{:else}
-							<li class="flex items-start gap-2 text-[13px] text-muted/40">
-								<span class="mt-0.5 text-border">—</span>
-								{feature.text}
+							<li class="flex items-start gap-2 text-[13px] leading-5 text-muted/40">
+								<span class="mt-[9px] block w-2 h-0.5 bg-border shrink-0"></span>
+								<span>{feature.text}</span>
 							</li>
 						{/if}
 					{/each}
@@ -187,7 +193,7 @@
 	</div>
 
 	<!-- Enterprise row -->
-	<div data-pricing-animate class="mt-3 border bg-white p-5 flex items-center justify-between transition-all duration-300 {highlightedPlan === 'enterprise' ? 'border-primary shadow-lg shadow-primary/5' : 'border-border/30'}">
+	<div data-pricing-animate class="mt-3 border bg-white p-5 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 transition-all duration-300 {highlightedPlan === 'enterprise' ? 'border-primary shadow-lg shadow-primary/5' : 'border-border/30'}">
 		<div>
 			<h3 class="text-sm font-semibold mb-1 {highlightedPlan === 'enterprise' ? 'text-primary' : 'text-surface'}">Enterprise</h3>
 			<p class="text-[13px] text-muted">
@@ -196,7 +202,7 @@
 		</div>
 		<a
 			href="/demo/"
-			class="shrink-0 flex items-center gap-2 px-5 py-2.5 text-sm font-medium transition-colors
+			class="flex items-center justify-center gap-2 px-5 py-2.5 text-sm font-medium transition-colors w-full sm:w-auto sm:shrink-0
 				{highlightedPlan === 'enterprise'
 				? 'bg-primary text-white hover:bg-primary/90'
 				: 'border border-border/50 text-surface hover:border-primary/30 hover:text-primary'}"
@@ -207,11 +213,14 @@
 	</div>
 
 	<!-- Compare plans -->
-	<div data-pricing-animate class="mt-8 border border-border/30 bg-white p-6">
-		<h3 class="mb-6 text-sm font-bold text-surface">Compare plans</h3>
+	<div data-pricing-animate class="mt-8 border border-border/30 bg-white p-4 sm:p-6">
+		<div class="mb-6 flex items-baseline justify-between gap-3">
+			<h3 class="text-sm font-bold text-surface">Compare plans</h3>
+			<span class="text-[11px] text-muted/70 md:hidden">Swipe to compare &rarr;</span>
+		</div>
 
-		<div class="overflow-x-auto">
-			<table class="w-full table-fixed text-[13px]">
+		<div class="-mx-4 overflow-x-auto px-4 sm:mx-0 sm:px-0">
+			<table class="w-full min-w-[640px] table-fixed text-[13px]">
 				<colgroup>
 					<col class="w-[28%]" />
 					<col class="w-[18%]" />
@@ -225,7 +234,7 @@
 						<th class="pb-3 px-4 text-center font-normal text-muted">Free</th>
 						<th class="pb-3 px-4 text-center font-semibold text-primary">Pro</th>
 						<th class="pb-3 px-4 text-center font-normal text-muted">Business</th>
-						<th class="pb-3 pl-4 text-center font-normal text-muted">Enterprise</th>
+						<th class="pb-3 px-4 text-center font-normal text-muted">Enterprise</th>
 					</tr>
 				</thead>
 				<tbody class="text-muted">

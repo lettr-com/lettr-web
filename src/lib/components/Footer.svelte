@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import { buildRegisterUrl, registerUrl } from '$lib/utils/utm';
-	import { EnvelopeSimpleIcon, GithubLogoIcon, XLogoIcon } from 'phosphor-svelte';
+	import { EnvelopeSimpleIcon, GithubLogoIcon, LinkedinLogoIcon, XLogoIcon } from 'phosphor-svelte';
 
 	let registerHref: string = $state(registerUrl);
 
@@ -41,13 +41,14 @@
 
 	const socials = [
 		{ label: 'Email', href: 'mailto:hello@lettr.com', icon: EnvelopeSimpleIcon },
-		{ label: 'GitHub', href: 'https://github.com', icon: GithubLogoIcon, external: true },
-		{ label: 'X', href: 'https://x.com', icon: XLogoIcon, external: true }
+		{ label: 'GitHub', href: 'https://github.com/lettr-com', icon: GithubLogoIcon, external: true },
+		{ label: 'X', href: 'https://x.com/lettr_com', icon: XLogoIcon, external: true },
+		{ label: 'LinkedIn', href: 'https://www.linkedin.com/company/lettr-com', icon: LinkedinLogoIcon, external: true }
 	];
 </script>
 
-<footer class="border-t border-border/30 bg-white px-4 py-12">
-	<div class="mx-auto max-w-[550px]">
+<footer class="border-t border-border/30 bg-white px-6 py-12">
+	<div class="mx-auto max-w-4xl">
 		<!-- Logo + Columns -->
 		<div class="flex flex-col gap-8">
 			<div class="flex items-start justify-between">
@@ -74,7 +75,7 @@
 				</div>
 			</div>
 
-			<div class="grid grid-cols-3 gap-8">
+			<div class="grid grid-cols-2 gap-x-4 gap-y-8 sm:grid-cols-3 sm:gap-8">
 				{#each columns as column}
 					<div>
 						<span class="mb-3 block text-xs font-semibold uppercase tracking-wider text-surface">

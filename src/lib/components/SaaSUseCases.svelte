@@ -56,7 +56,7 @@
 			</p>
 		</div>
 
-		<div class="grid grid-cols-2 gap-x-6 gap-y-8">
+		<div class="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-8">
 			{#each useCases as useCase}
 				<div data-usecase>
 					<useCase.icon size={20} class="text-primary mb-3" />

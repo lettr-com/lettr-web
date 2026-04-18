@@ -1,6 +1,5 @@
 <script lang="ts">
 	import type { LegalDocumentData, LegalNavLink } from '$lib/content/legal';
-	import Footer from '$lib/components/Footer.svelte';
 
 	interface Props {
 		document: LegalDocumentData;
@@ -41,5 +40,3 @@
 		{@html document.html}
 	</article>
 </section>
-
-<Footer />
