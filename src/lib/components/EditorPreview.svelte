@@ -29,6 +29,8 @@
 	let showVariable = $state(true);
 	let cursorTarget: 'heading' | 'body' | null = $state(null);
 	let blocksRevealed = $state(true);
+	let showButton = $state(true);
+	let activeBlock: string | null = $state(null);
 
 	const blocks: { label: string; Icon: typeof TextAaIcon }[] = [
 		{ label: 'Text', Icon: TextAaIcon },
@@ -51,6 +53,7 @@
 		bodySuffix = '';
 		showVariable = false;
 		blocksRevealed = false;
+		showButton = false;
 		cursorTarget = 'heading';
 
 		let alive = true;
@@ -82,8 +85,16 @@
 				await wait(500);
 				await typeChars((v) => (bodySuffix = v), BODY_SUFFIX, 20);
 
-				await wait(1200);
+				await wait(700);
 				cursorTarget = null;
+
+				activeBlock = 'Button';
+				await wait(280);
+				showButton = true;
+				await wait(450);
+				activeBlock = null;
+
+				await wait(800);
 			} catch {
 				/* component destroyed during animation */
 			}
@@ -149,7 +160,11 @@
 				<div class="grid grid-cols-3 gap-1.5 transition-opacity duration-500" style:opacity={blocksRevealed ? 1 : 0}>
 					{#each blocks as block (block.label)}
 						{@const Icon = block.Icon}
-						<div class="flex aspect-square flex-col items-center justify-center gap-1 border border-border/30 bg-gray-50/60 text-muted transition-colors hover:border-primary/30 hover:bg-primary/[0.03] hover:text-primary">
+						{@const isActive = activeBlock === block.label}
+						<div
+							class="flex aspect-square flex-col items-center justify-center gap-1 border border-border/30 bg-gray-50/60 text-muted transition-all duration-150 hover:border-primary/30 hover:bg-primary/[0.03] hover:text-primary"
+							class:block-active={isActive}
+						>
 							<Icon size={14} />
 							<span class="text-[9px] font-medium">{block.label}</span>
 						</div>
@@ -177,9 +192,13 @@
 					{bodyPrefix}{#if showVariable}<span class="inline-flex items-center border border-dashed border-primary/50 bg-primary/[0.04] px-1 font-code text-[11px] text-primary variable-pop">{'{{first_name}}'}</span>{/if}{bodySuffix}{#if cursorTarget === 'body'}<span class="typing-cursor"></span>{/if}
 				</p>
 
-				<!-- CTA button -->
-				<div class="mt-6 bg-surface px-5 py-3 text-center text-[13px] font-semibold text-white">
-					Open your dashboard
+				<!-- CTA button slot (reserves space to prevent layout shift) -->
+				<div class="mt-6 min-h-[44px]">
+					{#if showButton}
+						<div class="bg-surface px-5 py-3 text-center text-[13px] font-semibold text-white button-drop-in">
+							Open your dashboard
+						</div>
+					{/if}
 				</div>
 			</div>
 		</div>
@@ -209,5 +228,29 @@
 	@keyframes pop-in {
 		0% { opacity: 0; transform: scale(0.85); }
 		100% { opacity: 1; transform: scale(1); }
+	}
+
+	.block-active {
+		border-color: color-mix(in oklab, var(--color-primary) 60%, transparent);
+		background-color: color-mix(in oklab, var(--color-primary) 8%, transparent);
+		color: var(--color-primary);
+		animation: block-tap 0.35s ease-out;
+	}
+
+	@keyframes block-tap {
+		0% { transform: scale(1); }
+		40% { transform: scale(0.92); }
+		100% { transform: scale(1); }
+	}
+
+	.button-drop-in {
+		animation: button-drop-in 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+		transform-origin: top center;
+	}
+
+	@keyframes button-drop-in {
+		0% { opacity: 0; transform: translateY(-8px) scaleY(0.85); }
+		60% { opacity: 1; }
+		100% { opacity: 1; transform: translateY(0) scaleY(1); }
 	}
 </style>
