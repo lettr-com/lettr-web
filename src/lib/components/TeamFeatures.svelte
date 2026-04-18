@@ -136,7 +136,7 @@
 </script>
 
 <section bind:this={section} class="py-16 border-b border-border/30">
-	<div class="mb-10" data-feature>
+	<div class="mb-6 md:mb-10" data-feature>
 		<h2 class="mb-3 text-surface">
 			Your team edits. <span class="text-primary">No dev tickets required.</span>
 		</h2>
@@ -184,7 +184,7 @@
 		<!-- Horizontal tab strip (scrolls, click to jump) -->
 		<div
 			bind:this={mobileTabStrip}
-			class="-mx-6 mb-5 flex gap-2 overflow-x-auto scroll-smooth px-6 pb-1 no-scrollbar"
+			class="-mx-6 mb-3 flex gap-2 overflow-x-auto scroll-smooth px-6 pb-1 no-scrollbar"
 		>
 			{#each features as feature, i}
 				<button
@@ -201,15 +201,6 @@
 			{/each}
 		</div>
 
-		<!-- Current feature description (above preview, large and readable) -->
-		<div class="mb-4 min-h-[48px]">
-			{#key mobileIndex}
-				<p class="text-[13px] leading-relaxed text-muted" in:fade={{ duration: 180 }}>
-					{features[mobileIndex].description}
-				</p>
-			{/key}
-		</div>
-
 		<!-- Snap-scroll carousel of previews -->
 		<div
 			bind:this={mobileTrack}
@@ -218,13 +209,13 @@
 		>
 			{#each features as _, i}
 				<div class="w-screen shrink-0 snap-center px-6">
-					{@render previewPanel(i, false, 300)}
+					{@render previewPanel(i, false, 0)}
 				</div>
 			{/each}
 		</div>
 
 		<!-- Pagination dots + progress -->
-		<div class="mt-5 flex items-center justify-center gap-1.5">
+		<div class="mt-4 flex items-center justify-center gap-1.5">
 			{#each features as _, i}
 				<button
 					onclick={() => scrollMobileTo(i)}
@@ -275,7 +266,7 @@
 					</div>
 				{/key}
 			{:else}
-				<div class="p-5 sm:p-6">
+				<div class="px-5 pt-5 pb-3 sm:p-6">
 					{@render previewContent(idx)}
 				</div>
 			{/if}
