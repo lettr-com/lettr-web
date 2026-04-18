@@ -353,12 +353,6 @@
 			<!-- Desktop CTAs -->
 			<div class="hidden md:flex items-center gap-5">
 				<a
-					href="/demo"
-					class="text-sm text-muted transition-colors hover:text-surface"
-				>
-					Talk to expert
-				</a>
-				<a
 					href="https://app.lettr.com"
 					class="text-sm text-muted transition-colors hover:text-surface"
 				>

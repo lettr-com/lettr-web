@@ -142,7 +142,7 @@
 				</div>
 
 				<!-- Email body -->
-				<div class="group relative border-2 border-primary/30 bg-primary/[0.02] px-6 py-5 transition-colors">
+				<div class="group relative border-2 border-primary/30 bg-primary/[0.02] px-6 py-5 transition-colors min-h-[200px]">
 					<div class="absolute -top-2.5 -right-2.5 flex h-5 w-5 items-center justify-center bg-primary text-white">
 						<PencilSimpleIcon size={10} />
 					</div>
@@ -158,15 +158,9 @@
 						<div class="mx-1 h-3 w-px bg-border/50"></div>
 						<LinkIcon size={12} class="text-muted" />
 					</div>
-					{#if labelText || cursorTarget === 'label'}
-						<p class="text-[10px] font-semibold tracking-widest text-primary uppercase">{labelText}{#if cursorTarget === 'label'}<span class="typing-cursor typing-cursor--primary"></span>{/if}</p>
-					{/if}
-					{#if headingText || cursorTarget === 'heading'}
-						<h2 class="mt-1 font-heading text-lg font-medium text-surface leading-tight">{headingText}{#if cursorTarget === 'heading'}<span class="typing-cursor"></span>{/if}</h2>
-					{/if}
-					{#if bodyPrefix || showVariable || bodySuffix || cursorTarget === 'body'}
-						<p class="mt-2.5 text-[12px] leading-relaxed text-muted">{bodyPrefix}{#if showVariable}<span class="inline-flex items-center gap-0.5 bg-primary/8 px-1.5 py-0.5 font-code text-[10px] text-primary variable-pop">{'{{ first_name }}'}</span>{/if}{bodySuffix}{#if cursorTarget === 'body'}<span class="typing-cursor"></span>{/if}</p>
-					{/if}
+					<p class="text-[10px] font-semibold tracking-widest text-primary uppercase min-h-[15px]">{labelText}{#if cursorTarget === 'label'}<span class="typing-cursor typing-cursor--primary"></span>{/if}</p>
+					<h2 class="mt-1 font-heading text-lg font-medium text-surface leading-tight min-h-[24px]">{headingText}{#if cursorTarget === 'heading'}<span class="typing-cursor"></span>{/if}</h2>
+					<p class="mt-2.5 text-[12px] leading-relaxed text-muted min-h-[44px]">{bodyPrefix}{#if showVariable}<span class="inline-flex items-center gap-0.5 bg-primary/8 px-1.5 py-0.5 font-code text-[10px] text-primary variable-pop">{'{{ first_name }}'}</span>{/if}{bodySuffix}{#if cursorTarget === 'body'}<span class="typing-cursor"></span>{/if}</p>
 				</div>
 
 				<!-- CTA block -->

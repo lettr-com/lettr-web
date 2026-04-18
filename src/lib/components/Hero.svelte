@@ -33,7 +33,7 @@
 				<a
 					data-animate
 					href="/changelog/"
-					class="group mb-6 inline-flex w-fit items-center gap-2 border border-primary/20 bg-primary/5 px-4 py-1.5 text-sm text-primary transition-colors hover:bg-primary/10"
+					class="group mb-6 inline-flex w-fit items-center gap-2 border border-primary/20 bg-primary/5 p-1.5 text-sm text-primary transition-colors hover:bg-primary/10"
 				>
 					<span class="bg-primary px-2 py-0.5 text-xs font-bold text-white">New</span>
 					Announcing Lettr
@@ -58,15 +58,17 @@
 
 		</div>
 
-		<div data-animate class="mt-12">
+		<div data-animate>
 			<EditorPreview />
 		</div>
 
-		<div data-animate class="flex flex-wrap items-center gap-4 mt-8 pt-6 text-sm text-muted">
-			<span>Sending millions of emails for the <a href="https://biggood.io/" target="_blank" rel="noopener noreferrer" class="font-semibold text-surface hover:text-primary transition-colors">Big Good</a> group</span>
-			<img src="/images/logos/ecomail-icon.svg" alt="Ecomail" class="h-5" />
-			<img src="/images/logos/topol-icon.svg" alt="Topol" class="h-6" />
-			<img src="/images/logos/dmarceye-icon.svg" alt="DMARCeye" class="h-6" />
+		<div data-animate class="flex flex-col items-center gap-4 py-10 text-sm text-muted">
+			<span>Part of the <a href="https://biggood.io/" target="_blank" rel="noopener noreferrer" class="font-semibold text-surface hover:text-primary transition-colors">Big Good</a> group. Sending millions of emails.</span>
+			<div class="flex items-center gap-8 opacity-20">
+				<img src="/images/logos/topol-icon.svg" alt="Topol" class="h-6" />
+				<img src="/images/logos/ecomail-icon.svg" alt="Ecomail" class="h-5" />
+				<img src="/images/logos/dmarceye-icon.svg" alt="DMARCeye" class="h-6" />
+			</div>
 		</div>
 	</div>
 </section>

@@ -120,12 +120,12 @@
 		</div>
 
 		<!-- Preview panel -->
-		<div class="border border-border/30 rounded-lg overflow-hidden bg-[#fafafa]">
+		<div class="border border-border/30 overflow-hidden bg-[#fafafa]">
 			<!-- Window chrome -->
 			<div class="flex items-center gap-1.5 px-4 py-2.5 border-b border-border/20 bg-white">
-				<div class="w-2 h-2 rounded-full bg-[#e5e5e5]"></div>
-				<div class="w-2 h-2 rounded-full bg-[#e5e5e5]"></div>
-				<div class="w-2 h-2 rounded-full bg-[#e5e5e5]"></div>
+				<div class="w-2 h-2 bg-[#e5e5e5]"></div>
+				<div class="w-2 h-2 bg-[#e5e5e5]"></div>
+				<div class="w-2 h-2 bg-[#e5e5e5]"></div>
 				<span class="ml-3 text-[10px] text-muted/60 font-medium">Lettr Editor</span>
 			</div>
 
@@ -137,29 +137,29 @@
 							<!-- Drag-and-drop editor -->
 							<div class="space-y-2.5">
 								<div class="flex items-center gap-2">
-									<div class="flex flex-col gap-[3px] opacity-30"><span class="block w-1 h-1 rounded-full bg-current"></span><span class="block w-1 h-1 rounded-full bg-current"></span><span class="block w-1 h-1 rounded-full bg-current"></span></div>
-									<div class="flex-1 h-14 rounded border border-primary/20 bg-primary/[0.06] p-3 flex items-center">
-										<div class="h-3 w-24 rounded bg-primary/20"></div>
+									<div class="flex flex-col gap-[3px] opacity-30"><span class="block w-1 h-1 bg-current"></span><span class="block w-1 h-1 bg-current"></span><span class="block w-1 h-1 bg-current"></span></div>
+									<div class="flex-1 h-14 border border-primary/20 bg-primary/[0.06] p-3 flex items-center">
+										<div class="h-3 w-24 bg-primary/20"></div>
 									</div>
 								</div>
 								<div class="flex items-center gap-2">
-									<div class="flex flex-col gap-[3px] opacity-30"><span class="block w-1 h-1 rounded-full bg-current"></span><span class="block w-1 h-1 rounded-full bg-current"></span><span class="block w-1 h-1 rounded-full bg-current"></span></div>
-									<div class="flex-1 rounded border border-border/20 bg-white p-3 space-y-1.5">
-										<div class="h-2 w-full rounded bg-border/20"></div>
-										<div class="h-2 w-4/5 rounded bg-border/15"></div>
-										<div class="h-2 w-3/5 rounded bg-border/10"></div>
+									<div class="flex flex-col gap-[3px] opacity-30"><span class="block w-1 h-1 bg-current"></span><span class="block w-1 h-1 bg-current"></span><span class="block w-1 h-1 bg-current"></span></div>
+									<div class="flex-1 border border-border/20 bg-white p-3 space-y-1.5">
+										<div class="h-2 w-full bg-border/20"></div>
+										<div class="h-2 w-4/5 bg-border/15"></div>
+										<div class="h-2 w-3/5 bg-border/10"></div>
 									</div>
 								</div>
 								<div class="flex items-center gap-2">
-									<div class="flex flex-col gap-[3px] opacity-30"><span class="block w-1 h-1 rounded-full bg-current"></span><span class="block w-1 h-1 rounded-full bg-current"></span><span class="block w-1 h-1 rounded-full bg-current"></span></div>
-									<div class="flex-1 h-20 rounded border border-border/20 bg-white flex items-center justify-center">
-										<div class="w-12 h-12 rounded bg-border/10 flex items-center justify-center text-border/40 text-lg">&#9634;</div>
+									<div class="flex flex-col gap-[3px] opacity-30"><span class="block w-1 h-1 bg-current"></span><span class="block w-1 h-1 bg-current"></span><span class="block w-1 h-1 bg-current"></span></div>
+									<div class="flex-1 h-20 border border-border/20 bg-white flex items-center justify-center">
+										<div class="w-12 h-12 bg-border/10 flex items-center justify-center text-border/40 text-lg">&#9634;</div>
 									</div>
 								</div>
 								<div class="flex items-center gap-2">
-									<div class="flex flex-col gap-[3px] opacity-30"><span class="block w-1 h-1 rounded-full bg-current"></span><span class="block w-1 h-1 rounded-full bg-current"></span><span class="block w-1 h-1 rounded-full bg-current"></span></div>
-									<div class="flex-1 rounded border border-border/20 bg-white p-3 flex justify-center">
-										<div class="px-5 py-2 rounded bg-primary text-white text-[10px] font-medium">Get Started</div>
+									<div class="flex flex-col gap-[3px] opacity-30"><span class="block w-1 h-1 bg-current"></span><span class="block w-1 h-1 bg-current"></span><span class="block w-1 h-1 bg-current"></span></div>
+									<div class="flex-1 border border-border/20 bg-white p-3 flex justify-center">
+										<div class="px-5 py-2 bg-primary text-white text-[10px] font-medium">Get Started</div>
 									</div>
 								</div>
 							</div>
@@ -168,22 +168,22 @@
 							<!-- Synced sections -->
 							<div class="grid grid-cols-2 gap-4">
 								{#each ['Welcome Email', 'Trial Ending'] as label}
-									<div class="rounded border border-border/30 bg-white overflow-hidden">
+									<div class="border border-border/30 bg-white overflow-hidden">
 										<div class="px-3 py-1.5 border-b border-border/15 text-[10px] text-muted font-medium">{label}</div>
 										<div class="p-3 space-y-2">
-											<div class="h-7 rounded bg-primary/10 border border-primary/20 flex items-center justify-center">
+											<div class="h-7 bg-primary/10 border border-primary/20 flex items-center justify-center">
 												<span class="text-[9px] text-primary font-medium">Synced Header</span>
 											</div>
 											<div class="space-y-1">
-												<div class="h-1.5 w-full rounded bg-border/15"></div>
-												<div class="h-1.5 w-3/4 rounded bg-border/10"></div>
+												<div class="h-1.5 w-full bg-border/15"></div>
+												<div class="h-1.5 w-3/4 bg-border/10"></div>
 											</div>
-											<div class="h-5 w-14 rounded bg-border/15 mx-auto"></div>
+											<div class="h-5 w-14 bg-border/15 mx-auto"></div>
 											<div class="space-y-1">
-												<div class="h-1.5 w-full rounded bg-border/15"></div>
-												<div class="h-1.5 w-1/2 rounded bg-border/10"></div>
+												<div class="h-1.5 w-full bg-border/15"></div>
+												<div class="h-1.5 w-1/2 bg-border/10"></div>
 											</div>
-											<div class="h-7 rounded bg-primary/10 border border-primary/20 flex items-center justify-center">
+											<div class="h-7 bg-primary/10 border border-primary/20 flex items-center justify-center">
 												<span class="text-[9px] text-primary font-medium">Synced Footer</span>
 											</div>
 										</div>
@@ -205,7 +205,7 @@
 											<div class="flex-1 h-px mx-3 {step.done || step.active ? 'bg-primary/30' : 'bg-border/30'}"></div>
 										{/if}
 										<div class="flex flex-col items-center gap-2">
-											<div class="w-8 h-8 rounded-full flex items-center justify-center text-[10px] font-medium
+											<div class="w-8 h-8 flex items-center justify-center text-[10px] font-medium
 												{step.done ? 'bg-primary text-white' : step.active ? 'border-2 border-primary text-primary' : 'border-2 border-border/30 text-muted'}">
 												{step.done ? '✓' : i + 1}
 											</div>
@@ -213,18 +213,18 @@
 										</div>
 									{/each}
 								</div>
-								<div class="rounded border border-border/30 bg-white p-4 space-y-3">
+								<div class="border border-border/30 bg-white p-4 space-y-3">
 									<div class="flex items-center justify-between">
 										<span class="text-[12px] font-medium text-surface">Welcome Email v3</span>
-										<span class="text-[10px] px-2 py-0.5 rounded-full bg-amber-50 text-amber-600 font-medium">In Review</span>
+										<span class="text-[10px] px-2 py-0.5 bg-amber-50 text-amber-600 font-medium">In Review</span>
 									</div>
 									<div class="space-y-1.5">
-										<div class="h-2 w-full rounded bg-border/15"></div>
-										<div class="h-2 w-2/3 rounded bg-border/10"></div>
+										<div class="h-2 w-full bg-border/15"></div>
+										<div class="h-2 w-2/3 bg-border/10"></div>
 									</div>
 									<div class="flex gap-2 pt-1">
-										<div class="px-3 py-1.5 rounded bg-primary text-white text-[10px] font-medium">Approve & Publish</div>
-										<div class="px-3 py-1.5 rounded border border-border/30 text-[10px] text-muted">Request Changes</div>
+										<div class="px-3 py-1.5 bg-primary text-white text-[10px] font-medium">Approve & Publish</div>
+										<div class="px-3 py-1.5 border border-border/30 text-[10px] text-muted">Request Changes</div>
 									</div>
 								</div>
 							</div>
@@ -234,28 +234,28 @@
 							<div>
 								<div class="flex gap-1 mb-4">
 									{#each ['EN', 'ES', 'DE', 'FR'] as lang, i}
-										<div class="px-3 py-1.5 rounded text-[11px] font-medium transition-colors
+										<div class="px-3 py-1.5 text-[11px] font-medium transition-colors
 											{i === 0 ? 'bg-primary text-white' : 'bg-white border border-border/30 text-muted'}">
 											{lang}
 										</div>
 									{/each}
 								</div>
-								<div class="rounded border border-border/30 bg-white p-4 space-y-3">
-									<div class="h-3 w-28 rounded bg-primary/15"></div>
+								<div class="border border-border/30 bg-white p-4 space-y-3">
+									<div class="h-3 w-28 bg-primary/15"></div>
 									<div class="space-y-1.5">
-										<div class="h-2 w-full rounded bg-border/20"></div>
-										<div class="h-2 w-5/6 rounded bg-border/15"></div>
-										<div class="h-2 w-4/5 rounded bg-border/10"></div>
+										<div class="h-2 w-full bg-border/20"></div>
+										<div class="h-2 w-5/6 bg-border/15"></div>
+										<div class="h-2 w-4/5 bg-border/10"></div>
 									</div>
 									<div class="h-px bg-border/15"></div>
 									<div class="space-y-1.5">
-										<div class="h-2 w-full rounded bg-border/20"></div>
-										<div class="h-2 w-3/4 rounded bg-border/15"></div>
+										<div class="h-2 w-full bg-border/20"></div>
+										<div class="h-2 w-3/4 bg-border/15"></div>
 									</div>
-									<div class="px-4 py-2 rounded bg-primary/80 text-white text-[10px] font-medium w-fit">Confirm</div>
+									<div class="px-4 py-2 bg-primary/80 text-white text-[10px] font-medium w-fit">Confirm</div>
 								</div>
 								<div class="flex items-center gap-2 mt-3 text-[10px] text-muted/60">
-									<span class="w-1.5 h-1.5 rounded-full bg-green-400"></span>
+									<span class="w-1.5 h-1.5 bg-green-400"></span>
 									4 languages configured
 								</div>
 							</div>
@@ -263,15 +263,15 @@
 						{:else if activeIndex === 4}
 							<!-- Dynamic placeholders -->
 							<div class="space-y-4">
-								<div class="rounded border border-border/30 bg-white p-4">
+								<div class="border border-border/30 bg-white p-4">
 									<div class="text-[10px] text-muted font-medium mb-2 uppercase tracking-wide">Template</div>
 									<div class="text-[12px] text-surface leading-loose space-y-1">
-										<p>Hi <span class="inline-flex px-1.5 py-0.5 rounded bg-primary/10 text-primary text-[10px] font-mono font-medium">{'{{first_name}}'}</span>,</p>
-										<p>Your <span class="inline-flex px-1.5 py-0.5 rounded bg-primary/10 text-primary text-[10px] font-mono font-medium">{'{{plan_name}}'}</span> trial ends in <span class="inline-flex px-1.5 py-0.5 rounded bg-primary/10 text-primary text-[10px] font-mono font-medium">{'{{days_left}}'}</span> days.</p>
-										<p>Upgrade to keep your <span class="inline-flex px-1.5 py-0.5 rounded bg-primary/10 text-primary text-[10px] font-mono font-medium">{'{{feature_count}}'}</span> active features.</p>
+										<p>Hi <span class="inline-flex px-1.5 py-0.5 bg-primary/10 text-primary text-[10px] font-mono font-medium">{'{{first_name}}'}</span>,</p>
+										<p>Your <span class="inline-flex px-1.5 py-0.5 bg-primary/10 text-primary text-[10px] font-mono font-medium">{'{{plan_name}}'}</span> trial ends in <span class="inline-flex px-1.5 py-0.5 bg-primary/10 text-primary text-[10px] font-mono font-medium">{'{{days_left}}'}</span> days.</p>
+										<p>Upgrade to keep your <span class="inline-flex px-1.5 py-0.5 bg-primary/10 text-primary text-[10px] font-mono font-medium">{'{{feature_count}}'}</span> active features.</p>
 									</div>
 								</div>
-								<div class="rounded border border-primary/20 bg-primary/[0.03] p-4">
+								<div class="border border-primary/20 bg-primary/[0.03] p-4">
 									<div class="text-[10px] text-primary font-medium mb-2 uppercase tracking-wide">Preview</div>
 									<div class="text-[12px] text-surface leading-loose space-y-1">
 										<p>Hi <strong>Sarah</strong>,</p>
@@ -292,11 +292,11 @@
 									{ title: 'Changelog', accent: 'bg-pink-50 border-pink-100' },
 									{ title: 'Usage Alert', accent: 'bg-orange-50 border-orange-100' }
 								] as tmpl}
-									<div class="rounded border {tmpl.accent} p-2.5 hover:shadow-sm transition-shadow cursor-pointer">
-										<div class="h-14 rounded bg-white/70 border border-white/80 p-2 space-y-1 mb-2">
-											<div class="h-1.5 w-full rounded bg-current opacity-[0.08]"></div>
-											<div class="h-1.5 w-3/4 rounded bg-current opacity-[0.06]"></div>
-											<div class="h-3 w-8 rounded bg-current opacity-[0.08] mt-1"></div>
+									<div class="border {tmpl.accent} p-2.5 hover:shadow-sm transition-shadow cursor-pointer">
+										<div class="h-14 bg-white/70 border border-white/80 p-2 space-y-1 mb-2">
+											<div class="h-1.5 w-full bg-current opacity-[0.08]"></div>
+											<div class="h-1.5 w-3/4 bg-current opacity-[0.06]"></div>
+											<div class="h-3 w-8 bg-current opacity-[0.08] mt-1"></div>
 										</div>
 										<div class="text-[10px] font-medium text-surface">{tmpl.title}</div>
 									</div>

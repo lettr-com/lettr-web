@@ -50,9 +50,9 @@
 
 <section bind:this={section} id="features" class="-mx-6 px-6 py-16 bg-surface border-b border-white/10">
 		<div class="mb-10" data-feature>
-			<h2 class="mb-3 text-white">Integrate in minutes. <span class="text-primary">Forget about it forever.</span></h2>
-			<p class="text-body text-gray-400 max-w-[50ch]">
-				Everything you need to send emails from your SaaS. Nothing you don't.
+			<h2 class="mb-3 text-white">Integrate in minutes.<br /><span class="text-primary">Forget about it forever.</span></h2>
+			<p class="text-body text-gray-300 max-w-[50ch]">
+				Everything you need to send emails from your SaaS.<br />Nothing you don't.
 			</p>
 		</div>
 

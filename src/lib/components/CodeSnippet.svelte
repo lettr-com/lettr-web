@@ -103,17 +103,17 @@
 	});
 </script>
 
-<div bind:this={container} class="relative mx-auto max-w-2xl w-full overflow-visible bg-gray-950 p-[6px] pt-[2px] {shadow ? 'shadow-[0_0_40px_-10px_rgba(236,16,75,0.15)]' : ''}">
+<div bind:this={container} class="relative max-w-2xl w-full overflow-visible bg-gray-950 p-[6px] pt-[2px] {shadow ? 'shadow-[0_0_40px_-10px_rgba(236,16,75,0.15)]' : ''}">
 	<div class="flex items-center justify-between">
 		{#if filename}
-			<div class="px-3 py-2 text-[12px] text-gray-400">{filename}</div>
+			<div class="px-3 py-2 text-[12px] text-gray-300">{filename}</div>
 		{:else}
 			<div class="flex items-center gap-0">
 				{#each primaryTabIndices as tabIndex}
 					<button
 						class="whitespace-nowrap border-b-2 px-8 py-2 text-[13px] transition-colors {activeTab === tabIndex
 							? 'border-primary text-white'
-							: 'border-transparent text-gray-400 hover:text-gray-200'}"
+							: 'border-transparent text-gray-300 hover:text-gray-200'}"
 						onclick={() => selectTab(tabIndex)}
 					>
 						{tabs[tabIndex].label}
@@ -123,7 +123,7 @@
 					<button
 						class="flex items-center gap-1 whitespace-nowrap border-b-2 px-8 py-2 text-[13px] transition-colors {isMoreActive
 							? 'border-primary text-white'
-							: 'border-transparent text-gray-400 hover:text-gray-200'}"
+							: 'border-transparent text-gray-300 hover:text-gray-200'}"
 						onclick={toggleMore}
 					>
 						{isMoreActive ? tabs[activeTab].label : 'More'}
@@ -135,7 +135,7 @@
 								<button
 									class="block w-full px-3 py-1.5 text-left text-[13px] transition-colors {activeTab === tabIndex
 										? 'text-white'
-										: 'text-gray-400 hover:text-white'}"
+										: 'text-gray-300 hover:text-white'}"
 									onclick={() => selectTab(tabIndex)}
 								>
 									{tabs[tabIndex].label}
@@ -147,7 +147,7 @@
 			</div>
 		{/if}
 		<button
-			class="ml-2 flex shrink-0 items-center gap-1.5 p-1.5 text-gray-400 transition-colors hover:text-white text-[12px]"
+			class="ml-2 flex shrink-0 items-center gap-1.5 p-1.5 text-gray-300 transition-colors hover:text-white text-[12px]"
 			onclick={copyCode}
 			aria-label="Copy code"
 		>

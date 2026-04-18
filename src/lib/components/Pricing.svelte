@@ -136,7 +136,7 @@
 	</div>
 
 	<!-- Pricing cards -->
-	<div class="grid grid-cols-3 gap-3 items-start" data-pricing-animate>
+	<div class="grid grid-cols-3 gap-3 items-stretch" data-pricing-animate>
 		{#each plans as plan}
 			{@const isHighlighted = highlightedPlan === plan.key}
 			<div
