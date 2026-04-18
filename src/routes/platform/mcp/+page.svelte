@@ -47,7 +47,7 @@
 		{ name: 'Claude', icon: '/images/icons/claude.svg' },
 		{ name: 'ChatGPT', icon: '/images/icons/chat-gpt.svg' },
 		{ name: 'Cursor', icon: '/images/icons/cursor.svg' },
-		{ name: 'Windsurf', icon: '/images/icons/windsurf.svg' }
+		{ name: 'Copilot', icon: '/images/icons/copilot.svg' }
 	];
 
 	const conversations = [
