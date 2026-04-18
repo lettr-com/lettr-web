@@ -51,28 +51,13 @@
 	<div class="mx-auto max-w-4xl">
 		<!-- Logo + Columns -->
 		<div class="flex flex-col gap-8">
-			<div class="flex items-start justify-between">
-				<div>
-					<a href="/" class="flex items-center">
-						<img src="/logo.svg" alt="Lettr" class="h-5" />
-					</a>
-					<p class="mt-2 max-w-xs text-sm text-muted">
-						The email platform built for SaaS.
-					</p>
-				</div>
-				<div class="flex items-center gap-3">
-					{#each socials as social}
-						<a
-							href={social.href}
-							class="text-muted transition-colors hover:text-surface"
-							target={social.external ? '_blank' : undefined}
-							rel={social.external ? 'noopener noreferrer' : undefined}
-							aria-label={social.label}
-						>
-							<social.icon size={20} />
-						</a>
-					{/each}
-				</div>
+			<div>
+				<a href="/" class="flex items-center">
+					<img src="/logo.svg" alt="Lettr" class="h-5" />
+				</a>
+				<p class="mt-2 max-w-xs text-sm text-muted">
+					The email platform built for SaaS.
+				</p>
 			</div>
 
 			<div class="grid grid-cols-2 gap-x-4 gap-y-8 sm:grid-cols-3 sm:gap-8">
@@ -113,11 +98,26 @@
 		</div>
 
 		<!-- Legal -->
-		<div class="mt-8 flex flex-wrap items-center gap-x-4 gap-y-2 text-xs text-muted">
-			<span>&copy; {new Date().getFullYear()} Lettr. All rights reserved.</span>
-			<a href="/privacy-policy/" class="transition-colors hover:text-surface">Privacy Policy</a>
-			<a href="/terms/" class="transition-colors hover:text-surface">Terms of Use</a>
-			<a href="/accessibility-statement/" class="transition-colors hover:text-surface">Accessibility Statement</a>
+		<div class="mt-8 flex flex-wrap items-center justify-between gap-x-4 gap-y-4 text-xs text-muted">
+			<div class="flex flex-wrap items-center gap-x-4 gap-y-2">
+				<span>&copy; {new Date().getFullYear()} Lettr. All rights reserved.</span>
+				<a href="/privacy-policy/" class="transition-colors hover:text-surface">Privacy Policy</a>
+				<a href="/terms/" class="transition-colors hover:text-surface">Terms of Use</a>
+				<a href="/accessibility-statement/" class="transition-colors hover:text-surface">Accessibility Statement</a>
+			</div>
+			<div class="flex items-center gap-3">
+				{#each socials as social}
+					<a
+						href={social.href}
+						class="text-muted transition-colors hover:text-surface"
+						target={social.external ? '_blank' : undefined}
+						rel={social.external ? 'noopener noreferrer' : undefined}
+						aria-label={social.label}
+					>
+						<social.icon size={20} />
+					</a>
+				{/each}
+			</div>
 		</div>
 	</div>
 </footer>
