@@ -4,6 +4,7 @@
 	import { createScrollRevealCleanup } from '$lib/utils/gsap';
 
 	let section: HTMLElement | undefined = $state();
+	let activeIndex = $state(0);
 
 	const useCases = [
 		{
@@ -68,6 +69,15 @@
 		}
 	];
 
+	function bringToFront(index: number) {
+		activeIndex = index;
+	}
+
+	function getStackPosition(index: number): number {
+		const len = useCases.length;
+		return (index - activeIndex + len) % len;
+	}
+
 	onMount(() => {
 		if (!section) return;
 
@@ -79,32 +89,156 @@
 </script>
 
 <section bind:this={section} class="pt-24 pb-16 border-b border-border/30">
-		<div class="mb-8" data-usecase>
-			<h2 class="mb-3 text-surface">Built for the emails <span class="text-primary">SaaS companies actually send.</span></h2>
-			<p class="text-body text-muted max-w-[55ch]">
-				Designed for the emails your product already sends.
-			</p>
+	<div class="mb-12 max-w-2xl" data-usecase>
+		<div class="mb-4 inline-flex items-center gap-2 text-[11px] font-medium tracking-[0.18em] uppercase text-primary/80">
+			<span class="block w-6 h-px bg-primary/60"></span>
+			Use cases
+		</div>
+		<h2 class="mb-3 text-surface">
+			Built for the emails <span class="text-primary">SaaS companies actually send.</span>
+		</h2>
+		<p class="text-body text-muted max-w-[55ch]">
+			Designed for the emails your product already sends.
+		</p>
+	</div>
+
+	<div class="grid lg:grid-cols-[1fr_1.5fr] gap-10 lg:gap-14 items-start">
+		<div class="flex flex-col" data-usecase>
+			<ul class="flex flex-col">
+				{#each useCases as useCase, i}
+					{@const isActive = activeIndex === i}
+					<li>
+						<button
+							type="button"
+							onclick={() => bringToFront(i)}
+							aria-pressed={isActive}
+							class="group flex w-full items-center gap-3 border-l-2 py-3 pl-4 pr-2 text-left transition-colors cursor-pointer"
+							class:border-primary={isActive}
+							class:border-transparent={!isActive}
+							class:bg-primary={false}
+						>
+							<span
+								class="flex h-8 w-8 flex-shrink-0 items-center justify-center transition-colors"
+								class:bg-primary={isActive}
+								style={isActive ? '' : 'background-color: rgba(236, 16, 75, 0.08);'}
+							>
+								<useCase.icon
+									size={16}
+									class={isActive ? 'text-white' : 'text-primary'}
+								/>
+							</span>
+							<span
+								class="text-sm font-medium transition-colors"
+								class:text-primary={isActive}
+								class:text-surface={!isActive}
+							>
+								{useCase.title}
+							</span>
+						</button>
+					</li>
+				{/each}
+			</ul>
 		</div>
 
-		<div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-			{#each useCases as useCase}
-				<div data-usecase class="group">
-					<h3 class="text-sm text-surface font-medium leading-tight tracking-tight mb-3">{useCase.title}</h3>
-					<div class="border border-border/40 bg-white p-3 transition-all duration-200 group-hover:-translate-y-0.5 group-hover:shadow-[0_8px_24px_-12px_rgba(236,16,75,0.2)] group-hover:border-primary/40">
-						<div class="flex items-center gap-2 mb-2">
-							<div class="w-7 h-7 bg-primary/10 flex items-center justify-center flex-shrink-0">
-								<useCase.icon size={14} class="text-primary" />
+		<div
+			class="queue-frame relative overflow-hidden border border-border/40 bg-white p-5 sm:p-6"
+			data-usecase
+		>
+			<div class="particles-wrap" aria-hidden="true">
+				<div class="particles"></div>
+			</div>
+
+			<div class="relative h-[360px] w-full">
+				{#each useCases as useCase, i}
+					{@const pos = getStackPosition(i)}
+					<button
+						type="button"
+						onclick={() => bringToFront(i)}
+						aria-label={`Show ${useCase.title} email`}
+						class="stack-card absolute bottom-0 left-0 right-[90px] cursor-pointer border border-border/40 bg-white p-4 text-left shadow-[0_10px_30px_-18px_rgba(17,24,39,0.35)] transition-all duration-500 ease-out hover:border-primary/50"
+						style="--pos: {pos}; z-index: {100 - pos};"
+					>
+						<div class="mb-2 flex items-center gap-2">
+							<div class="flex h-8 w-8 flex-shrink-0 items-center justify-center bg-primary/10">
+								<useCase.icon size={16} class="text-primary" />
 							</div>
-							<span class="text-[13px] text-surface font-medium">{useCase.sender}</span>
+							<span class="text-[13px] font-semibold text-surface">{useCase.sender}</span>
+							<span class="ml-auto text-[10px] uppercase tracking-wider text-muted/60">
+								{useCase.time}
+							</span>
 						</div>
-						<p class="text-[13px] text-surface font-semibold mb-0.5 truncate">{useCase.subject}</p>
-						<p class="text-[12px] text-muted truncate mb-2">{useCase.preview}</p>
-						<div class="inline-flex items-center gap-1 text-[10px] text-primary bg-primary/10 px-1.5 py-0.5 font-medium uppercase tracking-wide">
-							<span class="w-1 h-1 rounded-full bg-primary animate-pulse"></span>
+						<p class="mb-0.5 truncate text-[14px] font-semibold text-surface">
+							{useCase.subject}
+						</p>
+						<p class="mb-3 truncate text-[12px] text-muted">{useCase.preview}</p>
+						<div
+							class="inline-flex items-center gap-1 bg-primary/10 px-1.5 py-0.5 text-[10px] font-medium uppercase tracking-wide text-primary"
+						>
+							<span class="h-1 w-1 rounded-full bg-primary"></span>
 							{useCase.badge}
 						</div>
-					</div>
-				</div>
-			{/each}
+					</button>
+				{/each}
+			</div>
 		</div>
+	</div>
 </section>
+
+<style>
+	.particles-wrap {
+		position: absolute;
+		inset: 0;
+		pointer-events: none;
+		-webkit-mask-image: radial-gradient(
+			ellipse at 100% 50%,
+			rgba(0, 0, 0, 1) 0%,
+			rgba(0, 0, 0, 0.75) 35%,
+			rgba(0, 0, 0, 0) 78%
+		);
+		mask-image: radial-gradient(
+			ellipse at 100% 50%,
+			rgba(0, 0, 0, 1) 0%,
+			rgba(0, 0, 0, 0.75) 35%,
+			rgba(0, 0, 0, 0) 78%
+		);
+	}
+
+	.particles {
+		position: absolute;
+		inset: 0;
+		background: linear-gradient(
+			135deg,
+			rgba(236, 16, 75, 0.55) 0%,
+			rgba(236, 16, 75, 1) 50%,
+			rgba(236, 16, 75, 0.65) 100%
+		);
+		-webkit-mask-image:
+			radial-gradient(circle, #000 1.4px, transparent 1.7px),
+			radial-gradient(circle, #000 1.4px, transparent 1.7px);
+		-webkit-mask-size: 5px 5px, 5px 5px;
+		-webkit-mask-position: 0 0, 2.5px 2.5px;
+		-webkit-mask-repeat: repeat, repeat;
+		mask-image:
+			radial-gradient(circle, #000 1.4px, transparent 1.7px),
+			radial-gradient(circle, #000 1.4px, transparent 1.7px);
+		mask-size: 5px 5px, 5px 5px;
+		mask-position: 0 0, 2.5px 2.5px;
+		mask-repeat: repeat, repeat;
+		opacity: 0.9;
+	}
+
+	.stack-card {
+		transform: translate(calc(var(--pos) * 14px), calc(var(--pos) * -34px))
+			scale(calc(1 - var(--pos) * 0.015));
+		transform-origin: bottom left;
+		transition:
+			transform 500ms cubic-bezier(0.22, 1, 0.36, 1),
+			box-shadow 300ms,
+			border-color 300ms;
+	}
+
+	.stack-card:hover {
+		transform: translate(calc(var(--pos) * 14px), calc((var(--pos) * -34px) - 4px))
+			scale(calc(1 - var(--pos) * 0.015));
+	}
+</style>
