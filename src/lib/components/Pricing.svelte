@@ -4,6 +4,7 @@
 	import Slider from './Slider.svelte';
 	import { createScrollRevealCleanup } from '$lib/utils/gsap';
 	import { buildRegisterUrl, registerUrl } from '$lib/utils/utm';
+	import { capturePosthogEvent } from '$lib/analytics/posthog';
 
 	let section: HTMLElement | undefined = $state();
 	let sliderValue: number = $state(1);
@@ -111,6 +112,44 @@
 		{ feature: 'SLA guarantee', values: [false, false, false, true] }
 	];
 
+	let sliderDebounce: ReturnType<typeof setTimeout> | null = null;
+
+	$effect(() => {
+		const currentValue = sliderValue;
+		const currentLabel = sliderLabels[currentValue];
+		const currentPlan = highlightedPlan;
+		if (sliderDebounce) clearTimeout(sliderDebounce);
+		sliderDebounce = setTimeout(() => {
+			void capturePosthogEvent('pricing_volume_changed', {
+				slider_value: currentValue,
+				volume_label: currentLabel,
+				highlighted_plan: currentPlan
+			});
+		}, 400);
+	});
+
+	function trackPlanCta(planKey: PlanKey, planName: string, cta: string) {
+		void capturePosthogEvent('pricing_plan_cta_clicked', {
+			plan: planKey,
+			plan_name: planName,
+			cta_label: cta,
+			highlighted_plan: highlightedPlan,
+			slider_value: sliderValue,
+			volume_label: sliderLabels[sliderValue]
+		});
+	}
+
+	function trackEnterpriseCta() {
+		void capturePosthogEvent('cta_clicked', {
+			placement: 'pricing_enterprise',
+			label: 'Contact sales',
+			href: '/demo/',
+			destination_type: 'internal',
+			slider_value: sliderValue,
+			volume_label: sliderLabels[sliderValue]
+		});
+	}
+
 	onMount(() => {
 		registerHref = buildRegisterUrl(new URL(window.location.href), document.cookie);
 		if (!section) return;
@@ -187,6 +226,7 @@
 						{isHighlighted
 						? 'bg-primary text-white hover:bg-primary/90'
 						: 'border border-border/50 text-surface hover:border-primary/30 hover:text-primary'}"
+					onclick={() => trackPlanCta(plan.key, plan.name, plan.cta)}
 				>
 					{plan.cta}
 				</a>
@@ -208,6 +248,7 @@
 				{highlightedPlan === 'enterprise'
 				? 'bg-primary text-white hover:bg-primary/90'
 				: 'border border-border/50 text-surface hover:border-primary/30 hover:text-primary'}"
+			onclick={trackEnterpriseCta}
 		>
 			Contact sales
 			<ArrowRight size={14} />

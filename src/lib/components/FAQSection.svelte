@@ -3,12 +3,19 @@
 	import { slide } from 'svelte/transition';
 	import { CaretDownIcon } from 'phosphor-svelte';
 	import { createScrollRevealCleanup } from '$lib/utils/gsap';
+	import { capturePosthogEvent } from '$lib/analytics/posthog';
 
 	let section: HTMLElement | undefined = $state();
 	let openIndex: number | null = $state(null);
 
 	function toggle(i: number) {
-		openIndex = openIndex === i ? null : i;
+		const wasOpen = openIndex === i;
+		openIndex = wasOpen ? null : i;
+		void capturePosthogEvent('faq_toggled', {
+			index: i,
+			question: faqs[i].question,
+			opened: !wasOpen
+		});
 	}
 
 	const faqs = [

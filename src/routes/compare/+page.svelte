@@ -4,6 +4,24 @@
 	import { createFromAnimationCleanup, createScrollRevealCleanup } from '$lib/utils/gsap';
 	import { buildRegisterUrl, registerUrl } from '$lib/utils/utm';
 	import { providerList } from '$lib/data/providers';
+	import { capturePosthogEvent } from '$lib/analytics/posthog';
+
+	function trackProviderClick(slug: string, name: string, savings: string | number) {
+		void capturePosthogEvent('compare_provider_clicked', {
+			provider_slug: slug,
+			provider_name: name,
+			average_savings: savings
+		});
+	}
+
+	function trackCompareCta() {
+		void capturePosthogEvent('cta_clicked', {
+			placement: 'compare_bottom',
+			label: 'Try Lettr free',
+			href: '/register',
+			destination_type: 'internal'
+		});
+	}
 
 	let hero: HTMLElement | undefined = $state();
 	let gridSection: HTMLElement | undefined = $state();
@@ -77,6 +95,7 @@
 					data-reveal
 					href="/compare/{provider.slug}"
 					class="group flex flex-col border border-border/50 bg-white p-6 transition-colors hover:border-primary/30"
+					onclick={() => trackProviderClick(provider.slug, provider.name, provider.averageSavings)}
 				>
 					<div class="mb-4 flex items-center gap-3">
 						<div class="flex h-10 w-10 shrink-0 items-center justify-center border border-border/50 bg-background">
@@ -116,6 +135,7 @@
 				<a
 					href={registerHref}
 					class="bg-primary px-7 py-3 text-[15px] font-semibold text-white transition-colors hover:bg-primary/90"
+					onclick={trackCompareCta}
 				>
 					Try Lettr free &rarr;
 				</a>

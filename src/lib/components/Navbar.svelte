@@ -21,6 +21,7 @@
 	} from 'phosphor-svelte';
 	import { createFromAnimationCleanup } from '$lib/utils/gsap';
 	import { buildRegisterUrl, registerUrl } from '$lib/utils/utm';
+	import { capturePosthogEvent } from '$lib/analytics/posthog';
 
 	interface DropdownItem {
 		icon?: typeof CodeIcon;
@@ -140,6 +141,9 @@
 			clearTimeout(closeTimer);
 			closeTimer = null;
 		}
+		if (openDropdown !== key) {
+			void capturePosthogEvent('nav_dropdown_opened', { dropdown: key, device: 'desktop' });
+		}
 		openDropdown = key;
 	}
 
@@ -151,6 +155,7 @@
 
 	function toggleMobile() {
 		mobileOpen = !mobileOpen;
+		void capturePosthogEvent('nav_mobile_toggled', { open: mobileOpen });
 	}
 
 	function closeMobile() {
@@ -159,7 +164,45 @@
 	}
 
 	function toggleMobileMenu(key: string) {
-		mobileExpanded = mobileExpanded === key ? null : key;
+		const willOpen = mobileExpanded !== key;
+		mobileExpanded = willOpen ? key : null;
+		if (willOpen) {
+			void capturePosthogEvent('nav_dropdown_opened', { dropdown: key, device: 'mobile' });
+		}
+	}
+
+	function trackNavItemClick(
+		location: 'dropdown' | 'dropdown_footer' | 'mobile_dropdown' | 'mobile_link' | 'top_level',
+		label: string,
+		href: string,
+		dropdownKey?: string
+	) {
+		void capturePosthogEvent('nav_link_clicked', {
+			location,
+			label,
+			href,
+			dropdown: dropdownKey ?? null,
+			is_external: /^https?:\/\//.test(href)
+		});
+	}
+
+	function trackNavCtaClick(label: string, href: string, placement: 'desktop' | 'mobile') {
+		void capturePosthogEvent('cta_clicked', {
+			placement: `navbar_${placement}`,
+			label,
+			href,
+			destination_type: /^https?:\/\//.test(href) ? 'external' : 'internal'
+		});
+	}
+
+	function trackLogoClick() {
+		void capturePosthogEvent('nav_link_clicked', {
+			location: 'logo',
+			label: 'Lettr logo',
+			href: '/',
+			dropdown: null,
+			is_external: false
+		});
 	}
 
 	onMount(() => {
@@ -183,7 +226,7 @@
 >
 	<div class="flex h-[60px] w-full items-center justify-between px-6">
 		<!-- Logo -->
-		<a href="/" class="flex items-center shrink-0">
+		<a href="/" class="flex items-center shrink-0" onclick={trackLogoClick}>
 			<img src="/logo.svg" alt="Lettr" class="h-5" />
 		</a>
 
@@ -238,7 +281,10 @@
 																		rel={item.external ? 'noopener noreferrer' : undefined}
 																		class="flex items-center justify-center h-12 w-12 opacity-60 hover:opacity-100 transition-opacity"
 																		title={item.label}
-																		onclick={() => (openDropdown = null)}
+																		onclick={() => {
+																			trackNavItemClick('dropdown', item.label, item.href, link.dropdownKey);
+																			openDropdown = null;
+																		}}
 																	>
 																		{#if item.iconSrc}
 																			<img src={item.iconSrc} alt={item.label} class="h-8 w-8" />
@@ -270,7 +316,10 @@
 																	target={item.external ? '_blank' : undefined}
 																	rel={item.external ? 'noopener noreferrer' : undefined}
 																	class="group flex items-start gap-3 px-3 py-2 transition-colors hover:bg-background"
-																	onclick={() => (openDropdown = null)}
+																	onclick={() => {
+																		trackNavItemClick('dropdown', item.label, item.href, link.dropdownKey);
+																		openDropdown = null;
+																	}}
 																>
 																	<div class="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center border border-border/50 bg-background transition-colors group-hover:border-primary/30 group-hover:bg-primary/5">
 																		{#if item.iconSrc}
@@ -298,7 +347,10 @@
 													target={item.external ? '_blank' : undefined}
 													rel={item.external ? 'noopener noreferrer' : undefined}
 													class="group flex items-start gap-3 px-3 py-2 transition-colors hover:bg-background"
-													onclick={() => (openDropdown = null)}
+													onclick={() => {
+														trackNavItemClick('dropdown', item.label, item.href, link.dropdownKey);
+														openDropdown = null;
+													}}
 												>
 													<div class="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center border border-border/50 bg-background transition-colors group-hover:border-primary/30 group-hover:bg-primary/5">
 														{#if item.iconSrc}
@@ -331,7 +383,12 @@
 												target={ddConfig.footer.href.startsWith('http') ? '_blank' : undefined}
 												rel={ddConfig.footer.href.startsWith('http') ? 'noopener noreferrer' : undefined}
 												class="flex items-center gap-1.5 text-[13px] font-medium text-muted transition-colors hover:text-primary"
-												onclick={() => (openDropdown = null)}
+												onclick={() => {
+													if (ddConfig.footer) {
+														trackNavItemClick('dropdown_footer', ddConfig.footer.label, ddConfig.footer.href, link.dropdownKey);
+													}
+													openDropdown = null;
+												}}
 											>
 												{ddConfig.footer.label} &rarr;
 											</a>
@@ -341,7 +398,11 @@
 							{/if}
 						</div>
 					{:else}
-						<a href={link.href} class="px-2.5 py-2 text-sm text-muted transition-colors hover:text-surface">
+						<a
+							href={link.href}
+							class="px-2.5 py-2 text-sm text-muted transition-colors hover:text-surface"
+							onclick={() => trackNavItemClick('top_level', link.label, link.href)}
+						>
 							{link.label}
 						</a>
 					{/if}
@@ -354,12 +415,14 @@
 				<a
 					href="https://app.lettr.com"
 					class="text-sm text-muted transition-colors hover:text-surface"
+					onclick={() => trackNavCtaClick('Sign in', 'https://app.lettr.com', 'desktop')}
 				>
 					Sign in
 				</a>
 				<a
 					href={registerHref}
 					class="flex items-center justify-center px-4 py-2 text-sm font-semibold bg-primary text-white transition-colors hover:bg-primary/90"
+					onclick={() => trackNavCtaClick('Start sending', registerHref, 'desktop')}
 				>
 					Start sending
 				</a>
@@ -411,7 +474,10 @@
 															target={item.external ? '_blank' : undefined}
 															rel={item.external ? 'noopener noreferrer' : undefined}
 															class="flex items-center gap-3 px-2 py-2 text-muted transition-colors hover:text-surface"
-															onclick={closeMobile}
+															onclick={() => {
+																trackNavItemClick('mobile_dropdown', item.label, item.href, link.dropdownKey);
+																closeMobile();
+															}}
 														>
 															{#if item.iconSrc}
 																<img src={item.iconSrc} alt="" class="h-4 w-4" />
@@ -428,7 +494,10 @@
 													target={item.external ? '_blank' : undefined}
 													rel={item.external ? 'noopener noreferrer' : undefined}
 													class="flex items-center gap-3 px-2 py-2.5 text-muted transition-colors hover:text-surface"
-													onclick={closeMobile}
+													onclick={() => {
+														trackNavItemClick('mobile_dropdown', item.label, item.href, link.dropdownKey);
+														closeMobile();
+													}}
 												>
 													{#if item.iconSrc}
 														<img src={item.iconSrc} alt="" class="h-4 w-4" />
@@ -446,7 +515,10 @@
 							<a
 								href={link.href}
 								class="py-3 text-surface transition-colors"
-								onclick={closeMobile}
+								onclick={() => {
+									trackNavItemClick('mobile_link', link.label, link.href);
+									closeMobile();
+								}}
 							>
 								{link.label}
 							</a>
@@ -457,7 +529,10 @@
 						<a
 							href={registerHref}
 							class="block font-bold text-primary transition-colors hover:text-primary/90"
-							onclick={closeMobile}
+							onclick={() => {
+								trackNavCtaClick('Start sending', registerHref, 'mobile');
+								closeMobile();
+							}}
 						>
 							Start sending
 						</a>

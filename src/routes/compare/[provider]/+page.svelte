@@ -5,6 +5,17 @@
 	import { createFromAnimationCleanup, createScrollRevealCleanup } from '$lib/utils/gsap';
 	import { buildRegisterUrl, registerUrl } from '$lib/utils/utm';
 	import { providers } from '$lib/data/providers';
+	import { capturePosthogEvent } from '$lib/analytics/posthog';
+
+	function trackProviderCta(label: string, href: string) {
+		void capturePosthogEvent('cta_clicked', {
+			placement: 'compare_provider_bottom',
+			label,
+			href,
+			provider_slug: data.provider,
+			destination_type: /^https?:\/\//.test(href) ? 'external' : 'internal'
+		});
+	}
 
 	let { data } = $props();
 
@@ -181,12 +192,14 @@
 					<a
 						href={registerHref}
 						class="bg-primary px-7 py-3 text-[15px] font-semibold text-white transition-colors hover:bg-primary/90"
+						onclick={() => trackProviderCta('Try Lettr free', registerHref)}
 					>
 						Try Lettr free &rarr;
 					</a>
 					<a
 						href="/compare"
 						class="flex items-center gap-2 px-4 py-3 text-[15px] font-medium text-muted transition-colors hover:text-surface"
+						onclick={() => trackProviderCta('View all comparisons', '/compare')}
 					>
 						View all comparisons
 						<ArrowRightIcon size={14} />

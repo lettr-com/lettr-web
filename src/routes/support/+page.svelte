@@ -10,6 +10,7 @@
 		WarningCircleIcon
 	} from 'phosphor-svelte';
 	import { createFromAnimationCleanup, createScrollRevealCleanup } from '$lib/utils/gsap';
+	import { capturePosthogEvent } from '$lib/analytics/posthog';
 
 	let hero: HTMLElement | undefined = $state();
 	let channelsSection: HTMLElement | undefined = $state();
@@ -82,6 +83,12 @@
 		error = '';
 		submitting = true;
 
+		void capturePosthogEvent('support_form_submitted', {
+			category,
+			has_subject: Boolean(subject.trim()),
+			message_length: message.length
+		});
+
 		try {
 			const res = await fetch('/api/contact', {
 				method: 'POST',
@@ -93,10 +100,12 @@
 
 			if (!res.ok) {
 				error = data.error || 'Something went wrong.';
+				void capturePosthogEvent('support_form_failed', { category, error_message: error });
 				return;
 			}
 
 			submitted = true;
+			void capturePosthogEvent('support_form_succeeded', { category });
 			name = '';
 			email = '';
 			subject = '';
@@ -104,9 +113,27 @@
 			category = 'general';
 		} catch {
 			error = 'Something went wrong. Please try again or email us directly.';
+			void capturePosthogEvent('support_form_failed', { category, error_message: error });
 		} finally {
 			submitting = false;
 		}
+	}
+
+	function trackCategorySelected(value: string) {
+		category = value;
+		void capturePosthogEvent('support_category_selected', { category: value });
+	}
+
+	function trackChannelClick(title: string, href: string, external: boolean) {
+		void capturePosthogEvent('support_channel_clicked', {
+			channel: title,
+			href,
+			is_external: external
+		});
+	}
+
+	function trackFaqLinkClick(question: string, href: string) {
+		void capturePosthogEvent('support_faq_link_clicked', { question, href });
 	}
 
 	onMount(() => {
@@ -178,6 +205,7 @@
 				target={channel.external ? '_blank' : undefined}
 				rel={channel.external ? 'noopener noreferrer' : undefined}
 				class="group flex flex-col border border-border/50 bg-white p-6 transition-colors hover:border-primary/30"
+				onclick={() => trackChannelClick(channel.title, channel.actionHref, channel.external)}
 			>
 				<div
 					class="mb-4 flex h-11 w-11 items-center justify-center border border-border/50 bg-background transition-colors duration-200 group-hover:border-primary/30 group-hover:bg-primary/5"
@@ -214,6 +242,7 @@
 							target="_blank"
 							rel="noopener noreferrer"
 							class="flex items-center justify-between px-3 py-2 text-sm text-muted transition-all duration-200 hover:bg-background hover:text-surface"
+							onclick={() => trackFaqLinkClick(faq.q, faq.href)}
 						>
 							{faq.q}
 							<ArrowSquareOutIcon size={12} class="shrink-0 text-muted" />
@@ -263,7 +292,7 @@
 							{#each categories as opt}
 								<button
 									type="button"
-									onclick={() => (category = opt.value)}
+									onclick={() => trackCategorySelected(opt.value)}
 									class="border px-4 py-2 text-sm font-medium transition-all duration-200 {category ===
 									opt.value
 										? 'border-primary bg-primary/10 text-primary'

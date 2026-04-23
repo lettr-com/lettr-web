@@ -6,8 +6,9 @@ import { consentChangedEventName, getConsentState } from '$lib/utils/cookieConse
 
 const posthogConfig = {
 	apiKey: 'phc_67BYz5Uv0uoiydQyaN3OyeK9OPx6LjmFDFvF0mNaTy9',
-	apiHost: 'https://eu.i.posthog.com',
+	apiHost: 'https://m.lettr.cz',
 	defaults: '2026-01-30',
+	crossSubdomainCookie: true,
 } as const;
 
 type PosthogClient = typeof posthogJs;
@@ -49,6 +50,7 @@ export async function initPosthog(): Promise<void> {
 		posthog.init(posthogConfig.apiKey, {
 			api_host: posthogConfig.apiHost,
 			defaults: posthogConfig.defaults,
+			cross_subdomain_cookie: posthogConfig.crossSubdomainCookie,
 		});
 
 		posthogClient = posthog;

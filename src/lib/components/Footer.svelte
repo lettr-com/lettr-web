@@ -2,12 +2,44 @@
 	import { onMount } from 'svelte';
 	import { buildRegisterUrl, registerUrl } from '$lib/utils/utm';
 	import { EnvelopeSimpleIcon, GithubLogoIcon, LinkedinLogoIcon, XLogoIcon } from 'phosphor-svelte';
+	import { capturePosthogEvent } from '$lib/analytics/posthog';
 
 	let registerHref: string = $state(registerUrl);
 
 	onMount(() => {
 		registerHref = buildRegisterUrl(new URL(window.location.href), document.cookie);
 	});
+
+	function trackFooterLinkClick(column: string, label: string, href: string) {
+		void capturePosthogEvent('footer_link_clicked', {
+			column,
+			label,
+			href,
+			is_external: /^https?:\/\//.test(href)
+		});
+	}
+
+	function trackFooterLegalClick(label: string, href: string) {
+		void capturePosthogEvent('footer_link_clicked', {
+			column: 'legal',
+			label,
+			href,
+			is_external: false
+		});
+	}
+
+	function trackFooterSocialClick(label: string, href: string) {
+		void capturePosthogEvent('footer_social_clicked', { label, href });
+	}
+
+	function trackFooterCtaClick() {
+		void capturePosthogEvent('cta_clicked', {
+			placement: 'footer',
+			label: 'Start sending in minutes',
+			href: registerHref,
+			destination_type: 'internal'
+		});
+	}
 
 	const columns = [
 		{
@@ -73,6 +105,7 @@
 									class="text-sm text-muted transition-colors hover:text-surface"
 									target={link.external ? '_blank' : undefined}
 									rel={link.external ? 'noopener noreferrer' : undefined}
+									onclick={() => trackFooterLinkClick(column.title, link.label, link.href)}
 								>
 									{link.label}
 								</a>
@@ -91,6 +124,7 @@
 				<a
 					href={registerHref}
 					class="bg-primary px-6 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-primary/90"
+					onclick={trackFooterCtaClick}
 				>
 					Start sending in minutes
 				</a>
@@ -101,9 +135,21 @@
 		<div class="mt-8 flex flex-wrap items-center justify-between gap-x-4 gap-y-4 text-xs text-muted">
 			<div class="flex flex-wrap items-center gap-x-4 gap-y-2">
 				<span>&copy; {new Date().getFullYear()} Lettr. All rights reserved.</span>
-				<a href="/privacy-policy/" class="transition-colors hover:text-surface">Privacy Policy</a>
-				<a href="/terms/" class="transition-colors hover:text-surface">Terms of Use</a>
-				<a href="/accessibility-statement/" class="transition-colors hover:text-surface">Accessibility Statement</a>
+				<a
+					href="/privacy-policy/"
+					class="transition-colors hover:text-surface"
+					onclick={() => trackFooterLegalClick('Privacy Policy', '/privacy-policy/')}
+				>Privacy Policy</a>
+				<a
+					href="/terms/"
+					class="transition-colors hover:text-surface"
+					onclick={() => trackFooterLegalClick('Terms of Use', '/terms/')}
+				>Terms of Use</a>
+				<a
+					href="/accessibility-statement/"
+					class="transition-colors hover:text-surface"
+					onclick={() => trackFooterLegalClick('Accessibility Statement', '/accessibility-statement/')}
+				>Accessibility Statement</a>
 			</div>
 			<div class="flex items-center gap-3">
 				{#each socials as social}
@@ -113,6 +159,7 @@
 						target={social.external ? '_blank' : undefined}
 						rel={social.external ? 'noopener noreferrer' : undefined}
 						aria-label={social.label}
+						onclick={() => trackFooterSocialClick(social.label, social.href)}
 					>
 						<social.icon size={20} />
 					</a>

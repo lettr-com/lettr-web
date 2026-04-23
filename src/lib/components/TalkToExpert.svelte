@@ -2,8 +2,18 @@
 	import { onMount } from 'svelte';
 	import { ChatCircleDotsIcon } from 'phosphor-svelte';
 	import { createScrollRevealCleanup } from '$lib/utils/gsap';
+	import { capturePosthogEvent } from '$lib/analytics/posthog';
 
 	let section: HTMLElement | undefined = $state();
+
+	function trackTalkToExpert() {
+		void capturePosthogEvent('cta_clicked', {
+			placement: 'talk_to_expert',
+			label: 'Talk to an expert',
+			href: '/demo',
+			destination_type: 'internal'
+		});
+	}
 
 	onMount(() => {
 		if (!section) return;
@@ -25,6 +35,7 @@
 		<a
 			href="/demo"
 			class="bg-surface px-6 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-surface/90"
+			onclick={trackTalkToExpert}
 		>
 			Talk to an expert
 		</a>

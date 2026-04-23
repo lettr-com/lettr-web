@@ -46,7 +46,7 @@
 </script>
 
 {#if href}
-	<a bind:this={el} {href} class="{baseClasses} {variants[variant]}" {...rest}>
+	<a bind:this={el} {href} {onclick} class="{baseClasses} {variants[variant]}" {...rest}>
 		{#if children}{@render children()}{/if}
 	</a>
 {:else}

@@ -9,6 +9,16 @@
 	} from 'phosphor-svelte';
 	import { createFromAnimationCleanup, createScrollRevealCleanup } from '$lib/utils/gsap';
 	import { buildRegisterUrl, registerUrl } from '$lib/utils/utm';
+	import { capturePosthogEvent } from '$lib/analytics/posthog';
+
+	function trackAboutCta(label: string, href: string) {
+		void capturePosthogEvent('cta_clicked', {
+			placement: 'about_bottom',
+			label,
+			href,
+			destination_type: /^https?:\/\/|^mailto:/.test(href) ? 'external' : 'internal'
+		});
+	}
 
 	let hero: HTMLElement | undefined = $state();
 	let statsSection: HTMLElement | undefined = $state();
@@ -253,12 +263,14 @@
 					<a
 						href={registerHref}
 						class="bg-primary px-7 py-3 text-[15px] font-semibold text-white transition-colors hover:bg-primary/90"
+						onclick={() => trackAboutCta('Try Lettr free', registerHref)}
 					>
 						Try Lettr free &rarr;
 					</a>
 					<a
 						href="mailto:hello@lettr.com"
 						class="flex items-center gap-2 px-4 py-3 text-[15px] font-medium text-muted transition-colors hover:text-surface"
+						onclick={() => trackAboutCta('Email hello@lettr.com', 'mailto:hello@lettr.com')}
 					>
 						<EnvelopeSimpleIcon size={16} />
 						hello@lettr.com

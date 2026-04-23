@@ -12,6 +12,16 @@
 	import FeaturePageLayout from '$lib/components/FeaturePageLayout.svelte';
 	import { createScrollRevealCleanup } from '$lib/utils/gsap';
 	import { buildRegisterUrl, registerUrl } from '$lib/utils/utm';
+	import { capturePosthogEvent } from '$lib/analytics/posthog';
+
+	function trackChannelCta(label: string, href: string) {
+		void capturePosthogEvent('cta_clicked', {
+			placement: 'channel_email_bottom',
+			label,
+			href,
+			destination_type: /^https?:\/\//.test(href) ? 'external' : 'internal'
+		});
+	}
 
 	let statsSection: HTMLElement | undefined = $state();
 	let infraSection: HTMLElement | undefined = $state();
@@ -183,12 +193,14 @@
 					<a
 						href={registerHref}
 						class="bg-primary px-7 py-3 text-[15px] font-semibold text-white transition-colors hover:bg-primary/90"
+						onclick={() => trackChannelCta('Start sending for free', registerHref)}
 					>
 						Start sending for free &rarr;
 					</a>
 					<a
 						href="/demo"
 						class="px-4 py-3 text-[15px] font-medium text-muted transition-colors hover:text-surface"
+						onclick={() => trackChannelCta('Book a demo', '/demo')}
 					>
 						Book a demo
 					</a>

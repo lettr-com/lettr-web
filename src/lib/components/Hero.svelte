@@ -4,6 +4,17 @@
 	import EditorPreview from './EditorPreview.svelte';
 	import { createFromAnimationCleanup } from '$lib/utils/gsap';
 	import { buildRegisterUrl, registerUrl } from '$lib/utils/utm';
+	import { capturePosthogEvent } from '$lib/analytics/posthog';
+
+	function trackHeroCta(label: string, href: string, variant: 'primary' | 'secondary') {
+		void capturePosthogEvent('cta_clicked', {
+			placement: 'home_hero',
+			label,
+			href,
+			variant,
+			destination_type: /^https?:\/\//.test(href) ? 'external' : 'internal'
+		});
+	}
 
 	let section: HTMLElement | undefined = $state();
 	let registerHref: string = $state(registerUrl);
@@ -34,6 +45,7 @@
 					data-animate
 					href="/changelog/"
 					class="group mb-6 inline-flex w-fit items-center gap-2 border border-primary/20 bg-primary/5 p-1.5 text-sm text-primary transition-colors hover:bg-primary/10"
+					onclick={() => void capturePosthogEvent('hero_announcement_clicked', { href: '/changelog/', label: 'Announcing Lettr' })}
 				>
 					<span class="bg-primary px-2 py-0.5 text-xs font-bold text-white">New</span>
 					Announcing Lettr
@@ -49,8 +61,18 @@
 				</p>
 
 				<div data-animate class="flex flex-wrap items-center mb-3 gap-2">
-					<Button variant="primary" href={registerHref}>Start sending</Button>
-					<Button variant="secondary" href="https://docs.lettr.com/introduction" target="_blank" rel="noopener noreferrer">See docs</Button>
+					<Button
+						variant="primary"
+						href={registerHref}
+						onclick={() => trackHeroCta('Start sending', registerHref, 'primary')}
+					>Start sending</Button>
+					<Button
+						variant="secondary"
+						href="https://docs.lettr.com/introduction"
+						target="_blank"
+						rel="noopener noreferrer"
+						onclick={() => trackHeroCta('See docs', 'https://docs.lettr.com/introduction', 'secondary')}
+					>See docs</Button>
 				</div>
 				<p data-animate class="max-w-md text-sm text-muted">
 					3,000 emails/month free. No credit card required.
