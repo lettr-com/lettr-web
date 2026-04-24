@@ -1,6 +1,8 @@
 import { providerSlugs } from '$lib/data/providers';
 import type { RequestHandler } from './$types';
 
+export const prerender = true;
+
 const BASE_URL = 'https://lettr.com';
 
 interface SitemapEntry {

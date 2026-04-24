@@ -1,113 +1,60 @@
 data "aws_caller_identity" "current" {}
 
 locals {
-  name = var.project_name
+  name   = var.project_name
+  bucket = var.bucket_name != "" ? var.bucket_name : "${var.project_name}-${data.aws_caller_identity.current.account_id}"
 }
 
 # --------------------------------------------------------------------
-# ECR — holds the container image App Runner pulls from
+# S3 — private bucket holding the static site
 # --------------------------------------------------------------------
-resource "aws_ecr_repository" "app" {
-  name                 = local.name
-  image_tag_mutability = "MUTABLE"
+resource "aws_s3_bucket" "site" {
+  bucket = local.bucket
+}
 
-  image_scanning_configuration {
-    scan_on_push = true
+resource "aws_s3_bucket_public_access_block" "site" {
+  bucket                  = aws_s3_bucket.site.id
+  block_public_acls       = true
+  block_public_policy     = true
+  ignore_public_acls      = true
+  restrict_public_buckets = true
+}
+
+resource "aws_s3_bucket_versioning" "site" {
+  bucket = aws_s3_bucket.site.id
+  versioning_configuration {
+    status = "Enabled"
   }
 }
 
-resource "aws_ecr_lifecycle_policy" "app" {
-  repository = aws_ecr_repository.app.name
-  policy = jsonencode({
-    rules = [{
-      rulePriority = 1
-      description  = "Keep the last 10 images"
-      selection = {
-        tagStatus   = "any"
-        countType   = "imageCountMoreThan"
-        countNumber = 10
-      }
-      action = { type = "expire" }
-    }]
-  })
+resource "aws_s3_bucket_ownership_controls" "site" {
+  bucket = aws_s3_bucket.site.id
+  rule {
+    object_ownership = "BucketOwnerEnforced"
+  }
 }
 
-# --------------------------------------------------------------------
-# App Runner — warm container always running (min_size = 1)
-# --------------------------------------------------------------------
-resource "aws_iam_role" "apprunner_access" {
-  name = "${local.name}-apprunner-access"
-  assume_role_policy = jsonencode({
+# CloudFront-only access via OAC; bucket stays private.
+resource "aws_s3_bucket_policy" "site" {
+  bucket = aws_s3_bucket.site.id
+  policy = jsonencode({
     Version = "2012-10-17"
     Statement = [{
       Effect    = "Allow"
-      Principal = { Service = "build.apprunner.amazonaws.com" }
-      Action    = "sts:AssumeRole"
+      Principal = { Service = "cloudfront.amazonaws.com" }
+      Action    = "s3:GetObject"
+      Resource  = "${aws_s3_bucket.site.arn}/*"
+      Condition = {
+        StringEquals = {
+          "AWS:SourceArn" = aws_cloudfront_distribution.cdn.arn
+        }
+      }
     }]
   })
 }
 
-resource "aws_iam_role_policy_attachment" "apprunner_access_ecr" {
-  role       = aws_iam_role.apprunner_access.name
-  policy_arn = "arn:aws:iam::aws:policy/service-role/AWSAppRunnerServicePolicyForECRAccess"
-}
-
-resource "aws_apprunner_auto_scaling_configuration_version" "warm" {
-  auto_scaling_configuration_name = "${local.name}-warm"
-  min_size                        = 1
-  max_size                        = 10
-  max_concurrency                 = 100
-}
-
-resource "aws_apprunner_service" "app" {
-  service_name = local.name
-
-  source_configuration {
-    authentication_configuration {
-      access_role_arn = aws_iam_role.apprunner_access.arn
-    }
-    auto_deployments_enabled = true
-
-    image_repository {
-      image_identifier      = "${aws_ecr_repository.app.repository_url}:${var.image_tag}"
-      image_repository_type = "ECR"
-
-      image_configuration {
-        port = "3000"
-        runtime_environment_variables = {
-          NODE_ENV         = "production"
-          ZAPTIME_TOKEN    = var.zaptime_token
-          ZAPTIME_BASE_URL = var.zaptime_base_url
-          TURNSTILE_SECRET = var.turnstile_secret
-        }
-      }
-    }
-  }
-
-  instance_configuration {
-    cpu    = "1024"
-    memory = "2048"
-  }
-
-  health_check_configuration {
-    protocol            = "HTTP"
-    path                = "/"
-    healthy_threshold   = 1
-    unhealthy_threshold = 5
-    interval            = 10
-    timeout             = 5
-  }
-
-  auto_scaling_configuration_arn = aws_apprunner_auto_scaling_configuration_version.warm.arn
-
-  # CI pushes new :latest images; let App Runner auto-deploy without Terraform fighting it.
-  lifecycle {
-    ignore_changes = [source_configuration[0].image_repository[0].image_identifier]
-  }
-}
-
 # --------------------------------------------------------------------
-# ACM + DNS (optional; only when domain_name is provided)
+# ACM certificate (us-east-1, required for CloudFront) + Route 53
 # --------------------------------------------------------------------
 resource "aws_acm_certificate" "cf" {
   count             = var.domain_name != "" ? 1 : 0
@@ -145,54 +92,87 @@ resource "aws_acm_certificate_validation" "cf" {
 }
 
 # --------------------------------------------------------------------
-# CloudFront — global edge cache in front of App Runner
+# CloudFront — global edge cache serving the S3 bucket
 # --------------------------------------------------------------------
+resource "aws_cloudfront_origin_access_control" "site" {
+  name                              = "${local.name}-oac"
+  origin_access_control_origin_type = "s3"
+  signing_behavior                  = "always"
+  signing_protocol                  = "sigv4"
+}
+
+resource "aws_cloudfront_function" "append_index" {
+  name    = "${local.name}-append-index"
+  runtime = "cloudfront-js-2.0"
+  comment = "Rewrite /path/ to /path/index.html so SvelteKit trailing-slash pages resolve on S3."
+  publish = true
+  code    = <<-EOT
+    function handler(event) {
+      var request = event.request;
+      var uri = request.uri;
+      if (uri.endsWith('/')) {
+        request.uri = uri + 'index.html';
+      } else if (!uri.includes('.')) {
+        request.uri = uri + '/index.html';
+      }
+      return request;
+    }
+  EOT
+}
+
 resource "aws_cloudfront_distribution" "cdn" {
-  enabled         = true
-  is_ipv6_enabled = true
-  http_version    = "http2and3"
-  price_class     = "PriceClass_All" # global (all POPs) — uncheck to PriceClass_100 if you want to cap cost
-  aliases         = var.domain_name != "" ? [var.domain_name] : []
+  enabled             = true
+  is_ipv6_enabled     = true
+  http_version        = "http2and3"
+  price_class         = "PriceClass_All"
+  default_root_object = "index.html"
+  aliases             = var.domain_name != "" ? [var.domain_name] : []
 
   origin {
-    domain_name = replace(aws_apprunner_service.app.service_url, "https://", "")
-    origin_id   = "apprunner"
+    domain_name              = aws_s3_bucket.site.bucket_regional_domain_name
+    origin_id                = "s3-site"
+    origin_access_control_id = aws_cloudfront_origin_access_control.site.id
+  }
 
-    custom_origin_config {
-      http_port              = 80
-      https_port             = 443
-      origin_protocol_policy = "https-only"
-      origin_ssl_protocols   = ["TLSv1.2"]
+  default_cache_behavior {
+    target_origin_id       = "s3-site"
+    viewer_protocol_policy = "redirect-to-https"
+    allowed_methods        = ["GET", "HEAD", "OPTIONS"]
+    cached_methods         = ["GET", "HEAD"]
+    compress               = true
+
+    # Managed-CachingOptimized — honors Cache-Control headers set on upload
+    cache_policy_id = "658327ea-f89d-4fab-a63d-7e88639e58f6"
+
+    function_association {
+      event_type   = "viewer-request"
+      function_arn = aws_cloudfront_function.append_index.arn
     }
   }
 
-  # Default: let App Runner's Cache-Control headers drive caching.
-  default_cache_behavior {
-    target_origin_id       = "apprunner"
+  # Hashed build artifacts — aggressive caching (immutable)
+  ordered_cache_behavior {
+    path_pattern           = "/_app/immutable/*"
+    target_origin_id       = "s3-site"
     viewer_protocol_policy = "redirect-to-https"
-    allowed_methods        = ["GET", "HEAD", "OPTIONS", "PUT", "POST", "PATCH", "DELETE"]
+    allowed_methods        = ["GET", "HEAD"]
     cached_methods         = ["GET", "HEAD"]
     compress               = true
-
-    # Managed-CachingOptimized
-    cache_policy_id = "658327ea-f89d-4fab-a63d-7e88639e58f6"
-    # Managed-AllViewerExceptHostHeader — forwards cookies/headers/query to App Runner
-    origin_request_policy_id = "b689b0a8-53d0-40ab-baf2-68738e2966ac"
+    cache_policy_id        = "658327ea-f89d-4fab-a63d-7e88639e58f6"
   }
 
-  # Never cache API routes; they hold booking flow, contact form, geo.
-  ordered_cache_behavior {
-    path_pattern           = "/api/*"
-    target_origin_id       = "apprunner"
-    viewer_protocol_policy = "redirect-to-https"
-    allowed_methods        = ["GET", "HEAD", "OPTIONS", "PUT", "POST", "PATCH", "DELETE"]
-    cached_methods         = ["GET", "HEAD"]
-    compress               = true
+  custom_error_response {
+    error_code            = 403
+    response_code         = 404
+    response_page_path    = "/404.html"
+    error_caching_min_ttl = 60
+  }
 
-    # Managed-CachingDisabled
-    cache_policy_id = "4135ea2d-6df8-44a3-9df3-4b5a84be39ad"
-    # Managed-AllViewerExceptHostHeader
-    origin_request_policy_id = "b689b0a8-53d0-40ab-baf2-68738e2966ac"
+  custom_error_response {
+    error_code            = 404
+    response_code         = 404
+    response_page_path    = "/404.html"
+    error_caching_min_ttl = 60
   }
 
   viewer_certificate {
@@ -265,21 +245,18 @@ resource "aws_iam_role_policy" "github_actions" {
     Statement = [
       {
         Effect   = "Allow"
-        Action   = ["ecr:GetAuthorizationToken"]
-        Resource = "*"
+        Action   = ["s3:ListBucket"]
+        Resource = aws_s3_bucket.site.arn
       },
       {
         Effect = "Allow"
         Action = [
-          "ecr:BatchGetImage",
-          "ecr:BatchCheckLayerAvailability",
-          "ecr:CompleteLayerUpload",
-          "ecr:GetDownloadUrlForLayer",
-          "ecr:InitiateLayerUpload",
-          "ecr:PutImage",
-          "ecr:UploadLayerPart",
+          "s3:PutObject",
+          "s3:PutObjectAcl",
+          "s3:GetObject",
+          "s3:DeleteObject",
         ]
-        Resource = aws_ecr_repository.app.arn
+        Resource = "${aws_s3_bucket.site.arn}/*"
       },
       {
         Effect   = "Allow"

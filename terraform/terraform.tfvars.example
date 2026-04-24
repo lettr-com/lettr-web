@@ -1,14 +1,9 @@
-aws_region       = "eu-central-1"
-project_name     = "lettr-web"
+aws_region   = "eu-central-1"
+project_name = "lettr-web"
 
-# Leave blank to launch on the default *.cloudfront.net URL; fill both to wire a custom domain via Route 53.
-domain_name      = ""
-route53_zone_id  = ""
+# Leave blank for default *.cloudfront.net URL; fill both for a Route 53 custom domain.
+domain_name     = ""
+route53_zone_id = ""
 
 # Enables GitHub Actions OIDC (no long-lived AWS keys). Format: "owner/repo".
-github_repo      = ""
-
-# Runtime secrets — pulled into App Runner as env vars. Do NOT commit terraform.tfvars.
-zaptime_token    = "REPLACE_ME"
-zaptime_base_url = "https://api.zaptime.com/"
-turnstile_secret = "REPLACE_ME"
+github_repo = ""

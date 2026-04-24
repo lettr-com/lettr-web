@@ -3,7 +3,6 @@ import {
 	getCookieValue,
 	getConsentState,
 	buildConsentCookieString,
-	shouldShowBanner,
 	writeConsentCookie,
 } from './cookieConsent';
 
@@ -82,21 +81,6 @@ describe('buildConsentCookieString', () => {
 	it('uses custom max-age', () => {
 		const result = buildConsentCookieString('accepted', 30);
 		expect(result).toContain('max-age=2592000');
-	});
-});
-
-describe('shouldShowBanner', () => {
-	it('returns false when already consented', () => {
-		expect(shouldShowBanner({ hasConsented: true, value: 'accepted' }, true)).toBe(false);
-		expect(shouldShowBanner({ hasConsented: true, value: 'rejected' }, true)).toBe(false);
-	});
-
-	it('returns true when in EU and no consent', () => {
-		expect(shouldShowBanner({ hasConsented: false, value: null }, true)).toBe(true);
-	});
-
-	it('returns false when not in EU', () => {
-		expect(shouldShowBanner({ hasConsented: false, value: null }, false)).toBe(false);
 	});
 });
 

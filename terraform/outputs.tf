@@ -1,21 +1,16 @@
-output "apprunner_url" {
-  description = "App Runner origin URL (used by CloudFront; not for end users)."
-  value       = aws_apprunner_service.app.service_url
+output "s3_bucket" {
+  description = "S3 bucket holding the site. Pass to CI as S3_BUCKET."
+  value       = aws_s3_bucket.site.bucket
 }
 
 output "cloudfront_domain" {
-  description = "CloudFront distribution domain. Point your DNS here, or use this directly if no custom domain was configured."
+  description = "CloudFront distribution domain. Point DNS here, or open directly if no custom domain is set."
   value       = aws_cloudfront_distribution.cdn.domain_name
 }
 
 output "cloudfront_distribution_id" {
   description = "Pass this to CI as CLOUDFRONT_DISTRIBUTION_ID for cache invalidation."
   value       = aws_cloudfront_distribution.cdn.id
-}
-
-output "ecr_repository_url" {
-  description = "ECR repo URL. Use this in CI to tag/push images."
-  value       = aws_ecr_repository.app.repository_url
 }
 
 output "github_actions_role_arn" {

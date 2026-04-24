@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { PUBLIC_TURNSTILE_SITE_KEY } from '$env/static/public';
 	import { onMount } from 'svelte';
 	import { capturePosthogEvent, identifyPosthogUser } from '$lib/analytics/posthog';
 	import BookingAlerts from '$lib/components/booking/BookingAlerts.svelte';
@@ -9,7 +8,8 @@
 	import SlotPicker from '$lib/components/booking/SlotPicker.svelte';
 	import VolumePicker from '$lib/components/booking/VolumePicker.svelte';
 	import { createFromAnimationCleanup } from '$lib/utils/gsap';
-	import type { InitData, InitResponse, ReservationResponse, TimeSlot } from '$lib/zaptime/types';
+	import { bookZaptimeSlot, fetchZaptimeConfig, fetchZaptimeSlots } from '$lib/zaptime/client';
+	import type { InitData, TimeSlot } from '$lib/zaptime/types';
 
 	let config: InitData | null = $state(null);
 	let slots: TimeSlot[] = $state([]);
@@ -26,8 +26,6 @@
 	let firstName: string = $state('');
 	let lastName: string = $state('');
 	let companyName: string = $state('');
-	let turnstileToken: string = $state('');
-	let turnstileResetKey: number = $state(0);
 
 	let confirmationUuid: string | null = $state(null);
 
@@ -180,7 +178,7 @@
 		infoMessage = '';
 
 		try {
-			const configResponse = await requestJson<InitResponse>('/api/zaptime/config');
+			const configResponse = await fetchZaptimeConfig();
 			config = configResponse.data;
 			trackBookingEvent('book_config_loaded', {
 				step_number: 4
@@ -246,15 +244,8 @@
 		const until = new Date();
 		until.setDate(until.getDate() + 21);
 
-		const params = new URLSearchParams({
-			from: from.toISOString(),
-			until: until.toISOString()
-		});
-
 		try {
-			const response = await requestJson<{ success: boolean; data: TimeSlot[] }>(
-				`/api/zaptime/slots?${params.toString()}`
-			);
+			const response = await fetchZaptimeSlots(from.toISOString(), until.toISOString());
 
 			slots = response.data;
 			trackBookingEvent('book_slots_loaded', {
@@ -322,15 +313,6 @@
 			return;
 		}
 
-		if (!turnstileToken) {
-			errorMessage = 'Please complete the verification challenge.';
-			trackBookingEvent('book_confirm_validation_failed', {
-				step_number: 8,
-				reason: 'missing_turnstile_token'
-			});
-			return;
-		}
-
 		errorMessage = '';
 		infoMessage = '';
 		isConfirming = true;
@@ -341,21 +323,14 @@
 		});
 
 		try {
-			const confirmation = await requestJson<ReservationResponse>('/api/zaptime/book', {
-				method: 'POST',
-				headers: {
-					'Content-Type': 'application/json'
-				},
-				body: JSON.stringify({
-					email,
-					firstName,
-					lastName,
-					companyName,
-					emailsVolume: selectedVolumeRange,
-					timeSlot: selectedSlot,
-					timezone,
-					turnstileToken
-				})
+			const confirmation = await bookZaptimeSlot({
+				email,
+				firstName,
+				lastName,
+				companyName,
+				emailsVolume: selectedVolumeRange,
+				timeSlot: selectedSlot,
+				timezone
 			});
 
 			confirmationUuid = confirmation.data.uuid;
@@ -372,8 +347,6 @@
 		} catch (error) {
 			const message = toErrorMessage(error, 'Could not confirm reservation.');
 			errorMessage = message;
-			turnstileToken = '';
-			turnstileResetKey += 1;
 			trackBookingEvent('book_reservation_failed', {
 				step_number: 9,
 				error_message: message,
@@ -413,19 +386,6 @@
 
 	function getDaySlotCount(day: string) {
 		return slotGroups.get(day)?.length ?? 0;
-	}
-
-	async function requestJson<T>(url: string, init?: RequestInit): Promise<T> {
-		const response = await fetch(url, init);
-		const body = (await response.json().catch(() => null)) as
-			| { message?: string; error?: string }
-			| null;
-
-		if (!response.ok) {
-			throw new Error(body?.message ?? body?.error ?? 'Request failed');
-		}
-
-		return body as T;
 	}
 
 	function toDayKey(isoDateTime: string) {
@@ -527,9 +487,6 @@
 					bind:firstName
 					bind:lastName
 					bind:companyName
-					bind:turnstileToken
-					turnstileSiteKey={PUBLIC_TURNSTILE_SITE_KEY}
-					{turnstileResetKey}
 					{canConfirm}
 					{isConfirming}
 					{isConfirmed}

@@ -7,7 +7,6 @@ on:
 
 env:
   AWS_REGION: eu-central-1
-  ECR_REPOSITORY: lettr-web
 
 concurrency:
   group: deploy-${{ github.ref }}
@@ -22,44 +21,41 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 9
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - run: pnpm install --frozen-lockfile
+
+      - name: Build static site
+        env:
+          PUBLIC_INTERCOM_APP_ID: ${{ secrets.PUBLIC_INTERCOM_APP_ID }}
+        run: pnpm build
+
       - uses: aws-actions/configure-aws-credentials@v4
         with:
           role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
           aws-region: ${{ env.AWS_REGION }}
 
-      - uses: aws-actions/amazon-ecr-login@v2
-        id: login-ecr
-
-      - uses: docker/setup-buildx-action@v3
-
-      - name: Build and push image
-        uses: docker/build-push-action@v6
-        with:
-          context: .
-          push: true
-          platforms: linux/amd64
-          tags: |
-            ${{ steps.login-ecr.outputs.registry }}/${{ env.ECR_REPOSITORY }}:latest
-            ${{ steps.login-ecr.outputs.registry }}/${{ env.ECR_REPOSITORY }}:${{ github.sha }}
-          cache-from: type=gha
-          cache-to: type=gha,mode=max
-
-      # App Runner auto-deploys on :latest push (auto_deployments_enabled = true in Terraform).
-      # Wait for the rollout to finish before invalidating CloudFront so we don't serve the old origin response.
-      - name: Wait for App Runner rollout
+      # Hashed immutable assets first — long cache, keep existing copies around.
+      - name: Sync hashed assets (immutable, no delete)
         run: |
-          SERVICE_ARN=$(aws apprunner list-services --region "$AWS_REGION" \
-            --query "ServiceSummaryList[?ServiceName=='${ECR_REPOSITORY}'].ServiceArn | [0]" --output text)
-          for i in $(seq 1 60); do
-            STATUS=$(aws apprunner describe-service --service-arn "$SERVICE_ARN" --region "$AWS_REGION" \
-              --query "Service.Status" --output text)
-            echo "App Runner status: $STATUS"
-            if [ "$STATUS" = "RUNNING" ]; then exit 0; fi
-            if [ "$STATUS" = "CREATE_FAILED" ] || [ "$STATUS" = "OPERATION_IN_PROGRESS" ]; then sleep 15; continue; fi
-            sleep 15
-          done
-          echo "Timed out waiting for App Runner to reach RUNNING" >&2
-          exit 1
+          aws s3 sync build/_app/immutable s3://${{ secrets.S3_BUCKET }}/_app/immutable \
+            --cache-control "public, max-age=31536000, immutable" \
+            --size-only
+
+      # Everything else — short cache, delete removed files.
+      - name: Sync HTML + other assets (short cache)
+        run: |
+          aws s3 sync build s3://${{ secrets.S3_BUCKET }} \
+            --exclude "_app/immutable/*" \
+            --cache-control "public, max-age=60, s-maxage=600" \
+            --delete
 
       - name: Invalidate CloudFront
         run: |

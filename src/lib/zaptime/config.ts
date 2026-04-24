@@ -28,6 +28,12 @@ const zaptimeConfigByEnvironment: Record<'development' | 'production', ZaptimeEn
 	}
 };
 
-export function getCurrentZaptimeConfig() {
-	return dev ? zaptimeConfigByEnvironment.development : zaptimeConfigByEnvironment.production;
+export function getZaptimeConfig() {
+	const { apiToken, apiBaseUrl, customFieldIds } = dev
+		? zaptimeConfigByEnvironment.development
+		: zaptimeConfigByEnvironment.production;
+
+	const baseUrl = apiBaseUrl.endsWith('/') ? apiBaseUrl : `${apiBaseUrl}/`;
+
+	return { token: apiToken.trim(), baseUrl, customFieldIds };
 }

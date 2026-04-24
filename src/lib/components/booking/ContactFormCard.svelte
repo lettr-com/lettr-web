@@ -1,5 +1,4 @@
 <script lang="ts">
-	import Turnstile from '$lib/components/Turnstile.svelte';
 	import { Button } from '$lib/components/ui/button';
 	import {
 		Card,
@@ -18,9 +17,6 @@
 		firstName?: string;
 		lastName?: string;
 		companyName?: string;
-		turnstileToken?: string;
-		turnstileSiteKey?: string;
-		turnstileResetKey?: number;
 		canConfirm: boolean;
 		isConfirming: boolean;
 		isConfirmed: boolean;
@@ -33,9 +29,6 @@
 		firstName = $bindable(''),
 		lastName = $bindable(''),
 		companyName = $bindable(''),
-		turnstileToken = $bindable(''),
-		turnstileSiteKey = '',
-		turnstileResetKey = 0,
 		canConfirm,
 		isConfirming,
 		isConfirmed,
@@ -43,14 +36,7 @@
 		onconfirm
 	}: Props = $props();
 
-	const hasTurnstileSiteKey = $derived(Boolean(turnstileSiteKey.trim()));
-	const canSubmit = $derived(
-		canConfirm &&
-			!isConfirming &&
-			!isConfirmed &&
-			Boolean(turnstileToken) &&
-			hasTurnstileSiteKey
-	);
+	const canSubmit = $derived(canConfirm && !isConfirming && !isConfirmed);
 </script>
 
 <Card>
@@ -79,12 +65,6 @@
 			<Label for="company-name">Company name</Label>
 			<Input id="company-name" bind:value={companyName} placeholder="Acme Inc." required />
 		</div>
-
-		<Turnstile
-			bind:token={turnstileToken}
-			siteKey={turnstileSiteKey}
-			resetKey={turnstileResetKey}
-		/>
 	</CardContent>
 
 	<Separator />
