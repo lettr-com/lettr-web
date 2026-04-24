@@ -1,7 +1,7 @@
 variable "aws_region" {
   description = "AWS region for App Runner + ECR. Pick the region closest to your largest user base."
   type        = string
-  default     = "us-east-1"
+  default     = "eu-central-1"
 }
 
 variable "project_name" {
