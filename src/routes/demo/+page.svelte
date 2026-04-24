@@ -36,7 +36,15 @@
 	let infoMessage: string = $state('');
 	let errorMessage: string = $state('');
 
-	const volumeRanges = [
+	type VolumeRoute = 'demo' | 'priorityDemo' | 'selfServe';
+	interface VolumeRange {
+		value: string;
+		label: string;
+		description: string;
+		route: VolumeRoute;
+	}
+
+	const volumeRanges: readonly VolumeRange[] = [
 		{
 			value: 'Under 100K',
 			label: 'Under 100K',
@@ -61,7 +69,7 @@
 			description: 'Great fit for a regular demo',
 			route: 'demo'
 		}
-	] as const;
+	];
 
 	const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone || 'UTC';
 	const funnelName = 'booking_funnel';
@@ -176,25 +184,49 @@
 	async function initializeBooking() {
 		errorMessage = '';
 		infoMessage = '';
+		isLoadingSlots = true;
 
-		try {
-			const configResponse = await fetchZaptimeConfig();
-			config = configResponse.data;
-			trackBookingEvent('book_config_loaded', {
-				step_number: 4
-			});
-		} catch (error) {
-			const message = toErrorMessage(error, 'Could not load booking configuration.');
+		const from = new Date();
+		const until = new Date();
+		until.setDate(until.getDate() + 21);
+
+		const [configResult, slotsResult] = await Promise.allSettled([
+			fetchZaptimeConfig(),
+			fetchZaptimeSlots(from.toISOString(), until.toISOString())
+		]);
+
+		if (configResult.status === 'fulfilled') {
+			config = configResult.value.data;
+			trackBookingEvent('book_config_loaded', { step_number: 4 });
+		} else {
+			const message = toErrorMessage(configResult.reason, 'Could not load booking configuration.');
 			errorMessage = message;
 			trackBookingEvent('book_config_load_failed', {
 				step_number: 4,
 				error_message: message
 			});
-		} finally {
-			isLoadingConfig = false;
 		}
+		isLoadingConfig = false;
 
-		await loadSlots();
+		if (slotsResult.status === 'fulfilled') {
+			slots = slotsResult.value.data;
+			trackBookingEvent('book_slots_loaded', {
+				step_number: 5,
+				slot_count: slots.length
+			});
+			if (slots.length > 0) {
+				selectedDay = toDayKey(slots[0].start);
+				selectedSlot = null;
+			}
+		} else {
+			const message = toErrorMessage(slotsResult.reason, 'Could not load available booking slots.');
+			errorMessage ||= message;
+			trackBookingEvent('book_slots_load_failed', {
+				step_number: 5,
+				error_message: message
+			});
+		}
+		isLoadingSlots = false;
 	}
 
 	async function routeRequest(rangeOverride?: (typeof volumeRanges)[number]) {
@@ -234,38 +266,6 @@
 		if (!hasInitializedBooking) {
 			hasInitializedBooking = true;
 			await initializeBooking();
-		}
-	}
-
-	async function loadSlots() {
-		isLoadingSlots = true;
-
-		const from = new Date();
-		const until = new Date();
-		until.setDate(until.getDate() + 21);
-
-		try {
-			const response = await fetchZaptimeSlots(from.toISOString(), until.toISOString());
-
-			slots = response.data;
-			trackBookingEvent('book_slots_loaded', {
-				step_number: 5,
-				slot_count: slots.length
-			});
-
-			if (slots.length > 0) {
-				selectedDay = toDayKey(slots[0].start);
-				selectedSlot = null;
-			}
-		} catch (error) {
-			const message = toErrorMessage(error, 'Could not load available booking slots.');
-			errorMessage = message;
-			trackBookingEvent('book_slots_load_failed', {
-				step_number: 5,
-				error_message: message
-			});
-		} finally {
-			isLoadingSlots = false;
 		}
 	}
 

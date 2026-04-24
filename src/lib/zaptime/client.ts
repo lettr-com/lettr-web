@@ -7,14 +7,13 @@ import type {
 	TimeSlot
 } from './types';
 
-function headers() {
-	const { token } = getZaptimeConfig();
-	return {
-		'Content-Type': 'application/json',
-		Accept: 'application/json',
-		Authorization: `Bearer ${token}`
-	};
-}
+const { token, baseUrl, customFieldIds } = getZaptimeConfig();
+
+const headers = {
+	'Content-Type': 'application/json',
+	Accept: 'application/json',
+	Authorization: `Bearer ${token}`
+};
 
 async function parseJson<T>(response: Response, fallback: string): Promise<T> {
 	const text = await response.text();
@@ -43,10 +42,9 @@ async function parseJson<T>(response: Response, fallback: string): Promise<T> {
 }
 
 export async function fetchZaptimeConfig(): Promise<InitResponse> {
-	const { baseUrl } = getZaptimeConfig();
 	const response = await fetch(`${baseUrl}event-types/init`, {
 		method: 'POST',
-		headers: headers(),
+		headers,
 		body: JSON.stringify({})
 	});
 
@@ -57,10 +55,9 @@ export async function fetchZaptimeSlots(
 	from: string,
 	until: string
 ): Promise<AvailableTimeSlotsResponse> {
-	const { baseUrl } = getZaptimeConfig();
 	const params = new URLSearchParams({ from, until });
 	const response = await fetch(`${baseUrl}time-slots?${params.toString()}`, {
-		headers: headers()
+		headers
 	});
 
 	return parseJson<AvailableTimeSlotsResponse>(response, 'Could not load available time slots');
@@ -80,8 +77,6 @@ type BookingRequest = {
 };
 
 export async function bookZaptimeSlot(req: BookingRequest): Promise<ReservationResponse> {
-	const { baseUrl, customFieldIds } = getZaptimeConfig();
-
 	const customFields: NonNullable<ReservationPayload['customFields']> = [];
 	if (customFieldIds.company && req.companyName.trim()) {
 		customFields.push({ uuid: customFieldIds.company, value: req.companyName.trim() });
@@ -105,7 +100,7 @@ export async function bookZaptimeSlot(req: BookingRequest): Promise<ReservationR
 
 	const response = await fetch(`${baseUrl}reservations`, {
 		method: 'POST',
-		headers: headers(),
+		headers,
 		body: JSON.stringify(body)
 	});
 

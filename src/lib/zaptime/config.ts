@@ -33,7 +33,5 @@ export function getZaptimeConfig() {
 		? zaptimeConfigByEnvironment.development
 		: zaptimeConfigByEnvironment.production;
 
-	const baseUrl = apiBaseUrl.endsWith('/') ? apiBaseUrl : `${apiBaseUrl}/`;
-
-	return { token: apiToken.trim(), baseUrl, customFieldIds };
+	return { token: apiToken.trim(), baseUrl: apiBaseUrl, customFieldIds };
 }

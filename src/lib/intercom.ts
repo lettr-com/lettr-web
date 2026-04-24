@@ -1,6 +1,6 @@
 const PUBLIC_INTERCOM_APP_ID = import.meta.env.PUBLIC_INTERCOM_APP_ID as string | undefined;
 
-type IntercomCommand = 'boot' | 'update' | 'show' | 'showMessages' | 'showNewMessage' | 'shutdown';
+type IntercomCommand = 'boot' | 'show' | 'showNewMessage';
 
 declare global {
 	interface Window {
@@ -37,16 +37,8 @@ export function bootIntercom() {
 	booted = true;
 }
 
-export function openIntercom() {
-	if (typeof window === 'undefined') return;
-	bootIntercom();
-	window.Intercom?.('show');
-}
-
 export function openIntercomNewMessage(message?: string) {
 	if (typeof window === 'undefined') return;
 	bootIntercom();
 	window.Intercom?.('showNewMessage', message ?? '');
 }
-
-export const hasIntercom = Boolean(PUBLIC_INTERCOM_APP_ID);
