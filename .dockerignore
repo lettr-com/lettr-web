@@ -1,0 +1,12 @@
+node_modules
+.svelte-kit
+build
+.git
+.github
+terraform
+*.md
+.env
+.env.*
+!.env.example
+.DS_Store
+coverage
