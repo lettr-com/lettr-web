@@ -71,6 +71,32 @@ export async function capturePosthogEvent(
 	posthogClient?.capture(eventName, properties);
 }
 
+function authEventProperties(placement: string, href: string, extra?: PosthogProperties) {
+	return {
+		placement,
+		href,
+		page_path: browser ? window.location.pathname : null,
+		page_url: browser ? window.location.href : null,
+		...extra
+	};
+}
+
+export function trackSignupClick(
+	placement: string,
+	href: string,
+	extra?: PosthogProperties
+): void {
+	void capturePosthogEvent('signup_clicked', authEventProperties(placement, href, extra));
+}
+
+export function trackSigninClick(
+	placement: string,
+	href: string,
+	extra?: PosthogProperties
+): void {
+	void capturePosthogEvent('signin_clicked', authEventProperties(placement, href, extra));
+}
+
 export async function identifyPosthogUser(
 	distinctId: string,
 	properties?: PosthogProperties

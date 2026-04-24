@@ -21,7 +21,7 @@
 	} from 'phosphor-svelte';
 	import { createFromAnimationCleanup } from '$lib/utils/gsap';
 	import { buildRegisterUrl, registerUrl } from '$lib/utils/utm';
-	import { capturePosthogEvent } from '$lib/analytics/posthog';
+	import { capturePosthogEvent, trackSigninClick, trackSignupClick } from '$lib/analytics/posthog';
 
 	interface DropdownItem {
 		icon?: typeof CodeIcon;
@@ -193,6 +193,11 @@
 			href,
 			destination_type: /^https?:\/\//.test(href) ? 'external' : 'internal'
 		});
+		if (label === 'Sign in') {
+			trackSigninClick(`navbar_${placement}`, href);
+		} else if (label === 'Start sending') {
+			trackSignupClick(`navbar_${placement}`, href);
+		}
 	}
 
 	function trackLogoClick() {

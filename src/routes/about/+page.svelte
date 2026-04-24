@@ -9,7 +9,7 @@
 	} from 'phosphor-svelte';
 	import { createFromAnimationCleanup, createScrollRevealCleanup } from '$lib/utils/gsap';
 	import { buildRegisterUrl, registerUrl } from '$lib/utils/utm';
-	import { capturePosthogEvent } from '$lib/analytics/posthog';
+	import { capturePosthogEvent, trackSignupClick } from '$lib/analytics/posthog';
 
 	function trackAboutCta(label: string, href: string) {
 		void capturePosthogEvent('cta_clicked', {
@@ -18,6 +18,9 @@
 			href,
 			destination_type: /^https?:\/\/|^mailto:/.test(href) ? 'external' : 'internal'
 		});
+		if (label === 'Try Lettr free') {
+			trackSignupClick('about_bottom', href);
+		}
 	}
 
 	let hero: HTMLElement | undefined = $state();

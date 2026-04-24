@@ -4,7 +4,7 @@
 	import EditorPreview from './EditorPreview.svelte';
 	import { createFromAnimationCleanup } from '$lib/utils/gsap';
 	import { buildRegisterUrl, registerUrl } from '$lib/utils/utm';
-	import { capturePosthogEvent } from '$lib/analytics/posthog';
+	import { capturePosthogEvent, trackSignupClick } from '$lib/analytics/posthog';
 
 	function trackHeroCta(label: string, href: string, variant: 'primary' | 'secondary') {
 		void capturePosthogEvent('cta_clicked', {
@@ -14,6 +14,9 @@
 			variant,
 			destination_type: /^https?:\/\//.test(href) ? 'external' : 'internal'
 		});
+		if (label === 'Start sending') {
+			trackSignupClick('home_hero', href);
+		}
 	}
 
 	let section: HTMLElement | undefined = $state();

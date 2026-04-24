@@ -4,7 +4,7 @@
 	import Slider from './Slider.svelte';
 	import { createScrollRevealCleanup } from '$lib/utils/gsap';
 	import { buildRegisterUrl, registerUrl } from '$lib/utils/utm';
-	import { capturePosthogEvent } from '$lib/analytics/posthog';
+	import { capturePosthogEvent, trackSignupClick } from '$lib/analytics/posthog';
 
 	let section: HTMLElement | undefined = $state();
 	let sliderValue: number = $state(1);
@@ -135,6 +135,13 @@
 			cta_label: cta,
 			highlighted_plan: highlightedPlan,
 			slider_value: sliderValue,
+			volume_label: sliderLabels[sliderValue]
+		});
+		trackSignupClick(`pricing_plan_${planKey}`, registerHref, {
+			plan: planKey,
+			plan_name: planName,
+			cta_label: cta,
+			highlighted_plan: highlightedPlan,
 			volume_label: sliderLabels[sliderValue]
 		});
 	}

@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import { createFromAnimationCleanup, createScrollRevealCleanup } from '$lib/utils/gsap';
+	import { capturePosthogEvent } from '$lib/analytics/posthog';
 
 	interface ChangelogEntry {
 		date: string;
@@ -81,6 +82,21 @@ Welcome to Lettr. Let's make email not suck.
 	let header: HTMLElement | undefined = $state();
 	let entriesSection: HTMLElement | undefined = $state();
 
+	function handleEntryClick(event: MouseEvent) {
+		const anchor = (event.target as HTMLElement | null)?.closest('a');
+		if (!anchor) return;
+		const href = anchor.getAttribute('href') ?? '';
+		if (!href) return;
+		const article = anchor.closest('article');
+		const entryTitle = article?.querySelector('h2')?.textContent?.trim() ?? null;
+		void capturePosthogEvent('changelog_link_clicked', {
+			href,
+			label: anchor.textContent?.trim() ?? '',
+			entry_title: entryTitle,
+			is_external: /^https?:\/\//.test(href)
+		});
+	}
+
 	onMount(() => {
 		const cleanups: (() => void)[] = [];
 
@@ -125,7 +141,8 @@ Welcome to Lettr. Let's make email not suck.
 		</div>
 
 		<!-- Entries -->
-		<div bind:this={entriesSection} class="space-y-10">
+		<!-- svelte-ignore a11y_click_events_have_key_events a11y_no_static_element_interactions -->
+		<div bind:this={entriesSection} class="space-y-10" onclick={handleEntryClick}>
 			{#each changelog as entry}
 				<article data-reveal>
 					<!-- Meta -->

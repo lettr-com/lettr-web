@@ -4,7 +4,7 @@
 	import { createFromAnimationCleanup, createScrollRevealCleanup } from '$lib/utils/gsap';
 	import { buildRegisterUrl, registerUrl } from '$lib/utils/utm';
 	import { providerList } from '$lib/data/providers';
-	import { capturePosthogEvent } from '$lib/analytics/posthog';
+	import { capturePosthogEvent, trackSignupClick } from '$lib/analytics/posthog';
 
 	function trackProviderClick(slug: string, name: string, savings: string | number) {
 		void capturePosthogEvent('compare_provider_clicked', {
@@ -18,9 +18,10 @@
 		void capturePosthogEvent('cta_clicked', {
 			placement: 'compare_bottom',
 			label: 'Try Lettr free',
-			href: '/register',
+			href: registerHref,
 			destination_type: 'internal'
 		});
+		trackSignupClick('compare_bottom', registerHref);
 	}
 
 	let hero: HTMLElement | undefined = $state();

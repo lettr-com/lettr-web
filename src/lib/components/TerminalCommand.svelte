@@ -2,6 +2,7 @@
 	import { onDestroy } from 'svelte';
 	import { CopyIcon, CheckIcon, TerminalWindowIcon } from 'phosphor-svelte';
 	import { createSingleTimeoutManager } from '$lib/utils/timeoutManager';
+	import { capturePosthogEvent } from '$lib/analytics/posthog';
 
 	interface Props {
 		commands: string[];
@@ -15,6 +16,10 @@
 	async function copyCommands() {
 		await navigator.clipboard.writeText(commands.join('\n'));
 		copied = true;
+		void capturePosthogEvent('terminal_command_copied', {
+			command_count: commands.length,
+			first_command: commands[0] ?? ''
+		});
 		copyResetTimeout.schedule(() => {
 			copied = false;
 		}, 3000);

@@ -4,6 +4,7 @@
 	import { CaretDownIcon } from 'phosphor-svelte';
 	import { codeTabs as defaultTabs, type CodeTab } from '$lib/utils/shiki';
 	import { getHighlighter } from '$lib/utils/shiki';
+	import { capturePosthogEvent } from '$lib/analytics/posthog';
 
 	interface Props {
 		tabs?: CodeTab[];
@@ -45,6 +46,14 @@
 
 	function selectTab(index: number) {
 		if (index === activeTab) return;
+		const source = primaryTabIndices.includes(index) ? 'primary' : 'more';
+		void capturePosthogEvent('code_snippet_tab_selected', {
+			tab_index: index,
+			tab_label: tabs[index].label,
+			tab_lang: tabs[index].lang,
+			source,
+			filename: filename ?? null
+		});
 		moreOpen = false;
 		activeTab = index;
 

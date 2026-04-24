@@ -5,7 +5,7 @@
 	import { createFromAnimationCleanup, createScrollRevealCleanup } from '$lib/utils/gsap';
 	import { buildRegisterUrl, registerUrl } from '$lib/utils/utm';
 	import { providers } from '$lib/data/providers';
-	import { capturePosthogEvent } from '$lib/analytics/posthog';
+	import { capturePosthogEvent, trackSignupClick } from '$lib/analytics/posthog';
 
 	function trackProviderCta(label: string, href: string) {
 		void capturePosthogEvent('cta_clicked', {
@@ -15,6 +15,9 @@
 			provider_slug: data.provider,
 			destination_type: /^https?:\/\//.test(href) ? 'external' : 'internal'
 		});
+		if (label === 'Try Lettr free') {
+			trackSignupClick('compare_provider_bottom', href, { provider_slug: data.provider });
+		}
 	}
 
 	let { data } = $props();

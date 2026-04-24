@@ -3,7 +3,7 @@
 	import type { Snippet } from 'svelte';
 	import { createFromAnimationCleanup } from '$lib/utils/gsap';
 	import { buildRegisterUrl, registerUrl } from '$lib/utils/utm';
-	import { capturePosthogEvent } from '$lib/analytics/posthog';
+	import { capturePosthogEvent, trackSignupClick } from '$lib/analytics/posthog';
 
 	interface Props {
 		title: string;
@@ -69,13 +69,16 @@
 		<a
 			href={registerHref}
 			class="inline-flex items-center gap-2 bg-primary px-8 py-3.5 text-[15px] font-semibold text-white transition-colors hover:bg-primary/90"
-			onclick={() => void capturePosthogEvent('cta_clicked', {
-				placement: 'feature_page_bottom',
-				label: 'Start sending for free',
-				feature: label,
-				href: registerHref,
-				destination_type: 'internal'
-			})}
+			onclick={() => {
+				void capturePosthogEvent('cta_clicked', {
+					placement: 'feature_page_bottom',
+					label: 'Start sending for free',
+					feature: label,
+					href: registerHref,
+					destination_type: 'internal'
+				});
+				trackSignupClick('feature_page_bottom', registerHref, { feature: label });
+			}}
 		>
 			Start sending for free &rarr;
 		</a>

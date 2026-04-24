@@ -12,7 +12,7 @@
 	import FeaturePageLayout from '$lib/components/FeaturePageLayout.svelte';
 	import { createScrollRevealCleanup } from '$lib/utils/gsap';
 	import { buildRegisterUrl, registerUrl } from '$lib/utils/utm';
-	import { capturePosthogEvent } from '$lib/analytics/posthog';
+	import { capturePosthogEvent, trackSignupClick } from '$lib/analytics/posthog';
 
 	function trackChannelCta(label: string, href: string) {
 		void capturePosthogEvent('cta_clicked', {
@@ -21,6 +21,9 @@
 			href,
 			destination_type: /^https?:\/\//.test(href) ? 'external' : 'internal'
 		});
+		if (label === 'Start sending for free') {
+			trackSignupClick('channel_email_bottom', href);
+		}
 	}
 
 	let statsSection: HTMLElement | undefined = $state();

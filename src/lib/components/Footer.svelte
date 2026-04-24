@@ -2,7 +2,7 @@
 	import { onMount } from 'svelte';
 	import { buildRegisterUrl, registerUrl } from '$lib/utils/utm';
 	import { EnvelopeSimpleIcon, GithubLogoIcon, LinkedinLogoIcon, XLogoIcon } from 'phosphor-svelte';
-	import { capturePosthogEvent } from '$lib/analytics/posthog';
+	import { capturePosthogEvent, trackSignupClick } from '$lib/analytics/posthog';
 
 	let registerHref: string = $state(registerUrl);
 
@@ -39,6 +39,7 @@
 			href: registerHref,
 			destination_type: 'internal'
 		});
+		trackSignupClick('footer', registerHref);
 	}
 
 	const columns = [
