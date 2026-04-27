@@ -134,8 +134,9 @@ resource "aws_cloudfront_function" "viewer_country_cookie" {
       var response = event.response;
       var header = request.headers['cloudfront-viewer-country'];
       var country = (header && header.value) ? header.value : 'XX';
-      response.headers['set-cookie'] = {
-        value: 'viewer_country=' + country + '; Path=/; Max-Age=86400; SameSite=Lax; Secure'
+      response.cookies['viewer_country'] = {
+        value: country,
+        attributes: 'Path=/; Max-Age=86400; SameSite=Lax; Secure'
       };
       return response;
     }
