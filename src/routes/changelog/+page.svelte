@@ -117,6 +117,10 @@ Welcome to Lettr. Let's make email not suck.
 					targets: '[data-reveal]'
 				})
 			);
+
+			const section = entriesSection;
+			section.addEventListener('click', handleEntryClick);
+			cleanups.push(() => section.removeEventListener('click', handleEntryClick));
 		}
 
 		return () => cleanups.forEach((fn) => fn());
@@ -141,8 +145,7 @@ Welcome to Lettr. Let's make email not suck.
 		</div>
 
 		<!-- Entries -->
-		<!-- svelte-ignore a11y_click_events_have_key_events a11y_no_static_element_interactions -->
-		<div bind:this={entriesSection} class="space-y-10" onclick={handleEntryClick}>
+		<div bind:this={entriesSection} class="space-y-10">
 			{#each changelog as entry}
 				<article data-reveal>
 					<!-- Meta -->

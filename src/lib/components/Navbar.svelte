@@ -330,7 +330,8 @@
 																		{#if item.iconSrc}
 																			<img src={item.iconSrc} alt="" class="h-4 w-4" />
 																		{:else if item.icon}
-																			<svelte:component this={item.icon} size={14} class="text-muted transition-colors group-hover:text-primary" />
+																			{@const Icon = item.icon}
+																			<Icon size={14} class="text-muted transition-colors group-hover:text-primary" />
 																		{/if}
 																	</div>
 																	<div>
@@ -361,7 +362,8 @@
 														{#if item.iconSrc}
 															<img src={item.iconSrc} alt="" class="h-3.5 w-3.5" />
 														{:else if item.icon}
-															<svelte:component this={item.icon} size={14} class="text-muted transition-colors group-hover:text-primary" />
+															{@const Icon = item.icon}
+															<Icon size={14} class="text-muted transition-colors group-hover:text-primary" />
 														{/if}
 													</div>
 													<div>
@@ -507,7 +509,8 @@
 													{#if item.iconSrc}
 														<img src={item.iconSrc} alt="" class="h-4 w-4" />
 													{:else if item.icon}
-														<svelte:component this={item.icon} size={16} class="text-muted" />
+														{@const Icon = item.icon}
+														<Icon size={16} class="text-muted" />
 													{/if}
 													<span class="text-sm">{item.label}</span>
 												</a>
