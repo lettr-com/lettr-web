@@ -74,7 +74,7 @@
 	});
 </script>
 
-<div bind:this={container} class="fixed inset-x-0 bottom-0 z-0 h-[30vh]">
+<div bind:this={container} class="fixed inset-x-0 bottom-0 z-0 mx-auto h-[30vh] max-w-[1600px]">
 	{#if shouldRenderSpline}
 		<spline-viewer url={sceneUrl} style="width: 100%; height: 100%;"></spline-viewer>
 	{/if}
