@@ -67,7 +67,7 @@
 				"text": faq.answer
 			}
 		}))
-	})}</script>`}
+	})}<\/script>`}
 </svelte:head>
 
 <section bind:this={section} id="faq" class="py-16 border-b border-border/30">

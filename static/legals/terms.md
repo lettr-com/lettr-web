@@ -34,10 +34,8 @@ ensure consumer’s protection under the Directive 2011/83/EU on consumer
 rights.**
 
 1.  **DEFINITIONS**
-
     1.  The following terms shall have the meaning attributed to them
         under this section when capitalized:
-
         1.  **Account** means the account you have signed up for the
             purpose to use the Service according to these Terms.
 
@@ -239,9 +237,7 @@ rights.**
             fonts, etc., which may also include works of third parties.
 
 2.  **USE POLICY**
-
     1.  **User Declaration.** You represent and undertake that:
-
         1.  you are fully capable of legal acts,
 
         2.  all information you provide about yourself is true,
@@ -285,7 +281,6 @@ rights.**
 
     6.  **User’s commitment in using the Service**. Especially you
         undertake that you do not:
-
         1.  **use** the Service in connection with unsolicited mass
             distribution of emails known as Spam, in general, Lettr is
             not set up for mass distribution of Emails, but for sending
@@ -321,7 +316,6 @@ rights.**
         8.  **violate** any applicable laws or regulations.
 
     7.  **Use of the Software**. You **may not**:
-
         1.  **copy**, **rent**, **lease**, **sell**, **transfer**,
             **assign**, **sublicense**, **disassemble**, **reverse
             engineer** or **decompile**, **modify** or **alter** any
@@ -364,7 +358,6 @@ rights.**
         including non-pecuniary loss.
 
 3.  **PROPRIETARY RIGHTS, INTELLECTUAL PROPERTY AND LICENSE**
-
     1.  **Intellectual property rights**. All rights, title and interest
         in and to the Software and any other technology and software
         provided, including all Intellectual property and proprietary
@@ -409,7 +402,6 @@ rights.**
         components, as well as the User's Content.
 
 4.  **LICENSE AND OTHER ARRANGEMENTS**
-
     1.  **Licensed software and content as a work.** An important part
         of providing the Service is the Licensed software and content,
         thanks to which you can edit your email templates, create your
@@ -468,7 +460,6 @@ rights.**
         for any damage incurred, including non-pecuniary damage.
 
 5.  **ACCOUNT**
-
     1.  **Eligibility**. In order to use the Service, you must be
         eligible. That means you are legally able to enter into
         contracts (at least 18 years old). We may refuse to provide the
@@ -551,7 +542,6 @@ rights.**
         differentiate the range of the Service features that a given
         additional Team member can access within an Account. The access
         levels of an additional Team members are as follows:
-
         1.  **Owner.** Has access to all features that the User has
             access to.
 
@@ -578,7 +568,6 @@ rights.**
         applicable.
 
 6.  **REMUNERATION FOR THE SERVICE AND METHOD OF PAYMENT**
-
     1.  **Use of the Service for a Fee.** The Service is provided for a
         fee. You undertake to pay us the Fee for the provision of the
         Service, in accordance with the rules set out in the [<u>Price
@@ -631,7 +620,6 @@ rights.**
         the fee for the provision of our Service in advance, for each
         Billing Period that has already begun (applies to all Tariff
         bands for Tariff Programs):
-
         1.  normal Billing Period starts every first day of a new month
             and lasts exactly one month;
 
@@ -717,7 +705,6 @@ rights.**
         email address.
 
 7.  **RIGHTS AND OBLIGATIONS OF LETTR**
-
     1.  **Use of the User's Email Domain.** We have the right to use
         your Email domain (@userdomain.cz) solely for the purpose of
         providing performance under these Terms, i.e. sending Emails. At
@@ -813,7 +800,6 @@ rights.**
         hello@lettr.com.
 
 8.  **LIMITATION OF LETTR’S LIABILITY**
-
     1.  **Non-delivery or incomplete delivery of an email.** It bears no
         liability for any damage or harm that you and/or Recipients
         incur in connection with the use of the Service, in particular
@@ -870,7 +856,6 @@ rights.**
         suspend your Account due to such violation
 
 9.  **FORCE MAJEURE**
-
     1.  **Conditions for the application of force majeure.** We are not
         liable for any breach of obligations under these Terms caused by
         force majeure, unless these Terms provide otherwise.
@@ -883,7 +868,6 @@ rights.**
         obstacle at the time the obligation arose.
 
 10. **MAINTENANCE REQUIRED**
-
     1.  **Necessary Maintenance.** It is not a breach of these Terms if
         the Service is not provided due to Necessary Maintenance.
         Necessary maintenance is usually notified in advance through the
@@ -907,7 +891,6 @@ rights.**
         User Account or via your E-mail.
 
 11. **SERVICE DEFECTS**
-
     1.  **Right in the event of defects.** If the Service is provided
         defectively or is not provided in accordance with these Terms,
         you have the right to file a complaint with us about a defect in
@@ -932,7 +915,6 @@ rights.**
         affect the maturity of the Reward.
 
 12. **RESTRICTION OR SUSPENSION OF SERVICE**
-
     1.  **Limitation or suspension of the Service.** We reserve the
         right to limit or suspend the provision of the Service if we
         believe that you are in breach of these Terms and/or legal
@@ -948,7 +930,6 @@ rights.**
     2.  **Exceptions to Notice Obligation.** You acknowledge that we are
         not required to notify you of a decision to limit or suspend the
         Service at least fifteen (15) days in advance, provided that:
-
         1.  we are subject to a legal or regulatory obligation requiring
             us to cease providing the Services to a business User in a
             manner that does not allow us to meet the notice period;
@@ -970,7 +951,6 @@ rights.**
 
 13. **DURATION AND POSSIBILITIES OF TERMINATION OF THE CONTRACTUAL
     RELATIONSHIP**
-
     1.  **Duration of the contractual relationship.** This contractual
         relationship is concluded for an indefinite period of time,
         namely at the moment of your registration for the Service.
@@ -1015,7 +995,6 @@ rights.**
         Terms or applicable legal regulations. A material breach
         according to the previous sentence is considered in particular
         to be:
-
         1.  any action that is capable of jeopardizing the software
             necessary to provide the Service;
 
@@ -1064,7 +1043,6 @@ rights.**
         part of the Fee already paid for the use of the Service.
 
 14. **HOW TO PROCEED WHEN CHANGING THE PROVIDER (EU DATA ACT)?**
-
     1.  **Switching to another provider.** You may notify us at any time
         that you wish to switch to another provider of similar services,
         move your Exportable Data to your on-premises infrastructure, or
@@ -1154,7 +1132,6 @@ rights.**
         protection with appropriate technical and legal measures.
 
 15. **SECURITY AND PRIVACY**
-
     1.  **Data processing**. Your privacy is important to us. We employ
         security measures in accordance with applicable and routine
         practice. Please read our [<u>Privacy
@@ -1187,7 +1164,6 @@ rights.**
         and as a reference or to develop new features and services.
 
 16. **CUSTOMER SUPPORT**
-
     1.  **Support provision**. For purposes of these Terms,
         “**support**” means email guidance provided by us pertaining to
         the installation, assisted integration or usage of the Software.
@@ -1209,9 +1185,7 @@ rights.**
         trademark, moral right or other intellectual property rights.
 
 17. **SERVICE LEVEL**
-
     1.  **User’s acknowledgments**. You acknowledge that:
-
         1.  the access to and use of the Service may be suspended for
             the duration of any unanticipated or unscheduled outage or
             unavailability of the Service for any reason, including as a
@@ -1251,7 +1225,6 @@ and fitness for a particular purpose, which are, to the fullest extent
 permitted by law, excluded from these Terms.
 
 19. **CHANGES OF TERMS**
-
     1.  **Changes of Terms**. We can change these Terms at any time. The
         proposed changes cannot be made before the notification period
         (which is reasonable and proportionate to the nature and extent
@@ -1272,7 +1245,6 @@ permitted by law, excluded from these Terms.
         to the User**.
 
 20. **VIOLATION OF THESE TERMS**
-
     1.  **Violation of these Terms by the User**. It is not a breach of
         the Terms if the Service is not properly provided because the
         User has violated any provision of these Terms. In the event
@@ -1318,7 +1290,6 @@ permitted by law, excluded from these Terms.
         we may preserve any communication between us, and may also
         disclose such data if required to do so by law or we determine
         that such preservation or disclosure is reasonably necessary to:
-
         1.  comply with legal requirements;
 
         2.  enforce these Terms;
@@ -1333,7 +1304,6 @@ permitted by law, excluded from these Terms.
         Emails that you send through the Service will comply with
         applicable laws and these Terms and Conditions. In particular,
         you are obliged to ensure that your Emails:
-
         1.  do not contain any parts that incite or lead to
             non-compliance with obligations imposed by law or on the
             basis of law or criminal offenses, or that approve of
@@ -1391,7 +1361,6 @@ permitted by law, excluded from these Terms.
         14. would be contrary to good morals in any other respect.
 
 21. **FINAL PROVISIONS**
-
     1.  **Governing law**. These Terms, and any disputes arising from or
         relating to the interpretation thereof, shall be governed by and
         construed under the Czech law.
@@ -1464,7 +1433,6 @@ rules in writing, which they do by this Processing Agreement.
 
 1.  **INTRODUCTION AND BRIEF OVERVIEW OF THE CONTENT OF THE PROCESSING
     AGREEMENT**
-
     1.  **Subject and purpose of the Processing Agreement**. By entering
         into this Processing Agreement, you, as the Controller,
         authorize the Processor to process personal data for you in
@@ -1519,7 +1487,6 @@ rules in writing, which they do by this Processing Agreement.
         maintain the confidentiality of the information.
 
 2.  **JOINT OBLIGATIONS OF THE CONTROLLER AND PROCESSOR**
-
     1.  **Legality of processing**. The Controller and the Processor
         undertake to comply with the regulations governing the
         protection of personal data.
@@ -1546,7 +1513,6 @@ rules in writing, which they do by this Processing Agreement.
         disclosure or access to personal data processed under the Terms.
 
 3.  **RIGHTS AND OBLIGATIONS OF THE PROCESSOR**
-
     1.  **Restriction of access**. The Processor shall ensure that
         access to personal data is limited to (a) employees who process
         personal data as part of their job description, and (b) persons
@@ -1565,7 +1531,6 @@ rules in writing, which they do by this Processing Agreement.
         can be found in **Annex B** of this Processing Agreement.
 
     3.  **Obligations of the Processor**. The Processor undertakes to:
-
         1.  when processing personal data, comply with all obligations
             arising for the processor of personal data from the relevant
             legislation;
@@ -1674,7 +1639,6 @@ rules in writing, which they do by this Processing Agreement.
         inaccessible.
 
 4.  **FINAL PROVISIONS**
-
     1.  **Governing law**. For matters not specifically covered in this
         Processing Agreement, generally binding legal regulations shall
         apply. The Processing Agreement shall be governed by and
@@ -1693,7 +1657,6 @@ rules in writing, which they do by this Processing Agreement.
         communications regarding the Processing Agreement (including
         notification of a security incident) will be conducted via email
         addresses:
-
         1.  Controller: the email address used by the Controller for
             registration for the Service;
 

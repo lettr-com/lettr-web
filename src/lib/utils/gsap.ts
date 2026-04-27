@@ -1,86 +1,90 @@
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { createGsapContextCleanup } from './gsapContext';
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { createGsapContextCleanup } from "./gsapContext";
 
 type GsapTargets = string | Element | Element[] | NodeListOf<Element>;
 type GsapFromVars = NonNullable<Parameters<typeof gsap.from>[1]>;
 
 interface BaseAnimationOptions {
-	scope: Element;
-	targets: GsapTargets;
-	vars: GsapFromVars;
+  scope: Element;
+  targets: GsapTargets;
+  vars: GsapFromVars;
 }
 
 interface ScrollRevealOptions {
-	scope: Element;
-	targets: GsapTargets;
-	trigger?: Element;
-	vars?: GsapFromVars;
+  scope: Element;
+  targets: GsapTargets;
+  trigger?: Element;
+  vars?: GsapFromVars;
 }
 
 let hasRegisteredScrollTrigger = false;
 
 function resolveTargets(scope: Element, targets: GsapTargets): GsapTargets {
-	if (typeof targets === 'string') {
-		return scope.querySelectorAll(targets);
-	}
+  if (typeof targets === "string") {
+    return scope.querySelectorAll(targets);
+  }
 
-	return targets;
+  return targets;
 }
 
 export function ensureGsapPlugins(): void {
-	if (hasRegisteredScrollTrigger) return;
+  if (hasRegisteredScrollTrigger) return;
 
-	gsap.registerPlugin(ScrollTrigger);
-	hasRegisteredScrollTrigger = true;
+  gsap.registerPlugin(ScrollTrigger);
+  hasRegisteredScrollTrigger = true;
 }
 
-export function createFromAnimationCleanup({ scope, targets, vars }: BaseAnimationOptions): () => void {
-	const resolvedTargets = resolveTargets(scope, targets);
+export function createFromAnimationCleanup({
+  scope,
+  targets,
+  vars,
+}: BaseAnimationOptions): () => void {
+  const resolvedTargets = resolveTargets(scope, targets);
 
-	return createGsapContextCleanup(
-		gsap,
-		() => {
-			gsap.from(resolvedTargets, vars);
-		},
-		scope
-	);
+  return createGsapContextCleanup(
+    gsap,
+    () => {
+      gsap.from(resolvedTargets, vars);
+    },
+    scope,
+  );
 }
 
 export function createScrollRevealCleanup({
-	scope,
-	targets,
-	trigger = scope,
-	vars
+  scope,
+  targets,
+  trigger = scope,
+  vars,
 }: ScrollRevealOptions): () => void {
-	ensureGsapPlugins();
+  ensureGsapPlugins();
 
-	const animationVars = vars ?? ({} as GsapFromVars);
-	const scrollTriggerVars = (animationVars.scrollTrigger ?? {}) as Record<string, unknown>;
-	const resolvedTargets = resolveTargets(scope, targets);
+  const animationVars = vars ?? ({} as GsapFromVars);
+  const scrollTriggerVars = (animationVars.scrollTrigger ?? {}) as Record<string, unknown>;
+  const resolvedTargets = resolveTargets(scope, targets);
 
-	return createGsapContextCleanup(
-		gsap,
-		() => {
-			gsap.fromTo(
-				resolvedTargets,
-				{ y: 20, opacity: 0 },
-				{
-					y: 0,
-					opacity: 1,
-					duration: 0.4,
-					stagger: 0.04,
-					ease: 'power3.out',
-					...animationVars,
-					scrollTrigger: {
-						trigger,
-						start: 'top 95%',
-						toggleActions: 'play none none none',
-						...scrollTriggerVars
-					}
-				}
-			);
-		},
-		scope
-	);
+  return createGsapContextCleanup(
+    gsap,
+    () => {
+      gsap.fromTo(
+        resolvedTargets,
+        { y: 20, opacity: 0 },
+        {
+          y: 0,
+          opacity: 1,
+          duration: 0.4,
+          stagger: 0.04,
+          ease: "power3.out",
+          ...animationVars,
+          scrollTrigger: {
+            trigger,
+            start: "top 95%",
+            toggleActions: "play none none none",
+            ...scrollTriggerVars,
+          },
+        },
+      );
+    },
+    scope,
+  );
 }

@@ -49,15 +49,19 @@ Developer-led. Dev puts it on the company card. No procurement, no sales calls n
 ## Competitive Positioning
 
 ### vs. Resend
+
 Resend has a great developer experience but essentially no marketer-facing tools. If your product/marketing team needs to edit templates or run campaigns, they're stuck. Lettr gives you the same clean API PLUS a full drag-and-drop editor (powered by Topol, used by 40K+ companies) so your whole team is unblocked.
 
 ### vs. Postmark
+
 Postmark is reliable but expensive and transactional-only. No campaign features, limited template editing. Lettr covers both transactional and marketing emails in one platform, with better data retention and more competitive pricing.
 
 ### vs. SendGrid / Mailchimp
+
 Over-engineered, expensive, painful to integrate, designed for a different era. Lettr is purpose-built for modern SaaS teams — not retrofitted from a marketing automation platform.
 
 ### vs. Sidemail
+
 Closest positioning overlap. Sidemail also targets SaaS and offers both transactional + marketing. Lettr's advantages: the Topol editor quality (best-in-class drag-and-drop, synced sections, multilingual templates), infrastructure heritage from Ecomail, and more aggressive pricing at scale.
 
 ---
@@ -96,6 +100,7 @@ Closest positioning overlap. Sidemail also targets SaaS and offers both transact
 **Heading:** "Integrate in minutes. Forget about it forever."
 
 Key messages:
+
 - Clean REST API + SMTP relay
 - SDKs for [list supported languages]
 - Laravel-native with one-command install
@@ -111,6 +116,7 @@ Code snippet showing a real API call — simple, clean, no boilerplate.
 **Heading:** "Your team edits. No dev tickets required."
 
 Key messages:
+
 - Full drag-and-drop editor (powered by Topol)
 - Synced sections — update once, apply everywhere
 - Draft → publish workflow with version history
@@ -125,6 +131,7 @@ Visual: screenshot or animation of the Topol editor in action inside Lettr.
 **Heading:** "Built for the emails SaaS companies actually send."
 
 Use case grid:
+
 - Onboarding sequences
 - Password resets & security alerts
 - Trial expiry & upgrade nudges
@@ -139,6 +146,7 @@ Message: "No ecommerce plugins. No marketing automation bloat. Just the email to
 **Heading:** "One platform. One domain. One reputation."
 
 Key messages:
+
 - Send transactional emails via API
 - Run campaigns to your audiences (coming soon / new)
 - Same sending domain, same deliverability reputation
@@ -185,6 +193,7 @@ Pricing summary: Free → $15/mo → $110/mo → Enterprise
 ## Messaging Do's and Don'ts
 
 ### Do:
+
 - Lead with the dual-audience value (dev + team)
 - Use SaaS-specific examples and language throughout
 - Show real code snippets (devs want to see the API)
@@ -193,6 +202,7 @@ Pricing summary: Free → $15/mo → $110/mo → Enterprise
 - Keep the tone confident but not arrogant — you're the focused alternative, not the incumbent
 
 ### Don't:
+
 - Say "for Artisans" — too Laravel-specific, alienates non-Laravel devs
 - Lead with "transactional email" — too narrow now that campaigns are coming
 - Position against specific competitors by name on the homepage
@@ -204,13 +214,13 @@ Pricing summary: Free → $15/mo → $110/mo → Enterprise
 
 ## Ecosystem Positioning (Topol Family)
 
-| Product | One-liner | Audience |
-|---|---|---|
-| **Topol PRO** | The standalone email template builder | Designers & email marketers who need to build beautiful emails for any platform |
-| **Topol Plugin** | The embeddable email editor for your platform | Product teams building email editing into their own SaaS |
-| **Lettr** | The email platform built for SaaS | SaaS developers and their product/marketing teammates |
-| **Ecomail** | The email marketing platform for ecommerce | Ecommerce businesses (especially Czech/EU market) |
-| **DMARCeye** | DMARC monitoring and reporting | IT/security teams managing email authentication |
+| Product          | One-liner                                     | Audience                                                                        |
+| ---------------- | --------------------------------------------- | ------------------------------------------------------------------------------- |
+| **Topol PRO**    | The standalone email template builder         | Designers & email marketers who need to build beautiful emails for any platform |
+| **Topol Plugin** | The embeddable email editor for your platform | Product teams building email editing into their own SaaS                        |
+| **Lettr**        | The email platform built for SaaS             | SaaS developers and their product/marketing teammates                           |
+| **Ecomail**      | The email marketing platform for ecommerce    | Ecommerce businesses (especially Czech/EU market)                               |
+| **DMARCeye**     | DMARC monitoring and reporting                | IT/security teams managing email authentication                                 |
 
 These products do not compete. They serve different audiences with different needs, united by deep email infrastructure expertise.
 
