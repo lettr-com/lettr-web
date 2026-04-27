@@ -143,6 +143,24 @@ resource "aws_cloudfront_function" "viewer_country_cookie" {
   EOT
 }
 
+resource "aws_cloudfront_origin_request_policy" "viewer_country" {
+  name    = "${local.name}-viewer-country"
+  comment = "Forces CloudFront to populate CloudFront-Viewer-Country on the request so the viewer-response function can read it."
+
+  cookies_config {
+    cookie_behavior = "none"
+  }
+  query_strings_config {
+    query_string_behavior = "none"
+  }
+  headers_config {
+    header_behavior = "whitelist"
+    headers {
+      items = ["CloudFront-Viewer-Country"]
+    }
+  }
+}
+
 resource "aws_cloudfront_distribution" "cdn" {
   enabled             = true
   is_ipv6_enabled     = true
@@ -165,7 +183,8 @@ resource "aws_cloudfront_distribution" "cdn" {
     compress               = true
 
     # Managed-CachingOptimized — honors Cache-Control headers set on upload
-    cache_policy_id = "658327ea-f89d-4fab-a63d-7e88639e58f6"
+    cache_policy_id          = "658327ea-f89d-4fab-a63d-7e88639e58f6"
+    origin_request_policy_id = aws_cloudfront_origin_request_policy.viewer_country.id
 
     function_association {
       event_type   = "viewer-request"
