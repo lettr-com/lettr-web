@@ -231,6 +231,19 @@ resource "aws_route53_record" "apex" {
   }
 }
 
+resource "aws_route53_record" "apex_aaaa" {
+  count   = var.domain_name != "" && var.route53_zone_id != "" ? 1 : 0
+  zone_id = var.route53_zone_id
+  name    = var.domain_name
+  type    = "AAAA"
+
+  alias {
+    name                   = aws_cloudfront_distribution.cdn.domain_name
+    zone_id                = aws_cloudfront_distribution.cdn.hosted_zone_id
+    evaluate_target_health = false
+  }
+}
+
 # --------------------------------------------------------------------
 # GitHub Actions OIDC role (optional) — avoids long-lived AWS keys in CI
 # --------------------------------------------------------------------
