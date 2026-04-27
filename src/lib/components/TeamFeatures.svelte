@@ -358,7 +358,7 @@
 			<div class="border border-border/30 bg-white p-4 space-y-3">
 				<div class="flex items-center justify-between">
 					<span class="text-[12px] font-medium text-surface">Welcome Email v3</span>
-					<span class="text-[10px] px-2 py-0.5 bg-amber-50 text-amber-600 font-medium">In Review</span>
+					<span class="text-[10px] px-2 py-0.5 bg-amber-50 text-amber-600 font-medium border border-amber-200">In Review</span>
 				</div>
 				<div class="space-y-1.5">
 					<div class="h-2 w-full bg-border/15"></div>
