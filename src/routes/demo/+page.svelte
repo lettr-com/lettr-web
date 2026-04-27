@@ -437,7 +437,7 @@
 					{
 						name: 'Getting started guide',
 						description: 'Learn how to set up Lettr and send your first email',
-						href: 'https://docs.lettr.email'
+						href: 'https://docs.lettr.com/introduction'
 					}
 				]}
 			/>
