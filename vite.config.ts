@@ -1,7 +1,11 @@
-import { sveltekit } from '@sveltejs/kit/vite';
-import tailwindcss from '@tailwindcss/vite';
-import { defineConfig } from 'vite';
+import { sveltekit } from "@sveltejs/kit/vite";
+import tailwindcss from "@tailwindcss/vite";
+import { defineConfig } from "vite-plus";
 
 export default defineConfig({
-	plugins: [tailwindcss(), sveltekit()]
+  staged: {
+    "*": "vp check --fix",
+  },
+  lint: { options: { typeAware: true, typeCheck: true } },
+  plugins: [tailwindcss(), sveltekit()],
 });

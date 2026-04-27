@@ -126,7 +126,7 @@
 					"creator": { "@id": "https://lettr.com/#organization" }
 				}
 			]
-		})}</script>`}
+		})}<\/script>`}
 	{/if}
 
 </svelte:head>
