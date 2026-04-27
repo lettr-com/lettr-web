@@ -4,6 +4,8 @@ import {
 	getConsentState,
 	buildConsentCookieString,
 	writeConsentCookie,
+	getViewerCountry,
+	requiresExplicitConsent,
 } from './cookieConsent';
 
 describe('getCookieValue', () => {
@@ -102,5 +104,51 @@ describe('writeConsentCookie', () => {
 		const mockDoc = { cookie: '' };
 		writeConsentCookie('accepted', mockDoc, 30);
 		expect(mockDoc.cookie).toContain('max-age=2592000');
+	});
+});
+
+describe('getViewerCountry', () => {
+	it('returns the upper-cased country code', () => {
+		expect(getViewerCountry('viewer_country=de')).toBe('DE');
+		expect(getViewerCountry('viewer_country=US')).toBe('US');
+	});
+
+	it('returns null when the cookie is missing', () => {
+		expect(getViewerCountry('foo=bar')).toBeNull();
+	});
+
+	it('returns null for the XX fallback used when CloudFront cannot resolve', () => {
+		expect(getViewerCountry('viewer_country=XX')).toBeNull();
+	});
+
+	it('returns null for malformed values', () => {
+		expect(getViewerCountry('viewer_country=')).toBeNull();
+		expect(getViewerCountry('viewer_country=USA')).toBeNull();
+	});
+});
+
+describe('requiresExplicitConsent', () => {
+	it('requires consent for EU member states', () => {
+		expect(requiresExplicitConsent('DE')).toBe(true);
+		expect(requiresExplicitConsent('FR')).toBe(true);
+		expect(requiresExplicitConsent('CZ')).toBe(true);
+	});
+
+	it('requires consent for EEA countries, the UK, and Switzerland', () => {
+		expect(requiresExplicitConsent('NO')).toBe(true);
+		expect(requiresExplicitConsent('IS')).toBe(true);
+		expect(requiresExplicitConsent('LI')).toBe(true);
+		expect(requiresExplicitConsent('GB')).toBe(true);
+		expect(requiresExplicitConsent('CH')).toBe(true);
+	});
+
+	it('does not require consent for countries outside the perimeter', () => {
+		expect(requiresExplicitConsent('US')).toBe(false);
+		expect(requiresExplicitConsent('CA')).toBe(false);
+		expect(requiresExplicitConsent('JP')).toBe(false);
+	});
+
+	it('defaults to requiring consent when the country is unknown', () => {
+		expect(requiresExplicitConsent(null)).toBe(true);
 	});
 });

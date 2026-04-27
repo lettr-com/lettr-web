@@ -120,6 +120,28 @@ resource "aws_cloudfront_function" "append_index" {
   EOT
 }
 
+# Surfaces the viewer's country (resolved by CloudFront from the source IP) to
+# client JS via a non-HttpOnly cookie. Used by the cookie banner to decide
+# whether explicit consent is required (GDPR/UK PECR/Swiss FADP scope).
+resource "aws_cloudfront_function" "viewer_country_cookie" {
+  name    = "${local.name}-viewer-country-cookie"
+  runtime = "cloudfront-js-2.0"
+  comment = "Expose CloudFront-Viewer-Country to the browser as a viewer_country cookie."
+  publish = true
+  code    = <<-EOT
+    function handler(event) {
+      var request = event.request;
+      var response = event.response;
+      var header = request.headers['cloudfront-viewer-country'];
+      var country = (header && header.value) ? header.value : 'XX';
+      response.headers['set-cookie'] = {
+        value: 'viewer_country=' + country + '; Path=/; Max-Age=86400; SameSite=Lax; Secure'
+      };
+      return response;
+    }
+  EOT
+}
+
 resource "aws_cloudfront_distribution" "cdn" {
   enabled             = true
   is_ipv6_enabled     = true
@@ -147,6 +169,11 @@ resource "aws_cloudfront_distribution" "cdn" {
     function_association {
       event_type   = "viewer-request"
       function_arn = aws_cloudfront_function.append_index.arn
+    }
+
+    function_association {
+      event_type   = "viewer-response"
+      function_arn = aws_cloudfront_function.viewer_country_cookie.arn
     }
   }
 

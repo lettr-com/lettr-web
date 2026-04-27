@@ -1,6 +1,11 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import { getConsentState, writeConsentCookie } from '$lib/utils/cookieConsent';
+	import {
+		getConsentState,
+		getViewerCountry,
+		requiresExplicitConsent,
+		writeConsentCookie,
+	} from '$lib/utils/cookieConsent';
 
 	interface ConsentProvider {
 		name: string;
@@ -39,9 +44,17 @@
 
 	onMount(() => {
 		const consentState = getConsentState(document.cookie);
-		if (!consentState.hasConsented) {
+		if (consentState.hasConsented) return;
+
+		const country = getViewerCountry(document.cookie);
+		if (requiresExplicitConsent(country)) {
 			visible = true;
+			return;
 		}
+
+		// Outside the GDPR/UK/CH consent perimeter — auto-accept silently so
+		// analytics initialise without a banner interruption.
+		writeConsentCookie('accepted');
 	});
 </script>
 
