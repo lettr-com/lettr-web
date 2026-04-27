@@ -7,6 +7,7 @@
 	import SplineFooter from '$lib/components/SplineFooter.svelte';
 	import Footer from '$lib/components/Footer.svelte';
 	import CookieBanner from '$lib/components/CookieBanner.svelte';
+	import { bootIntercom } from '$lib/intercom';
 	import { persistUtmParamsFromUrl } from '$lib/utils/utm';
 
 	let { children } = $props();
@@ -16,6 +17,7 @@
 
 	onMount(() => {
 		persistUtmParamsFromUrl(new URL(window.location.href));
+		bootIntercom();
 	});
 </script>
 

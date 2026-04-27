@@ -1,0 +1,64 @@
+name: Deploy
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+env:
+  AWS_REGION: eu-central-1
+
+concurrency:
+  group: deploy-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 9
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - run: pnpm install --frozen-lockfile
+
+      - name: Build static site
+        env:
+          PUBLIC_INTERCOM_APP_ID: ${{ secrets.PUBLIC_INTERCOM_APP_ID }}
+        run: pnpm build
+
+      - uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      # Hashed immutable assets first — long cache, keep existing copies around.
+      - name: Sync hashed assets (immutable, no delete)
+        run: |
+          aws s3 sync build/_app/immutable s3://${{ secrets.S3_BUCKET }}/_app/immutable \
+            --cache-control "public, max-age=31536000, immutable" \
+            --size-only
+
+      # Everything else — short cache, delete removed files.
+      - name: Sync HTML + other assets (short cache)
+        run: |
+          aws s3 sync build s3://${{ secrets.S3_BUCKET }} \
+            --exclude "_app/immutable/*" \
+            --cache-control "public, max-age=60, s-maxage=600" \
+            --delete
+
+      - name: Invalidate CloudFront
+        run: |
+          aws cloudfront create-invalidation \
+            --distribution-id "${{ secrets.CLOUDFRONT_DISTRIBUTION_ID }}" \
+            --paths "/*"

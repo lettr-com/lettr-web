@@ -5,33 +5,15 @@
 		BookOpenIcon,
 		ClockIcon,
 		ArrowSquareOutIcon,
-		PaperPlaneRightIcon,
-		CheckCircleIcon,
-		WarningCircleIcon
+		ChatCircleTextIcon
 	} from 'phosphor-svelte';
 	import { createFromAnimationCleanup, createScrollRevealCleanup } from '$lib/utils/gsap';
 	import { capturePosthogEvent } from '$lib/analytics/posthog';
+	import { openIntercomNewMessage } from '$lib/intercom';
 
 	let hero: HTMLElement | undefined = $state();
 	let channelsSection: HTMLElement | undefined = $state();
-	let formSection: HTMLElement | undefined = $state();
-
-	// Form state
-	let name = $state('');
-	let email = $state('');
-	let subject = $state('');
-	let message = $state('');
-	let category = $state('general');
-	let submitting = $state(false);
-	let submitted = $state(false);
-	let error = $state('');
-
-	const categories = [
-		{ value: 'general', label: 'General' },
-		{ value: 'technical', label: 'Technical Issue' },
-		{ value: 'billing', label: 'Billing' },
-		{ value: 'partnership', label: 'Partnership' }
-	];
+	let contactSection: HTMLElement | undefined = $state();
 
 	const channels = [
 		{
@@ -78,50 +60,9 @@
 		{ q: 'What are the API error codes?', href: 'https://docs.lettr.com/api-reference/introduction' }
 	];
 
-	async function handleSubmit(e: SubmitEvent) {
-		e.preventDefault();
-		error = '';
-		submitting = true;
-
-		void capturePosthogEvent('support_form_submitted', {
-			category,
-			has_subject: Boolean(subject.trim()),
-			message_length: message.length
-		});
-
-		try {
-			const res = await fetch('/api/contact', {
-				method: 'POST',
-				headers: { 'Content-Type': 'application/json' },
-				body: JSON.stringify({ name, email, subject, message, category })
-			});
-
-			const data = await res.json();
-
-			if (!res.ok) {
-				error = data.error || 'Something went wrong.';
-				void capturePosthogEvent('support_form_failed', { category, error_message: error });
-				return;
-			}
-
-			submitted = true;
-			void capturePosthogEvent('support_form_succeeded', { category });
-			name = '';
-			email = '';
-			subject = '';
-			message = '';
-			category = 'general';
-		} catch {
-			error = 'Something went wrong. Please try again or email us directly.';
-			void capturePosthogEvent('support_form_failed', { category, error_message: error });
-		} finally {
-			submitting = false;
-		}
-	}
-
-	function trackCategorySelected(value: string) {
-		category = value;
-		void capturePosthogEvent('support_category_selected', { category: value });
+	function openChat() {
+		void capturePosthogEvent('support_chat_opened', { source: 'support_page' });
+		openIntercomNewMessage();
 	}
 
 	function trackChannelClick(title: string, href: string, external: boolean) {
@@ -149,7 +90,7 @@
 			);
 		}
 
-		for (const section of [channelsSection, formSection]) {
+		for (const section of [channelsSection, contactSection]) {
 			if (section) {
 				cleanups.push(
 					createScrollRevealCleanup({
@@ -229,8 +170,8 @@
 		{/each}
 	</div>
 
-	<!-- Form + FAQ -->
-	<div bind:this={formSection} class="mx-auto mt-20 max-w-3xl md:mt-28">
+	<!-- Chat + FAQ -->
+	<div bind:this={contactSection} class="mx-auto mt-20 max-w-3xl md:mt-28">
 		<!-- Common questions -->
 		<div data-reveal class="mb-16">
 			<div class="border border-border/50 bg-white p-6">
@@ -252,136 +193,33 @@
 			</div>
 		</div>
 
-		<!-- Form -->
-		<div data-reveal>
-			<h2 class="mb-2">Send us a message</h2>
-			<p class="mb-8 text-muted">Fill out the form below and we'll get back to you shortly.</p>
-
-			{#if submitted}
-				<div class="flex flex-col items-center justify-center border border-primary/20 bg-primary/5 px-6 py-16 text-center">
-					<div class="mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-primary/10">
-						<CheckCircleIcon size={28} class="text-primary" />
-					</div>
-					<h3 class="text-xl font-semibold text-surface">Message sent!</h3>
-					<p class="mt-2 max-w-sm text-sm leading-relaxed text-muted">
-						We'll get back to you as soon as possible. You can also reach us directly at
-						<a href="mailto:hello@lettr.com" class="text-primary underline underline-offset-4">
-							hello@lettr.com
-						</a>
-					</p>
-					<button
-						onclick={() => (submitted = false)}
-						class="mt-6 text-sm font-medium text-primary transition-colors hover:text-primary/80"
-					>
-						Send another message
-					</button>
-				</div>
-			{:else}
-				<form onsubmit={handleSubmit} class="space-y-5">
-					{#if error}
-						<div class="flex items-center gap-2 border border-red-500/20 bg-red-500/5 px-4 py-3 text-sm text-red-600">
-							<WarningCircleIcon size={16} class="shrink-0" />
-							{error}
-						</div>
-					{/if}
-
-					<!-- Category -->
-					<div>
-						<label class="mb-2 block text-sm font-medium text-surface">What can we help with?</label>
-						<div class="flex flex-wrap gap-2">
-							{#each categories as opt}
-								<button
-									type="button"
-									onclick={() => trackCategorySelected(opt.value)}
-									class="border px-4 py-2 text-sm font-medium transition-all duration-200 {category ===
-									opt.value
-										? 'border-primary bg-primary/10 text-primary'
-										: 'border-border/50 bg-white text-muted hover:border-primary/30 hover:text-surface'}"
-								>
-									{opt.label}
-								</button>
-							{/each}
-						</div>
-					</div>
-
-					<!-- Name & Email -->
-					<div class="grid gap-4 sm:grid-cols-2">
-						<div>
-							<label for="name" class="mb-2 block text-sm font-medium text-surface">Name</label>
-							<input
-								id="name"
-								type="text"
-								required
-								bind:value={name}
-								placeholder="Your name"
-								class="w-full border border-border/50 bg-white px-4 py-3 text-sm text-surface placeholder-muted/60 transition-all duration-200 outline-none focus:border-primary/50"
-							/>
-						</div>
-						<div>
-							<label for="email" class="mb-2 block text-sm font-medium text-surface">Email</label>
-							<input
-								id="email"
-								type="email"
-								required
-								bind:value={email}
-								placeholder="you@company.com"
-								class="w-full border border-border/50 bg-white px-4 py-3 text-sm text-surface placeholder-muted/60 transition-all duration-200 outline-none focus:border-primary/50"
-							/>
-						</div>
-					</div>
-
-					<!-- Subject -->
-					<div>
-						<label for="subject" class="mb-2 block text-sm font-medium text-surface">Subject</label>
-						<input
-							id="subject"
-							type="text"
-							required
-							bind:value={subject}
-							placeholder="How can we help?"
-							class="w-full border border-border/50 bg-white px-4 py-3 text-sm text-surface placeholder-muted/60 transition-all duration-200 outline-none focus:border-primary/50"
-						/>
-					</div>
-
-					<!-- Message -->
-					<div>
-						<label for="message" class="mb-2 block text-sm font-medium text-surface">Message</label>
-						<textarea
-							id="message"
-							required
-							rows="5"
-							bind:value={message}
-							placeholder="Tell us more about your question or issue..."
-							class="w-full resize-none border border-border/50 bg-white px-4 py-3 text-sm leading-relaxed text-surface placeholder-muted/60 transition-all duration-200 outline-none focus:border-primary/50"
-						></textarea>
-					</div>
-
-					<!-- Submit -->
-					<button
-						type="submit"
-						disabled={submitting}
-						class="flex w-full items-center justify-center gap-2 bg-primary px-6 py-3.5 text-[15px] font-semibold text-white transition-colors hover:bg-primary/90 disabled:cursor-not-allowed disabled:opacity-60"
-					>
-						{#if submitting}
-							<div class="h-4 w-4 animate-spin rounded-full border-2 border-white/30 border-t-white"></div>
-							Sending...
-						{:else}
-							<PaperPlaneRightIcon size={16} />
-							Send message
-						{/if}
-					</button>
-
-					<p class="text-center text-[13px] text-muted">
-						Or email us directly at
-						<a
-							href="mailto:hello@lettr.com"
-							class="text-primary underline underline-offset-4 transition-colors hover:text-primary/80"
-						>
-							hello@lettr.com
-						</a>
-					</p>
-				</form>
-			{/if}
+		<!-- Live chat CTA -->
+		<div data-reveal class="border border-border/50 bg-white p-8 text-center">
+			<div class="mx-auto mb-5 flex h-14 w-14 items-center justify-center rounded-full bg-primary/10">
+				<ChatCircleTextIcon size={28} class="text-primary" />
+			</div>
+			<h2 class="mb-2">Talk to us directly</h2>
+			<p class="mx-auto mb-6 max-w-md text-muted">
+				Open a live chat with the team. We reply fast and can help with anything from setup to
+				billing.
+			</p>
+			<button
+				type="button"
+				onclick={openChat}
+				class="inline-flex items-center justify-center gap-2 bg-primary px-6 py-3.5 text-[15px] font-semibold text-white transition-colors hover:bg-primary/90"
+			>
+				<ChatCircleTextIcon size={16} />
+				Start a chat
+			</button>
+			<p class="mt-6 text-[13px] text-muted">
+				Prefer email? Reach us at
+				<a
+					href="mailto:hello@lettr.com"
+					class="text-primary underline underline-offset-4 transition-colors hover:text-primary/80"
+				>
+					hello@lettr.com
+				</a>
+			</p>
 		</div>
 	</div>
 </section>

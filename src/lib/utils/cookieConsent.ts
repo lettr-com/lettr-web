@@ -35,11 +35,6 @@ export function buildConsentCookieString(value: ConsentValue, maxAgeDays: number
 	return `${COOKIE_NAME}=${value}; path=/; max-age=${maxAge}; SameSite=Lax; Secure`;
 }
 
-export function shouldShowBanner(consentState: ConsentState, requiresConsent: boolean): boolean {
-	if (consentState.hasConsented) return false;
-	return requiresConsent;
-}
-
 export function writeConsentCookie(
 	value: ConsentValue,
 	doc: { cookie: string } = document,

@@ -1,0 +1,9 @@
+aws_region   = "eu-central-1"
+project_name = "lettr-web"
+
+# Leave blank for default *.cloudfront.net URL; fill both for a Route 53 custom domain.
+domain_name     = ""
+route53_zone_id = ""
+
+# Enables GitHub Actions OIDC (no long-lived AWS keys). Format: "owner/repo".
+github_repo = ""
