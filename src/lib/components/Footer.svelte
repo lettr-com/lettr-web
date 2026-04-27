@@ -81,7 +81,7 @@
 </script>
 
 <footer class="border-t border-border/30 bg-white px-6 py-12">
-	<div class="mx-auto max-w-4xl">
+	<div class="mx-auto max-w-[1600px]">
 		<!-- Logo + Columns -->
 		<div class="flex flex-col gap-8">
 			<div>
