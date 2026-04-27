@@ -57,7 +57,7 @@
 
 <Card data-animate-intro class="overflow-hidden border-border/60">
 	<CardHeader class="space-y-2 border-b border-border/40 pb-4">
-		<div class="inline-flex w-fit items-center gap-1.5 border border-primary/20 bg-primary/5 px-2 py-0.5 text-[11px] font-semibold uppercase tracking-[0.12em] text-primary">
+		<div class="inline-flex w-fit items-center gap-1.5 border border-emerald-200 bg-emerald-50 px-2 py-0.5 text-[11px] font-semibold uppercase tracking-[0.12em] text-emerald-700">
 			<CheckCircle size={12} weight="fill" />
 			Booking confirmed
 		</div>
