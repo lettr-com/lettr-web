@@ -168,7 +168,7 @@
 	});
 </script>
 
-<section bind:this={section} id="pricing" class="py-16 border-b border-border/30">
+<section bind:this={section} id="pricing" class="py-16">
 	<div class="mb-10" data-pricing-animate>
 		<h2 class="mb-3 text-surface">Simple, transparent <span class="text-primary">pricing.</span></h2>
 		<p class="text-body text-muted">Start free. Scale as you grow. No hidden fees.</p>
