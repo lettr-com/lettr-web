@@ -174,7 +174,7 @@
 		</div>
 
 		<!-- Canvas -->
-		<div class="relative flex-1 overflow-hidden bg-[#F4F4F2] p-4 sm:p-8">
+		<div class="relative flex-1 overflow-hidden bg-gray-50 p-4 sm:p-8">
 			<div class="mx-auto max-w-[420px]">
 				<!-- Store name header block (selected-variable look) -->
 				<div class="border border-dashed border-primary/40 px-3 py-3">
