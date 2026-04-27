@@ -36,6 +36,16 @@ jobs:
 
       - run: pnpm install --frozen-lockfile --prefer-offline
 
+      - name: Cache build artifacts
+        uses: actions/cache@v4
+        with:
+          path: |
+            node_modules/.vite
+            .svelte-kit
+          key: build-${{ hashFiles('pnpm-lock.yaml') }}-${{ github.sha }}
+          restore-keys: |
+            build-${{ hashFiles('pnpm-lock.yaml') }}-
+
       - name: Build static site
         env:
           PUBLIC_INTERCOM_APP_ID: ${{ secrets.PUBLIC_INTERCOM_APP_ID }}
