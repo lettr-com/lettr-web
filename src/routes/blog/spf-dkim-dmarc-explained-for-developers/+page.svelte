@@ -71,7 +71,7 @@ dmarc=pass (p=REJECT dis=NONE) header.from=yourapp.com`;
 	category="Deliverability"
 	title="SPF, DKIM, and DMARC explained for developers"
 	excerpt="Open a terminal and you can send mail claiming to be from support@stripe.com — SMTP won't stop you. Three DNS-based standards close that gap. Here's what each one does and how to tell if it's working."
-	author={{ name: 'Erik Vlčák', role: 'Customer Success', avatar: '/images/authors/erik.jpg' }}
+	author={{ name: 'Erik Vlčák', role: 'Customer Success Engineer', avatar: '/images/authors/erik.jpg' }}
 	date="March 4, 2026"
 	datetime="2026-03-04"
 	readTime="10 min read"

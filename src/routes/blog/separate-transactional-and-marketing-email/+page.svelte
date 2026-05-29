@@ -19,7 +19,7 @@ news.yourapp.com     → newsletters, product updates, feature announcements`;
 	category="Deliverability"
 	title="Why you should separate transactional and marketing email"
 	excerpt="Your password reset and your weekly newsletter have almost nothing in common — yet most teams send both from the same domain, then wonder why 2FA codes hit spam after a campaign goes sideways."
-	author={{ name: 'Erik Vlčák', role: 'Customer Success', avatar: '/images/authors/erik.jpg' }}
+	author={{ name: 'Erik Vlčák', role: 'Customer Success Engineer', avatar: '/images/authors/erik.jpg' }}
 	date="April 8, 2026"
 	datetime="2026-04-08"
 	readTime="7 min read"

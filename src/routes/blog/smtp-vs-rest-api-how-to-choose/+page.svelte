@@ -53,7 +53,7 @@ with smtplib.SMTP("smtp.provider.com", 587) as server:
 	category="Engineering"
 	title="SMTP vs. REST API: how to choose and when to switch"
 	excerpt="Most developers reach for the email transport they've used before — until they're debugging a recycled SMTP connection in a serverless function at 2 AM. Here's how to pick the right one and switch if you picked wrong."
-	author={{ name: 'Erik Vlčák', role: 'Customer Success', avatar: '/images/authors/erik.jpg' }}
+	author={{ name: 'Erik Vlčák', role: 'Customer Success Engineer', avatar: '/images/authors/erik.jpg' }}
 	date="March 18, 2026"
 	datetime="2026-03-18"
 	readTime="8 min read"

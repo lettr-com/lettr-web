@@ -25,7 +25,7 @@ Lettr::to($user->email)
 	category="Deliverability"
 	title="The hidden cost of DIY transactional email"
 	excerpt="Rolling your own email stack feels cheap until you count the dev hours, the deliverability surprises, and the 2 a.m. pages. Here's what it actually costs."
-	author={{ name: 'Erik Vlčák', role: 'Customer Success', avatar: '/images/authors/erik.jpg' }}
+	author={{ name: 'Erik Vlčák', role: 'Customer Success Engineer', avatar: '/images/authors/erik.jpg' }}
 	date="May 13, 2026"
 	datetime="2026-05-13"
 	readTime="6 min read"

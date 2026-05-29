@@ -6,7 +6,7 @@
 	category="Fundamentals"
 	title="How transactional email actually works"
 	excerpt="A user clicks 'Reset Password,' waits, checks spam, gives up — and files a ticket about an email you didn't know was broken. If you're shipping your first signup or receipt flow, the transactional vs. marketing distinction matters."
-	author={{ name: 'Erik Vlčák', role: 'Customer Success', avatar: '/images/authors/erik.jpg' }}
+	author={{ name: 'Erik Vlčák', role: 'Customer Success Engineer', avatar: '/images/authors/erik.jpg' }}
 	date="February 4, 2026"
 	datetime="2026-02-04"
 	readTime="6 min read"

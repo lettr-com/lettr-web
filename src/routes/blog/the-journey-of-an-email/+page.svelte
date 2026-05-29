@@ -47,7 +47,7 @@ Receiving server: 250 2.0.0 OK`;
 	category="Engineering"
 	title="The journey of an email: from API call to inbox"
 	excerpt="You POST /emails, get a 200 OK, and assume it went through. Fifteen minutes later: 'I never received my verification email.' Here's everything that happens between your API call and the recipient's inbox."
-	author={{ name: 'Erik Vlčák', role: 'Customer Success', avatar: '/images/authors/erik.jpg' }}
+	author={{ name: 'Erik Vlčák', role: 'Customer Success Engineer', avatar: '/images/authors/erik.jpg' }}
 	date="February 18, 2026"
 	datetime="2026-02-18"
 	readTime="11 min read"

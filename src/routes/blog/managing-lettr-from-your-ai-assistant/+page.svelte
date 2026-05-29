@@ -18,7 +18,7 @@
 	category="Product"
 	title="Managing Lettr from your AI assistant: the MCP integration"
 	excerpt="A bounce report comes in and you tab between dashboard, terminal, and editor copying IDs. MCP turns that into a sentence in the AI assistant you already have open. Here's how the integration works."
-	author={{ name: 'Erik Vlčák', role: 'Customer Success', avatar: '/images/authors/erik.jpg' }}
+	author={{ name: 'Erik Vlčák', role: 'Customer Success Engineer', avatar: '/images/authors/erik.jpg' }}
 	date="May 27, 2026"
 	datetime="2026-05-27"
 	readTime="5 min read"

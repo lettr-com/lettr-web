@@ -32,7 +32,7 @@
 	category="Deliverability"
 	title="How to warm up a new sending domain"
 	excerpt="You set up SPF, DKIM, and DMARC, flip the switch, send 50,000 emails on day one — and half vanish. Nothing is broken. Your domain is just new and untrusted. Here's how to warm it up."
-	author={{ name: 'Erik Vlčák', role: 'Customer Success', avatar: '/images/authors/erik.jpg' }}
+	author={{ name: 'Erik Vlčák', role: 'Customer Success Engineer', avatar: '/images/authors/erik.jpg' }}
 	date="April 22, 2026"
 	datetime="2026-04-22"
 	readTime="9 min read"
