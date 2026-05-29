@@ -46,12 +46,12 @@
 		<div class="flex flex-col">
 				<a
 					data-animate
-					href="/changelog/"
+					href="/email-marketing/"
 					class="group mb-6 inline-flex w-fit items-center gap-2 border border-primary/20 bg-primary/5 p-1.5 text-sm text-primary transition-colors hover:bg-primary/10"
-					onclick={() => void capturePosthogEvent('hero_announcement_clicked', { href: '/changelog/', label: 'Announcing Lettr' })}
+					onclick={() => void capturePosthogEvent('hero_announcement_clicked', { href: '/email-marketing/', label: 'Campaigns is live' })}
 				>
 					<span class="bg-primary px-2 py-0.5 text-xs font-bold text-white">New</span>
-					Announcing Lettr
+					Campaigns is live — run marketing from the same account
 					<span class="transition-transform group-hover:translate-x-0.5">&rarr;</span>
 				</a>
 				<h1 data-animate class="text-surface mb-4">
@@ -60,7 +60,8 @@
 				</h1>
 
 				<p data-animate class="max-w-[650px] text-body text-muted mb-10">
-					Our marketing team couldn't touch emails without dev tickets. We couldn't tell which transactional email failed or why. Nothing fit — so we built it.
+					Build every email in one drag-and-drop editor. Send transactional via API, marketing
+					via campaigns. One platform, one bill.
 				</p>
 
 				<div data-animate class="flex flex-wrap items-center mb-3 gap-2">

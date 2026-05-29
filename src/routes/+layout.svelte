@@ -84,7 +84,7 @@
 					"@id": "https://lettr.com/#software",
 					"name": "Lettr",
 					"url": "https://lettr.com",
-					"description": "Lettr is an email platform built exclusively for SaaS companies, combining a clean REST API for developers with a drag-and-drop visual editor for marketing and product teams. Send both transactional and marketing emails from one platform, one domain, one sending reputation.",
+					"description": "Lettr is an email platform built exclusively for SaaS companies, combining a clean REST API for developers with a drag-and-drop visual editor for marketing and product teams. Send both transactional and marketing emails from one platform, built in the same editor.",
 					"applicationCategory": "DeveloperApplication",
 					"operatingSystem": "Web",
 					"offers": [

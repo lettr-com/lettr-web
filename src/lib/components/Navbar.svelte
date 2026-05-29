@@ -6,7 +6,6 @@
 		CaretDown,
 		CodeIcon,
 		SparkleIcon,
-		ArrowsLeftRightIcon,
 		ChartBarIcon,
 		ShieldCheckIcon,
 		RobotIcon,
@@ -26,6 +25,7 @@
 	interface DropdownItem {
 		icon?: typeof CodeIcon;
 		iconSrc?: string;
+		badge?: 'transactional' | 'marketing';
 		label: string;
 		description: string;
 		href: string;
@@ -44,6 +44,7 @@
 		sections?: DropdownSection[];
 		footer?: { label: string; href: string };
 		wide?: boolean;
+		align?: 'center' | 'left';
 	}
 
 	interface NavLink {
@@ -59,13 +60,24 @@
 	let closeTimer: ReturnType<typeof setTimeout> | null = null;
 	let registerHref: string = $state(registerUrl);
 
-	const platformItems: DropdownItem[] = [
-		{ icon: CodeIcon, label: 'Developer API', description: 'REST API, SMTP, and SDKs — integrate once, forget forever', href: '/platform/laravel' },
-		{ icon: SparkleIcon, label: 'Visual Editor', description: 'Best-in-class drag-and-drop editor powered by Topol', href: '/platform/templates' },
-		{ icon: ArrowsLeftRightIcon, label: 'Transactional + Marketing', description: 'One platform, one domain, one sending reputation', href: '/platform/sync' },
-		{ icon: ChartBarIcon, label: 'Analytics & Logs', description: 'Delivery metrics, searchable logs, and webhooks', href: '/platform/analytics' },
-		{ icon: ShieldCheckIcon, label: 'Deliverability', description: 'SPF, DKIM, DMARC, dedicated IPs, custom domains', href: '/platform/deliverability' },
-		{ icon: RobotIcon, label: 'MCP Integration', description: 'Connect AI agents and LLMs to Lettr', href: '/platform/mcp' }
+	const platformSections: DropdownSection[] = [
+		{
+			label: 'Products',
+			items: [
+				{ badge: 'transactional', label: 'Transactional Email', description: 'Send via REST API & SMTP — pay per email', href: '/email-api/' },
+				{ badge: 'marketing', label: 'Email Marketing', description: 'Campaigns, lists & segments — pay per contact', href: '/email-marketing/' }
+			]
+		},
+		{
+			label: 'Features',
+			items: [
+				{ icon: CodeIcon, label: 'Developer API', description: 'REST API, SMTP, and SDKs', href: '/platform/laravel' },
+				{ icon: SparkleIcon, label: 'Visual Editor', description: 'Drag-and-drop editor powered by Topol', href: '/platform/templates' },
+				{ icon: ChartBarIcon, label: 'Analytics & Logs', description: 'Delivery metrics, logs, and webhooks', href: '/platform/analytics' },
+				{ icon: ShieldCheckIcon, label: 'Deliverability', description: 'SPF, DKIM, DMARC, dedicated IPs', href: '/platform/deliverability' },
+				{ icon: RobotIcon, label: 'MCP Integration', description: 'Connect AI agents and LLMs to Lettr', href: '/platform/mcp' }
+			]
+		}
 	];
 
 	const resourcesItems: DropdownItem[] = [
@@ -107,7 +119,7 @@
 	];
 
 	const dropdownConfigs: Record<string, DropdownConfig> = {
-		platform: { items: platformItems, footer: { label: 'View all features', href: '/#features' } },
+		platform: { sections: platformSections, wide: true, align: 'left', footer: { label: 'View all features', href: '/#features' } },
 		docs: { sections: [
 			{
 				label: 'Documentation',
@@ -126,7 +138,8 @@
 	const navLinks: NavLink[] = [
 		{ label: 'Platform', href: '/#features', dropdownKey: 'platform' },
 		{ label: 'Docs', href: 'https://docs.lettr.com', dropdownKey: 'docs' },
-		{ label: 'Pricing', href: '/#pricing' },
+		{ label: 'Pricing', href: '/pricing/' },
+		{ label: 'Blog', href: '/blog/' },
 		{ label: 'Company', href: '#', dropdownKey: 'company' }
 	];
 
@@ -223,6 +236,40 @@
 	});
 </script>
 
+{#snippet brandBadge(mode: 'transactional' | 'marketing')}
+	{#if mode === 'transactional'}
+		<span class="flex h-10 w-10 shrink-0 items-center justify-center bg-[#EC104B]">
+			<svg width="16" height="20" viewBox="0 0 19 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="block">
+				<path
+					d="M11.3896 13.832L15 17.334L12.251 20L9.5 17.334L6.75098 20L4 17.334L6.75098 14.666L9.5 12L11.3896 13.832ZM15 6.66602L11.748 9.82031L9.5 12L6.75098 9.33398L4 6.66602L6.75098 4L9.5 6.66602L12.251 4L15 6.66602Z"
+					fill="url(#nav_tx_grad)"
+				/>
+				<defs>
+					<linearGradient id="nav_tx_grad" x1="9.5" y1="4" x2="9.5" y2="20" gradientUnits="userSpaceOnUse">
+						<stop stop-color="#FFEFF4" />
+						<stop offset="1" stop-color="#FF90AE" />
+					</linearGradient>
+				</defs>
+			</svg>
+		</span>
+	{:else}
+		<span class="flex h-10 w-10 shrink-0 items-center justify-center bg-[#00D46B]">
+			<svg width="20" height="20" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg" class="block">
+				<path
+					d="M11 15L7 19L3 15L7 11L11 15ZM19 15L15 19L11 15L15 11L19 15ZM11 7L7 11L3 7L7 3L11 7ZM19 7L15 11L11 7L15 3L19 7Z"
+					fill="url(#nav_mk_grad)"
+				/>
+				<defs>
+					<linearGradient id="nav_mk_grad" x1="11" y1="3" x2="11" y2="19" gradientUnits="userSpaceOnUse">
+						<stop stop-color="white" />
+						<stop offset="1" stop-color="#AAFFD5" />
+					</linearGradient>
+				</defs>
+			</svg>
+		</span>
+	{/if}
+{/snippet}
+
 <div class="fixed top-0 right-0 left-0 z-50 flex justify-center">
 <nav
 	bind:this={nav}
@@ -261,7 +308,7 @@
 							{#if openDropdown === link.dropdownKey && link.dropdownKey}
 								{@const ddConfig = dropdownConfigs[link.dropdownKey]}
 								<div
-									class="absolute top-full left-1/2 mt-2 -translate-x-1/2 border border-border/50 bg-white shadow-[0_16px_48px_rgba(0,0,0,0.1)] {ddConfig?.wide ? 'w-[580px]' : 'w-[300px]'}"
+									class="absolute top-full mt-2 border border-border/50 bg-white shadow-[0_16px_48px_rgba(0,0,0,0.1)] {ddConfig?.align === 'left' ? 'left-0' : 'left-1/2 -translate-x-1/2'} {ddConfig?.wide ? 'w-[580px]' : 'w-[300px]'}"
 								>
 									{#if ddConfig?.sections}
 										<div class="grid {ddConfig.sections.length > 2 ? 'sm:grid-cols-3' : ddConfig.sections.length > 1 ? 'sm:grid-cols-2' : ''}">
@@ -320,20 +367,24 @@
 																	href={item.href}
 																	target={item.external ? '_blank' : undefined}
 																	rel={item.external ? 'noopener noreferrer' : undefined}
-																	class="group flex items-start gap-3 px-3 py-2 transition-colors hover:bg-background"
+																	class="group flex {item.badge ? 'items-center' : 'items-start'} gap-3 px-3 py-2 transition-colors hover:bg-background"
 																	onclick={() => {
 																		trackNavItemClick('dropdown', item.label, item.href, link.dropdownKey);
 																		openDropdown = null;
 																	}}
 																>
-																	<div class="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center border border-border/50 bg-background transition-colors group-hover:border-primary/30 group-hover:bg-primary/5">
-																		{#if item.iconSrc}
-																			<img src={item.iconSrc} alt="" class="h-4 w-4" />
-																		{:else if item.icon}
-																			{@const Icon = item.icon}
-																			<Icon size={14} class="text-muted transition-colors group-hover:text-primary" />
-																		{/if}
-																	</div>
+																	{#if item.badge}
+																		{@render brandBadge(item.badge)}
+																	{:else}
+																		<div class="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center border border-border/50 bg-background transition-colors group-hover:border-primary/30 group-hover:bg-primary/5">
+																			{#if item.iconSrc}
+																				<img src={item.iconSrc} alt="" class="h-4 w-4" />
+																			{:else if item.icon}
+																				{@const Icon = item.icon}
+																				<Icon size={14} class="text-muted transition-colors group-hover:text-primary" />
+																			{/if}
+																		</div>
+																	{/if}
 																	<div>
 																		<span class="text-[13px] font-medium text-surface">{item.label}</span>
 																		<div class="mt-0.5 text-[12px] leading-snug text-muted">{item.description}</div>
@@ -486,8 +537,13 @@
 																closeMobile();
 															}}
 														>
-															{#if item.iconSrc}
+															{#if item.badge}
+																{@render brandBadge(item.badge)}
+															{:else if item.iconSrc}
 																<img src={item.iconSrc} alt="" class="h-4 w-4" />
+															{:else if item.icon}
+																{@const Icon = item.icon}
+																<Icon size={16} class="text-muted" />
 															{/if}
 															<span class="text-sm">{item.label}</span>
 														</a>

@@ -42,9 +42,9 @@
 		{
 			icon: GlobeIcon,
 			stage: 'Send',
-			title: 'One domain, one reputation',
+			title: 'Transactional and marketing, together',
 			description:
-				'Stop splitting transactional and marketing across two vendors. One sending domain, one deliverability reputation, one place to monitor it all.'
+				'Stop splitting transactional and marketing across two vendors. Send both from one platform — built in the same editor, with one place to monitor it all.'
 		},
 		{
 			icon: LinkIcon,

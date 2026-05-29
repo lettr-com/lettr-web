@@ -40,9 +40,9 @@
 
 <section bind:this={section} class="py-16 border-b border-border/30">
 		<div class="mb-8" data-unified>
-			<h2 class="mb-3 text-surface">One platform. One domain. <span class="text-primary">One reputation.</span></h2>
+			<h2 class="mb-3 text-surface">One platform. <span class="text-primary">One place to send.</span></h2>
 			<p class="text-body text-muted max-w-[55ch]">
-				No more juggling Postmark for transactional and Mailchimp for marketing. Send everything from one place, on the same domain, with the same deliverability reputation.
+				No more juggling Postmark for transactional and Mailchimp for marketing. Send everything from one place — transactional and campaigns, built in the same editor.
 			</p>
 		</div>
 
