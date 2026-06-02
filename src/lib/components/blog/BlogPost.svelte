@@ -93,9 +93,9 @@
 </svelte:head>
 
 <article class="pt-32 pb-24">
-	<div class="mx-auto max-w-[720px]">
+	<div class="mx-auto max-w-[1064px] px-4">
 		<!-- Header -->
-		<header bind:this={header}>
+		<header bind:this={header} class="max-w-[800px]">
 			<a
 				data-animate
 				href="/blog"
@@ -149,7 +149,7 @@
 		</header>
 
 		{#if coverImage}
-			<figure class="mt-10">
+			<figure class="mt-10 max-w-[800px]">
 				<img
 					src={coverImage}
 					alt={coverAlt}
@@ -160,8 +160,8 @@
 	</div>
 
 	<!-- Body + table of contents -->
-	<div class="mt-12 flex justify-center gap-10 px-6">
-		<div bind:this={body} class="blog-prose w-full max-w-[720px]">
+	<div class="mx-auto mt-12 flex max-w-[1064px] gap-10 px-4">
+		<div bind:this={body} class="blog-prose w-full max-w-[800px]">
 			{@render children()}
 		</div>
 		<aside class="hidden w-56 shrink-0 lg:block">
