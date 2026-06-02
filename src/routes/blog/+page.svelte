@@ -16,6 +16,16 @@
 	// As you add posts, list their metadata here (newest first).
 	const posts: PostMeta[] = [
 		{
+			slug: 'introducing-lettr-marketing-audiences-and-campaigns',
+			category: 'Product',
+			title: 'Introducing marketing emails in Lettr',
+			excerpt:
+				'Marketing email now lives inside Lettr. The new module adds Audiences for managing who you send to and Campaigns for designing and sending bulk email, all in the same account and on the same domains you already use for transactional sending.',
+			author: 'Erik Vlčák',
+			date: 'June 2, 2026',
+			readTime: '7 min read'
+		},
+		{
 			slug: 'managing-lettr-from-your-ai-assistant',
 			category: 'Product',
 			title: 'Managing Lettr from your AI assistant: the MCP integration',
