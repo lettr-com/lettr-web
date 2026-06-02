@@ -2,6 +2,7 @@
 	import { onMount, type Snippet } from 'svelte';
 	import { ArrowLeftIcon, ClockIcon } from 'phosphor-svelte';
 	import { createFromAnimationCleanup, createScrollRevealCleanup } from '$lib/utils/gsap';
+	import TableOfContents from './TableOfContents.svelte';
 
 	export interface BlogAuthor {
 		name: string;
@@ -156,10 +157,17 @@
 				/>
 			</figure>
 		{/if}
+	</div>
 
-		<!-- Body -->
-		<div bind:this={body} class="blog-prose mt-12">
+	<!-- Body + table of contents -->
+	<div class="mt-12 flex justify-center gap-10 px-6">
+		<div bind:this={body} class="blog-prose w-full max-w-[720px]">
 			{@render children()}
 		</div>
+		<aside class="hidden w-56 shrink-0 lg:block">
+			<div class="sticky top-32">
+				<TableOfContents container={body} />
+			</div>
+		</aside>
 	</div>
 </article>
