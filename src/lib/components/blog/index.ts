@@ -5,6 +5,7 @@
 //     from '$lib/components/blog';
 //
 export { default as BlogPost } from "./BlogPost.svelte";
+export { default as TableOfContents } from "./TableOfContents.svelte";
 export { default as Lead } from "./Lead.svelte";
 export { default as Heading } from "./Heading.svelte";
 export { default as Paragraph } from "./Paragraph.svelte";
