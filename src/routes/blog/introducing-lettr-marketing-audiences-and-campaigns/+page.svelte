@@ -52,7 +52,7 @@
 	<Heading level={2}>Introducing Audiences</Heading>
 
 	<Paragraph>
-		The <a href="https://docs.lettr.com/learn/audience/introduction">Audience</a> module is where Lettr
+		The Audience is where Lettr
 		keeps track of <strong>the people you send marketing emails to</strong>. It stores them as a single, team-wide pool
 		of contacts rather than several separate audiences, so there is one shared place to manage who hears
 		from you.
@@ -75,11 +75,11 @@
 	<Heading level={3}>Lists, segments, and topics</Heading>
 
 	<Paragraph>
-		That pool can be grouped in three ways: <strong>lists</strong>, <strong>segments</strong>, and <strong>topics</strong>. A list is a hand-curated
+		That pool can be grouped in three ways: <strong>lists</strong>, <strong>segments</strong>, and <strong>topics</strong>. A <strong>list</strong> is a hand-curated
 		membership, with people added or removed one at a time, so it changes only when someone edits it.
-		A segment is a membership defined by
+		A <strong>segment</strong> is a membership defined by
 		a rule, such as "subscribed contacts on the Pro plan," and it updates automatically as contacts change.
-		Lastly, topics sit alongside both, allowing recipients to opt into the categories they want to hear
+		Lastly, <strong>topics</strong> sit alongside both, allowing recipients to opt into the categories they want to hear
 		about rather than being assigned to them by you.
 	</Paragraph>
 
@@ -93,7 +93,7 @@
 	<Heading level={3}>The wrong people stay off automatically</Heading>
 
 	<Paragraph>
-		Just as important as who a campaign reaches is who it skips. Lettr automatically excludes anyone
+		Just as important as who a campaign reaches is who it <strong>skips</strong>. Lettr automatically excludes anyone
 		who has unsubscribed, bounced, or complained, without you having to maintain a suppression list.
 		Once someone opts out of one campaign, they stay out of the rest.
 	</Paragraph>
@@ -105,7 +105,7 @@
 	</Paragraph>
 
 	<Paragraph>
-		Taken together, an Audience gives you one accurate pool of contacts, organized however you like
+		Taken together, an Audience gives you <strong>one accurate pool of contacts</strong>, organized however you like
 		with lists, segments, and topics, and kept clean of anyone who shouldn't be reached. That is the
 		who. The next half is the what: turning that audience into an email worth sending.
 	</Paragraph>
@@ -119,9 +119,9 @@
 	<Heading level={2}>Introducing Campaigns</Heading>
 
 	<Paragraph>
-		Once your audience is in place, the other half of the marketing email is the message itself. A <a
-			href="https://docs.lettr.com/learn/campaigns/introduction">campaign</a
-		> is how Lettr sends a single email to your entire audience at once.
+		Once your audience is in place, the other half of the marketing email is the message itself. A <strong>campaign</strong> is how Lettr sends a single email <strong>to your entire audience in bulk.</strong> All setup steps are described in our <a
+			href="https://docs.lettr.com/learn/campaigns/introduction">Campaigns docs</a
+		>.
 	</Paragraph>
 
 	<Paragraph>
@@ -131,40 +131,38 @@
 	</Paragraph>
 
 	<Paragraph>
-		Each campaign can even have its own sending domain and from address, allowing one team to reach
+		Each campaign can even have <strong>its own sending domain and from address</strong>, allowing one team to reach
 		multiple customer bases, each arriving in the inbox exactly as designed. That last part is the work of the editor behind every campaign.
 	</Paragraph>
 
 	<Heading level={3}>The visual editor is Topol's drag-and-drop builder</Heading>
 
 	<Paragraph>
-		That editor is a <a href="https://docs.lettr.com/learn/campaigns/content-and-design"
-			>drag-and-drop builder powered by Topol</a
+		That editor is a drag-and-drop email builder powered by <a
+			href="https://topol.io/">Topol</a
 		>, and it is worth a closer look. Topol is not a generic page builder bolted onto email. Instead,
-		it is a dedicated email design tool, refined over years for the inbox, and it shows in the
+		it is a <strong>dedicated email design tool</strong>, refined over years for the inbox, and it shows in the
 		results. What you see while designing is what arrives, polished and consistent across clients,
 		and built with ease.
 	</Paragraph>
 
 	<Paragraph>
 		That is what makes it the best part of building a campaign. The editor carries the email
-		expertise, so your team doesn't have to, which means anyone can produce a professional email
-		without struggle. And for those who want full control, a raw HTML editor
-		is right there alongside it, ready to pick up from one of our premade <a
-			href="https://docs.lettr.com/learn/templates/introduction">templates</a
-		> or a blank canvas.
+		expertise, so your team doesn't have to, which means <strong>anyone can produce a professional email</strong>
+		without struggle. And for those who want full control, a <strong>raw HTML editor</strong>
+		is right there alongside it, ready to pick up from one of our premade templates or a blank canvas.
 	</Paragraph>
 
 	<Heading level={3}>Merge tags and built-in compliance</Heading>
 
 	<Paragraph>
 		Lettr also uses the same contact properties that shape your audience to populate the email.
-		Simply drop a merge tag like <code>{'{{first_name}}'}</code> into the subject or body, and a line
+		Simply drop a <strong>merge tag</strong> like <code>{'{{first_name}}'}</code> into the subject or body, and a line
 		such as <code>Welcome to Acme, {'{{first_name}}'}!</code> reaches each person with their own details. This way, each campaign reads like it was written for one reader rather than blasted to a list.
 	</Paragraph>
 
 	<Paragraph>
-		And last but not least, compliance is handled by default. The law requires every marketing email
+		And last but not least, <strong>compliance is handled by default</strong>. The law requires every marketing email
 		to include a working unsubscribe link, and Lettr adds one to each send so a campaign can't
 		accidentally ship without it.
 	</Paragraph>
@@ -173,7 +171,7 @@
 
 	<Paragraph>
 		Getting the email out is one thing; knowing whether it landed is another, and Lettr handles that
-		side, too. The moment a campaign goes out, it shows how the send is performing in real time, so
+		side, too. The moment a campaign goes out, it shows how the send is performing <strong>in real time</strong>, so
 		there is no waiting or guessing. Every metric that matters is there the moment it happens.
 	</Paragraph>
 
@@ -187,11 +185,10 @@
 
 	<Paragraph>
 		Good numbers only matter if the email reaches inboxes in the first place, and that depends on how
-		Lettr protects your sending reputation. Mailbox providers judge a sending domain by how all its
+		Lettr protects your <strong>sending reputation</strong>. Mailbox providers judge a sending domain by how all its
 		mail behaves collectively, and marketing email naturally draws lower engagement and more
-		complaints than transactional email. Lettr encourages you to keep the two streams on separate <a
-			href="https://docs.lettr.com/learn/domains/sending-domains">sending domains</a
-		>, each with its own reputation. As a result, marketing complaints count only against the marketing domain and
+		complaints than transactional email. Lettr encourages you to keep the two streams on <strong>separate sending domains</strong>, each with its own reputation.
+		As a result, marketing complaints count only against the marketing domain and
 		transactional deliverability stays protected.
 	</Paragraph>
 
@@ -202,7 +199,7 @@
 	/>
 
 	<Paragraph>
-		This separation is handled for you, so a failed campaign will never affect the transaction emails your users depend on. We
+		This separation is handled for you, so a failed campaign will <strong>never</strong> affect the transaction emails your users depend on. We
 		cover the full reasoning and the migration steps in <a
 			href="https://lettr.com/blog/separate-transactional-and-marketing-email"
 			>Why you should separate transactional and marketing email</a
@@ -223,18 +220,16 @@
 	</Paragraph>
 
 	<Paragraph>
-		The best way to get a feel for any of this is to try it. Every Lettr account includes a free
-		500-contact tier, so you can <a href="https://app.lettr.com/register">create an account</a> at no
+		The best way to get a feel for any of this is to <strong>try it</strong>. Every Lettr account includes a <strong>free
+		500-contact tier</strong>, so you can <a href="https://app.lettr.com/register">create an account</a> at no
 		cost, build a small audience, and send a real campaign to yourself in a few minutes. 
 	</Paragraph>
 
 	<Divider />
 
 	<Paragraph>
-		Ready to send your first campaign? <a href="https://app.lettr.com/register"
+		<strong>Ready to send your first campaign?</strong> <a href="https://app.lettr.com/register"
 			>Create a free Lettr account</a
-		> and try Audiences and Campaigns today. Visit our <a href="https://docs.lettr.com/learn/audience/introduction">Audiences</a> and <a
-			href="https://docs.lettr.com/learn/campaigns/introduction">Campaigns</a
-		> docs for full details.
+		> and try Audiences and Campaigns today.
 	</Paragraph>
 </BlogPost>
