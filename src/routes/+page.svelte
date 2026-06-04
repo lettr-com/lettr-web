@@ -4,8 +4,9 @@
 	import Features from '$lib/components/Features.svelte';
 	import TeamFeatures from '$lib/components/TeamFeatures.svelte';
 	import SaaSUseCases from '$lib/components/SaaSUseCases.svelte';
+	import MarketingEmail from '$lib/components/MarketingEmail.svelte';
 	import TalkToExpert from '$lib/components/TalkToExpert.svelte';
-	import Pricing from '$lib/components/Pricing.svelte';
+	import PricingPreview from '$lib/components/PricingPreview.svelte';
 	import FAQSection from '$lib/components/FAQSection.svelte';
 </script>
 
@@ -14,6 +15,7 @@
 <TeamFeatures />
 <Features />
 <SaaSUseCases />
+<MarketingEmail />
 <TalkToExpert />
-<Pricing />
+<PricingPreview />
 <FAQSection />

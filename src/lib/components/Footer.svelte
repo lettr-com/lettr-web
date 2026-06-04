@@ -46,7 +46,8 @@
 		{
 			title: 'Product',
 			links: [
-				{ label: 'Laravel Integration', href: '/platform/laravel' },
+				{ label: 'Transactional Email', href: '/email-api/' },
+				{ label: 'Email Marketing', href: '/email-marketing/' },
 				{ label: 'Template Builder', href: '/platform/templates' },
 				{ label: 'Analytics', href: '/platform/analytics' },
 				{ label: 'Deliverability', href: '/platform/deliverability' },
@@ -58,6 +59,7 @@
 			links: [
 				{ label: 'Documentation', href: 'https://docs.lettr.com', external: true },
 				{ label: 'API Reference', href: 'https://docs.lettr.com/api-reference/introduction', external: true },
+				{ label: 'Blog', href: '/blog/' },
 				{ label: 'Changelog', href: '/changelog' },
 				{ label: 'Compare', href: '/compare' },
 				{ label: 'Status', href: 'https://status.lettr.com', external: true }

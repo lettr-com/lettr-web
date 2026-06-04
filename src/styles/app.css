@@ -160,6 +160,47 @@
   }
 }
 
+@layer components {
+  /* Vertical rhythm + inline element styling shared by every blog post.
+     Block-level spacing lives here so the typography components in
+     $lib/components/blog stay focused on a single element each. */
+  .blog-prose > * + * {
+    margin-top: 1.5rem;
+  }
+
+  .blog-prose > h2 {
+    margin-top: 3rem;
+  }
+
+  .blog-prose > h3 {
+    margin-top: 2.25rem;
+  }
+
+  .blog-prose a {
+    color: var(--color-primary);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    transition: color 0.15s ease;
+  }
+
+  .blog-prose a:hover {
+    color: color-mix(in srgb, var(--color-primary) 80%, transparent);
+  }
+
+  .blog-prose strong {
+    font-weight: 650;
+    color: var(--color-surface);
+  }
+
+  .blog-prose :not(pre) > code {
+    font-family: var(--font-code);
+    font-size: 0.875em;
+    padding: 0.15em 0.4em;
+    background-color: rgba(17, 24, 39, 0.06);
+    color: var(--color-surface);
+  }
+}
+
 @utility glass {
   backdrop-filter: blur(8px);
   background-color: rgba(247, 241, 243, 0.7);

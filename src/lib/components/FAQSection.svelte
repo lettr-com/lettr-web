@@ -29,7 +29,7 @@
 		},
 		{
 			question: 'Can I send both transactional and marketing emails with Lettr?',
-			answer: 'Yes. Lettr handles both transactional emails (password resets, security alerts, usage notifications) and marketing emails (product updates, feature announcements, newsletters) from a single platform. One sending domain, one deliverability reputation, and one integration. No need to manage separate providers for transactional and marketing email.'
+			answer: 'Yes. Lettr handles both transactional emails (password resets, security alerts, usage notifications) and marketing emails (product updates, feature announcements, newsletters) from a single platform — both built in the same drag-and-drop editor, with one integration. No need to manage separate providers for transactional and marketing email.'
 		},
 		{
 			question: 'What programming languages does Lettr support?',

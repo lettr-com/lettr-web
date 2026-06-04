@@ -3,8 +3,13 @@ import { marked } from "marked";
 import accessibilityStatementMarkdown from "../../../static/legals/statement.md?raw";
 import privacyPolicyMarkdown from "../../../static/legals/privacy-policy.md?raw";
 import termsOfUseMarkdown from "../../../static/legals/terms.md?raw";
+import termsOfUse20260215Markdown from "../../../static/legals/terms-15-02-2026.md?raw";
 
-export type LegalDocumentKey = "privacyPolicy" | "termsOfUse" | "accessibilityStatement";
+export type LegalDocumentKey =
+  | "privacyPolicy"
+  | "termsOfUse"
+  | "accessibilityStatement"
+  | "termsOfUse20260215";
 
 export interface LegalNavLink {
   key: LegalDocumentKey;
@@ -29,7 +34,7 @@ interface LegalDocumentEntry {
   markdown: string;
 }
 
-const googleDocReferencePattern = /\[(\d+\.)\]\(https:\/\/docs\.google\.com\/document\/[^)]+\)/g;
+const googleDocReferencePattern = /\[(\d+)\\?\.\]\(https:\/\/docs\.google\.com\/document\/[^)]+\)/g;
 
 const legalDocuments: Record<LegalDocumentKey, LegalDocumentEntry> = {
   privacyPolicy: {
@@ -42,9 +47,16 @@ const legalDocuments: Record<LegalDocumentKey, LegalDocumentEntry> = {
   termsOfUse: {
     title: "Terms of Use",
     description: "Rules and contractual terms for using Lettr services.",
-    updatedAt: "February 15, 2026",
+    updatedAt: "June 4, 2026",
     href: "/terms/",
     markdown: termsOfUseMarkdown,
+  },
+  termsOfUse20260215: {
+    title: "Terms of Use",
+    description: "Archived Terms of Use, effective February 15, 2026.",
+    updatedAt: "February 15, 2026",
+    href: "/terms-15-02-2026/",
+    markdown: termsOfUse20260215Markdown,
   },
   accessibilityStatement: {
     title: "Accessibility Statement",
@@ -55,12 +67,14 @@ const legalDocuments: Record<LegalDocumentKey, LegalDocumentEntry> = {
   },
 };
 
-export const legalNavLinks: LegalNavLink[] = (
-  Object.entries(legalDocuments) as [LegalDocumentKey, LegalDocumentEntry][]
-).map(([key, document]) => ({
+// Keys shown in the legal nav. Archived documents (e.g. superseded Terms
+// versions) are intentionally excluded so they stay reachable only by direct URL.
+const navLinkKeys: LegalDocumentKey[] = ["privacyPolicy", "termsOfUse", "accessibilityStatement"];
+
+export const legalNavLinks: LegalNavLink[] = navLinkKeys.map((key) => ({
   key,
-  label: document.title,
-  href: document.href,
+  label: legalDocuments[key].title,
+  href: legalDocuments[key].href,
 }));
 
 function normalizeLegalMarkdown(markdown: string): string {
@@ -71,7 +85,7 @@ function normalizeLegalMarkdown(markdown: string): string {
     .replace(/<\/mark>/g, "")
     .replace(/<u>/g, "")
     .replace(/<\/u>/g, "")
-    .replace(googleDocReferencePattern, "$1");
+    .replace(googleDocReferencePattern, "$1.");
 }
 
 export async function getLegalDocumentData(key: LegalDocumentKey): Promise<LegalDocumentData> {

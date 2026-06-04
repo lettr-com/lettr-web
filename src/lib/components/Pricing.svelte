@@ -2,9 +2,11 @@
 	import { onMount } from 'svelte';
 	import { Check, X, ArrowRight } from 'phosphor-svelte';
 	import Slider from './Slider.svelte';
-	import { createScrollRevealCleanup } from '$lib/utils/gsap';
+	import { createScrollRevealCleanup, createFromAnimationCleanup } from '$lib/utils/gsap';
 	import { buildRegisterUrl, registerUrl } from '$lib/utils/utm';
 	import { capturePosthogEvent, trackSignupClick } from '$lib/analytics/posthog';
+
+	let { sectionClass = 'py-16', animateOnMount = false }: { sectionClass?: string; animateOnMount?: boolean } = $props();
 
 	let section: HTMLElement | undefined = $state();
 	let sliderValue: number = $state(1);
@@ -160,6 +162,13 @@
 	onMount(() => {
 		registerHref = buildRegisterUrl(new URL(window.location.href), document.cookie);
 		if (!section) return;
+		if (animateOnMount) {
+			return createFromAnimationCleanup({
+				scope: section,
+				targets: '[data-pricing-animate]',
+				vars: { y: 30, opacity: 0, duration: 0.6, stagger: 0.1, ease: 'power3.out', clearProps: 'opacity,transform' }
+			});
+		}
 		return createScrollRevealCleanup({
 			scope: section,
 			targets: '[data-pricing-animate]',
@@ -168,12 +177,7 @@
 	});
 </script>
 
-<section bind:this={section} id="pricing" class="py-16">
-	<div class="mb-10" data-pricing-animate>
-		<h2 class="mb-3 text-surface">Simple, transparent <span class="text-primary">pricing.</span></h2>
-		<p class="text-body text-muted">Start free. Scale as you grow. No hidden fees.</p>
-	</div>
-
+<section bind:this={section} id="pricing" class={sectionClass}>
 	<div class="mb-8" data-pricing-animate>
 		<span class="mb-3 block text-sm text-muted">How many emails do you send per month?</span>
 		<Slider
@@ -242,7 +246,7 @@
 	</div>
 
 	<!-- Enterprise row -->
-	<div data-pricing-animate class="mt-3 border bg-white p-5 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 transition-all duration-300 {highlightedPlan === 'enterprise' ? 'border-primary shadow-lg shadow-primary/5' : 'border-border/30'}">
+	<div data-pricing-animate class="mt-3 border bg-white p-5 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 transition-colors duration-300 {highlightedPlan === 'enterprise' ? 'border-primary shadow-lg shadow-primary/5' : 'border-border/30'}">
 		<div>
 			<h3 class="text-sm font-semibold mb-1 {highlightedPlan === 'enterprise' ? 'text-primary' : 'text-surface'}">Enterprise</h3>
 			<p class="text-[13px] text-muted">
