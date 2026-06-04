@@ -22,7 +22,8 @@
 </script>
 
 <svelte:head>
-	<link rel="icon" href="/logo-icon.svg" type="image/svg+xml" />
+	<link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+	<link rel="icon" href="/favicon.png" type="image/png" />
 	{#if isHomeRoute}
 		<title>Lettr — The Email Platform Built for SaaS</title>
 		<link rel="canonical" href="https://lettr.com" />
