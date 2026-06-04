@@ -1,66 +1,69 @@
 <script lang="ts">
-	import { BlogPost, Lead, Heading, Paragraph, Callout, Divider } from '$lib/components/blog';
+	import { BlogPost, Heading, Paragraph, Callout, Figure, Divider } from '$lib/components/blog';
 </script>
 
 <BlogPost
 	category="Product"
-	title="Introducing marketing emails in Lettr"
+	title="Introducing marketing emails"
 	excerpt="Marketing email now lives inside Lettr. The new module adds Audiences for managing who you send to and Campaigns for designing and sending bulk email, all in the same account and on the same domains you already use for transactional sending."
 	author={{ name: 'Erik Vlčák', role: 'Customer Success Engineer', avatar: '/images/authors/erik.jpg' }}
-	date="June 2, 2026"
+	date="June 5, 2026"
 	datetime="2026-06-02"
-	readTime="7 min read"
-	slug="introducing-lettr-marketing-audiences-and-campaigns"
+	readTime="13 min read"
+	slug="introducing-audiences-and-campaigns"
 >
 
-	<Paragraph>
-		Lettr started as a way to reliably send transactional email: password resets, receipts,
-		verification codes, and the messages your product depends on. Those still work the way they
-		always have.
+<Paragraph>
+		Lettr started as a way to reliably send <strong>transactional email</strong>: password resets, receipts,
+		verification codes, and the messages your product depends on. Sending the occasional product
+		update or announcement to those same people is a different job, and most teams reach for a
+		separate marketing tool to do it.
 	</Paragraph>
 
 	<Paragraph>
-		But sending the occasional product update or announcement to the people who use that product is
-		a different job, and most teams reach for a separate marketing tool. The new <strong>Marketing module</strong>
-		closes that gap inside Lettr itself. It adds two features for marketing email: <strong
-			>Audiences</strong
-		> for managing who you send to and <strong>Campaigns</strong> for designing and sending emails in bulk.
+		The new <strong>Marketing module</strong> closes that gap inside Lettr itself. It adds two features
+		for marketing email: <strong>Audiences</strong> for managing who you send to and <strong
+			>Campaigns</strong
+		> for designing and sending emails in bulk, all in the same account and on the same domains you already
+		use for transactional sending.
 	</Paragraph>
 
 	<Callout variant="tip" title="TL;DR">
 		<ul class="list-disc space-y-1 pl-5 marker:text-primary">
 			<li>
-				Lettr now sends marketing email alongside your transactional sending, in the same account and
+				Lettr now sends <strong>marketing email</strong> alongside your transactional sending, in the same account and
 				on the same domains.
 			</li>
 			<li>
-				Audiences give you one shared pool of contacts, grouped by lists, segments, and topics, with
+				<strong>Audiences</strong> give you one shared pool of contacts, grouped by lists, segments, and topics, with
 				unsubscribes, bounces, and complaints suppressed automatically.
 			</li>
 			<li>
-				Campaigns build a single bulk email in the Topol drag-and-drop editor, personalize it with
+				<strong>Campaigns</strong> build a single bulk email in the Topol drag-and-drop editor, personalize it with
 				merge tags, add a compliant unsubscribe link by default, send or schedule it, and report
 				results in real time.
 			</li>
-			<li>Keep marketing on its own sending domain to protect transactional deliverability.</li>
+			<li>Keep marketing on its own <strong>sending domain</strong> to protect transactional deliverability.</li>
 		</ul>
 	</Callout>
+
+	
 
 	<Heading level={2}>Introducing Audiences</Heading>
 
 	<Paragraph>
 		The <a href="https://docs.lettr.com/learn/audience/introduction">Audience</a> module is where Lettr
-		keeps track of the people you send marketing emails to. It stores them as a single, team-wide pool
+		keeps track of <strong>the people you send marketing emails to</strong>. It stores them as a single, team-wide pool
 		of contacts rather than several separate audiences, so there is one shared place to manage who hears
 		from you.
 	</Paragraph>
 
 	<Paragraph>
-		That single-record rule is what makes the rest predictable. A contact's subscription status,
+		That <strong>single-record rule</strong> is what makes the rest predictable. A contact's subscription status,
 		engagement history, and custom properties live in one place, so an unsubscribe or a bounce
 		applies everywhere at once, and your reporting counts each person only once. The same holds at
 		send time. When a campaign targets several overlapping lists and segments, anyone caught in more
-		than one still receives it exactly once.
+		than one still receives it <strong>exactly once</strong>.
 	</Paragraph>
 
 	<Paragraph>
@@ -72,9 +75,9 @@
 	<Heading level={3}>Lists, segments, and topics</Heading>
 
 	<Paragraph>
-		That pool can be grouped in three ways: lists, segments, and topics. A list is a hand-curated
+		That pool can be grouped in three ways: <strong>lists</strong>, <strong>segments</strong>, and <strong>topics</strong>. A list is a hand-curated
 		membership, with people added or removed one at a time, so it changes only when someone edits it.
-		A <a href="https://docs.lettr.com/learn/audience/segments">segment</a> is a membership defined by
+		A segment is a membership defined by
 		a rule, such as "subscribed contacts on the Pro plan," and it updates automatically as contacts change.
 		Lastly, topics sit alongside both, allowing recipients to opt into the categories they want to hear
 		about rather than being assigned to them by you.
@@ -106,6 +109,12 @@
 		with lists, segments, and topics, and kept clean of anyone who shouldn't be reached. That is the
 		who. The next half is the what: turning that audience into an email worth sending.
 	</Paragraph>
+
+	<Figure
+		src="/images/blog/introducing-audiences-and-campaigns/marketing-features.png"
+		alt="The two features of Lettr's Marketing module: Campaigns and Audiences."
+		caption="Audiences decide who you reach; Campaigns decide what you send."
+	/>
 
 	<Heading level={2}>Introducing Campaigns</Heading>
 
@@ -185,6 +194,12 @@
 		>, each with its own reputation. As a result, marketing complaints count only against the marketing domain and
 		transactional deliverability stays protected.
 	</Paragraph>
+
+	<Figure
+		src="/images/blog/introducing-audiences-and-campaigns/stream-switcher.png"
+		alt="Lettr workspace switcher showing two separate streams: Transactional for repetitive automatic emails and Marketing for promotional campaigns."
+		caption="Switch between your Transactional and Marketing streams."
+	/>
 
 	<Paragraph>
 		This separation is handled for you, so a failed campaign will never affect the transaction emails your users depend on. We
