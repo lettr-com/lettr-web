@@ -16,7 +16,7 @@
 		{
 			key: 'transactional',
 			label: 'Transactional',
-			description: 'Repetitive and automatic emails.'
+			description: 'Automated, event-triggered emails.'
 		},
 		{
 			key: 'marketing',
@@ -41,12 +41,14 @@
 			role="tab"
 			aria-selected={isActive}
 			onclick={() => select(option.key)}
-			class="group relative flex items-start gap-3 border p-4 text-left transition-all duration-200
+			class="group relative flex cursor-pointer items-start gap-3 border p-4 text-left transition-all duration-200
 				{isActive
 					? isTransactional
 						? 'border-[#EC104B] bg-[#FFEFF4] shadow-[0_8px_24px_-12px_rgba(236,16,75,0.25)]'
 						: 'border-[#00D46B] bg-[#E6FBF0] shadow-[0_8px_24px_-12px_rgba(0,212,107,0.25)]'
-					: 'border-border/40 bg-white hover:border-border/70'}"
+					: isTransactional
+						? 'border-border/40 bg-white hover:border-[#EC104B]/50 hover:bg-[#FFEFF4]/40 hover:shadow-[0_6px_20px_-12px_rgba(236,16,75,0.2)]'
+						: 'border-border/40 bg-white hover:border-[#00D46B]/50 hover:bg-[#E6FBF0]/40 hover:shadow-[0_6px_20px_-12px_rgba(0,212,107,0.2)]'}"
 		>
 			{#if isTransactional}
 				<span
