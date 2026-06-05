@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import { slugify } from '$lib/utils/slug';
+	import { resolveActiveId, hasReachedPinned } from '$lib/utils/scrollSpy';
 
 	interface Props {
 		/** The blog body element whose <h2>s populate the TOC. */
@@ -16,6 +17,31 @@
 
 	let items = $state<TocItem[]>([]);
 	let activeId = $state<string | null>(null);
+
+	// While a TOC click is scrolling the page, the clicked heading is "pinned":
+	// the observer holds the indicator on it instead of walking down through every
+	// heading the smooth scroll passes over. Cleared once the scroll arrives (the
+	// observer sees the target reach the band) or by a safety timeout.
+	let pinnedId: string | null = null;
+	let pinSafetyTimer: ReturnType<typeof setTimeout> | null = null;
+
+	function clearPin() {
+		pinnedId = null;
+		if (pinSafetyTimer) {
+			clearTimeout(pinSafetyTimer);
+			pinSafetyTimer = null;
+		}
+	}
+
+	function pinTarget(id: string) {
+		pinnedId = id;
+		activeId = id;
+		if (pinSafetyTimer) clearTimeout(pinSafetyTimer);
+		// Safety net: if the observer never reports the target reaching the band
+		// (e.g. a short last section that can't scroll to the top), release the pin
+		// so the scroll-spy is never permanently frozen.
+		pinSafetyTimer = setTimeout(clearPin, 1200);
+	}
 
 	onMount(() => {
 		// Fail-soft: nothing to do until the body element is bound.
@@ -55,35 +81,25 @@
 
 		if (observed.length === 0) return;
 
-		// Index of the most recently passed heading (top above the band).
-		let lastPassed = 0;
-
 		const observer = new IntersectionObserver(
 			() => {
 				// Recompute from live geometry every callback. The band sits ~the
 				// navbar offset from the top of the viewport.
-				const bandTop = 120;
-				const intersecting: { id: string; top: number }[] = [];
-				lastPassed = 0;
+				const positions = observed.map((node) => ({
+					id: node.id,
+					top: node.getBoundingClientRect().top
+				}));
 
-				observed.forEach((node, index) => {
-					const top = node.getBoundingClientRect().top;
-					if (top <= bandTop) lastPassed = index; // most recent heading above band.
-					// "In the band" = near the top of the viewport.
-					if (top >= 0 && top <= window.innerHeight * 0.34) {
-						intersecting.push({ id: node.id, top });
-					}
-				});
-
-				if (intersecting.length > 0) {
-					// Topmost visible heading wins (smallest top).
-					intersecting.sort((a, b) => a.top - b.top);
-					activeId = intersecting[0].id;
-				} else {
-					// Nothing in the band: keep the section being read lit — the most
-					// recently passed heading (first item at the very top of the page).
-					activeId = observed[lastPassed].id;
+				// A click-scroll that has reached its target hands control back to the
+				// observer, so the indicator doesn't stay stuck once the reader scrolls on.
+				if (pinnedId != null && hasReachedPinned(positions, { pinnedId, viewportHeight: window.innerHeight })) {
+					clearPin();
 				}
+
+				activeId = resolveActiveId(positions, {
+					viewportHeight: window.innerHeight,
+					pinnedId
+				});
 			},
 			// Collapse the viewport to a band near the top so a heading becomes
 			// "active" as it crosses ~the navbar offset.
@@ -92,7 +108,10 @@
 
 		observed.forEach((node) => observer.observe(node));
 
-		return () => observer.disconnect();
+		return () => {
+			observer.disconnect();
+			clearPin();
+		};
 	});
 </script>
 
@@ -104,7 +123,7 @@
 				<li>
 					<a
 						href={'#' + item.id}
-						onclick={() => (activeId = item.id)}
+						onclick={() => pinTarget(item.id)}
 						class="block border-l-2 py-1 pl-3 transition-colors
 							{activeId === item.id
 							? 'border-primary text-primary'
