@@ -122,7 +122,7 @@
 		<div class="flex flex-col">
 			<a
 				data-animate
-				href="/changelog/"
+				href="/blog/introducing-lettr-marketing-audiences-and-campaigns/"
 				class="group mb-6 inline-flex w-fit items-center gap-2 border border-primary/20 bg-primary/5 p-1.5 text-sm text-primary transition-colors hover:bg-primary/10"
 			>
 				<span class="bg-primary px-2 py-0.5 text-xs font-bold text-white">New</span>
