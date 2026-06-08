@@ -296,12 +296,6 @@ Receiving server: 250 2.0.0 OK`;
 		</li>
 	</List>
 
-	<Callout variant="info">
-		The takeaway: the journey does not end at placement. Bounces, complaints, and engagement flow back
-		from receivers and set the sender's reputation for the next send, so acting on them is what keeps
-		future mail reaching the inbox.
-	</Callout>
-
 	<Heading level={2}>The gap between "sent" and "received"</Heading>
 
 	<Paragraph>
