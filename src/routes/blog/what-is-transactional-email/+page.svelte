@@ -5,7 +5,7 @@
 <BlogPost
 	category="Fundamentals"
 	title="How transactional email actually works"
-	excerpt="A user clicks 'Reset Password,' waits, checks spam, gives up — and files a ticket about an email you didn't know was broken. If you're shipping your first signup or receipt flow, the transactional vs. marketing distinction matters."
+	excerpt="What separates transactional email from marketing email, why inbox providers and regulators treat them differently, and how to keep these messages reliable in production."
 	author={{ name: 'Erik Vlčák', role: 'Customer Success Engineer', avatar: '/images/authors/erik.jpg' }}
 	date="February 4, 2026"
 	datetime="2026-02-04"
@@ -13,28 +13,26 @@
 	slug="what-is-transactional-email"
 >
 	<Lead>
-		When a user clicks "Reset Password," your system sends a one-time link to their inbox. They wait,
-		check their spam folder, and try again. Nothing. The link expires, they get locked out, and a few
-		minutes later, a support ticket lands in your queue about an email you probably didn't notice was
-		broken.
+		A transactional email is a message sent to one person in response to something they did: a
+		password reset, a login code, an order confirmation. Almost every app and online store sends them,
+		and they work differently from the marketing emails a company sends to its whole audience.
 	</Lead>
 
 	<Paragraph>
-		That email was transactional. If you're a backend developer about to ship your first signup,
-		password reset, or receipt flow, the difference between transactional and marketing email
-		matters. Get it wrong, and the same template can hit a 90% inbox rate on one provider and the spam
-		folder on another.
+		That difference matters more than it first appears. Inbox providers and regulators <strong>treat the two
+		kinds of email by separate rules</strong>, so the same message can reliably reach the inbox or quietly land
+		in spam depending on how it's set up.
 	</Paragraph>
 
 	<Callout variant="info" title="TL;DR">
 		<List>
 			<li>
-				Transactional emails are sent in response to a specific user action, whereas marketing emails
+				<strong>Transactional emails</strong> are sent in response to a specific user action, whereas <strong>marketing emails</strong>
 				are sent on the sender's schedule. Inbox providers and regulators treat them differently.
 			</li>
 			<li>
-				Mixing promotional content into a receipt is the fastest way to torch deliverability, and
-				it's a common FTC enforcement target.
+				Mixing promotional content into a receipt <strong>damages deliverability</strong>, and it's a common FTC
+				enforcement target.
 			</li>
 			<li>
 				Treat email outages like API outages: authenticate your domain, separate streams, monitor
@@ -46,118 +44,71 @@
 	<Heading level={2}>What is transactional email?</Heading>
 
 	<Paragraph>
-		A transactional email is sent in direct response to a user action: an order confirmation, a login
-		code, a password reset, or a dunning notice. There's a one-to-one link between the action and the
+		A <strong>transactional email</strong> is sent in <strong>direct response to a user action</strong>: an order confirmation, a login
+		code, a password reset, or a dunning notice. There's a <strong>one-to-one link</strong> between the action and the
 		message, and the user is usually waiting for it.
 	</Paragraph>
 
 	<Paragraph>
-		Marketing emails work the other way around. The sender selects the audience, timing, and content,
-		and pushes the message out on a schedule. No specific user action triggers any specific send.
-		Gmail, spam filters, and privacy regulators all key off this distinction, so the same HTML
-		template performs very differently depending on which bucket it lands in.
-	</Paragraph>
-
-	<Heading level={2}>Transactional vs. marketing: why inboxes treat them differently</Heading>
-
-	<Paragraph>
-		Open rates tell the first part of the story. Marketing emails average 20–25%, while transactional
-		emails hover around
-		<a href="https://www.mailgun.com/blog/email/email-open-rates-decoded/">80–85%</a>, roughly four
-		times higher. A 2FA code is a gate: users refresh their inbox until it shows up. A receipt is
-		expected but not a blocker. Either way, transactional messages get more attention per send than
-		anything else you'll deliver, so rendering bugs, wrong details, or slow delivery are noticed
-		immediately.
+		<strong>Marketing emails</strong> work the other way around. The sender selects the audience, timing, and content,
+		and pushes the message out <strong>in bulk to all contacts</strong>. No specific user action triggers any specific send.
 	</Paragraph>
 
 	<Paragraph>
-		Regulators draw the same line. CAN-SPAM defines a narrow set of "transactional or relationship
-		messages" (receipts, account notices, etc.) that are exempt from the unsubscribe requirement.
-		Under GDPR, sends that are genuinely necessary to perform a contract (like a receipt for a
-		purchase the user just made) can rely on contractual necessity as the lawful basis instead of
-		consent. "We updated our terms" emails are disputed. CASL has a similar carve-out. None of these
-		exceptions are as broad as they sound, but they do exist.
+This distinction matters because Gmail, spam filters, and privacy regulators all depend on it, so the same HTML template can behave very differently depending on its category.
+	</Paragraph>
+
+	<Heading level={2}>Why inboxes treat them differently</Heading>
+
+	<Paragraph>
+		It comes down to one thing: a <strong>transactional</strong> email is mail the recipient is <strong>actively expecting</strong>. The
+		user just asked for the reset or placed the order, so it's wanted by definition. <strong>Marketing</strong> email
+		arrives <strong>unrequested</strong> and has to earn its place in the inbox.
 	</Paragraph>
 
 	<Paragraph>
-		The combination of looser legal requirements and four times higher open rates is why teams are
-		tempted to slip a promo banner into the order confirmation. That temptation is where most
-		deliverability problems start.
-	</Paragraph>
-
-	<Heading level={2}>Mixing marketing into transactional is how you end up in spam</Heading>
-
-	<Paragraph>
-		The risk is reclassification. Once a "transactional" email contains enough promotional content,
-		regulators or mailbox providers no longer treat it as transactional. Concretely: an order
-		confirmation that includes a 30%-off coupon and three product recommendations is no longer a
-		receipt but a marketing email with a receipt attached. The FTC has
-		<a
-			href="https://www.ftc.gov/legal-library/browse/cases-proceedings?search_api_fulltext=can-spam"
-			>penalized companies under CAN-SPAM</a
-		> for exactly this pattern when the resulting message lacked a working unsubscribe link.
-	</Paragraph>
-
-	<Callout variant="warning" title="Promo in a receipt can trigger FTC enforcement">
-		An order confirmation that's mostly coupons and product recommendations can be reclassified as
-		marketing — and if it lacks a working unsubscribe link, that's a CAN-SPAM violation regulators
-		have actively pursued.
-	</Callout>
-
-	<Paragraph>
-		Even when regulators don't get involved, Gmail does, and it doesn't send warning letters. Content
-		signals, engagement patterns, and sender reputation all feed into spam classification. If your
-		transactional templates look promotional or share infrastructure with your marketing campaigns,
-		in the worst case, order confirmations can slide into Promotions and 2FA codes can land in spam.
-		Once domain reputation drops, recovery typically takes weeks of clean sending.
+		Recipients prove the point by opening transactional email
+		<a href="https://www.mailgun.com/blog/email/email-open-rates-decoded/">80–85% of the time</a>,
+		against 20–25% for marketing. Inbox
+		providers like Gmail <strong>trust mail that people reliably open</strong>, which is part of why a well-run
+		transactional stream lands in the inbox so consistently. Regulators follow the same logic: anti-spam
+		laws target unwanted bulk mail, so a receipt under CAN-SPAM or a purchase confirmation under GDPR is
+		largely exempt from the rules a promotion has to follow.
 	</Paragraph>
 
 	<Paragraph>
-		The rule is simple: keep transactional templates focused on a single purpose. If you want to
-		cross-sell, send a separate marketing email with proper opt-in and an unsubscribe link.
+		That extra trust is exactly what makes transactional email <strong>tempting to abuse</strong>. It reaches the inbox
+		more reliably and carries fewer legal strings, so slipping a promotional banner into an order
+		confirmation is an easy way to reach people who would ignore a normal campaign. That shortcut is where
+		<strong>most deliverability problems start</strong>.
 	</Paragraph>
 
-	<Heading level={2}>Delivery failures are outages</Heading>
+	<Heading level={2}>Mixing them makes you end up in spam</Heading>
 
 	<Paragraph>
-		Transactional email isn't a side channel; it's part of your product's critical path. A 2FA code
-		that doesn't arrive blocks login. A verification email that bounces stalls signup. A receipt that
-		goes to spam generates support tickets and, occasionally, chargebacks.
-	</Paragraph>
-
-	<Paragraph>Treat email like any other production dependency:</Paragraph>
-
-	<List
-		items={[
-			'Track delivery rates by message type.',
-			'Monitor bounces and spam complaints.',
-			'Suppress addresses that repeatedly fail. Sending to dead mailboxes damages reputation, and inbox providers remember.',
-			'Keep per-message logs so you can debug a specific failure instead of guessing from aggregates.'
-		]}
-	/>
-
-	<Paragraph>
-		Latency matters as much as deliverability. Users expect a 2FA code or verification link within
-		seconds; after 10–15 seconds, they tend to hit "resend," leading to duplicates and confusion.
-		Receipts and confirmations have more slack, so a minute or two is fine. Anything that blocks a
-		user action (login codes, password resets, email verification) deserves an explicit SLA and an
-		alert when it breaches.
+	The key point is that the exemption applies only as long as the email is <strong>purely transactional</strong>. If you include enough promotional content, regulators and inbox providers stop viewing it as a transaction. For example, an order confirmation with a 30%-off coupon and three product recommendations is no longer just a receipt; it becomes a marketing email with a receipt attached. This means it must include the unsubscribe link, which a receipt normally does not require.
 	</Paragraph>
 
 	<Paragraph>
-		Once email is on your critical path, the same retry logic that keeps the rest of your queue
-		reliable will start sending the same 2FA code two or three times. Pass an idempotency key on each
-		send (the order ID, a hash of the user ID and template, whatever is stable for that event) and let
-		your provider dedupe within a short window. The alternative is a worker that retries a transient
-		SMTP failure and ships three copies of the password reset.
+		Gmail reaches the same conclusion more quickly and without warning. It analyzes the content, engagement, and sender reputation <strong>behind each message</strong>. A transactional template that appears promotional or shares infrastructure with campaigns can seriously <strong>harm your sender score</strong>. Once your domain reputation drops, it can take weeks of consistent, clean sending to recover.
+	</Paragraph>
+
+	<Paragraph>
+		The fix follows from the cause: <strong>keep each transactional template to a single purpose</strong>. When there's
+		something to cross-sell, that's a separate marketing email, with its own opt-in and unsubscribe
+		link.
 	</Paragraph>
 
 	<Heading level={2}>Setting up the infrastructure</Heading>
 
-	<Heading level={3}>Authenticate your domain (SPF, DKIM, DMARC)</Heading>
+	<Paragraph>
+		Because the recipient is waiting on it, a transactional email sits on the product's critical path,
+		so a delivery failure is closer to an <strong>outage</strong> than a missed message. That's why the setup is
+		worth getting right.
+	</Paragraph>
 
 	<Paragraph>
-		Domain authentication is the single biggest lever for deliverability, and it's the area most teams
+		<strong>Domain authentication</strong> is the single biggest lever for deliverability, and it's the area most teams
 		get wrong. Three DNS records do the work:
 	</Paragraph>
 
@@ -178,64 +129,41 @@
 		</li>
 	</List>
 
-	<Paragraph>
-		Since February 2024, Gmail and Yahoo have required all three for bulk senders. Your provider, such
-		as Lettr,
-		<a href="https://docs.lettr.com/learn/domains/sending-domains"
-			>generates and verifies these records for you</a
-		>, but you still have to add them to your DNS. Skipping this step is the most common reason
-		transactional emails end up in spam.
-	</Paragraph>
+	<Paragraph>With authentication in place, a few more practices keep the stream healthy:</Paragraph>
 
-	<Heading level={3}>Separate your sending streams</Heading>
+	<List>
+		<li>
+			<strong>Separate your sending streams.</strong> Use different IPs, or at least different subdomains, for
+			transactional and marketing email, so a spam complaint from a campaign can't drag your password resets
+			down with it.
+		</li>
+		<li>
+			<strong>Be selective about tracking.</strong> A tracking redirect on a password-reset link adds latency
+			and can trigger phishing warnings, so disable tracking on security-sensitive emails and keep it for
+			receipts and notifications where engagement data is useful.
+		</li>
+		<li>
+			<strong>Test in a sandbox first.</strong> Sandbox keys exercise the full send path without spending quota
+			or risking reputation, and wiring them into CI catches a regression before it reaches a real inbox.
+		</li>
+		<li>
+			<strong>Manage suppressions and bounces.</strong> Suppress hard bounces and spam complaints permanently
+			and retry only soft bounces on a backoff. A suppression list that grows faster than expected usually
+			points to a problem upstream, like a signup form with no email validation.
+		</li>
+	</List>
 
-	<Paragraph>
-		Use different IPs (or, at a minimum, different subdomains) for transactional and marketing email.
-		A spam complaint from a marketing campaign shouldn't be allowed to drag your password resets down
-		with it. Teams that skip this end up untangling shared infrastructure after a marketing blast
-		pushes login codes into spam folders.
-	</Paragraph>
-
-	<Heading level={3}>Be selective about tracking</Heading>
-
-	<Paragraph>
-		Open and click tracking confirm delivery and engagement, but routing a password-reset link
-		through a tracking redirect adds latency and can trigger phishing warnings in some clients.
-		Disable tracking on security-sensitive emails, and keep it enabled for receipts and notifications
-		where engagement data is useful.
-	</Paragraph>
-
-	<Heading level={3}>Test in a sandbox before production</Heading>
+	<Heading level={2}>To sum up</Heading>
 
 	<Paragraph>
-		Sandbox keys let you exercise the full send path, including templates, headers, and suppressions,
-		without consuming quota or risking your sender reputation on a half-finished feature. Wire sandbox
-		tests into CI so that a regression in your password reset email is caught before it reaches a real
-		user. Production is a bad place to discover that your DKIM signature fails when a customer's name
-		contains a non-ASCII character.
-	</Paragraph>
-
-	<Heading level={3}>Manage suppressions and bounces</Heading>
-
-	<Paragraph>
-		Permanent failures (hard bounces) and spam complaints should be suppressed immediately and never
-		retried. Soft bounces (a temporarily full mailbox or a transient server error) can be retried on a
-		backoff schedule. The rule: stop sending to addresses that have permanently failed, and monitor
-		the suppression list as a leading indicator. If it's growing faster than expected, the problem is
-		usually upstream, such as typo-prone signup forms, a missing email-validation step, or a list that
-		was scraped rather than collected.
-	</Paragraph>
-
-	<Heading level={2}>When it breaks</Heading>
-
-	<Paragraph>
-		Transactional email tends to stay invisible until it breaks: a failed login, an abandoned signup,
-		or a chargeback for a receipt that never arrived. By then, you're not fixing a bug; you're
-		handling a production incident that began weeks earlier in your DNS records, your suppression
-		list, or your shared sender reputation.
+		If there's one idea to carry away, it's that transactional email earns trust by being exactly
+        what the recipient asked for, and loses that trust the moment it tries to be anything more. Let each message do its one job well, and most of the rest
+        tends to take care of itself.
 	</Paragraph>
 
 	<Paragraph>
-		If you'd rather not wire this up yourself, <a href="https://lettr.com">Lettr</a> handles it.
+		<a href="https://lettr.com">Lettr</a> is built to handle that groundwork, from domain authentication
+		to separate sending streams and per-message logs, so transactional email stays one less thing to run
+		yourself.
 	</Paragraph>
 </BlogPost>
