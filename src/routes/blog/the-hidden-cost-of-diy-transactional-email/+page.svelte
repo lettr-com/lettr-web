@@ -5,7 +5,6 @@
 		Heading,
 		Paragraph,
 		List,
-		Quote,
 		Callout,
 		Code,
 		Divider
@@ -24,78 +23,99 @@ Lettr::to($user->email)
 <BlogPost
 	category="Deliverability"
 	title="The hidden cost of DIY transactional email"
-	excerpt="Rolling your own email stack feels cheap until you count the dev hours, the deliverability surprises, and the 2 a.m. pages. Here's what it actually costs."
+	excerpt="The real cost of running your own transactional email stack: deliverability drift, no delivery logs, on-call time spent on bounces and blocklists, and template changes that require a deploy. What DIY actually costs beyond infrastructure, and what a managed alternative replaces."
 	author={{ name: 'Erik Vlčák', role: 'Customer Success Engineer', avatar: '/images/authors/erik.jpg' }}
 	date="May 13, 2026"
 	datetime="2026-05-13"
-	readTime="6 min read"
+	readTime="5 min read"
 	slug="the-hidden-cost-of-diy-transactional-email"
 >
 	<Lead>
-		Almost every SaaS starts the same way: a single <code>Mail::send()</code> call, an SMTP server
-		picked in a hurry, and a quiet hope that the welcome email lands somewhere useful. It works — right
-		up until it doesn't.
+		Most products send their first transactional emails the cheap way: an SMTP server or a provider
+		API wired straight into the app, with authentication, deliverability, logging, and templates all
+		handled in-house. The sending itself stays cheap, but the work that grows up around it is where
+		the real cost hides, and that cost almost never shows up on a budget.
 	</Lead>
 
-	<Paragraph>
-		Transactional email looks like a solved problem from the outside. You wire up a mail driver, drop
-		in some credentials, and emails go out. But the moment your product grows past a few hundred
-		users, the cracks start to show — and they rarely show up where you're looking.
-	</Paragraph>
+	<Callout variant="info" title="TL;DR">
+		<List>
+			<li>
+				<strong>Infrastructure is the cheap part.</strong> A sending service and a few DNS records are
+				easy to budget for; the recurring engineering work around them is not.
+			</li>
+			<li>
+				<strong>The real cost is the work no roadmap shows.</strong> Deliverability drift, missing
+				delivery logs, on-call bounces, and template changes that need a deploy.
+			</li>
+			<li>
+				<strong>The fix is visibility.</strong> Make email observable, editable, and monitored
+				instead of a fire-and-forget side effect.
+			</li>
+		</List>
+	</Callout>
 
-	<Heading level={2}>The bill you can see</Heading>
+	<Heading level={2}>What it costs on day one</Heading>
 
 	<Paragraph>
-		The obvious cost is infrastructure: a sending service, a couple of DNS records, maybe a queue
-		worker. That's the part teams budget for. It's also the cheapest part. Here's the setup most
-		teams reach for first:
+		The obvious cost is <strong>infrastructure</strong>: a sending service, a couple of DNS records,
+		and maybe a queue worker. In any modern framework the actual send is a handful of chained method
+		calls, and it stays that small no matter how the product grows:
 	</Paragraph>
 
 	<Code lang="php" filename="app/Notifications/WelcomeMail.php" code={phpExample} />
 
 	<Paragraph>
-		Clean enough. The problem isn't the code you write on day one — it's everything that surrounds it
-		on day ninety.
+		That snippet never gets more complicated. <strong>Everything around it does</strong>: the
+		authentication, sender reputation, delivery logging, and template maintenance that the application
+		needs once it is sending real volume to real recipients, none of which a setup tutorial covers.
 	</Paragraph>
 
-	<Heading level={2}>The bill you can't see</Heading>
+	<Heading level={2}>What it costs in the long run</Heading>
 
 	<Paragraph>
-		The real expense of DIY transactional email is the work that never makes it onto a roadmap. It
-		hides in interruptions, in debugging sessions, and in revenue you never knew you lost.
+		That surrounding work shows up as <strong>unplanned engineering hours</strong>. None of it is hard
+		in isolation, but it recurs, never makes the roadmap, and tends to land on whoever is on call.
+		Four costs account for most of it:
 	</Paragraph>
 
-	<List
-		items={[
-			'Deliverability drift — open rates quietly fall as your sender reputation erodes, and nobody notices until a customer does.',
-			'No visibility — when a user swears they never got the password reset, you have no log to check and no way to prove otherwise.',
-			'On-call tax — bounces, blocklists, and DNS misconfigurations become 2 a.m. pages for engineers who should be shipping features.',
-			'Template sprawl — every email lives in a different Blade file, and changing a footer means a deploy.'
-		]}
-	/>
+	<List>
+		<li>
+			<strong>Deliverability drift.</strong> Open rates fall as sender reputation erodes, and the
+			decline goes unnoticed until a customer reports a missing email.
+		</li>
+		<li>
+			<strong>No visibility.</strong> A disputed password reset has no log to check and no way to
+			prove whether it was sent or delivered.
+		</li>
+		<li>
+			<strong>On-call tax.</strong> Bounces, blocklists, and DNS misconfigurations turn into pages for
+			engineers who should be shipping features.
+		</li>
+		<li>
+			<strong>Template sprawl.</strong> Every email lives in a different Blade file, so changing a
+			footer requires a deploy.
+		</li>
+	</List>
 
 	<Callout variant="warning" title="Deliverability is not a one-time setup">
 		SPF, DKIM, and DMARC aren't checkboxes you tick once. Mailbox providers continuously re-evaluate
 		your reputation, and a single bad sending day can take weeks to recover from.
 	</Callout>
 
-	<Heading level={2}>What good looks like</Heading>
+	<Heading level={2}>Make email observable and maintainable</Heading>
 
 	<Paragraph>
-		The fix isn't to hire an email-ops engineer. It's to treat transactional email as a product
-		surface — something observable, editable, and monitored — instead of a fire-and-forget side
-		effect.
+		The durable fix is to give transactional email the same <strong>visibility and tooling</strong>
+		as any other part of the application: a record of what happened to each message, alerts when
+		something degrades, and templates that can change without a deploy. That generally matters more
+		than hiring a dedicated email-ops engineer.
 	</Paragraph>
 
-	<Quote cite="Every developer who has debugged a missing receipt email">
-		You shouldn't have to choose between shipping features and knowing whether your emails arrive.
-	</Quote>
-
 	<Paragraph>
-		That means delivery logs you can actually search, alerts when open rates drop before customers
-		complain, and templates your marketing team can edit without filing a dev ticket. The mechanics
-		of authentication and warmup should be handled for you — not assembled by hand from a dozen
-		Stack Overflow answers.
+		In practice that means delivery logs that are actually searchable, alerts when open rates drop
+		before customers complain, and templates a marketing team can edit without filing a dev ticket.
+		<strong>Authentication and warmup should be handled by the platform</strong>, not assembled by
+		hand from a dozen Stack Overflow answers.
 	</Paragraph>
 
 	<Callout variant="tip" title="Start with observability">
@@ -103,17 +123,33 @@ Lettr::to($user->email)
 		<em>did it arrive, and if not, why?</em> Everything else follows from that.
 	</Callout>
 
-	<Divider />
+	<Heading level={2}>When DIY is the right call</Heading>
 
 	<Paragraph>
-		DIY transactional email is rarely a deliberate decision — it's the default you never revisited.
-		The cost isn't a line item; it's spread across every engineer who gets pulled away to chase a
-		bounce. Counting it honestly is usually enough to change the plan.
+		Rolling your own is not always the wrong choice. At <strong>low and predictable volume</strong>,
+		a handful of internal notifications a day where nobody outside the team ever waits on the message,
+		the maintenance burden is small and a managed platform buys little. The same is true for
+		<strong>throwaway prototypes</strong> that may never reach real users.
 	</Paragraph>
 
 	<Paragraph>
-		That's exactly the problem we built <a href="/">Lettr</a> to solve: one platform for
-		transactional and marketing email, with the deliverability work handled and a clear view of
-		everything your app sends.
+		The calculation changes once an email becomes something a <strong>customer is actively waiting
+		for</strong>: a password reset, a receipt, a login code. Silent spam placement on those messages
+		costs support time and sometimes revenue, and diagnosing the cause without delivery logs quickly
+		outweighs the price of the sending service itself.
+	</Paragraph>
+
+	<Divider />
+
+	<Paragraph>
+		DIY transactional email usually persists as an unrevisited default, and the case for changing it
+		rarely comes from a single dramatic failure. It comes from <strong>adding up the scattered
+		hours</strong> already spent on it and asking whether that time is better spent elsewhere.
+	</Paragraph>
+
+	<Paragraph>
+		That is the problem we built <a href="/">Lettr</a> to solve: one platform for transactional and
+		marketing email, with the deliverability work handled and a clear view of everything the
+		application sends.
 	</Paragraph>
 </BlogPost>
