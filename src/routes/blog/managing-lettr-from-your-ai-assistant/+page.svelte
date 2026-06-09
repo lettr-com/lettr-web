@@ -38,19 +38,14 @@
 
 	<Callout variant="info" title="TL;DR">
 		<List>
+			<li><strong>MCP lets an AI assistant call the Lettr API in plain language</strong>, against real data.</li>
 			<li>
-				<strong>MCP lets an AI assistant call the Lettr API in plain language</strong>, so a request
-				like "list last week's bounces" runs against real data and the answer lands in the same pane
-				you're already working in.
+				<strong>Lettr ships two servers</strong>: a remote one (OAuth, read-only) for chat tools, a local
+				one (API key, full access) for editors.
 			</li>
 			<li>
-				<strong>Lettr ships two servers:</strong> a remote one (OAuth, read-only) for chat tools like
-				Claude.ai and ChatGPT, and a local one (your API key, full access) for editors like Claude
-				Code.
-			</li>
-			<li>
-				<strong>It complements the dashboard, it doesn't replace it</strong>: MCP suits quick lookups
-				and one-off actions mid-task; bulk production changes still belong in a script.
+				<strong>It complements the dashboard, it doesn't replace it</strong>: quick lookups yes, bulk
+				production changes no.
 			</li>
 		</List>
 	</Callout>

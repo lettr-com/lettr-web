@@ -79,17 +79,16 @@ dmarc=pass (p=REJECT dis=NONE) header.from=yourapp.com`;
 	<Callout variant="info" title="TL;DR">
 		<List>
 			<li>
-				<strong>SPF</strong> names which servers may send for your domain, <strong>DKIM</strong> cryptographically
-				signs each message, and <strong>DMARC</strong> ties both to the <code>From</code> header users see and
-				says what to do on failure.
+				<strong>SPF</strong> names allowed servers, <strong>DKIM</strong> signs each message, and
+				<strong>DMARC</strong> ties both to the visible <code>From</code> and says what to do on failure.
 			</li>
 			<li>
-				<strong>Alignment</strong> is what closes the spoofing gap: a message passes DMARC only when the authenticated
-				domain matches the visible <code>From</code> domain.
+				<strong>Alignment closes the spoofing gap</strong>: DMARC passes only when the authenticated domain
+				matches the <code>From</code> domain.
 			</li>
 			<li>
-				Roll out enforcement in stages: deploy DMARC at <code>p=none</code>, read the reports for a few
-				weeks, then ratchet up to <code>p=quarantine</code> and <code>p=reject</code>.
+				<strong>Roll out enforcement in stages</strong>: <code>p=none</code>, read the reports, then ratchet
+				to <code>p=quarantine</code> and <code>p=reject</code>.
 			</li>
 		</List>
 	</Callout>

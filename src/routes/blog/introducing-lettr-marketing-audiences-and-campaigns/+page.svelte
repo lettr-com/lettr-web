@@ -30,17 +30,13 @@
 
 	<Callout variant="tip" title="TL;DR">
 		<ul class="list-disc space-y-1 pl-5 marker:text-primary">
+			<li>Lettr now sends <strong>marketing email</strong> alongside transactional, same account and domains.</li>
 			<li>
-				Lettr now sends <strong>marketing email</strong> alongside your transactional sending, in the same account and
-				on the same domains.
+				<strong>Audiences</strong> are one shared contact pool, with unsubscribes, bounces, and complaints
+				suppressed automatically.
 			</li>
 			<li>
-				<strong>Audiences</strong> give you one shared pool of contacts, grouped by lists, segments, and topics, with
-				unsubscribes, bounces, and complaints suppressed automatically.
-			</li>
-			<li>
-				<strong>Campaigns</strong> build a single bulk email in the Topol drag-and-drop editor, personalize it with
-				merge tags, add a compliant unsubscribe link by default, send or schedule it, and report
+				<strong>Campaigns</strong> build a bulk email in the Topol editor, send or schedule it, and report
 				results in real time.
 			</li>
 			<li>Keep marketing on its own <strong>sending domain</strong> to protect transactional deliverability.</li>

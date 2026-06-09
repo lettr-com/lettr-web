@@ -27,21 +27,26 @@
 		proves who is sending, not that the sender is trusted.
 	</Lead>
 
+	<Paragraph>
+		That trust is the part no setup checklist covers, and it cannot be configured. It has to be earned,
+		by sending in a way that gives mailbox providers a reason to deliver. This article is about how to do
+		that without tripping a spam filter on the way: who needs a warm-up, which recipients and content to
+		send first, how fast to ramp, and which signals mean keep going or stop.
+	</Paragraph>
+
 	<Callout variant="info" title="TL;DR">
 		<List>
 			<li>
-				<strong>A new domain has no reputation, which is worse than a mediocre one.</strong> To a mailbox
-				provider it is indistinguishable from a spammer who just registered, so volume from it gets deferred,
-				throttled, or filtered until there is evidence to the contrary.
+				<strong>A new domain has no reputation</strong>, which reads to providers like a spammer who just
+				registered.
 			</li>
 			<li>
-				<strong>Reputation is built with sending history, gradually.</strong> Start at a few hundred emails
-				a day to your most engaged recipients and ramp over two to six weeks, watching bounce, complaint,
-				and engagement signals at each step.
+				<strong>Reputation is built gradually</strong>: ramp from a few hundred emails a day over two to six
+				weeks.
 			</li>
 			<li>
-				<strong>The first sends matter most.</strong> Every signal is amplified at low volume, so send only
-				your highest-engagement audience and content, and pause the moment a stop signal appears.
+				<strong>The first sends matter most</strong>: most-engaged recipients only, and pause on any stop
+				signal.
 			</li>
 		</List>
 	</Callout>

@@ -27,17 +27,11 @@
 	<Callout variant="info" title="TL;DR">
 		<List>
 			<li>
-				<strong>Transactional emails</strong> are sent in response to a specific user action, whereas <strong>marketing emails</strong>
-				are sent on the sender's schedule. Inbox providers and regulators treat them differently.
+				<strong>Transactional emails</strong> answer a user action; <strong>marketing emails</strong> go
+				on the sender's schedule. Providers and regulators treat them differently.
 			</li>
-			<li>
-				Mixing promotional content into a receipt <strong>damages deliverability</strong>, and it's a common FTC
-				enforcement target.
-			</li>
-			<li>
-				Treat email outages like API outages: authenticate your domain, separate streams, monitor
-				latency, and suppress dead addresses.
-			</li>
+			<li>Mixing promotional content into a receipt <strong>damages deliverability</strong> and invites FTC scrutiny.</li>
+			<li><strong>Treat email outages like API outages</strong>: authenticate, separate streams, monitor, suppress dead addresses.</li>
 		</List>
 	</Callout>
 

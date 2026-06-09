@@ -34,17 +34,14 @@
 	<Callout variant="info" title="TL;DR">
 		<List>
 			<li>
-				<strong>One domain means one reputation.</strong> Marketing email runs higher complaint rates,
-				and on a shared domain those complaints drag down the transactional email users depend on.
+				<strong>One domain means one reputation</strong>: marketing complaints drag down the transactional
+				email users depend on.
 			</li>
 			<li>
-				<strong>Separate subdomains separate reputations.</strong> Sending transactional from
-				<code>mail.yourapp.com</code> and marketing from <code>news.yourapp.com</code> gives each its own
-				SPF, DKIM, DMARC, and sender history, so a bad campaign stays contained.
+				<strong>Separate subdomains separate reputations</strong>, each with its own authentication and
+				sender history, so a bad campaign stays contained.
 			</li>
-			<li>
-				<strong>Some emails sit on the line.</strong> When in doubt, treat an email as marketing.
-			</li>
+			<li><strong>Some emails sit on the line</strong>; when in doubt, treat an email as marketing.</li>
 		</List>
 	</Callout>
 

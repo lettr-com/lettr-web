@@ -39,18 +39,12 @@ Lettr::to($user->email)
 
 	<Callout variant="info" title="TL;DR">
 		<List>
+			<li><strong>Infrastructure is the cheap part</strong>; the recurring engineering work around it is not.</li>
 			<li>
-				<strong>Infrastructure is the cheap part.</strong> A sending service and a few DNS records are
-				easy to budget for; the recurring engineering work around them is not.
+				<strong>The real cost is the work no roadmap shows</strong>: deliverability drift, missing logs,
+				on-call bounces, template deploys.
 			</li>
-			<li>
-				<strong>The real cost is the work no roadmap shows.</strong> Deliverability drift, missing
-				delivery logs, on-call bounces, and template changes that need a deploy.
-			</li>
-			<li>
-				<strong>The fix is visibility.</strong> Make email observable, editable, and monitored
-				instead of a fire-and-forget side effect.
-			</li>
+			<li><strong>The fix is visibility</strong>: email observable, editable, and monitored.</li>
 		</List>
 	</Callout>
 
