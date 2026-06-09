@@ -36,16 +36,6 @@
 			readTime: '5 min read'
 		},
 		{
-			slug: 'the-hidden-cost-of-diy-transactional-email',
-			category: 'Deliverability',
-			title: 'The hidden cost of DIY transactional email',
-			excerpt:
-				'Rolling your own email stack feels cheap until you count the dev hours, the deliverability surprises, and the 2 a.m. pages. Here’s what it actually costs.',
-			author: 'Erik Vlčák',
-			date: 'May 13, 2026',
-			readTime: '6 min read'
-		},
-		{
 			slug: 'how-to-warm-up-a-sending-domain',
 			category: 'Deliverability',
 			title: 'How to warm up a new sending domain',

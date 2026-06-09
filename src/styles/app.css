@@ -199,6 +199,31 @@
     background-color: rgba(17, 24, 39, 0.06);
     color: var(--color-surface);
   }
+
+  .blog-prose table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9375rem;
+    line-height: 1.4;
+  }
+
+  .blog-prose thead th {
+    text-align: left;
+    font-weight: 650;
+    color: var(--color-surface);
+    padding: 0.625rem 0.75rem;
+    border-bottom: 2px solid color-mix(in srgb, var(--color-surface) 18%, transparent);
+  }
+
+  .blog-prose tbody td {
+    padding: 0.625rem 0.75rem;
+    border-bottom: 1px solid color-mix(in srgb, var(--color-surface) 10%, transparent);
+    vertical-align: top;
+  }
+
+  .blog-prose tbody tr:last-child td {
+    border-bottom: none;
+  }
 }
 
 @utility glass {

@@ -161,7 +161,7 @@
 
 	<!-- Body + table of contents -->
 	<div class="mx-auto mt-12 flex max-w-[1064px] gap-10 px-4">
-		<div bind:this={body} class="blog-prose w-full max-w-[800px]">
+		<div bind:this={body} class="blog-prose w-full max-w-[800px] min-w-0">
 			{@render children()}
 		</div>
 		<aside class="hidden w-56 shrink-0 lg:block">

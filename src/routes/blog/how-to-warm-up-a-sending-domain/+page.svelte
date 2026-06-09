@@ -5,468 +5,348 @@
 		Heading,
 		Paragraph,
 		List,
-		Quote,
 		Callout,
-		Code,
 		Divider
 	} from '$lib/components/blog';
-
-	const lowVolumeSchedule = `Day     Daily volume   Notes
-1-2     100-200        Most engaged recipients only
-3-4     500            Monitor bounce and complaint rates
-5-7     1,000          Check Postmaster Tools if sending to Gmail
-8-10    2,500
-11-14   5,000
-15+     Target volume  Maintain steady sending from here`;
-
-	const highVolumeSchedule = `Week    Daily volume       Notes
-1       1,000-2,000        Most engaged recipients, monitor everything
-2       5,000-10,000       Review Postmaster Tools, check deferral rates
-3       15,000-25,000      Expand to moderately engaged recipients
-4       30,000-50,000
-5-6     50,000-100,000     Approach target volume
-6+      Target volume`;
 </script>
 
 <BlogPost
 	category="Deliverability"
 	title="How to warm up a new sending domain"
-	excerpt="You set up SPF, DKIM, and DMARC, flip the switch, send 50,000 emails on day one — and half vanish. Nothing is broken. Your domain is just new and untrusted. Here's how to warm it up."
+	excerpt="How to build sending reputation on a new domain by ramping volume gradually: who needs a warm-up, which recipients and content to send first, two sample ramp schedules, the bounce and complaint signals to watch, and the stop signals that mean pause immediately."
 	author={{ name: 'Erik Vlčák', role: 'Customer Success Engineer', avatar: '/images/authors/erik.jpg' }}
 	date="April 22, 2026"
 	datetime="2026-04-22"
-	readTime="9 min read"
+	readTime="6 min read"
 	slug="how-to-warm-up-a-sending-domain"
 >
 	<Lead>
-		You've set up SPF, DKIM, and DMARC. Your templates look good, and your API integration works. You
-		flip the switch, send 50,000 emails on day one, and half of them vanish. Gmail defers most of them.
-		Outlook silently drops a chunk into spam. Yahoo bounces a few hundred with a cryptic "temporarily
-		deferred" error.
+		Warming up a sending domain means raising its daily volume gradually so mailbox providers can build
+		a reputation for it before it sends at full scale. A brand-new domain with correct SPF, DKIM, and
+		DMARC can still see half its first large batch deferred or filtered, because correct authentication
+		proves who is sending, not that the sender is trusted.
 	</Lead>
 
 	<Paragraph>
-		Nothing is broken, and your authentication is fine. The problem is that your domain is new and not
-		yet trusted, which is what the rest of this article is about.
+		That trust is the part no setup checklist covers, and it cannot be configured. It has to be earned,
+		by sending in a way that gives mailbox providers a reason to deliver. This article is about how to do
+		that without tripping a spam filter on the way: who needs a warm-up, which recipients and content to
+		send first, how fast to ramp, and which signals mean keep going or stop.
 	</Paragraph>
+
+	<Callout variant="info" title="TL;DR">
+		<List>
+			<li>
+				<strong>A new domain has no reputation</strong>, which reads to providers like a spammer who just
+				registered.
+			</li>
+			<li>
+				<strong>Reputation is built gradually</strong>: ramp from a few hundred emails a day over two to six
+				weeks.
+			</li>
+			<li>
+				<strong>The first sends matter most</strong>: most-engaged recipients only, and pause on any stop
+				signal.
+			</li>
+		</List>
+	</Callout>
 
 	<Heading level={2}>Why warm-up exists</Heading>
 
 	<Paragraph>
-		Mailbox providers maintain reputation scores for every sending domain. A brand-new domain has no
-		score, which is worse than having a mediocre one. An unknown sender behaves exactly like a spammer
-		who just registered a new domain, and providers can't tell the difference without evidence.
+		Mailbox providers maintain reputation scores for every sending domain, and <strong>a brand-new
+		domain has no score, which is worse than having a mediocre one</strong>. An unknown sender behaves
+		exactly like a spammer who just registered a new domain, and providers cannot tell the difference
+		without evidence.
 	</Paragraph>
 
 	<Paragraph>
-		The evidence they need is sending history: messages that are delivered, opened, and not reported as
-		spam. That history has to build over time. You can't provide it all at once, because a sudden flood
-		from an unknown domain is itself a spam signal.
-	</Paragraph>
-
-	<Paragraph>
-		The trap is that the test looks fine. A team ships 50 emails during development, and everything
-		lands in the inbox, so they assume production will behave the same way, but it doesn't. The reason
-		is that mailbox providers apply different levels of scrutiny at different volumes, so 50 emails from
-		an unknown domain are unremarkable, but 50,000 are alarming.
-	</Paragraph>
-
-	<Paragraph>
-		The consequences depend on how badly you overshoot. Gmail might defer your messages for hours,
-		delivering them in slow batches, or your domain might get rate-limited, requiring weeks of
-		reduced-volume sending to recover. In the worst case, you land on a blocklist and spend months
-		trying to get removed.
+		The evidence they need is <strong>sending history</strong>: messages that are delivered, opened, and
+		not reported as spam. That history has to build over time, because a sudden flood from an unknown
+		domain is itself a spam signal. Fifty emails sent during development all land in the inbox, while
+		fifty thousand from the same new domain are alarming, and overshooting earns deferrals, rate-limiting,
+		or in the worst case a blocklist that takes months to get removed from.
 	</Paragraph>
 
 	<Heading level={2}>Who needs to warm up</Heading>
 
-	<Paragraph>Not every situation needs a warm-up.</Paragraph>
-
-	<Paragraph><strong>You need a warm-up if:</strong></Paragraph>
-
-	<List>
-		<li>
-			You're sending from a brand-new domain or subdomain that has never sent email before
-		</li>
-		<li>
-			You're switching email providers and your new provider uses different sending IPs (your domain
-			reputation carries over, but IP reputation doesn't)
-		</li>
-		<li>You're bringing a domain back into use after months of inactivity</li>
-		<li>
-			You're adding a new subdomain for a separate sending stream (such as splitting transactional
-			from marketing)
-		</li>
-	</List>
-
-	<Paragraph><strong>You probably don't need a warm-up if:</strong></Paragraph>
+	<Paragraph>
+		Not every situation needs a warm-up, and the deciding factor is whether the sending IPs already
+		carry a reputation. <strong>A warm-up is needed whenever the IPs start at zero</strong>:
+	</Paragraph>
 
 	<List>
+		<li>A brand-new domain or subdomain that has never sent email before.</li>
 		<li>
-			You're switching providers while keeping the same sending IPs (rare, but it happens during
-			dedicated IP migrations)
+			A provider switch where the new provider sends from different IPs. Domain reputation carries
+			over, IP reputation does not.
 		</li>
+		<li>A domain coming back into use after months of inactivity.</li>
 		<li>
-			You're already sending a steady volume and just adding a few thousand more messages per day
-		</li>
-		<li>
-			You're sending very low volume (under a few hundred emails per day), where the gradual ramp
-			would be indistinguishable from normal sending
+			A new subdomain for a separate sending stream, such as splitting transactional from marketing.
 		</li>
 	</List>
 
 	<Paragraph>
-		If you're setting up a new domain with <a href="https://docs.lettr.com/learn/domains/sending-domains"
-			>Lettr</a
-		>, you need to warm up, regardless of how your previous provider was configured. The domain's
-		authentication records transfer, but your new sending IPs won't yet have an established reputation.
+		The warm-up is <strong>usually skippable when the reputation already exists or the volume is
+		negligible</strong>: a provider switch that keeps the same sending IPs (rare, mostly during
+		dedicated IP migrations), a steady sender adding only a few thousand messages a day, or a very
+		low-volume sender under a few hundred emails a day, where a gradual ramp is indistinguishable from
+		normal sending.
 	</Paragraph>
 
 	<Paragraph>
-		This is also the right time to consider whether you should separate transactional and marketing
-		email. Each new subdomain you add will need its own warm-up. See <a
-				href="/blog/separate-transactional-and-marketing-email"
-				>why you should separate transactional and marketing email</a
-			> for the full case.
-	</Paragraph>
-
-	<Heading level={2}>Dedicated vs. shared IPs</Heading>
-
-	<Paragraph>
-		Reputation lives in two places: your domain and the IPs your messages are sent from. Domain
-		reputation is yours alone, and it follows you across providers. IP reputation depends on how those
-		IPs are used.
-	</Paragraph>
-
-	<Paragraph>
-		On a shared IP pool, you inherit a reputation built by other senders. That can cut both ways: a
-		clean shared pool gives a new domain a head start, while a noisy one drags you down regardless of
-		how careful your sending is.
-	</Paragraph>
-
-	<Paragraph>
-		A dedicated IP is yours alone, but it starts at zero. You're warming up <em>both</em> the domain and
-		the IP at the same time. That's slower and more demanding, and it's only worth it once your volume is
-		high enough that a shared pool can't protect your reputation from other senders' mistakes.
-	</Paragraph>
-
-	<Paragraph>
-		The rule of thumb: for fewer than ~100,000 messages per month, shared IPs are usually the right
-		choice. Above that, a dedicated IP starts to justify the extra warm-up effort. With Lettr, sending
-		IPs are managed for you, so you don't pick the pool, but you still need to warm up the domain.
+		A new domain on <a href="https://docs.lettr.com/learn/domains/sending-domains">Lettr</a> always needs
+		a warm-up, regardless of the previous provider. The authentication records transfer, but the new sending
+		IPs have no established reputation yet, and <strong>each new subdomain needs its own warm-up</strong>
+		(one reason to <a href="/blog/separate-transactional-and-marketing-email">separate transactional and
+		marketing email</a> from the start).
 	</Paragraph>
 
 	<Heading level={2}>What and who to send first</Heading>
 
 	<Paragraph>
-		The single most important decision during warm-up is who you send to first. Every signal is
-		amplified at this stage. A 2% bounce rate on 100,000 emails is a problem; a 2% bounce rate on your
-		first 500 emails is an emergency, because it's the only data the provider has about you. Your early
-		sends need to produce strong positive signals: high open rates, low bounce rates, zero complaints.
+		The single most important decision during warm-up is <strong>who receives the first sends</strong>.
+		Every signal is amplified at this stage. A 2% bounce rate on 100,000 emails is a problem; a 2% bounce
+		rate on the first 500 is an emergency, because it is the only data the provider has. The early sends
+		need to produce strong positive signals: high open rates, low bounce rates, zero complaints.
 	</Paragraph>
 
 	<Paragraph>
-		Sort your recipient list by engagement and start at the top. The people you want first are the ones
-		who opened an email from you in the last 30 days, clicked something recently, or actively use your
-		product. They're the most likely to open your messages and the least likely to mark them as spam.
-		Work your way down the list as volume increases.
+		Sort the recipient list by engagement and start at the top. The first batch should go to the people
+		<strong>who opened a recent email</strong>, <strong>clicked something lately</strong>, or <strong>actively use the product</strong>. They are the most
+		likely to open and the least likely to mark a message as spam. The rest of the list comes in as
+		volume increases.
 	</Paragraph>
 
 	<Paragraph>
-		Do not start with your newest signups. New users have the highest bounce rates (due to typos in
-		email addresses and disposable emails) and the lowest engagement (they haven't formed a habit yet).
-		And absolutely do not start with a re-engagement campaign targeting users who haven't opened in
-		months, as that's the worst possible audience for a new domain.
+		<strong>The newest signups are the wrong place to start.</strong> New users have the highest bounce
+		rates (typos and disposable addresses) and the lowest engagement (no habit formed yet). The worst
+		audience of all is a re-engagement campaign aimed at users who have not opened in months.
 	</Paragraph>
 
 	<Paragraph>
-		<strong>On the content side, stick to your top-performing email types.</strong> Transactional emails
-		that people expect and open (order confirmations, account notifications) are ideal. If you're warming
-		up a marketing subdomain, use your highest-engagement content rather than a cold re-engagement campaign.
+		On the content side, <strong>the top-performing email types are the safest.</strong> Transactional
+		emails that people expect and open (order confirmations, account notifications) are ideal. A marketing
+		subdomain should warm up on its highest-engagement content, never a cold re-engagement campaign.
 	</Paragraph>
 
 	<Paragraph>
-		<strong>Avoid anything that could generate complaints during warm-up.</strong> No re-engagement blasts,
-		no aggressive promotions, and nothing for segments you haven't mailed in a while. One bad send in the
-		first week can set you back significantly.
+		<strong>Anything that could generate complaints stays off the schedule during warm-up.</strong> No
+		re-engagement blasts, no aggressive promotions, nothing aimed at segments left untouched for a while.
+		One bad send in the first week can set the domain back significantly.
 	</Paragraph>
 
 	<Heading level={2}>Warm-up schedules</Heading>
 
 	<Paragraph>
-		There's no universal schedule because every sender has different volume targets, audience quality,
-		and risk tolerance. The principle is always the same: start low, increase gradually, and watch the
-		signals. Here are two schedules that serve as starting points. Adjust based on the feedback you see.
+		There is no universal schedule, because every sender has different volume targets, audience quality,
+		and risk tolerance. The principle is always the same: <strong>start low, increase gradually, and
+		watch the signals</strong>. The two schedules below are starting points to adjust against the
+		feedback each send produces.
 	</Paragraph>
 
 	<Heading level={3}>Low-volume senders (target: under 10,000/day)</Heading>
 
-	<Code lang="text" code={lowVolumeSchedule} />
+	<table>
+		<thead>
+			<tr>
+				<th>Day</th>
+				<th>Daily volume</th>
+				<th>Notes</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>1-2</td>
+				<td>100-200</td>
+				<td>Most engaged recipients only</td>
+			</tr>
+			<tr>
+				<td>3-4</td>
+				<td>500</td>
+				<td>Monitor bounce and complaint rates</td>
+			</tr>
+			<tr>
+				<td>5-7</td>
+				<td>1,000</td>
+				<td>Check Postmaster Tools if sending to Gmail</td>
+			</tr>
+			<tr>
+				<td>8-10</td>
+				<td>2,500</td>
+				<td></td>
+			</tr>
+			<tr>
+				<td>11-14</td>
+				<td>5,000</td>
+				<td></td>
+			</tr>
+			<tr>
+				<td>15+</td>
+				<td>Target volume</td>
+				<td>Maintain steady sending from here</td>
+			</tr>
+		</tbody>
+	</table>
 
 	<Paragraph>
-		For low-volume senders, two weeks is usually enough. The ramp may feel slow, but you're building a
-		foundation. Rushing to reach target volume three days in saves you nothing if Gmail starts
-		deferring everything on day four.
+		For low-volume senders, <strong>two weeks is usually enough</strong>. The ramp feels slow, but it is
+		building a foundation. Reaching target volume three days in saves nothing if Gmail starts deferring
+		everything on day four.
 	</Paragraph>
 
 	<Heading level={3}>High-volume senders (target: 50,000+/day)</Heading>
 
-	<Code lang="text" code={highVolumeSchedule} />
+	<table>
+		<thead>
+			<tr>
+				<th>Week</th>
+				<th>Daily volume</th>
+				<th>Notes</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>1</td>
+				<td>1,000-2,000</td>
+				<td>Most engaged recipients, monitor everything</td>
+			</tr>
+			<tr>
+				<td>2</td>
+				<td>5,000-10,000</td>
+				<td>Review Postmaster Tools, check deferral rates</td>
+			</tr>
+			<tr>
+				<td>3</td>
+				<td>15,000-25,000</td>
+				<td>Expand to moderately engaged recipients</td>
+			</tr>
+			<tr>
+				<td>4</td>
+				<td>30,000-50,000</td>
+				<td></td>
+			</tr>
+			<tr>
+				<td>5-6</td>
+				<td>50,000-100,000</td>
+				<td>Approach target volume</td>
+			</tr>
+			<tr>
+				<td>6+</td>
+				<td>Target volume</td>
+				<td></td>
+			</tr>
+		</tbody>
+	</table>
 
 	<Paragraph>
-		High-volume warm-ups take 4-6 weeks. There's no way to compress this significantly without risking
-		throttling or blocks. If your launch timeline doesn't allow a full month of warm-up, start earlier.
-		This is one of those things that's easy to plan for and painful to rush.
+		High-volume warm-ups take <strong>four to six weeks</strong>, with no way to compress that
+		significantly without risking throttling or blocks. A launch timeline that does not leave a full
+		month for the ramp needs to start earlier. This is easy to plan for and painful to rush.
 	</Paragraph>
 
 	<Heading level={2}>The signals to watch</Heading>
 
 	<Paragraph>
-		During warm-up, you need to monitor three categories of signals and understand what each one means.
-		Set up <a href="https://postmaster.google.com/">Google Postmaster Tools</a> and feedback loops at Yahoo
-		and Microsoft before your first send. Without them, you're flying blind throughout the ramp.
+		Warm-up depends on monitoring <strong>three categories of signal</strong> and knowing what each one
+		means. Set up <a href="https://postmaster.google.com/">Google Postmaster Tools</a> and feedback loops
+		at Yahoo and Microsoft before the first send. Without them, the entire ramp runs blind.
 	</Paragraph>
 
 	<Heading level={3}>Bounce rate</Heading>
 
 	<Paragraph>
-		Track hard bounces (permanent failures, 5xx errors) and soft bounces (temporary failures, 4xx
-		errors) separately, as they mean very different things. Hard bounces above 2% on any single send
-		indicate poor list quality. In that case, it is best to stop, clean your list, and resume with
-		verified addresses. During warm-up, anything above 1% should make you uncomfortable.
+		Track <strong>hard bounces (permanent, 5xx) and soft bounces (temporary, 4xx) separately</strong>,
+		because they mean very different things. Hard bounces above 2% on any single send indicate poor list
+		quality, and the right response is to stop, clean the list, and resume with verified addresses.
+		During warm-up, anything above 1% is cause for concern.
 	</Paragraph>
 
 	<Paragraph>
-		Soft bounces and deferrals during warm-up are normal up to a point. Mailbox providers deliberately
-		slow delivery from unknown senders, so a deferral rate of 5-10% in the first few days isn't
-		unusual. If the deferral rate is above 20% or persists after the first week, you're ramping too
-		fast.
-	</Paragraph>
-
-	<Paragraph>
-		Lettr reports bounce events via <a href="https://docs.lettr.com/learn/webhooks/introduction"
-			>webhooks</a
-		> and the <a href="https://docs.lettr.com/learn/events/introduction">events API</a>, categorized by
-		type, so you can tell the difference between list quality issues and normal warm-up throttling.
+		Soft bounces and deferrals are normal during warm-up, up to a point. Mailbox providers deliberately
+		slow delivery from unknown senders, so a <strong>deferral rate of 5-10% in the first few days</strong>
+		is unremarkable. A deferral rate above 20%, or one that persists past the first week, means the ramp
+		is too fast.
 	</Paragraph>
 
 	<Heading level={3}>Complaint rate</Heading>
 
 	<Paragraph>
-		This is the most damaging signal. Gmail's published threshold is 0.3% before they take action, but
-		during warm-up you should aim for zero, because even a single complaint on a small-volume send has
-		an outsized impact.
+		This is <strong>the most damaging signal</strong>. Gmail's published threshold is 0.3% before it
+		takes action, but the warm-up target is zero, because even a single complaint on a small-volume send
+		has an outsized impact.
 	</Paragraph>
 
 	<Paragraph>
-		If you see complaints during the first week, figure out why immediately. Are you sending to people
-		who didn't opt in? Is the content confusing enough to be mistaken for spam? Is the "from" name
-		unrecognizable? Fix it before sending more.
+		Complaints in the first week need an immediate diagnosis. The usual causes are recipients who never
+		opted in, content confusing enough to be mistaken for spam, or an unrecognizable "from" name. Fix the
+		cause before sending more.
 	</Paragraph>
 
 	<Heading level={3}>Open and click rates</Heading>
 
 	<Paragraph>
-		High open rates during warm-up tell providers your messages are wanted. This is why starting with
-		engaged recipients matters so much. If your first few sends achieve 60-70% open rates, you're
-		building a strong reputation foundation. If they're at 15%, you're telling Gmail that most people
-		who receive your email don't care about it.
+		High open rates tell providers the messages are wanted, which is why the first sends go to engaged
+		recipients. <strong>First sends at 60-70% open rates build a strong reputation foundation; first
+		sends at 15% tell Gmail that most recipients do not care.</strong>
 	</Paragraph>
 
 	<Heading level={2}>Stop signals</Heading>
 
 	<Paragraph>
-		Not everything during warm-up is a normal growing pain. Some signals mean you should pause
-		immediately.
+		Not everything during warm-up is a normal growing pain. <strong>Five signals call for an immediate
+		pause</strong>, not a push-through:
 	</Paragraph>
 
-	<Paragraph>
-		<strong>Hard bounce rate above 5% on a single send.</strong> Your list has serious quality issues. Stop
-		sending, remove all bounced addresses, and consider re-verifying your entire list before resuming. Continuing
-		to send to invalid addresses during warm-up is the fastest way to get blocked.
-	</Paragraph>
+	<List>
+		<li>
+			<strong>Hard bounce rate above 5% on a single send.</strong> The list has serious quality issues.
+			Stop sending, remove every bounced address, and consider re-verifying the whole list before resuming.
+			Continuing to send to invalid addresses during warm-up is the fastest way to get blocked.
+		</li>
+		<li>
+			<strong>Complaint rate above 0.3% on any send.</strong> This is past Gmail's threshold. A
+			list-quality cause (recipients who never signed up) needs the list fixed; a content cause (an
+			unrecognized sender) needs the "from" name and template fixed. Do not resume until the root cause is
+			addressed.
+		</li>
+		<li>
+			<strong>Deferral rate above 30% that is not decreasing.</strong> Some deferrals are normal in the
+			first few days, but persistent high deferrals after a week mean the ramp moved too fast. Drop back to
+			a lower volume and hold there for several days before increasing again.
+		</li>
+		<li>
+			<strong>Postmaster Tools shows a "Bad" reputation.</strong> Stop sending to Gmail immediately, reduce
+			volume dramatically, and send only to the most engaged Gmail recipients until reputation recovers.
+			This can take one to two weeks of reduced sending.
+		</li>
+		<li>
+			<strong>Blocklist appearance.</strong> Check whether the domain or sending IP has landed on a major
+			blocklist (Spamhaus, Barracuda, SURBL). If so, pause all sending and work to get delisted first.
+			Sending while blocklisted makes everything worse.
+		</li>
+	</List>
 
-	<Paragraph>
-		<strong>Complaint rate above 0.3% on any send.</strong> You're past Gmail's threshold. Identify what
-		triggered the complaints. If it's a list-quality issue (sending to people who didn't sign up), fix the
-		list. If it's a content issue (people don't recognize the sender), fix the "from" name and template.
-		Don't resume until you've addressed the root cause.
-	</Paragraph>
-
-	<Paragraph>
-		<strong>Deferral rate above 30% that isn't decreasing.</strong> Some deferrals are normal in the first
-		few days. Persistent high deferrals after a week indicate you've ramped too fast. Drop back to a lower
-		volume and stay there for several days before trying to increase again.
-	</Paragraph>
-
-	<Paragraph>
-		<strong>Postmaster Tools shows a "Bad" reputation.</strong> If Google Postmaster Tools marks your domain
-		as "Bad" during warm-up, stop sending to Gmail immediately. Reduce volume dramatically and send only
-		to your most engaged Gmail recipients until reputation recovers. This can take 1-2 weeks of reduced sending.
-	</Paragraph>
-
-	<Paragraph>
-		<strong>Blocklist appearance.</strong> Check whether your domain or sending IP has been listed on a major
-		blocklist (Spamhaus, Barracuda, SURBL). If so, pause all sending and work to get delisted before continuing.
-		Sending while blocklisted makes everything worse.
-	</Paragraph>
-
-	<Callout variant="warning" title="When you hit a stop signal, stop">
-		When you hit any of these, the instinct is to push through, but don't. Pausing to fix the problem
-		costs you days, while ignoring it and continuing to send costs you weeks or months.
+	<Callout variant="warning" title="When a stop signal hits, stop">
+		The instinct on hitting any of these is to push through. Resist it. Pausing to fix the problem costs
+		days; ignoring it and continuing to send costs weeks or months.
 	</Callout>
 
-	<Heading level={2}>Recovering from a botched warm-up</Heading>
+	<Heading level={2}>What warming up actually buys you</Heading>
 
 	<Paragraph>
-		If you've already sent too much too fast and your reputation is damaged, the recovery process looks
-		a lot like a warm-up, only slower and more cautious.
+		One idea sits under every rule here: <strong>a warm-up is the sender proving, gradually, that volume
+		from this domain is wanted</strong>. A slow ramp is not wasted time. Reputation is the one part of an
+		email stack that cannot be provisioned on demand, which is why it has to be scheduled rather than
+		rushed at launch.
 	</Paragraph>
 
 	<Paragraph>
-		<strong>Drop your volume immediately.</strong> Return to sending a few hundred emails per day, all to
-		your most engaged recipients. You need to generate positive signals to counteract the negative ones.
-	</Paragraph>
-
-	<Paragraph>
-		<strong>Clean your list ruthlessly.</strong> Remove every address that bounced, anyone who complained,
-		and anyone who hasn't engaged in 90 days. You should be left with a core audience that reliably opens
-		your email.
-	</Paragraph>
-
-	<Paragraph>
-		<strong>Ramp up even more slowly than a normal warm-up.</strong> While a fresh domain might go from 1,000
-		to 5,000 in a week, a damaged domain should take two weeks to reach the same increase. Providers are
-		watching you more closely now.
-	</Paragraph>
-
-	<Paragraph>
-		<strong>Be patient.</strong> Recovery typically takes 2-4 weeks of consistent, good sending. If you were
-		added to a blocklist, allow extra time for the delisting process. If Postmaster Tools shows a "Bad"
-		reputation, expect at least two weeks of clean sending before it starts to climb back. The frustrating
-		part is that there's no way to know exactly when reputation has recovered. You watch the metrics trend
-		in the right direction and keep doing what you're doing.
-	</Paragraph>
-
-	<Heading level={2}>What to expect from each provider</Heading>
-
-	<Paragraph>
-		Gmail, Outlook, and Yahoo each handle unknown senders differently. The framework above applies to
-		all three, but understanding the per-provider quirks helps you interpret what you're seeing.
-	</Paragraph>
-
-	<Heading level={3}>Gmail</Heading>
-
-	<Paragraph>
-		Gmail is the most transparent. They aggressively rate-limit new senders, and you'll see 421
-		deferral responses ("try again later") when you exceed their limits. These deferrals are normal and
-		decrease as your reputation builds.
-	</Paragraph>
-
-	<Paragraph>
-		In Postmaster Tools, you want to see your domain reputation climb from "no data" to "Medium" to
-		"High" over the warm-up period. The data lags by 1-2 days, so don't expect real-time feedback, but
-		check it daily. If your reputation drops to "Low" or "Bad," pause and investigate before sending
-		more.
-	</Paragraph>
-
-	<Paragraph>
-		Gmail also tracks engagement per recipient. Even during warm-up, some users might see your email in
-		spam while others see it in their primary inbox, based on their individual interaction history with
-		similar senders.
-	</Paragraph>
-
-	<Callout variant="tip" title="Set up Postmaster Tools before your first send">
-		Google Postmaster Tools is the clearest window into how Gmail sees your domain. Verify it before
-		you send a single production email, then check it daily throughout the ramp — the data lags by 1-2
-		days, so early visibility matters.
-	</Callout>
-
-	<Heading level={3}>Outlook / Microsoft 365</Heading>
-
-	<Paragraph>
-		Microsoft is less transparent than Gmail. It doesn't offer an equivalent to Postmaster Tools for
-		most senders. What it does have is <a
-			href="https://sendersupport.olc.protection.outlook.com/snds/">SNDS (Smart Network Data Services)</a
-		>, which provides reputation data for each IP address. On shared IPs, SNDS reflects all senders on
-		that IP, not just you, so it's less useful.
-	</Paragraph>
-
-	<Paragraph>
-		Microsoft tends to be more aggressive with spam filtering during warm-up. While Gmail defers and
-		delivers later, Outlook is more likely to silently route messages to Junk. You might see decent
-		delivery rates (the server accepted the message) but poor open rates (because everything went to
-		spam). If your Outlook opens are significantly lower than Gmail's during warm-up, send to a test
-		account to check whether messages are landing in Junk.
-	</Paragraph>
-
-	<Paragraph>
-		Microsoft also maintains its own blocklist. The delisting process involves submitting a request and
-		waiting, sometimes for days. Keeping your early volumes low and your list clean is the best
-		prevention.
-	</Paragraph>
-
-	<Heading level={3}>Yahoo</Heading>
-
-	<Paragraph>
-		Yahoo behaves similarly to Gmail in terms of deferral patterns but provides less tooling. There's
-		no public equivalent to Postmaster Tools, so you'll diagnose Yahoo issues mainly through bounce
-		codes and delivery timing.
-	</Paragraph>
-
-	<Paragraph>
-		Yahoo is particularly sensitive to complaint rates. They operate one of the original feedback
-		loops, so spam complaints come back quickly if you're registered for FBLs through your email
-		provider. Watch these closely during warm-up.
-	</Paragraph>
-
-	<Paragraph>
-		One Yahoo-specific quirk: they sometimes defer messages with a 421 error that includes the phrase
-		"temporarily deferred." This is their rate-limiting mechanism for new senders, not an error in the
-		traditional sense. The message will go through eventually, once Yahoo has decided you're not a
-		spammer.
-	</Paragraph>
-
-	<Heading level={2}>Planning warm-up into your launch timeline</Heading>
-
-	<Paragraph>
-		The most practical advice: don't treat warm-up as something you'll figure out at launch time. If
-		your product launch or migration is in six weeks, start warm-up now. Three common mistakes:
-	</Paragraph>
-
-	<Paragraph>
-		<strong>"We'll warm up during our beta."</strong> This only works if the beta generates enough volume.
-		Fifty beta users sending 20 emails a day won't meaningfully warm up a domain.
-	</Paragraph>
-
-	<Paragraph>
-		<strong>"We'll send a test batch the week before launch."</strong> One batch doesn't build a reputation.
-		Warm-up requires sustained daily sending over weeks.
-	</Paragraph>
-
-	<Paragraph>
-		<strong>"We'll start with our full list and see what happens."</strong> This is how most botched warm-ups
-		happen. By the time you see what happens, the damage is done.
-	</Paragraph>
-
-	<Paragraph>
-		Build warm-up into your project timeline the same way you'd include QA or a staging deployment. It's
-		not optional and can't be compressed much. A realistic warm-up adds 2-4 weeks for low-volume
-		senders and 4-6 weeks for high-volume senders.
-	</Paragraph>
-
-	<Divider />
-
-	<Paragraph>
-		If you're using <a href="https://docs.lettr.com/learn/domains/sending-domains">Lettr</a>, domain authentication
-		is verified during setup, eliminating one common source of warm-up problems: broken SPF or DKIM records
-		that cause authentication failures on your first sends.
-	</Paragraph>
-
-	<Paragraph>
-		Bounce and complaint events stream through <a
+		On <a href="https://docs.lettr.com/learn/domains/sending-domains">Lettr</a>, authentication is
+		verified during setup and bounce and complaint events stream through <a
 			href="https://docs.lettr.com/learn/webhooks/introduction">webhooks</a
-		> in real time, so you can catch ramp problems within minutes instead of days. But the warm-up itself
-		is still on you, and no email provider can skip it.
+		> in real time, so a bad ramp surfaces in minutes instead of days. <a href="https://app.lettr.com/register">Create a free account</a> and verify a
+		domain before the next launch needs it.
 	</Paragraph>
 </BlogPost>
