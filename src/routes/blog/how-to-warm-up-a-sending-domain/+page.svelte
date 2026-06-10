@@ -5,6 +5,7 @@
 		Heading,
 		Paragraph,
 		List,
+		TldrList,
 		Callout,
 		Divider
 	} from '$lib/components/blog';
@@ -35,7 +36,7 @@
 	</Paragraph>
 
 	<Callout variant="info" title="TL;DR">
-		<List>
+		<TldrList>
 			<li>
 				<strong>A new domain has no reputation</strong>, which reads to providers like a spammer who just
 				registered.
@@ -48,7 +49,7 @@
 				<strong>The first sends matter most</strong>: most-engaged recipients only, and pause on any stop
 				signal.
 			</li>
-		</List>
+		</TldrList>
 	</Callout>
 
 	<Heading level={2}>Why warm-up exists</Heading>

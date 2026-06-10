@@ -5,6 +5,7 @@
 		Heading,
 		Paragraph,
 		List,
+		TldrList,
 		Callout,
 		Code,
 		Divider
@@ -38,14 +39,14 @@ Lettr::to($user->email)
 	</Lead>
 
 	<Callout variant="info" title="TL;DR">
-		<List>
+		<TldrList>
 			<li><strong>Infrastructure is the cheap part</strong>; the recurring engineering work around it is not.</li>
 			<li>
 				<strong>The real cost is the work no roadmap shows</strong>: deliverability drift, missing logs,
 				on-call bounces, template deploys.
 			</li>
 			<li><strong>The fix is visibility</strong>: email observable, editable, and monitored.</li>
-		</List>
+		</TldrList>
 	</Callout>
 
 	<Heading level={2}>What it costs on day one</Heading>

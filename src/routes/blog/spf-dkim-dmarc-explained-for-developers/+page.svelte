@@ -4,7 +4,7 @@
 		Lead,
 		Heading,
 		Paragraph,
-		List,
+		TldrList,
 		Callout,
 		Code,
 		Divider
@@ -77,7 +77,7 @@ dmarc=pass (p=REJECT dis=NONE) header.from=yourapp.com`;
 	</Paragraph>
 
 	<Callout variant="info" title="TL;DR">
-		<List>
+		<TldrList>
 			<li>
 				<strong>SPF</strong> names allowed servers, <strong>DKIM</strong> signs each message, and
 				<strong>DMARC</strong> ties both to the visible <code>From</code> and says what to do on failure.
@@ -90,7 +90,7 @@ dmarc=pass (p=REJECT dis=NONE) header.from=yourapp.com`;
 				<strong>Roll out enforcement in stages</strong>: <code>p=none</code>, read the reports, then ratchet
 				to <code>p=quarantine</code> and <code>p=reject</code>.
 			</li>
-		</List>
+		</TldrList>
 	</Callout>
 
 	<Heading level={2}>SPF: declaring who can send for you</Heading>

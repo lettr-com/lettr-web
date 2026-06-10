@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { BlogPost, Heading, Paragraph, Callout, Figure, Divider } from '$lib/components/blog';
+	import { BlogPost, Heading, Paragraph, TldrList, Callout, Figure, Divider } from '$lib/components/blog';
 </script>
 
 <BlogPost
@@ -28,8 +28,8 @@
 		use for transactional sending.
 	</Paragraph>
 
-	<Callout variant="tip" title="TL;DR">
-		<ul class="list-disc space-y-1 pl-5 marker:text-primary">
+	<Callout variant="info" title="TL;DR">
+		<TldrList>
 			<li>Lettr now sends <strong>marketing email</strong> alongside transactional, same account and domains.</li>
 			<li>
 				<strong>Audiences</strong> are one shared contact pool, with unsubscribes, bounces, and complaints
@@ -40,7 +40,7 @@
 				results in real time.
 			</li>
 			<li>Keep marketing on its own <strong>sending domain</strong> to protect transactional deliverability.</li>
-		</ul>
+		</TldrList>
 	</Callout>
 
 	
