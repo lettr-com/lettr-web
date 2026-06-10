@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { BlogPost, Lead, Heading, Paragraph, List, Callout, Code } from '$lib/components/blog';
+	import { BlogPost, Lead, Heading, Paragraph, List, TldrList, Callout, Code } from '$lib/components/blog';
 
 	const mcpJsonExample = `{
   "mcpServers": {
@@ -37,7 +37,7 @@
 	</Paragraph>
 
 	<Callout variant="info" title="TL;DR">
-		<List>
+		<TldrList>
 			<li><strong>MCP lets an AI assistant call the Lettr API in plain language</strong>, against real data.</li>
 			<li>
 				<strong>Lettr ships two servers</strong>: a remote one (OAuth, read-only) for chat tools, a local
@@ -47,7 +47,7 @@
 				<strong>It complements the dashboard, it doesn't replace it</strong>: quick lookups yes, bulk
 				production changes no.
 			</li>
-		</List>
+		</TldrList>
 	</Callout>
 
 	<Heading level={2}>What is MCP?</Heading>

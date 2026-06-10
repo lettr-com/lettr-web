@@ -5,6 +5,7 @@
 		Heading,
 		Paragraph,
 		List,
+		TldrList,
 		Quote,
 		Callout,
 		Divider
@@ -32,7 +33,7 @@
 	</Paragraph>
 
 	<Callout variant="info" title="TL;DR">
-		<List>
+		<TldrList>
 			<li>
 				<strong>One domain means one reputation</strong>: marketing complaints drag down the transactional
 				email users depend on.
@@ -42,7 +43,7 @@
 				sender history, so a bad campaign stays contained.
 			</li>
 			<li><strong>Some emails sit on the line</strong>; when in doubt, treat an email as marketing.</li>
-		</List>
+		</TldrList>
 	</Callout>
 
 	<Heading level={2}>The problem with one domain</Heading>

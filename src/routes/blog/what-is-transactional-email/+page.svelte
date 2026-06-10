@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { BlogPost, Lead, Heading, Paragraph, List, Callout } from '$lib/components/blog';
+	import { BlogPost, Lead, Heading, Paragraph, List, TldrList, Callout } from '$lib/components/blog';
 </script>
 
 <BlogPost
@@ -25,14 +25,14 @@
 	</Paragraph>
 
 	<Callout variant="info" title="TL;DR">
-		<List>
+		<TldrList>
 			<li>
 				<strong>Transactional emails</strong> answer a user action; <strong>marketing emails</strong> go
 				on the sender's schedule. Providers and regulators treat them differently.
 			</li>
 			<li>Mixing promotional content into a receipt <strong>damages deliverability</strong> and invites FTC scrutiny.</li>
 			<li><strong>Treat email outages like API outages</strong>: authenticate, separate streams, monitor, suppress dead addresses.</li>
-		</List>
+		</TldrList>
 	</Callout>
 
 	<Heading level={2}>What is transactional email?</Heading>
