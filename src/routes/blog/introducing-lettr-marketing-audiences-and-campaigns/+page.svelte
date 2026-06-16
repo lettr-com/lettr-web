@@ -10,7 +10,7 @@
 	date="June 5, 2026"
 	datetime="2026-06-02"
 	readTime="13 min read"
-	slug="introducing-audiences-and-campaigns"
+	slug="introducing-lettr-marketing-audiences-and-campaigns"
 >
 
 <Paragraph>
