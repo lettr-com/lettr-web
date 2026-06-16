@@ -1,7 +1,7 @@
 **Accessibility Statement**
 
 This accessibility statement applies to the website
-[<u>lettr.com</u>](http://lettr.com) operated by TOPOL.io, s.r.o., ID:
+[<u>lettr.com</u>](https://lettr.com) operated by TOPOL.io, s.r.o., ID:
 10956123, with its registered office at <span class="mark">Na příkopě
 388/1, Staré Město, 110 00 Prague, Czech Republic</span>.
 
@@ -100,4 +100,4 @@ In the event that you are not provided with an adequate response or
 solution from TOPOL.io, s.r.o. regarding accessibility, you have the
 right to contact the relevant law enforcement authority. The enforcement
 authorities vary depending on the region from which you access our
-website [<u>lettr.com</u>](http://lettr.com).
+website [<u>lettr.com</u>](https://lettr.com).
