@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
+	import Seo from '$lib/components/Seo.svelte';
 	import { createFromAnimationCleanup, createScrollRevealCleanup } from '$lib/utils/gsap';
 	import { capturePosthogEvent } from '$lib/analytics/posthog';
 
@@ -127,13 +128,11 @@ Welcome to Lettr. Let's make email not suck.
 	});
 </script>
 
-<svelte:head>
-	<title>Changelog | Lettr</title>
-	<meta name="description" content="All the latest updates, improvements, and fixes to Lettr." />
-	<link rel="canonical" href="https://lettr.com/changelog" />
-	<meta property="og:title" content="Lettr Changelog" />
-	<meta property="og:description" content="All the latest updates, improvements, and fixes to Lettr." />
-</svelte:head>
+<Seo
+	title="Changelog | Lettr"
+	description="All the latest updates, improvements, and fixes to Lettr."
+	ogTitle="Lettr Changelog"
+/>
 
 <section class="pt-32 pb-24">
 		<!-- Header -->

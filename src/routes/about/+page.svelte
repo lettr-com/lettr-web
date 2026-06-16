@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
+	import Seo from '$lib/components/Seo.svelte';
 	import SparkleIcon from 'phosphor-svelte/lib/SparkleIcon';
 	import ShieldCheckIcon from 'phosphor-svelte/lib/ShieldCheckIcon';
 	import EnvelopeSimpleIcon from 'phosphor-svelte/lib/EnvelopeSimpleIcon';
@@ -116,19 +117,12 @@
 	];
 </script>
 
-<svelte:head>
-	<title>About | Lettr</title>
-	<meta
-		name="description"
-		content="The story behind Lettr — built by a team with 10+ years in email infrastructure, sending 500M+ emails monthly across the globe."
-	/>
-	<link rel="canonical" href="https://lettr.com/about" />
-	<meta property="og:title" content="About Lettr" />
-	<meta
-		property="og:description"
-		content="Built by a team with 10+ years in email infrastructure, sending 500M+ emails monthly across the globe."
-	/>
-</svelte:head>
+<Seo
+	title="About | Lettr"
+	description="The story behind Lettr — built by a team with 10+ years in email infrastructure, sending 500M+ emails monthly across the globe."
+	ogTitle="About Lettr"
+	ogDescription="Built by a team with 10+ years in email infrastructure, sending 500M+ emails monthly across the globe."
+/>
 
 <section class="pt-32 pb-24">
 	<!-- Hero -->

@@ -3,6 +3,7 @@
 	import ArrowLeftIcon from 'phosphor-svelte/lib/ArrowLeftIcon';
 	import ClockIcon from 'phosphor-svelte/lib/ClockIcon';
 	import { createFromAnimationCleanup, createScrollRevealCleanup } from '$lib/utils/gsap';
+	import Seo from '$lib/components/Seo.svelte';
 	import TableOfContents from './TableOfContents.svelte';
 
 	export interface BlogAuthor {
@@ -17,6 +18,8 @@
 		title: string;
 		/** Short summary shown under the title and used as the meta description. */
 		excerpt?: string;
+		/** Optional meta description override when the visible excerpt is too long for SEO. */
+		metaDescription?: string;
 		author: BlogAuthor;
 		/** Human-readable publish date, e.g. "May 29, 2026". */
 		date: string;
@@ -34,6 +37,7 @@
 		category,
 		title,
 		excerpt,
+		metaDescription,
 		author,
 		date,
 		datetime,
@@ -44,7 +48,8 @@
 		children
 	}: Props = $props();
 
-	const canonical = $derived(slug ? `https://lettr.com/blog/${slug}` : undefined);
+	const canonical = $derived(slug ? `/blog/${slug}/` : undefined);
+	const seoDescription = $derived(metaDescription ?? excerpt ?? '');
 	const initials = $derived(
 		author.name
 			.split(' ')
@@ -83,15 +88,14 @@
 	});
 </script>
 
-<svelte:head>
-	<title>{title} | Lettr Blog</title>
-	{#if excerpt}<meta name="description" content={excerpt} />{/if}
-	{#if canonical}<link rel="canonical" href={canonical} />{/if}
-	<meta property="og:type" content="article" />
-	<meta property="og:title" content={title} />
-	{#if excerpt}<meta property="og:description" content={excerpt} />{/if}
-	{#if coverImage}<meta property="og:image" content={coverImage} />{/if}
-</svelte:head>
+<Seo
+	title="{title} | Lettr Blog"
+	description={seoDescription}
+	ogTitle={title}
+	type="article"
+	image={coverImage}
+	{canonical}
+/>
 
 <article class="pt-32 pb-24">
 	<div class="mx-auto max-w-[1064px] px-4">

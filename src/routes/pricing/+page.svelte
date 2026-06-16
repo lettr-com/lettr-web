@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
+	import Seo from '$lib/components/Seo.svelte';
 	import PackageIcon from 'phosphor-svelte/lib/PackageIcon';
 	import ArrowRight from 'phosphor-svelte/lib/ArrowRight';
 	import Pricing from '$lib/components/Pricing.svelte';
@@ -46,16 +47,11 @@
 	});
 </script>
 
-<svelte:head>
-	<title>Pricing — Lettr</title>
-	<link rel="canonical" href="https://lettr.com/pricing" />
-	<meta name="description" content="Transparent pricing for Lettr. Transactional bills per email, Marketing bills per contact. Bundle both for a discount. Free tier for transactional — 3,000 emails/month." />
-	<meta property="og:title" content="Pricing — Lettr" />
-	<meta property="og:description" content="Transactional per email, Marketing per contact. Bundle to save more." />
-	<meta property="og:url" content="https://lettr.com/pricing" />
-	<meta name="twitter:title" content="Pricing — Lettr" />
-	<meta name="twitter:description" content="Transactional per email, Marketing per contact. Bundle to save more." />
-</svelte:head>
+<Seo
+	title="Pricing — Lettr"
+	description="Transparent pricing for Lettr. Transactional bills per email, Marketing bills per contact. Bundle both for a discount. Free tier for transactional — 3,000 emails/month."
+	ogDescription="Transactional per email, Marketing per contact. Bundle to save more."
+/>
 
 <section bind:this={header} class="pt-32 pb-8">
 	<div class="text-center">

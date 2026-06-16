@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
+	import Seo from '$lib/components/Seo.svelte';
 	import ArrowRightIcon from 'phosphor-svelte/lib/ArrowRightIcon';
 	import ClockIcon from 'phosphor-svelte/lib/ClockIcon';
 	import { createFromAnimationCleanup, createScrollRevealCleanup } from '$lib/utils/gsap';
@@ -121,14 +122,10 @@
 	});
 </script>
 
-<svelte:head>
-	<title>Blog | Lettr</title>
-	<meta
-		name="description"
-		content="Notes on transactional and marketing email, deliverability, and building email infrastructure that SaaS teams can trust."
-	/>
-	<link rel="canonical" href="https://lettr.com/blog" />
-</svelte:head>
+<Seo
+	title="Blog | Lettr"
+	description="Notes on transactional and marketing email, deliverability, and building email infrastructure that SaaS teams can trust."
+/>
 
 <section class="pt-32 pb-24">
 	<div bind:this={header}>

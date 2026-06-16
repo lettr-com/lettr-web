@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import { error } from '@sveltejs/kit';
+	import Seo from '$lib/components/Seo.svelte';
 	import ArrowLeftIcon from 'phosphor-svelte/lib/ArrowLeftIcon';
 	import ArrowRightIcon from 'phosphor-svelte/lib/ArrowRightIcon';
 	import CheckIcon from 'phosphor-svelte/lib/CheckIcon';
@@ -67,19 +68,12 @@
 	});
 </script>
 
-<svelte:head>
-	<title>Lettr vs {provider.name} | Lettr</title>
-	<meta
-		name="description"
-		content="Compare Lettr with {provider.name}. {provider.tagline} — save up to {provider.averageSavings}% on transactional email."
-	/>
-	<link rel="canonical" href="https://lettr.com/compare/{provider.slug}" />
-	<meta property="og:title" content="Lettr vs {provider.name}" />
-	<meta
-		property="og:description"
-		content="{provider.tagline}. Save up to {provider.averageSavings}% on transactional email."
-	/>
-</svelte:head>
+<Seo
+	title="Lettr vs {provider.name} | Lettr"
+	description="Compare Lettr with {provider.name}. {provider.tagline} — save up to {provider.averageSavings}% on transactional email."
+	ogTitle="Lettr vs {provider.name}"
+	ogDescription="{provider.tagline}. Save up to {provider.averageSavings}% on transactional email."
+/>
 
 <section class="pt-32 pb-24">
 		<!-- Back Link -->

@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
+	import Seo from '$lib/components/Seo.svelte';
 	import EnvelopeSimpleIcon from 'phosphor-svelte/lib/EnvelopeSimpleIcon';
 	import BookOpenIcon from 'phosphor-svelte/lib/BookOpenIcon';
 	import ClockIcon from 'phosphor-svelte/lib/ClockIcon';
@@ -103,19 +104,11 @@
 	});
 </script>
 
-<svelte:head>
-	<title>Support & Contact | Lettr</title>
-	<meta
-		name="description"
-		content="Get help from the Lettr team. Technical support, billing questions, or just say hi."
-	/>
-	<link rel="canonical" href="https://lettr.com/support" />
-	<meta property="og:title" content="Lettr Support & Contact" />
-	<meta
-		property="og:description"
-		content="Get help from the Lettr team. Technical support, billing questions, or just say hi."
-	/>
-</svelte:head>
+<Seo
+	title="Support & Contact | Lettr"
+	description="Get help from the Lettr team. Technical support, billing questions, or just say hi."
+	ogTitle="Lettr Support & Contact"
+/>
 
 <section class="pt-32 pb-24">
 	<!-- Hero -->
