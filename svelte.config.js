@@ -11,11 +11,7 @@ const config = {
       strict: true,
     }),
     prerender: {
-      entries: ["*", "/sitemap.xml"],
-      handleUnseenRoutes: ({ routes, message }) => {
-        const unseen = routes.filter((r) => r !== "/sitemap.xml");
-        if (unseen.length) throw new Error(message);
-      },
+      entries: ["*"],
     },
   },
 };
