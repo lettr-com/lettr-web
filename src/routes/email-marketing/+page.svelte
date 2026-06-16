@@ -106,7 +106,7 @@
 
 <Seo
 	title="Email Marketing & Campaigns — Lettr"
-	description="Run marketing campaigns from the same platform that sends your transactional email. Drag-and-drop editor, contact lists, segmentation, and automations — priced by contact."
+	description="Run marketing campaigns from the same platform as your transactional email: drag-and-drop editor, contact lists, segmentation, and automations."
 	ogDescription="Run marketing campaigns from the same platform that sends your transactional email."
 />
 

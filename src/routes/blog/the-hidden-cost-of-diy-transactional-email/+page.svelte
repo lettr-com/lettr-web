@@ -25,6 +25,7 @@ Lettr::to($user->email)
 	category="Deliverability"
 	title="The hidden cost of DIY transactional email"
 	excerpt="The real cost of running your own transactional email stack: deliverability drift, no delivery logs, on-call time spent on bounces and blocklists, and template changes that require a deploy. What DIY actually costs beyond infrastructure, and what a managed alternative replaces."
+	metaDescription="The real cost of running your own transactional email stack: deliverability drift, missing logs, on-call bounce handling, and deploy-gated templates."
 	author={{ name: 'Erik Vlčák', role: 'Customer Success Engineer', avatar: '/images/authors/erik.jpg' }}
 	date="May 13, 2026"
 	datetime="2026-05-13"

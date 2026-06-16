@@ -130,7 +130,7 @@ Welcome to Lettr. Let's make email not suck.
 
 <Seo
 	title="Changelog | Lettr"
-	description="All the latest updates, improvements, and fixes to Lettr."
+	description="The latest updates, improvements, and fixes to Lettr — new features, API changes, and platform refinements as we ship them."
 	ogTitle="Lettr Changelog"
 />
 

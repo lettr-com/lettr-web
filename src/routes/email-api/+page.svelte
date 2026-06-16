@@ -128,7 +128,7 @@
 
 <Seo
 	title="Transactional Email API — Lettr"
-	description="Send transactional email from your SaaS via a clean REST API and SMTP relay. Sub-second delivery, automatic retries, webhooks, and searchable logs — built by the team behind Topol."
+	description="Send transactional email from your SaaS via a clean REST API and SMTP relay — with sub-second delivery, automatic retries, webhooks, and searchable logs."
 	ogDescription="Send transactional email from your SaaS via a clean REST API and SMTP relay. Sub-second delivery, automatic retries, webhooks, and searchable logs."
 />
 

@@ -49,7 +49,7 @@
 
 <Seo
 	title="Pricing — Lettr"
-	description="Transparent pricing for Lettr. Transactional bills per email, Marketing bills per contact. Bundle both for a discount. Free tier for transactional — 3,000 emails/month."
+	description="Transparent Lettr pricing: transactional bills per email, marketing per contact. Bundle both to save, with a free tier of 3,000 transactional emails a month."
 	ogDescription="Transactional per email, Marketing per contact. Bundle to save more."
 />
 
