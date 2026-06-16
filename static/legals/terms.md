@@ -37,7 +37,7 @@ By using the Lettr online emailing service, you are agreeing to be bound by thes
       25. **Log** means an information provided through the Service which consists of status of sent or intended to be sent emails such as “delivered”, “opened” and other.
       26. **Necessary maintenance** means regular maintenance necessary to maintain the features of the Service, which is carried out at the initiative of Lettr; it is not a response to any Defect and is a period of time during which the Service is wholly or partially unavailable;
       27. **Personal information** means any information about the data subject from which he or she can be identified, directly or indirectly.
-      28. **Price list** states the amount of the Fee for the Service provided to the User, is part of these Terms and Conditions and is published on the Lettr website [https://lettr.com/\#pricing](https://lettr.com/#pricing), or directly in the Dashboard.
+      28. **Price list** states the amount of the Fee for the Service provided to the User, is part of these Terms and Conditions and is published on the Lettr website [https://lettr.com/\pricing](https://lettr.com/pricing), or directly in the Dashboard.
       29. **Provider’s content** means all of the materials, work (including copyrighted work), content, data and information provided by us as part of the Service.
       30. **Sensitive data** means information about the data subject's national, racial or ethnic origin, political opinions, trade union membership, religion or philosophical beliefs, criminal convictions, health or sex life and genetic data of the data subject or any biometric data which allows the direct identification or authentication of the data subject.
       31. **Service** means all the functionalities of the Software offered through our application [https://app.lettr.com/](https://app.lettr.com/) (e.g. emailing service for emails and email editor).
@@ -338,7 +338,7 @@ By using the Lettr online emailing service, you are agreeing to be bound by thes
     11. **Transparency of international access.** We store and process exportable data in the EU or EEA. We publish a current list of countries and involved subcontractors in our online data register. If there is a request for access to data from authorities outside the EEA, we will assess its legality and inform the customer of the provision, if legally permitted. We only share data to the extent necessary and ensure its protection with appropriate technical and legal measures.
 
 16. **SECURITY AND PRIVACY**
-    1. **Data processing**. Your privacy is important to us. We employ security measures in accordance with applicable and routine practice. Please read our [Privacy Policy](https://lettr.com/privacy) for information regarding how we collect, use, and disclose your User’s content and personal information and protect your privacy when you use the Service.
+    1. **Data processing**. Your privacy is important to us. We employ security measures in accordance with applicable and routine practice. Please read our [Privacy Policy](https://lettr.com/privacy-policy) for information regarding how we collect, use, and disclose your User’s content and personal information and protect your privacy when you use the Service.
 
     2. **Data Processing Agreement**. User may entrust us with the personal data of its customers or other persons. Details of our obligations as a processor can be found in the Data Processing Agreement (DPA), which is attached as **Annex 1** and forms an integral part of these Terms.
 
@@ -434,7 +434,7 @@ and
 
 (Processor and Controller hereinafter jointly referred to as “**Parties**” and each individually as “**Party**”).
 
-If you use the Lettr emailing service from Lettr (the "**Service**"), then Lettr will be the processor of the personal data you entrust to us. The Service is provided on the basis of the [Terms of use](https://lettr.com/legal) (the "**Terms**"). By using the Service, you confirm that you have read and agree to the Processing Agreement and it is legally binding on you. This Processing Agreement applies to all users who access or use the Service.
+If you use the Lettr emailing service from Lettr (the "**Service**"), then Lettr will be the processor of the personal data you entrust to us. The Service is provided on the basis of the [Terms of use](https://lettr.com/terms) (the "**Terms**"). By using the Service, you confirm that you have read and agree to the Processing Agreement and it is legally binding on you. This Processing Agreement applies to all users who access or use the Service.
 
 **Please read this Processing Agreement carefully, as it sets out the terms and conditions for processing personal data under which the Service is provided**. If you have any questions regarding the processing of personal data, you may contact us at any time at hello@lettr.com.
 
