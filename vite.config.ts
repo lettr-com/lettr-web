@@ -19,11 +19,12 @@ export default defineConfig({
       // The site canonicalises to trailing-slash URLs (trailingSlash = "always"),
       // so the sitemap must list the trailing-slash form to stay canonical.
       trailingSlashes: true,
-      // Keep the 404 page and superseded terms version out of the index.
+      // Keep non-indexable routes out of the index: the 404 fallback, the
+      // superseded terms version, and /book (a 308 redirect to /demo).
       // Patterns are matched against the built files under `build/`, so the
       // 404 fallback must be referenced by its file name (`build/404` never
-      // matches `build/404.html`); the terms route is a directory.
-      ignore: ["404.html", "terms-15-02-2026"],
+      // matches `build/404.html`); the other two are route directories.
+      ignore: ["404.html", "terms-15-02-2026", "book"],
     }),
   ],
 });
