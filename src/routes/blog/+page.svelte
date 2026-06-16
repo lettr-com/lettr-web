@@ -38,6 +38,16 @@
 			readTime: '5 min read'
 		},
 		{
+			slug: 'the-hidden-cost-of-diy-transactional-email',
+			category: 'Deliverability',
+			title: 'The hidden cost of DIY transactional email',
+			excerpt:
+				'The real cost of running your own transactional email stack: deliverability drift, no delivery logs, on-call time spent on bounces and blocklists, and template changes that require a deploy. What DIY actually costs beyond infrastructure, and what a managed alternative replaces.',
+			author: 'Erik Vlčák',
+			date: 'May 13, 2026',
+			readTime: '5 min read'
+		},
+		{
 			slug: 'how-to-warm-up-a-sending-domain',
 			category: 'Deliverability',
 			title: 'How to warm up a new sending domain',
