@@ -1,12 +1,10 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import {
-		PaintBrushIcon,
-		UsersThreeIcon,
-		PaperPlaneTiltIcon,
-		ChartLineUpIcon,
-		ArrowRightIcon
-	} from 'phosphor-svelte';
+	import PaintBrushIcon from 'phosphor-svelte/lib/PaintBrushIcon';
+	import UsersThreeIcon from 'phosphor-svelte/lib/UsersThreeIcon';
+	import PaperPlaneTiltIcon from 'phosphor-svelte/lib/PaperPlaneTiltIcon';
+	import ChartLineUpIcon from 'phosphor-svelte/lib/ChartLineUpIcon';
+	import ArrowRightIcon from 'phosphor-svelte/lib/ArrowRightIcon';
 	import { createScrollRevealCleanup } from '$lib/utils/gsap';
 	import { capturePosthogEvent } from '$lib/analytics/posthog';
 

@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { onMount, type Snippet } from 'svelte';
-	import { ArrowLeftIcon, ClockIcon } from 'phosphor-svelte';
+	import ArrowLeftIcon from 'phosphor-svelte/lib/ArrowLeftIcon';
+	import ClockIcon from 'phosphor-svelte/lib/ClockIcon';
 	import { createFromAnimationCleanup, createScrollRevealCleanup } from '$lib/utils/gsap';
 	import TableOfContents from './TableOfContents.svelte';
 

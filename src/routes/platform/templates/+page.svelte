@@ -1,13 +1,11 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import {
-		DotsSixVerticalIcon,
-		SparkleIcon,
-		StackIcon,
-		ExportIcon,
-		PaletteIcon,
-		BracketsAngleIcon
-	} from 'phosphor-svelte';
+	import DotsSixVerticalIcon from 'phosphor-svelte/lib/DotsSixVerticalIcon';
+	import SparkleIcon from 'phosphor-svelte/lib/SparkleIcon';
+	import StackIcon from 'phosphor-svelte/lib/StackIcon';
+	import ExportIcon from 'phosphor-svelte/lib/ExportIcon';
+	import PaletteIcon from 'phosphor-svelte/lib/PaletteIcon';
+	import BracketsAngleIcon from 'phosphor-svelte/lib/BracketsAngleIcon';
 	import FeaturePageLayout from '$lib/components/FeaturePageLayout.svelte';
 	import EditorPreview from '$lib/components/EditorPreview.svelte';
 	import { createScrollRevealCleanup } from '$lib/utils/gsap';

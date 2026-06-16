@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import { slide } from 'svelte/transition';
-	import { CaretDownIcon } from 'phosphor-svelte';
+	import CaretDownIcon from 'phosphor-svelte/lib/CaretDownIcon';
 	import { createScrollRevealCleanup } from '$lib/utils/gsap';
 	import { capturePosthogEvent } from '$lib/analytics/posthog';
 

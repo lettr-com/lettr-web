@@ -1,13 +1,11 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import {
-		ShieldCheckIcon,
-		ChartLineUpIcon,
-		HardDrivesIcon,
-		ProhibitIcon,
-		ListChecksIcon,
-		LockKeyIcon
-	} from 'phosphor-svelte';
+	import ShieldCheckIcon from 'phosphor-svelte/lib/ShieldCheckIcon';
+	import ChartLineUpIcon from 'phosphor-svelte/lib/ChartLineUpIcon';
+	import HardDrivesIcon from 'phosphor-svelte/lib/HardDrivesIcon';
+	import ProhibitIcon from 'phosphor-svelte/lib/ProhibitIcon';
+	import ListChecksIcon from 'phosphor-svelte/lib/ListChecksIcon';
+	import LockKeyIcon from 'phosphor-svelte/lib/LockKeyIcon';
 	import FeaturePageLayout from '$lib/components/FeaturePageLayout.svelte';
 	import { createScrollRevealCleanup } from '$lib/utils/gsap';
 

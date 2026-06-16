@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import { ArrowRight } from 'phosphor-svelte';
+	import ArrowRight from 'phosphor-svelte/lib/ArrowRight';
 	import { createScrollRevealCleanup } from '$lib/utils/gsap';
 	import { capturePosthogEvent } from '$lib/analytics/posthog';
 

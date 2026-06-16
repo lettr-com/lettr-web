@@ -1,4 +1,4 @@
-import { createHighlighter, type Highlighter, type ThemeRegistration } from "shiki";
+import type { Highlighter, ThemeRegistration } from "shiki";
 
 const lettrTheme: ThemeRegistration = {
   name: "lettr",
@@ -67,6 +67,9 @@ let highlighter: Highlighter | null = null;
 
 export async function getHighlighter(): Promise<Highlighter> {
   if (!highlighter) {
+    // Dynamic import so the ~760 KB shiki bundle is split into its own lazy
+    // chunk instead of being pulled into the initial page load.
+    const { createHighlighter } = await import("shiki");
     highlighter = await createHighlighter({
       themes: [lettrTheme],
       langs: ["php", "javascript", "go", "ruby", "java", "bash", "shell"],

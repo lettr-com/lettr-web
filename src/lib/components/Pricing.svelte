@@ -1,6 +1,8 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import { Check, X, ArrowRight } from 'phosphor-svelte';
+	import Check from 'phosphor-svelte/lib/Check';
+	import X from 'phosphor-svelte/lib/X';
+	import ArrowRight from 'phosphor-svelte/lib/ArrowRight';
 	import Slider from './Slider.svelte';
 	import { createScrollRevealCleanup, createFromAnimationCleanup } from '$lib/utils/gsap';
 	import { buildRegisterUrl, registerUrl } from '$lib/utils/utm';

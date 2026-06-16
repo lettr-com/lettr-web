@@ -1,5 +1,6 @@
 <script lang="ts">
-	import { CaretDown, Check } from 'phosphor-svelte';
+	import CaretDown from 'phosphor-svelte/lib/CaretDown';
+	import Check from 'phosphor-svelte/lib/Check';
 	import { onMount } from 'svelte';
 	import { slide } from 'svelte/transition';
 	import { Button } from '$lib/components/ui/button';

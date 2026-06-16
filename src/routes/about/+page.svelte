@@ -1,12 +1,10 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import {
-		SparkleIcon,
-		ShieldCheckIcon,
-		EnvelopeSimpleIcon,
-		GlobeSimpleIcon,
-		ArrowRightIcon
-	} from 'phosphor-svelte';
+	import SparkleIcon from 'phosphor-svelte/lib/SparkleIcon';
+	import ShieldCheckIcon from 'phosphor-svelte/lib/ShieldCheckIcon';
+	import EnvelopeSimpleIcon from 'phosphor-svelte/lib/EnvelopeSimpleIcon';
+	import GlobeSimpleIcon from 'phosphor-svelte/lib/GlobeSimpleIcon';
+	import ArrowRightIcon from 'phosphor-svelte/lib/ArrowRightIcon';
 	import { createFromAnimationCleanup, createScrollRevealCleanup } from '$lib/utils/gsap';
 	import { buildRegisterUrl, registerUrl } from '$lib/utils/utm';
 	import { capturePosthogEvent, trackSignupClick } from '$lib/analytics/posthog';

@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import { ArrowSquareOutIcon } from 'phosphor-svelte';
+	import ArrowSquareOutIcon from 'phosphor-svelte/lib/ArrowSquareOutIcon';
 	import CodeSnippet from './CodeSnippet.svelte';
 	import TerminalCommand from './TerminalCommand.svelte';
 	import { createScrollRevealCleanup } from '$lib/utils/gsap';

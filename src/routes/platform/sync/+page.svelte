@@ -1,11 +1,9 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import {
-		LightningIcon,
-		EnvelopeSimpleIcon,
-		ShieldCheckIcon,
-		ArrowsLeftRightIcon
-	} from 'phosphor-svelte';
+	import LightningIcon from 'phosphor-svelte/lib/LightningIcon';
+	import EnvelopeSimpleIcon from 'phosphor-svelte/lib/EnvelopeSimpleIcon';
+	import ShieldCheckIcon from 'phosphor-svelte/lib/ShieldCheckIcon';
+	import ArrowsLeftRightIcon from 'phosphor-svelte/lib/ArrowsLeftRightIcon';
 	import FeaturePageLayout from '$lib/components/FeaturePageLayout.svelte';
 	import { createScrollRevealCleanup } from '$lib/utils/gsap';
 

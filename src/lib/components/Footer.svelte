@@ -1,7 +1,10 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import { buildRegisterUrl, registerUrl } from '$lib/utils/utm';
-	import { EnvelopeSimpleIcon, GithubLogoIcon, LinkedinLogoIcon, XLogoIcon } from 'phosphor-svelte';
+	import EnvelopeSimpleIcon from 'phosphor-svelte/lib/EnvelopeSimpleIcon';
+	import GithubLogoIcon from 'phosphor-svelte/lib/GithubLogoIcon';
+	import LinkedinLogoIcon from 'phosphor-svelte/lib/LinkedinLogoIcon';
+	import XLogoIcon from 'phosphor-svelte/lib/XLogoIcon';
 	import { capturePosthogEvent, trackSignupClick } from '$lib/analytics/posthog';
 
 	let registerHref: string = $state(registerUrl);

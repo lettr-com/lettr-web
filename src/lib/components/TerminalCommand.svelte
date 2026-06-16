@@ -1,6 +1,8 @@
 <script lang="ts">
 	import { onDestroy } from 'svelte';
-	import { CopyIcon, CheckIcon, TerminalWindowIcon } from 'phosphor-svelte';
+	import CopyIcon from 'phosphor-svelte/lib/CopyIcon';
+	import CheckIcon from 'phosphor-svelte/lib/CheckIcon';
+	import TerminalWindowIcon from 'phosphor-svelte/lib/TerminalWindowIcon';
 	import { createSingleTimeoutManager } from '$lib/utils/timeoutManager';
 	import { capturePosthogEvent } from '$lib/analytics/posthog';
 

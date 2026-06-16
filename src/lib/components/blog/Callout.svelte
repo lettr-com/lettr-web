@@ -1,6 +1,8 @@
 <script lang="ts">
 	import type { Snippet } from 'svelte';
-	import { InfoIcon, LightbulbIcon, WarningIcon } from 'phosphor-svelte';
+	import InfoIcon from 'phosphor-svelte/lib/InfoIcon';
+	import LightbulbIcon from 'phosphor-svelte/lib/LightbulbIcon';
+	import WarningIcon from 'phosphor-svelte/lib/WarningIcon';
 
 	interface Props {
 		variant?: 'info' | 'tip' | 'warning';

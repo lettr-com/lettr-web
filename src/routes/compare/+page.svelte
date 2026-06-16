@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import { ArrowRightIcon } from 'phosphor-svelte';
+	import ArrowRightIcon from 'phosphor-svelte/lib/ArrowRightIcon';
 	import { createFromAnimationCleanup, createScrollRevealCleanup } from '$lib/utils/gsap';
 	import { buildRegisterUrl, registerUrl } from '$lib/utils/utm';
 	import { providerList } from '$lib/data/providers';

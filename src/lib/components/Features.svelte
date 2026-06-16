@@ -1,13 +1,11 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import {
-		LinkIcon,
-		GlobeIcon,
-		LightningIcon,
-		CodeIcon,
-		ShieldCheckIcon,
-		MagnifyingGlassIcon
-	} from 'phosphor-svelte';
+	import LinkIcon from 'phosphor-svelte/lib/LinkIcon';
+	import GlobeIcon from 'phosphor-svelte/lib/GlobeIcon';
+	import LightningIcon from 'phosphor-svelte/lib/LightningIcon';
+	import CodeIcon from 'phosphor-svelte/lib/CodeIcon';
+	import ShieldCheckIcon from 'phosphor-svelte/lib/ShieldCheckIcon';
+	import MagnifyingGlassIcon from 'phosphor-svelte/lib/MagnifyingGlassIcon';
 	import gsap from 'gsap';
 	import { ScrollTrigger } from 'gsap/ScrollTrigger';
 	import { ensureGsapPlugins } from '$lib/utils/gsap';

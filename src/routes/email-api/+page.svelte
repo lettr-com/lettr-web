@@ -1,18 +1,16 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import {
-		CodeIcon,
-		LightningIcon,
-		ShieldCheckIcon,
-		ArrowsClockwiseIcon,
-		LinkIcon,
-		MagnifyingGlassIcon,
-		UserPlusIcon,
-		LockKeyIcon,
-		BellIcon,
-		HourglassHighIcon,
-		PaperPlaneTiltIcon
-	} from 'phosphor-svelte';
+	import CodeIcon from 'phosphor-svelte/lib/CodeIcon';
+	import LightningIcon from 'phosphor-svelte/lib/LightningIcon';
+	import ShieldCheckIcon from 'phosphor-svelte/lib/ShieldCheckIcon';
+	import ArrowsClockwiseIcon from 'phosphor-svelte/lib/ArrowsClockwiseIcon';
+	import LinkIcon from 'phosphor-svelte/lib/LinkIcon';
+	import MagnifyingGlassIcon from 'phosphor-svelte/lib/MagnifyingGlassIcon';
+	import UserPlusIcon from 'phosphor-svelte/lib/UserPlusIcon';
+	import LockKeyIcon from 'phosphor-svelte/lib/LockKeyIcon';
+	import BellIcon from 'phosphor-svelte/lib/BellIcon';
+	import HourglassHighIcon from 'phosphor-svelte/lib/HourglassHighIcon';
+	import PaperPlaneTiltIcon from 'phosphor-svelte/lib/PaperPlaneTiltIcon';
 	import Button from '$lib/components/Button.svelte';
 	import CodeSnippet from '$lib/components/CodeSnippet.svelte';
 	import TalkToExpert from '$lib/components/TalkToExpert.svelte';

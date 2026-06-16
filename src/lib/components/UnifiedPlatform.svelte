@@ -1,6 +1,9 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import { PaperPlaneTiltIcon, UsersIcon, GlobeIcon, ShieldCheckIcon } from 'phosphor-svelte';
+	import PaperPlaneTiltIcon from 'phosphor-svelte/lib/PaperPlaneTiltIcon';
+	import UsersIcon from 'phosphor-svelte/lib/UsersIcon';
+	import GlobeIcon from 'phosphor-svelte/lib/GlobeIcon';
+	import ShieldCheckIcon from 'phosphor-svelte/lib/ShieldCheckIcon';
 	import { createScrollRevealCleanup } from '$lib/utils/gsap';
 
 	let section: HTMLElement | undefined = $state();

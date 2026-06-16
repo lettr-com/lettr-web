@@ -1,23 +1,21 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import {
-		PencilSimpleIcon,
-		ArrowCounterClockwiseIcon,
-		ArrowClockwiseIcon,
-		EyeIcon,
-		CaretDownIcon,
-		DeviceMobileIcon,
-		MonitorIcon,
-		TextAaIcon,
-		ImageIcon,
-		CursorClickIcon,
-		MinusIcon,
-		ArrowsOutLineVerticalIcon,
-		ShareNetworkIcon,
-		PlayCircleIcon,
-		CodeIcon,
-		RepeatIcon
-	} from 'phosphor-svelte';
+	import PencilSimpleIcon from 'phosphor-svelte/lib/PencilSimpleIcon';
+	import ArrowCounterClockwiseIcon from 'phosphor-svelte/lib/ArrowCounterClockwiseIcon';
+	import ArrowClockwiseIcon from 'phosphor-svelte/lib/ArrowClockwiseIcon';
+	import EyeIcon from 'phosphor-svelte/lib/EyeIcon';
+	import CaretDownIcon from 'phosphor-svelte/lib/CaretDownIcon';
+	import DeviceMobileIcon from 'phosphor-svelte/lib/DeviceMobileIcon';
+	import MonitorIcon from 'phosphor-svelte/lib/MonitorIcon';
+	import TextAaIcon from 'phosphor-svelte/lib/TextAaIcon';
+	import ImageIcon from 'phosphor-svelte/lib/ImageIcon';
+	import CursorClickIcon from 'phosphor-svelte/lib/CursorClickIcon';
+	import MinusIcon from 'phosphor-svelte/lib/MinusIcon';
+	import ArrowsOutLineVerticalIcon from 'phosphor-svelte/lib/ArrowsOutLineVerticalIcon';
+	import ShareNetworkIcon from 'phosphor-svelte/lib/ShareNetworkIcon';
+	import PlayCircleIcon from 'phosphor-svelte/lib/PlayCircleIcon';
+	import CodeIcon from 'phosphor-svelte/lib/CodeIcon';
+	import RepeatIcon from 'phosphor-svelte/lib/RepeatIcon';
 
 	const HEADING = 'Your trial is live!';
 	const BODY_PREFIX = 'Hi ';

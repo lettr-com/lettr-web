@@ -1,6 +1,8 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import { TerminalIcon, PackageIcon, LightningIcon } from 'phosphor-svelte';
+	import TerminalIcon from 'phosphor-svelte/lib/TerminalIcon';
+	import PackageIcon from 'phosphor-svelte/lib/PackageIcon';
+	import LightningIcon from 'phosphor-svelte/lib/LightningIcon';
 	import FeaturePageLayout from '$lib/components/FeaturePageLayout.svelte';
 	import { createScrollRevealCleanup } from '$lib/utils/gsap';
 

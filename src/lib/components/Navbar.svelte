@@ -1,23 +1,21 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import {
-		List,
-		X,
-		CaretDown,
-		CodeIcon,
-		SparkleIcon,
-		ChartBarIcon,
-		ShieldCheckIcon,
-		RobotIcon,
-		HeadsetIcon,
-		BookOpenIcon,
-		ScalesIcon,
-		PulseIcon,
-		InfoIcon,
-		EnvelopeSimpleIcon,
-		ChatDotsIcon,
-		WhatsappLogoIcon
-	} from 'phosphor-svelte';
+	import List from 'phosphor-svelte/lib/List';
+	import X from 'phosphor-svelte/lib/X';
+	import CaretDown from 'phosphor-svelte/lib/CaretDown';
+	import CodeIcon from 'phosphor-svelte/lib/CodeIcon';
+	import SparkleIcon from 'phosphor-svelte/lib/SparkleIcon';
+	import ChartBarIcon from 'phosphor-svelte/lib/ChartBarIcon';
+	import ShieldCheckIcon from 'phosphor-svelte/lib/ShieldCheckIcon';
+	import RobotIcon from 'phosphor-svelte/lib/RobotIcon';
+	import HeadsetIcon from 'phosphor-svelte/lib/HeadsetIcon';
+	import BookOpenIcon from 'phosphor-svelte/lib/BookOpenIcon';
+	import ScalesIcon from 'phosphor-svelte/lib/ScalesIcon';
+	import PulseIcon from 'phosphor-svelte/lib/PulseIcon';
+	import InfoIcon from 'phosphor-svelte/lib/InfoIcon';
+	import EnvelopeSimpleIcon from 'phosphor-svelte/lib/EnvelopeSimpleIcon';
+	import ChatDotsIcon from 'phosphor-svelte/lib/ChatDotsIcon';
+	import WhatsappLogoIcon from 'phosphor-svelte/lib/WhatsappLogoIcon';
 	import { createFromAnimationCleanup } from '$lib/utils/gsap';
 	import { buildRegisterUrl, registerUrl } from '$lib/utils/utm';
 	import { capturePosthogEvent, trackSigninClick, trackSignupClick } from '$lib/analytics/posthog';

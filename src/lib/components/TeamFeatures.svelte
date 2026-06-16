@@ -1,21 +1,19 @@
 <script lang="ts">
 	import { onMount, tick } from 'svelte';
 	import { fade } from 'svelte/transition';
-	import {
-		TranslateIcon,
-		GitForkIcon,
-		PaintBrushIcon,
-		ArrowsClockwiseIcon,
-		TextboxIcon,
-		SquaresFourIcon,
-		PencilSimpleIcon,
-		ArrowCounterClockwiseIcon,
-		ArrowClockwiseIcon,
-		EyeIcon,
-		CaretDownIcon,
-		DeviceMobileIcon,
-		MonitorIcon
-	} from 'phosphor-svelte';
+	import TranslateIcon from 'phosphor-svelte/lib/TranslateIcon';
+	import GitForkIcon from 'phosphor-svelte/lib/GitForkIcon';
+	import PaintBrushIcon from 'phosphor-svelte/lib/PaintBrushIcon';
+	import ArrowsClockwiseIcon from 'phosphor-svelte/lib/ArrowsClockwiseIcon';
+	import TextboxIcon from 'phosphor-svelte/lib/TextboxIcon';
+	import SquaresFourIcon from 'phosphor-svelte/lib/SquaresFourIcon';
+	import PencilSimpleIcon from 'phosphor-svelte/lib/PencilSimpleIcon';
+	import ArrowCounterClockwiseIcon from 'phosphor-svelte/lib/ArrowCounterClockwiseIcon';
+	import ArrowClockwiseIcon from 'phosphor-svelte/lib/ArrowClockwiseIcon';
+	import EyeIcon from 'phosphor-svelte/lib/EyeIcon';
+	import CaretDownIcon from 'phosphor-svelte/lib/CaretDownIcon';
+	import DeviceMobileIcon from 'phosphor-svelte/lib/DeviceMobileIcon';
+	import MonitorIcon from 'phosphor-svelte/lib/MonitorIcon';
 	import { createScrollRevealCleanup } from '$lib/utils/gsap';
 
 	let section: HTMLElement | undefined = $state();

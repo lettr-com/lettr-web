@@ -1,13 +1,11 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import {
-		UsersThreeIcon,
-		PaintBrushIcon,
-		ChartLineIcon,
-		ShieldCheckIcon,
-		ClockCounterClockwiseIcon,
-		PaperPlaneTiltIcon
-	} from 'phosphor-svelte';
+	import UsersThreeIcon from 'phosphor-svelte/lib/UsersThreeIcon';
+	import PaintBrushIcon from 'phosphor-svelte/lib/PaintBrushIcon';
+	import ChartLineIcon from 'phosphor-svelte/lib/ChartLineIcon';
+	import ShieldCheckIcon from 'phosphor-svelte/lib/ShieldCheckIcon';
+	import ClockCounterClockwiseIcon from 'phosphor-svelte/lib/ClockCounterClockwiseIcon';
+	import PaperPlaneTiltIcon from 'phosphor-svelte/lib/PaperPlaneTiltIcon';
 	import Button from '$lib/components/Button.svelte';
 	import CampaignEditorPreview from '$lib/components/CampaignEditorPreview.svelte';
 	import TalkToExpert from '$lib/components/TalkToExpert.svelte';

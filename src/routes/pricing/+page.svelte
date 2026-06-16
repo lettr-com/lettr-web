@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import { PackageIcon, ArrowRight } from 'phosphor-svelte';
+	import PackageIcon from 'phosphor-svelte/lib/PackageIcon';
+	import ArrowRight from 'phosphor-svelte/lib/ArrowRight';
 	import Pricing from '$lib/components/Pricing.svelte';
 	import CampaignsPricing from '$lib/components/CampaignsPricing.svelte';
 	import ModeToggle, { type Mode } from '$lib/components/ModeToggle.svelte';

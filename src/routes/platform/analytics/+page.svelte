@@ -1,13 +1,11 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import {
-		ChartBarIcon,
-		BellIcon,
-		TrendUpIcon,
-		LightningIcon,
-		EyeIcon,
-		ShieldWarningIcon
-	} from 'phosphor-svelte';
+	import ChartBarIcon from 'phosphor-svelte/lib/ChartBarIcon';
+	import BellIcon from 'phosphor-svelte/lib/BellIcon';
+	import TrendUpIcon from 'phosphor-svelte/lib/TrendUpIcon';
+	import LightningIcon from 'phosphor-svelte/lib/LightningIcon';
+	import EyeIcon from 'phosphor-svelte/lib/EyeIcon';
+	import ShieldWarningIcon from 'phosphor-svelte/lib/ShieldWarningIcon';
 	import FeaturePageLayout from '$lib/components/FeaturePageLayout.svelte';
 	import { createScrollRevealCleanup } from '$lib/utils/gsap';
 

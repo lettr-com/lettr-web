@@ -1,5 +1,7 @@
 <script lang="ts">
-	import { ArrowSquareOut, CheckCircle, Clock } from 'phosphor-svelte';
+	import ArrowSquareOut from 'phosphor-svelte/lib/ArrowSquareOut';
+	import CheckCircle from 'phosphor-svelte/lib/CheckCircle';
+	import Clock from 'phosphor-svelte/lib/Clock';
 	import { Button } from '$lib/components/ui/button';
 	import {
 		Card,

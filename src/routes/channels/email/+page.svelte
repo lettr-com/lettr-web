@@ -1,14 +1,12 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import {
-		GlobeSimpleIcon,
-		ArrowsSplitIcon,
-		RocketLaunchIcon,
-		ShieldCheckIcon,
-		LockKeyIcon,
-		ChartLineUpIcon,
-		CheckCircleIcon
-	} from 'phosphor-svelte';
+	import GlobeSimpleIcon from 'phosphor-svelte/lib/GlobeSimpleIcon';
+	import ArrowsSplitIcon from 'phosphor-svelte/lib/ArrowsSplitIcon';
+	import RocketLaunchIcon from 'phosphor-svelte/lib/RocketLaunchIcon';
+	import ShieldCheckIcon from 'phosphor-svelte/lib/ShieldCheckIcon';
+	import LockKeyIcon from 'phosphor-svelte/lib/LockKeyIcon';
+	import ChartLineUpIcon from 'phosphor-svelte/lib/ChartLineUpIcon';
+	import CheckCircleIcon from 'phosphor-svelte/lib/CheckCircleIcon';
 	import FeaturePageLayout from '$lib/components/FeaturePageLayout.svelte';
 	import { createScrollRevealCleanup } from '$lib/utils/gsap';
 	import { buildRegisterUrl, registerUrl } from '$lib/utils/utm';

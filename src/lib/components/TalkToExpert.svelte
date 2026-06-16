@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import { ChatCircleDotsIcon } from 'phosphor-svelte';
+	import ChatCircleDotsIcon from 'phosphor-svelte/lib/ChatCircleDotsIcon';
 	import { createScrollRevealCleanup } from '$lib/utils/gsap';
 	import { capturePosthogEvent } from '$lib/analytics/posthog';
 

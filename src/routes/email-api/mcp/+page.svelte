@@ -1,21 +1,19 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import {
-		PaperPlaneRightIcon,
-		BugIcon,
-		GlobeIcon,
-		ChartBarIcon,
-		ShieldCheckIcon,
-		CodeIcon,
-		WebhooksLogoIcon,
-		KeyIcon,
-		EnvelopeSimpleIcon,
-		MagnifyingGlassIcon,
-		ListBulletsIcon,
-		LinkIcon,
-		LockKeyIcon,
-		RobotIcon
-	} from 'phosphor-svelte';
+	import PaperPlaneRightIcon from 'phosphor-svelte/lib/PaperPlaneRightIcon';
+	import BugIcon from 'phosphor-svelte/lib/BugIcon';
+	import GlobeIcon from 'phosphor-svelte/lib/GlobeIcon';
+	import ChartBarIcon from 'phosphor-svelte/lib/ChartBarIcon';
+	import ShieldCheckIcon from 'phosphor-svelte/lib/ShieldCheckIcon';
+	import CodeIcon from 'phosphor-svelte/lib/CodeIcon';
+	import WebhooksLogoIcon from 'phosphor-svelte/lib/WebhooksLogoIcon';
+	import KeyIcon from 'phosphor-svelte/lib/KeyIcon';
+	import EnvelopeSimpleIcon from 'phosphor-svelte/lib/EnvelopeSimpleIcon';
+	import MagnifyingGlassIcon from 'phosphor-svelte/lib/MagnifyingGlassIcon';
+	import ListBulletsIcon from 'phosphor-svelte/lib/ListBulletsIcon';
+	import LinkIcon from 'phosphor-svelte/lib/LinkIcon';
+	import LockKeyIcon from 'phosphor-svelte/lib/LockKeyIcon';
+	import RobotIcon from 'phosphor-svelte/lib/RobotIcon';
 	import FeaturePageLayout from '$lib/components/FeaturePageLayout.svelte';
 	import { createScrollRevealCleanup } from '$lib/utils/gsap';
 

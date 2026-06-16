@@ -1,12 +1,10 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import {
-		EnvelopeSimpleIcon,
-		BookOpenIcon,
-		ClockIcon,
-		ArrowSquareOutIcon,
-		ChatCircleTextIcon
-	} from 'phosphor-svelte';
+	import EnvelopeSimpleIcon from 'phosphor-svelte/lib/EnvelopeSimpleIcon';
+	import BookOpenIcon from 'phosphor-svelte/lib/BookOpenIcon';
+	import ClockIcon from 'phosphor-svelte/lib/ClockIcon';
+	import ArrowSquareOutIcon from 'phosphor-svelte/lib/ArrowSquareOutIcon';
+	import ChatCircleTextIcon from 'phosphor-svelte/lib/ChatCircleTextIcon';
 	import { createFromAnimationCleanup, createScrollRevealCleanup } from '$lib/utils/gsap';
 	import { capturePosthogEvent } from '$lib/analytics/posthog';
 	import { openIntercomNewMessage } from '$lib/intercom';

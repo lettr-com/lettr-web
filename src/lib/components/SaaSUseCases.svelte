@@ -1,6 +1,11 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import { UserPlusIcon, LockKeyIcon, HourglassHighIcon, BellIcon, MegaphoneIcon, RocketLaunchIcon } from 'phosphor-svelte';
+	import UserPlusIcon from 'phosphor-svelte/lib/UserPlusIcon';
+	import LockKeyIcon from 'phosphor-svelte/lib/LockKeyIcon';
+	import HourglassHighIcon from 'phosphor-svelte/lib/HourglassHighIcon';
+	import BellIcon from 'phosphor-svelte/lib/BellIcon';
+	import MegaphoneIcon from 'phosphor-svelte/lib/MegaphoneIcon';
+	import RocketLaunchIcon from 'phosphor-svelte/lib/RocketLaunchIcon';
 	import { createScrollRevealCleanup } from '$lib/utils/gsap';
 
 	let section: HTMLElement | undefined = $state();

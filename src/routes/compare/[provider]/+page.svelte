@@ -1,7 +1,10 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import { error } from '@sveltejs/kit';
-	import { ArrowLeftIcon, ArrowRightIcon, CheckIcon, XIcon } from 'phosphor-svelte';
+	import ArrowLeftIcon from 'phosphor-svelte/lib/ArrowLeftIcon';
+	import ArrowRightIcon from 'phosphor-svelte/lib/ArrowRightIcon';
+	import CheckIcon from 'phosphor-svelte/lib/CheckIcon';
+	import XIcon from 'phosphor-svelte/lib/XIcon';
 	import { createFromAnimationCleanup, createScrollRevealCleanup } from '$lib/utils/gsap';
 	import { buildRegisterUrl, registerUrl } from '$lib/utils/utm';
 	import { providers } from '$lib/data/providers';

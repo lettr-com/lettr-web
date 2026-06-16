@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import gsap from 'gsap';
-	import { CaretDownIcon } from 'phosphor-svelte';
+	import CaretDownIcon from 'phosphor-svelte/lib/CaretDownIcon';
 	import { codeTabs as defaultTabs, type CodeTab } from '$lib/utils/shiki';
 	import { getHighlighter } from '$lib/utils/shiki';
 	import { capturePosthogEvent } from '$lib/analytics/posthog';
