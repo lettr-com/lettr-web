@@ -63,7 +63,8 @@
 			label: 'Products',
 			items: [
 				{ badge: 'transactional', label: 'Transactional Email', description: 'Send via REST API & SMTP — pay per email', href: '/email-api/' },
-				{ badge: 'marketing', label: 'Email Marketing', description: 'Campaigns, lists & segments — pay per contact', href: '/email-marketing/' }
+				{ badge: 'marketing', label: 'Email Marketing', description: 'Campaigns, lists & segments — pay per contact', href: '/email-marketing/' },
+				{ label: 'Transactional + Marketing', description: 'Run both from one platform and one editor', href: '/platform/sync/' }
 			]
 		},
 		{
@@ -73,7 +74,8 @@
 				{ icon: SparkleIcon, label: 'Visual Editor', description: 'Drag-and-drop editor powered by Topol', href: '/platform/templates/' },
 				{ icon: ChartBarIcon, label: 'Analytics & Logs', description: 'Delivery metrics, logs, and webhooks', href: '/platform/analytics/' },
 				{ icon: ShieldCheckIcon, label: 'Deliverability', description: 'SPF, DKIM, DMARC, dedicated IPs', href: '/platform/deliverability/' },
-				{ icon: RobotIcon, label: 'MCP Integration', description: 'Connect AI agents and LLMs to Lettr', href: '/platform/mcp/' }
+				{ icon: RobotIcon, label: 'MCP Integration', description: 'Connect AI agents and LLMs to Lettr', href: '/platform/mcp/' },
+				{ icon: EnvelopeSimpleIcon, label: 'Email Channel', description: 'Multi-region delivery infrastructure', href: '/channels/email/' }
 			]
 		}
 	];
