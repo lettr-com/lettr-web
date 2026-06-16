@@ -4,6 +4,7 @@
 	import { createFromAnimationCleanup } from '$lib/utils/gsap';
 	import { buildRegisterUrl, registerUrl } from '$lib/utils/utm';
 	import { capturePosthogEvent, trackSignupClick } from '$lib/analytics/posthog';
+	import Seo from '$lib/components/Seo.svelte';
 
 	interface Props {
 		title: string;
@@ -38,15 +39,7 @@
 	});
 </script>
 
-<svelte:head>
-	<title>{title} | Lettr</title>
-	<meta name="description" content={metaDescription} />
-	<link rel="canonical" href="https://lettr.com" />
-	<meta property="og:title" content="Lettr — {title}" />
-	<meta property="og:description" content={metaDescription} />
-	<meta name="twitter:title" content="Lettr — {title}" />
-	<meta name="twitter:description" content={metaDescription} />
-</svelte:head>
+<Seo title="{title} | Lettr" description={metaDescription} ogTitle="Lettr — {title}" />
 
 <section class="pt-32 pb-24">
 	<div bind:this={hero} class="text-center">

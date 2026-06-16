@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
+	import Seo from '$lib/components/Seo.svelte';
 	import UsersThreeIcon from 'phosphor-svelte/lib/UsersThreeIcon';
 	import PaintBrushIcon from 'phosphor-svelte/lib/PaintBrushIcon';
 	import ChartLineIcon from 'phosphor-svelte/lib/ChartLineIcon';
@@ -103,16 +104,11 @@
 	});
 </script>
 
-<svelte:head>
-	<title>Email Marketing & Campaigns — Lettr</title>
-	<link rel="canonical" href="https://lettr.com/email-marketing" />
-	<meta name="description" content="Run marketing campaigns from the same platform that sends your transactional email. Drag-and-drop editor, contact lists, segmentation, and automations — priced by contact." />
-	<meta property="og:title" content="Email Marketing & Campaigns — Lettr" />
-	<meta property="og:description" content="Run marketing campaigns from the same platform that sends your transactional email." />
-	<meta property="og:url" content="https://lettr.com/email-marketing" />
-	<meta name="twitter:title" content="Email Marketing & Campaigns — Lettr" />
-	<meta name="twitter:description" content="Run marketing campaigns from the same platform that sends your transactional email." />
-</svelte:head>
+<Seo
+	title="Email Marketing & Campaigns — Lettr"
+	description="Run marketing campaigns from the same platform that sends your transactional email. Drag-and-drop editor, contact lists, segmentation, and automations — priced by contact."
+	ogDescription="Run marketing campaigns from the same platform that sends your transactional email."
+/>
 
 <div>
 <section bind:this={hero} class="pt-30 pb-16 border-b border-border/30">

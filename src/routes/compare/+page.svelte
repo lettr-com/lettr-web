@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
+	import Seo from '$lib/components/Seo.svelte';
 	import ArrowRightIcon from 'phosphor-svelte/lib/ArrowRightIcon';
 	import { createFromAnimationCleanup, createScrollRevealCleanup } from '$lib/utils/gsap';
 	import { buildRegisterUrl, registerUrl } from '$lib/utils/utm';
@@ -59,19 +60,12 @@
 	});
 </script>
 
-<svelte:head>
-	<title>Compare | Lettr</title>
-	<meta
-		name="description"
-		content="See how Lettr compares to other email providers. Switch from Resend, Postmark, SendGrid, Mailgun, or MailerSend and save up to 78%."
-	/>
-	<link rel="canonical" href="https://lettr.com/compare" />
-	<meta property="og:title" content="Compare Email Providers | Lettr" />
-	<meta
-		property="og:description"
-		content="See how Lettr compares to other email providers. Switch from Resend, Postmark, SendGrid, Mailgun, or MailerSend."
-	/>
-</svelte:head>
+<Seo
+	title="Compare | Lettr"
+	description="See how Lettr compares to other email providers. Switch from Resend, Postmark, SendGrid, Mailgun, or MailerSend and save up to 78%."
+	ogTitle="Compare Email Providers | Lettr"
+	ogDescription="See how Lettr compares to other email providers. Switch from Resend, Postmark, SendGrid, Mailgun, or MailerSend."
+/>
 
 <section class="pt-32 pb-24">
 	<!-- Hero -->

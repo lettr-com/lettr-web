@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
+	import Seo from '$lib/components/Seo.svelte';
 	import CodeIcon from 'phosphor-svelte/lib/CodeIcon';
 	import LightningIcon from 'phosphor-svelte/lib/LightningIcon';
 	import ShieldCheckIcon from 'phosphor-svelte/lib/ShieldCheckIcon';
@@ -125,16 +126,11 @@
 	});
 </script>
 
-<svelte:head>
-	<title>Transactional Email API — Lettr</title>
-	<link rel="canonical" href="https://lettr.com/email-api" />
-	<meta name="description" content="Send transactional email from your SaaS via a clean REST API and SMTP relay. Sub-second delivery, automatic retries, webhooks, and searchable logs — built by the team behind Topol." />
-	<meta property="og:title" content="Transactional Email API — Lettr" />
-	<meta property="og:description" content="Send transactional email from your SaaS via a clean REST API and SMTP relay. Sub-second delivery, automatic retries, webhooks, and searchable logs." />
-	<meta property="og:url" content="https://lettr.com/email-api" />
-	<meta name="twitter:title" content="Transactional Email API — Lettr" />
-	<meta name="twitter:description" content="Send transactional email from your SaaS via a clean REST API and SMTP relay." />
-</svelte:head>
+<Seo
+	title="Transactional Email API — Lettr"
+	description="Send transactional email from your SaaS via a clean REST API and SMTP relay. Sub-second delivery, automatic retries, webhooks, and searchable logs — built by the team behind Topol."
+	ogDescription="Send transactional email from your SaaS via a clean REST API and SMTP relay. Sub-second delivery, automatic retries, webhooks, and searchable logs."
+/>
 
 <section bind:this={hero} class="pt-30 pb-16 border-b border-border/30">
 	<div class="grid gap-12 lg:grid-cols-1">

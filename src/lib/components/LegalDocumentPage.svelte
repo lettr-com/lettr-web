@@ -1,5 +1,6 @@
 <script lang="ts">
 	import type { LegalDocumentData, LegalNavLink } from '$lib/content/legal';
+	import Seo from '$lib/components/Seo.svelte';
 
 	interface Props {
 		document: LegalDocumentData;
@@ -9,11 +10,7 @@
 	let { document, links }: Props = $props();
 </script>
 
-<svelte:head>
-	<title>{document.title} | Lettr</title>
-	<meta name="description" content={document.description} />
-	<link rel="canonical" href={`https://lettr.com${document.href}`} />
-</svelte:head>
+<Seo title="{document.title} | Lettr" description={document.description} canonical={document.href} />
 
 <section class="pb-20 pt-28">
 	<div class="rounded border border-border/50 bg-white/80 p-5 shadow-[0_20px_50px_-45px_rgba(17,24,39,0.6)]">
