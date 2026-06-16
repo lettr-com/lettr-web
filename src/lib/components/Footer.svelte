@@ -51,9 +51,12 @@
 			links: [
 				{ label: 'Transactional Email', href: '/email-api/' },
 				{ label: 'Email Marketing', href: '/email-marketing/' },
+				{ label: 'Transactional + Marketing', href: '/platform/sync/' },
+				{ label: 'Developer API', href: '/platform/laravel/' },
 				{ label: 'Template Builder', href: '/platform/templates/' },
 				{ label: 'Analytics', href: '/platform/analytics/' },
 				{ label: 'Deliverability', href: '/platform/deliverability/' },
+				{ label: 'Email Channel', href: '/channels/email/' },
 				{ label: 'MCP Server', href: '/platform/mcp/' }
 			]
 		},
