@@ -51,10 +51,10 @@
 			links: [
 				{ label: 'Transactional Email', href: '/email-api/' },
 				{ label: 'Email Marketing', href: '/email-marketing/' },
-				{ label: 'Template Builder', href: '/platform/templates' },
-				{ label: 'Analytics', href: '/platform/analytics' },
-				{ label: 'Deliverability', href: '/platform/deliverability' },
-				{ label: 'MCP Server', href: '/platform/mcp' }
+				{ label: 'Template Builder', href: '/platform/templates/' },
+				{ label: 'Analytics', href: '/platform/analytics/' },
+				{ label: 'Deliverability', href: '/platform/deliverability/' },
+				{ label: 'MCP Server', href: '/platform/mcp/' }
 			]
 		},
 		{
@@ -63,16 +63,16 @@
 				{ label: 'Documentation', href: 'https://docs.lettr.com', external: true },
 				{ label: 'API Reference', href: 'https://docs.lettr.com/api-reference/introduction', external: true },
 				{ label: 'Blog', href: '/blog/' },
-				{ label: 'Changelog', href: '/changelog' },
-				{ label: 'Compare', href: '/compare' },
+				{ label: 'Changelog', href: '/changelog/' },
+				{ label: 'Compare', href: '/compare/' },
 				{ label: 'Status', href: 'https://status.lettr.com', external: true }
 			]
 		},
 		{
 			title: 'Company',
 			links: [
-				{ label: 'About', href: '/about' },
-				{ label: 'Support', href: '/support' }
+				{ label: 'About', href: '/about/' },
+				{ label: 'Support', href: '/support/' }
 			]
 		}
 	];

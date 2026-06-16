@@ -103,7 +103,7 @@
 		<header bind:this={header} class="max-w-[800px]">
 			<a
 				data-animate
-				href="/blog"
+				href="/blog/"
 				class="inline-flex items-center gap-1.5 text-sm font-medium text-muted transition-colors hover:text-primary"
 			>
 				<ArrowLeftIcon size={15} />
