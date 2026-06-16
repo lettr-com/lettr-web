@@ -426,6 +426,17 @@
 	}
 </script>
 
+<svelte:head>
+	<title>Book a Demo — Lettr</title>
+	<link rel="canonical" href="https://lettr.com/demo" />
+	<meta name="description" content="Book a demo of Lettr — the email platform built for SaaS. Pick a time that works for you, or get started self-serve in minutes." />
+	<meta property="og:title" content="Book a Demo — Lettr" />
+	<meta property="og:description" content="See how Lettr handles transactional and marketing email from one platform. Book a time or get started self-serve." />
+	<meta property="og:url" content="https://lettr.com/demo" />
+	<meta name="twitter:title" content="Book a Demo — Lettr" />
+	<meta name="twitter:description" content="See how Lettr handles transactional and marketing email from one platform. Book a time or get started self-serve." />
+</svelte:head>
+
 <section class="border-b border-border/30 pb-16 pt-30">
 	<div bind:this={section} class="space-y-5">
 		{#if isConfirmed}
