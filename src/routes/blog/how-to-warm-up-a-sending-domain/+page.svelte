@@ -101,7 +101,7 @@
 		A new domain on <a href="https://docs.lettr.com/learn/domains/sending-domains">Lettr</a> always needs
 		a warm-up, regardless of the previous provider. The authentication records transfer, but the new sending
 		IPs have no established reputation yet, and <strong>each new subdomain needs its own warm-up</strong>
-		(one reason to <a href="/blog/separate-transactional-and-marketing-email">separate transactional and
+		(one reason to <a href="/blog/separate-transactional-and-marketing-email/">separate transactional and
 		marketing email</a> from the start).
 	</Paragraph>
 

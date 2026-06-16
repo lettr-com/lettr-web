@@ -144,7 +144,7 @@
 		{#if featured}
 			<a
 				data-reveal
-				href="/blog/{featured.slug}"
+				href="/blog/{featured.slug}/"
 				class="group block border border-border/50 bg-white p-8 transition-colors hover:border-primary/30 md:p-10"
 			>
 				<span class="font-heading text-xs tracking-[0.15em] text-primary uppercase">
@@ -173,7 +173,7 @@
 				{#each rest as post}
 					<a
 						data-reveal
-						href="/blog/{post.slug}"
+						href="/blog/{post.slug}/"
 						class="group flex flex-col border border-border/50 bg-white p-6 transition-colors hover:border-primary/30"
 					>
 						<span class="font-heading text-xs tracking-[0.15em] text-primary uppercase">

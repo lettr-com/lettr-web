@@ -199,9 +199,9 @@
 						Start sending for free &rarr;
 					</a>
 					<a
-						href="/demo"
+						href="/demo/"
 						class="px-4 py-3 text-[15px] font-medium text-muted transition-colors hover:text-surface"
-						onclick={() => trackChannelCta('Book a demo', '/demo')}
+						onclick={() => trackChannelCta('Book a demo', '/demo/')}
 					>
 						Book a demo
 					</a>

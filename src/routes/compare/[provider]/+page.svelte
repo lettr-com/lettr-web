@@ -78,7 +78,7 @@
 <section class="pt-32 pb-24">
 		<!-- Back Link -->
 		<a
-			href="/compare"
+			href="/compare/"
 			class="mb-8 inline-flex items-center gap-1.5 text-sm font-medium text-muted transition-colors hover:text-surface"
 		>
 			<ArrowLeftIcon size={14} />
@@ -197,9 +197,9 @@
 						Try Lettr free &rarr;
 					</a>
 					<a
-						href="/compare"
+						href="/compare/"
 						class="flex items-center gap-2 px-4 py-3 text-[15px] font-medium text-muted transition-colors hover:text-surface"
-						onclick={() => trackProviderCta('View all comparisons', '/compare')}
+						onclick={() => trackProviderCta('View all comparisons', '/compare/')}
 					>
 						View all comparisons
 						<ArrowRightIcon size={14} />

@@ -69,25 +69,25 @@
 		{
 			label: 'Features',
 			items: [
-				{ icon: CodeIcon, label: 'Developer API', description: 'REST API, SMTP, and SDKs', href: '/platform/laravel' },
-				{ icon: SparkleIcon, label: 'Visual Editor', description: 'Drag-and-drop editor powered by Topol', href: '/platform/templates' },
-				{ icon: ChartBarIcon, label: 'Analytics & Logs', description: 'Delivery metrics, logs, and webhooks', href: '/platform/analytics' },
-				{ icon: ShieldCheckIcon, label: 'Deliverability', description: 'SPF, DKIM, DMARC, dedicated IPs', href: '/platform/deliverability' },
-				{ icon: RobotIcon, label: 'MCP Integration', description: 'Connect AI agents and LLMs to Lettr', href: '/platform/mcp' }
+				{ icon: CodeIcon, label: 'Developer API', description: 'REST API, SMTP, and SDKs', href: '/platform/laravel/' },
+				{ icon: SparkleIcon, label: 'Visual Editor', description: 'Drag-and-drop editor powered by Topol', href: '/platform/templates/' },
+				{ icon: ChartBarIcon, label: 'Analytics & Logs', description: 'Delivery metrics, logs, and webhooks', href: '/platform/analytics/' },
+				{ icon: ShieldCheckIcon, label: 'Deliverability', description: 'SPF, DKIM, DMARC, dedicated IPs', href: '/platform/deliverability/' },
+				{ icon: RobotIcon, label: 'MCP Integration', description: 'Connect AI agents and LLMs to Lettr', href: '/platform/mcp/' }
 			]
 		}
 	];
 
 	const resourcesItems: DropdownItem[] = [
-		{ icon: HeadsetIcon, label: 'Support & Contact', description: 'Get help or reach out to our team', href: '/support' },
+		{ icon: HeadsetIcon, label: 'Support & Contact', description: 'Get help or reach out to our team', href: '/support/' },
 		{ icon: BookOpenIcon, label: 'Docs', description: 'Guides, API reference, and examples', href: 'https://docs.lettr.com', external: true },
-		{ icon: ScalesIcon, label: 'Compare & Migrate', description: 'See how Lettr compares to other providers', href: '/compare' },
+		{ icon: ScalesIcon, label: 'Compare & Migrate', description: 'See how Lettr compares to other providers', href: '/compare/' },
 		{ icon: PulseIcon, label: 'Status', description: 'System uptime and incident history', href: 'https://status.lettr.com', external: true },
-		{ icon: EnvelopeSimpleIcon, label: 'Changelog', description: 'Latest updates and improvements', href: '/changelog' }
+		{ icon: EnvelopeSimpleIcon, label: 'Changelog', description: 'Latest updates and improvements', href: '/changelog/' }
 	];
 
 	const companyItems: DropdownItem[] = [
-		{ icon: InfoIcon, label: 'About', description: 'Our story, team, and mission', href: '/about' },
+		{ icon: InfoIcon, label: 'About', description: 'Our story, team, and mission', href: '/about/' },
 		{ iconSrc: '/images/logos/lettr-icon.svg', label: 'Lettr', description: 'The email platform built for SaaS', href: '/' },
 		{ iconSrc: '/images/logos/topol-icon.svg', label: 'Topol', description: 'Email editor trusted by 40,000+ companies', href: 'https://topol.io', external: true },
 		{ iconSrc: '/images/logos/dmarceye-icon.svg', label: 'DMARCeye', description: 'DMARC monitoring and reporting', href: 'https://dmarceye.com', external: true }
@@ -124,7 +124,7 @@
 				items: [
 					{ icon: BookOpenIcon, label: 'Getting Started', description: 'Quick start guides', href: 'https://docs.lettr.com/introduction', external: true },
 					{ icon: CodeIcon, label: 'API Reference', description: 'Full API documentation', href: 'https://docs.lettr.com/api-reference/introduction', external: true },
-					{ icon: EnvelopeSimpleIcon, label: 'Changelog', description: 'Latest updates', href: '/changelog' }
+					{ icon: EnvelopeSimpleIcon, label: 'Changelog', description: 'Latest updates', href: '/changelog/' }
 				]
 			},
 			...integrationsSections

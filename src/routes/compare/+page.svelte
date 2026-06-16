@@ -88,7 +88,7 @@
 			{#each providerList as provider}
 				<a
 					data-reveal
-					href="/compare/{provider.slug}"
+					href="/compare/{provider.slug}/"
 					class="group flex flex-col border border-border/50 bg-white p-6 transition-colors hover:border-primary/30"
 					onclick={() => trackProviderClick(provider.slug, provider.name, provider.averageSavings)}
 				>
