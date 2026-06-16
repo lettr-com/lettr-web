@@ -1,9 +1,8 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import { page } from '$app/state';
-	import gsap from 'gsap';
 	import Button from '$lib/components/Button.svelte';
-	import { createFromAnimationCleanup } from '$lib/utils/gsap';
+	import { createFromAnimationCleanup, loadGsap } from '$lib/utils/gsap';
 
 	let section: HTMLElement | undefined = $state();
 	let envelope: HTMLElement | undefined = $state();
@@ -28,21 +27,26 @@
 		isNotFound ? 'Page not found: the requested route does not exist' : (page.error?.message ?? 'Temporary server failure')
 	);
 
+	let floatTween: { kill: () => void } | undefined;
+
 	onMount(() => {
 		// Gently float the envelope, like a letter drifting back to the sender.
-		if (envelope) {
-			gsap.to(envelope, {
-				y: -10,
-				rotation: 2,
-				duration: 2.4,
-				ease: 'sine.inOut',
-				repeat: -1,
-				yoyo: true
+		const floatTarget = envelope;
+		if (floatTarget) {
+			void loadGsap().then(({ gsap }) => {
+				floatTween = gsap.to(floatTarget, {
+					y: -10,
+					rotation: 2,
+					duration: 2.4,
+					ease: 'sine.inOut',
+					repeat: -1,
+					yoyo: true
+				});
 			});
 		}
 
 		if (!section) return;
-		return createFromAnimationCleanup({
+		const cleanup = createFromAnimationCleanup({
 			scope: section,
 			targets: '[data-animate]',
 			vars: {
@@ -53,6 +57,11 @@
 				ease: 'power3.out'
 			}
 		});
+
+		return () => {
+			floatTween?.kill();
+			cleanup();
+		};
 	});
 </script>
 

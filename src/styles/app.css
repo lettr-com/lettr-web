@@ -35,6 +35,19 @@
     border-radius: 0;
   }
 
+  /*
+   * Scroll-reveal elements are animated in via gsap, which now loads lazily in
+   * its own chunk. Start them hidden so they don't paint visible and then snap
+   * to opacity:0 once gsap arrives (a flash). Guarded by `scripting: enabled`
+   * so no-JS clients still see all content; gsap (or its fail-safe) reveals
+   * them once the chunk loads.
+   */
+  @media (scripting: enabled) {
+    [data-reveal] {
+      opacity: 0;
+    }
+  }
+
   html {
     scroll-behavior: smooth;
     -webkit-font-smoothing: antialiased;

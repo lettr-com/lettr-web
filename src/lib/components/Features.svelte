@@ -6,9 +6,7 @@
 	import CodeIcon from 'phosphor-svelte/lib/CodeIcon';
 	import ShieldCheckIcon from 'phosphor-svelte/lib/ShieldCheckIcon';
 	import MagnifyingGlassIcon from 'phosphor-svelte/lib/MagnifyingGlassIcon';
-	import gsap from 'gsap';
-	import { ScrollTrigger } from 'gsap/ScrollTrigger';
-	import { ensureGsapPlugins } from '$lib/utils/gsap';
+	import { loadGsap } from '$lib/utils/gsap';
 	import { createGsapContextCleanup } from '$lib/utils/gsapContext';
 
 	let section: HTMLElement | undefined = $state();
@@ -62,15 +60,20 @@
 
 	onMount(() => {
 		if (!section || !timeline || !progressLine) return;
-		ensureGsapPlugins();
 
 		const scopedSection = section;
 		const scopedTimeline = timeline;
 		const scopedProgress = progressLine;
 
-		return createGsapContextCleanup(
-			gsap,
-			() => {
+		let cancelled = false;
+		let revert: (() => void) | undefined;
+
+		void loadGsap()
+			.then(({ gsap, ScrollTrigger }) => {
+				if (cancelled) return;
+				revert = createGsapContextCleanup(
+					gsap,
+					() => {
 				gsap.fromTo(
 					scopedSection.querySelectorAll('[data-reveal]'),
 					{ y: 20, opacity: 0 },
@@ -110,9 +113,22 @@
 						onEnter: () => node.classList.add('is-active')
 					});
 				});
-			},
-			scopedSection
-		);
+					},
+					scopedSection
+				);
+			})
+			.catch(() => {
+				// gsap chunk failed to load — make sure content is never left hidden.
+				scopedSection.querySelectorAll('[data-reveal]').forEach((el) => {
+					(el as HTMLElement).style.opacity = '1';
+					(el as HTMLElement).style.transform = 'none';
+				});
+			});
+
+		return () => {
+			cancelled = true;
+			revert?.();
+		};
 	});
 </script>
 

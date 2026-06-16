@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import gsap from 'gsap';
+	import { loadGsap } from '$lib/utils/gsap';
 	import CaretDownIcon from 'phosphor-svelte/lib/CaretDownIcon';
 	import { codeTabs as defaultTabs, type CodeTab } from '$lib/utils/shiki';
 	import { getHighlighter } from '$lib/utils/shiki';
@@ -62,23 +62,30 @@
 			return;
 		}
 
-		gsap.killTweensOf(codeEl);
-		gsap.to(codeEl, {
-			opacity: 0,
-			y: 4,
-			duration: 0.15,
-			ease: 'power2.in',
-			onComplete: () => {
-				highlight(tabs[index]).then(() => {
-					gsap.fromTo(codeEl!, { opacity: 0, y: -4 }, {
-						opacity: 1,
-						y: 0,
-						duration: 0.2,
-						ease: 'power2.out'
-					});
+		const target = codeEl;
+		// gsap loads on demand (first tab switch); fall back to an instant swap
+		// if the chunk isn't available.
+		void loadGsap()
+			.then(({ gsap }) => {
+				gsap.killTweensOf(target);
+				gsap.to(target, {
+					opacity: 0,
+					y: 4,
+					duration: 0.15,
+					ease: 'power2.in',
+					onComplete: () => {
+						highlight(tabs[index]).then(() => {
+							gsap.fromTo(target, { opacity: 0, y: -4 }, {
+								opacity: 1,
+								y: 0,
+								duration: 0.2,
+								ease: 'power2.out'
+							});
+						});
+					}
 				});
-			}
-		});
+			})
+			.catch(() => void highlight(tabs[index]));
 	}
 
 	function toggleMore() {
