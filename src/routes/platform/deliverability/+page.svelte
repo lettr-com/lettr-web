@@ -113,7 +113,7 @@
 
 <FeaturePageLayout
 	title="Deliverability"
-	metaDescription="Enterprise-grade email deliverability backed by 12 years of infrastructure. Guided DNS setup, DMARC monitoring, dedicated IPs, and custom tracking domains from day one."
+	metaDescription="Enterprise-grade email deliverability from 12 years of infrastructure: guided DNS setup, DMARC monitoring, dedicated IPs, and custom tracking domains."
 	label="DELIVERABILITY"
 	description="Enterprise-grade infrastructure backed by 12 years of Ecomail operations. Guided DNS setup, dedicated IPs, and first-party domain control from day one."
 >

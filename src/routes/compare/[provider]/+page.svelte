@@ -70,7 +70,7 @@
 
 <Seo
 	title="Lettr vs {provider.name} | Lettr"
-	description="Compare Lettr with {provider.name}. {provider.tagline} — save up to {provider.averageSavings}% on transactional email."
+	description="Compare Lettr with {provider.name} on price, deliverability, and features. {provider.tagline} — save up to {provider.averageSavings}% on transactional email."
 	ogTitle="Lettr vs {provider.name}"
 	ogDescription="{provider.tagline}. Save up to {provider.averageSavings}% on transactional email."
 />

@@ -39,28 +39,32 @@ const googleDocReferencePattern = /\[(\d+)\\?\.\]\(https:\/\/docs\.google\.com\/
 const legalDocuments: Record<LegalDocumentKey, LegalDocumentEntry> = {
   privacyPolicy: {
     title: "Privacy Policy",
-    description: "How Lettr collects, uses, and protects personal data.",
+    description:
+      "How Lettr collects, uses, stores, and protects your personal data, the rights you have over it, and the third-party processors we rely on.",
     updatedAt: "February 15, 2026",
     href: "/privacy-policy/",
     markdown: privacyPolicyMarkdown,
   },
   termsOfUse: {
     title: "Terms of Use",
-    description: "Rules and contractual terms for using Lettr services.",
+    description:
+      "The rules and contractual terms for using Lettr's email platform, covering accounts, acceptable use, billing, liability, and termination.",
     updatedAt: "June 4, 2026",
     href: "/terms/",
     markdown: termsOfUseMarkdown,
   },
   termsOfUse20260215: {
     title: "Terms of Use",
-    description: "Archived Terms of Use, effective February 15, 2026.",
+    description:
+      "Archived Terms of Use for Lettr, effective February 15, 2026 — kept for reference and superseded by the current Terms of Use.",
     updatedAt: "February 15, 2026",
     href: "/terms-15-02-2026/",
     markdown: termsOfUse20260215Markdown,
   },
   accessibilityStatement: {
     title: "Accessibility Statement",
-    description: "Accessibility commitment and compliance details for lettr.com.",
+    description:
+      "Lettr's commitment to digital accessibility — the standards we follow, the steps we take to meet them, and how to report any barriers you encounter.",
     updatedAt: "January 30, 2026",
     href: "/accessibility-statement/",
     markdown: accessibilityStatementMarkdown,

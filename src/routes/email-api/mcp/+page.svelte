@@ -129,7 +129,7 @@
 
 <FeaturePageLayout
 	title="MCP Server"
-	metaDescription="Control your SaaS email infrastructure from any AI assistant. Send emails, debug delivery, and monitor domains through natural language via the Model Context Protocol."
+	metaDescription="Control your SaaS email infrastructure from any AI assistant — send emails, debug delivery, and monitor domains in natural language via MCP."
 	label="MCP"
 	description="Control your email infrastructure from any AI assistant. Send transactional and marketing emails, debug delivery, and monitor domains — all through natural language."
 >

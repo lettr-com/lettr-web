@@ -18,6 +18,7 @@
 	category="Product"
 	title="Managing Lettr from your AI assistant"
 	excerpt="How Lettr's MCP integration lets an AI assistant call the Lettr API in plain language: what MCP is, what the tools cover, the difference between the remote and local servers, how to set up each one, and which tasks suit a chat interface versus the dashboard."
+	metaDescription="How Lettr's MCP integration lets an AI assistant run the Lettr API in plain language — what MCP covers, remote vs local servers, and how to set it up."
 	author={{ name: 'Erik Vlčák', role: 'Customer Success Engineer', avatar: '/images/authors/erik.jpg' }}
 	date="May 27, 2026"
 	datetime="2026-05-27"

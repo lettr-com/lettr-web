@@ -15,6 +15,7 @@
 	category="Deliverability"
 	title="How to warm up a new sending domain"
 	excerpt="How to build sending reputation on a new domain by ramping volume gradually: who needs a warm-up, which recipients and content to send first, two sample ramp schedules, the bounce and complaint signals to watch, and the stop signals that mean pause immediately."
+	metaDescription="How to warm up a new sending domain by ramping volume gradually: who needs it, what to send first, sample ramp schedules, and the signals to watch."
 	author={{ name: 'Erik Vlčák', role: 'Customer Success Engineer', avatar: '/images/authors/erik.jpg' }}
 	date="April 22, 2026"
 	datetime="2026-04-22"

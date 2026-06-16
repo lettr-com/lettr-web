@@ -57,6 +57,7 @@ dmarc=pass (p=REJECT dis=NONE) header.from=yourapp.com`;
 	category="Deliverability"
 	title="SPF, DKIM, and DMARC explained for developers"
 	excerpt="What SPF, DKIM, and DMARC each do, how they fit together to stop email spoofing, and how to read the DNS records and authentication headers to tell whether they're working."
+	metaDescription="What SPF, DKIM, and DMARC each do, how they work together to stop email spoofing, and how to read the DNS records and headers to confirm they work."
 	author={{ name: 'Erik Vlčák', role: 'Customer Success Engineer', avatar: '/images/authors/erik.jpg' }}
 	date="March 4, 2026"
 	datetime="2026-03-04"

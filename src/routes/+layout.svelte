@@ -30,7 +30,7 @@
 
 		<!-- Primary Meta Tags -->
 		<meta name="title" content="Lettr — The Email Platform Built for SaaS" />
-		<meta name="description" content="Developers integrate once. Your team takes over. Transactional and marketing emails in one platform — clean API, drag-and-drop editor, zero dev tickets for content changes." />
+		<meta name="description" content="Transactional and marketing email in one platform. Developers integrate once via a clean API; your team ships content with a drag-and-drop editor." />
 		<meta name="keywords" content="SaaS email platform, transactional email API, email for SaaS, developer email API, marketing email SaaS, email delivery, REST API email, SMTP relay, drag-and-drop email editor, email infrastructure" />
 		<meta name="author" content="Lettr" />
 		<meta name="robots" content="index, follow" />
@@ -39,7 +39,7 @@
 		<meta property="og:type" content="website" />
 		<meta property="og:url" content="https://lettr.com" />
 		<meta property="og:title" content="Lettr — The Email Platform Built for SaaS" />
-		<meta property="og:description" content="Developers integrate once. Your team takes over. Transactional and marketing emails in one platform — clean API, drag-and-drop editor, zero dev tickets for content changes." />
+		<meta property="og:description" content="Transactional and marketing email in one platform. Developers integrate once via a clean API; your team ships content with a drag-and-drop editor." />
 		<meta property="og:image" content="https://lettr.com/og-image.png" />
 		<meta property="og:image:width" content="1200" />
 		<meta property="og:image:height" content="630" />
@@ -50,7 +50,7 @@
 		<meta name="twitter:card" content="summary_large_image" />
 		<meta name="twitter:url" content="https://lettr.com" />
 		<meta name="twitter:title" content="Lettr — The Email Platform Built for SaaS" />
-		<meta name="twitter:description" content="Developers integrate once. Your team takes over. Transactional and marketing emails in one platform — clean API, drag-and-drop editor, zero dev tickets for content changes." />
+		<meta name="twitter:description" content="Transactional and marketing email in one platform. Developers integrate once via a clean API; your team ships content with a drag-and-drop editor." />
 		<meta name="twitter:image" content="https://lettr.com/og-image.png" />
 
 		<!-- Structured Data -->
