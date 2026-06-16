@@ -18,7 +18,7 @@
 		rootMargin = '400px 0px 400px 0px'
 	}: Props = $props();
 
-	let container: HTMLElement | undefined = $state();
+	let sentinel: HTMLElement | undefined = $state();
 	let canUseSpline: boolean = $state(false);
 	let isSplineReady: boolean = $state(false);
 	let shouldRenderSpline: boolean = $state(false);
@@ -41,8 +41,14 @@
 		window.addEventListener('resize', handleViewportChange, { passive: true });
 		reducedMotionMedia.addEventListener('change', handleViewportChange);
 
+		// Observe a sentinel in normal document flow (at the end of the page)
+		// rather than the viewer's own container — the container is
+		// position:fixed at bottom:0, so it is always in the viewport and
+		// would trigger the Spline load immediately on page load. The sentinel
+		// only intersects once the user actually scrolls near the bottom, where
+		// the Spline scene becomes visible.
 		let observer: IntersectionObserver | undefined;
-		if (container) {
+		if (sentinel) {
 			observer = new IntersectionObserver(
 				(entries) => {
 					const isNearViewport = entries.some((entry) => entry.isIntersecting);
@@ -63,7 +69,7 @@
 				{ rootMargin }
 			);
 
-			observer.observe(container);
+			observer.observe(sentinel);
 		}
 
 		return () => {
@@ -74,7 +80,11 @@
 	});
 </script>
 
-<div bind:this={container} class="fixed inset-x-0 bottom-0 z-0 mx-auto h-[30vh] max-w-[1600px]">
+<!-- Normal-flow anchor at the end of the page; intersecting this (not the
+	 fixed viewer) is what gates loading the Spline scene. -->
+<div bind:this={sentinel} aria-hidden="true" class="pointer-events-none h-px w-full"></div>
+
+<div class="fixed inset-x-0 bottom-0 z-0 mx-auto h-[30vh] max-w-[1600px]">
 	{#if shouldRenderSpline}
 		<spline-viewer url={sceneUrl} style="width: 100%; height: 100%;"></spline-viewer>
 	{/if}
