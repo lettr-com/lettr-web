@@ -118,7 +118,7 @@
 </script>
 
 <Seo
-	title="About | Lettr"
+	title="About Lettr — the Team Behind Your Email Platform"
 	description="The story behind Lettr — built by a team with 10+ years in email infrastructure, sending 500M+ emails monthly across the globe."
 	ogTitle="About Lettr"
 	ogDescription="Built by a team with 10+ years in email infrastructure, sending 500M+ emails monthly across the globe."

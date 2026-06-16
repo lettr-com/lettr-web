@@ -123,7 +123,8 @@
 </script>
 
 <Seo
-	title="Blog | Lettr"
+	title="Lettr Blog — Email Deliverability & Engineering"
+	ogTitle="Lettr Blog"
 	description="Notes on transactional and marketing email, deliverability, and building email infrastructure that SaaS teams can trust."
 />
 
