@@ -35,7 +35,7 @@ the following defined terms:</span>
 style="text-align: left;"><strong><mark>Agreement</mark></strong></th>
 <th style="text-align: left;">means the contract between you and Lettr
 that governs your purchase and use of our products and services
-(including our <a href="https://lettr.com/terms"><u>Terms of</u>
+(including our <a href="https://lettr.com/terms/"><u>Terms of</u>
 <u>Use</u></a>), and sets out our and your respective rights and
 obligations;</th>
 </tr>
