@@ -63,14 +63,12 @@
 			label: 'Products',
 			items: [
 				{ badge: 'transactional', label: 'Transactional Email', description: 'Send via REST API & SMTP — pay per email', href: '/email-api/' },
-				{ badge: 'marketing', label: 'Email Marketing', description: 'Campaigns, lists & segments — pay per contact', href: '/email-marketing/' },
-				{ label: 'Transactional + Marketing', description: 'Run both from one platform and one editor', href: '/platform/sync/' }
+				{ badge: 'marketing', label: 'Email Marketing', description: 'Campaigns, lists & segments — pay per contact', href: '/email-marketing/' }
 			]
 		},
 		{
 			label: 'Features',
 			items: [
-				{ icon: CodeIcon, label: 'Developer API', description: 'REST API, SMTP, and SDKs', href: '/platform/laravel/' },
 				{ icon: SparkleIcon, label: 'Visual Editor', description: 'Drag-and-drop editor powered by Topol', href: '/platform/templates/' },
 				{ icon: ChartBarIcon, label: 'Analytics & Logs', description: 'Delivery metrics, logs, and webhooks', href: '/platform/analytics/' },
 				{ icon: ShieldCheckIcon, label: 'Deliverability', description: 'SPF, DKIM, DMARC, dedicated IPs', href: '/platform/deliverability/' },
