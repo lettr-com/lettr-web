@@ -25,8 +25,33 @@
 		trackSignupClick('compare_bottom', registerHref);
 	}
 
+	function trackGuideClick(slug: string, title: string) {
+		void capturePosthogEvent('compare_guide_clicked', {
+			guide_slug: slug,
+			guide_title: title
+		});
+	}
+
+	// Roundup / "alternatives" landing pages that live alongside the head-to-head
+	// provider comparisons. These target switch-intent searches.
+	const guides = [
+		{
+			slug: 'mailerlite-alternatives',
+			title: 'MailerLite alternatives',
+			description:
+				'MailerLite vs Lettr, Brevo, Resend and MailerSend on transactional support, API quality, analytics and pricing — an honest breakdown for switchers.'
+		},
+		{
+			slug: 'aws-ses-alternatives',
+			title: 'AWS SES alternatives',
+			description:
+				'AWS SES vs Lettr, SendGrid and Postmark on setup, dashboard, analytics, templates and deliverability — where SES makes you build it yourself, and where it still wins.'
+		}
+	];
+
 	let hero: HTMLElement | undefined = $state();
 	let gridSection: HTMLElement | undefined = $state();
+	let guidesSection: HTMLElement | undefined = $state();
 	let ctaSection: HTMLElement | undefined = $state();
 	let registerHref: string = $state(registerUrl);
 
@@ -45,7 +70,7 @@
 			);
 		}
 
-		for (const section of [gridSection, ctaSection]) {
+		for (const section of [gridSection, guidesSection, ctaSection]) {
 			if (section) {
 				cleanups.push(
 					createScrollRevealCleanup({
@@ -113,6 +138,38 @@
 							/>
 						</span>
 					</div>
+				</a>
+			{/each}
+		</div>
+	</div>
+
+	<!-- Switching guides -->
+	<div bind:this={guidesSection} class="mt-20">
+		<h2 data-reveal class="mb-2">Switching guides</h2>
+		<p data-reveal class="mb-6 text-sm text-muted">
+			Honest, multi-tool roundups for teams shopping to move off a specific provider.
+		</p>
+		<div class="grid gap-4 sm:grid-cols-2">
+			{#each guides as guide}
+				<a
+					data-reveal
+					href="/compare/{guide.slug}/"
+					class="group flex flex-col border border-border/50 bg-white p-6 transition-colors hover:border-primary/30"
+					onclick={() => trackGuideClick(guide.slug, guide.title)}
+				>
+					<span class="text-sm font-semibold text-surface transition-colors group-hover:text-primary">
+						{guide.title}
+					</span>
+					<p class="mt-2 mb-4 flex-1 text-sm leading-relaxed text-muted line-clamp-3">
+						{guide.description}
+					</p>
+					<span class="mt-auto flex items-center gap-1 text-sm font-medium text-muted transition-colors group-hover:text-primary">
+						Read the guide
+						<ArrowRightIcon
+							size={14}
+							class="transition-transform duration-200 group-hover:translate-x-1"
+						/>
+					</span>
 				</a>
 			{/each}
 		</div>
