@@ -56,6 +56,7 @@
 				{ label: 'Analytics', href: '/platform/analytics/' },
 				{ label: 'Deliverability', href: '/platform/deliverability/' },
 				{ label: 'SMTP Relay', href: '/smtp-relay/' },
+				{ label: 'Inbound Email API', href: '/inbound-email-api/' },
 				{ label: 'Email Channel', href: '/channels/email/' },
 				{ label: 'MCP Server', href: '/platform/mcp/' }
 			]

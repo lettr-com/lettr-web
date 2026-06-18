@@ -9,6 +9,7 @@
 	import ShieldCheckIcon from 'phosphor-svelte/lib/ShieldCheckIcon';
 	import RobotIcon from 'phosphor-svelte/lib/RobotIcon';
 	import PaperPlaneTiltIcon from 'phosphor-svelte/lib/PaperPlaneTiltIcon';
+	import TrayIcon from 'phosphor-svelte/lib/TrayIcon';
 	import HeadsetIcon from 'phosphor-svelte/lib/HeadsetIcon';
 	import BookOpenIcon from 'phosphor-svelte/lib/BookOpenIcon';
 	import ScalesIcon from 'phosphor-svelte/lib/ScalesIcon';
@@ -74,6 +75,7 @@
 				{ icon: ChartBarIcon, label: 'Analytics & Logs', description: 'Delivery metrics, logs, and webhooks', href: '/platform/analytics/' },
 				{ icon: ShieldCheckIcon, label: 'Deliverability', description: 'SPF, DKIM, DMARC, dedicated IPs', href: '/platform/deliverability/' },
 				{ icon: PaperPlaneTiltIcon, label: 'SMTP Relay', description: 'Drop-in SMTP for any app or server', href: '/smtp-relay/' },
+				{ icon: TrayIcon, label: 'Inbound Email API', description: 'Receive & parse incoming email via webhooks', href: '/inbound-email-api/' },
 				{ icon: RobotIcon, label: 'MCP Integration', description: 'Connect AI agents and LLMs to Lettr', href: '/platform/mcp/' },
 				{ icon: EnvelopeSimpleIcon, label: 'Email Channel', description: 'Multi-region delivery infrastructure', href: '/channels/email/' }
 			]
