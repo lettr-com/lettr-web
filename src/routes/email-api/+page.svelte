@@ -161,7 +161,8 @@
 				>See docs</Button>
 			</div>
 			<p data-animate class="max-w-md text-sm text-muted">
-				3,000 emails/month free. No credit card required.
+				3,000 emails/month free. No credit card required. See the
+				<a class="text-primary underline underline-offset-2" href="/free-email-api/">free email API</a>.
 			</p>
 		</div>
 
