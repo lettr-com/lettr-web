@@ -54,6 +54,7 @@
 				{ label: 'Template Builder', href: '/platform/templates/' },
 				{ label: 'Analytics', href: '/platform/analytics/' },
 				{ label: 'Deliverability', href: '/platform/deliverability/' },
+				{ label: 'SMTP Relay', href: '/smtp-relay/' },
 				{ label: 'Email Channel', href: '/channels/email/' },
 				{ label: 'MCP Server', href: '/platform/mcp/' }
 			]
