@@ -25,7 +25,19 @@
 		},
 		{
 			question: 'How is Lettr different from Resend, Postmark, or SendGrid?',
-			answer: 'Resend offers a developer-friendly API but no visual editing tools for non-technical team members. Postmark focuses on transactional email only, with no campaign or marketing features. SendGrid and Mailchimp target a very broad audience, while Lettr is focused specifically on SaaS features. Lettr combines a developer-friendly API with a best-in-class drag-and-drop editor and supports both transactional and marketing emails from one platform.'
+			answer: 'Resend offers a developer-friendly API and code-based templates (React Email), but no drag-and-drop editor that non-technical teammates can use. Postmark is strong on transactional deliverability but has only limited campaign tooling and no drag-and-drop editor. SendGrid and Mailchimp serve a very broad audience and split transactional and marketing into separate products. Lettr is built specifically for SaaS: it pairs a developer-friendly REST API and SMTP relay with a drag-and-drop editor powered by Topol (used by 40,000+ companies), and handles both transactional and marketing email from one platform with one bill.'
+		},
+		{
+			question: 'Is Lettr free?',
+			answer: "Yes. Lettr's free tier includes 3,000 transactional emails per month, or 500 marketing contacts, with no credit card required. Paid plans start at $15/month for transactional email and $10/month for marketing, billed by usage."
+		},
+		{
+			question: 'How much does Lettr cost?',
+			answer: 'Lettr uses simple, usage-based pricing. Transactional email is free up to 3,000 emails per month, then starts at $15/month. Marketing is free up to 500 contacts, then starts at $10/month, billed per contact. Transactional and marketing are billed together on one account, so there is no separate provider or second invoice to manage.'
+		},
+		{
+			question: 'Does Lettr support SPF, DKIM, and DMARC?',
+			answer: 'Yes. Lettr authenticates every sending domain with SPF, DKIM, and DMARC to protect deliverability and prevent spoofing. It is built by the team behind DMARCeye, a dedicated DMARC monitoring and reporting platform, so domain authentication and email security are first-class parts of the product.'
 		},
 		{
 			question: 'Can I send both transactional and marketing emails with Lettr?',
@@ -42,6 +54,10 @@
 		{
 			question: 'Who built Lettr?',
 			answer: 'Lettr is built by the Big Good group — the team behind Topol (email editor used by 40,000+ companies), Ecomail (email marketing platform serving 12,000+ organizations for over 12 years), and DMARCeye (DMARC monitoring and reporting). Lettr leverages this deep email infrastructure expertise to deliver enterprise-grade reliability at startup-friendly pricing.'
+		},
+		{
+			question: 'When is Lettr not the right fit?',
+			answer: 'Lettr is purpose-built for SaaS products sending onboarding, transactional, and product-marketing email. It is a weaker fit if you run a high-volume ecommerce store that needs deep product-feed automation, if you need a full CRM rather than an email platform, or if you only send occasional one-off newsletters with no product app behind them. For those cases a general-purpose marketing or ecommerce tool may suit you better.'
 		}
 	];
 
