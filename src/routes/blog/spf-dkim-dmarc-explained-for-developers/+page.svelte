@@ -154,6 +154,7 @@ dmarc=pass (p=REJECT dis=NONE) header.from=yourapp.com`;
 		None of this is yours to manage. When you
 		<a href="https://docs.lettr.com/learn/domains/sending-domains">add a sending domain in Lettr</a>,
 		the keys are generated and the DKIM records handed to you. Copy them to your DNS, and you're done.
+		See how <a href="/platform/deliverability/">Lettr handles deliverability</a> end to end.
 	</Callout>
 
 	<Heading level={2}>DMARC: policy and reporting</Heading>

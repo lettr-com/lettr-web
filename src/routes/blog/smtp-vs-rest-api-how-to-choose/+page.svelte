@@ -260,7 +260,8 @@ with smtplib.SMTP("smtp.provider.com", 587) as server:
 	</Paragraph>
 
 	<Paragraph>
-		If you want both transports available from a single provider,
+		If you want both transports available from a single provider — a
+		<a href="/smtp-relay/">drop-in SMTP relay</a> and a <a href="/email-api/">REST email API</a> —
 		<a href="https://app.lettr.com/register">create a free Lettr account</a> and select the right one
 		for each part of your stack.
 	</Paragraph>

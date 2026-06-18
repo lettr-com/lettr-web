@@ -348,7 +348,8 @@
 		On <a href="https://docs.lettr.com/learn/domains/sending-domains">Lettr</a>, authentication is
 		verified during setup and bounce and complaint events stream through <a
 			href="https://docs.lettr.com/learn/webhooks/introduction">webhooks</a
-		> in real time, so a bad ramp surfaces in minutes instead of days. <a href="https://app.lettr.com/register">Create a free account</a> and verify a
+		> in real time, so a bad ramp surfaces in minutes instead of days — part of Lettr's
+		<a href="/platform/deliverability/">deliverability tooling</a>. <a href="https://app.lettr.com/register">Create a free account</a> and verify a
 		domain before the next launch needs it.
 	</Paragraph>
 </BlogPost>

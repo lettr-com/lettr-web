@@ -254,7 +254,8 @@
 	<Paragraph>
 		<strong>The sweet spot is the dozens of small interactions in a working day</strong>. Set it
 		up in whatever assistant is already open, keep the dashboard a click away for the heavy lifting,
-		and most of the context switching disappears.
-		<a href="https://app.lettr.com/register">Create a free Lettr account</a> to connect it.
+		and most of the context switching disappears. Learn more about
+		<a href="/platform/mcp/">Lettr's MCP integration</a>, or
+		<a href="https://app.lettr.com/register">create a free Lettr account</a> to connect it.
 	</Paragraph>
 </BlogPost>

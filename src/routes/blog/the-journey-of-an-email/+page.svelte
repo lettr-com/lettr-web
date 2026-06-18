@@ -314,8 +314,8 @@ Receiving server: 250 2.0.0 OK`;
 
 	<Paragraph>
 		If you're building an app that sends email and would rather not spend the next month debugging
-		DKIM alignment and processing feedback loops yourself, <a href="https://lettr.com"
-			>give Lettr a try</a
-		>.
+		DKIM alignment and processing feedback loops yourself, Lettr surfaces every step in
+		<a href="/platform/analytics/">delivery logs and analytics</a>, on a multi-region
+		<a href="/channels/email/">email channel</a> built for it.
 	</Paragraph>
 </BlogPost>

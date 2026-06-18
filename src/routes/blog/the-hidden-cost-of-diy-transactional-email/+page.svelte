@@ -144,8 +144,8 @@ Lettr::to($user->email)
 	</Paragraph>
 
 	<Paragraph>
-		That is the problem we built <a href="/">Lettr</a> to solve: one platform for transactional and
-		marketing email, with the deliverability work handled and a clear view of everything the
-		application sends.
+		That is the problem we built <a href="/email-api/">Lettr's transactional email</a> to solve: one
+		platform for transactional and marketing email, with the deliverability work handled and a clear
+		view of everything the application sends. See the <a href="/pricing/">pay-per-email pricing</a>.
 	</Paragraph>
 </BlogPost>

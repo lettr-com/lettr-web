@@ -5,6 +5,7 @@
 	import { createFromAnimationCleanup, createScrollRevealCleanup } from '$lib/utils/gsap';
 	import Seo from '$lib/components/Seo.svelte';
 	import TableOfContents from './TableOfContents.svelte';
+	import { getRelatedPosts } from '$lib/data/posts';
 
 	export interface BlogAuthor {
 		name: string;
@@ -50,6 +51,7 @@
 
 	const canonical = $derived(slug ? `/blog/${slug}/` : undefined);
 	const seoDescription = $derived(metaDescription ?? excerpt ?? '');
+	const related = $derived(getRelatedPosts(slug));
 	const initials = $derived(
 		author.name
 			.split(' ')
@@ -175,4 +177,36 @@
 			</div>
 		</aside>
 	</div>
+
+	{#if related.length}
+		<div class="mx-auto mt-20 max-w-[1064px] px-4">
+			<div class="border-t border-border/50 pt-12">
+				<h2 class="font-heading text-xs tracking-[0.15em] text-primary uppercase">
+					Related articles
+				</h2>
+				<div class="mt-6 grid gap-4 sm:grid-cols-3">
+					{#each related as post}
+						<a
+							href="/blog/{post.slug}/"
+							class="group flex flex-col border border-border/50 bg-white p-6 transition-colors hover:border-primary/30"
+						>
+							<span class="font-heading text-xs tracking-[0.15em] text-primary uppercase">
+								{post.category}
+							</span>
+							<h3 class="mt-2 text-base leading-snug transition-colors group-hover:text-primary">
+								{post.title}
+							</h3>
+							<div class="mt-auto pt-5 flex items-center gap-2 text-xs text-muted">
+								<span>{post.date}</span>
+								<span class="flex items-center gap-1">
+									<ClockIcon size={12} />
+									{post.readTime}
+								</span>
+							</div>
+						</a>
+					{/each}
+				</div>
+			</div>
+		</div>
+	{/if}
 </article>

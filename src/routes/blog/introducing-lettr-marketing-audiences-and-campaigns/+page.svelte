@@ -217,9 +217,11 @@
 	</Paragraph>
 
 	<Paragraph>
-		The best way to get a feel for any of this is to <strong>try it</strong>. Every Lettr account includes a <strong>free
+		The best way to get a feel for any of this is to <strong>try it</strong>. See what
+		<a href="/email-marketing/">Lettr's email marketing</a> covers and how it's
+		<a href="/pricing/">priced</a>. Every Lettr account includes a <strong>free
 		500-contact tier</strong>, so you can <a href="https://app.lettr.com/register">create an account</a> at no
-		cost, build a small audience, and send a real campaign to yourself in a few minutes. 
+		cost, build a small audience, and send a real campaign to yourself in a few minutes.
 	</Paragraph>
 
 	<Divider />

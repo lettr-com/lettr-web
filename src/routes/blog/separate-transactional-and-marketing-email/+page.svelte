@@ -191,7 +191,9 @@
 	</Paragraph>
 
 	<Paragraph>
-		Lettr is built around separate sending domains, each with its own authentication and reputation.
+		Lettr is built around separate sending domains, each with its own authentication and reputation,
+		keeping <a href="/email-api/">transactional email</a> and
+		<a href="/email-marketing/">marketing campaigns</a> apart by design.
 		<a href="https://app.lettr.com/register">Create a free account</a> to set transactional and
 		marketing email apart.
 	</Paragraph>

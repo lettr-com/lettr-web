@@ -157,8 +157,9 @@ This distinction matters because Gmail, spam filters, and privacy regulators all
 	</Paragraph>
 
 	<Paragraph>
-		<a href="https://lettr.com">Lettr</a> is built to handle that groundwork, from domain authentication
-		to separate sending streams and per-message logs, so transactional email stays one less thing to run
-		yourself.
+		<a href="/email-api/">Lettr's transactional email</a> is built to handle that groundwork, from domain
+		authentication to separate sending streams and per-message logs, whether you send over a
+		<a href="/smtp-relay/">drop-in SMTP relay</a> or the API, so transactional email stays one less
+		thing to run yourself.
 	</Paragraph>
 </BlogPost>
