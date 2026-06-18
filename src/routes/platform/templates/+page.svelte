@@ -237,6 +237,11 @@
 	metaDescription="Best-in-class drag-and-drop email editor powered by Topol. Your team designs, edits, and manages templates — no dev tickets required."
 	label="VISUAL EDITOR"
 	description="The same drag-and-drop editor trusted by 40,000+ companies. Your team manages templates, content, and campaigns — without filing a single dev ticket."
+	related={[
+		{ href: '/email-marketing/', label: 'Email Marketing', description: 'Campaigns, audiences, and segments, billed per contact.' },
+		{ href: '/email-api/', label: 'Transactional Email', description: 'Send via REST API and SMTP, billed per email.' },
+		{ href: '/platform/analytics/', label: 'Analytics & Logs', description: 'Delivery metrics, searchable logs, and webhooks.' }
+	]}
 >
 	{#snippet heading()}
 		Your team edits.<br />No dev tickets required.

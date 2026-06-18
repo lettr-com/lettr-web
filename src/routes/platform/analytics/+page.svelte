@@ -150,6 +150,11 @@
 	metaDescription="Real-time delivery metrics, searchable logs, and webhooks for every email event. Know exactly what your SaaS emails are doing."
 	label="ANALYTICS & LOGS"
 	description="Delivery metrics, searchable logs for debugging, and webhooks for every event. Real-time visibility into every email — transactional and marketing."
+	related={[
+		{ href: '/platform/deliverability/', label: 'Deliverability', description: 'SPF, DKIM, DMARC, dedicated IPs, and DNS setup.' },
+		{ href: '/channels/email/', label: 'Email Channel', description: 'Multi-region delivery infrastructure built for email.' },
+		{ href: '/email-api/', label: 'Transactional Email', description: 'Send via REST API and SMTP, billed per email.' }
+	]}
 >
 	{#snippet heading()}
 		Know what your<br />emails are doing.

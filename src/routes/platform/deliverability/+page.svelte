@@ -116,6 +116,11 @@
 	metaDescription="Enterprise-grade email deliverability from 12 years of infrastructure: guided DNS setup, DMARC monitoring, dedicated IPs, and custom tracking domains."
 	label="DELIVERABILITY"
 	description="Enterprise-grade infrastructure backed by 12 years of Ecomail operations. Guided DNS setup, dedicated IPs, and first-party domain control from day one."
+	related={[
+		{ href: '/email-api/', label: 'Transactional Email', description: 'Send via REST API and SMTP, billed per email.' },
+		{ href: '/platform/analytics/', label: 'Analytics & Logs', description: 'Delivery metrics, searchable logs, and webhooks.' },
+		{ href: '/smtp-relay/', label: 'SMTP Relay', description: 'Drop-in SMTP for any app, framework, or server.' }
+	]}
 >
 	{#snippet heading()}
 		Every email.<br />Every inbox.

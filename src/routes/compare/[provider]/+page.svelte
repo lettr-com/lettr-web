@@ -32,6 +32,10 @@
 		return p;
 	});
 
+	const otherProviders = $derived(
+		Object.values(providers).filter((p) => p.slug !== data.provider)
+	);
+
 	let hero: HTMLElement | undefined = $state();
 	let featuresSection: HTMLElement | undefined = $state();
 	let pricingSection: HTMLElement | undefined = $state();
@@ -180,13 +184,44 @@
 			</div>
 		</div>
 
+		<!-- Other comparisons -->
+		{#if otherProviders.length}
+			<div class="mt-16">
+				<h2 class="mb-6">Compare with other providers</h2>
+				<div class="grid gap-4 sm:grid-cols-2">
+					{#each otherProviders as other}
+						<a
+							href="/compare/{other.slug}/"
+							class="group flex items-center gap-4 border border-border/50 bg-white p-5 transition-colors hover:border-primary/30"
+						>
+							<div class="flex h-10 w-10 shrink-0 items-center justify-center border border-border/50 bg-background">
+								<img src={other.logo} alt={other.name} class="h-5 w-5" />
+							</div>
+							<div class="min-w-0">
+								<h3 class="text-sm font-semibold text-surface transition-colors group-hover:text-primary">
+									Lettr vs {other.name}
+								</h3>
+								<p class="truncate text-xs text-muted">{other.tagline}</p>
+							</div>
+							<ArrowRightIcon
+								size={14}
+								class="ml-auto shrink-0 text-muted transition-transform duration-200 group-hover:translate-x-1 group-hover:text-primary"
+							/>
+						</a>
+					{/each}
+				</div>
+			</div>
+		{/if}
+
 		<!-- Migration CTA -->
 		<div bind:this={ctaSection} class="mt-20">
 			<div data-reveal class="border border-border/50 bg-white p-8 text-center md:p-12">
 				<h2>Switch from {provider.name} in minutes</h2>
 				<p class="mx-auto mt-3 max-w-lg text-body leading-[1.7] text-muted">
-					Swap your mail driver, verify your domain, and start sending. No complex migration scripts, no
-					downtime.
+					Swap your mail driver, verify your domain, and start sending — over our
+					<a href="/email-api/" class="text-primary underline underline-offset-4 hover:text-primary/80">REST email API</a>
+					or a <a href="/smtp-relay/" class="text-primary underline underline-offset-4 hover:text-primary/80">drop-in SMTP relay</a>.
+					No complex migration scripts, no downtime.
 				</p>
 				<div class="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row">
 					<a

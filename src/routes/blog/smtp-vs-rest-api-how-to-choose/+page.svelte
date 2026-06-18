@@ -239,7 +239,8 @@ with smtplib.SMTP("smtp.provider.com", 587) as server:
 	<Paragraph>
 		<strong>For anything new, the API is almost always the better starting point</strong>. When your stack spans both
 		worlds, such as a WordPress site alongside a custom Node.js service, choosing a provider that
-		supports both protocols keeps the analytics and suppression list unified.
+		supports both protocols keeps the analytics and suppression list unified — see how Lettr
+		<a href="/compare/">compares to other providers</a>.
 	</Paragraph>
 
 	<Heading level={2}>Making the decision</Heading>

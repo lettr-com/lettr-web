@@ -5,6 +5,7 @@
 	import { buildRegisterUrl, registerUrl } from '$lib/utils/utm';
 	import { capturePosthogEvent, trackSignupClick } from '$lib/analytics/posthog';
 	import Seo from '$lib/components/Seo.svelte';
+	import RelatedFeatures, { type RelatedLink } from '$lib/components/RelatedFeatures.svelte';
 
 	interface Props {
 		title: string;
@@ -13,9 +14,11 @@
 		heading: Snippet;
 		description: string;
 		children: Snippet;
+		/** Optional cross-links to related feature pages, shown above the closing CTA. */
+		related?: RelatedLink[];
 	}
 
-	let { title, metaDescription, label, heading, description, children }: Props = $props();
+	let { title, metaDescription, label, heading, description, children, related }: Props = $props();
 
 	let hero: HTMLElement | undefined = $state();
 	let registerHref: string = $state(registerUrl);
@@ -57,6 +60,12 @@
 	<div class="mt-16 md:mt-24">
 		{@render children()}
 	</div>
+
+	{#if related?.length}
+		<div class="mt-20 md:mt-32">
+			<RelatedFeatures links={related} />
+		</div>
+	{/if}
 
 	<div class="mt-20 text-center md:mt-32">
 		<a

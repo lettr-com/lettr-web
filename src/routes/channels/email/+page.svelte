@@ -111,6 +111,11 @@
 	metaDescription="Enterprise-grade email delivery infrastructure. Multi-region, adaptive routing, 99.99% uptime, and sub-3-second delivery times."
 	label="EMAIL"
 	description="Enterprise-grade email delivery infrastructure built for transactional email. Multi-region, adaptive routing, and sub-3-second delivery."
+	related={[
+		{ href: '/email-api/', label: 'Transactional Email', description: 'Send via REST API and SMTP, billed per email.' },
+		{ href: '/smtp-relay/', label: 'SMTP Relay', description: 'Drop-in SMTP for any app, framework, or server.' },
+		{ href: '/platform/deliverability/', label: 'Deliverability', description: 'SPF, DKIM, DMARC, dedicated IPs, and DNS setup.' }
+	]}
 >
 	{#snippet heading()}
 		The most reliable way<br />to reach the inbox.

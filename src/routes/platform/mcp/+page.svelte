@@ -132,6 +132,11 @@
 	metaDescription="Control your SaaS email infrastructure from any AI assistant — send emails, debug delivery, and monitor domains in natural language via MCP."
 	label="MCP"
 	description="Control your email infrastructure from any AI assistant. Send transactional and marketing emails, debug delivery, and monitor domains — all through natural language."
+	related={[
+		{ href: '/email-api/', label: 'Transactional Email', description: 'Send via REST API and SMTP, billed per email.' },
+		{ href: '/platform/analytics/', label: 'Analytics & Logs', description: 'Delivery metrics, searchable logs, and webhooks.' },
+		{ href: '/email-marketing/', label: 'Email Marketing', description: 'Campaigns, audiences, and segments, billed per contact.' }
+	]}
 >
 	{#snippet heading()}
 		Your email API,<br />AI-native.

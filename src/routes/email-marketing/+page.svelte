@@ -11,6 +11,7 @@
 	import CampaignEditorPreview from '$lib/components/CampaignEditorPreview.svelte';
 	import TalkToExpert from '$lib/components/TalkToExpert.svelte';
 	import FAQSection from '$lib/components/FAQSection.svelte';
+	import RelatedFeatures from '$lib/components/RelatedFeatures.svelte';
 	import { createFromAnimationCleanup, createScrollRevealCleanup } from '$lib/utils/gsap';
 	import { buildRegisterUrl, registerUrl } from '$lib/utils/utm';
 	import { capturePosthogEvent, trackSignupClick } from '$lib/analytics/posthog';
@@ -236,6 +237,16 @@
 		</div>
 	</div>
 </section>
+
+<div class="py-16">
+	<RelatedFeatures
+		links={[
+			{ href: '/platform/templates/', label: 'Visual Editor', description: 'Drag-and-drop email editor powered by Topol.' },
+			{ href: '/email-api/', label: 'Transactional Email', description: 'Send via REST API and SMTP, billed per email.' },
+			{ href: '/platform/analytics/', label: 'Analytics & Logs', description: 'Delivery metrics, searchable logs, and webhooks.' }
+		]}
+	/>
+</div>
 
 <TalkToExpert />
 <FAQSection />

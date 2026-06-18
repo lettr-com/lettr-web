@@ -6,6 +6,7 @@
 	import CodeSnippet from '$lib/components/CodeSnippet.svelte';
 	import TalkToExpert from '$lib/components/TalkToExpert.svelte';
 	import Pricing from '$lib/components/Pricing.svelte';
+	import RelatedFeatures from '$lib/components/RelatedFeatures.svelte';
 	import ArrowsClockwiseIcon from 'phosphor-svelte/lib/ArrowsClockwiseIcon';
 	import ShieldCheckIcon from 'phosphor-svelte/lib/ShieldCheckIcon';
 	import LockKeyIcon from 'phosphor-svelte/lib/LockKeyIcon';
@@ -674,6 +675,16 @@ func main() {
 		{/each}
 	</div>
 </section>
+
+<div class="py-16">
+	<RelatedFeatures
+		links={[
+			{ href: '/email-api/', label: 'Transactional Email', description: 'Send via REST API and SMTP, billed per email.' },
+			{ href: '/platform/deliverability/', label: 'Deliverability', description: 'SPF, DKIM, DMARC, dedicated IPs, and DNS setup.' },
+			{ href: '/channels/email/', label: 'Email Channel', description: 'Multi-region delivery infrastructure built for email.' }
+		]}
+	/>
+</div>
 
 <!-- Final CTA -->
 <section bind:this={finalCtaSection} class="py-20">

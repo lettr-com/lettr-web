@@ -17,6 +17,7 @@
 	import TalkToExpert from '$lib/components/TalkToExpert.svelte';
 	import Pricing from '$lib/components/Pricing.svelte';
 	import FAQSection from '$lib/components/FAQSection.svelte';
+	import RelatedFeatures from '$lib/components/RelatedFeatures.svelte';
 	import { createFromAnimationCleanup, createScrollRevealCleanup } from '$lib/utils/gsap';
 	import { buildRegisterUrl, registerUrl } from '$lib/utils/utm';
 	import { capturePosthogEvent, trackSignupClick } from '$lib/analytics/posthog';
@@ -280,6 +281,16 @@
 		{/each}
 	</div>
 </section>
+
+<div class="py-16">
+	<RelatedFeatures
+		links={[
+			{ href: '/smtp-relay/', label: 'SMTP Relay', description: 'Drop-in SMTP for any app, framework, or server.' },
+			{ href: '/platform/deliverability/', label: 'Deliverability', description: 'SPF, DKIM, DMARC, dedicated IPs, and DNS setup.' },
+			{ href: '/platform/analytics/', label: 'Analytics & Logs', description: 'Delivery metrics, searchable logs, and webhooks.' }
+		]}
+	/>
+</div>
 
 <TalkToExpert />
 <Pricing />
