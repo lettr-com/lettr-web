@@ -12,6 +12,16 @@ export interface PostMeta {
 // Used by the blog index listing and the "Related articles" block on each post.
 export const posts: PostMeta[] = [
   {
+    slug: "onboarding-email-best-practices",
+    category: "Fundamentals",
+    title: "Onboarding email best practices (with examples and templates)",
+    excerpt:
+      "A practical guide to onboarding email sequences: what an onboarding email is, how to time and structure the welcome-to-activation flow, the best practices that matter (subject lines, personalization, a single CTA, the metrics to track), teardown examples, copy-paste templates, and how to send the sequence programmatically.",
+    author: "Erik Vlčák",
+    date: "June 24, 2026",
+    readTime: "9 min read",
+  },
+  {
     slug: "email-deliverability-checklist",
     category: "Deliverability",
     title: "Email deliverability checklist",
