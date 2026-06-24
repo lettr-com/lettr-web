@@ -8,7 +8,7 @@
 	excerpt="Marketing email now lives inside Lettr. The new module adds Audiences for managing who you send to and Campaigns for designing and sending bulk email, all in the same account and on the same domains you already use for transactional sending."
 	metaDescription="Marketing email now lives inside Lettr — Audiences to manage who you send to and Campaigns to design and send bulk email, on your existing domains."
 	author={{ name: 'Erik Vlčák', role: 'Customer Success Engineer', avatar: '/images/authors/erik.jpg' }}
-	date="June 5, 2026"
+	date="June 2, 2026"
 	datetime="2026-06-02"
 	readTime="13 min read"
 	slug="introducing-lettr-marketing-audiences-and-campaigns"

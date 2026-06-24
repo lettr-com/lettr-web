@@ -28,7 +28,7 @@ export const posts: PostMeta[] = [
     excerpt:
       "What a Mailer Daemon or Mail Delivery Subsystem bounce-back means, the common reasons an email fails to deliver, how to read the SMTP status code in the message, step-by-step fixes for each cause, Gmail and Yahoo specifics, and what bounces that arrive for mail you never sent are telling you.",
     author: "Erik Vlčák",
-    date: "June 24, 2026",
+    date: "June 19, 2026",
     readTime: "8 min read",
   },
   {
@@ -38,7 +38,7 @@ export const posts: PostMeta[] = [
     excerpt:
       "The attachment size limits for Gmail, Outlook, Yahoo, and iCloud Mail, why the real ceiling is lower than the number suggests because of encoding overhead, and the practical ways to send a file that is too big to attach, including large video.",
     author: "Erik Vlčák",
-    date: "June 24, 2026",
+    date: "June 15, 2026",
     readTime: "6 min read",
   },
   {
@@ -48,7 +48,7 @@ export const posts: PostMeta[] = [
     excerpt:
       "A practical guide to onboarding email sequences: what an onboarding email is, how to time and structure the welcome-to-activation flow, the best practices that matter (subject lines, personalization, a single CTA, the metrics to track), teardown examples, copy-paste templates, and how to send the sequence programmatically.",
     author: "Erik Vlčák",
-    date: "June 24, 2026",
+    date: "June 12, 2026",
     readTime: "9 min read",
   },
   {
@@ -58,7 +58,7 @@ export const posts: PostMeta[] = [
     excerpt:
       "A complete email deliverability checklist covering authentication (SPF, DKIM, DMARC), list hygiene, content and spam triggers, sender reputation and IP warmup, and the monitoring metrics to watch, with a printable summary at the end.",
     author: "Erik Vlčák",
-    date: "June 24, 2026",
+    date: "June 9, 2026",
     readTime: "9 min read",
   },
   {
@@ -68,7 +68,7 @@ export const posts: PostMeta[] = [
     excerpt:
       "The recommended pixel dimensions, file size, and format for an email signature, how signatures render in Gmail, Outlook, and Apple Mail, and the common mistakes that make them break on mobile or load slowly.",
     author: "Erik Vlčák",
-    date: "June 24, 2026",
+    date: "June 6, 2026",
     readTime: "5 min read",
   },
   {

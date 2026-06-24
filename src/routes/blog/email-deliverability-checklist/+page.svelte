@@ -22,8 +22,8 @@
 	excerpt="A complete email deliverability checklist covering authentication (SPF, DKIM, DMARC), list hygiene, content and spam triggers, sender reputation and IP warmup, and the monitoring metrics to watch, with a printable summary at the end."
 	metaDescription="A complete email deliverability checklist: SPF, DKIM, and DMARC, list hygiene, spam triggers, sender reputation and warmup, and the metrics to monitor."
 	author={{ name: 'Erik Vlčák', role: 'Customer Success Engineer', avatar: '/images/authors/erik.jpg' }}
-	date="June 24, 2026"
-	datetime="2026-06-24"
+	date="June 9, 2026"
+	datetime="2026-06-09"
 	readTime="9 min read"
 	slug="email-deliverability-checklist"
 >

@@ -18,8 +18,8 @@
 	excerpt="The recommended pixel dimensions, file size, and format for an email signature, how signatures render in Gmail, Outlook, and Apple Mail, and the common mistakes that make them break on mobile or load slowly."
 	metaDescription="Recommended email signature dimensions and file size: the right width and height in pixels, PNG vs JPG, how signatures render across clients, and what to avoid."
 	author={{ name: 'Erik Vlčák', role: 'Customer Success Engineer', avatar: '/images/authors/erik.jpg' }}
-	date="June 24, 2026"
-	datetime="2026-06-24"
+	date="June 6, 2026"
+	datetime="2026-06-06"
 	readTime="5 min read"
 	slug="email-signature-size-and-dimensions"
 >

@@ -159,8 +159,8 @@ await lettr.emails.schedule({
 	excerpt="A practical guide to onboarding email sequences: what an onboarding email is, how to time and structure the welcome-to-activation flow, the best practices that matter (subject lines, personalization, a single CTA, the metrics to track), teardown examples, copy-paste templates, and how to send the sequence programmatically."
 	metaDescription="A practical guide to onboarding emails: sequence timing and structure, best practices, real examples, copy-paste templates, and how to send them with an API."
 	author={{ name: 'Erik Vlčák', role: 'Customer Success Engineer', avatar: '/images/authors/erik.jpg' }}
-	date="June 24, 2026"
-	datetime="2026-06-24"
+	date="June 12, 2026"
+	datetime="2026-06-12"
 	readTime="9 min read"
 	slug="onboarding-email-best-practices"
 >
