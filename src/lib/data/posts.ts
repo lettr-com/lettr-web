@@ -12,6 +12,16 @@ export interface PostMeta {
 // Used by the blog index listing and the "Related articles" block on each post.
 export const posts: PostMeta[] = [
   {
+    slug: "email-attachment-size-limits",
+    category: "Fundamentals",
+    title: "Email attachment size limits by provider (and how to send large files)",
+    excerpt:
+      "The attachment size limits for Gmail, Outlook, Yahoo, and iCloud Mail, why the real ceiling is lower than the number suggests because of encoding overhead, and the practical ways to send a file that is too big to attach, including large video.",
+    author: "Erik Vlčák",
+    date: "June 24, 2026",
+    readTime: "6 min read",
+  },
+  {
     slug: "onboarding-email-best-practices",
     category: "Fundamentals",
     title: "Onboarding email best practices (with examples and templates)",
