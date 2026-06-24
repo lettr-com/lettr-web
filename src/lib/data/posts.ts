@@ -12,6 +12,16 @@ export interface PostMeta {
 // Used by the blog index listing and the "Related articles" block on each post.
 export const posts: PostMeta[] = [
   {
+    slug: "email-deliverability-checklist",
+    category: "Deliverability",
+    title: "Email deliverability checklist",
+    excerpt:
+      "A complete email deliverability checklist covering authentication (SPF, DKIM, DMARC), list hygiene, content and spam triggers, sender reputation and IP warmup, and the monitoring metrics to watch, with a printable summary at the end.",
+    author: "Erik Vlčák",
+    date: "June 24, 2026",
+    readTime: "9 min read",
+  },
+  {
     slug: "email-signature-size-and-dimensions",
     category: "Fundamentals",
     title: "Email signature size and dimensions",
