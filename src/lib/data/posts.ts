@@ -12,6 +12,16 @@ export interface PostMeta {
 // Used by the blog index listing and the "Related articles" block on each post.
 export const posts: PostMeta[] = [
   {
+    slug: "mailer-daemon-mail-delivery-subsystem",
+    category: "Fundamentals",
+    title: "Mailer Daemon and Mail Delivery Subsystem errors explained (and how to fix them)",
+    excerpt:
+      "What a Mailer Daemon or Mail Delivery Subsystem bounce-back means, the common reasons an email fails to deliver, how to read the SMTP status code in the message, step-by-step fixes for each cause, Gmail and Yahoo specifics, and what bounces that arrive for mail you never sent are telling you.",
+    author: "Erik Vlčák",
+    date: "June 24, 2026",
+    readTime: "8 min read",
+  },
+  {
     slug: "email-attachment-size-limits",
     category: "Fundamentals",
     title: "Email attachment size limits by provider (and how to send large files)",
