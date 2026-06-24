@@ -12,6 +12,16 @@ export interface PostMeta {
 // Used by the blog index listing and the "Related articles" block on each post.
 export const posts: PostMeta[] = [
   {
+    slug: "hard-bounce-vs-soft-bounce",
+    category: "Deliverability",
+    title: "Hard bounce vs. soft bounce: what email bounces mean and how to handle them",
+    excerpt:
+      "What an email bounce is, the difference between a hard bounce (a permanent failure such as an address that does not exist) and a soft bounce (a temporary one such as a full mailbox), the common causes of each, why a bounce rate above roughly 2% damages sender reputation, and how to handle both kinds correctly.",
+    author: "Erik Vlčák",
+    date: "June 24, 2026",
+    readTime: "7 min read",
+  },
+  {
     slug: "mailer-daemon-mail-delivery-subsystem",
     category: "Fundamentals",
     title: "Mailer Daemon and Mail Delivery Subsystem errors explained (and how to fix them)",
