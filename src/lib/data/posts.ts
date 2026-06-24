@@ -12,6 +12,16 @@ export interface PostMeta {
 // Used by the blog index listing and the "Related articles" block on each post.
 export const posts: PostMeta[] = [
   {
+    slug: "email-signature-size-and-dimensions",
+    category: "Fundamentals",
+    title: "Email signature size and dimensions",
+    excerpt:
+      "The recommended pixel dimensions, file size, and format for an email signature, how signatures render in Gmail, Outlook, and Apple Mail, and the common mistakes that make them break on mobile or load slowly.",
+    author: "Erik Vlčák",
+    date: "June 24, 2026",
+    readTime: "5 min read",
+  },
+  {
     slug: "introducing-lettr-marketing-audiences-and-campaigns",
     category: "Product",
     title: "Introducing marketing emails in Lettr",

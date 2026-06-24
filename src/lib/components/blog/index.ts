@@ -1,7 +1,7 @@
 // Reusable blog typography system.
 // Import everything you need for a post from this single entry point:
 //
-//   import { BlogPost, Lead, Heading, Paragraph, List, TldrList, Quote, Callout, Code, Figure, Divider }
+//   import { BlogPost, Lead, Heading, Paragraph, List, TldrList, Quote, Callout, Faq, FaqItem, Code, Figure, Divider }
 //     from '$lib/components/blog';
 //
 export { default as BlogPost } from "./BlogPost.svelte";
@@ -13,6 +13,8 @@ export { default as List } from "./List.svelte";
 export { default as TldrList } from "./TldrList.svelte";
 export { default as Quote } from "./Quote.svelte";
 export { default as Callout } from "./Callout.svelte";
+export { default as Faq } from "./Faq.svelte";
+export { default as FaqItem } from "./FaqItem.svelte";
 export { default as Code } from "./Code.svelte";
 export { default as Figure } from "./Figure.svelte";
 export { default as Divider } from "./Divider.svelte";
