@@ -5,8 +5,11 @@
 		Heading,
 		Paragraph,
 		List,
+		TldrList,
 		Callout,
-		Code
+		Code,
+		Faq,
+		FaqItem
 	} from '$lib/components/blog';
 
 	const restTemplateExample = `POST /emails
@@ -66,9 +69,25 @@ with smtplib.SMTP("smtp.provider.com", 587) as server:
 		infrastructure</strong>.
 	</Lead>
 
-	<Paragraph>
-		The difference is how each one holds a connection, so that's the place to start.
-	</Paragraph>
+	<Callout variant="info" title="TL;DR">
+		<TldrList>
+			<li>
+				<strong>SMTP is stateful; a REST API is stateless.</strong> SMTP holds a connection through a
+				multi-step handshake, while a REST call is a single HTTP request with nothing to keep alive
+				between sends.
+			</li>
+			<li>
+				<strong>The API fits serverless and containers, and adds features SMTP cannot.</strong>
+				Server-side templates, idempotency keys, structured metadata, and scheduled sending all come from
+				the API understanding structured data; SMTP only moves a finished message.
+			</li>
+			<li>
+				<strong>Use the API for new code; keep working SMTP integrations until a change forces the
+				move.</strong> SMTP stays the right choice when the sending code cannot be modified, such as a
+				legacy CRM or a WordPress plugin.
+			</li>
+		</TldrList>
+	</Callout>
 
 	<Paragraph>
 		<strong>SMTP</strong> is a <strong>stateful, connection-oriented protocol</strong>. The application opens a TCP connection to the
@@ -239,11 +258,43 @@ with smtplib.SMTP("smtp.provider.com", 587) as server:
 	<Paragraph>
 		<strong>For anything new, the API is almost always the better starting point</strong>. When your stack spans both
 		worlds, such as a WordPress site alongside a custom Node.js service, choosing a provider that
-		supports both protocols keeps the analytics and suppression list unified — see how Lettr
+		supports both protocols keeps the analytics and suppression list unified. See how Lettr
 		<a href="/compare/">compares to other providers</a>.
 	</Paragraph>
 
-	<Heading level={2}>Making the decision</Heading>
+	<Heading level={2}>FAQ</Heading>
+
+	<Faq>
+		<FaqItem question="Is a REST API faster than SMTP?">
+			<strong>For most applications, yes, because there is no connection to establish.</strong> A REST
+			call is a single stateless HTTP request, while SMTP pays for a multi-step handshake on every send
+			from a short-lived process. A long-lived server that reuses one SMTP connection across a large
+			batch is the exception where the handshake cost is amortized.
+		</FaqItem>
+
+		<FaqItem question="Can I use both SMTP and a REST API with the same provider?">
+			<strong>Yes, and it is common when a stack spans both worlds.</strong> A provider that supports
+			both lets a serverless function send over the API while a legacy system that only exposes an SMTP
+			screen sends over the relay, with both flows feeding the same analytics and suppression list. Lettr
+			supports both protocols.
+		</FaqItem>
+
+		<FaqItem question="When should I keep using SMTP instead of switching to an API?">
+			<strong>Keep SMTP when the sending code cannot be modified or when migration risk outweighs the
+			benefit.</strong> WordPress plugins, legacy CRMs, ERP systems, and appliances that send alerts
+			usually expose only an SMTP configuration screen, so a relay is the only option. A working
+			low-volume integration with monitoring built around SMTP logs is also rarely worth rebuilding.
+		</FaqItem>
+
+		<FaqItem question="What is an idempotency key and why does SMTP lack one?">
+			<strong>An idempotency key lets a retried request return the original result instead of sending
+			the message twice.</strong> A REST API recognizes the key from the first attempt and does not
+			reprocess it. SMTP has no equivalent, so a connection that drops after <code>DATA</code> but before
+			the <code>250 OK</code> leaves the outcome unknown, and a naive retry can deliver a duplicate.
+		</FaqItem>
+	</Faq>
+
+	<Heading level={2}>Bottom line</Heading>
 
 	<Paragraph>
 		<strong>New code should use the API; existing SMTP integrations that work should be left alone
@@ -261,8 +312,8 @@ with smtplib.SMTP("smtp.provider.com", 587) as server:
 	</Paragraph>
 
 	<Paragraph>
-		If you want both transports available from a single provider — a
-		<a href="/smtp-relay/">drop-in SMTP relay</a> and a <a href="/email-api/">REST email API</a> —
+		For both transports from a single provider (a
+		<a href="/smtp-relay/">drop-in SMTP relay</a> and a <a href="/email-api/">REST email API</a>),
 		<a href="https://app.lettr.com/register">create a free Lettr account</a> and select the right one
 		for each part of your stack.
 	</Paragraph>

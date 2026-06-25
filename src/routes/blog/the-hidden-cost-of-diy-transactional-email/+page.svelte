@@ -8,7 +8,8 @@
 		TldrList,
 		Callout,
 		Code,
-		Divider
+		Faq,
+		FaqItem
 	} from '$lib/components/blog';
 
 	// Every post is just data + composed typography components.
@@ -135,7 +136,39 @@ Lettr::to($user->email)
 		outweighs the price of the sending service itself.
 	</Paragraph>
 
-	<Divider />
+	<Heading level={2}>FAQ</Heading>
+
+	<Faq>
+		<FaqItem question="Isn't sending email yourself cheaper than a managed platform?">
+			<strong>The infrastructure is cheaper; the engineering work around it usually is not.</strong> The
+			send itself stays a handful of method calls, but authentication, reputation, delivery logging, and
+			template maintenance turn into recurring hours that never make the roadmap. Those scattered hours
+			are the real cost, and they rarely appear on a budget.
+		</FaqItem>
+
+		<FaqItem question="What actually breaks when you run transactional email in-house?">
+			<strong>The common failures are deliverability drift, no delivery logs, on-call bounce and
+			blocklist handling, and templates gated behind a deploy.</strong> None is hard alone, but each
+			recurs and tends to land on whoever is on call. Deliverability drift is the quietest: open rates
+			fall as reputation erodes, often unnoticed until a customer reports a missing email.
+		</FaqItem>
+
+		<FaqItem question="When is rolling your own transactional email the right call?">
+			<strong>At low, predictable volume where nobody outside the team waits on the message, or for
+			throwaway prototypes.</strong> The maintenance burden is small there and a managed platform buys
+			little. The calculation changes once a customer is actively waiting on a password reset, receipt,
+			or login code, where silent spam placement costs support time and revenue.
+		</FaqItem>
+
+		<FaqItem question="What does a managed platform actually replace?">
+			<strong>The surrounding work: authentication and warm-up, searchable delivery logs, alerts when
+			open rates drop, and templates that change without a deploy.</strong> The goal is visibility, being
+			able to answer "did it arrive, and if not, why?" for every message, rather than assembling the
+			answer by hand from a dozen Stack Overflow threads.
+		</FaqItem>
+	</Faq>
+
+	<Heading level={2}>Bottom line</Heading>
 
 	<Paragraph>
 		DIY transactional email usually persists as an unrevisited default, and the case for changing it

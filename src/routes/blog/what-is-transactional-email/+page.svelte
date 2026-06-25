@@ -1,5 +1,15 @@
 <script lang="ts">
-	import { BlogPost, Lead, Heading, Paragraph, List, TldrList, Callout } from '$lib/components/blog';
+	import {
+		BlogPost,
+		Lead,
+		Heading,
+		Paragraph,
+		List,
+		TldrList,
+		Callout,
+		Faq,
+		FaqItem
+	} from '$lib/components/blog';
 </script>
 
 <BlogPost
@@ -18,12 +28,6 @@
 		password reset, a login code, an order confirmation. Almost every app and online store sends them,
 		and they work differently from the marketing emails a company sends to its whole audience.
 	</Lead>
-
-	<Paragraph>
-		That difference matters more than it first appears. Inbox providers and regulators <strong>treat the two
-		kinds of email by separate rules</strong>, so the same message can reliably reach the inbox or quietly land
-		in spam depending on how it's set up.
-	</Paragraph>
 
 	<Callout variant="info" title="TL;DR">
 		<TldrList>
@@ -148,12 +152,43 @@ This distinction matters because Gmail, spam filters, and privacy regulators all
 		</li>
 	</List>
 
-	<Heading level={2}>To sum up</Heading>
+	<Heading level={2}>FAQ</Heading>
+
+	<Faq>
+		<FaqItem question="What is the difference between transactional and marketing email?">
+			<strong>A transactional email answers a specific user action; a marketing email goes out on the
+			sender's schedule.</strong> A password reset, login code, or order confirmation has a one-to-one
+			link to something the recipient just did, while a campaign is pushed in bulk to an audience with
+			no specific action triggering each send.
+		</FaqItem>
+
+		<FaqItem question="Do transactional emails need an unsubscribe link?">
+			<strong>A purely transactional email does not, but the exemption ends the moment it carries
+			promotional content.</strong> An order confirmation with a discount code and product
+			recommendations is treated as marketing, which means it must include the unsubscribe link a plain
+			receipt would not require.
+		</FaqItem>
+
+		<FaqItem question="Why does mixing marketing into transactional email hurt deliverability?">
+			<strong>Because inbox providers and regulators stop treating the message as a transaction.</strong>
+			Gmail analyzes content, engagement, and sender reputation behind each message, and a transactional
+			template that looks promotional or shares infrastructure with campaigns can drag down the sender
+			score. Recovering a damaged domain reputation can take weeks of clean sending.
+		</FaqItem>
+
+		<FaqItem question="Are transactional emails exempt from anti-spam laws?">
+			<strong>Largely, as long as they stay purely transactional.</strong> Anti-spam laws like CAN-SPAM
+			and GDPR target unwanted bulk mail, so a receipt or purchase confirmation is mostly exempt from the
+			rules a promotion has to follow. Adding promotional content removes that exemption.
+		</FaqItem>
+	</Faq>
+
+	<Heading level={2}>Bottom line</Heading>
 
 	<Paragraph>
-		If there's one idea to carry away, it's that transactional email earns trust by being exactly
-        what the recipient asked for, and loses that trust the moment it tries to be anything more. Let each message do its one job well, and most of the rest
-        tends to take care of itself.
+		Transactional email earns trust by being exactly what the recipient asked for, and loses that trust
+		the moment it tries to be anything more. <strong>Let each message do its one job well</strong>, and
+		most of the rest tends to take care of itself.
 	</Paragraph>
 
 	<Paragraph>

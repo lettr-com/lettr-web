@@ -1,5 +1,16 @@
 <script lang="ts">
-	import { BlogPost, Lead, Heading, Paragraph, List, TldrList, Callout, Code } from '$lib/components/blog';
+	import {
+		BlogPost,
+		Lead,
+		Heading,
+		Paragraph,
+		List,
+		TldrList,
+		Callout,
+		Code,
+		Faq,
+		FaqItem
+	} from '$lib/components/blog';
 
 	const mcpJsonExample = `{
   "mcpServers": {
@@ -18,7 +29,7 @@
 	category="Product"
 	title="Managing Lettr from your AI assistant"
 	excerpt="How Lettr's MCP integration lets an AI assistant call the Lettr API in plain language: what MCP is, what the tools cover, the difference between the remote and local servers, how to set up each one, and which tasks suit a chat interface versus the dashboard."
-	metaDescription="How Lettr's MCP integration lets an AI assistant run the Lettr API in plain language — what MCP covers, remote vs local servers, and how to set it up."
+	metaDescription="How Lettr's MCP integration lets an AI assistant run the Lettr API in plain language: what MCP covers, remote vs local servers, and how to set it up."
 	author={{ name: 'Erik Vlčák', role: 'Customer Success Engineer', avatar: '/images/authors/erik.jpg' }}
 	date="May 27, 2026"
 	datetime="2026-05-27"
@@ -30,12 +41,6 @@
 		in plain language to list last week's bounces, add a sending domain, or send a test, and it picks
 		the right API call and returns the result in the same window.
 	</Lead>
-
-	<Paragraph>
-		It works in whatever assistant is already open (Claude, ChatGPT, Cursor, Copilot), so the tools
-		sit alongside the rest of that conversation. <strong>The same chat used to draft welcome-email
-		copy can send the test version of it</strong>, without a context switch in between.
-	</Paragraph>
 
 	<Callout variant="info" title="TL;DR">
 		<TldrList>
@@ -235,7 +240,39 @@
 		<a href="https://docs.lettr.com/learn/mcp/introduction">MCP docs</a>.
 	</Paragraph>
 
-	<Heading level={2}>Where this fits</Heading>
+	<Heading level={2}>FAQ</Heading>
+
+	<Faq>
+		<FaqItem question="What is MCP?">
+			<strong>MCP (Model Context Protocol) is an open standard that lets AI assistants call external
+			services.</strong> Without it, an assistant only sees what is in the conversation. With it, the
+			assistant can reach a real API and act on real data, so a request like "show me my sending
+			domains" returns the actual list from the account.
+		</FaqItem>
+
+		<FaqItem question="Which AI assistants work with Lettr's MCP?">
+			<strong>The remote server suits chat tools like Claude.ai, ChatGPT, and GitHub Copilot; the local
+			server suits editors like Claude Code.</strong> Cursor and Claude Desktop work with either. The
+			remote server connects over OAuth, while the local one runs on your machine with an API key in a
+			config file.
+		</FaqItem>
+
+		<FaqItem question="Is it safe to put my API key in a chat?">
+			<strong>The key never reaches the chat. The remote server uses OAuth and hands the tool a scoped
+			token, and the local server keeps the key in an env var on your machine.</strong> The remote
+			server is also read-only, so a stored or shared transcript cannot trigger a destructive change.
+			Both servers honor existing Lettr permissions.
+		</FaqItem>
+
+		<FaqItem question="Does MCP replace the Lettr dashboard?">
+			<strong>No. It complements the dashboard for quick lookups and one-off actions, not bulk
+			production work.</strong> Analytics charts, suppression management, and anything with a complex
+			filter UI stay better in the dashboard, where seeing a lot of data at once beats a series of
+			follow-up questions.
+		</FaqItem>
+	</Faq>
+
+	<Heading level={2}>Bottom line</Heading>
 
 	<Paragraph>
 		<strong>The dashboard stays the better tool for some work.</strong> Analytics charts, suppression

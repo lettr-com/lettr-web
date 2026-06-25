@@ -1,12 +1,22 @@
 <script lang="ts">
-	import { BlogPost, Heading, Paragraph, TldrList, Callout, Figure, Divider } from '$lib/components/blog';
+	import {
+		BlogPost,
+		Lead,
+		Heading,
+		Paragraph,
+		TldrList,
+		Callout,
+		Figure,
+		Faq,
+		FaqItem
+	} from '$lib/components/blog';
 </script>
 
 <BlogPost
 	category="Product"
 	title="Introducing marketing emails"
 	excerpt="Marketing email now lives inside Lettr. The new module adds Audiences for managing who you send to and Campaigns for designing and sending bulk email, all in the same account and on the same domains you already use for transactional sending."
-	metaDescription="Marketing email now lives inside Lettr — Audiences to manage who you send to and Campaigns to design and send bulk email, on your existing domains."
+	metaDescription="Marketing email now lives inside Lettr: Audiences to manage who you send to and Campaigns to design and send bulk email, on your existing domains."
 	author={{ name: 'Erik Vlčák', role: 'Customer Success Engineer', avatar: '/images/authors/erik.jpg' }}
 	date="June 2, 2026"
 	datetime="2026-06-02"
@@ -14,20 +24,12 @@
 	slug="introducing-lettr-marketing-audiences-and-campaigns"
 >
 
-<Paragraph>
-		Lettr started as a way to reliably send <strong>transactional email</strong>: password resets, receipts,
+<Lead>
+		Lettr started as a way to reliably send transactional email: password resets, receipts,
 		verification codes, and the messages your product depends on. Sending the occasional product
 		update or announcement to those same people is a different job, and most teams reach for a
 		separate marketing tool to do it.
-	</Paragraph>
-
-	<Paragraph>
-		The new <strong>Marketing module</strong> closes that gap inside Lettr itself. It adds two features
-		for marketing email: <strong>Audiences</strong> for managing who you send to and <strong
-			>Campaigns</strong
-		> for designing and sending emails in bulk, all in the same account and on the same domains you already
-		use for transactional sending.
-	</Paragraph>
+	</Lead>
 
 	<Callout variant="info" title="TL;DR">
 		<TldrList>
@@ -44,7 +46,13 @@
 		</TldrList>
 	</Callout>
 
-	
+	<Paragraph>
+		The new <strong>Marketing module</strong> closes that gap inside Lettr itself. It adds two features
+		for marketing email: <strong>Audiences</strong> for managing who you send to and <strong
+			>Campaigns</strong
+		> for designing and sending emails in bulk, all in the same account and on the same domains you already
+		use for transactional sending.
+	</Paragraph>
 
 	<Heading level={2}>Introducing Audiences</Heading>
 
@@ -224,11 +232,45 @@
 		cost, build a small audience, and send a real campaign to yourself in a few minutes.
 	</Paragraph>
 
-	<Divider />
+	<Heading level={2}>FAQ</Heading>
+
+	<Faq>
+		<FaqItem question="Can I send marketing and transactional email from the same Lettr account?">
+			<strong>Yes. The Marketing module runs in the same account and on the same domains you already use
+			for transactional sending.</strong> Audiences manage who you send to and Campaigns design and send
+			the bulk email. Keeping marketing on its own sending domain is recommended so its lower engagement
+			does not affect transactional deliverability.
+		</FaqItem>
+
+		<FaqItem question="What is the difference between a list, a segment, and a topic?">
+			<strong>A list is hand-curated, a segment follows a rule, and a topic is the recipient's
+			choice.</strong> A list changes only when someone edits it, a segment updates automatically as
+			contacts change (such as "subscribed contacts on the Pro plan"), and a topic lets recipients opt
+			into the categories they want. Most audiences use all three together.
+		</FaqItem>
+
+		<FaqItem question="How does Lettr handle unsubscribes and bounces?">
+			<strong>Automatically, on the contact record rather than per list.</strong> Anyone who has
+			unsubscribed, bounced, or complained is excluded from future campaigns without a suppression list
+			to maintain, and because the opt-out lives on the contact, it follows the person everywhere they
+			appear. A contact in several overlapping lists still receives a campaign exactly once.
+		</FaqItem>
+
+		<FaqItem question="Do marketing campaigns include an unsubscribe link?">
+			<strong>Yes. Lettr adds a working unsubscribe link to every marketing send by default</strong>, so
+			a campaign cannot accidentally ship without the one the law requires. Merge tags like
+			<code>{'{{first_name}}'}</code> pull from the same contact properties that shape the audience.
+		</FaqItem>
+	</Faq>
+
+	<Heading level={2}>Bottom line</Heading>
 
 	<Paragraph>
-		<strong>Ready to send your first campaign?</strong> <a href="https://app.lettr.com/register"
-			>Create a free Lettr account</a
-		> and try Audiences and Campaigns today.
+		Marketing email now lives inside Lettr, on the same account and domains as transactional sending,
+		with Audiences for who you reach and Campaigns for what you send.
+		<strong>The free 500-contact tier is enough to build a small audience and send a real
+		campaign.</strong>
+		<a href="https://app.lettr.com/register">Create a free Lettr account</a> to try Audiences and
+		Campaigns.
 	</Paragraph>
 </BlogPost>
