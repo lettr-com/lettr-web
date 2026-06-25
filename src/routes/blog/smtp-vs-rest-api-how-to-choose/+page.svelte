@@ -64,9 +64,11 @@ with smtplib.SMTP("smtp.provider.com", 587) as server:
 	slug="smtp-vs-rest-api-how-to-choose"
 >
 	<Lead>
-		SMTP and a REST API are the two ways an application hands an email to a sending service. They
-		differ in one fundamental way, and <strong>that difference decides which one fits modern
-		infrastructure</strong>.
+		SMTP and a REST API are the two ways an application hands an email to a sending service. SMTP is
+		the older, connection-oriented protocol that every mail system understands, while a REST API is a
+		single stateless HTTP request. They differ in how they hold a connection, what features they expose
+		beyond plain delivery, and how they report failure, and <strong>that difference decides which one
+		fits modern infrastructure</strong> like serverless functions and containers.
 	</Lead>
 
 	<Callout variant="info" title="TL;DR">

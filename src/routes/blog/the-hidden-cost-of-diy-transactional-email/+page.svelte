@@ -37,7 +37,9 @@ Lettr::to($user->email)
 		Most products send their first transactional emails the cheap way: an SMTP server or a provider
 		API wired straight into the app, with authentication, deliverability, logging, and templates all
 		handled in-house. The sending itself stays cheap, but the work that grows up around it is where
-		the real cost hides, and that cost almost never shows up on a budget.
+		the real cost hides, and that cost almost never shows up on a budget. <strong>It surfaces instead
+		as recurring engineering hours</strong>: chasing deliverability drift, debugging bounces, and
+		shipping a deploy every time a template changes.
 	</Lead>
 
 	<Callout variant="info" title="TL;DR">

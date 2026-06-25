@@ -28,7 +28,9 @@
 		Lettr started as a way to reliably send transactional email: password resets, receipts,
 		verification codes, and the messages your product depends on. Sending the occasional product
 		update or announcement to those same people is a different job, and most teams reach for a
-		separate marketing tool to do it.
+		separate marketing tool to do it. <strong>The new Marketing module closes that gap inside Lettr
+		itself</strong>, adding Audiences for managing who you send to and Campaigns for designing and
+		sending bulk email, on the same account and domains you already use.
 	</Lead>
 
 	<Callout variant="info" title="TL;DR">
@@ -45,14 +47,6 @@
 			<li>Keep marketing on its own <strong>sending domain</strong> to protect transactional deliverability.</li>
 		</TldrList>
 	</Callout>
-
-	<Paragraph>
-		The new <strong>Marketing module</strong> closes that gap inside Lettr itself. It adds two features
-		for marketing email: <strong>Audiences</strong> for managing who you send to and <strong
-			>Campaigns</strong
-		> for designing and sending emails in bulk, all in the same account and on the same domains you already
-		use for transactional sending.
-	</Paragraph>
 
 	<Heading level={2}>Introducing Audiences</Heading>
 

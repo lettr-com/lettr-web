@@ -27,9 +27,9 @@
 		A Mailer Daemon is the automated program on a mail server that sends a bounce-back message when an
 		email cannot be delivered. The message arrives from a sender like "Mail Delivery Subsystem" or
 		"Mailer-Daemon", it usually carries a subject such as "Delivery Status Notification (Failure)",
-		and it means one specific email did not reach its recipient. This article explains what the
-		daemon is, the common reasons a message bounces, how to read the error code inside the bounce, and
-		how to fix each cause.
+		and it means one specific email did not reach its recipient. <strong>The useful part is the status
+		code buried in the body</strong>, which names why the message failed and whether the address is
+		dead for good or just temporarily unreachable.
 	</Lead>
 
 	<Callout variant="info" title="TL;DR">

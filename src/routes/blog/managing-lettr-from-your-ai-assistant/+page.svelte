@@ -39,7 +39,9 @@
 	<Lead>
 		Lettr has an MCP integration which lets an AI assistant call the Lettr API on your behalf. Ask it
 		in plain language to list last week's bounces, add a sending domain, or send a test, and it picks
-		the right API call and returns the result in the same window.
+		the right API call and returns the result in the same window. It works in whatever assistant is
+		already open, whether Claude, ChatGPT, Cursor, or Copilot, so <strong>the same chat that drafts an
+		email can send the test version of it</strong> without a context switch in between.
 	</Lead>
 
 	<Callout variant="info" title="TL;DR">

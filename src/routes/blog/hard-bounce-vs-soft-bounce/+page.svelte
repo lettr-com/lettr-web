@@ -28,8 +28,7 @@
 		it instead of placing it in the inbox. Bounces come in two kinds. A hard bounce is permanent,
 		caused by something that will not change on its own such as an address that does not exist. A soft
 		bounce is temporary, caused by something that usually clears such as a full mailbox or a server
-		that is briefly down. This article explains the difference, the causes of each, why bounces hurt
-		sender reputation, and how to handle both correctly.
+		that is briefly down.
 	</Lead>
 
 	<Callout variant="info" title="TL;DR">

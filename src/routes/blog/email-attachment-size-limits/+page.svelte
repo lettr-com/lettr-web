@@ -16,9 +16,9 @@
 	<Lead>
 		Every email provider caps how large an attachment can be, and the caps are lower than most people
 		expect. The number a provider advertises is also not the number that actually applies, because
-		attachments are encoded for transit and the encoding adds roughly a third to the file size. This
-		article lists the real limits for the major providers, explains why the effective ceiling is
-		lower, and covers the practical ways to send a file that is too big to attach.
+		attachments are encoded for transit and the encoding adds roughly a third to the file size. The
+		real ceiling is set by the receiving server as much as the sending one, so <strong>a file that
+		sends fine from one provider can bounce at another</strong>.
 	</Lead>
 
 	<Callout variant="info" title="TL;DR">
