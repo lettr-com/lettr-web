@@ -5,10 +5,11 @@
 		Heading,
 		Paragraph,
 		List,
-		Quote,
+		TldrList,
 		Callout,
 		Code,
-		Divider
+		Faq,
+		FaqItem
 	} from '$lib/components/blog';
 
 	const rfcMessage = `From: notifications@yourapp.com
@@ -56,21 +57,31 @@ Receiving server: 250 2.0.0 OK`;
 >
 	<Lead>
 		Sending an email looks like one line of code: a <code>POST /emails</code> request, then a
-		<code>200 OK</code> a few milliseconds later. It looks instant and simple, but a lot has to happen
-		before that message reaches a real inbox.
+		<code>200 OK</code> a few milliseconds later. It looks instant and simple, but behind that single
+		call the message is validated, assembled into a standard format, cryptographically signed, routed
+		through DNS, and checked for reputation and spam before a mail server decides where it lands.
+		A lot has to happen before that message reaches a real inbox, and each stage hides
+		a failure that can drop or misroute it.
 	</Lead>
 
-	<Paragraph>
-		Behind that single call is a chain of steps: the message is <strong>validated</strong>, <strong>assembled</strong> into a standard
-		format, cryptographically <strong>signed</strong>, <strong>routed</strong> through DNS, and <strong>checked</strong> for reputation and spam before a
-		mail server decides where it lands.
-	</Paragraph>
-
-	<Paragraph>
-		<strong>This article follows that journey one step at a time</strong>, from the
-		API call to the moment a recipient sees the message, so each stage and the failures that hide in it
-		become clear.
-	</Paragraph>
+	<Callout variant="info" title="TL;DR">
+		<TldrList>
+			<li>
+				<strong>A 200 OK means the message passed validation, not that it was delivered.</strong> The
+				API success only confirms the send was accepted and queued; everything that decides placement happens
+				afterward.
+			</li>
+			<li>
+				<strong>Delivery and deliverability are different things.</strong> A <code>250</code> from the
+				receiving server means it accepted the message; whether the message reaches the inbox is a separate
+				question decided by authentication, reputation, and content.
+			</li>
+			<li>
+				<strong>Spam placement is silent.</strong> No error code and no webhook fire when a message is
+				filtered, so a falling open rate is often the only signal that mail has stopped landing in the inbox.
+			</li>
+		</TldrList>
+	</Callout>
 
 	<Heading level={2}>Step 1: Submission and validation</Heading>
 
@@ -297,25 +308,52 @@ Receiving server: 250 2.0.0 OK`;
 		</li>
 	</List>
 
-	<Heading level={2}>The gap between "sent" and "received"</Heading>
+	<Heading level={2}>FAQ</Heading>
+
+	<Faq>
+		<FaqItem question="Does a 200 OK mean my email was delivered?">
+			<strong>No. A 200 OK means the message passed validation and was queued for sending.</strong>
+			Delivery happens later, when the receiving server accepts the message and returns a
+			<code>250</code> over SMTP. Even that is not the same as reaching the inbox, since placement is
+			decided afterward by authentication, reputation, and content filtering.
+		</FaqItem>
+
+		<FaqItem question="What is the difference between delivery and deliverability?">
+			<strong>Delivery means the receiving server accepted the message; deliverability means it
+			reached the inbox.</strong> A <code>250</code> confirms delivery, but the receiver still decides
+			whether to file the message in the inbox, in spam, or in a tab like Promotions. A 99% delivery
+			rate can still leave a large share of mail in spam.
+		</FaqItem>
+
+		<FaqItem question="Why did my email land in spam with no error?">
+			<strong>Spam placement is silent: there is no error code and no webhook when a message is
+			filtered.</strong> The message was accepted, so the delivery rate stays high while the open rate
+			drops. That fall in engagement is usually the only signal, which is why tracking opens is the
+			early warning system for placement problems.
+		</FaqItem>
+
+		<FaqItem question="What actually decides whether an email reaches the inbox?">
+			<strong>Reputation does most of the work, with authentication as the entry requirement.</strong>
+			SPF, DKIM, and DMARC have to pass for the message to be considered at all, but the sending
+			domain's reputation, built from how recipients engage with its mail, is what determines placement
+			when the content itself is ambiguous.
+		</FaqItem>
+	</Faq>
+
+	<Heading level={2}>Bottom line</Heading>
 
 	<Paragraph>
-		Email looks like a simple input-output system: call an API, and a message arrives. Between those
-		two events, the message passes through DNS resolution, cryptographic verification, reputation
-		scoring, and content analysis, and each step can silently drop or misroute it. The sender's only
-		confirmation is a <code>250 OK</code>, which means "I'll take it from here" with no promise of what
-		happens next.
+		Between the API call and the inbox, a message passes through DNS resolution, cryptographic
+		verification, reputation scoring, and content analysis, and each step can silently drop or misroute
+		it. <strong>The only confirmation a sender gets is a <code>250 OK</code>, which means the server
+		took the message, not that anyone will see it.</strong> Authentication, reputation, and feedback
+		loops feed into one another, and placement is the result.
 	</Paragraph>
 
 	<Paragraph>
-		Seen in full, <strong>email is a distributed system where authentication, reputation, and feedback loops
-		feed into one another</strong>.
-	</Paragraph>
-
-	<Paragraph>
-		If you're building an app that sends email and would rather not spend the next month debugging
-		DKIM alignment and processing feedback loops yourself, Lettr surfaces every step in
-		<a href="/platform/analytics/">delivery logs and analytics</a>, on a multi-region
-		<a href="/channels/email/">email channel</a> built for it.
+		Lettr surfaces every step in <a href="/platform/analytics/">delivery logs and analytics</a>, on a
+		multi-region <a href="/channels/email/">email channel</a> built for it, so DKIM alignment and
+		feedback-loop handling are not something to run yourself.
+		<a href="https://app.lettr.com/register">Create a free account</a> to send on it.
 	</Paragraph>
 </BlogPost>

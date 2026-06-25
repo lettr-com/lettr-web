@@ -7,7 +7,8 @@
 		TldrList,
 		Callout,
 		Code,
-		Divider
+		Faq,
+		FaqItem
 	} from '$lib/components/blog';
 
 	const spfRecord = `v=spf1 include:spf.lettr.com include:_spf.google.com ~all`;
@@ -67,15 +68,10 @@ dmarc=pass (p=REJECT dis=NONE) header.from=yourapp.com`;
 	<Lead>
 		Open a terminal, and you can send an email claiming to be from <code>support@stripe.com</code>.
 		SMTP won't stop you. The protocol was designed in the early 1980s with no built-in way to verify
-		the sender, and that gap is still there.
+		the sender, and that gap is still there. Three standards have been retrofitted on top to close it:
+		SPF, DKIM, and DMARC. Together they let a receiving server decide whether mail
+		claiming to be from a domain actually came from someone the domain authorized.
 	</Lead>
-
-	<Paragraph>
-		Three standards have been retrofitted on top to close it: <strong>SPF</strong>, <strong>DKIM</strong>, and <strong>DMARC</strong>. Together, they
-		decide whether mail claiming to be from your domain actually deserves to land in someone's inbox.
-		This is the developer's version: what these DNS records do, how they fit together, and how to
-		tell whether they're working.
-	</Paragraph>
 
 	<Callout variant="info" title="TL;DR">
 		<TldrList>
@@ -241,15 +237,49 @@ dmarc=pass (p=REJECT dis=NONE) header.from=yourapp.com`;
 		checks and flags missing records before you start sending.
 	</Paragraph>
 
-	<Heading level={2}>None of this is optional anymore</Heading>
+	<Heading level={2}>FAQ</Heading>
+
+	<Faq>
+		<FaqItem question="Do I need all three of SPF, DKIM, and DMARC?">
+			<strong>Yes. The three do different jobs and only close the spoofing gap together.</strong> SPF
+			names the servers allowed to send, DKIM signs each message so tampering is detectable, and DMARC
+			ties both to the visible <code>From</code> address and says what to do on failure. Gmail and Yahoo
+			require all three for bulk senders.
+		</FaqItem>
+
+		<FaqItem question="What does DMARC alignment mean?">
+			<strong>Alignment means the domain that passed SPF or DKIM matches the domain in the visible
+			<code>From</code> header.</strong> Without it, a message could pass SPF for one domain while
+			displaying another in the <code>From</code> line, which is exactly the spoofing DMARC exists to
+			stop. DMARC passes only when at least one of the two authenticates and aligns with the
+			<code>From</code> domain.
+		</FaqItem>
+
+		<FaqItem question="Why should I start DMARC at p=none?">
+			<strong>Because <code>p=none</code> reports failures without blocking any mail.</strong> The
+			aggregate reports surface every service sending as your domain, including ones you forgot about,
+			so you can fix legitimate senders before enforcement could send their mail to spam. Review the
+			reports for a few weeks, then move to <code>p=quarantine</code> and <code>p=reject</code>.
+		</FaqItem>
+
+		<FaqItem question="How do I check whether SPF, DKIM, and DMARC are working?">
+			<strong>Read the records from DNS with <code>dig</code>, then send a test email and open "Show
+			original" in Gmail.</strong> The receiver records the verdicts in an
+			<code>Authentication-Results</code> header, and the goal is <code>dkim=pass</code>,
+			<code>spf=pass</code>, and <code>dmarc=pass</code>. A <code>dmarc=fail</code> while SPF and DKIM
+			pass almost always points to an alignment mismatch.
+		</FaqItem>
+	</Faq>
+
+	<Heading level={2}>Bottom line</Heading>
 
 	<Paragraph>
 		Gmail and Yahoo both
 		<a href="https://blog.google/products/gmail/gmail-security-authentication-spam-protection/"
 			>require all three</a
 		> for bulk senders, and inbox providers increasingly penalize domains that lack them. <strong>Without these
-		records, anyone can send mail that appears to come from your domain</strong>, and your users won't inspect the
-		headers - they will assume it was you.
+		records, anyone can send mail that appears to come from your domain</strong>, and recipients won't inspect the
+		headers. They will assume it was you.
 	</Paragraph>
 
 	<Paragraph>

@@ -12,6 +12,66 @@ export interface PostMeta {
 // Used by the blog index listing and the "Related articles" block on each post.
 export const posts: PostMeta[] = [
   {
+    slug: "hard-bounce-vs-soft-bounce",
+    category: "Deliverability",
+    title: "Hard bounce vs. soft bounce: what email bounces mean and how to handle them",
+    excerpt:
+      "What an email bounce is, the difference between a hard bounce (a permanent failure such as an address that does not exist) and a soft bounce (a temporary one such as a full mailbox), the common causes of each, why a bounce rate above roughly 2% damages sender reputation, and how to handle both kinds correctly.",
+    author: "Erik Vlčák",
+    date: "June 24, 2026",
+    readTime: "7 min read",
+  },
+  {
+    slug: "mailer-daemon-mail-delivery-subsystem",
+    category: "Fundamentals",
+    title: "Mailer Daemon and Mail Delivery Subsystem errors explained (and how to fix them)",
+    excerpt:
+      "What a Mailer Daemon or Mail Delivery Subsystem bounce-back means, the common reasons an email fails to deliver, how to read the SMTP status code in the message, step-by-step fixes for each cause, Gmail and Yahoo specifics, and what bounces that arrive for mail you never sent are telling you.",
+    author: "Erik Vlčák",
+    date: "June 19, 2026",
+    readTime: "8 min read",
+  },
+  {
+    slug: "email-attachment-size-limits",
+    category: "Fundamentals",
+    title: "Email attachment size limits by provider (and how to send large files)",
+    excerpt:
+      "The attachment size limits for Gmail, Outlook, Yahoo, and iCloud Mail, why the real ceiling is lower than the number suggests because of encoding overhead, and the practical ways to send a file that is too big to attach, including large video.",
+    author: "Erik Vlčák",
+    date: "June 15, 2026",
+    readTime: "6 min read",
+  },
+  {
+    slug: "onboarding-email-best-practices",
+    category: "Fundamentals",
+    title: "Onboarding email best practices (with examples and templates)",
+    excerpt:
+      "A practical guide to onboarding email sequences: what an onboarding email is, how to time and structure the welcome-to-activation flow, the best practices that matter (subject lines, personalization, a single CTA, the metrics to track), teardown examples, copy-paste templates, and how to send the sequence programmatically.",
+    author: "Erik Vlčák",
+    date: "June 12, 2026",
+    readTime: "9 min read",
+  },
+  {
+    slug: "email-deliverability-checklist",
+    category: "Deliverability",
+    title: "Email deliverability checklist",
+    excerpt:
+      "A complete email deliverability checklist covering authentication (SPF, DKIM, DMARC), list hygiene, content and spam triggers, sender reputation and IP warmup, and the monitoring metrics to watch, with a printable summary at the end.",
+    author: "Erik Vlčák",
+    date: "June 9, 2026",
+    readTime: "9 min read",
+  },
+  {
+    slug: "email-signature-size-and-dimensions",
+    category: "Fundamentals",
+    title: "Email signature size and dimensions",
+    excerpt:
+      "The recommended pixel dimensions, file size, and format for an email signature, how signatures render in Gmail, Outlook, and Apple Mail, and the common mistakes that make them break on mobile or load slowly.",
+    author: "Erik Vlčák",
+    date: "June 6, 2026",
+    readTime: "5 min read",
+  },
+  {
     slug: "introducing-lettr-marketing-audiences-and-campaigns",
     category: "Product",
     title: "Introducing marketing emails in Lettr",
@@ -26,7 +86,7 @@ export const posts: PostMeta[] = [
     category: "Product",
     title: "Managing Lettr from your AI assistant: the MCP integration",
     excerpt:
-      "A bounce report comes in and you tab between dashboard, terminal, and editor copying IDs. MCP turns that into a sentence in the AI assistant you already have open. Here’s how the integration works.",
+      "How Lettr's MCP integration lets an AI assistant call the Lettr API in plain language: what MCP is, what the tools cover, the difference between the remote and local servers, how to set up each one, and which tasks suit a chat interface versus the dashboard.",
     author: "Erik Vlčák",
     date: "May 27, 2026",
     readTime: "5 min read",
@@ -46,7 +106,7 @@ export const posts: PostMeta[] = [
     category: "Deliverability",
     title: "How to warm up a new sending domain",
     excerpt:
-      "You set up SPF, DKIM, and DMARC, flip the switch, send 50,000 emails on day one — and half vanish. Nothing is broken. Your domain is just new and untrusted. Here’s how to warm it up.",
+      "How to build sending reputation on a new domain by ramping volume gradually: who needs a warm-up, which recipients and content to send first, two sample ramp schedules, the bounce and complaint signals to watch, and the stop signals that mean pause immediately.",
     author: "Erik Vlčák",
     date: "April 22, 2026",
     readTime: "9 min read",
@@ -56,7 +116,7 @@ export const posts: PostMeta[] = [
     category: "Deliverability",
     title: "Why you should separate transactional and marketing email",
     excerpt:
-      "Your password reset and your weekly newsletter have almost nothing in common — yet most teams send both from the same domain, then wonder why 2FA codes hit spam after a campaign goes sideways.",
+      "Why transactional and marketing email belong on separate subdomains: how shared sender reputation lets a marketing campaign drag 2FA codes into spam, how to classify the gray-area emails that sit between the two, and what the legal rules add on top.",
     author: "Erik Vlčák",
     date: "April 8, 2026",
     readTime: "7 min read",
@@ -66,7 +126,7 @@ export const posts: PostMeta[] = [
     category: "Engineering",
     title: "SMTP vs. REST API: how to choose and when to switch",
     excerpt:
-      "Most developers reach for the email transport they’ve used before — until they’re debugging a recycled SMTP connection in a serverless function at 2 AM. Here’s how to pick the right one and switch if you picked wrong.",
+      "How SMTP and REST API email transports differ in practice (statefulness, serverless fit, templates, idempotency, error handling), when each is the right choice, and a step-by-step plan for migrating from SMTP to a REST API.",
     author: "Erik Vlčák",
     date: "March 18, 2026",
     readTime: "8 min read",
@@ -76,7 +136,7 @@ export const posts: PostMeta[] = [
     category: "Deliverability",
     title: "SPF, DKIM, and DMARC explained for developers",
     excerpt:
-      "Open a terminal and you can send mail claiming to be from support@stripe.com — SMTP won’t stop you. Three DNS-based standards close that gap. Here’s what each one does and how to tell if it’s working.",
+      "What SPF, DKIM, and DMARC each do, how they fit together to stop email spoofing, and how to read the DNS records and authentication headers to tell whether they're working.",
     author: "Erik Vlčák",
     date: "March 4, 2026",
     readTime: "10 min read",
@@ -86,7 +146,7 @@ export const posts: PostMeta[] = [
     category: "Engineering",
     title: "The journey of an email: from API call to inbox",
     excerpt:
-      "You POST /emails, get a 200 OK, and assume it went through. Fifteen minutes later: “I never received my verification email.” Here’s everything that happens between your API call and the recipient’s inbox.",
+      "A step-by-step walkthrough of what happens to an email between your API call and the recipient's inbox: validation, message assembly, DKIM signing, DNS routing, the SMTP handshake, authentication, content filtering, and placement.",
     author: "Erik Vlčák",
     date: "February 18, 2026",
     readTime: "11 min read",
@@ -96,7 +156,7 @@ export const posts: PostMeta[] = [
     category: "Fundamentals",
     title: "How transactional email actually works",
     excerpt:
-      "A user clicks “Reset Password,” waits, checks spam, gives up — and files a ticket about an email you didn’t know was broken. If you’re shipping your first signup or receipt flow, the transactional vs. marketing distinction matters.",
+      "What separates transactional email from marketing email, why inbox providers and regulators treat them differently, and how to keep these messages reliable in production.",
     author: "Erik Vlčák",
     date: "February 4, 2026",
     readTime: "6 min read",

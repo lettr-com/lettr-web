@@ -6,9 +6,9 @@
 		Paragraph,
 		List,
 		TldrList,
-		Quote,
 		Callout,
-		Divider
+		Faq,
+		FaqItem
 	} from '$lib/components/blog';
 </script>
 
@@ -25,13 +25,11 @@
 >
 	<Lead>
 		A password reset and a weekly newsletter have almost nothing in common: different audiences,
-		expectations, legal requirements, and engagement patterns. However, sending both from the same domain ties
-		their fates together, which is how a marketing campaign can push transactional emails into spam.
+		expectations, legal requirements, and engagement patterns. Mailbox providers still judge a sending
+		domain by how all of its mail behaves together, so sending both from the same domain ties their
+		fates together. That shared reputation is how a marketing campaign can push transactional
+		emails into spam, and putting each stream on its own subdomain is what keeps them apart.
 	</Lead>
-
-	<Paragraph>
-		The most critical email a business cannot afford to lose is transactional, such as password resets, 2FA codes, receipts, and messages that users are actively awaiting. Marketing emails are sent in bulk to recipients who never requested them. Sharing a domain means the reputation of the transactional emails depends on the behavior of the marketing messages.
-	</Paragraph>
 
 	<Callout variant="info" title="TL;DR">
 		<TldrList>
@@ -181,7 +179,39 @@
 		sent through the marketing subdomain, with proper consent and unsubscribe handling.
 	</Callout>
 
-	<Heading level={2}>Where to start</Heading>
+	<Heading level={2}>FAQ</Heading>
+
+	<Faq>
+		<FaqItem question="Why separate transactional and marketing email?">
+			<strong>So a marketing complaint can never damage the reputation password resets and receipts
+			depend on.</strong> Transactional mail reaches the inbox because recipients reliably engage with
+			it. Sharing a domain with campaigns lets a single bad send drag that reputation down, and the
+			critical-path mail suffers for it.
+		</FaqItem>
+
+		<FaqItem question="Should I use a subdomain or a completely separate domain?">
+			<strong>A subdomain of your main domain is enough for most senders.</strong> Sending transactional
+			mail from one subdomain and marketing from another gives each its own authentication and
+			reputation while keeping both visibly tied to your brand. A fully separate domain is rarely needed
+			and adds setup for little extra isolation.
+		</FaqItem>
+
+		<FaqItem question="Which emails count as transactional versus marketing?">
+			<strong>Transactional mail answers a specific user action; marketing mail is sent on the sender's
+			schedule.</strong> Password resets, receipts, and shipping notices are transactional. A newsletter
+			or promotion is marketing. The gray area is a receipt with a coupon or product recommendations,
+			which providers and regulators treat as marketing.
+		</FaqItem>
+
+		<FaqItem question="Can one email be both transactional and marketing?">
+			<strong>In practice no, because adding promotional content reclassifies the whole message.</strong>
+			Gmail evaluates content signals rather than your internal label, and regulators apply the
+			marketing rules once a message carries promotion. Keep each message to a single purpose and send
+			the cross-sell as a separate marketing email.
+		</FaqItem>
+	</Faq>
+
+	<Heading level={2}>Bottom line</Heading>
 
 	<Paragraph>
 		Separating the two streams is a <strong>structural decision, not a deliverability tactic</strong>.

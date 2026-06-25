@@ -7,7 +7,8 @@
 		List,
 		TldrList,
 		Callout,
-		Divider
+		Faq,
+		FaqItem
 	} from '$lib/components/blog';
 </script>
 
@@ -26,15 +27,10 @@
 		Warming up a sending domain means raising its daily volume gradually so mailbox providers can build
 		a reputation for it before it sends at full scale. A brand-new domain with correct SPF, DKIM, and
 		DMARC can still see half its first large batch deferred or filtered, because correct authentication
-		proves who is sending, not that the sender is trusted.
+		proves who is sending, not that the sender is trusted. Trust has to be earned through a
+		record of mail that people open and do not report, which is why a warm-up is paced over
+		weeks.
 	</Lead>
-
-	<Paragraph>
-		That trust is the part no setup checklist covers, and it cannot be configured. It has to be earned,
-		by sending in a way that gives mailbox providers a reason to deliver. This article is about how to do
-		that without tripping a spam filter on the way: who needs a warm-up, which recipients and content to
-		send first, how fast to ramp, and which signals mean keep going or stop.
-	</Paragraph>
 
 	<Callout variant="info" title="TL;DR">
 		<TldrList>
@@ -335,7 +331,39 @@
 		days; ignoring it and continuing to send costs weeks or months.
 	</Callout>
 
-	<Heading level={2}>What warming up actually buys you</Heading>
+	<Heading level={2}>FAQ</Heading>
+
+	<Faq>
+		<FaqItem question="How long does it take to warm up a sending domain?">
+			<strong>Most warm-ups run two to eight weeks, depending on target volume.</strong> A schedule that
+			reaches a few thousand emails a day finishes faster than one ramping to hundreds of thousands. The
+			pace is set by the signals, not the calendar: hold or slow the ramp whenever bounce, complaint, or
+			deferral rates climb, and only increase when they stay clean.
+		</FaqItem>
+
+		<FaqItem question="Do I need to warm up a domain if my provider has a good reputation?">
+			<strong>Reputation is tied to the sending domain, not just the provider, so a new domain still
+			needs to warm up.</strong> Shared IP pools can carry some of the provider's standing, but mailbox
+			providers track how recipients engage with mail from your specific domain, and that history starts
+			at zero.
+		</FaqItem>
+
+		<FaqItem question="What happens if I send full volume from a cold domain?">
+			<strong>A sudden spike from a domain with no history looks like a spam campaign and gets throttled
+			or blocked.</strong> Receivers defer or reject the mail, the early sends land in spam, and the
+			domain's reputation forms around that bad first impression, which then takes weeks of reduced
+			sending to repair.
+		</FaqItem>
+
+		<FaqItem question="Who needs to send the first warm-up emails?">
+			<strong>The most engaged recipients first: people who open and reply reliably.</strong> Early
+			positive engagement is what builds the reputation that later, less-engaged sends rely on. Starting
+			with a stale or unverified list does the opposite and can stall the warm-up before it gains any
+			ground.
+		</FaqItem>
+	</Faq>
+
+	<Heading level={2}>Bottom line</Heading>
 
 	<Paragraph>
 		One idea sits under every rule here: <strong>a warm-up is the sender proving, gradually, that volume
@@ -348,8 +376,9 @@
 		On <a href="https://docs.lettr.com/learn/domains/sending-domains">Lettr</a>, authentication is
 		verified during setup and bounce and complaint events stream through <a
 			href="https://docs.lettr.com/learn/webhooks/introduction">webhooks</a
-		> in real time, so a bad ramp surfaces in minutes instead of days — part of Lettr's
-		<a href="/platform/deliverability/">deliverability tooling</a>. <a href="https://app.lettr.com/register">Create a free account</a> and verify a
-		domain before the next launch needs it.
+		> in real time, so a bad ramp surfaces in minutes instead of days, part of Lettr's
+		<a href="/platform/deliverability/">deliverability tooling</a>.
+		<a href="https://app.lettr.com/register">Create a free account</a> and verify a domain before the
+		next launch needs it.
 	</Paragraph>
 </BlogPost>
