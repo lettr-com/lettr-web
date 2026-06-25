@@ -69,7 +69,7 @@ dmarc=pass (p=REJECT dis=NONE) header.from=yourapp.com`;
 		Open a terminal, and you can send an email claiming to be from <code>support@stripe.com</code>.
 		SMTP won't stop you. The protocol was designed in the early 1980s with no built-in way to verify
 		the sender, and that gap is still there. Three standards have been retrofitted on top to close it:
-		<strong>SPF, DKIM, and DMARC</strong>. Together they let a receiving server decide whether mail
+		SPF, DKIM, and DMARC. Together they let a receiving server decide whether mail
 		claiming to be from a domain actually came from someone the domain authorized.
 	</Lead>
 

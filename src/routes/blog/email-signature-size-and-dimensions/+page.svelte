@@ -27,8 +27,8 @@
 		An email signature is the block of contact details, branding, and sometimes a logo or headshot
 		that sits at the bottom of an email. Getting its size right matters because email clients render
 		images very differently from a browser, and a signature that looks correct in one inbox can
-		overflow, blur, or break entirely in another. Two numbers decide whether it holds up: <strong>the
-		pixel dimensions of the image and the file size in kilobytes</strong>.
+		overflow, blur, or break entirely in another. Two numbers decide whether it holds up: the
+		pixel dimensions of the image and the file size in kilobytes.
 	</Lead>
 
 	<Callout variant="info" title="TL;DR">

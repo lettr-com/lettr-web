@@ -27,8 +27,8 @@
 		Warming up a sending domain means raising its daily volume gradually so mailbox providers can build
 		a reputation for it before it sends at full scale. A brand-new domain with correct SPF, DKIM, and
 		DMARC can still see half its first large batch deferred or filtered, because correct authentication
-		proves who is sending, not that the sender is trusted. <strong>Trust has to be earned through a
-		record of mail that people open and do not report</strong>, which is why a warm-up is paced over
+		proves who is sending, not that the sender is trusted. Trust has to be earned through a
+		record of mail that people open and do not report, which is why a warm-up is paced over
 		weeks.
 	</Lead>
 

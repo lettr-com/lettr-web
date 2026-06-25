@@ -27,8 +27,8 @@
 		A password reset and a weekly newsletter have almost nothing in common: different audiences,
 		expectations, legal requirements, and engagement patterns. Mailbox providers still judge a sending
 		domain by how all of its mail behaves together, so sending both from the same domain ties their
-		fates together. <strong>That shared reputation is how a marketing campaign can push transactional
-		emails into spam</strong>, and putting each stream on its own subdomain is what keeps them apart.
+		fates together. That shared reputation is how a marketing campaign can push transactional
+		emails into spam, and putting each stream on its own subdomain is what keeps them apart.
 	</Lead>
 
 	<Callout variant="info" title="TL;DR">

@@ -17,8 +17,8 @@
 		Every email provider caps how large an attachment can be, and the caps are lower than most people
 		expect. The number a provider advertises is also not the number that actually applies, because
 		attachments are encoded for transit and the encoding adds roughly a third to the file size. The
-		real ceiling is set by the receiving server as much as the sending one, so <strong>a file that
-		sends fine from one provider can bounce at another</strong>.
+		real ceiling is set by the receiving server as much as the sending one, so a file that
+		sends fine from one provider can bounce at another.
 	</Lead>
 
 	<Callout variant="info" title="TL;DR">

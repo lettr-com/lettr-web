@@ -60,7 +60,7 @@ Receiving server: 250 2.0.0 OK`;
 		<code>200 OK</code> a few milliseconds later. It looks instant and simple, but behind that single
 		call the message is validated, assembled into a standard format, cryptographically signed, routed
 		through DNS, and checked for reputation and spam before a mail server decides where it lands.
-		<strong>A lot has to happen before that message reaches a real inbox</strong>, and each stage hides
+		A lot has to happen before that message reaches a real inbox, and each stage hides
 		a failure that can drop or misroute it.
 	</Lead>
 

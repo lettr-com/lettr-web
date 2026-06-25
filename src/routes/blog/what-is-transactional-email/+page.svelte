@@ -27,8 +27,8 @@
 		A transactional email is a message sent to one person in response to something they did: a
 		password reset, a login code, an order confirmation. Almost every app and online store sends them,
 		and they work differently from the marketing emails a company sends to its whole audience. The
-		recipient is expecting a transactional message, which is why <strong>inbox providers and regulators
-		treat the two kinds by separate rules</strong>, and why the same template can reach the inbox or
+		recipient is expecting a transactional message, which is why inbox providers and regulators
+		treat the two kinds by separate rules, and why the same template can reach the inbox or
 		land in spam.
 	</Lead>
 

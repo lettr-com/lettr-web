@@ -168,8 +168,8 @@ await lettr.emails.schedule({
 		An onboarding email is a message sent to a new user or customer to help them start using a product
 		and reach its value quickly. It rarely works as a single email, but as a short sequence (a welcome,
 		a setup nudge, an activation prompt, and a check-in) timed across the first days of an account. Each
-		message has one job, to move the user a step closer to the product's value, and <strong>the
-		sequence works best when every email earns the next one</strong> rather than arriving on a fixed
+		message has one job, to move the user a step closer to the product's value, and the
+		sequence works best when every email earns the next one rather than arriving on a fixed
 		schedule.
 	</Lead>
 
