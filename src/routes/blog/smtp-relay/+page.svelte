@@ -72,7 +72,7 @@ await transport.sendMail({
 			</li>
 			<li>
 				<strong>A managed relay is a drop-in for code you can't change.</strong> Any system with an SMTP
-				configuration screen, a legacy CRM, a WordPress plugin, a network appliance, points at the relay
+				configuration screen (a legacy CRM, a WordPress plugin, a network appliance) points at the relay
 				host and sends without a code change.
 			</li>
 		</TldrList>
@@ -81,8 +81,8 @@ await transport.sendMail({
 	<Heading level={2}>What an SMTP relay actually does</Heading>
 
 	<Paragraph>
-		SMTP (Simple Mail Transfer Protocol) is the protocol mail servers use to pass messages between
-		each other. <strong>A relay is a server that speaks SMTP on both sides</strong>: it accepts a
+		SMTP (Simple Mail Transfer Protocol) is the protocol mail servers use to pass messages to each
+		other. <strong>A relay is a server that speaks SMTP on both sides</strong>: it accepts a
 		message from an authenticated sender, then opens its own SMTP connection to the recipient's mail
 		server and delivers the message there. The application never talks to the recipient's server
 		directly.
@@ -145,7 +145,7 @@ await transport.sendMail({
 
 	<Paragraph>
 		The <code>5.7.8</code> enhanced status code specifically means the credentials were rejected,
-		distinct from a <code>530</code> that means no authentication was attempted at all.
+		distinct from a <code>530</code>, which means no authentication was attempted at all.
 		<strong>A bad API key or the wrong username is the first thing to check</strong> when a previously
 		working relay starts refusing mail.
 	</Paragraph>
@@ -175,7 +175,7 @@ await transport.sendMail({
 		most networks and cloud providers block outbound 25 to limit spam, so it is not used for
 		application relay. When a firewall also blocks 465 and 587, providers often expose alternates such
 		as <strong>2465 and 2587</strong> (Lettr) or <strong>2525</strong> (a common industry fallback)
-		that behave identically on a non-standard number.
+		that behave identically on a non-standard port.
 	</Paragraph>
 
 	<Callout variant="warning" title="SSL vs. TLS naming">
@@ -189,14 +189,14 @@ await transport.sendMail({
 	<Paragraph>
 		A relay needs four values: the host, the port, the username, and the secret. <strong>Everything
 		below is the complete configuration</strong> for the Lettr relay, and the shape is identical for
-		any provider, only the values change.
+		any provider; only the values change.
 	</Paragraph>
 
 	<Heading level={3}>1. Get the four connection values</Heading>
 
 	<Paragraph>
-		Create a free account, verify a sending domain so the relay can apply its authentication records,
-		and generate an API key. The four values then read as follows:
+		Create a free account, verify a sending domain so the relay can apply the domain's authentication
+		records, and generate an API key. The four values then read as follows:
 	</Paragraph>
 
 	<Code lang="text" code={relayEnvExample} />
@@ -212,8 +212,9 @@ await transport.sendMail({
 	<Code lang="javascript" code={nodemailerExample} />
 
 	<Paragraph>
-		For an off-the-shelf system without a code path, the same values go into its SMTP settings screen.
-		<strong>A WordPress plugin, a CRM, or a network appliance needs only the host, port, username, and
+		For an off-the-shelf system with no code path to edit, the same values go into its SMTP settings
+		screen.
+		A WordPress plugin, a CRM, or a network appliance <strong>needs only the host, port, username, and
 		API key</strong>, entered once, and it sends through the relay from then on. This is the case a
 		relay exists for, since the sending code cannot be modified.
 	</Paragraph>
@@ -221,11 +222,11 @@ await transport.sendMail({
 	<Heading level={3}>3. Send a test and read the reply</Heading>
 
 	<Paragraph>
-		A successful relay accepts the message with a <code>250</code> reply and a queued message ID. Any
-		other reply is worth reading in full before sending real traffic. <strong>A
+		The relay acknowledges a successful submission with a <code>250</code> reply and a queued message
+		ID. <strong>Any other reply is worth reading in full</strong> before sending real traffic: a
 		<code>535</code> means the credentials are wrong, a <code>5xx</code> on the recipient address means
-		the address was rejected, and a timeout usually means the chosen port is blocked</strong> and
-		another (587 or an alternate) should be tried.
+		the address was rejected, and a timeout usually means the chosen port is blocked and another (587
+		or an alternate) should be tried.
 	</Paragraph>
 
 	<Callout variant="info" title="Where deliverability comes from">
@@ -288,7 +289,7 @@ await transport.sendMail({
 
 		<FaqItem question="Is port 465 the SSL port or the TLS port?">
 			<strong>Port 465 is commonly called the SSL port, but it uses modern TLS today.</strong> The SSL
-			label is historical from when the protocol was named SSL rather than TLS. Configure 465 as the
+			label dates from when the protocol was named SSL rather than TLS. Configure 465 as the
 			implicit-TLS port, meaning the connection is encrypted immediately without a STARTTLS step.
 		</FaqItem>
 
@@ -310,10 +311,10 @@ await transport.sendMail({
 	<Heading level={2}>Bottom line</Heading>
 
 	<Paragraph>
-		<strong>A relay is the right choice for any SMTP-speaking system you can point at a host but
-		can't rewrite.</strong> Setup is four values, a host, a port, a username, and an API key, over an
-		encrypted port, and the deliverability comes from the provider's warmed IPs and the sending
-		domain's own authentication records. For new code that can send structured requests, a REST API
+		A relay is the right choice for <strong>any SMTP-speaking system you can point at a host but
+		can't rewrite</strong>. Setup is four values (host, encrypted port, username, API key), and
+		deliverability comes from the provider's warmed IPs and the sending domain's own authentication
+		records. For new code that can send structured requests, a REST API
 		adds templates, idempotency, and scheduling that the relay protocol cannot.
 	</Paragraph>
 
