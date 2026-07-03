@@ -12,6 +12,16 @@ export interface PostMeta {
 // Used by the blog index listing and the "Related articles" block on each post.
 export const posts: PostMeta[] = [
   {
+    slug: "what-is-an-email-api",
+    category: "Engineering",
+    title: "Email API: what it is and how to choose one",
+    excerpt:
+      "What an email API is and how it works: the request and response shape, how it differs from an SMTP relay and from mailbox APIs like the Gmail API, what an SMTP API means, the criteria that matter when choosing one, and the free tiers available in 2026.",
+    author: "Erik Vlčák",
+    date: "July 10, 2026",
+    readTime: "8 min read",
+  },
+  {
     slug: "best-transactional-email-services",
     category: "Fundamentals",
     title: "Best transactional email services in 2026, compared",
