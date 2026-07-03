@@ -12,6 +12,16 @@ export interface PostMeta {
 // Used by the blog index listing and the "Related articles" block on each post.
 export const posts: PostMeta[] = [
   {
+    slug: "smtp-relay",
+    category: "Engineering",
+    title: "SMTP relay: what it is and how to set one up",
+    excerpt:
+      "What an SMTP relay is, how it differs from a mailbox SMTP server, how relay authentication and the TLS ports (465, 587, 2525) work, a step-by-step setup you can copy, and how a relay compares to IMAP and to a REST email API.",
+    author: "Erik Vlčák",
+    date: "July 3, 2026",
+    readTime: "9 min read",
+  },
+  {
     slug: "hard-bounce-vs-soft-bounce",
     category: "Deliverability",
     title: "Hard bounce vs. soft bounce: what email bounces mean and how to handle them",
