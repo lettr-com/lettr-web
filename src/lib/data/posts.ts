@@ -12,6 +12,16 @@ export interface PostMeta {
 // Used by the blog index listing and the "Related articles" block on each post.
 export const posts: PostMeta[] = [
   {
+    slug: "how-to-send-bulk-email",
+    category: "Fundamentals",
+    title: "How to send bulk email the right way",
+    excerpt:
+      "How to send bulk email that reaches the inbox: the sending limits that rule out Gmail and Outlook mailboxes, the bulk sender requirements Gmail, Yahoo, and Microsoft now enforce, the legal rules in the US, EU, and Canada, and a six-step workflow from permission to monitoring.",
+    author: "Erik Vlčák",
+    date: "July 14, 2026",
+    readTime: "9 min read",
+  },
+  {
     slug: "what-is-an-email-api",
     category: "Engineering",
     title: "Email API: what it is and how to choose one",
