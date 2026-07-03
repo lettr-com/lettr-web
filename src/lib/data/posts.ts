@@ -12,6 +12,16 @@ export interface PostMeta {
 // Used by the blog index listing and the "Related articles" block on each post.
 export const posts: PostMeta[] = [
   {
+    slug: "why-emails-go-to-spam",
+    category: "Deliverability",
+    title: "Why your emails go to spam (and how to fix it)",
+    excerpt:
+      "A diagnostic guide to why emails go to spam: how spam filters actually decide, where to find the evidence (message headers, Google Postmaster Tools, Microsoft SNDS, blocklist checks), and the five causes behind most spam placement, each with the signs that identify it and the fix.",
+    author: "Erik Vlčák",
+    date: "July 17, 2026",
+    readTime: "10 min read",
+  },
+  {
     slug: "how-to-send-bulk-email",
     category: "Fundamentals",
     title: "How to send bulk email the right way",
