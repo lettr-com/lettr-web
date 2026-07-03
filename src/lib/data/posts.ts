@@ -12,6 +12,16 @@ export interface PostMeta {
 // Used by the blog index listing and the "Related articles" block on each post.
 export const posts: PostMeta[] = [
   {
+    slug: "best-transactional-email-services",
+    category: "Fundamentals",
+    title: "Best transactional email services in 2026, compared",
+    excerpt:
+      "A comparison of nine transactional email services (Lettr, Postmark, SendGrid, Mailgun, Amazon SES, Resend, MailerSend, Brevo, SMTP2GO): current free tiers, pricing at 50,000 and 100,000 emails a month, deliverability track records, and which service fits which use case.",
+    author: "Erik Vlčák",
+    date: "July 7, 2026",
+    readTime: "11 min read",
+  },
+  {
     slug: "smtp-relay",
     category: "Engineering",
     title: "SMTP relay: what it is and how to set one up",
