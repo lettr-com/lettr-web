@@ -36,8 +36,8 @@
 	excerpt="What an email API is and how it works: the request and response shape, how it differs from an SMTP relay and from mailbox APIs like the Gmail API, what an SMTP API means, the criteria that matter when choosing one, and the free tiers available in 2026."
 	metaDescription="What an email API is, how it differs from SMTP and the Gmail API, the criteria for choosing one, and the free email API tiers available in 2026."
 	author={{ name: 'Erik Vlčák', role: 'Customer Success Engineer', avatar: '/images/authors/erik.jpg' }}
-	date="July 10, 2026"
-	datetime="2026-07-10"
+	date="July 1, 2026"
+	datetime="2026-07-01"
 	readTime="8 min read"
 	slug="what-is-an-email-api"
 >

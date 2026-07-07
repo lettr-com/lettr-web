@@ -18,7 +18,7 @@ export const posts: PostMeta[] = [
     excerpt:
       "A diagnostic guide to why emails go to spam: how spam filters actually decide, where to find the evidence (message headers, Google Postmaster Tools, Microsoft SNDS, blocklist checks), and the five causes behind most spam placement, each with the signs that identify it and the fix.",
     author: "Erik Vlčák",
-    date: "July 17, 2026",
+    date: "July 7, 2026",
     readTime: "10 min read",
   },
   {
@@ -28,7 +28,7 @@ export const posts: PostMeta[] = [
     excerpt:
       "How to send bulk email that reaches the inbox: the sending limits that rule out Gmail and Outlook mailboxes, the bulk sender requirements Gmail, Yahoo, and Microsoft now enforce, the legal rules in the US, EU, and Canada, and a six-step workflow from permission to monitoring.",
     author: "Erik Vlčák",
-    date: "July 14, 2026",
+    date: "July 4, 2026",
     readTime: "9 min read",
   },
   {
@@ -38,7 +38,7 @@ export const posts: PostMeta[] = [
     excerpt:
       "What an email API is and how it works: the request and response shape, how it differs from an SMTP relay and from mailbox APIs like the Gmail API, what an SMTP API means, the criteria that matter when choosing one, and the free tiers available in 2026.",
     author: "Erik Vlčák",
-    date: "July 10, 2026",
+    date: "July 1, 2026",
     readTime: "8 min read",
   },
   {
@@ -48,7 +48,7 @@ export const posts: PostMeta[] = [
     excerpt:
       "A comparison of nine transactional email services (Lettr, Postmark, SendGrid, Mailgun, Amazon SES, Resend, MailerSend, Brevo, SMTP2GO): current free tiers, pricing at 50,000 and 100,000 emails a month, deliverability track records, and which service fits which use case.",
     author: "Erik Vlčák",
-    date: "July 7, 2026",
+    date: "June 29, 2026",
     readTime: "11 min read",
   },
   {
@@ -58,7 +58,7 @@ export const posts: PostMeta[] = [
     excerpt:
       "What an SMTP relay is, how it differs from a mailbox SMTP server, how relay authentication and the TLS ports (465, 587, 2525) work, a step-by-step setup you can copy, and how a relay compares to IMAP and to a REST email API.",
     author: "Erik Vlčák",
-    date: "July 3, 2026",
+    date: "June 26, 2026",
     readTime: "9 min read",
   },
   {

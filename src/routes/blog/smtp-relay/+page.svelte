@@ -45,8 +45,8 @@ await transport.sendMail({
 	excerpt="What an SMTP relay is, how it differs from a mailbox SMTP server, how relay authentication and the TLS ports (465, 587, 2525) work, a step-by-step setup you can copy, and how a relay compares to IMAP and to a REST email API."
 	metaDescription="What an SMTP relay is, how relay authentication and the TLS ports work, a copy-paste setup, and how a relay compares to IMAP and a REST email API."
 	author={{ name: 'Erik Vlčák', role: 'Customer Success Engineer', avatar: '/images/authors/erik.jpg' }}
-	date="July 3, 2026"
-	datetime="2026-07-03"
+	date="June 26, 2026"
+	datetime="2026-06-26"
 	readTime="9 min read"
 	slug="smtp-relay"
 >

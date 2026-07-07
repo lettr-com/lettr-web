@@ -22,8 +22,8 @@ List-Unsubscribe-Post: List-Unsubscribe=One-Click`;
 	excerpt="How to send bulk email that reaches the inbox: the sending limits that rule out Gmail and Outlook mailboxes, the bulk sender requirements Gmail, Yahoo, and Microsoft now enforce, the legal rules in the US, EU, and Canada, and a six-step workflow from permission to monitoring."
 	metaDescription="The bulk sender rules Gmail, Yahoo, and Outlook enforce, why a mailbox account can't send mass email, and a six-step workflow that reaches the inbox."
 	author={{ name: 'Erik Vlčák', role: 'Customer Success Engineer', avatar: '/images/authors/erik.jpg' }}
-	date="July 14, 2026"
-	datetime="2026-07-14"
+	date="July 4, 2026"
+	datetime="2026-07-04"
 	readTime="9 min read"
 	slug="how-to-send-bulk-email"
 >
