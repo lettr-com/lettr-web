@@ -129,7 +129,7 @@
 		Beyond volume, a mailbox API has no bounce webhooks, no suppression list, and no way to
 		isolate the sending reputation from the rest of the mailbox. Mailbox APIs are the right tool
 		for building an email client or automating a personal inbox; <strong>application email
-		belongs on a transactional email API</strong>.
+		belongs on a <a href="/blog/what-is-transactional-email/">transactional email</a> API</strong>.
 	</Paragraph>
 
 	<Heading level={2}>What "SMTP API" means</Heading>
@@ -178,7 +178,9 @@
 		<li>
 			<strong>Sandbox and onboarding friction.</strong> Amazon SES starts every account in a
 			sandbox limited to 200 messages a day until production access is approved; other providers
-			apply manual account review. Worth knowing before a launch deadline.
+			apply manual account review. Worth knowing before a launch deadline — if the sandbox is a
+			blocker, the <a href="/compare/aws-ses-alternatives/">AWS SES alternatives</a> comparison
+			covers providers without one.
 		</li>
 		<li>
 			<strong>Suppression handling and data residency.</strong> How bounces and complaints are
