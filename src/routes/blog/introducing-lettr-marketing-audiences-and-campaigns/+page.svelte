@@ -200,7 +200,7 @@
 	<Paragraph>
 		This separation is handled for you, so a failed campaign will <strong>never</strong> affect the transaction emails your users depend on. We
 		cover the full reasoning and the migration steps in <a
-			href="https://lettr.com/blog/separate-transactional-and-marketing-email"
+			href="/blog/separate-transactional-and-marketing-email/"
 			>Why you should separate transactional and marketing email</a
 		>, so go ahead and give it a read.
 	</Paragraph>

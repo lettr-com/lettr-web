@@ -266,7 +266,8 @@
 
 	<Paragraph>
 		MailerSend pairs a developer API with a drag-and-drop template builder inherited from
-		MailerLite, a combination rare at its price point ($35 at 50,000). Its recent direction is
+		<a href="/compare/mailerlite-alternatives/">MailerLite</a>, a combination rare at its price
+		point ($35 at 50,000). Its recent direction is
 		worth knowing: the free tier shrank from 3,000 emails to 500 in late 2025 (with a credit card
 		now required), activity retention is 24 hours on the free plan and 7 days on Starter, and
 		account approval is strict enough that rejected signups are a recurring review theme.
