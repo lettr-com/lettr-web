@@ -15,6 +15,7 @@
 <BlogPost
 	category="Fundamentals"
 	title="Mailer Daemon and Mail Delivery Subsystem errors explained (and how to fix them)"
+	seoTitle="Mailer Daemon & Mail Delivery Subsystem errors"
 	excerpt="What a Mailer Daemon or Mail Delivery Subsystem bounce-back means, the common reasons an email fails to deliver, how to read the SMTP status code in the message, step-by-step fixes for each cause, Gmail and Yahoo specifics, and what bounces that arrive for mail you never sent are telling you."
 	metaDescription="What a Mailer Daemon / Mail Delivery Subsystem bounce means, why your email failed, how to read the error code, and how to fix it for Gmail and Yahoo."
 	author={{ name: 'Erik Vlčák', role: 'Customer Success Engineer', avatar: '/images/authors/erik.jpg' }}

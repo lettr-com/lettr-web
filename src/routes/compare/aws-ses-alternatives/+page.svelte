@@ -239,7 +239,7 @@
 
 <Seo
 	title="AWS SES Alternative: 4 Top Picks Compared (2026) | Lettr"
-	description="Looking for an AWS SES alternative? Compare Lettr, SES, SendGrid, and Postmark on setup, dashboard, analytics, templates, deliverability, and pricing — an honest breakdown to help you switch."
+	description="Looking for an AWS SES alternative? Compare Lettr, SES, SendGrid, and Postmark on setup, analytics, templates, deliverability, and pricing."
 	ogTitle="The Best AWS SES Alternative, Compared"
 	ogDescription="An honest comparison of AWS SES alternatives on setup ease, UI, analytics, templates, deliverability, and pricing."
 />

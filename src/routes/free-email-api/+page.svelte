@@ -202,7 +202,7 @@
 
 <Seo
 	title="Free Email API — Send 3,000 Emails/Month Free | Lettr"
-	description="Get a free email API key and send up to 3,000 emails a month, no credit card. REST API and SMTP, SDKs for every language, and deliverability built in on the free tier."
+	description="Get a free email API key and send up to 3,000 emails a month, no credit card. REST API and SMTP, SDKs for every language, deliverability built in."
 	ogDescription="A genuinely free email API: 3,000 emails/month, REST API and SMTP, SDKs for every language, and SPF/DKIM/DMARC built in. No credit card, no sandbox."
 />
 
