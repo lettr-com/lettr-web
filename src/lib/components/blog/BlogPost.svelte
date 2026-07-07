@@ -17,6 +17,8 @@
 		/** Small eyebrow label above the title, e.g. "Engineering" or "Deliverability". */
 		category?: string;
 		title: string;
+		/** Optional <title> override when the visible headline is too long for SEO. */
+		seoTitle?: string;
 		/** Short summary shown under the title and used as the meta description. */
 		excerpt?: string;
 		/** Optional meta description override when the visible excerpt is too long for SEO. */
@@ -37,6 +39,7 @@
 	let {
 		category,
 		title,
+		seoTitle,
 		excerpt,
 		metaDescription,
 		author,
@@ -91,7 +94,7 @@
 </script>
 
 <Seo
-	title="{title} | Lettr Blog"
+	title="{seoTitle ?? title} | Lettr Blog"
 	description={seoDescription}
 	ogTitle={title}
 	type="article"

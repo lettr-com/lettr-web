@@ -337,7 +337,7 @@ func main() {
 
 <Seo
 	title="SMTP Relay Service — Lettr"
-	description="Lettr's SMTP relay is a drop-in replacement for your mail server or SMTP provider. Point your app at smtp.lettr.com for better deliverability, encrypted ports, analytics, and a free tier."
+	description="A drop-in SMTP relay for your app: point it at smtp.lettr.com for better deliverability, encrypted ports, analytics, and a free tier."
 	ogDescription="A standards-compliant SMTP relay with built-in deliverability, encrypted ports, analytics, and searchable logs. Drop-in setup, free tier, no code changes."
 />
 

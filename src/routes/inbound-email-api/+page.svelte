@@ -286,7 +286,7 @@ end`
 
 <Seo
 	title="Inbound Email API — Receive & Parse Email | Lettr"
-	description="Receive and parse inbound email in your app via API and webhooks. Point your domain at Lettr and get every incoming message as clean JSON — sender, body, headers, and attachments — fired to your endpoint."
+	description="Receive and parse inbound email via API and webhooks. Point your domain at Lettr and get every message as clean JSON fired to your endpoint."
 	ogDescription="Receive inbound email as parsed JSON via webhooks. Build email-to-ticket support, reply handling, and email-to-app workflows on the same platform you send from."
 />
 
