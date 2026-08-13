@@ -12,6 +12,16 @@ export interface PostMeta {
 // Used by the blog index listing and the "Related articles" block on each post.
 export const posts: PostMeta[] = [
   {
+    slug: "why-we-built-lettr-on-laravel",
+    category: "Engineering",
+    title: "Why we built Lettr on Laravel",
+    excerpt:
+      "Why Lettr runs on Laravel and why our Laravel SDK is the most direct integration we offer: the defaults an experienced team would have picked anyway, the mail layer the SDK registers into as a native transport, the packages we run in production (Pest, Cashier, Bref, Spatie), the conventions that make a Laravel codebase legible to a coding assistant, and the community that has kept us on the framework since Laravel 4.",
+    author: "Jakub Gause",
+    date: "August 11, 2026",
+    readTime: "6 min read",
+  },
+  {
     slug: "why-emails-go-to-spam",
     category: "Deliverability",
     title: "Why your emails go to spam (and how to fix it)",
