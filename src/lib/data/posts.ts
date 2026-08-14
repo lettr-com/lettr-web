@@ -12,6 +12,16 @@ export interface PostMeta {
 // Used by the blog index listing and the "Related articles" block on each post.
 export const posts: PostMeta[] = [
   {
+    slug: "meet-adamko",
+    category: "Product",
+    title: "Meet Adamko, Lettr's AI assistant",
+    excerpt:
+      "Adamko is Lettr's built-in AI assistant. He sets up a new account from nothing but a website URL, creates branded templates and campaign drafts, diagnoses DNS and delivery problems from live account data, and records every change he makes in a team-wide activity log with one-click undo.",
+    author: "Erik Vlčák",
+    date: "August 14, 2026",
+    readTime: "5 min read",
+  },
+  {
     slug: "why-we-built-lettr-on-laravel",
     category: "Engineering",
     title: "Why we built Lettr on Laravel",
