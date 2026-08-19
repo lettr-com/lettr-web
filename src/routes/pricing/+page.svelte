@@ -64,6 +64,10 @@
 		<p data-animate class="mx-auto mt-5 max-w-xl text-body text-muted">
 			Pay per email for transactional. Pay per contact for marketing.
 		</p>
+		<p data-animate class="mx-auto mt-4 max-w-xl text-body text-surface">
+			<span class="font-semibold text-primary">Every plan — including the free tier —</span> runs on
+			EU-hosted infrastructure. No enterprise gate for data residency.
+		</p>
 	</div>
 </section>
 

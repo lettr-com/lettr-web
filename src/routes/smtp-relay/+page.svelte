@@ -370,10 +370,12 @@ func main() {
 			</h1>
 
 			<p data-animate class="max-w-[650px] text-body text-muted mb-10">
-				A drop-in replacement for your mail server or SMTP provider. Point any app, framework, or
-				server at <span class="font-code text-surface">smtp.lettr.com</span> and get better
-				deliverability, encrypted ports, real-time analytics, and searchable logs — without changing
-				a line of code.
+				A drop-in replacement for your mail server or SMTP provider, <span
+					class="font-semibold text-surface">EU-hosted on every plan</span> — the same sending
+				infrastructure, logs, and webhooks as the API, reachable from any stack that speaks SMTP.
+				Point any app, framework, or server at
+				<span class="font-code text-surface">smtp.lettr.com</span> and get better deliverability,
+				encrypted ports, real-time analytics, and searchable logs — without changing a line of code.
 			</p>
 
 			<div data-animate class="flex flex-wrap items-center mb-3 gap-2">
