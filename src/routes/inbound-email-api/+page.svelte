@@ -285,7 +285,7 @@ end`
 </script>
 
 <Seo
-	title="Inbound Email API — Receive & Parse Email | Lettr"
+	title="Inbound Email API — receive & parse email programmatically | Lettr"
 	description="Receive and parse inbound email via API and webhooks. Point your domain at Lettr and get every message as clean JSON fired to your endpoint."
 	ogDescription="Receive inbound email as parsed JSON via webhooks. Build email-to-ticket support, reply handling, and email-to-app workflows on the same platform you send from."
 />
@@ -314,15 +314,16 @@ end`
 				Inbound email API
 			</div>
 			<h1 data-animate class="text-surface mb-4">
-				Receive and parse email<br />
-				<span class="text-primary">right inside your app.</span>
+				Inbound Email API<br />
+				<span class="text-primary">receive and parse email in your app.</span>
 			</h1>
 
 			<p data-animate class="max-w-[650px] text-body text-muted mb-10">
-				Point a domain at Lettr and every incoming message arrives as clean JSON — sender, subject,
-				body, headers, and attachments — fired to your webhook in real time. No IMAP polling, no MIME
-				parsing. Build support inboxes, reply handling, and email-to-app workflows on the same
-				platform you send from.
+				Lettr's inbound email API receives and parses incoming email programmatically — set a route,
+				get structured JSON on your webhook. Every message arrives as clean JSON — sender, subject,
+				body, headers, and attachments — in real time. No IMAP polling, no MIME parsing. Build
+				support inboxes, reply handling, and email-to-app workflows on the same platform you send
+				from.
 			</p>
 
 			<div data-animate class="flex flex-wrap items-center mb-3 gap-2">
@@ -447,7 +448,8 @@ end`
 			How it works
 		</div>
 		<h2 class="mb-3 text-surface">
-			Three things to set up.<br /><span class="text-primary">Then it just flows.</span>
+			Process inbound emails programmatically.<br /><span class="text-primary">Three things to set
+			up.</span>
 		</h2>
 		<p class="text-body text-muted max-w-[55ch]">
 			Create a route, point your domain, and give Lettr an endpoint. Every email to that domain is
@@ -557,7 +559,7 @@ end`
 			Quick start
 		</div>
 		<h2 class="mb-3 text-surface">
-			Receiving your first<br /><span class="text-primary">email in minutes.</span>
+			Receive email via API.<br /><span class="text-primary">Your first message in minutes.</span>
 		</h2>
 		<p class="text-body text-muted max-w-[55ch]">
 			Stand up an endpoint, point a route at it, and send a test email. The handler on the right is
