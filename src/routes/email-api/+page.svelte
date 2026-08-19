@@ -142,9 +142,10 @@
 			</h1>
 
 			<p data-animate class="max-w-[650px] text-body text-muted mb-10">
-				Fire password resets, receipts, and alerts from a clean REST API or SMTP relay. Sub-second
-				delivery, automatic retries, and a drag-and-drop editor your team owns — no dev ticket to
-				change a button.
+				Lettr is an <span class="font-semibold text-surface">EU-hosted</span> transactional email API
+				for developers — REST API and SMTP relay with tracking, templates, and webhooks, on every
+				plan. Fire password resets, receipts, and alerts with sub-second delivery, automatic retries,
+				and a drag-and-drop editor your team owns — no dev ticket to change a button.
 			</p>
 
 			<div data-animate class="flex flex-wrap items-center mb-3 gap-2">
