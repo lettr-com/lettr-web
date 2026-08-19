@@ -69,6 +69,11 @@
 				{ label: 'Blog', href: '/blog/' },
 				{ label: 'Changelog', href: '/changelog/' },
 				{ label: 'Compare', href: '/compare/' },
+				{
+					label: 'Email glossary',
+					href: 'https://docs.lettr.com/knowledge-base/glossary/email-glossary',
+					external: true
+				},
 				{ label: 'Status', href: 'https://status.lettr.com', external: true }
 			]
 		},
