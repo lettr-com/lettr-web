@@ -81,6 +81,19 @@ SMTP_PASSWORD=lttr_your_api_key_here       # your Lettr API key
 SMTP_SECURE=true`
 		},
 		{
+			label: 'Laravel',
+			lang: 'bash',
+			code: `# .env — then run: php artisan config:clear
+MAIL_MAILER=smtp
+MAIL_HOST=smtp.lettr.com
+MAIL_PORT=587                              # or 465 with MAIL_ENCRYPTION=ssl
+MAIL_USERNAME=lettr                        # always the literal word "lettr"
+MAIL_PASSWORD=lttr_your_api_key_here       # your Lettr API key
+MAIL_ENCRYPTION=tls
+MAIL_FROM_ADDRESS=you@yourdomain.com
+MAIL_FROM_NAME="\${APP_NAME}"`
+		},
+		{
 			label: 'Node.js',
 			lang: 'javascript',
 			code: `import nodemailer from 'nodemailer';
@@ -401,7 +414,7 @@ func main() {
 			<CodeSnippet
 				tabs={smtpTabs}
 				primaryTabIndices={[0, 1]}
-				moreTabIndices={[2, 3, 4]}
+				moreTabIndices={[2, 3, 4, 5]}
 				filename={undefined}
 			/>
 		</div>
@@ -577,7 +590,7 @@ func main() {
 			<CodeSnippet
 				tabs={smtpTabs}
 				primaryTabIndices={[0, 1]}
-				moreTabIndices={[2, 3, 4]}
+				moreTabIndices={[2, 3, 4, 5]}
 				shadow={false}
 				filename={undefined}
 			/>
