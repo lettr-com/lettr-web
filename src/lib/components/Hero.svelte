@@ -18,6 +18,21 @@
 		}
 	}
 
+	const badges = [
+		{
+			label: 'EU-hosted',
+			paths: ['M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z', 'm9 12 2 2 4-4']
+		},
+		{
+			label: 'GDPR & CCPA compliant',
+			paths: [
+				'M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z',
+				'M14 2v4a2 2 0 0 0 2 2h4',
+				'm9 15 2 2 4-4'
+			]
+		}
+	];
+
 	let section: HTMLElement | undefined = $state();
 	let registerHref: string = $state(registerUrl);
 
@@ -73,10 +88,32 @@
 					<span class="text-primary">built for SaaS</span>
 				</h1>
 
-				<p data-animate style="animation-delay:0.12s" class="max-w-[650px] text-body text-muted mb-10">
+				<p data-animate style="animation-delay:0.12s" class="max-w-[650px] text-body text-muted mb-6">
 					Build every email in one drag-and-drop editor. Send transactional via API, marketing
 					via campaigns. One platform, one bill.
 				</p>
+
+				<ul data-animate style="animation-delay:0.16s" class="flex flex-wrap items-center mb-10 gap-2">
+					{#each badges as badge}
+						<li class="inline-flex items-center gap-1.5 border border-border px-2.5 py-1 text-xs font-semibold text-muted">
+							<svg
+								class="h-3.5 w-3.5 shrink-0 text-primary"
+								viewBox="0 0 24 24"
+								fill="none"
+								stroke="currentColor"
+								stroke-width="2"
+								stroke-linecap="round"
+								stroke-linejoin="round"
+								aria-hidden="true"
+							>
+								{#each badge.paths as d}
+									<path {d} />
+								{/each}
+							</svg>
+							{badge.label}
+						</li>
+					{/each}
+				</ul>
 
 				<div data-animate style="animation-delay:0.18s" class="flex flex-wrap items-center mb-3 gap-2">
 					<Button
