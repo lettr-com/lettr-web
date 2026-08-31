@@ -154,8 +154,9 @@ Mail::to('user@example.com')->queue(new WelcomeEmail());`;
 	</List>
 
 	<Paragraph>
-		Not all of the good work is first-party. <strong>Spatie</strong> has open-sourced a great deal
-		of what they run in their own client work, and it holds to the same pattern. We run their
+		Not all of the good work is first-party. <strong><a href="https://spatie.be/">Spatie</a></strong>
+		is a web agency from Antwerp that has open-sourced hundreds of the Laravel and PHP packages it
+		built for its own client work, and their output holds to the same pattern. We run their
 		packages for permissions, media handling, backups and health checks, four problems we have
 		never had to solve ourselves. Open any serious Laravel
 		<code>composer.json</code> and you will find several of theirs in it.
