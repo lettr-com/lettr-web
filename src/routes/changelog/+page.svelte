@@ -27,7 +27,7 @@
 
 ## Bulk contacts
 
-One call now imports a whole batch, and each contact in it brings its own properties, list memberships and topic subscriptions. The response returns the ids of everything created, so there is no paging through the audience afterwards to find what just landed. Rows that fail validation are skipped and reported individually instead of sinking the whole batch, and a flag lets an import update contacts that already exist rather than duplicating them.
+One call now imports a whole batch, and each contact in it brings its own properties, list memberships and topic subscriptions. The response returns the ids of everything created, so there is no paging through the audience afterwards to find them. Rows that fail validation are skipped and reported individually instead of failing the whole batch, and a flag lets an import update contacts that already exist rather than duplicating them.
 
 **The old import payload keeps its exact semantics.** Existing integrations keep working, untouched.
 
