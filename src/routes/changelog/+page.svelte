@@ -16,6 +16,48 @@
 
 	const changelog: ChangelogEntry[] = [
 		{
+			date: 'Aug 31, 2026',
+			title: 'Bulk contact import, and a real preferences page',
+			slug: 'bulk-import-and-email-preferences',
+			summary:
+				'One call now imports a whole batch of contacts with their properties, lists and topics, plus a preferences page that replaces the old unsubscribe screen.',
+			tag: 'API',
+			authors: [{ name: 'Tom from Lettr', initials: 'T', avatar: '/images/authors/tom.jpg' }],
+			content: `Importing contacts over our API used to cost one request per contact, against a per-team throttle of three requests a second. Ten thousand contacts meant roughly thirty thousand requests and the better part of three hours. The new bulk import takes about ten requests and a few seconds.
+
+## Bulk contacts
+
+One call now imports a whole batch, and each contact in it brings its own properties, list memberships and topic subscriptions. The response returns the ids of everything created, so there is no paging through the audience afterwards to find them. Rows that fail validation are skipped and reported individually instead of failing the whole batch, and a flag lets an import update contacts that already exist rather than duplicating them.
+
+**The old import payload keeps its exact semantics.** Existing integrations keep working, untouched.
+
+## Read this before you upgrade
+
+Same rule as in May: if you built against any of these, you're owed the explanation rather than a silent fix.
+
+**An opt-out inside an import could be silently ignored.** For contacts we already knew about, a row unsubscribing someone only took effect if the update-existing flag happened to be set; the request succeeded and the contact stayed subscribed. Opt-outs are now honoured unconditionally. A withdrawal of consent is not a data field that a request flag gets to override.
+
+**The 50-recipient cap now counts cc and bcc.** It was documented that way all along but enforced only on the To field, so a request could carry, and be billed for, far more addresses than intended. Anything over the cap is now rejected. Check your fan-out before you upgrade.
+
+**API sends skip unsubscribe suppression by default.** That was always the behaviour; the spec now says it out loud. If you're sending anything marketing-shaped through the API, turn the transactional option off.
+
+## A real preferences page
+
+The old unsubscribe screen did exactly one thing. The signed link in your emails now opens a full preferences page instead, aimed at everyone who was never going to build their own.
+
+Recipients see their current status, a checkbox per topic, a pause of 30, 60 or 90 days, and the campaigns they recently received. One button commits it all: untick everything to unsubscribe (behind a reason dialog), tick topics again to come back. Topic opt-outs genuinely suppress sends, and consent is re-checked at send time rather than trusted from an earlier read.
+
+Paused recipients are visible on your side too: a badge and filter in Audiences, the pause end date in exports, and a new nullable field on the API that changes nothing you already parse.
+
+## The rest of the month
+
+Adamko is on for every team now, and he can create an API key or register a sending domain directly in conversation instead of only inside the setup flow. Asked to do either in ordinary chat he used to refuse with reasons he had invented, including that adding a domain requires your registrar login. It never has.
+
+DNS alerts back off instead of firing daily forever. A record that stays broken alerts a few more times at growing intervals and then goes quiet, while the domain keeps showing as failing in the app; a fresh break still alerts immediately.
+
+And brand kit collected a month of fixes: logo detection stopped preferring partner badges to the site's own mark, near-white logos stay visible on light backgrounds, and generated emails no longer ship a pink divider to brands with no pink in them.`
+		},
+		{
 			date: 'Jul 24, 2026',
 			title: 'Adamko builds your emails now',
 			slug: 'adamko-brand-kit-and-generated-emails',
