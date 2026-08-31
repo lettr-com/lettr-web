@@ -16,6 +16,58 @@
 
 	const changelog: ChangelogEntry[] = [
 		{
+			date: 'Aug 31, 2026',
+			title: 'Bulk contact import, and a real preferences page',
+			slug: 'bulk-import-and-email-preferences',
+			summary:
+				'A row-oriented bulk endpoint that imports contacts with their properties, lists and topics in one call, plus a preferences page that replaces the old unsubscribe screen.',
+			tag: 'API',
+			authors: [{ name: 'Tom from Lettr', initials: 'T', avatar: '/images/authors/tom.jpg' }],
+			content: `Importing contacts over our API cost one request per contact. With a per-team throttle of three requests a second, that arithmetic gets ugly quickly: ten thousand contacts, each with its own properties and two topic subscriptions, came to roughly 30,000 requests and about two hours forty-seven minutes of wall clock. It now takes about ten requests and a few seconds.
+
+## Bulk contacts
+
+\`POST /audience/contacts/bulk\` is row-oriented. Each row carries its own email, its own properties, its own list memberships and its own topic subscriptions, so a single call can import contacts that have nothing in common with each other. It returns the created contact ids, so the follow-up call needs no pagination sweep to find what it just wrote.
+
+Rows that fail validation are skipped and reported individually rather than taking the batch down with them. \`update_existing\` merges properties into contacts that are already there.
+
+Topics finally get the bulk endpoint lists have had all along: \`POST\` and \`DELETE /audience/contacts/topics/bulk\`. Those writes now also append consent-history activity rows, which pivot-level writes had been skipping entirely.
+
+**The old \`{emails, list_id, properties}\` payload keeps its exact semantics.** Existing integrations and lettr-php 2.4.0 keep working, untouched.
+
+## Read this before you upgrade
+
+Same rule as in May: if you built against any of these, you're owed the explanation rather than a silent fix.
+
+**A row-level \`opt_out\` was discarded for contacts we already knew about** unless you also sent \`update_existing: true\`. The response came back 201, with no error row and the contact still subscribed. \`update_existing\` now gates property merges and nothing else, and opt-outs are always honoured. A withdrawal of consent is not a data field that a request flag gets to override.
+
+**The documented 50-recipient cap was only ever enforced on \`to\`.** A request could carry, and be billed for, arbitrarily many addresses once cc and bcc were counted. The cap now applies across to, cc and bcc combined, and anything over it gets a 422. Check your fan-out before you upgrade.
+
+**\`options.transactional\` defaults to \`true\`**, which the spec now says out loud instead of leaving you to discover it. Every API send bypasses unsubscribe suppression unless you set it to \`false\`. If you're pushing anything marketing-shaped through the send endpoint, that is the field you want.
+
+## Manage email preferences
+
+The old unsubscribe screen did exactly one thing. The signed link in your emails now opens a full preferences page, aimed at everyone who was never going to build their own.
+
+Recipients get a derived status banner (subscribed, paused, unsubscribed, not receiving), a checkbox per topic, a global unsubscribe behind a reason dialog, a 30, 60 or 90-day pause, and the campaigns they recently received, each linked to its web version. It all commits through one Update preferences button: untick every box and you unsubscribe, tick topics again and you're back.
+
+Topic opt-outs genuinely suppress sends. Consent is re-checked when recipients are materialised and then again per batch, because there is no provider-side backstop for Lettr topics the way there is for a global unsubscribe. Pauses expire lazily, so there is no scheduled job to fail.
+
+**Rate limiting on that page is keyed by contact, not by IP.** Corporate security gateways prefetch links in email, and an IP-keyed limiter lets one of them throttle real recipients out of unsubscribing. For the same reason the page never fails closed. Refusing to render an unsubscribe page is worse than dropping a malformed parameter.
+
+Paused is visible on your side too: a badge in Audiences carrying the date it lifts, a Paused filter, and the derived status plus a \`paused_until\` column in CSV exports. The API gains a nullable \`paused_until\` additively, so nothing you already parse changes shape.
+
+## The rest of the month
+
+Adamko is on for every team now rather than the ones behind the flag, and he can create an API key or register a sending domain directly in conversation instead of only inside the setup scenario. Asked to do either in ordinary chat he used to refuse with reasons he had invented, including that adding a domain requires your registrar login. It does not, and never has. He now presses the same buttons the setup flow presses and relays the real reason when a domain is taken or blacklisted.
+
+DNS regression alerts back off. A record that is still failing alerts on day 0, 1, 4 and 11 and then goes quiet, while the domain keeps showing as failing in the UI. A newly broken record still alerts immediately and a recovery resets the schedule. Daily mail about a problem you already know about only teaches people to filter the alert.
+
+Brand kit took most of the month's remaining fixes. Logo detection no longer prefers a partner badge on the page to the site's own mark, near-white logos stay visible on light surfaces, a kit that extracted a single colour fills content blocks from a tint ladder derived from it rather than leaving gaps, and generated emails stopped shipping a pink divider to brands with no pink anywhere in them.
+
+Folder pickers for move and duplicate are scoped to the template's own module, so copying an email into a folder from the other side can no longer flip it from transactional to marketing behind your back.`
+		},
+		{
 			date: 'Jul 24, 2026',
 			title: 'Adamko builds your emails now',
 			slug: 'adamko-brand-kit-and-generated-emails',
