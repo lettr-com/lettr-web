@@ -102,9 +102,8 @@ import ArrowSquareOut from 'phosphor-svelte/lib/ArrowSquareOut';
 				<div>
 					<h2 class="mb-2 text-surface">Bundle <span class="text-primary">with Topol.</span></h2>
 					<p class="text-body text-muted max-w-[55ch]">
-						Run Lettr + Topol Plugin from the same account. Embed the same drag-and-drop editor your
-						team designs in — trusted by 40,000+ companies — directly in your own product, and send
-						through Lettr.
+						Topol Plugin is our drag-and-drop email editor, built to embed in your own app. Users design
+						emails inside your product, and Lettr sends them.
 					</p>
 				</div>
 			</div>
