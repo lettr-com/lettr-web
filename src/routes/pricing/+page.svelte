@@ -1,8 +1,8 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import Seo from '$lib/components/Seo.svelte';
-	import PackageIcon from 'phosphor-svelte/lib/PackageIcon';
-	import ArrowRight from 'phosphor-svelte/lib/ArrowRight';
+		import ArrowRight from 'phosphor-svelte/lib/ArrowRight';
+import ArrowSquareOut from 'phosphor-svelte/lib/ArrowSquareOut';
 	import Pricing from '$lib/components/Pricing.svelte';
 	import CampaignsPricing from '$lib/components/CampaignsPricing.svelte';
 	import ModeToggle, { type Mode } from '$lib/components/ModeToggle.svelte';
@@ -24,6 +24,15 @@
 			label: 'Talk to us',
 			href: '/demo/',
 			destination_type: 'internal'
+		});
+	}
+
+	function trackTopolLink() {
+		void capturePosthogEvent('cta_clicked', {
+			placement: 'pricing_bundle',
+			label: 'Explore Topol',
+			href: 'https://topol.io',
+			destination_type: 'external'
 		});
 	}
 
@@ -49,8 +58,8 @@
 
 <Seo
 	title="Pricing — Lettr"
-	description="Transparent Lettr pricing: transactional bills per email, marketing per contact. Bundle both to save, with a free tier of 3,000 transactional emails a month."
-	ogDescription="Transactional per email, Marketing per contact. Bundle to save more."
+	description="Transparent Lettr pricing: transactional bills per email, marketing per contact, with a free tier of 3,000 transactional emails a month."
+	ogDescription="Transactional per email, Marketing per contact. Free tier of 3,000 emails a month."
 />
 
 <section bind:this={header} class="pt-32 pb-8">
@@ -88,24 +97,36 @@
 		<div class="flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
 			<div class="flex items-start gap-4">
 				<div class="flex h-12 w-12 shrink-0 items-center justify-center border border-primary/30 bg-primary/5">
-					<PackageIcon size={22} class="text-primary" />
+					<img src="/images/logos/topol-icon.svg" alt="Topol" class="h-6" />
 				</div>
 				<div>
-					<h2 class="mb-2 text-surface">Bundle <span class="text-primary">and save.</span></h2>
+					<h2 class="mb-2 text-surface">Bundle <span class="text-primary">with Topol.</span></h2>
 					<p class="text-body text-muted max-w-[55ch]">
-						Run transactional and marketing from the same account and the price drops on both. Talk
-						to us — we'll price the bundle to your sending mix.
+						Topol Plugin is our drag-and-drop email editor, built to embed in your own app. Users design
+						emails inside your product, and Lettr sends them.
 					</p>
 				</div>
 			</div>
-			<a
-				href="/demo/"
-				class="inline-flex items-center justify-center gap-2 bg-primary px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-primary/90 shrink-0"
-				onclick={trackBundleCta}
-			>
-				Talk to us
-				<ArrowRight size={14} />
-			</a>
+			<div class="flex flex-col gap-3 sm:flex-row sm:items-center shrink-0">
+				<a
+					href="https://topol.io"
+					target="_blank"
+					rel="noopener noreferrer"
+					class="inline-flex items-center justify-center gap-2 border border-border px-6 py-3 text-sm font-semibold text-surface transition-colors hover:border-primary/50 hover:text-primary"
+					onclick={trackTopolLink}
+				>
+					Explore Topol
+					<ArrowSquareOut size={14} />
+				</a>
+				<a
+					href="/demo/"
+					class="inline-flex items-center justify-center gap-2 bg-primary px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-primary/90"
+					onclick={trackBundleCta}
+				>
+					Talk to us
+					<ArrowRight size={14} />
+				</a>
+			</div>
 		</div>
 	</div>
 </section>
