@@ -66,7 +66,7 @@ export const posts: PostMeta[] = [
     category: "Fundamentals",
     title: "Best transactional email services in 2026, compared",
     excerpt:
-      "A comparison of nine transactional email services (Lettr, Postmark, SendGrid, Mailgun, Amazon SES, Resend, MailerSend, Brevo, SMTP2GO): current free tiers, pricing at 50,000 and 100,000 emails a month, deliverability track records, and which service fits which use case.",
+      "A comparison of ten transactional email services (Lettr, Mailtrap, Postmark, SendGrid, Mailgun, Amazon SES, Resend, MailerSend, Brevo, SMTP2GO): current free tiers, pricing at 50,000 and 100,000 emails a month, deliverability track records, and which service fits which use case.",
     author: "Erik Vlčák",
     date: "June 29, 2026",
     readTime: "11 min read",
