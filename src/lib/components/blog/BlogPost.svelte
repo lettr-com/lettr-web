@@ -3,6 +3,7 @@
 	import ArrowLeftIcon from 'phosphor-svelte/lib/ArrowLeftIcon';
 	import ClockIcon from 'phosphor-svelte/lib/ClockIcon';
 	import { createFromAnimationCleanup, createScrollRevealCleanup } from '$lib/utils/gsap';
+	import { openLinksInNewTab } from '$lib/utils/blogLinks';
 	import Seo from '$lib/components/Seo.svelte';
 	import TableOfContents from './TableOfContents.svelte';
 	import { getRelatedPosts } from '$lib/data/posts';
@@ -81,6 +82,8 @@
 		}
 
 		if (body) {
+			// Every link in the article body opens in a new tab so readers keep their place.
+			openLinksInNewTab(body);
 			cleanups.push(
 				createScrollRevealCleanup({
 					scope: body,
