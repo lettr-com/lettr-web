@@ -15,8 +15,8 @@
 <BlogPost
 	category="Fundamentals"
 	title="Best transactional email services in 2026, compared"
-	excerpt="A comparison of nine transactional email services (Lettr, Postmark, SendGrid, Mailgun, Amazon SES, Resend, MailerSend, Brevo, SMTP2GO): current free tiers, pricing at 50,000 and 100,000 emails a month, deliverability track records, and which service fits which use case."
-	metaDescription="Nine transactional email services compared on free tiers, pricing at 50k and 100k emails a month, deliverability, and features, with a pick per use case."
+	excerpt="A comparison of ten transactional email services (Lettr, Mailtrap, Postmark, SendGrid, Mailgun, Amazon SES, Resend, MailerSend, Brevo, SMTP2GO): current free tiers, pricing at 50,000 and 100,000 emails a month, deliverability track records, and which service fits which use case."
+	metaDescription="Ten transactional email services compared on free tiers, pricing at 50k and 100k emails a month, deliverability, and features, with a pick per use case."
 	author={{ name: 'Erik Vlčák', role: 'Customer Success Engineer', avatar: '/images/authors/erik.jpg' }}
 	date="June 29, 2026"
 	datetime="2026-06-29"
@@ -28,7 +28,7 @@
 		a time (password resets, receipts, verification codes) through infrastructure with an
 		established sending reputation, and reports back what happened to each one. The market moved a
 		lot in the last two years: SendGrid retired its free plan in 2025, SparkPost disappeared into
-		Bird, and several providers repriced. This comparison covers nine services with their current
+		Bird, and several providers repriced. This comparison covers ten services with their current
 		pricing, what each is genuinely good at, and where each falls short.
 	</Lead>
 
@@ -43,8 +43,8 @@
 				price</strong> among mainstream providers, at roughly $134 a month for 100,000 emails.
 			</li>
 			<li>
-				<strong>A broad middle tier costs a third of Postmark</strong>: Lettr ($30), Resend ($35),
-				and SendGrid ($34.95) all cover 100,000 emails a month; the differences are analytics
+				<strong>A broad middle tier costs a third of Postmark</strong>: Lettr ($30), Mailtrap ($30), Resend
+				($35), and SendGrid ($34.95) all cover 100,000 emails a month; the differences are analytics
 				depth, template tooling, and support.
 			</li>
 		</TldrList>
@@ -52,14 +52,14 @@
 
 	<Paragraph>
 		One disclosure up front: Lettr is our product, so its entry below is the vendor's own case.
-		Every price and test result for the other eight comes from their public pricing pages and
+		Every price and test result for the other nine comes from their public pricing pages and
 		named third-party tests, checked in July 2026.
 	</Paragraph>
 
 	<Heading level={2}>What to compare before the price</Heading>
 
 	<Paragraph>
-		The nine services below all do the same basic job: accept a message over a REST API or SMTP
+		The ten services below all do the same basic job: accept a message over a REST API or SMTP
 		relay and deliver it. The differences that matter in production are less visible than the
 		price:
 	</Paragraph>
@@ -68,14 +68,14 @@
 		<li>
 			<strong>Traffic separation.</strong> Whether transactional mail shares IP pools with
 			marketing blasts. Shared pools mean someone else's campaign can affect your password
-			resets; separated streams (Postmark's Message Streams, Lettr's transactional and marketing
-			streams) contain the damage.
+			resets; separated streams (Lettr's transactional and marketing streams, Postmark's Message
+			Streams, Mailtrap's isolated transactional and bulk pools) contain the damage.
 		</li>
 		<li>
 			<strong>Analytics granularity and retention.</strong> Per-email event history versus
 			aggregate counters, and for how long. Retention is a hidden pricing lever: Mailgun keeps
-			logs 1 to 30 days depending on plan, MailerSend 24 hours on its free tier, Postmark 45 days
-			by default.
+			logs 1 to 30 days depending on plan, MailerSend 24 hours on its free tier, Mailtrap 3 to 30 days
+			depending on plan, Postmark 45 days by default.
 		</li>
 		<li>
 			<strong>Template tooling.</strong> Bring-your-own-HTML (SES), templates-in-code (Resend), or
@@ -128,6 +128,12 @@
 				<td>$30</td>
 			</tr>
 			<tr>
+				<td>Mailtrap</td>
+				<td>4,000/mo (150/day)</td>
+				<td>$20</td>
+				<td>$30</td>
+			</tr>
+			<tr>
 				<td>Resend</td>
 				<td>3,000/mo (100/day)</td>
 				<td>$20</td>
@@ -172,7 +178,7 @@
 		</tbody>
 	</table>
 
-	<Heading level={2}>The nine services</Heading>
+	<Heading level={2}>The ten services</Heading>
 
 	<Heading level={3}>Lettr</Heading>
 
@@ -193,6 +199,23 @@
 		paid pricing ($15 for 50,000, $30 for 100,000) sits at roughly half of Mailgun and a quarter
 		of Postmark. The <a href="/pricing/">pricing page</a> has the full ladder. The honest
 		tradeoff: Lettr is younger than the incumbents, which is also why it is priced under them.
+	</Paragraph>
+
+	<Heading level={3} id="Mailtrap">Mailtrap</Heading>
+
+	<Paragraph>
+		<a href="https://mailtrap.io/">Mailtrap</a> sends over a REST API and an SMTP relay with
+		eight official SDKs, and keeps transactional and bulk traffic on
+		<strong>isolated IP pools by default</strong>, on every plan including the free one, so a
+		digest send cannot drag password resets into spam. Analytics break delivery down by mailbox
+		provider (Gmail, Google Workspace, Outlook, Apple Mail) rather than reporting one aggregate
+		rate, and inbound runs in the same account: hosted inboxes accept support replies, forwarded
+		documents, and the other
+		<a href="https://mailtrap.io/blog/what-is-inbound-email/">types of inbound email</a> a product
+		has to handle, with no MX records or mail server to run. The free tier is 4,000 emails a
+		month capped at 150 a day, and paid pricing is $20 for 50,000 and $30 for 100,000. The
+		tradeoffs: log retention runs 3 to 30 days by plan, and 24/7 support starts at the Business
+		tier.
 	</Paragraph>
 
 	<Heading level={3}>Postmark</Heading>
@@ -321,8 +344,12 @@
 			and 30-day retention are enough.
 		</li>
 		<li>
-			<strong>Per-email analytics, visual templates, and marketing in one account:</strong>
+			<strong>Per-email analytics, visual templates, marketing, and inbound in one account:</strong>
 			Lettr, at $30 for 100,000 emails with both API and SMTP transports.
+		</li>
+		<li>
+			<strong>Transactional, bulk, and inbound in one account:</strong> Mailtrap, at $30 for
+			100,000 emails with per-provider delivery analytics.
 		</li>
 		<li>
 			<strong>EU data residency as a hard requirement:</strong> Mailgun's EU region, or Brevo as
@@ -356,20 +383,20 @@
 		<FaqItem question="Does SendGrid still have a free plan?">
 			<strong>No. SendGrid retired its free plan in May 2025.</strong> New accounts get a 60-day
 			trial capped at 100 emails a day, after which a paid plan is required. Ongoing free tiers
-			still exist at Lettr and Resend (3,000 emails a month each), Brevo (300 a day), and SMTP2GO
-			(1,000 a month).
+			still exist at Lettr and Resend (3,000 emails a month each), Mailtrap (4,000 a month, capped
+			at 150 a day), Brevo (300 a day), and SMTP2GO (1,000 a month).
 		</FaqItem>
 
 		<FaqItem question="Can a transactional email service send marketing email too?">
 			<strong>Often yes, but the traffic should stay separated.</strong> Marketing mail draws more
 			complaints than receipts, and shared reputation lets a bad campaign drag transactional mail
-			into spam. Prefer providers that separate the streams (Postmark's Message Streams, Lettr's
-			transactional and marketing streams), and keep the two on
+			into spam. Prefer providers that separate the streams (Lettr's transactional and marketing streams,
+			Postmark's Message Streams, Mailtrap's isolated pools), and keep the two on
 			<a href="/blog/separate-transactional-and-marketing-email/">separate sending domains</a>.
 		</FaqItem>
 
 		<FaqItem question="Should I choose SMTP or a REST API to send?">
-			<strong>All nine services offer both, so the choice is per codebase, not per
+			<strong>All ten services offer both, so the choice is per codebase, not per
 			provider.</strong> SMTP is a drop-in for legacy systems and anything with an SMTP settings
 			screen; a REST API adds templates, structured errors, and idempotency for new application
 			code. The <a href="/blog/smtp-vs-rest-api-how-to-choose/">SMTP vs. REST API guide</a>
