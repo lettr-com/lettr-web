@@ -12,6 +12,16 @@ export interface PostMeta {
 // Used by the blog index listing and the "Related articles" block on each post.
 export const posts: PostMeta[] = [
   {
+    slug: "why-lettr-runs-on-lambda-with-bref",
+    category: "Engineering",
+    title: "Why Lettr runs on AWS Lambda with Bref",
+    excerpt:
+      "Why Lettr, a Laravel application, runs on AWS Lambda through Bref: the PHP runtimes and single-file deployment Bref provides, how Lettr's serverless.yml splits HTTP, queues, S3 events, and the scheduler into separate functions with no AWS keys anywhere, the Lambda limits we hit, and why Matthieu Napoli deserves the credit.",
+    author: "Jakub Gause",
+    date: "September 4, 2026",
+    readTime: "6 min read",
+  },
+  {
     slug: "meet-adamko",
     category: "Product",
     title: "Meet Adamko, Lettr's AI assistant",
