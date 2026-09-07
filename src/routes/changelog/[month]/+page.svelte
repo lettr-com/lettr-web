@@ -6,6 +6,7 @@
 	import ChangelogMonth from '$lib/components/changelog/ChangelogMonth.svelte';
 	import { trackChangelogLinkClick } from '$lib/changelog/analytics';
 	import { formatMonth } from '$lib/changelog/months';
+	import { summarizeMonth } from '$lib/changelog/summary';
 	import { createFromAnimationCleanup, createScrollRevealCleanup } from '$lib/utils/gsap';
 	import type { PageData } from './$types';
 
@@ -19,24 +20,11 @@
 	let body: HTMLElement | undefined = $state();
 
 	const label = $derived(formatMonth(data.month.id));
-
-	function count(n: number, singular: string): string | null {
-		if (n === 0) return null;
-		return `${n} ${n === 1 ? singular : `${singular}s`}`;
-	}
-
 	const description = $derived.by(() => {
-		const parts = [
-			count(data.month.features.length, 'new feature'),
-			count(data.month.improvements.length, 'improvement'),
-			count(data.month.bugfixes.length, 'bugfix')
-		].filter((part): part is string => part !== null);
-
-		if (parts.length === 0) return `Everything Lettr shipped in ${label}.`;
-
-		const list =
-			parts.length === 1 ? parts[0] : `${parts.slice(0, -1).join(', ')} and ${parts.at(-1)}`;
-		return `Everything Lettr shipped in ${label}: ${list}.`;
+		const summary = summarizeMonth(data.month);
+		return summary
+			? `Everything Lettr shipped in ${label}: ${summary}.`
+			: `Everything Lettr shipped in ${label}.`;
 	});
 
 	onMount(() => {
@@ -47,7 +35,7 @@
 				createFromAnimationCleanup({
 					scope: header,
 					targets: '[data-animate]',
-					vars: { y: 20, opacity: 0, duration: 0.6, stagger: 0.1, ease: 'power3.out' }
+					vars: { y: 20, opacity: 0, duration: 0.6, stagger: 0.08, ease: 'power3.out' }
 				})
 			);
 		}
@@ -71,51 +59,74 @@
 />
 
 <section class="pt-32 pb-24">
-	<div bind:this={header} class="mb-14">
+	<div bind:this={header}>
 		<a
 			data-animate
 			href="/changelog/"
-			class="mb-6 inline-flex items-center gap-1.5 font-heading text-[13px] text-muted transition-colors hover:text-primary"
+			class="inline-flex items-center gap-1.5 text-sm font-medium text-muted transition-colors hover:text-primary"
 		>
-			<ArrowLeftIcon size={13} weight="bold" />
+			<ArrowLeftIcon size={15} />
 			All changes
 		</a>
-		<h1 data-animate class="font-heading text-4xl text-surface">{label}</h1>
-		<p data-animate class="mt-4 max-w-xl text-body leading-[1.7] text-muted">
+
+		<span
+			data-animate
+			class="mt-8 block font-heading text-xs tracking-[0.15em] text-primary uppercase"
+		>
+			Changelog
+		</span>
+		<h1 data-animate class="mt-3">{label}</h1>
+		<p data-animate class="mt-5 max-w-xl text-body leading-[1.8] text-muted">
 			{description}
 		</p>
 	</div>
 
-	<div bind:this={body}>
+	<div bind:this={body} class="mt-12 border-t border-border/50 pt-12">
 		<ChangelogMonth month={data.month} variant="page" />
 	</div>
 
 	{#if data.newer || data.older}
-		<nav
-			aria-label="Other months"
-			class="mt-16 flex flex-wrap items-center justify-between gap-4 border-t border-border/40 pt-8"
-		>
-			{#if data.older}
-				<a
-					href="/changelog/{data.older}/"
-					class="inline-flex items-center gap-1.5 font-heading text-[13px] text-muted transition-colors hover:text-primary"
-				>
-					<ArrowLeftIcon size={13} weight="bold" />
-					{formatMonth(data.older)}
-				</a>
-			{:else}
-				<span></span>
-			{/if}
+		<nav aria-label="Other months" class="mt-20 border-t border-border/50 pt-12">
+			<h2 class="font-heading text-xs tracking-[0.15em] text-primary uppercase">Other months</h2>
+			<div class="mt-6 grid gap-4 sm:grid-cols-2">
+				{#if data.older}
+					<a
+						href="/changelog/{data.older}/"
+						class="group flex flex-col border border-border/50 bg-white p-6 transition-colors hover:border-primary/30"
+					>
+						<span class="text-xs font-medium tracking-[0.1em] text-muted uppercase">Earlier</span>
+						<span
+							class="mt-2 inline-flex items-center gap-2 font-heading text-h3 text-surface transition-colors group-hover:text-primary"
+						>
+							<ArrowLeftIcon
+								size={16}
+								class="text-muted transition-transform duration-200 group-hover:-translate-x-1 group-hover:text-primary"
+							/>
+							{formatMonth(data.older)}
+						</span>
+					</a>
+				{:else}
+					<span class="hidden sm:block" aria-hidden="true"></span>
+				{/if}
 
-			{#if data.newer}
-				<a
-					href="/changelog/{data.newer}/"
-					class="inline-flex items-center gap-1.5 font-heading text-[13px] text-muted transition-colors hover:text-primary"
-				>
-					{formatMonth(data.newer)}
-					<ArrowRightIcon size={13} weight="bold" />
-				</a>
-			{/if}
+				{#if data.newer}
+					<a
+						href="/changelog/{data.newer}/"
+						class="group flex flex-col border border-border/50 bg-white p-6 transition-colors hover:border-primary/30 sm:items-end sm:text-right"
+					>
+						<span class="text-xs font-medium tracking-[0.1em] text-muted uppercase">Later</span>
+						<span
+							class="mt-2 inline-flex items-center gap-2 font-heading text-h3 text-surface transition-colors group-hover:text-primary"
+						>
+							{formatMonth(data.newer)}
+							<ArrowRightIcon
+								size={16}
+								class="text-muted transition-transform duration-200 group-hover:translate-x-1 group-hover:text-primary"
+							/>
+						</span>
+					</a>
+				{/if}
+			</div>
 		</nav>
 	{/if}
 </section>

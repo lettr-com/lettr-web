@@ -13,8 +13,12 @@
 </script>
 
 <!-- data-entry-title is read by the delegated PostHog handler on the container. -->
-<article data-reveal data-entry-title={entry.title} class="border-t border-border/40 pt-6">
-	<div class="mb-3 flex flex-wrap items-center gap-2">
+<article
+	data-reveal
+	data-entry-title={entry.title}
+	class="border border-border/50 bg-white p-6 shadow-[0_20px_50px_-45px_rgba(17,24,39,0.6)] md:p-8"
+>
+	<div class="flex flex-wrap items-center gap-1.5">
 		{#each entry.modules as module (module)}
 			<ChangelogBadge {module} />
 		{/each}
@@ -23,16 +27,16 @@
 		{/each}
 	</div>
 
-	<h3 class="text-surface">{entry.title}</h3>
+	<h3 class="mt-4 text-surface">{entry.title}</h3>
 
-	<p class="mt-3 leading-[1.8] font-medium text-surface">{@html renderInline(entry.lead)}</p>
+	<p class="mt-3 text-body leading-[1.7] font-medium text-surface">{@html renderInline(entry.lead)}</p>
 
 	{#each entry.body ?? [] as paragraph}
-		<p class="mt-4 leading-[1.8] text-muted">{@html renderInline(paragraph)}</p>
+		<p class="mt-4 text-[15px] leading-[1.8] text-muted">{@html renderInline(paragraph)}</p>
 	{/each}
 
 	{#if entry.code}
-		<div class="mt-5">
+		<div class="mt-6">
 			<Code code={entry.code.source} lang={entry.code.lang} />
 		</div>
 	{/if}
@@ -42,10 +46,10 @@
 			href={entry.docs.href}
 			target="_blank"
 			rel="noopener noreferrer"
-			class="mt-5 inline-flex items-center gap-1.5 font-heading text-[13px] text-primary transition-colors hover:text-primary/70"
+			class="mt-6 inline-flex items-center gap-1.5 text-sm font-medium text-primary transition-colors hover:text-primary/70"
 		>
 			{entry.docs.label}
-			<ArrowUpRightIcon size={13} weight="bold" />
+			<ArrowUpRightIcon size={14} weight="bold" />
 		</a>
 	{/if}
 </article>

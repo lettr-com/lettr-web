@@ -91,41 +91,61 @@
 	});
 </script>
 
-<div bind:this={container} class="space-y-16">
-	{#each loaded as month (month.id)}
-		<ChangelogMonth {month} />
+<div bind:this={container} class="divide-y divide-border/50">
+	{#each loaded as month, index (month.id)}
+		<div class="py-16 first:pt-0">
+			<ChangelogMonth {month} isLatest={index === 0} />
+		</div>
 	{/each}
 </div>
 
 {#if !isComplete}
-	<div bind:this={sentinel} class="pt-16 text-center">
+	<div bind:this={sentinel} class="border-t border-border/50 pt-10 text-center">
 		{#if failedMonth}
 			<p class="text-sm text-muted">
 				{formatMonth(failedMonth)} could not be loaded here.
 				<a
 					href="/changelog/{failedMonth}/"
-					class="text-primary underline underline-offset-4 hover:text-primary/70"
+					class="text-primary underline underline-offset-4 transition-colors hover:text-primary/80"
 				>
 					Open it on its own page
 				</a>.
 			</p>
 		{:else}
-			<p class="font-code text-[13px] text-muted" aria-live="polite">
+			<p class="text-sm text-muted" aria-live="polite">
 				{isLoading ? 'Loading earlier months…' : 'Scroll for earlier months'}
 			</p>
 		{/if}
 	</div>
 {:else}
-	<div class="border-t border-border/40 pt-10 text-center">
-		<p class="text-sm text-muted">
+	<div class="border-t border-border/50 pt-10 text-center">
+		<div class="flex items-center justify-center gap-2" role="separator">
+			<span class="h-1 w-1 bg-border"></span>
+			<span class="h-1 w-1 bg-border"></span>
+			<span class="h-1 w-1 bg-border"></span>
+		</div>
+		<p class="mt-6 text-sm text-muted">
 			That is the whole log, back to {formatMonth(MONTHS[MONTHS.length - 1])}.
+		</p>
+		<p class="mt-2 text-sm text-muted">
+			Something missing or wrong?
+			<a
+				href="/support/"
+				class="text-primary underline underline-offset-4 transition-colors hover:text-primary/80"
+			>
+				Tell us
+			</a>
+			— we would rather fix the entry than have you find out the hard way.
 		</p>
 		<a
 			href="#top"
-			class="mt-3 inline-flex items-center gap-1.5 font-heading text-[13px] text-primary transition-colors hover:text-primary/70"
+			class="group mt-6 inline-flex items-center gap-1.5 text-sm font-medium text-muted transition-colors hover:text-primary"
 		>
-			<ArrowUpIcon size={13} weight="bold" />
-			Return to latest changes
+			<ArrowUpIcon
+				size={14}
+				class="transition-transform duration-200 group-hover:-translate-y-0.5"
+			/>
+			Back to the latest month
 		</a>
 	</div>
 {/if}
