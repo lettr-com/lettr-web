@@ -6,7 +6,14 @@ import type { ChangelogMonth } from "./types";
  * the two stay in step. Without that a missed registration would render nothing
  * and raise no error.
  */
-export const MONTHS: readonly string[] = ["2026-08", "2026-05", "2026-04", "2026-03", "2026-02"];
+export const MONTHS: readonly string[] = [
+  "2026-08",
+  "2026-06",
+  "2026-05",
+  "2026-04",
+  "2026-03",
+  "2026-02",
+];
 
 /**
  * Lazy loaders keyed by data-file path. Vite compiles the glob at build time,
