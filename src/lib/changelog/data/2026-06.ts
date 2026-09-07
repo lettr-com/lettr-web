@@ -144,12 +144,12 @@ export const month: ChangelogMonth = {
         " there.",
     },
     {
-      title: "Copy A Template Between Transactional And Marketing",
+      title: "Copy An Email Between Transactional And Marketing",
       modules: ["transactional", "campaigns"],
       tags: ["UI/UX"],
       lead:
-        "A row action duplicates a template with the opposite purpose, so a design built for one" +
-        " side of the product does not have to be rebuilt for the other.",
+        "A row action copies an email across to the other side, so a design built for one half of" +
+        " the product does not have to be rebuilt for the other.",
     },
     {
       title: "The Editor Warns You Before Your Session Costs You Work",

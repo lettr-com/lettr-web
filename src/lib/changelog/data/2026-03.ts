@@ -185,13 +185,13 @@ export const month: ChangelogMonth = {
       lead: "Changing only your name does not.",
     },
     {
-      title: "Dark Mode In The Drag-And-Drop Editor",
+      title: "Dark Mode In The Topol Editor",
       modules: ["transactional", "campaigns"],
       tags: ["UI/UX"],
       lead: "The Topol editor follows a dark appearance now.",
     },
     {
-      title: "The API Reference Got An Audit",
+      title: "Two Endpoints Reach The Reference For The First Time",
       modules: ["transactional"],
       tags: ["Docs", "API"],
       lead:
