@@ -8,6 +8,7 @@ import type { ChangelogMonth } from "./types";
  */
 export const MONTHS: readonly string[] = [
   "2026-08",
+  "2026-07",
   "2026-06",
   "2026-05",
   "2026-04",
