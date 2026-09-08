@@ -3,10 +3,6 @@ import type { ChangelogMonth } from "../types";
 export const month: ChangelogMonth = {
   id: "2026-06",
 
-  intro:
-    "Two projects shipped this month. We scoped them as unrelated work, which lasted about a" +
-    " week.",
-
   features: [
     {
       title: "Modes: Transactional And Marketing Are Separate Now",

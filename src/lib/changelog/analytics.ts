@@ -23,3 +23,15 @@ export function trackChangelogLinkClick(event: MouseEvent): void {
     is_external: /^https?:\/\//.test(href),
   });
 }
+
+/**
+ * Fired when a reader changes the badge filter, with the selection as it stands
+ * afterwards. Called from the toggle handler rather than from an effect, so a
+ * filter restored from a shared link is not reported as someone's choice.
+ */
+export function trackChangelogFilterChange(tokens: readonly string[]): void {
+  void capturePosthogEvent("changelog_filter_changed", {
+    filter: tokens.join(","),
+    filter_count: tokens.length,
+  });
+}

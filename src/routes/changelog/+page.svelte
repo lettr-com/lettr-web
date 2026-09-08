@@ -2,9 +2,10 @@
 	import { onMount } from 'svelte';
 	import Seo from '$lib/components/Seo.svelte';
 	import ChangelogFeed from '$lib/components/changelog/ChangelogFeed.svelte';
-	import ChangelogLegend from '$lib/components/changelog/ChangelogLegend.svelte';
-	import { MONTHS, formatMonth } from '$lib/changelog/months';
-	import { summarizeMonth } from '$lib/changelog/summary';
+	import ChangelogFilter from '$lib/components/changelog/ChangelogFilter.svelte';
+	import ChangelogArchive from '$lib/components/changelog/ChangelogArchive.svelte';
+	import type { FilterToken } from '$lib/changelog/filter';
+	import { MONTHS } from '$lib/changelog/months';
 	import { createFromAnimationCleanup } from '$lib/utils/gsap';
 	import type { PageData } from './$types';
 
@@ -14,10 +15,14 @@
 
 	let { data }: Props = $props();
 
-	const latestLabel = $derived(formatMonth(data.month.id));
-	const latestSummary = $derived(summarizeMonth(data.month));
-
 	let header: HTMLElement | undefined = $state();
+	// Owned here rather than inside the filter panel because the feed below is
+	// what the selection actually acts on.
+	let filter = $state<FilterToken[]>([]);
+	// The feed counts the matches — it is the only thing that knows how many
+	// months it has read — and the panel above states them, so the selection is
+	// described once rather than twice.
+	let filterStatus = $state<string | undefined>();
 
 	onMount(() => {
 		if (!header) return;
@@ -46,45 +51,27 @@
 		</span>
 		<h1 data-animate>Everything we ship,<br class="hidden sm:inline" />month by month</h1>
 		<p data-animate class="mt-6 max-w-xl text-body leading-[1.8] text-muted">
-			If a change is something you could notice from the outside, it is written down here —
-			including the ones we would rather have shipped quietly. Work that never leaves our side
-			of the wire stays out.
+			We publish a new entry every month with everything that shipped: new features,
+			improvements and bugfixes. Each entry names the part of Lettr it touches.
 		</p>
 
-		<div
-			data-animate
-			class="mt-8 flex flex-wrap items-center gap-x-6 gap-y-3 border-y border-border/50 py-4 text-sm"
-		>
-			<span class="flex items-center gap-2.5 font-medium text-surface">
-				<span class="block h-1.5 w-1.5 bg-primary" aria-hidden="true"></span>
-				Latest: {latestLabel}
-			</span>
-			{#if latestSummary}
-				<span class="text-muted">{latestSummary}</span>
-			{/if}
-			{#if MONTHS.length > 1}
-				<nav
-					aria-label="Browse by month"
-					class="flex flex-wrap items-center gap-x-4 gap-y-1 sm:ml-auto"
-				>
-					{#each MONTHS as id (id)}
-						<a
-							href="/changelog/{id}/"
-							class="text-xs font-medium text-muted transition-colors hover:text-primary"
-						>
-							{formatMonth(id)}
-						</a>
-					{/each}
-				</nav>
-			{/if}
-		</div>
+		{#if MONTHS.length > 1}
+			<div data-animate class="mt-8 border-y border-border/50 py-3">
+				<ChangelogArchive {filter} />
+			</div>
+		{/if}
 
 		<div data-animate class="mt-6">
-			<ChangelogLegend />
+			<ChangelogFilter bind:tokens={filter} status={filterStatus} />
 		</div>
 	</div>
 
 	<div class="mt-16">
-		<ChangelogFeed initial={data.month} />
+		<ChangelogFeed
+			initial={data.month}
+			{filter}
+			bind:status={filterStatus}
+			onClear={() => (filter = [])}
+		/>
 	</div>
 </section>

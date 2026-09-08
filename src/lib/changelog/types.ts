@@ -51,8 +51,6 @@ export interface ChangelogBugfix {
 export interface ChangelogMonth {
   /** "YYYY-MM"; must equal the data file's name. Asserted by months.test.ts. */
   id: string;
-  /** One framing sentence, used only where a month genuinely needs it. */
-  intro?: string;
   features: ChangelogEntry[];
   improvements: ChangelogEntry[];
   bugfixes: ChangelogBugfix[];

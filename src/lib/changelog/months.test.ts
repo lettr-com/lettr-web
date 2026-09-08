@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vite-plus/test";
-import { MONTHS, formatMonth, isMonthId, loadMonth, monthModules } from "./months";
+import { MONTHS, archiveByYear, formatMonth, isMonthId, loadMonth, monthModules } from "./months";
 
 const idFromPath = (path: string) => path.replace("./data/", "").replace(".ts", "");
 
@@ -78,5 +78,34 @@ describe("formatMonth", () => {
 describe("loadMonth", () => {
   it("throws for a month with no data module", async () => {
     await expect(loadMonth("1999-01")).rejects.toThrow(/1999-01/);
+  });
+});
+
+describe("archiveByYear", () => {
+  const archive = archiveByYear();
+
+  it("gives every year twelve slots, January first", () => {
+    for (const { slots } of archive) {
+      expect(slots).toHaveLength(12);
+      expect(slots[0].label).toBe("Jan");
+      expect(slots[11].label).toBe("Dec");
+    }
+  });
+
+  it("is ordered newest year first", () => {
+    const years = archive.map(({ year }) => year);
+    expect(years).toEqual([...years].sort().reverse());
+  });
+
+  it("places every registered month in its own slot and leaves the rest empty", () => {
+    const placed = archive.flatMap(({ slots }) => slots.map((slot) => slot.id));
+    expect(placed.filter((id) => id !== null).sort()).toEqual([...MONTHS].sort());
+
+    for (const { year, slots } of archive) {
+      slots.forEach((slot, index) => {
+        const id = `${year}-${String(index + 1).padStart(2, "0")}`;
+        expect(slot.id).toBe(MONTHS.includes(id) ? id : null);
+      });
+    }
   });
 });

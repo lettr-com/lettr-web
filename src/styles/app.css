@@ -55,6 +55,16 @@
     [data-reveal] {
       opacity: 0;
     }
+
+    /*
+     * Filtering the changelog re-renders entries in response to a click. Fading
+     * them in again on scroll would animate content the click just asked to
+     * see, so a filtered view opts out: the reveal contexts are reverted (which
+     * removes the inline opacity gsap set) and this rule takes over.
+     */
+    [data-reveal-instant] [data-reveal] {
+      opacity: 1;
+    }
   }
 
   html {

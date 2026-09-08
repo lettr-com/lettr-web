@@ -57,3 +57,43 @@ export async function loadMonth(id: string): Promise<ChangelogMonth> {
   const module = await loader();
   return module.month;
 }
+
+export interface ArchiveSlot {
+  /** "Jan" — always rendered, so an empty month still holds the grid's shape. */
+  label: string;
+  /** The registered month id, or null when nothing shipped that month. */
+  id: string | null;
+}
+
+export interface ArchiveYear {
+  year: string;
+  /** Twelve slots, January first. */
+  slots: ArchiveSlot[];
+}
+
+/**
+ * {@link MONTHS} regrouped as one fixed twelve-slot row per year, newest year
+ * first. A flat list of months grows a line of links every month; grouped this
+ * way the index grows a row once a year and each row keeps the same width, so
+ * the header stays the same size whether the log covers one year or ten.
+ */
+export function archiveByYear(): ArchiveYear[] {
+  const years = new Map<string, ArchiveSlot[]>();
+
+  for (const id of MONTHS) {
+    const [year, month] = id.split("-");
+    const index = Number(month) - 1;
+    if (!MONTH_NAMES[index]) continue;
+
+    let slots = years.get(year);
+    if (!slots) {
+      slots = MONTH_NAMES.map((name) => ({ label: name.slice(0, 3), id: null }));
+      years.set(year, slots);
+    }
+    slots[index].id = id;
+  }
+
+  return [...years.entries()]
+    .sort(([a], [b]) => b.localeCompare(a))
+    .map(([year, slots]) => ({ year, slots }));
+}
