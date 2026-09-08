@@ -30,11 +30,19 @@ describe("sectionAnchor", () => {
 
 describe("summarizeMonth", () => {
   it("joins the non-empty sections with commas and a final 'and'", () => {
-    expect(summarizeMonth(month)).toBe("1 new feature, 2 improvements and 3 bugfixes");
+    expect(summarizeMonth(month)).toBe(
+      "1\u00a0new feature, 2\u00a0improvements and 3\u00a0bugfixes",
+    );
+  });
+
+  it("binds every count to its noun so a line never wraps between them", () => {
+    const summary = summarizeMonth(month) ?? "";
+    expect(summary).not.toMatch(/\d /);
+    expect(summary.match(/\u00a0/g)).toHaveLength(3);
   });
 
   it("skips empty sections", () => {
-    expect(summarizeMonth({ ...month, features: [], improvements: [] })).toBe("3 bugfixes");
+    expect(summarizeMonth({ ...month, features: [], improvements: [] })).toBe("3\u00a0bugfixes");
   });
 
   it("returns null for an empty month", () => {

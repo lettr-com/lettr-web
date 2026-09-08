@@ -28,12 +28,22 @@ export function sectionAnchor(month: ChangelogMonth, key: SectionKey): string {
   return `${month.id}-${key}`;
 }
 
+/**
+ * A count is bound to its noun with a non-breaking space, so a line never wraps
+ * between them and leaves a bare "9" hanging at the end of a line with no idea
+ * what it counts. Written as an escape rather than a literal so it survives
+ * editing. The separators between phrases stay ordinary spaces — those are
+ * where the line is meant to break.
+ */
 function countLabel(n: number, singular: string, plural: string): string | null {
   if (n === 0) return null;
-  return `${n} ${n === 1 ? singular : plural}`;
+  return `${n}\u00a0${n === 1 ? singular : plural}`;
 }
 
-/** "3 new features, 8 improvements and 14 bugfixes", or null for an empty month. */
+/**
+ * "3 new features, 8 improvements and 14 bugfixes" (each count joined to its
+ * noun by a non-breaking space), or null for an empty month.
+ */
 export function summarizeMonth(month: ChangelogMonth): string | null {
   const parts = [
     countLabel(month.features.length, "new feature", "new features"),
