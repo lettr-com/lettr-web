@@ -10,6 +10,15 @@
   --color-muted: #1f2937;
   --color-border: #d1d5db;
 
+  /* Changelog module badges: one hue per product area, plus a warning hue
+     reserved for the "Breaking" tag. Tinted backgrounds are produced with
+     Tailwind's /10 alpha modifier, so only the solid text color is declared. */
+  --color-module-transactional: #0f766e;
+  --color-module-campaigns: #b45309;
+  --color-module-audience: #6d28d9;
+  --color-module-platform: #1d4ed8;
+  --color-warning: #b91c1c;
+
   --font-heading: "Zalando Sans SemiExpanded", sans-serif;
   --font-body: "Manrope", sans-serif;
   --font-code: "DM Mono", monospace;
@@ -45,6 +54,16 @@
   @media (scripting: enabled) {
     [data-reveal] {
       opacity: 0;
+    }
+
+    /*
+     * Filtering the changelog re-renders entries in response to a click. Fading
+     * them in again on scroll would animate content the click just asked to
+     * see, so a filtered view opts out: the reveal contexts are reverted (which
+     * removes the inline opacity gsap set) and this rule takes over.
+     */
+    [data-reveal-instant] [data-reveal] {
+      opacity: 1;
     }
   }
 
@@ -236,6 +255,30 @@
 
   .blog-prose tbody tr:last-child td {
     border-bottom: none;
+  }
+}
+
+@layer components {
+  /* Inline elements emitted by renderInline() in $lib/changelog/inline.ts.
+     They arrive through {@html}, so they cannot carry Tailwind classes that
+     the scanner would ever see in markup. */
+  .changelog-link {
+    color: var(--color-primary);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    transition: color 0.15s ease;
+  }
+
+  .changelog-link:hover {
+    color: color-mix(in srgb, var(--color-primary) 80%, transparent);
+  }
+
+  .changelog-code {
+    font-family: var(--font-code);
+    font-size: 0.875em;
+    padding: 0.15em 0.4em;
+    background-color: rgba(17, 24, 39, 0.06);
+    color: var(--color-surface);
   }
 }
 
