@@ -1,21 +1,23 @@
 <script lang="ts">
-	import Hero from '$lib/components/Hero.svelte';
-	import Comparison from '$lib/components/Comparison.svelte';
-	import Features from '$lib/components/Features.svelte';
+	import HomeHero from '$lib/components/home/HomeHero.svelte';
+	import ProofStrip from '$lib/components/home/ProofStrip.svelte';
+	import TwoProducts from '$lib/components/home/TwoProducts.svelte';
+	import DeveloperPath from '$lib/components/home/DeveloperPath.svelte';
 	import TeamFeatures from '$lib/components/TeamFeatures.svelte';
-	import SaaSUseCases from '$lib/components/SaaSUseCases.svelte';
-	import MarketingEmail from '$lib/components/MarketingEmail.svelte';
+	import UseCasesInbox from '$lib/components/home/UseCasesInbox.svelte';
+	import CampaignsBand from '$lib/components/home/CampaignsBand.svelte';
+	import PricingSlider from '$lib/components/home/PricingSlider.svelte';
 	import TalkToExpert from '$lib/components/TalkToExpert.svelte';
-	import PricingPreview from '$lib/components/PricingPreview.svelte';
 	import FAQSection from '$lib/components/FAQSection.svelte';
 </script>
 
-<Hero />
-<Comparison />
+<HomeHero />
+<ProofStrip />
+<TwoProducts />
+<DeveloperPath />
 <TeamFeatures />
-<Features />
-<SaaSUseCases />
-<MarketingEmail />
+<UseCasesInbox />
+<CampaignsBand />
+<PricingSlider />
 <TalkToExpert />
-<PricingPreview />
 <FAQSection />

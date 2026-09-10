@@ -135,7 +135,7 @@
 <Navbar />
 
 <div class="relative z-10 bg-background lg:mb-[30vh]">
-	<div class="relative mx-auto max-w-4xl narrow:max-w-none border-x border-border/30 narrow:border-x-0 px-6">
+	<div class="relative mx-auto max-w-[1200px] narrow:max-w-none border-x border-border/30 narrow:border-x-0 px-6">
 		<main class="relative z-10 ">
 			{@render children()}
 		</main>

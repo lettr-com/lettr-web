@@ -275,7 +275,7 @@
 <div class="fixed top-0 right-0 left-0 z-50 flex justify-center">
 <nav
 	bind:this={nav}
-	class="flex flex-col w-full max-w-4xl narrow:max-w-none bg-white border-x border-b border-border/30 narrow:border-x-0"
+	class="flex flex-col w-full max-w-[1200px] narrow:max-w-none bg-white border-x border-b border-border/30 narrow:border-x-0"
 	aria-label="Main navigation"
 >
 	<div class="flex h-[60px] w-full items-center justify-between px-6">
