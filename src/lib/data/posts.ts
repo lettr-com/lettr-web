@@ -12,6 +12,16 @@ export interface PostMeta {
 // Used by the blog index listing and the "Related articles" block on each post.
 export const posts: PostMeta[] = [
   {
+    slug: "sendgrid-alternatives",
+    category: "Fundamentals",
+    title: "5 best SendGrid alternatives for email delivery in 2026, compared",
+    excerpt:
+      "Five SendGrid alternatives (Lettr, Mailtrap, Postmark, Amazon SES, and Mailgun) compared on free tiers, pricing at 50,000 and 100,000 emails a month, traffic separation, and what each one is actually good at.",
+    author: "Erik Vlčák",
+    date: "September 10, 2026",
+    readTime: "8 min read",
+  },
+  {
     slug: "why-lettr-runs-on-lambda-with-bref",
     category: "Engineering",
     title: "Why Lettr runs on AWS Lambda with Bref",
