@@ -146,47 +146,49 @@
 
 	<Heading level={3}>Low-volume senders (target: under 10,000/day)</Heading>
 
-	<table>
-		<thead>
-			<tr>
-				<th>Day</th>
-				<th>Daily volume</th>
-				<th>Notes</th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr>
-				<td>1-2</td>
-				<td>100-200</td>
-				<td>Most engaged recipients only</td>
-			</tr>
-			<tr>
-				<td>3-4</td>
-				<td>500</td>
-				<td>Monitor bounce and complaint rates</td>
-			</tr>
-			<tr>
-				<td>5-7</td>
-				<td>1,000</td>
-				<td>Check Postmaster Tools if sending to Gmail</td>
-			</tr>
-			<tr>
-				<td>8-10</td>
-				<td>2,500</td>
-				<td></td>
-			</tr>
-			<tr>
-				<td>11-14</td>
-				<td>5,000</td>
-				<td></td>
-			</tr>
-			<tr>
-				<td>15+</td>
-				<td>Target volume</td>
-				<td>Maintain steady sending from here</td>
-			</tr>
-		</tbody>
-	</table>
+	<div class="table-scroll">
+		<table>
+			<thead>
+				<tr>
+					<th>Day</th>
+					<th>Daily volume</th>
+					<th>Notes</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>1-2</td>
+					<td>100-200</td>
+					<td>Most engaged recipients only</td>
+				</tr>
+				<tr>
+					<td>3-4</td>
+					<td>500</td>
+					<td>Monitor bounce and complaint rates</td>
+				</tr>
+				<tr>
+					<td>5-7</td>
+					<td>1,000</td>
+					<td>Check Postmaster Tools if sending to Gmail</td>
+				</tr>
+				<tr>
+					<td>8-10</td>
+					<td>2,500</td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>11-14</td>
+					<td>5,000</td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>15+</td>
+					<td>Target volume</td>
+					<td>Maintain steady sending from here</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
 
 	<Paragraph>
 		For low-volume senders, <strong>two weeks is usually enough</strong>. The ramp feels slow, but it is
@@ -196,47 +198,49 @@
 
 	<Heading level={3}>High-volume senders (target: 50,000+/day)</Heading>
 
-	<table>
-		<thead>
-			<tr>
-				<th>Week</th>
-				<th>Daily volume</th>
-				<th>Notes</th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr>
-				<td>1</td>
-				<td>1,000-2,000</td>
-				<td>Most engaged recipients, monitor everything</td>
-			</tr>
-			<tr>
-				<td>2</td>
-				<td>5,000-10,000</td>
-				<td>Review Postmaster Tools, check deferral rates</td>
-			</tr>
-			<tr>
-				<td>3</td>
-				<td>15,000-25,000</td>
-				<td>Expand to moderately engaged recipients</td>
-			</tr>
-			<tr>
-				<td>4</td>
-				<td>30,000-50,000</td>
-				<td></td>
-			</tr>
-			<tr>
-				<td>5-6</td>
-				<td>50,000-100,000</td>
-				<td>Approach target volume</td>
-			</tr>
-			<tr>
-				<td>6+</td>
-				<td>Target volume</td>
-				<td></td>
-			</tr>
-		</tbody>
-	</table>
+	<div class="table-scroll">
+		<table>
+			<thead>
+				<tr>
+					<th>Week</th>
+					<th>Daily volume</th>
+					<th>Notes</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>1</td>
+					<td>1,000-2,000</td>
+					<td>Most engaged recipients, monitor everything</td>
+				</tr>
+				<tr>
+					<td>2</td>
+					<td>5,000-10,000</td>
+					<td>Review Postmaster Tools, check deferral rates</td>
+				</tr>
+				<tr>
+					<td>3</td>
+					<td>15,000-25,000</td>
+					<td>Expand to moderately engaged recipients</td>
+				</tr>
+				<tr>
+					<td>4</td>
+					<td>30,000-50,000</td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>5-6</td>
+					<td>50,000-100,000</td>
+					<td>Approach target volume</td>
+				</tr>
+				<tr>
+					<td>6+</td>
+					<td>Target volume</td>
+					<td></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
 
 	<Paragraph>
 		High-volume warm-ups take <strong>four to six weeks</strong>, with no way to compress that

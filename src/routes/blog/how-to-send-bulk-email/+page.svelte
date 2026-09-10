@@ -91,37 +91,39 @@ List-Unsubscribe-Post: List-Unsubscribe=One-Click`;
 		<strong>These are the current caps</strong>:
 	</Paragraph>
 
-	<table>
-		<thead>
-			<tr>
-				<th>Account type</th>
-				<th>Daily sending limit</th>
-				<th>What happens above it</th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr>
-				<td>Free Gmail</td>
-				<td>500 recipients or 500 emails per day</td>
-				<td>Sending blocked for 1 to 24 hours</td>
-			</tr>
-			<tr>
-				<td>Google Workspace</td>
-				<td>2,000 messages (1,500 via built-in mail merge)</td>
-				<td>Sending blocked for up to 24 hours</td>
-			</tr>
-			<tr>
-				<td>Free Outlook.com</td>
-				<td>About 300 recipients, 100 per message</td>
-				<td>Send failures; new accounts start lower</td>
-			</tr>
-			<tr>
-				<td>Microsoft 365</td>
-				<td>5,000 recipients, 500 per message</td>
-				<td>Throttling and send failures</td>
-			</tr>
-		</tbody>
-	</table>
+	<div class="table-scroll">
+		<table>
+			<thead>
+				<tr>
+					<th>Account type</th>
+					<th>Daily sending limit</th>
+					<th>What happens above it</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>Free Gmail</td>
+					<td>500 recipients or 500 emails per day</td>
+					<td>Sending blocked for 1 to 24 hours</td>
+				</tr>
+				<tr>
+					<td>Google Workspace</td>
+					<td>2,000 messages (1,500 via built-in mail merge)</td>
+					<td>Sending blocked for up to 24 hours</td>
+				</tr>
+				<tr>
+					<td>Free Outlook.com</td>
+					<td>About 300 recipients, 100 per message</td>
+					<td>Send failures; new accounts start lower</td>
+				</tr>
+				<tr>
+					<td>Microsoft 365</td>
+					<td>5,000 recipients, 500 per message</td>
+					<td>Throttling and send failures</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
 
 	<Paragraph>
 		The limits are only half the problem. <strong>A BCC blast offers no personalization, no

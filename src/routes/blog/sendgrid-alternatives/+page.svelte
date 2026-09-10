@@ -73,60 +73,62 @@
 
 	<Heading level={2}>Best SendGrid alternatives compared</Heading>
 
-	<table>
-		<thead>
-			<tr>
-				<th>Provider</th>
-				<th>Best for</th>
-				<th>Free tier</th>
-				<th>50,000/mo</th>
-				<th>100,000/mo</th>
-				<th>Traffic separation</th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr>
-				<td>Lettr</td>
-				<td>Full tooling and marketing included at $30 per 100,000</td>
-				<td>3,000/mo</td>
-				<td>$15</td>
-				<td>$30</td>
-				<td>Transactional and marketing streams</td>
-			</tr>
-			<tr>
-				<td>Mailtrap</td>
-				<td>Separate sending streams and per-provider analytics</td>
-				<td>4,000/mo (150/day)</td>
-				<td>$20</td>
-				<td>$30</td>
-				<td>Transactional and bulk on separate IP pools, every plan</td>
-			</tr>
-			<tr>
-				<td>Postmark</td>
-				<td>Delivery speed</td>
-				<td>100/mo, permanent</td>
-				<td>~$68.50</td>
-				<td>~$133.50</td>
-				<td>Message Streams</td>
-			</tr>
-			<tr>
-				<td>Amazon SES</td>
-				<td>Lowest cost per email</td>
-				<td>$200 AWS credits for new accounts</td>
-				<td>~$5</td>
-				<td>~$10</td>
-				<td>Configuration sets, built by you</td>
-			</tr>
-			<tr>
-				<td>Mailgun</td>
-				<td>Pre-send address validation</td>
-				<td>100/day</td>
-				<td>$35</td>
-				<td>$90</td>
-				<td>Separate domains, manual setup</td>
-			</tr>
-		</tbody>
-	</table>
+	<div class="table-scroll">
+		<table>
+			<thead>
+				<tr>
+					<th>Provider</th>
+					<th>Best for</th>
+					<th>Free tier</th>
+					<th>50,000/mo</th>
+					<th>100,000/mo</th>
+					<th>Traffic separation</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>Lettr</td>
+					<td>Full tooling and marketing included at $30 per 100,000</td>
+					<td>3,000/mo</td>
+					<td>$15</td>
+					<td>$30</td>
+					<td>Transactional and marketing streams</td>
+				</tr>
+				<tr>
+					<td>Mailtrap</td>
+					<td>Separate sending streams and per-provider analytics</td>
+					<td>4,000/mo (150/day)</td>
+					<td>$20</td>
+					<td>$30</td>
+					<td>Transactional and bulk on separate IP pools, every plan</td>
+				</tr>
+				<tr>
+					<td>Postmark</td>
+					<td>Delivery speed</td>
+					<td>100/mo, permanent</td>
+					<td>~$68.50</td>
+					<td>~$133.50</td>
+					<td>Message Streams</td>
+				</tr>
+				<tr>
+					<td>Amazon SES</td>
+					<td>Lowest cost per email</td>
+					<td>$200 AWS credits for new accounts</td>
+					<td>~$5</td>
+					<td>~$10</td>
+					<td>Configuration sets, built by you</td>
+				</tr>
+				<tr>
+					<td>Mailgun</td>
+					<td>Pre-send address validation</td>
+					<td>100/day</td>
+					<td>$35</td>
+					<td>$90</td>
+					<td>Separate domains, manual setup</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
 
 	<Heading level={2}>1. Lettr: best for full-featured sending with marketing in one account</Heading>
 

@@ -205,52 +205,54 @@
 		from 3,000 emails to 500 the same year.
 	</Paragraph>
 
-	<table>
-		<thead>
-			<tr>
-				<th>Provider</th>
-				<th>Free tier</th>
-				<th>Limits</th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr>
-				<td>Lettr</td>
-				<td>3,000 emails/month</td>
-				<td>No expiry</td>
-			</tr>
-			<tr>
-				<td>Resend</td>
-				<td>3,000 emails/month</td>
-				<td>100/day cap, 1 domain</td>
-			</tr>
-			<tr>
-				<td>Brevo</td>
-				<td>300 emails/day</td>
-				<td>Brevo branding on emails</td>
-			</tr>
-			<tr>
-				<td>Amazon SES</td>
-				<td>3,000 messages/month</td>
-				<td>First 12 months only, then $0.10/1,000</td>
-			</tr>
-			<tr>
-				<td>SMTP2GO</td>
-				<td>1,000 emails/month</td>
-				<td>200/day, 5-day reporting</td>
-			</tr>
-			<tr>
-				<td>MailerSend</td>
-				<td>500 emails/month</td>
-				<td>100/day, 24-hour activity retention</td>
-			</tr>
-			<tr>
-				<td>SendGrid</td>
-				<td>None</td>
-				<td>60-day trial, 100/day</td>
-			</tr>
-		</tbody>
-	</table>
+	<div class="table-scroll">
+		<table>
+			<thead>
+				<tr>
+					<th>Provider</th>
+					<th>Free tier</th>
+					<th>Limits</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>Lettr</td>
+					<td>3,000 emails/month</td>
+					<td>No expiry</td>
+				</tr>
+				<tr>
+					<td>Resend</td>
+					<td>3,000 emails/month</td>
+					<td>100/day cap, 1 domain</td>
+				</tr>
+				<tr>
+					<td>Brevo</td>
+					<td>300 emails/day</td>
+					<td>Brevo branding on emails</td>
+				</tr>
+				<tr>
+					<td>Amazon SES</td>
+					<td>3,000 messages/month</td>
+					<td>First 12 months only, then $0.10/1,000</td>
+				</tr>
+				<tr>
+					<td>SMTP2GO</td>
+					<td>1,000 emails/month</td>
+					<td>200/day, 5-day reporting</td>
+				</tr>
+				<tr>
+					<td>MailerSend</td>
+					<td>500 emails/month</td>
+					<td>100/day, 24-hour activity retention</td>
+				</tr>
+				<tr>
+					<td>SendGrid</td>
+					<td>None</td>
+					<td>60-day trial, 100/day</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
 
 	<Paragraph>
 		The <a href="/blog/best-transactional-email-services/">full provider comparison</a> covers

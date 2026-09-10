@@ -48,37 +48,39 @@
 		as the sender side unless noted.
 	</Paragraph>
 
-	<table>
-		<thead>
-			<tr>
-				<th>Provider</th>
-				<th>Attachment limit</th>
-				<th>What happens above the limit</th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr>
-				<td>Gmail</td>
-				<td>25 MB</td>
-				<td>Offers to upload the file to Google Drive and insert a link instead</td>
-			</tr>
-			<tr>
-				<td>Outlook / Outlook.com</td>
-				<td>20 MB</td>
-				<td>Prompts to share via OneDrive as a link</td>
-			</tr>
-			<tr>
-				<td>Yahoo Mail</td>
-				<td>25 MB</td>
-				<td>Blocks the send; the file has to be linked or shrunk</td>
-			</tr>
-			<tr>
-				<td>iCloud Mail</td>
-				<td>20 MB</td>
-				<td>Mail Drop uploads the file (up to 5 GB) and sends a download link</td>
-			</tr>
-		</tbody>
-	</table>
+	<div class="table-scroll">
+		<table>
+			<thead>
+				<tr>
+					<th>Provider</th>
+					<th>Attachment limit</th>
+					<th>What happens above the limit</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>Gmail</td>
+					<td>25 MB</td>
+					<td>Offers to upload the file to Google Drive and insert a link instead</td>
+				</tr>
+				<tr>
+					<td>Outlook / Outlook.com</td>
+					<td>20 MB</td>
+					<td>Prompts to share via OneDrive as a link</td>
+				</tr>
+				<tr>
+					<td>Yahoo Mail</td>
+					<td>25 MB</td>
+					<td>Blocks the send; the file has to be linked or shrunk</td>
+				</tr>
+				<tr>
+					<td>iCloud Mail</td>
+					<td>20 MB</td>
+					<td>Mail Drop uploads the file (up to 5 GB) and sends a download link</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
 
 	<Paragraph>
 		Business and self-hosted mail can differ. <strong>Microsoft 365 defaults to 25 MB but an

@@ -232,6 +232,11 @@
     color: var(--color-surface);
   }
 
+  .blog-prose .table-scroll {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
   .blog-prose table {
     width: 100%;
     border-collapse: collapse;

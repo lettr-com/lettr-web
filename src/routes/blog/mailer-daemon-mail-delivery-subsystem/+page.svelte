@@ -178,52 +178,54 @@
 		that show up most often in a real bounce.
 	</Paragraph>
 
-	<table class="bounce-codes">
-		<thead>
-			<tr>
-				<th>Code</th>
-				<th>Type</th>
-				<th>What it means</th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr>
-				<td>550 5.1.1</td>
-				<td>Hard</td>
-				<td>The recipient address does not exist (user unknown). Usually a typo or a closed mailbox.</td>
-			</tr>
-			<tr>
-				<td>550 5.7.1</td>
-				<td>Hard</td>
-				<td>The message was blocked by policy: refused as spam, relay denied, or sender not allowed.</td>
-			</tr>
-			<tr>
-				<td>550 5.7.26</td>
-				<td>Hard</td>
-				<td>Authentication failed. The message did not pass SPF or DKIM and was rejected (Gmail).</td>
-			</tr>
-			<tr>
-				<td>552 5.2.2</td>
-				<td>Hard</td>
-				<td>The recipient mailbox is full and over its quota.</td>
-			</tr>
-			<tr>
-				<td>552 5.3.4</td>
-				<td>Hard</td>
-				<td>The message is larger than the recipient server's size limit.</td>
-			</tr>
-			<tr>
-				<td>452 4.2.2</td>
-				<td>Soft</td>
-				<td>The mailbox is temporarily full. The message may deliver on a later attempt.</td>
-			</tr>
-			<tr>
-				<td>421 4.7.0</td>
-				<td>Soft</td>
-				<td>The message was temporarily deferred, often for volume or reputation. Retried automatically.</td>
-			</tr>
-		</tbody>
-	</table>
+	<div class="table-scroll">
+		<table class="bounce-codes">
+			<thead>
+				<tr>
+					<th>Code</th>
+					<th>Type</th>
+					<th>What it means</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>550 5.1.1</td>
+					<td>Hard</td>
+					<td>The recipient address does not exist (user unknown). Usually a typo or a closed mailbox.</td>
+				</tr>
+				<tr>
+					<td>550 5.7.1</td>
+					<td>Hard</td>
+					<td>The message was blocked by policy: refused as spam, relay denied, or sender not allowed.</td>
+				</tr>
+				<tr>
+					<td>550 5.7.26</td>
+					<td>Hard</td>
+					<td>Authentication failed. The message did not pass SPF or DKIM and was rejected (Gmail).</td>
+				</tr>
+				<tr>
+					<td>552 5.2.2</td>
+					<td>Hard</td>
+					<td>The recipient mailbox is full and over its quota.</td>
+				</tr>
+				<tr>
+					<td>552 5.3.4</td>
+					<td>Hard</td>
+					<td>The message is larger than the recipient server's size limit.</td>
+				</tr>
+				<tr>
+					<td>452 4.2.2</td>
+					<td>Soft</td>
+					<td>The mailbox is temporarily full. The message may deliver on a later attempt.</td>
+				</tr>
+				<tr>
+					<td>421 4.7.0</td>
+					<td>Soft</td>
+					<td>The message was temporarily deferred, often for volume or reputation. Retried automatically.</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
 
 	<Paragraph>
 		Alongside the code, the bounce includes a human-readable line that often restates the cause in

@@ -105,78 +105,80 @@
 		volatile.
 	</Paragraph>
 
-	<table>
-		<thead>
-			<tr>
-				<th>Service</th>
-				<th>Free tier</th>
-				<th>50,000/mo</th>
-				<th>100,000/mo</th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr>
-				<td>Amazon SES</td>
-				<td>3,000/mo, first 12 months only</td>
-				<td>~$5</td>
-				<td>~$10</td>
-			</tr>
-			<tr>
-				<td>Lettr</td>
-				<td>3,000/mo</td>
-				<td>$15</td>
-				<td>$30</td>
-			</tr>
-			<tr>
-				<td>Mailtrap</td>
-				<td>4,000/mo (150/day)</td>
-				<td>$20</td>
-				<td>$30</td>
-			</tr>
-			<tr>
-				<td>Resend</td>
-				<td>3,000/mo (100/day)</td>
-				<td>$20</td>
-				<td>$35</td>
-			</tr>
-			<tr>
-				<td>SendGrid</td>
-				<td>None (60-day trial)</td>
-				<td>$19.95</td>
-				<td>$34.95</td>
-			</tr>
-			<tr>
-				<td>Mailgun</td>
-				<td>100/day</td>
-				<td>$35</td>
-				<td>$90</td>
-			</tr>
-			<tr>
-				<td>MailerSend</td>
-				<td>500/mo</td>
-				<td>$35</td>
-				<td>from $110 (Professional)</td>
-			</tr>
-			<tr>
-				<td>Brevo</td>
-				<td>300/day</td>
-				<td>Starter, sliding scale</td>
-				<td>$69 (Starter)</td>
-			</tr>
-			<tr>
-				<td>SMTP2GO</td>
-				<td>1,000/mo</td>
-				<td>~$50 (Starter + overage)</td>
-				<td>$75 (Professional)</td>
-			</tr>
-			<tr>
-				<td>Postmark</td>
-				<td>100/mo</td>
-				<td>~$68.50 (Pro)</td>
-				<td>~$133.50 (Pro)</td>
-			</tr>
-		</tbody>
-	</table>
+	<div class="table-scroll">
+		<table>
+			<thead>
+				<tr>
+					<th>Service</th>
+					<th>Free tier</th>
+					<th>50,000/mo</th>
+					<th>100,000/mo</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>Amazon SES</td>
+					<td>3,000/mo, first 12 months only</td>
+					<td>~$5</td>
+					<td>~$10</td>
+				</tr>
+				<tr>
+					<td>Lettr</td>
+					<td>3,000/mo</td>
+					<td>$15</td>
+					<td>$30</td>
+				</tr>
+				<tr>
+					<td>Mailtrap</td>
+					<td>4,000/mo (150/day)</td>
+					<td>$20</td>
+					<td>$30</td>
+				</tr>
+				<tr>
+					<td>Resend</td>
+					<td>3,000/mo (100/day)</td>
+					<td>$20</td>
+					<td>$35</td>
+				</tr>
+				<tr>
+					<td>SendGrid</td>
+					<td>None (60-day trial)</td>
+					<td>$19.95</td>
+					<td>$34.95</td>
+				</tr>
+				<tr>
+					<td>Mailgun</td>
+					<td>100/day</td>
+					<td>$35</td>
+					<td>$90</td>
+				</tr>
+				<tr>
+					<td>MailerSend</td>
+					<td>500/mo</td>
+					<td>$35</td>
+					<td>from $110 (Professional)</td>
+				</tr>
+				<tr>
+					<td>Brevo</td>
+					<td>300/day</td>
+					<td>Starter, sliding scale</td>
+					<td>$69 (Starter)</td>
+				</tr>
+				<tr>
+					<td>SMTP2GO</td>
+					<td>1,000/mo</td>
+					<td>~$50 (Starter + overage)</td>
+					<td>$75 (Professional)</td>
+				</tr>
+				<tr>
+					<td>Postmark</td>
+					<td>100/mo</td>
+					<td>~$68.50 (Pro)</td>
+					<td>~$133.50 (Pro)</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
 
 	<Heading level={2}>The ten services</Heading>
 

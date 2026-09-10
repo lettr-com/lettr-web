@@ -58,42 +58,44 @@
 		clients:
 	</Paragraph>
 
-	<table>
-		<thead>
-			<tr>
-				<th>Element</th>
-				<th>Recommended width</th>
-				<th>Recommended height</th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr>
-				<td>Full signature block</td>
-				<td>300-600px</td>
-				<td>70-150px</td>
-			</tr>
-			<tr>
-				<td>Company logo</td>
-				<td>150-300px</td>
-				<td>50-100px</td>
-			</tr>
-			<tr>
-				<td>Headshot / avatar</td>
-				<td>100px</td>
-				<td>100px</td>
-			</tr>
-			<tr>
-				<td>Social media icons</td>
-				<td>24-32px</td>
-				<td>24-32px</td>
-			</tr>
-			<tr>
-				<td>Banner / CTA image</td>
-				<td>up to 600px</td>
-				<td>50-150px</td>
-			</tr>
-		</tbody>
-	</table>
+	<div class="table-scroll">
+		<table>
+			<thead>
+				<tr>
+					<th>Element</th>
+					<th>Recommended width</th>
+					<th>Recommended height</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>Full signature block</td>
+					<td>300-600px</td>
+					<td>70-150px</td>
+				</tr>
+				<tr>
+					<td>Company logo</td>
+					<td>150-300px</td>
+					<td>50-100px</td>
+				</tr>
+				<tr>
+					<td>Headshot / avatar</td>
+					<td>100px</td>
+					<td>100px</td>
+				</tr>
+				<tr>
+					<td>Social media icons</td>
+					<td>24-32px</td>
+					<td>24-32px</td>
+				</tr>
+				<tr>
+					<td>Banner / CTA image</td>
+					<td>up to 600px</td>
+					<td>50-150px</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
 
 	<Paragraph>
 		Sharpness depends on one more step. <strong>Export images at twice the display size and constrain

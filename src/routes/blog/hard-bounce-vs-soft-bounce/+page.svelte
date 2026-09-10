@@ -84,42 +84,44 @@
 		failure.
 	</Paragraph>
 
-	<table class="bounce-compare">
-		<thead>
-			<tr>
-				<th></th>
-				<th>Hard bounce</th>
-				<th>Soft bounce</th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr>
-				<td>Nature</td>
-				<td>Permanent</td>
-				<td>Temporary</td>
-			</tr>
-			<tr>
-				<td>Status code</td>
-				<td>5xx (e.g. 550 5.1.1)</td>
-				<td>4xx (e.g. 452 4.2.2)</td>
-			</tr>
-			<tr>
-				<td>Typical cause</td>
-				<td>Address does not exist, invalid domain</td>
-				<td>Full mailbox, server down, message too large</td>
-			</tr>
-			<tr>
-				<td>Will retry succeed?</td>
-				<td>No</td>
-				<td>Often</td>
-			</tr>
-			<tr>
-				<td>Correct response</td>
-				<td>Remove the address immediately</td>
-				<td>Retry, then suppress if it persists</td>
-			</tr>
-		</tbody>
-	</table>
+	<div class="table-scroll">
+		<table class="bounce-compare">
+			<thead>
+				<tr>
+					<th></th>
+					<th>Hard bounce</th>
+					<th>Soft bounce</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>Nature</td>
+					<td>Permanent</td>
+					<td>Temporary</td>
+				</tr>
+				<tr>
+					<td>Status code</td>
+					<td>5xx (e.g. 550 5.1.1)</td>
+					<td>4xx (e.g. 452 4.2.2)</td>
+				</tr>
+				<tr>
+					<td>Typical cause</td>
+					<td>Address does not exist, invalid domain</td>
+					<td>Full mailbox, server down, message too large</td>
+				</tr>
+				<tr>
+					<td>Will retry succeed?</td>
+					<td>No</td>
+					<td>Often</td>
+				</tr>
+				<tr>
+					<td>Correct response</td>
+					<td>Remove the address immediately</td>
+					<td>Retry, then suppress if it persists</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
 
 	<Heading level={2}>Common causes of each</Heading>
 
