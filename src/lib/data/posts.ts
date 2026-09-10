@@ -17,7 +17,7 @@ export const posts: PostMeta[] = [
     title: "5 best SendGrid alternatives for email delivery in 2026, compared",
     excerpt:
       "Five SendGrid alternatives (Lettr, Mailtrap, Postmark, Amazon SES, and Mailgun) compared on free tiers, pricing at 50,000 and 100,000 emails a month, traffic separation, and what each one is actually good at.",
-    author: "Erik Vlčák",
+    author: "Jack Zagorski",
     date: "September 10, 2026",
     readTime: "8 min read",
   },
