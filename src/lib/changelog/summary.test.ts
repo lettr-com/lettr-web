@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vite-plus/test";
-import { sectionAnchor, sectionsOf, summarizeMonth } from "./summary";
+import { sectionAnchor, sectionsOf, summarizeMonth, summarizeMonthHtml } from "./summary";
 import type { ChangelogMonth } from "./types";
 
 const entry = (title: string) => ({ title, modules: ["platform" as const], lead: "Lead." });
@@ -47,5 +47,26 @@ describe("summarizeMonth", () => {
 
   it("returns null for an empty month", () => {
     expect(summarizeMonth({ ...month, features: [], improvements: [], bugfixes: [] })).toBeNull();
+  });
+});
+
+describe("summarizeMonthHtml", () => {
+  it("wraps each count and nothing else", () => {
+    expect(summarizeMonthHtml(month)).toBe(
+      '<strong class="changelog-count">1</strong>\u00a0new feature, ' +
+        '<strong class="changelog-count">2</strong>\u00a0improvements and ' +
+        '<strong class="changelog-count">3</strong>\u00a0bugfixes',
+    );
+  });
+
+  it("reads the same as the plain summary once the markup is stripped", () => {
+    const html = summarizeMonthHtml(month) ?? "";
+    expect(html.replace(/<[^>]+>/g, "")).toBe(summarizeMonth(month));
+  });
+
+  it("returns null for an empty month", () => {
+    expect(
+      summarizeMonthHtml({ ...month, features: [], improvements: [], bugfixes: [] }),
+    ).toBeNull();
   });
 });

@@ -285,6 +285,15 @@
     background-color: rgba(17, 24, 39, 0.06);
     color: var(--color-surface);
   }
+
+  /* A count in the month hero, from summarizeMonthHtml(). Set in the heading
+     face and the surface color so it reads at a glance against the muted
+     sentence around it. */
+  .changelog-count {
+    font-family: var(--font-heading);
+    font-weight: 500;
+    color: var(--color-surface);
+  }
 }
 
 @utility glass {

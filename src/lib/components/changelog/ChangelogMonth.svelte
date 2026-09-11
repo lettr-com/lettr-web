@@ -43,15 +43,15 @@
 </script>
 
 <!-- data-month is read by the delegated PostHog handler on the container. -->
-<div data-month={month.id} class="lg:grid lg:grid-cols-[11rem_minmax(0,1fr)] lg:gap-12">
+<div data-month={month.id} class="lg:grid lg:grid-cols-[minmax(0,1fr)_11rem] lg:gap-12">
 	<!--
 		The rail mirrors the blog post's sticky table of contents: it names the
 		month and lets the reader jump straight to the section they care about.
+		It sits to the right of the entries on wide screens (as the blog's does),
+		but stays first in the DOM so it leads on phones, where it stacks above.
 	-->
-	<aside data-reveal class="mb-10 lg:sticky lg:top-32 lg:mb-0 lg:self-start">
-		<div
-			class="flex items-center gap-2 text-[11px] font-medium tracking-[0.18em] text-primary/80 uppercase"
-		>
+	<aside data-reveal class="mb-10 lg:sticky lg:top-32 lg:order-last lg:mb-0 lg:self-start">
+		<div class="flex items-center gap-2 text-xs font-medium text-primary">
 			<span class="block h-px w-6 bg-primary/60"></span>
 			{railEyebrow}
 		</div>
@@ -103,7 +103,7 @@
 	<div class="min-w-0">
 		{#if shown.features.length || !hideEmpty}
 			<section id={sectionAnchor(month, 'features')} class="scroll-mt-28 first:mt-0">
-				<h2 data-reveal class="font-heading text-xs tracking-[0.15em] text-primary uppercase">
+				<h2 data-reveal class="font-heading text-sm text-primary">
 					New features
 				</h2>
 				{#if shown.features.length}
@@ -123,7 +123,7 @@
 				id={sectionAnchor(month, 'improvements')}
 				class="mt-14 scroll-mt-28 first:mt-0"
 			>
-				<h2 data-reveal class="font-heading text-xs tracking-[0.15em] text-primary uppercase">
+				<h2 data-reveal class="font-heading text-sm text-primary">
 					Improvements
 				</h2>
 				{#if shown.improvements.length}
@@ -143,7 +143,7 @@
 				id={sectionAnchor(month, 'bugfixes')}
 				class="mt-14 scroll-mt-28 first:mt-0"
 			>
-				<h2 data-reveal class="font-heading text-xs tracking-[0.15em] text-primary uppercase">
+				<h2 data-reveal class="font-heading text-sm text-primary">
 					Bugfixes
 				</h2>
 				{#if shown.bugfixes.length}

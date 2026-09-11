@@ -45,7 +45,7 @@
 	<div bind:this={header}>
 		<span
 			data-animate
-			class="mb-4 inline-block font-heading text-xs tracking-[0.15em] text-primary uppercase"
+			class="mb-4 inline-block font-heading text-sm text-primary"
 		>
 			Changelog
 		</span>

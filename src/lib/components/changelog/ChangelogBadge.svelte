@@ -42,13 +42,15 @@
 		platform: 'bg-module-platform text-white'
 	};
 
-	const base = 'inline-block px-3 font-heading text-[11px] tracking-[0.05em] whitespace-nowrap';
-	// A toggle is a touch target, so it keeps thumb-sized padding on phones and
-	// drops back to the badge's own density from `sm` up.
+	const base = 'inline-block font-heading tracking-[0.05em] whitespace-nowrap';
+	/** The badge as printed on an entry: dense, so a row of them stays one line. */
+	const label = 'px-3 py-0.5 text-[11px]';
+	// A toggle is a target, not a label, so it is a step larger than the badge
+	// it stands for: comfortably clickable, and thumb-sized on phones.
 	const interactive =
-		'cursor-pointer py-1.5 transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary sm:py-0.5';
+		'cursor-pointer px-3.5 py-2 text-xs transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary sm:py-1';
 
-	const label = $derived(module ? MODULE_LABELS[module] : (tag ?? ''));
+	const text = $derived(module ? MODULE_LABELS[module] : (tag ?? ''));
 
 	const variant = $derived.by(() => {
 		if (module) {
@@ -66,12 +68,12 @@
 	});
 </script>
 
-{#if label}
+{#if text}
 	{#if onToggle}
 		<button type="button" aria-pressed={pressed} onclick={onToggle} class="{base} {interactive} {variant}">
-			{label}
+			{text}
 		</button>
 	{:else}
-		<span class="{base} py-0.5 {variant}">{label}</span>
+		<span class="{base} {label} {variant}">{text}</span>
 	{/if}
 {/if}
