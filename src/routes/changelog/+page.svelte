@@ -45,14 +45,14 @@
 	<div bind:this={header}>
 		<span
 			data-animate
-			class="mb-4 inline-block font-heading text-xs tracking-[0.15em] text-primary uppercase"
+			class="mb-4 inline-block font-heading text-sm text-primary"
 		>
 			Changelog
 		</span>
 		<h1 data-animate>Everything we ship,<br class="hidden sm:inline" />month by month</h1>
 		<p data-animate class="mt-6 max-w-xl text-body leading-[1.8] text-muted">
-			We publish a new entry every month with everything that shipped: new features,
-			improvements and bugfixes. Each entry names the part of Lettr it touches.
+			Every month we post a summary of what's new in Lettr: features, improvements and
+			bugfixes. Each entry is tagged with the part of the app it affects.
 		</p>
 
 		{#if MONTHS.length > 1}

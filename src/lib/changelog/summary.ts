@@ -35,9 +35,26 @@ export function sectionAnchor(month: ChangelogMonth, key: SectionKey): string {
  * editing. The separators between phrases stay ordinary spaces — those are
  * where the line is meant to break.
  */
-function countLabel(n: number, singular: string, plural: string): string | null {
+function countLabel(
+  n: number,
+  singular: string,
+  plural: string,
+  wrap: (count: string) => string,
+): string | null {
   if (n === 0) return null;
-  return `${n}\u00a0${n === 1 ? singular : plural}`;
+  return `${wrap(String(n))}\u00a0${n === 1 ? singular : plural}`;
+}
+
+function summarize(month: ChangelogMonth, wrap: (count: string) => string): string | null {
+  const parts = [
+    countLabel(month.features.length, "new feature", "new features", wrap),
+    countLabel(month.improvements.length, "improvement", "improvements", wrap),
+    countLabel(month.bugfixes.length, "bugfix", "bugfixes", wrap),
+  ].filter((part): part is string => part !== null);
+
+  if (parts.length === 0) return null;
+  if (parts.length === 1) return parts[0];
+  return `${parts.slice(0, -1).join(", ")} and ${parts.at(-1)}`;
 }
 
 /**
@@ -45,13 +62,16 @@ function countLabel(n: number, singular: string, plural: string): string | null 
  * noun by a non-breaking space), or null for an empty month.
  */
 export function summarizeMonth(month: ChangelogMonth): string | null {
-  const parts = [
-    countLabel(month.features.length, "new feature", "new features"),
-    countLabel(month.improvements.length, "improvement", "improvements"),
-    countLabel(month.bugfixes.length, "bugfix", "bugfixes"),
-  ].filter((part): part is string => part !== null);
+  return summarize(month, (count) => count);
+}
 
-  if (parts.length === 0) return null;
-  if (parts.length === 1) return parts[0];
-  return `${parts.slice(0, -1).join(", ")} and ${parts.at(-1)}`;
+/**
+ * The same sentence with each count wrapped in a `.changelog-count` element,
+ * for the page hero where the numbers are the point of the line and would
+ * otherwise blend into the sentence around them. Meant for `{@html}`; safe
+ * because every character comes from a number or one of the nouns above, never
+ * from authored copy. `summarizeMonth` stays the plain form for meta tags.
+ */
+export function summarizeMonthHtml(month: ChangelogMonth): string | null {
+  return summarize(month, (count) => `<strong class="changelog-count">${count}</strong>`);
 }
