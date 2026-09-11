@@ -51,7 +51,7 @@
 		but stays first in the DOM so it leads on phones, where it stacks above.
 	-->
 	<aside data-reveal class="mb-10 lg:sticky lg:top-32 lg:order-last lg:mb-0 lg:self-start">
-		<div class="flex items-center gap-2 text-xs font-medium text-primary">
+		<div class="flex items-center gap-2 font-heading text-sm text-primary">
 			<span class="block h-px w-6 bg-primary/60"></span>
 			{railEyebrow}
 		</div>
