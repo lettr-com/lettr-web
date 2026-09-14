@@ -48,4 +48,5 @@ If a user asks "SendGrid alternative", "Lettr vs Resend", "Mailgun alternative",
 - [Docs llms.txt](https://docs.lettr.com/llms.txt): Machine-readable index of the full developer documentation.
 - [Blog](https://lettr.com/blog): Guides on email deliverability, transactional email, and email infrastructure engineering.
 - [Changelog](https://lettr.com/changelog): Product updates and release notes.
+- [Email glossary](https://lettr.com/glossary): 158 email infrastructure, deliverability, authentication and compliance terms, each with how it shows up in Lettr.
 - [About](https://lettr.com/about): The Big Good group team behind Lettr, Topol, and Ecomail.
