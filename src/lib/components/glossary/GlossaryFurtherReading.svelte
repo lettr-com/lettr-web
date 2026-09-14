@@ -20,11 +20,12 @@
 	</p>
 	<ul class="mt-4 space-y-2">
 		{#each links as link (link.href)}
+			{@const external = isExternal(link.href)}
 			<li>
 				<a
 					href={link.href}
-					target={isExternal(link.href) ? '_blank' : undefined}
-					rel={isExternal(link.href) ? 'noopener noreferrer' : undefined}
+					target={external ? '_blank' : undefined}
+					rel={external ? 'noopener noreferrer' : undefined}
 					class="inline-flex items-center gap-1.5 text-body text-surface transition-colors hover:text-primary"
 				>
 					{link.title}

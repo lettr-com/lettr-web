@@ -23,10 +23,8 @@
 		active = letter;
 		const target = document.getElementById(letter);
 		if (!target) return;
-		if (!window.matchMedia('(min-width: 768px)').matches) {
-			const details = target.querySelector('details');
-			if (details) details.open = true;
-		}
+		const details = target.querySelector('details');
+		if (details) details.open = true;
 		target.scrollIntoView({ behavior: 'smooth', block: 'start' });
 	}
 </script>

@@ -81,7 +81,7 @@
 			<h1 data-animate class="mt-3">{heading}</h1>
 		</header>
 
-		<div class="glossary-prose mt-10 text-body text-surface">
+		<div class="blog-prose glossary-prose mt-10 text-body text-surface">
 			{@html data.term.html}
 		</div>
 

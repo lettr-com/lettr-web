@@ -1,6 +1,6 @@
 import type { GlossaryTermLink, Letter, LetterGroup } from "./types";
 
-export const LETTERS: readonly Letter[] = [
+export const LETTERS = [
   "A",
   "B",
   "C",
@@ -28,7 +28,7 @@ export const LETTERS: readonly Letter[] = [
   "Y",
   "Z",
   "#",
-];
+] as const;
 
 /** First character of the label, uppercased; anything outside A to Z lands in "#". */
 export function letterFor(term: string): Letter {

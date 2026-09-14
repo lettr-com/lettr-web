@@ -10,19 +10,13 @@
  * inside a code span be rewritten into an anchor.
  */
 
+import { escapeHtml } from "../utils/html";
+
 /** Schemes an authored link may use. Anything else renders as plain text. */
 const SAFE_HREF = /^(https?:\/\/|\/|#|mailto:)/;
 
 /** A code span, or a link — whichever starts first wins. */
 const INLINE = /`([^`]+)`|\[([^\]]+)\]\(([^)\s]+)\)/g;
-
-function escapeHtml(value: string): string {
-  return value
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;");
-}
 
 function renderLink(label: string, href: string): string {
   if (!SAFE_HREF.test(href)) return label;

@@ -15,78 +15,88 @@ export const termFiles: TermFiles = import.meta.glob<string>("./terms/*.md", {
   eager: true,
 });
 
+const GLOSSARY_LINK = /\]\(\/glossary\/([^)/]+)\/\)/g;
+
 export function slugFromPath(path: string): string {
   return path.replace(/^.*\//, "").replace(/\.md$/, "");
 }
 
 const collator = new Intl.Collator("en", { sensitivity: "base", numeric: true });
 
-const cache = new WeakMap<TermFiles, readonly GlossaryTermSource[]>();
+interface TermSet {
+  sources: readonly GlossaryTermSource[];
+  index: readonly GlossaryTermLink[];
+  /** Slug to position in `sources` and `index`. */
+  positions: Map<string, number>;
+}
 
-/** Parse every file once per files record and sort by label. Throws on a bad or missing file set. */
-export function readSources(files: TermFiles = termFiles): readonly GlossaryTermSource[] {
+const cache = new WeakMap<TermFiles, TermSet>();
+
+/**
+ * Parse every file once per files record, sort by label and check that every
+ * related slug and body glossary link names a term that has a file. Throws on
+ * a bad or missing file set, so a broken reference fails the build.
+ */
+function loadTermSet(files: TermFiles): TermSet {
   const cached = cache.get(files);
   if (cached) return cached;
 
   const paths = Object.keys(files);
   if (paths.length === 0) throw new Error("no glossary terms found in src/lib/glossary/terms");
 
-  const seen = new Set<string>();
-  const sources = paths.map((path) => {
-    const slug = slugFromPath(path);
-    if (seen.has(slug)) throw new Error(`duplicate glossary slug: ${slug}`);
-    seen.add(slug);
-    return parseTermFile(slug, files[path], path);
-  });
+  const sources = paths.map((path) => parseTermFile(slugFromPath(path), files[path], path));
   sources.sort((a, b) => collator.compare(a.meta.term, b.meta.term));
 
-  cache.set(files, sources);
-  return sources;
+  const positions = new Map(sources.map((source, position) => [source.meta.slug, position]));
+  for (const { meta, body } of sources) {
+    const linked = [...body.matchAll(GLOSSARY_LINK)].map((match) => match[1]);
+    for (const slug of [...meta.related, ...linked]) {
+      if (!positions.has(slug)) throw new Error(`${meta.slug}.md: unknown glossary term ${slug}`);
+    }
+  }
+
+  const index = sources.map(({ meta }) => ({
+    slug: meta.slug,
+    term: meta.term,
+    href: `/glossary/${meta.slug}/`,
+  }));
+
+  const set = { sources, index, positions };
+  cache.set(files, set);
+  return set;
 }
 
-function linkFor(meta: { slug: string; term: string }): GlossaryTermLink {
-  return { slug: meta.slug, term: meta.term, href: `/glossary/${meta.slug}/` };
+export function readSources(files: TermFiles = termFiles): readonly GlossaryTermSource[] {
+  return loadTermSet(files).sources;
 }
 
-export function buildIndex(files: TermFiles = termFiles): GlossaryTermLink[] {
-  return readSources(files).map((source) => linkFor(source.meta));
+export function buildIndex(files: TermFiles = termFiles): readonly GlossaryTermLink[] {
+  return loadTermSet(files).index;
 }
 
 export function buildTerm(slug: string, files: TermFiles = termFiles): GlossaryTerm | undefined {
-  const sources = readSources(files);
-  const source = sources.find((candidate) => candidate.meta.slug === slug);
-  if (!source) return undefined;
-  // Links to terms without a file render as text so the prerender crawl never 404s.
-  const written = new Set(sources.map((candidate) => candidate.meta.slug));
-  return { ...source.meta, html: renderTermBody(source.body, written) };
+  const { sources, positions } = loadTermSet(files);
+  const position = positions.get(slug);
+  if (position === undefined) return undefined;
+  const { meta, body } = sources[position];
+  return { ...meta, html: renderTermBody(body) };
 }
 
 export function buildNeighbours(
   slug: string,
   files: TermFiles = termFiles,
 ): { prev?: GlossaryTermLink; next?: GlossaryTermLink } {
-  const index = buildIndex(files);
-  const position = index.findIndex((term) => term.slug === slug);
-  if (position === -1) return {};
+  const { index, positions } = loadTermSet(files);
+  const position = positions.get(slug);
+  if (position === undefined) return {};
   return { prev: index[position - 1], next: index[position + 1] };
 }
 
-/**
- * Resolve related slugs to links, skipping terms that have no file yet so a
- * batch can name siblings written in a later batch. content.test.ts checks
- * every related slug against the planned list, so a typo still fails there.
- */
+/** Resolve related slugs to links; the loader has already checked every slug exists. */
 export function resolveRelated(
   slugs: readonly string[],
   files: TermFiles = termFiles,
 ): GlossaryTermLink[] {
-  const index = buildIndex(files);
-  return slugs.flatMap((slug) => {
-    const link = index.find((term) => term.slug === slug);
-    return link ? [link] : [];
-  });
+  const { index, positions } = loadTermSet(files);
+  return slugs.map((slug) => index[positions.get(slug)!]);
 }
-
-export const loadTermIndex = (): GlossaryTermLink[] => buildIndex();
-export const loadTerm = (slug: string): GlossaryTerm | undefined => buildTerm(slug);
-export const neighbours = (slug: string) => buildNeighbours(slug);

@@ -17,13 +17,6 @@ const files = {
   "./terms/gamma.md": file("Gamma", "fullName: Gamma Ray\n"),
 };
 
-// A term whose body links to a written sibling (beta) and an unwritten one (zeta).
-const linked = {
-  ...files,
-  "./terms/delta.md":
-    '---\nterm: Delta\ndescription: "About Delta."\n---\nSee [Beta](/glossary/beta/) and [Zeta](/glossary/zeta/).\n\n## Delta in Lettr\n\nText.\n',
-};
-
 describe("slugFromPath", () => {
   it("takes the file name without extension", () => {
     expect(slugFromPath("./terms/hard-bounce.md")).toBe("hard-bounce");
@@ -43,6 +36,17 @@ describe("readSources", () => {
 
   it("names the broken file in the error", () => {
     expect(() => readSources({ "./terms/bad.md": "no fence" })).toThrow(/bad\.md/);
+  });
+
+  it("throws on a related slug without a file", () => {
+    expect(() =>
+      readSources({ ...files, "./terms/delta.md": file("Delta", "related: [zeta]\n") }),
+    ).toThrow(/delta\.md.*zeta/);
+  });
+
+  it("throws on a body link to a term without a file", () => {
+    const delta = file("Delta").replace("is a thing.", "links [Zeta](/glossary/zeta/).");
+    expect(() => readSources({ ...files, "./terms/delta.md": delta })).toThrow(/delta\.md.*zeta/);
   });
 });
 
@@ -67,13 +71,6 @@ describe("buildTerm", () => {
   it("returns undefined for an unknown slug", () => {
     expect(buildTerm("nope", files)).toBeUndefined();
   });
-
-  it("links only to terms that have a file and leaves the rest as text", () => {
-    const html = buildTerm("delta", linked)?.html;
-    expect(html).toContain('<a href="/glossary/beta/">Beta</a>');
-    expect(html).toContain("and Zeta.");
-    expect(html).not.toContain("/glossary/zeta/");
-  });
 });
 
 describe("buildNeighbours", () => {
@@ -95,13 +92,5 @@ describe("buildNeighbours", () => {
 describe("resolveRelated", () => {
   it("maps slugs to links in the given order", () => {
     expect(resolveRelated(["gamma", "beta"], files).map((l) => l.term)).toEqual(["Gamma", "Beta"]);
-  });
-
-  it("skips slugs that have no file yet", () => {
-    expect(resolveRelated(["gamma", "zeta", "beta"], files).map((l) => l.slug)).toEqual([
-      "gamma",
-      "beta",
-    ]);
-    expect(resolveRelated(["zeta"], files)).toEqual([]);
   });
 });

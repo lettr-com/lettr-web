@@ -27,20 +27,4 @@ describe("renderTermBody", () => {
     const html = renderTermBody('[x](/glossary/a/ "say \\"hi\\"")');
     expect(html).toContain('title="say &quot;hi&quot;"');
   });
-
-  it("renders links to unwritten glossary terms as plain text when given the known slugs", () => {
-    const html = renderTermBody(
-      "See [SPF](/glossary/spf/) and [DMARC](/glossary/dmarc/).",
-      new Set(["spf"]),
-    );
-    expect(html).toContain('<a href="/glossary/spf/">SPF</a>');
-    expect(html).toContain("and DMARC.");
-    expect(html).not.toContain("/glossary/dmarc/");
-  });
-
-  it("keeps every glossary link when no slug set is given", () => {
-    expect(renderTermBody("[DMARC](/glossary/dmarc/)")).toContain(
-      '<a href="/glossary/dmarc/">DMARC</a>',
-    );
-  });
 });

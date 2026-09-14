@@ -20,12 +20,10 @@ export function splitFrontmatter(raw: string, name = "document"): FrontmatterRes
   }
 
   const data = load(match[1]);
-  const body = match[2].trim();
-  if (data === null || data === undefined) return { data: {}, body };
-  if (typeof data !== "object" || Array.isArray(data)) {
+  if (typeof data !== "object" || data === null || Array.isArray(data)) {
     throw new Error(`${name}: frontmatter must be a YAML mapping`);
   }
-  return { data: data as Record<string, unknown>, body };
+  return { data: data as Record<string, unknown>, body: match[2].trim() };
 }
 
 function requireString(data: Record<string, unknown>, key: string, name: string): string {
@@ -60,15 +58,11 @@ function readingList(data: Record<string, unknown>, name: string): ReadingLink[]
   const value = data.reading;
   if (value === undefined || value === null) return [];
   if (!Array.isArray(value)) throw new Error(`${name}: frontmatter "reading" must be a list`);
-  return value.map((item, index) => {
-    if (typeof item !== "object" || item === null) {
-      throw new Error(`${name}: frontmatter "reading[${index}]" must have title and href`);
-    }
-    const entry = item as Record<string, unknown>;
-    if (typeof entry.title !== "string" || typeof entry.href !== "string") {
+  return value.map((item: { title?: unknown; href?: unknown } | null, index) => {
+    if (typeof item?.title !== "string" || typeof item.href !== "string") {
       throw new Error(`${name}: frontmatter "reading[${index}]" must have string title and href`);
     }
-    return { title: entry.title.trim(), href: entry.href.trim() };
+    return { title: item.title.trim(), href: item.href.trim() };
   });
 }
 
