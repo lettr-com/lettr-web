@@ -2,8 +2,7 @@
 	import { onMount } from 'svelte';
 	import ArrowLeftIcon from 'phosphor-svelte/lib/ArrowLeftIcon';
 	import Seo from '$lib/components/Seo.svelte';
-	import GlossaryFurtherReading from '$lib/components/glossary/GlossaryFurtherReading.svelte';
-	import GlossaryRelatedTerms from '$lib/components/glossary/GlossaryRelatedTerms.svelte';
+	import GlossaryLinkGrid from '$lib/components/glossary/GlossaryLinkGrid.svelte';
 	import GlossaryStepper from '$lib/components/glossary/GlossaryStepper.svelte';
 	import { createFromAnimationCleanup } from '$lib/utils/gsap';
 	import type { PageData } from './$types';
@@ -18,6 +17,8 @@
 
 	const heading = $derived(`${data.term.question} ${data.term.term}?`);
 	const pageUrl = $derived(`https://lettr.com/glossary/${data.term.slug}/`);
+	const readingLinks = $derived(data.term.reading.map(({ href, title }) => ({ href, label: title })));
+	const relatedLinks = $derived(data.related.map(({ href, term }) => ({ href, label: term })));
 
 	const jsonLd = $derived({
 		'@context': 'https://schema.org',
@@ -70,12 +71,15 @@
 			<a
 				data-animate
 				href="/glossary/"
-				class="inline-flex items-center gap-1.5 text-sm font-medium text-muted transition-colors hover:text-primary"
+				class="group inline-flex items-center gap-1.5 text-sm font-medium text-muted transition-colors hover:text-primary"
 			>
-				<ArrowLeftIcon size={15} />
+				<ArrowLeftIcon
+					size={15}
+					class="shrink-0 transition-transform duration-200 ease-out group-hover:-translate-x-0.5 motion-reduce:transition-none"
+				/>
 				All terms
 			</a>
-			<span data-animate class="mt-8 block font-heading text-xs tracking-[0.15em] text-primary uppercase">
+			<span data-animate class="mt-8 block font-heading text-sm text-primary">
 				Glossary
 			</span>
 			<h1 data-animate class="mt-3">{heading}</h1>
@@ -85,12 +89,12 @@
 			{@html data.term.html}
 		</div>
 
-		{#if data.term.reading.length > 0}
-			<GlossaryFurtherReading links={data.term.reading} />
+		{#if readingLinks.length > 0}
+			<GlossaryLinkGrid id="glossary-further-reading" heading="Further reading" links={readingLinks} />
 		{/if}
 
-		{#if data.related.length > 0}
-			<GlossaryRelatedTerms terms={data.related} />
+		{#if relatedLinks.length > 0}
+			<GlossaryLinkGrid id="glossary-related-terms" heading="Related terms" links={relatedLinks} />
 		{/if}
 
 		<GlossaryStepper prev={data.prev} next={data.next} />

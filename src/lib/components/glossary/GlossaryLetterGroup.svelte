@@ -21,9 +21,10 @@
 				>
 					<span class="break-words">{term.term}</span>
 					{#if arrow}
+						<!-- Sized to this 17px list the way the 15px arrows on a term page are sized to 14px text, with the same pink slide on hover. -->
 						<ArrowRightIcon
-							size={15}
-							class="shrink-0 opacity-0 transition-opacity group-hover/link:opacity-100 group-focus-visible/link:opacity-100"
+							size={18}
+							class="shrink-0 opacity-0 transition duration-200 ease-out group-hover/link:translate-x-0.5 group-hover/link:opacity-100 group-focus-visible/link:translate-x-0.5 group-focus-visible/link:opacity-100 motion-reduce:transition-none"
 						/>
 					{/if}
 				</a>
