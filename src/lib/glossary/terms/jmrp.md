@@ -39,6 +39,6 @@ A [spam complaint](/glossary/spam-complaint/) is far more damaging than an unsub
 
 When a recipient complains, **the email provider's feedback report goes to Lettr**, the address is added to the [suppression list](/glossary/suppression-list/) automatically and a `message.spam_complaint` webhook event fires. The event carries `rcpt_to` with the recipient who complained, `message_id`, `timestamp`, `fbtype` with the feedback type (typically `abuse`) and `rcpt_meta` with the custom metadata from the original send.
 
-A complaint appears as **Spam** in the message timeline on the Message Details page. The Analytics page counts Spam Complaints, and its Configure modal can filter by Mailbox Provider, while the **Break Down By** dropdown groups metrics by the same field, which separates Outlook traffic from other providers.
+A complaint appears as a spam event in the message timeline on the Message Details page. The Analytics page counts Spam Complaints, and its Configure modal can filter by Mailbox Provider, while the **Break Down By** dropdown groups metrics by the same field, which separates Outlook traffic from other providers.
 
-The Lettr docs treat a complaint rate below 0.1% as healthy and a rate between 0.1% and 0.3% as a warning that calls for a review of targeting and content. The [Outlook / Microsoft 365 Delivery Issues](https://docs.lettr.com/knowledge-base/troubleshooting/outlook-delivery) guide covers JMRP and SNDS along with the common Outlook block codes.
+The [Outlook / Microsoft 365 Delivery Issues](https://docs.lettr.com/knowledge-base/troubleshooting/outlook-delivery) guide covers JMRP and SNDS along with the common Outlook block codes.

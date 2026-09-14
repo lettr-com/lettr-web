@@ -37,7 +37,7 @@ The line between the two is not fixed. A mailbox that stays full across repeated
 
 **Mailbox providers read hard bounces as a signal of list quality.** A sender that keeps mailing addresses that do not exist looks like one working from an old or poorly maintained list, and that pattern damages [sender reputation](/glossary/sender-reputation/). Lower reputation means more mail filtered to spam or blocked outright, including mail to valid recipients.
 
-[Bounce rate](/glossary/bounce-rate/) is the number that captures this. A rate below 2% is healthy, a rate between 2 and 5% calls for a review of [list hygiene](/glossary/list-hygiene/), and a rate consistently above 5% can get mail blocked or filtered to spam. Double opt-in confirms an address is real before it joins a list, and removing subscribers who have not engaged in 6 to 12 months clears out addresses likely to go dead.
+[Bounce rate](/glossary/bounce-rate/) is the number that captures this. A rate below 2% is healthy, and a rate consistently above 5% can get mail blocked or filtered to spam. [List hygiene](/glossary/list-hygiene/) keeps it down: double opt-in confirms an address is real before it joins a list, and removing subscribers who have not engaged in 6 to 12 months clears out addresses likely to go dead.
 
 ## Hard bounce in Lettr
 
@@ -45,4 +45,4 @@ Lettr classifies bounces as hard or soft and **adds hard-bounced addresses to th
 
 Each bounce reaches the configured webhook endpoints in real time as a `message.bounce` event. The `bounce_class` field carries the classification: hard bounces use classes 10 (invalid recipient), 30 (generic bounce with no valid recipient) and 100 (relay denied). The event also includes `error_code` and `raw_reason` with the receiving server's response, for example `550 5.1.1 The email account that you tried to reach does not exist`. Out-of-band bounces arrive as separate `message.out_of_band` events.
 
-In the Events dashboard a bounce shows as a red **Bounced** badge, and the Message Details view shows the recipient domain and mailbox provider. The [Bounces page](https://docs.lettr.com/learn/suppressions/bounces) in the Lettr docs lists every bounce class and its recommended action.
+In the Events dashboard a bounce shows as a red bounced badge, and the Message Details view shows the recipient domain and mailbox provider. The [Bounces page](https://docs.lettr.com/learn/suppressions/bounces) in the Lettr docs lists every bounce class and its recommended action.

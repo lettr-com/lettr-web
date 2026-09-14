@@ -44,4 +44,4 @@ Lettr covers **the parts of the requirements that sit in the sending infrastruct
 
 Campaigns handle unsubscribing. Every campaign must include an unsubscribe mechanism, exposed as the `{{unsubscribe_link}}` merge tag, which becomes a signed per-recipient link to a hosted preferences page. If a marketing campaign's HTML has no unsubscribe tag, Lettr appends a default footer before sending. One-click unsubscribes through the `List-Unsubscribe` header skip the page and take effect immediately, and they arrive as `unsubscribe.list_unsubscribe` webhook events, with body link unsubscribes arriving as `unsubscribe.link_unsubscribe`.
 
-Complaints arrive as `message.spam_complaint` events, and the complaining recipient is suppressed immediately. The [Complaints & Unsubscribes page](https://docs.lettr.com/learn/suppressions/complaints-unsubscribes) treats a complaint rate below 0.1% as healthy and 0.1% to 0.3% as a warning.
+Complaints arrive as `message.spam_complaint` events, and the complaining recipient is suppressed immediately. The [Complaints & Unsubscribes page](https://docs.lettr.com/learn/suppressions/complaints-unsubscribes) covers how complaints are handled.

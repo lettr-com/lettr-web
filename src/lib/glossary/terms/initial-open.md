@@ -38,7 +38,7 @@ The practical response is to read opens as a trend and give more weight to click
 
 ## Initial open in Lettr
 
-**Lettr fires the `engagement.initial_open` webhook event on the first open of an email by a recipient**, and subsequent opens of the same email generate `engagement.open` events instead. AMP emails have the matching `engagement.amp_initial_open` event. In the Events dashboard both kinds are displayed as **Opened**, although Lettr tracks the initial open and later opens as separate events.
+**Lettr fires the `engagement.initial_open` webhook event on the first open of an email by a recipient**, and subsequent opens of the same email generate `engagement.open` events instead. AMP emails have the matching `engagement.amp_initial_open` event. In the Events dashboard both kinds are displayed as opened, although Lettr tracks the initial open and later opens as separate events.
 
 For open events, the Message Details view shows a **Prefetched** field, which indicates whether a mail client prefetching images triggered the open, and a **Pixel** field, which shows whether the tracking pixel was placed at the top or bottom of the email. Open tracking requires HTML content, and a request can switch it off for one email by setting `open_tracking` to `false` in its `options` object, which suits privacy-sensitive messages.
 

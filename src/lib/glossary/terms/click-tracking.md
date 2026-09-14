@@ -40,6 +40,6 @@ The tracking domain itself carries reputation. Links rewritten through a shared 
 
 **Lettr records clicks by rewriting the links in an email.** A send request can turn click tracking off per email with `options.click_tracking: false`, and a single link can opt out with the `data-msys-clicktrack="0"` attribute. Rewritten links route through Lettr's tracking servers, which record the click with its timestamp and URL and redirect the recipient immediately.
 
-Each click fires an `engagement.click` webhook event, and the Events dashboard shows it as an indigo **Clicked** badge along with the URL that was clicked. Unsubscribe links marked with `data-msys-unsubscribe="1"` depend on click tracking: without it, Lettr cannot detect the click and no unsubscribe event is generated.
+Each click fires an `engagement.click` webhook event, and the Events dashboard shows it as an indigo clicked badge along with the URL that was clicked. Unsubscribe links marked with `data-msys-unsubscribe="1"` depend on click tracking: without it, Lettr cannot detect the click and no unsubscribe event is generated.
 
 A custom tracking domain is added under **Domains → Tracking** and needs a CNAME record pointing the chosen subdomain to `proxy.lettr-tracking.com`. With Cloudflare DNS, that record must be set to DNS only. Once verified, the tracking domain is linked to a sending domain, and only emails sent after that use it. The [Tracking Domains](https://docs.lettr.com/learn/domains/tracking-domains) page in the Lettr docs covers the setup and SSL status.

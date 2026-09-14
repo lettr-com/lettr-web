@@ -23,11 +23,7 @@ A single overall figure can hide a local problem. A list with a healthy total ra
 
 ## What a good bounce rate is
 
-The usual guidelines use three bands:
-
-- **Below 2%:** healthy. Current practices are working and need only regular monitoring.
-- **2 to 5%:** a warning. The list deserves a review for stale or unvalidated addresses and a look at [list hygiene](/glossary/list-hygiene/) around recent imports.
-- **Above 5%:** critical. A rate consistently above 5% can get mail blocked or filtered to spam, so sending to unverified segments should stop until the source of bad addresses is found.
+A bounce rate below 2% is healthy, and a rate consistently above 5% can get mail blocked or filtered to spam. A rising rate deserves a review for stale or unvalidated addresses and a look at [list hygiene](/glossary/list-hygiene/) around recent imports, and sending to unverified segments should stop until the source of bad addresses is found.
 
 ## Why bounce rate matters
 
@@ -47,6 +43,6 @@ The fixes follow the causes. [Double opt-in](/glossary/double-opt-in/) confirms 
 
 Lettr's Analytics dashboard shows **Targeted**, **Accepted**, **Bounces** and **Unique Opens** by default, and the Bounces metric counts hard and soft bounces together. Breaking the view down by **Recipient Domain** or **Mailbox Provider** shows when one provider is behind a rate that looks healthy overall.
 
-For campaigns, the Show page reports each campaign's metrics, and the Analytics & Reporting docs define bounce rate there as bounces divided by injections, with under 2% healthy and above 5% needing attention. **Campaigns with a bounce rate of 10% or higher are highlighted with a visible warning** on the Show page, as a signal to audit the audience before sending more.
+For campaigns, the Show page reports each campaign's metrics, and the Analytics & Reporting docs define bounce rate there as bounces divided by injections, with under 2% healthy. **Campaigns with a high bounce rate are highlighted with a visible warning** on the Show page, as a signal to audit the audience before sending more.
 
 Hard-bounced addresses are added to the suppression list automatically, so later sends skip them instead of bouncing again. For a custom calculation, `message.bounce` and `message.out_of_band` webhook events deliver each bounce in real time with its `bounce_class`. The [Bounces page](https://docs.lettr.com/learn/suppressions/bounces) lists the bounce rate guidelines alongside every bounce class.

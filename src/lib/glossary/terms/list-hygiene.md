@@ -47,6 +47,6 @@ Open-based inactivity rules have a blind spot too. Some mail clients load images
 
 **Lettr automates the suppression side of list hygiene.** Hard-bounced addresses are added to the [suppression list](/glossary/suppression-list/) automatically, so later sends skip them. Spam complaints, list unsubscribes and link unsubscribes are suppressed automatically as well, although API sends left at the default `transactional: true` skip unsubscribe suppression. Soft bounces are retried with exponential backoff, and the address may eventually be suppressed if delivery keeps failing.
 
-The Bounces page grades [bounce rate](/glossary/bounce-rate/) as healthy below 2%, a warning between 2 and 5% that calls for a review of list hygiene, and critical above 5%, where the list needs cleaning immediately.
+A [bounce rate](/glossary/bounce-rate/) below 2% is healthy, and a rate consistently above 5% can get mail blocked or filtered to spam.
 
 In the Audience, every contact has one of five statuses, and campaigns send only to `subscribed` contacts, skipping `unsubscribed`, `bounced`, `complained` and `unverified` ones automatically. Those contacts still count toward the marketing plan's contact limit, so the docs suggest deleting bounced or unsubscribed contacts that are no longer needed. Before an import, Adamko, Lettr's AI assistant, can review a sample of the file for invalid or empty addresses, duplicates and a missing consent signal. The [List Hygiene guide](https://docs.lettr.com/knowledge-base/best-practices/list-hygiene) covers a quarterly audit checklist.

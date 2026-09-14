@@ -24,7 +24,7 @@ As a result, not every complaint reaches the sender as an individual report. Som
 
 ## Why complaints matter
 
-**Complaint rate is the share of delivered emails that generate spam complaints**, and mailbox providers weigh it heavily in [sender reputation](/glossary/sender-reputation/). A rate below 0.1% is healthy. Between 0.1% and 0.3% is a warning to review targeting and content, and above 0.3% mail is filtered to spam or blocked. Google requires bulk senders to stay below 0.3% and recommends staying below 0.1%.
+**Complaint rate is the share of delivered emails that generate spam complaints**, and mailbox providers weigh it heavily in [sender reputation](/glossary/sender-reputation/). Google requires bulk senders to stay below 0.3% and recommends staying below 0.1%.
 
 A complaint weighs more than a bounce. A bounce shows that an address is bad, while a complaint is a person telling their provider that the sender's mail is unwanted. It also weighs more than an unsubscribe, which is a neutral signal that the recipient used the proper way out. That difference makes an easy unsubscribe a deliverability measure, since every recipient who unsubscribes instead of complaining leaves the sender's reputation intact.
 
@@ -40,6 +40,6 @@ A hidden unsubscribe link turns opt-outs into complaints, because the spam butto
 
 **Lettr is enrolled in feedback loop programs with major mailbox providers** and processes complaint reports automatically. The complaining address is added to the [suppression list](/glossary/suppression-list/) immediately and permanently, which blocks later sends to it even when an application explicitly requests one.
 
-Each complaint fires a `message.spam_complaint` webhook event. The payload includes `rcpt_to` for the recipient who complained, `fbtype` for the feedback type (typically `abuse`) and `rcpt_meta` with the custom metadata from the original send. In the Events dashboard a complaint shows as a red **Spam** badge, and the Analytics dashboard tracks a Spam Complaints metric over time.
+Each complaint fires a `message.spam_complaint` webhook event. The payload includes `rcpt_to` for the recipient who complained, `fbtype` for the feedback type (typically `abuse`) and `rcpt_meta` with the custom metadata from the original send. In the Events dashboard a complaint shows as a red spam badge, and the Analytics dashboard tracks a Spam Complaints metric over time.
 
-The Lettr docs recommend reviewing targeting and content once the rate passes 0.1%, and warn that high complaint rates can lead to sending being suspended. The [Complaints and Unsubscribes](https://docs.lettr.com/learn/suppressions/complaints-unsubscribes) page covers the webhook payload and suppression behaviour.
+The Lettr docs recommend reviewing targeting and content when the complaint rate rises, and warn that high complaint rates can lead to sending being suspended. The [Complaints and Unsubscribes](https://docs.lettr.com/learn/suppressions/complaints-unsubscribes) page covers the webhook payload and suppression behaviour.

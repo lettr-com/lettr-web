@@ -42,7 +42,7 @@ Spam placement produces no bounce and no error message, which makes content prob
 
 ## Content filtering in Lettr
 
-**A `message.delivery` event in Lettr means the recipient's mail server accepted the email**, not that it reached the inbox, since the provider can still filter it to spam. A message rejected by a policy rule before delivery is attempted fires a `message.policy_rejection` event instead, which can be caused by content filtering, rate limits or a configuration issue. The Events dashboard shows it as an orange **Rejected** badge.
+**A `message.delivery` event in Lettr means the recipient's mail server accepted the email**, not that it reached the inbox, since the provider can still filter it to spam. A message rejected by a policy rule before delivery is attempted fires a `message.policy_rejection` event instead, which can be caused by content filtering, rate limits or a configuration issue. The Events dashboard shows it as an orange rejected badge.
 
 Lettr's AI assistant, Adamko, can review a template before a big send. Among other checks, he flags shouting subject lines, image-only bodies, `http://` links, URL shorteners and a size that gets clipped by Gmail, each with a concrete fix.
 

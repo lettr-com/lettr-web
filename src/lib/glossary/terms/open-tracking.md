@@ -44,7 +44,7 @@ Some messages are better left untracked. Password resets, security notifications
 
 **Open tracking in Lettr requires HTML content**, and plain text emails cannot be tracked for opens. A request can switch it off for one email with `options.open_tracking: false`, which the docs suggest for privacy-sensitive emails such as password resets and data exports. Engagement webhook events require tracking to be enabled.
 
-The first open of an email by a recipient fires `engagement.initial_open`, and subsequent opens fire `engagement.open`. The docs describe open rates as an approximation rather than an exact count, because some email clients block images by default or prefetch them automatically. In the Events dashboard both kinds appear as a blue **Opened** badge.
+The first open of an email by a recipient fires `engagement.initial_open`, and subsequent opens fire `engagement.open`. The docs describe open rates as an approximation rather than an exact count, because some email clients block images by default or prefetch them automatically. In the Events dashboard both kinds appear as a blue opened badge.
 
 For each open event, the Message Details view shows a **Prefetched** field, which indicates whether a mail client prefetching images triggered the open, and a Pixel field, which shows whether the tracking pixel was placed at the top or bottom of the email. User Agent, Geo IP and IP Address appear alongside them.
 

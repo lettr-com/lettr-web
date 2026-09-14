@@ -40,6 +40,6 @@ Accepting first and bouncing later also has a cost for everyone else. The notice
 
 **Lettr reports out-of-band bounces as `message.out_of_band` webhook events**, separate from the `message.bounce` event. The event fires when the receiving server accepted the message initially, then later determined it could not be delivered and sent a separate bounce notification.
 
-In the Events dashboard these appear with a red **Bounced (OOB)** badge, which the docs describe as less common but potentially harder to diagnose. The Message Details view lists every event recorded for a message in chronological order, so the out-of-band bounce can be read in the context of the events before it.
+In the Events dashboard these appear with a red bounced (OOB) badge, which the docs describe as less common but potentially harder to diagnose. The Message Details view lists every event recorded for a message in chronological order, so the out-of-band bounce can be read in the context of the events before it.
 
 The Bounces page recommends handling out-of-band bounces the same way as regular bounces: updating records and suppressing hard bounces. The [Bounces](https://docs.lettr.com/learn/suppressions/bounces) page also shows an example `out_of_band` event payload and lists every bounce class.

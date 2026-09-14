@@ -42,6 +42,6 @@ The send request takes AMP content in the `amp_html` field, next to `html` and `
 
 Templates handle AMP as well. Values inserted with `{{ ... }}` are HTML-escaped in AMP HTML content, as they are in HTML, and a `dynamic_amp_html` object in the substitution data holds AMP chunks that render through `render_dynamic_content()`.
 
-Engagement with the AMP version is reported separately from the HTML version. Webhooks deliver `engagement.amp_open`, `engagement.amp_initial_open` and `engagement.amp_click` events alongside the regular [open tracking](/glossary/open-tracking/) and [click tracking](/glossary/click-tracking/) events, and the Events dashboard shows them as AMP Opened and AMP Clicked.
+Engagement with the AMP version is reported separately from the HTML version. Webhooks deliver `engagement.amp_open`, `engagement.amp_initial_open` and `engagement.amp_click` events alongside the regular [open tracking](/glossary/open-tracking/) and [click tracking](/glossary/click-tracking/) events, and the Events dashboard shows them as AMP opened and AMP clicked badges.
 
 Sandbox API keys accept AMP content like live keys, so test requests can exercise the same payloads. On the Logs page, the AMP HTML body of a request is truncated after 200 characters. The [Email Content Types page](https://docs.lettr.com/knowledge-base/fundamentals/content-types) compares AMP with HTML and plain text.

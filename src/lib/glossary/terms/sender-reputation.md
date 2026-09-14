@@ -36,13 +36,13 @@ Who shapes each half depends on the infrastructure. On shared IP addresses the I
 
 Reputation builds and falls at different speeds. **It grows slowly through consistent, wanted mail and drops quickly** after a burst of complaints or a send to a stale list. A damaged reputation affects every message from the identity, including password resets and receipts, which is why many senders split transactional and marketing mail across separate subdomains.
 
-Providers publish no score, but some expose part of their view. Google Postmaster Tools shows the domain reputation Gmail assigns, and Microsoft's SNDS reports a filtering result per IP address. The widely used targets are a [bounce rate](/glossary/bounce-rate/) under 2% and a complaint rate under 0.1%.
+Providers publish no score, but some expose part of their view. Google Postmaster Tools shows the domain reputation Gmail assigns, and Microsoft's SNDS reports a filtering result per IP address. A [bounce rate](/glossary/bounce-rate/) below 2% is healthy, and Google recommends keeping the spam complaint rate below 0.1%.
 
 ## Sender reputation in Lettr
 
-**Lettr has no single reputation score**, and no API returns one. The docs recommend monitoring the individual signals through the dashboard and webhook data instead. The Bounces page grades bounce rate as healthy below 2%, a warning between 2 and 5% and critical above 5%, and the Complaints & Unsubscribes page treats a complaint rate below 0.1% as healthy and 0.1 to 0.3% as a warning that calls for a review of targeting and content.
+**Lettr has no single reputation score**, and no API returns one. The docs recommend monitoring the individual signals through the dashboard and webhook data instead.
 
-The Analytics dashboard carries the metrics behind those rates, including Bounces, Block Bounces (bounces caused by the recipient's server blocking the sending IP or domain), Delayed and Spam Complaints. Its filters and **Break Down By** table split them by Sending Domain, Sending IP and Mailbox Provider, which shows whether a problem belongs to one domain, one address or one provider. Each email's Message Details view shows the Sending IP that delivered it.
+The Analytics dashboard carries the metrics behind bounce and complaint rates, including Bounces, Block Bounces (bounces caused by the recipient's server blocking the sending IP or domain), Delayed and Spam Complaints. Its filters and **Break Down By** table split them by Sending Domain, Sending IP and Mailbox Provider, which shows whether a problem belongs to one domain, one address or one provider. Each email's Message Details view shows the Sending IP that delivered it.
 
 Lettr removes the most damaging signals automatically. Hard bounces, spam complaints, list unsubscribes and link unsubscribes are suppressed permanently, while soft bounces are retried and the address is suppressed only after repeated failures.
 

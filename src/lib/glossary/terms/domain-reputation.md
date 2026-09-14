@@ -32,7 +32,7 @@ Providers do not publish a score, but some offer a view of it. [Google Postmaste
 
 ## How to build and protect domain reputation
 
-A new domain has no history, and providers treat unknown senders with caution. **A [warm-up](/glossary/warm-up/) builds that history deliberately**: low daily volume to the most engaged recipients first, then gradual increases while bounce and complaint rates stay healthy. A bounce rate below 2% and a complaint rate below 0.1% are the usual targets.
+A new domain has no history, and providers treat unknown senders with caution. **A [warm-up](/glossary/warm-up/) builds that history deliberately**: low daily volume to the most engaged recipients first, then gradual increases while bounce and complaint rates stay healthy. A bounce rate below 2% is healthy, and Google recommends keeping the spam complaint rate below 0.1%.
 
 Separating mail streams limits the damage any one of them can do. Marketing email draws more complaints than transactional email, so sending it from its own [subdomain](/glossary/subdomain/) keeps a reputation problem there away from password resets and receipts on another subdomain.
 

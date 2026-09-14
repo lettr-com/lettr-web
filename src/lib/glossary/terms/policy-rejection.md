@@ -37,7 +37,7 @@ Receiving-side policy rejections still arrive as [bounces](/glossary/bounce/), s
 
 **In Lettr, a policy rejection means the message was stopped before delivery was attempted.** The `message.policy_rejection` webhook event fires when an email is rejected due to a policy rule before delivery was attempted, which could be due to content filtering, rate limits or a configuration issue.
 
-The Events dashboard shows it with an orange **Rejected** badge, meaning rejected by Lettr's infrastructure or by a policy rule before delivery was attempted.
+The Events dashboard shows it with an orange rejected badge, meaning rejected by Lettr's infrastructure or by a policy rule before delivery was attempted.
 
 The Analytics dashboard counts these under Policy Rejections, an injection metric for emails rejected due to a policy rule such as a content or rate policy. Refusals by the recipient's server show up as bounces instead. The Block Bounces delivery metric counts bounces caused by the recipient's server blocking the sending IP or domain, and Lettr's bounce classes include mail blocks by the receiving server, with separate classes for general, spam-related and content blocks.
 
