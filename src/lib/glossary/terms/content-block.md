@@ -18,7 +18,7 @@ reading:
 
 Email HTML depends on table-based layouts to render consistently across clients, Outlook desktop in particular. **A visual editor hides that layer** behind a simple hierarchy. In the [Topol email editor](/glossary/topol-email-editor/), a template is a stack of [structures](/glossary/structure/), each structure is split into columns, and content blocks sit inside the columns as the smallest unit of the template.
 
-A structure is a horizontal section of the email with 1 to 8 columns, and on mobile its columns stack vertically by default. A column is a container with its own background, border and padding. The content block holds the actual content, and selecting one on the canvas opens a configuration panel with the settings for that block type.
+A structure is a horizontal section of the email with one or more columns, and on mobile its columns stack vertically by default. A column is a container with its own background, border and padding. The content block holds the actual content, and selecting one on the canvas opens a configuration panel with the settings for that block type.
 
 Blocks inherit template-wide defaults from the Settings panel, such as fonts, link color and button styles. A value set on an individual block overrides the default for that block only, so exceptions do not change the template's baseline.
 

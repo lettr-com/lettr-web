@@ -38,7 +38,7 @@ Keep business logic in the application. Templates can compare and branch, but ca
 
 ## Merge tag in Lettr
 
-**Lettr's template language uses double curly braces**, and whitespace inside them is ignored, so `{{first_name}}` and `{{ first_name }}` behave the same. Values come from the `substitution_data` object in the send request, which can hold strings, numbers, booleans, nested objects and arrays, while the separate `metadata` object is not rendered in templates and is passed to webhooks instead.
+**Lettr's template language uses double curly braces**, and whitespace inside them is ignored, so `{{first_name}}` and `{{ first_name }}` behave the same. Values come from the key-value pairs of the `substitution_data` object in the send request, with loop data passed as an array of objects, while the separate `metadata` object is not rendered in templates and is passed to webhooks instead.
 
 The `or` operator supplies a default, as in `{{ first_name or 'Customer' }}`. In HTML content, double braces HTML-escape the value, and triple braces insert it unescaped, which the docs reserve for trusted content. Statements use the same braces, with `{{if}}` blocks closed by `{{end}}` and `{{each array}} ... {{end}}` loops. Keys may contain only US-ASCII letters, digits and underscores, cannot start with a digit, and words such as `email`, `address` and `each` are reserved.
 

@@ -37,7 +37,7 @@ They also cut down on rendering bugs and inconsistency. Hand-written email HTML 
 
 ## Topol Email Editor in Lettr
 
-**Lettr's visual templates are built in the Topol editor** from structures with 1 to 8 columns, columns and 10 content block types. Columns stack vertically on mobile unless stacking is turned off for the structure, and structures and blocks have **Hide on desktop** and **Hide on mobile** toggles. The **Settings** panel holds template-wide defaults, including **Preview text**, the preheader shown next to the subject line in inbox previews.
+**Lettr's visual templates are built in the Topol editor** from structures, columns and 10 content block types. Columns stack vertically on mobile unless stacking is turned off for the structure, and structures and blocks have **Hide on desktop** and **Hide on mobile** toggles. The **Settings** panel holds template-wide defaults, including **Preview text**, the preheader shown next to the subject line in inbox previews.
 
 The toolbar adds **Multilingual**, which keeps several language versions of one template with a shared structure and independent text, and **Autosave history**, where timestamped autosaves can be browsed and restored. Images uploaded through the **File Manager** are available to all team members across all templates. Structures can be saved as Saved Blocks, and merge tags can be placed in text blocks, link URLs, image alt text and button labels, with their values supplied in `substitution_data` in the send request.
 

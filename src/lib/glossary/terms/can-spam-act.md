@@ -26,7 +26,7 @@ The law covers commercial electronic mail messages, meaning email whose primary 
 - **Prompt opt-out handling:** requests are honored within 10 business days, with no fee, no information required beyond an email address, and no step other than a reply email or a visit to a single web page.
 - **Oversight of third parties:** a company that hires another company to send its email stays legally responsible for compliance.
 
-[Transactional emails](/glossary/transactional-email/) such as order confirmations, shipping notifications and password resets carry lighter obligations. They still need accurate headers and an honest subject line, but not the ad disclosure, the postal address or the opt-out. Fines reach $50,120 per non-compliant email, both the promoted company and the sender can be held liable, and severe cases can bring criminal penalties.
+[Transactional emails](/glossary/transactional-email/) such as order confirmations, shipping notifications and password resets carry lighter obligations. They still need accurate headers and an honest subject line, but not the ad disclosure, the postal address or the opt-out. Fines apply to each non-compliant email, both the promoted company and the sender can be held liable, and severe cases can bring criminal penalties.
 
 ## CAN-SPAM Act vs CASL and GDPR
 

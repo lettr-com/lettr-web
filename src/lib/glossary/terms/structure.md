@@ -39,7 +39,7 @@ Visibility toggles add a second tool. A structure can be hidden on desktop or on
 
 ## Structure in Lettr
 
-Lettr's visual template editor is the Topol email editor, where **templates are built from a hierarchy of structures, columns and content blocks**. Each structure holds 1 to 8 columns and has settings for background (solid color or background image), width (narrow and centered, or full-width), borders, top and bottom margins with internal padding, and mobile stacking, which starts out enabled. Columns share the structure's available width, and each column has its own background color, border, padding and margins.
+Lettr's visual template editor is the Topol email editor, where **templates are built from a hierarchy of structures, columns and content blocks**. Each structure holds one or more columns and has settings for background (solid color or background image), width (narrow and centered, or full-width), borders, top and bottom margins with internal padding, and mobile stacking, which starts out enabled. Columns share the structure's available width, and each column has its own background color, border, padding and margins.
 
 Stacking can be disabled per structure when side-by-side rendering is required at all viewport sizes. Individual structures can be limited to one device class with the **Hide on desktop** and **Hide on mobile** toggles. Hidden content is still rendered in the HTML and hidden with CSS, so it counts toward the total email size, and the **Show hidden** toolbar button reveals it for editing.
 

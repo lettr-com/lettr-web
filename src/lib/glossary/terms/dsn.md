@@ -45,7 +45,7 @@ The accept-then-bounce pattern has a side effect. When spam forges someone else'
 
 ## DSN in Lettr
 
-By default, Lettr sets the Return-Path of outgoing mail to an address on Lettr's own bounce-processing domain, so **bounce notifications reach Lettr instead of the sender's mailbox**. Lettr parses the bounce codes, classifies each bounce as hard or soft, updates the suppression list and surfaces the result in the dashboard and webhooks. With the **Use this sending domain as bounce domain** toggle enabled, bounce messages use the sending domain's Return-Path instead.
+By default, Lettr sets the Return-Path of outgoing mail to an address on Lettr's own bounce-processing domain, so **bounce notifications reach Lettr instead of the sender's mailbox**. Lettr parses the bounce codes, classifies bounce types, updates the suppression list and surfaces the result in the dashboard and webhooks. With the **Use this sending domain as bounce domain** toggle enabled, bounce messages use the sending domain's Return-Path instead.
 
 The parsed result reaches webhook endpoints as a `message.bounce` event with `bounce_class`, `error_code`, `reason` and `raw_reason`, the receiving server's full response. Hard bounce classes `10`, `30` and `100` lead to automatic suppression, and class `60` marks an automatic reply that needs no action. Notifications that arrive after the receiving server first accepted a message are reported separately as `message.out_of_band` events.
 

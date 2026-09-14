@@ -38,7 +38,7 @@ Arrays make variable-length content possible. A [loop block](/glossary/loop-bloc
 
 ## Substitution data in Lettr
 
-In Lettr, substitution data is the **`substitution_data` object in the send request**, which holds the variables for template substitution. It can contain strings, numbers, booleans, nested objects accessed with dot notation and arrays for looping. All values are converted to strings when rendered, while numbers and booleans still work in conditionals, and array indexes in bracket notation start at `1`. The separate `metadata` object is not used in templates and is available in webhooks instead.
+In Lettr, substitution data is the **`substitution_data` object in the send request**, which holds the variables for template substitution as key-value pairs. Data for a loop is passed as an array of objects, one per item, and array indexes in bracket notation start at `1`. The separate `metadata` object is not used in templates and is available in webhooks instead.
 
 The values apply to all recipients in the request. A request accepts up to 50 recipients, and the Batch Sending page describes `substitution_data` as merge tag values shared by everyone in a [batch](/glossary/batch-sending/), suited to variables like campaign names or dates. Keys may contain only US-ASCII letters, digits and underscores, cannot start with a digit, and must avoid reserved words such as `email`, `address`, `each` and `if`.
 

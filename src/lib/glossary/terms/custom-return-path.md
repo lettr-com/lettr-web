@@ -16,7 +16,7 @@ reading:
 
 Every email carries two sender addresses. The From header is the one recipients see. **The [Return-Path](/glossary/return-path/) is set during the SMTP `MAIL FROM` command** and stays hidden in the headers, and when a message bounces, the notification goes to the Return-Path rather than to the From address.
 
-Email service providers set the Return-Path to an address on their own bounce-processing domain by default. That lets them receive every bounce, parse the codes, classify each bounce as hard or soft and update suppression lists without the sender's involvement. A message from `hello@yourapp.com` therefore leaves with a Return-Path on the provider's domain.
+Email service providers set the Return-Path to an address on their own bounce-processing domain by default. That lets them receive every bounce, parse the codes, classify bounce types and update suppression lists without the sender's involvement. A message from `hello@yourapp.com` therefore leaves with a Return-Path on the provider's domain.
 
 A custom Return-Path moves that address onto the sender's domain while keeping bounces flowing to the provider. The domain is delegated to the provider through a DNS record, so bounce handling works exactly as before and only the domain in the envelope changes.
 
