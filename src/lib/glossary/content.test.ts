@@ -2,7 +2,7 @@ import { describe, expect, it } from "vite-plus/test";
 import { buildTerm, readSources, termFiles } from "./terms";
 
 // Raised by each content task: 3 → 31 → 63 → 97 → 121 → 158.
-const EXPECTED_TERM_COUNT = 121;
+const EXPECTED_TERM_COUNT = 158;
 
 /**
  * Every slug the glossary ships (design doc appendix, 158 entries). Related
