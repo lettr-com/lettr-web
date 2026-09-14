@@ -53,4 +53,4 @@ A code also describes one moment. A [soft bounce](/glossary/soft-bounce/) such a
 
 Lettr also assigns each [bounce](/glossary/bounce/) a numeric `bounce_class`. Classes 10, 30 and 100 are hard bounces and add the address to the suppression list automatically, while soft bounces are retried automatically. Delivery that is only delayed arrives as a separate `message.delay` event while Lettr keeps retrying.
 
-In the Events dashboard, the Message Details view for a bounce gives the specific bounce reason and whether it was hard or soft. The [Bounce Codes Reference](https://docs.lettr.com/knowledge-base/fundamentals/bounce-codes-reference) lists common reply and enhanced codes with a recommended action for each.
+In the Events dashboard, the Message Details view for a bounce shows the recipient domain and mailbox provider. The [Bounce Codes Reference](https://docs.lettr.com/knowledge-base/fundamentals/bounce-codes-reference) lists common reply and enhanced codes with a recommended action for each.

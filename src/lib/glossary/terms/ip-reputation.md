@@ -50,4 +50,4 @@ Recovery takes time. Fixing the cause, such as removing invalid addresses or sto
 
 For IP-level signals, the Block Bounces metric in Analytics counts bounces caused by the recipient's server blocking the sending IP or domain. Analytics can filter by Sending IP and group metrics by the Lettr IP that delivered each email, which shows whether a problem follows one address. Each email's Message Details view shows its Sending IP, and bounce and delay webhook payloads include `sending_ip` next to the receiving server's response.
 
-The docs give healthy ranges for the signals mailbox providers monitor: a bounce rate below 2% with a danger zone above 5%, and a complaint rate below 0.1% with a danger zone above 0.3%. The [Sending Reputation](https://docs.lettr.com/knowledge-base/best-practices/sending-reputation) guide covers domain and IP reputation and how to protect both.
+The docs give healthy ranges for the signals mailbox providers monitor: a bounce rate below 2% and a complaint rate below 0.1%. The [Sending Reputation](https://docs.lettr.com/knowledge-base/best-practices/sending-reputation) guide covers domain and IP reputation and how to protect both.

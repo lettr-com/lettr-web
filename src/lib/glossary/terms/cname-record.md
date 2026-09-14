@@ -34,7 +34,7 @@ A [subdomain](/glossary/subdomain/) avoids the conflict entirely. A CNAME at `ma
 
 The name field causes the next most frequent errors. Some DNS providers expect only the subdomain part, such as `links`, and append the zone automatically, while others require the full domain. Entering the full name in a provider that appends the zone produces an alias like `links.example.com.example.com`. A second record of another type at the same name also breaks the CNAME.
 
-Timing is the last factor. [DNS propagation](/glossary/dns-propagation/) usually completes within minutes but can take up to 48 hours, so a check run right after publishing can fail even when the record is correct.
+Timing is the last factor. [DNS propagation](/glossary/dns-propagation/) can take up to 48 hours, so a check run right after publishing can fail even when the record is correct.
 
 ## CNAME record in Lettr
 

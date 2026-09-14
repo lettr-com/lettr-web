@@ -49,4 +49,4 @@ By default, Lettr sets the Return-Path of outgoing mail to an address on Lettr's
 
 The parsed result reaches webhook endpoints as a `message.bounce` event with `bounce_class`, `error_code`, `reason` and `raw_reason`, the receiving server's full response. Hard bounce classes `10`, `30` and `100` lead to automatic suppression, and class `60` marks an automatic reply that needs no action. Notifications that arrive after the receiving server first accepted a message are reported separately as `message.out_of_band` events.
 
-In the Events dashboard, these appear as **Bounced** or **Bounced (OOB)** badges, and Message Details gives the bounce reason and whether it was hard or soft. The [Bounces page](https://docs.lettr.com/learn/suppressions/bounces) in the Lettr docs lists every bounce class and its recommended action.
+In the Events dashboard, these appear as **Bounced** or **Bounced (OOB)** badges, and Message Details shows the recipient domain and mailbox provider. The [Bounces page](https://docs.lettr.com/learn/suppressions/bounces) in the Lettr docs lists every bounce class and its recommended action.

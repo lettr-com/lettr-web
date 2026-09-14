@@ -45,7 +45,7 @@ Open-based inactivity rules have a blind spot too. Some mail clients load images
 
 ## List hygiene in Lettr
 
-**Lettr automates the suppression side of list hygiene.** Hard-bounced addresses are added to the [suppression list](/glossary/suppression-list/) automatically, and sends to suppressed addresses are blocked before delivery. Spam complaints, list unsubscribes and link unsubscribes are suppressed automatically as well, while soft bounces are retried with exponential backoff and the address may eventually be suppressed if delivery keeps failing.
+**Lettr automates the suppression side of list hygiene.** Hard-bounced addresses are added to the [suppression list](/glossary/suppression-list/) automatically, so later sends skip them. Spam complaints, list unsubscribes and link unsubscribes are suppressed automatically as well, although API sends left at the default `transactional: true` skip unsubscribe suppression. Soft bounces are retried with exponential backoff, and the address may eventually be suppressed if delivery keeps failing.
 
 The Bounces page grades [bounce rate](/glossary/bounce-rate/) as healthy below 2%, a warning between 2 and 5% that calls for a review of list hygiene, and critical above 5%, where the list needs cleaning immediately.
 

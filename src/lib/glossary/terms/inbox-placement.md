@@ -40,7 +40,7 @@ Transactional mail suffers when it shares a domain with marketing mail. A reputa
 
 ## Inbox placement in Lettr
 
-**A delivery event in Lettr confirms acceptance, not inbox placement.** The `message.delivery` webhook event fires when the recipient's mail server accepted the email, and the docs note that it does not guarantee the email reached the inbox, since the provider could filter it to spam or quarantine it. The green **Delivery** badge in the Events dashboard carries the same caveat.
+**A delivery event in Lettr confirms acceptance, not inbox placement.** The `message.delivery` webhook event fires when the recipient's mail server accepted the email, and the docs note that it does not guarantee the email reached the inbox, since the provider could filter it to spam or quarantine it. The green delivery badge in the Events dashboard carries the same caveat.
 
 Lettr offers no single reputation score, and the docs recommend monitoring the individual signals through the dashboard and webhook data instead. For mail landing in spam, the troubleshooting guide works through authentication, domain reputation and content, then the sending patterns in Analytics: sudden increases in volume, a bounce rate that should stay below 2% and a complaint rate that must stay below 0.3%.
 

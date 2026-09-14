@@ -39,7 +39,7 @@ Keys belong on servers. Frontend JavaScript and mobile apps ship their code to u
 
 Lettr keys are created under Settings > API Keys, and **the full key is displayed only once**, at creation. A live key starts with `lttr_` followed by a 64-character random string, and a sandbox key starts with `lttr_sandbox_`. Requests pass the key as a Bearer token in the `Authorization` header, and `GET /api/auth/check` confirms that a key is valid.
 
-Each key has one of two dashboard permission levels. Full Access covers every endpoint, including templates, domains, webhooks and projects. Sending Only is limited to emails, SMS and WhatsApp, and any other endpoint returns `403` with the `insufficient_scope` error code. Keys can also be restricted to single IP addresses or CIDR ranges, and a request from any other address receives `403 Forbidden`.
+Each key has one of two dashboard permission levels. Full Access covers every endpoint, including templates, domains, webhooks and projects. Sending Only is limited to sending endpoints, and any other endpoint returns `403` with the `insufficient_scope` error code. Keys can also be restricted to single IP addresses or CIDR ranges, and a request from any other address receives `403 Forbidden`.
 
 [Sandbox](/glossary/sandbox-mode/) keys redirect every message to the email address of the user who created the key, rewrite the From domain to the pre-verified `dev.uselettr.com` and have no billing impact, so they work before any sending domain is verified. They have their own [rate limits](/glossary/rate-limiting/).
 
