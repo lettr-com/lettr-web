@@ -39,7 +39,7 @@ Measure outcomes beyond the email where possible, such as site visits, logins, p
 
 ## Mail Privacy Protection in Lettr
 
-**Lettr records opens and clicks for emails with HTML content**, and either can be switched off per email with `open_tracking: false` or `click_tracking: false` in the request's `options` object. The docs' tracking accuracy guide lists Apple Mail Privacy Protection as a factor that inflates opens and notes that it affects Apple Mail users on iOS 15+, macOS Monterey+ and iPadOS 15+.
+**Open tracking in Lettr requires HTML content**, and open and click tracking can each be switched off per email with `open_tracking: false` or `click_tracking: false` in the request's `options` object. The docs' tracking accuracy guide lists Apple Mail Privacy Protection as a factor that inflates opens and notes that it affects Apple Mail users on iOS 15+, macOS Monterey+ and iPadOS 15+.
 
 For each open event, the Message Details page shows a **Prefetched** field, which indicates whether the open was triggered by a mail client prefetching images rather than the recipient actively viewing the email. A **Pixel** field shows whether the tracking pixel was placed at the top or bottom of the message.
 

@@ -38,7 +38,7 @@ Remote requests follow their own rules. An endpoint behind `amp-list` or `action
 
 ## AMP for Email in Lettr
 
-The send request takes AMP content in the `amp_html` field, next to `html` and `text`, and **Lettr packages the parts into one multipart MIME message**. A request still needs `html`, `text` or a `template_slug`, and the docs require an HTML fallback with every AMP send.
+The send request takes AMP content in the `amp_html` field, next to `html` and `text`, and **Lettr packages the parts into one multipart MIME message**. The docs require an HTML fallback with every AMP send.
 
 Templates handle AMP as well. Values inserted with `{{ ... }}` are HTML-escaped in AMP HTML content, as they are in HTML, and a `dynamic_amp_html` object in the substitution data holds AMP chunks that render through `render_dynamic_content()`.
 

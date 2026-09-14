@@ -45,8 +45,8 @@ A real inbox is the final check. The [rendering engine](/glossary/rendering-engi
 
 ## Email clipping in Lettr
 
-**Lettr's AI assistant, Adamko, checks for size that gets clipped by Gmail** when asked to review a template, alongside broken merge tags, a missing unsubscribe link and other spam triggers, and each finding comes with a concrete fix. The review reads the actual template content, so it catches markup that has grown past the threshold before a large send.
+**Lettr's AI assistant, Adamko, checks for size that gets clipped by Gmail** when asked to review a template, alongside broken merge tags, a missing unsubscribe link and spam triggers such as URL shorteners, and each finding comes with a concrete fix. The review reads the actual template content, so it catches markup that has grown past the threshold before a large send.
 
-Open tracking is enabled by default, and Lettr records opens by inserting an invisible tracking pixel into HTML emails. In the Message Details view, each open event has a **Pixel** field that shows whether the pixel was placed at the top or the bottom of the email, which helps explain missing opens from a template that clips.
+Lettr records opens by inserting an invisible tracking pixel into HTML emails. In the Message Details view, each open event has a **Pixel** field that shows whether the pixel was placed at the top or the bottom of the email, which helps explain missing opens from a template that clips.
 
 The send API's `inline_css` option converts `<style>` rules into inline `style` attributes, which keeps styling in clients that strip style blocks and also adds those attributes to every matching element. Test emails go through the same rendering pipeline as production sends, with tracking disabled and analytics excluded, so a test to a Gmail address shows what recipients will see. The [rendering issues guide](https://docs.lettr.com/knowledge-base/troubleshooting/rendering-issues) covers the clipping threshold and size reduction in detail.

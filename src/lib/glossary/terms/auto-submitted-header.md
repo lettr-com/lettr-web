@@ -42,8 +42,8 @@ Header checks alone miss some auto-replies, because not every responder sets the
 
 ## Auto-Submitted header in Lettr
 
-**The Lettr send API accepts custom headers in the `headers` field**, up to 10 per email with values of up to 998 characters. Auto-Submitted is not on the list of headers Lettr blocks, which includes `From`, `Message-ID`, `DKIM-Signature` and `List-Unsubscribe`, so a send request can include `"headers": { "Auto-Submitted": "auto-generated" }`.
+**The Lettr send API accepts custom headers in the `headers` field**, up to 10 per email with values of up to 998 characters. Auto-Submitted is not on the list of headers Lettr blocks, which includes `From`, `Message-ID` and `DKIM-Signature`, so a send request can include `"headers": { "Auto-Submitted": "auto-generated" }`.
 
-On the inbound side, a reply sent to a [variable reply-to address](/glossary/variable-reply-to-address/) on an inbound domain arrives as a `relay.relay_delivery` webhook event, with the message headers in the `content.headers` array. The Reply Tracking docs include an auto-reply check that treats any Auto-Submitted value other than `no` as automatic, also looks at `X-Auto-Response-Suppress`, `Precedence` and subject patterns such as "out of office" and "automatic reply", and logs those messages without creating a ticket.
+On the inbound side, a reply sent to a [variable reply-to address](/glossary/variable-reply-to-address/) on an inbound domain arrives as a `relay.relay_delivery` webhook event. The Reply Tracking docs include an auto-reply check that treats any Auto-Submitted value other than `no` as automatic, also looks at `X-Auto-Response-Suppress`, `Precedence` and subject patterns such as "out of office" and "automatic reply", and logs those messages without creating a ticket.
 
 Automatic replies can also show up in delivery data. Lettr's [bounce](/glossary/bounce/) classification includes class 60, Auto-Reply, for automatic replies such as vacation messages, with no action needed. The [Reply Tracking page](https://docs.lettr.com/learn/inbound/reply-tracking) has the complete inbound example.

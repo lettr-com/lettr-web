@@ -42,4 +42,4 @@ A hidden unsubscribe link turns opt-outs into complaints, because the spam butto
 
 Each complaint fires a `message.spam_complaint` webhook event. The payload includes `rcpt_to` for the recipient who complained, `fbtype` for the feedback type (typically `abuse`) and `rcpt_meta` with the custom metadata from the original send. In the Events dashboard a complaint shows as a red **Spam** badge, and the Analytics dashboard tracks a Spam Complaints metric over time.
 
-The Lettr docs treat a rate above 0.3% as critical, with sending paused while the cause is investigated, and warn that high complaint rates can lead to sending being suspended. The [Complaints and Unsubscribes](https://docs.lettr.com/learn/suppressions/complaints-unsubscribes) page covers the webhook payload and suppression behaviour.
+The Lettr docs recommend reviewing targeting and content once the rate passes 0.1%, and warn that high complaint rates can lead to sending being suspended. The [Complaints and Unsubscribes](https://docs.lettr.com/learn/suppressions/complaints-unsubscribes) page covers the webhook payload and suppression behaviour.

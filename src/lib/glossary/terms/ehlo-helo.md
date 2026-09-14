@@ -38,7 +38,7 @@ Application mail libraries cause a separate class of failures. Many default to t
 
 ## EHLO and HELO in Lettr
 
-Every email sent through Lettr travels between servers over SMTP, whether it enters through the REST API or the SMTP relay. For API sends, **Lettr builds the message and runs the SMTP session with the recipient's mail server itself**, so the greeting on that hop is handled by Lettr's infrastructure. Lettr uses opportunistic TLS by default on that delivery, which depends on the extension list returned to EHLO.
+Every email sent through Lettr travels between servers over SMTP, whether it enters through the REST API or the SMTP relay. For API sends, **Lettr builds the message and runs the SMTP session with the recipient's mail server itself**, so the greeting on that hop is handled by Lettr's infrastructure. Lettr uses opportunistic TLS on that delivery, which depends on the extension list returned to EHLO.
 
 With the SMTP relay, the application's mail client speaks SMTP directly to Lettr, and its greeting opens that session. Lettr's relay accepts implicit TLS connections, where encryption starts before any SMTP command, and STARTTLS connections, where the client upgrades after greeting. The quickstart's `swaks` test prints the whole SMTP conversation, which makes it a quick way to see the greeting and the advertised extensions.
 

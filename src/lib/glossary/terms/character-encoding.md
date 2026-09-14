@@ -40,8 +40,8 @@ In a [multipart message](/glossary/multipart-message/), each part carries its ow
 
 ## Character encoding in Lettr
 
-Lettr builds the MIME message for every send. When a request carries both HTML and plain text, Lettr wraps them in a `multipart/alternative` structure, and the documented structure declares `charset="UTF-8"` on both the `text/plain` and the `text/html` part. The HTML examples in the sending docs include `<meta charset="utf-8">` in the head.
+When a request carries both HTML and plain text, Lettr wraps them in a `multipart/alternative` structure, and the documented structure declares `charset="UTF-8"` on both the `text/plain` and the `text/html` part. The HTML examples in the sending docs include `<meta charset="utf-8">` in the head.
 
-**Inbound email is normalized to UTF-8.** Lettr decodes ISO-8859-1, Windows-1252, base64-encoded UTF-8 and quoted-printable content, so the `text` and `subject` fields in the inbound webhook's `content` object are UTF-8 strings regardless of the original encoding. Subjects are decoded from MIME encoded words. The complete raw message stays available in `email_rfc822` for parsing with a MIME library.
+**Inbound email is normalized to UTF-8.** Lettr decodes ISO-8859-1, Windows-1252, base64-encoded UTF-8 and quoted-printable content, so the text and subject of an inbound message arrive as UTF-8 strings regardless of the original encoding. Subjects are decoded from MIME encoded words, and the complete raw message stays available for parsing with a MIME library.
 
 The test emails guide recommends sending templates with special characters and Unicode to catch encoding issues before a real send. The [Email Parsing](https://docs.lettr.com/learn/inbound/parsing) page in the Lettr docs lists the inbound fields.

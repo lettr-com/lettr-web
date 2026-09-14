@@ -41,7 +41,7 @@ The unsubscribe also has to reach every system that mails the recipient. A reque
 
 ## One-click unsubscribe in Lettr
 
-**Campaigns sent from Lettr's campaign builder carry both headers**: `List-Unsubscribe: <{{unsubscribe_url}}>` and `List-Unsubscribe-Post: List-Unsubscribe=One-Click`. Neither header can be set through the `headers` field of a send request, because Lettr manages them itself, among others such as `Reply-To` and `Return-Path`.
+**Campaigns sent from Lettr's campaign builder carry both headers**: `List-Unsubscribe: <{{unsubscribe_url}}>` and `List-Unsubscribe-Post: List-Unsubscribe=One-Click`.
 
 A one-click request bypasses the hosted Manage email preferences page and unsubscribes the recipient immediately, as the RFC requires. The `{{unsubscribe_link}}` in the campaign body opens that page instead, where the recipient can untick topics, pause marketing email for 30, 60 or 90 days, or unsubscribe from everything. Lettr reports an unsubscribe through the List-Unsubscribe header as the `unsubscribe.list_unsubscribe` webhook event, and both list and link unsubscribes add the address to the [suppression list](/glossary/suppression-list/) automatically.
 

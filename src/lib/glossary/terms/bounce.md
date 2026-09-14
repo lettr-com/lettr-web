@@ -37,7 +37,7 @@ The reason matters as much as the count. A bounce for an unknown user points at 
 
 ## Bounce in Lettr
 
-Lettr **classifies every bounce as hard or soft**, adds hard-bounced addresses to the [suppression list](/glossary/suppression-list/) automatically, and retries soft bounces with exponential backoff. Each bounce carries a numeric `bounce_class`: `10`, `30` and `100` are the hard classes that trigger suppression, classes such as `20`, `21` and `22` cover temporary failures like DNS problems and full mailboxes, `50` to `52` are mail blocks that call for investigation, and `60` marks an automatic reply that needs no action.
+Lettr **adds hard-bounced addresses to the [suppression list](/glossary/suppression-list/) automatically** and retries soft bounces with exponential backoff. Each bounce carries a numeric `bounce_class`: `10`, `30` and `100` are the hard classes that trigger suppression, classes such as `20`, `21` and `22` cover temporary failures like DNS problems and full mailboxes, `50` to `52` are mail blocks that call for investigation, and `60` marks an automatic reply that needs no action.
 
 Bounces reach configured webhook endpoints in real time as `message.bounce` events, with `bounce_class`, `error_code` and `raw_reason` holding the receiving server's full response. Out-of-band bounces arrive as `message.out_of_band` events, and delays are reported separately as `message.delay`.
 

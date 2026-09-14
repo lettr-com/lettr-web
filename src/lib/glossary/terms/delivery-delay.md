@@ -36,7 +36,7 @@ Time-sensitive mail needs its own handling. A password reset or two-factor code 
 
 ## Delay in Lettr
 
-The Events dashboard shows it as a yellow **Delayed** badge, the color reserved for temporary issues. Lettr continues retrying automatically, a delayed email usually resolves on its own, and one that does not will eventually become a bounce event. In Message Details, a timeline that shows Delayed followed by Delivery means the message hit a temporary problem and was delivered, with no action needed.
+The Events dashboard shows a delay as a yellow **Delayed** badge, the color reserved for temporary issues. Lettr continues retrying automatically, a delayed email usually resolves on its own, and one that does not will eventually become a bounce event. In Message Details, a timeline that shows Delayed followed by a delivery event means the message hit a temporary problem and was delivered, with no action needed.
 
 For integrations, Lettr sends a `message.delay` webhook event when delivery is temporarily delayed. The payload has `type` set to `delay`, the recipient in `rcpt_to`, the receiving server's response in `reason` and a `num_retries` field. Delayed emails are retried automatically, and the Lettr docs advise acting only when delays persist.
 

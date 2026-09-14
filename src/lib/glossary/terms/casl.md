@@ -30,7 +30,7 @@ CASL recognizes two types of consent. [Express consent](/glossary/express-consen
 [Implied consent](/glossary/implied-consent/) arises from certain relationships without an explicit opt-in, and it is time-limited:
 
 - **Existing business relationship:** 2 years from the last purchase, contract or transaction.
-- **Existing non-business relationship:** 6 months from an inquiry or application.
+- **Inquiry or application:** 6 months from the inquiry or application.
 - **Conspicuous publication:** an address listed on a business website or directory, with no fixed expiry, as long as the message is relevant to the recipient's role.
 
 Implied consent works best as a window for asking the recipient for express consent, with an opt-in option in every message sent under it.

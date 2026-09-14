@@ -44,7 +44,7 @@ Hand-built MIME is fragile. A boundary string that also appears inside the conte
 
 ## MIME in Lettr
 
-**Lettr encodes the body with MIME when it assembles each message**, to support HTML, plain text and attachments. A send request carries content in the `html`, `text` and `amp_html` fields, needs at least one of `html`, `text` or a template, and Lettr packages HTML and plain text together as a multipart MIME message.
+**Lettr encodes the body with MIME when it assembles each message**, to support HTML, plain text and attachments. A send request carries content in the `html`, `text` and `amp_html` fields, and Lettr packages HTML and plain text together as a multipart MIME message.
 
 Attachments go in an `attachments` array, where each entry has a `name`, Base64-encoded `data` and a MIME `type` such as `application/pdf`. Lettr does not currently support inline images: a `cid:` reference in the HTML has nothing to bind to, because the image is delivered as a regular attachment with `Content-Disposition: attachment` and no `Content-ID`. The `MIME-Version`, `Content-Type` and `Content-Transfer-Encoding` headers are managed by Lettr and cannot be set through the `headers` field.
 

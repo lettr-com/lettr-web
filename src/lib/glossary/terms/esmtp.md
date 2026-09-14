@@ -44,7 +44,7 @@ ESMTP also has limits worth knowing. Opportunistic STARTTLS falls back to plaint
 
 ## ESMTP in Lettr
 
-Every email sent through Lettr travels between servers over SMTP, whether it arrives through the REST API or the SMTP relay. **Lettr uses opportunistic TLS by default when delivering to recipient mail servers**, which gives the widest delivery coverage, and because the vast majority of major mailbox providers support TLS, most messages are encrypted in transit.
+Every email sent through Lettr travels between servers over SMTP, whether it arrives through the REST API or the SMTP relay. **Lettr uses opportunistic TLS when delivering to recipient mail servers**, which gives the widest delivery coverage, and because the vast majority of major mailbox providers support TLS, most messages are encrypted in transit.
 
 For applications that send over SMTP, Lettr's relay requires the client to authenticate before it accepts messages, with a Lettr API key as the credential. It accepts two connection types: implicit TLS, where the connection is encrypted before the first SMTP command, and STARTTLS, where the session starts in plaintext and upgrades after the greeting. The docs warn against sending the `AUTH` command before STARTTLS completes, because the credentials would then cross the network unencrypted.
 

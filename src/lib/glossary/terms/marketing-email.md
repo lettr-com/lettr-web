@@ -45,7 +45,7 @@ Set expectations at signup about what kind of email arrives and how often, then 
 
 ## Marketing email in Lettr
 
-**Lettr sends marketing email as campaigns and as API sends marked as marketing.** A campaign is a one-time bulk send to contacts in the Audience, chosen as all contacts, lists or segments, and only contacts with the status `subscribed` receive it. Every campaign must include the `{{unsubscribe_link}}` merge tag, which opens the hosted preferences page, and Lettr appends a default footer when the campaign HTML does not contain one. Campaigns sent from the builder also carry the `List-Unsubscribe` and `List-Unsubscribe-Post` headers.
+**Lettr sends marketing email as campaigns and as API sends marked as marketing.** A campaign is a one-time bulk send to contacts in the Audience, chosen as all contacts, lists or segments, and only contacts with the status `subscribed` receive it. Every campaign must include the `{{unsubscribe_link}}` merge tag, which opens the hosted preferences page, and Lettr appends a default footer when the campaign HTML does not contain the merge tag. Campaigns sent from the builder also carry the `List-Unsubscribe` and `List-Unsubscribe-Post` headers.
 
 On the API, the `transactional` option defaults to `true` and is set to `false` for marketing email. Leaving the default on a marketing-shaped send bypasses unsubscribe suppression, so a recipient who unsubscribed from marketing email still receives it. The docs describe separating transactional and marketing email on different sending domains or subdomains as a common practice to protect transactional sender reputation.
 

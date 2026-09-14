@@ -24,7 +24,7 @@ The [GDPR](/glossary/gdpr/) sets a comparable bar for marketing email sent on th
 
 ## Express consent vs implied consent
 
-CASL also recognizes [implied consent](/glossary/implied-consent/), which arises from a relationship rather than an opt-in. **Implied consent is time-limited**: an existing business relationship supports commercial email for 2 years after the last purchase, contract or transaction, and an existing non-business relationship, such as an inquiry, for 6 months. An address conspicuously published, for example on a company website, can be emailed about matters relevant to the person's role.
+CASL also recognizes [implied consent](/glossary/implied-consent/), which arises from a relationship rather than an opt-in. **Implied consent is time-limited**: an existing business relationship supports commercial email for 2 years after the last purchase, contract or transaction, and an inquiry or application for 6 months. An address conspicuously published, for example on a company website, can be emailed about matters relevant to the person's role.
 
 The practical difference is durability. Express consent lasts until withdrawn, while implied consent runs out on a fixed clock, after which the sender can no longer email that person. Senders therefore use the implied consent window to ask for express consent, with a clear opt-in option in each message sent under it.
 

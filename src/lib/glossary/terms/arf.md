@@ -39,7 +39,7 @@ Apple processes complaints without a public feedback loop enrollment program, an
 
 ## ARF in Lettr
 
-For email sent through Lettr, **complaint reports go to Lettr's feedback loop processing**, and ARF reports never need parsing by hand. Lettr identifies the original message and recipient, adds the address to the account's [suppression list](/glossary/suppression-list/) immediately and records the event, so later sends skip that address even when an application requests them.
+For email sent through Lettr, **complaint reports go to Lettr's feedback loop processing**, and ARF reports never need parsing by hand. Lettr identifies the original message and recipient, adds the address to the [suppression list](/glossary/suppression-list/) immediately and records the event, so later sends skip that address even when an application requests them.
 
 Each complaint reaches the configured webhook endpoints as a `message.spam_complaint` event. The payload carries `rcpt_to` with the recipient who complained, `message_id`, `timestamp`, `fbtype` with the type of feedback (typically `abuse`) and `rcpt_meta` with the custom metadata from the original send, which lets an application link the complaint back to its own records.
 

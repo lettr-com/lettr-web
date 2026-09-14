@@ -40,7 +40,7 @@ Structure errors are less common but harder to spot. HTML placed before plain te
 
 ## Multipart message in Lettr
 
-**When a request includes both `html` and `text`, Lettr packages them as a multipart MIME message**, and the recipient's client displays whichever format it prefers. The docs recommend including both versions and require at least one of `html`, `text` or a template in every request. With both parts present, Lettr wraps them in a `multipart/alternative` structure, and when AMP content is included the structure has three parts.
+**When a request includes both `html` and `text`, Lettr packages them as a multipart MIME message**, and the recipient's client displays whichever format it prefers. The docs recommend including both versions. With both parts present, Lettr wraps them in a `multipart/alternative` structure, and when AMP content is included the structure has three parts.
 
 AMP content goes in the `amp_html` field, and every AMP send needs HTML fallback content. Merge tags work in plain text content as well as HTML, with one difference: values are HTML-escaped in HTML content and inserted as-is in plain text.
 

@@ -42,7 +42,7 @@ After removal, volume should come back gradually, starting with the most engaged
 
 ## Blocklist in Lettr
 
-Lettr sends through **shared IP infrastructure powered by SparkPost**, which manages the reputation of those IPs. The Sending Reputation guide describes domain reputation as the main lever a Lettr customer controls, and there is no single reputation score in Lettr; the individual signals are monitored through the dashboard and webhook data.
+There is **no single reputation score in Lettr**; the individual signals are monitored through the dashboard and webhook data.
 
 A rejection caused by a block shows up as a bounce. Lettr's bounce classes include `50` (Mail Block, general), `51` (Mail Block, spam related) and `52` (Mail Block, content), with the receiving server's response in the `raw_reason` field of the `message.bounce` webhook event. In Analytics, the **Block Bounces** metric counts bounces caused by the recipient's server blocking the sending IP or domain, and a breakdown by Mailbox Provider or Recipient Domain shows where the blocks come from.
 

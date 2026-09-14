@@ -26,8 +26,7 @@ Screening at the start is not the only control. Providers also enforce an [accep
 
 The two statuses are independent, and confusing them explains many domains that look ready but cannot send. **DNS verification tracks each record separately**: whether the SPF, [DKIM](/glossary/dkim/), DMARC or CNAME record the provider expects is published and correct. Domain status tracks the provider's approval of the domain as a whole.
 
-A domain can have every record verified and still be unable to send, because approval has not been granted. A domain can also be approved while one of its records is broken, and then its mail fails authentication at the receiving end. Fixing a DNS record never changes the approval status, and approval never repairs a record.
-
+A domain can have every record verified and still be unable to send, because approval has not been granted. A domain can also be approved while one of its records is broken, and then its mail fails authentication at the receiving end.
 Domain status is also different from [domain reputation](/glossary/domain-reputation/). Reputation is what mailbox providers such as Gmail think of a domain based on the mail they receive from it. Domain status is the sending platform's own decision, made before and apart from any mailbox provider's judgment.
 
 ## Common problems with domain status

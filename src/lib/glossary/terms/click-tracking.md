@@ -38,7 +38,7 @@ The tracking domain itself carries reputation. Links rewritten through a shared 
 
 ## Click tracking in Lettr
 
-**Lettr enables click tracking by default for every email with HTML content.** A send request can turn it off per email with `options.click_tracking: false`, and a single link can opt out with the `data-msys-clicktrack="0"` attribute. Rewritten links route through Lettr's tracking servers, which record the click with its timestamp and URL and redirect the recipient immediately.
+**Lettr records clicks by rewriting the links in an email.** A send request can turn click tracking off per email with `options.click_tracking: false`, and a single link can opt out with the `data-msys-clicktrack="0"` attribute. Rewritten links route through Lettr's tracking servers, which record the click with its timestamp and URL and redirect the recipient immediately.
 
 Each click fires an `engagement.click` webhook event, and the Events dashboard shows it as an indigo **Clicked** badge along with the URL that was clicked. Unsubscribe links marked with `data-msys-unsubscribe="1"` depend on click tracking: without it, Lettr cannot detect the click and no unsubscribe event is generated.
 

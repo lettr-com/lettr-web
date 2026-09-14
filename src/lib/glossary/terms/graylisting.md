@@ -36,8 +36,8 @@ Time-sensitive mail suffers most. Password resets, login codes and verification 
 
 ## Graylisting in Lettr
 
-**Lettr retries temporary failures automatically**, and the docs glossary notes that this covers the delays graylisting causes. While a message is being retried, Lettr sends a `message.delay` webhook event, triggered when delivery is temporarily delayed. The payload carries `reason` with the receiving server's response, such as `421 Server temporarily unavailable`, and `num_retries`, next to `rcpt_to` and `sending_ip`.
+**Lettr retries temporary delivery delays automatically.** While a message is being retried, Lettr sends a `message.delay` webhook event, triggered when delivery is temporarily delayed. The payload carries `reason` with the receiving server's response, such as `421 Server temporarily unavailable`, and `num_retries`, next to `rcpt_to` and `sending_ip`.
 
-In the Events dashboard a delay appears as a yellow **Delayed** badge. A delayed email usually resolves on its own, and one that does not eventually becomes a bounce event. When the Message Details timeline shows **Delayed** followed by **Delivery**, the message was delivered after a temporary hiccup and needs no action. The Analytics dashboard counts these messages in the Delayed metric, emails that experienced a temporary delivery delay and are retried automatically.
+In the Events dashboard a delay appears as a yellow **Delayed** badge. A delayed email usually resolves on its own, and one that does not eventually becomes a bounce event. When the Message Details timeline shows **Delayed** followed by a delivery event, the message was delivered after a temporary hiccup and needs no action. The Analytics dashboard counts these messages in the Delayed metric, emails that experienced a temporary delivery delay and are retried automatically.
 
 The docs call for action only when delays persist, since that may indicate a delivery issue. The [Bounce Codes Reference](https://docs.lettr.com/knowledge-base/fundamentals/bounce-codes-reference) lists the temporary codes Lettr retries on its own and the permanent codes that end delivery.

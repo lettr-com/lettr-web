@@ -9,8 +9,6 @@ reading:
     href: https://docs.lettr.com/knowledge-base/compliance/gdpr-email
   - title: Data Retention and Deletion
     href: https://docs.lettr.com/knowledge-base/compliance/data-retention
-  - title: Security
-    href: https://docs.lettr.com/resources/security
 ---
 
 **A Data Processing Agreement (DPA)** is the contract between a data controller and a data processor that sets out how the processor handles personal data on the controller's behalf. Under the [GDPR](/glossary/gdpr/), Article 28 requires such a contract whenever a controller uses a processor. An email service provider that stores recipient addresses and delivers messages for its customers is a processor, so every business sending email to people in the EU or EEA through one needs a DPA with it.
@@ -45,4 +43,4 @@ The two documents also answer to different parties. The acceptable use policy pr
 
 When email is sent through Lettr, the sender is the **data controller** and Lettr is the data processor. The controller determines what data is collected and processed, ensures the lawful basis and responds to data subject requests, while Lettr processes data according to the controller's instructions. Implementing appropriate security measures and maintaining a DPA are listed as responsibilities of both parties.
 
-The personal data Lettr processes for a sender covers recipient email addresses, email content, delivery and engagement events such as opens, clicks and bounces, and any custom data passed in the `metadata` parameter. Lettr's security page lists data processing agreements among its GDPR commitments, and a sender without a DPA in place can request one from support@lettr.com. The same address handles requests to delete a specific recipient's data from Lettr's systems. The [GDPR and Email Sending](https://docs.lettr.com/knowledge-base/compliance/gdpr-email) page in the Lettr docs covers lawful bases, consent requirements and the processing Lettr performs.
+The personal data Lettr processes for a sender covers recipient email addresses, email content, delivery and engagement events such as opens, clicks and bounces, and any custom data passed in the `metadata` parameter. A sender without a DPA in place can request one from support@lettr.com. The same address handles requests to delete a specific recipient's data from Lettr's systems. The [GDPR and Email Sending](https://docs.lettr.com/knowledge-base/compliance/gdpr-email) page in the Lettr docs covers lawful bases, consent requirements and the processing Lettr performs.

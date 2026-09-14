@@ -49,7 +49,7 @@ A code also describes one moment. A [soft bounce](/glossary/soft-bounce/) such a
 
 ## Enhanced status code in Lettr
 
-**Every bounce reaches configured webhook endpoints as a `message.bounce` event** carrying the receiving server's response in three fields. `error_code` holds the basic reply code, such as `550`, `reason` holds a short description such as `User Unknown`, and `raw_reason` holds the full response with the enhanced code, for example `550 5.1.1 The email account that you tried to reach does not exist`.
+**A bounce reaches configured webhook endpoints as a `message.bounce` event** carrying the receiving server's response in three fields. `error_code` holds the basic reply code, such as `550`, `reason` holds a short description such as `User Unknown`, and `raw_reason` holds the full response with the enhanced code, for example `550 5.1.1 The email account that you tried to reach does not exist`.
 
 Lettr also assigns each [bounce](/glossary/bounce/) a numeric `bounce_class`. Classes 10, 30 and 100 are hard bounces and add the address to the suppression list automatically, while soft bounces are retried automatically. Delivery that is only delayed arrives as a separate `message.delay` event while Lettr keeps retrying.
 

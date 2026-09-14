@@ -42,6 +42,6 @@ Transactional mail starts with an advantage. A password reset or a receipt the r
 
 **A `message.delivery` event means the recipient's mail server accepted the email**, not that it reached the inbox. The same holds for Outlook's tabs: a delivered message may sit in either Focused or Other.
 
-Engagement data is the closest signal Lettr provides. Opens and clicks are tracked by default for HTML email, reach webhooks as `engagement.open` and `engagement.click` events, and appear in the Analytics dashboard as Unique Opens and Unique Clicked, which can be broken down by mailbox provider. The Message Details view for any message shows the recipient's mailbox provider, which separates Outlook recipients from others.
+Engagement data is the closest signal Lettr provides. Tracked opens and clicks reach webhooks as `engagement.open` and `engagement.click` events, and appear in the Analytics dashboard as Unique Opens and Unique Clicked, which can be broken down by mailbox provider. The Message Details view for any message shows the recipient's mailbox provider, which separates Outlook recipients from others.
 
 The `from_name` parameter sets the display name shown next to the sender address, and `reply_to` directs replies to a monitored address when the sending address is automated. Temporary deferrals from Microsoft's servers are retried automatically. The [Outlook / Microsoft 365 Delivery Issues](https://docs.lettr.com/knowledge-base/troubleshooting/outlook-delivery) guide covers Microsoft filtering, SNDS and Safe Senders.

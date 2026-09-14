@@ -43,6 +43,6 @@ The two can legitimately differ. A message's [From header](/glossary/from-header
 
 **Standard headers are set through dedicated fields of the send API** rather than written by hand, including `from`, `from_name`, `to`, `subject`, `cc`, `bcc` and `reply_to`. Additional headers go in the `headers` object, where each key is a header name and each value the header value. Lettr accepts a maximum of 10 custom headers per email, with a maximum of 998 characters per header value.
 
-Some headers are blocked from the `headers` field because Lettr manages them automatically. The docs list includes `From`, `To`, `Subject`, `Date`, `Message-ID`, `DKIM-Signature`, `Return-Path`, `List-Unsubscribe` and `List-Unsubscribe-Post`, among others.
+Some headers are blocked from the `headers` field because Lettr manages them automatically. The docs list includes `From`, `To`, `Subject`, `Date`, `Message-ID`, `DKIM-Signature`, `Return-Path` and `Received`, among others.
 
 For a sent email, the Message Details view in the Events dashboard shows the Friendly From as it appeared to the recipient, including the display name, and the raw From header value as Message From. For incoming mail on an inbound domain, Lettr parses each email and delivers structured JSON to a webhook, with the sender, recipients, subject, plain text and HTML body, headers and attachment URLs. The [API reference introduction](https://docs.lettr.com/api-reference/introduction) documents the custom header limits and the headers Lettr blocks.

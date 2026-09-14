@@ -41,7 +41,7 @@ The envelope address also affects presentation. Some clients, notably Gmail, sho
 
 ## Envelope From in Lettr
 
-**By default, Lettr sets the Return-Path to an address on Lettr's bounce-processing domain**, which lets it receive bounce notifications, parse the codes, classify each bounce as hard or soft and update suppression lists automatically. `Return-Path` is one of the headers Lettr manages itself, so it cannot be set through the `headers` field of a send request.
+**By default, Lettr sets the Return-Path to an address on Lettr's bounce-processing domain**, which lets it receive bounce notifications, parse the codes, classify bounce types and update suppression lists automatically. `Return-Path` is one of the headers Lettr manages itself, so it cannot be set through the `headers` field of a send request.
 
 In that default setup, DMARC passes through DKIM alignment, because Lettr signs with `d=` set to the sending domain. To move the envelope onto the sending domain, the domain's detail page has a **Bounce Domain** card with the toggle **Use this sending domain as bounce domain**. The toggle stays disabled until the domain's CNAME record is valid, needs no extra DNS changes, and reverts to Lettr's default bounce domain when switched off. With it on, a test email's `Authentication-Results` header shows `spf=pass smtp.mailfrom=` followed by the sending domain.
 

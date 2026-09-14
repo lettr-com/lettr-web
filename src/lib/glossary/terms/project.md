@@ -35,7 +35,7 @@ Projects also line up with how code is organised. An application sends a fixed s
 
 ## Project in Lettr
 
-**Lettr organises templates as Team, Project, Folder and Template.** Every team has a default project created automatically, and that project cannot be deleted and receives templates when no project is specified. During onboarding, Lettr populates the folders with [premade templates](/glossary/premade-template/) that match the business type.
+**Lettr organises templates as Team, Project, Folder and Template.** The team's default project cannot be deleted and receives templates when no project is specified. During onboarding, Lettr populates the folders with [premade templates](/glossary/premade-template/) that match the business type.
 
 Every template belongs to one of two modes, Transactional for sending through the API or SMTP and Marketing for campaigns, and folders are mode-scoped too. The Copy to Transactional and Copy to Marketing actions create a copy in the other mode with a new unique slug, and deleting a folder moves each of its templates to the project's default folder for its mode instead of deleting them.
 

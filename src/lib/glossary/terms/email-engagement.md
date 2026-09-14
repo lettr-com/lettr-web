@@ -40,7 +40,7 @@ The practical response is to weight the signals by reliability. Unique clicks, c
 
 ## Engagement in Lettr
 
-**Lettr tracks opens and clicks for all emails by default**, as long as the message has HTML content. Opens are recorded through an invisible tracking pixel, and clicks through links rewritten to pass through Lettr's tracking servers or through a custom tracking domain when one is set up in the domain settings. Either can be turned off per email with `open_tracking: false` or `click_tracking: false` in the request's `options` object, which suits privacy-sensitive messages such as data exports.
+**Lettr can track opens and clicks for emails with HTML content.** Opens are recorded through an invisible tracking pixel, and clicks through links rewritten to pass through Lettr's tracking servers or through a custom tracking domain when one is set up in the domain settings. Either can be turned off per email with `open_tracking: false` or `click_tracking: false` in the request's `options` object, which suits privacy-sensitive messages such as data exports.
 
 Engagement reaches webhook endpoints as `engagement.open`, `engagement.initial_open` for the first open of an email by a recipient, and `engagement.click`. In the Events dashboard, first and later opens both show as **Opened** and clicks as **Clicked**. The Message Details view adds the user agent and a **Prefetched** field that marks opens triggered by a mail client prefetching images.
 
