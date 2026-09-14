@@ -6,8 +6,6 @@ related: [email-spoofing, dmarc, bimi, acceptable-use-policy, content-filtering]
 reading:
   - title: Acceptable Use Policy for Email
     href: https://docs.lettr.com/knowledge-base/compliance/acceptable-use-policy
-  - title: Understanding SPF, DKIM, and DMARC
-    href: https://docs.lettr.com/knowledge-base/fundamentals/spf-dkim-dmarc
   - title: DMARC Records
     href: https://docs.lettr.com/learn/domains/dmarc
 ---

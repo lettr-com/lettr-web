@@ -8,8 +8,6 @@ reading:
     href: https://docs.lettr.com/knowledge-base/fundamentals/email-headers
   - title: Recipients
     href: https://docs.lettr.com/learn/sending/recipients
-  - title: Sending Domains
-    href: https://docs.lettr.com/learn/domains/sending-domains
 ---
 
 **The From header** is the message header that names the sender, and it is the address an email client displays in the inbox, as in `From: Acme Support <support@acme.com>`. It identifies who the message is from to the person reading it. Because it is also the identity recipients trust, DMARC checks its domain, which makes the From header the anchor of email authentication as well as of the sender's brand.

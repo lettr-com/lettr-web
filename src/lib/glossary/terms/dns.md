@@ -9,8 +9,6 @@ reading:
     href: https://docs.lettr.com/learn/domains/introduction
   - title: Domain Verification Failures
     href: https://docs.lettr.com/knowledge-base/troubleshooting/domain-verification
-  - title: Cloudflare DNS Guide
-    href: https://docs.lettr.com/knowledge-base/dns-guides/cloudflare
 ---
 
 **DNS (Domain Name System)** is the internet's distributed directory. It maps domain names to the information needed to use them, such as the IP address of a web server or the mail servers that accept email for a domain. Email depends on it at every step: sending servers use DNS to find where to deliver a message, and receiving servers use it to check whether the sender was authorized to send it.

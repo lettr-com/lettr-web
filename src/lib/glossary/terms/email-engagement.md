@@ -8,8 +8,6 @@ reading:
     href: https://docs.lettr.com/knowledge-base/troubleshooting/tracking-accuracy
   - title: Tracking
     href: https://docs.lettr.com/learn/sending/tracking
-  - title: What Is Email Deliverability?
-    href: https://docs.lettr.com/knowledge-base/concepts/email-deliverability
 ---
 
 **Engagement** is the way recipients interact with the email they receive: opening it, clicking its links, replying, forwarding, moving it out of the spam folder or reporting it as spam. Senders measure part of it to judge how their messages perform. Mailbox providers measure more of it and use the result to decide where future mail from the same sender lands.

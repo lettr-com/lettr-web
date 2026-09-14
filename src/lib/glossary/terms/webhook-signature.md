@@ -4,12 +4,14 @@ question: What is
 description: "A webhook signature is an HMAC of the request body proving a webhook came from the expected sender unaltered. How to verify it, and how Lettr secures webhooks."
 related: [webhook, api-key, base64-encoding, idempotency]
 reading:
+  - title: Webhook Delivery Failures
+    href: https://docs.lettr.com/knowledge-base/troubleshooting/webhook-failures
+  - title: Security Best Practices
+    href: https://docs.lettr.com/knowledge-base/best-practices/security
   - title: Authorization
     href: https://docs.lettr.com/learn/webhooks/authorization
   - title: Monitoring & Alerts
     href: https://docs.lettr.com/learn/settings/alerts
-  - title: Webhooks
-    href: https://docs.lettr.com/learn/webhooks/introduction
 ---
 
 **A webhook signature** is a cryptographic value that a service attaches to each [webhook](/glossary/webhook/) request so the receiving endpoint can confirm that the request came from that service and that its body was not changed along the way. The service computes it from the request body and a secret shared with the receiver, most often with HMAC-SHA256, and sends the result in a header. The endpoint repeats the calculation and accepts the request only when the two values match.

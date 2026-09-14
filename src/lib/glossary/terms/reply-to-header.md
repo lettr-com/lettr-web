@@ -4,8 +4,6 @@ question: What is
 description: "The Reply-To header tells mail clients where to send replies when that differs from the From address. How it works, how it is abused and how Lettr sets it."
 related: [from-header, variable-reply-to-address, message-threading, email-header, plus-addressing]
 reading:
-  - title: Email Headers Explained
-    href: https://docs.lettr.com/knowledge-base/fundamentals/email-headers
   - title: Recipients
     href: https://docs.lettr.com/learn/sending/recipients
   - title: Reply Tracking

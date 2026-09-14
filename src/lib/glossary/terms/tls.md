@@ -9,8 +9,6 @@ reading:
     href: https://docs.lettr.com/knowledge-base/fundamentals/smtp-protocol-basics
   - title: SMTP Getting Started
     href: https://docs.lettr.com/quickstart/smtp/introduction
-  - title: How Email Delivery Works
-    href: https://docs.lettr.com/knowledge-base/fundamentals/how-email-delivery-works
 ---
 
 **TLS (Transport Layer Security)** is a cryptographic protocol that encrypts a network connection between two systems. In email it protects each SMTP connection a message travels over, from the sending application to its mail server and from one mail server to the next, so the message and any login credentials cannot be read or altered by someone watching the traffic. It is the same protocol that secures HTTPS, and it replaced the older SSL, whose name is still often used for it.

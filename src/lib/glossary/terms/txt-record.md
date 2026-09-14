@@ -6,8 +6,6 @@ related: [spf, dmarc, cname-record, dns, bimi]
 reading:
   - title: SPF Records
     href: https://docs.lettr.com/learn/domains/spf
-  - title: DMARC Records
-    href: https://docs.lettr.com/learn/domains/dmarc
   - title: Sending Domains
     href: https://docs.lettr.com/learn/domains/sending-domains
 ---
