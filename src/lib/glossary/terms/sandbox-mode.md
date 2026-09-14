@@ -43,7 +43,7 @@ Lettr implements sandbox mode as a separate type of [API key](/glossary/api-key/
 
 Every email sent with a sandbox key is redirected: all `to`, `cc` and `bcc` addresses are replaced with the email address of the user who created the key, and the `from` domain is rewritten to the pre-verified `dev.uselettr.com` while the local part stays the same. No domain verification is needed, sandbox sends are free and do not count toward the monthly sending quota or daily limits, and the traffic runs through a dedicated subaccount separated from live sending.
 
-Sandbox keys can reach the email sending and read-only endpoints. Write operations on domains, webhooks and templates return `403` with the error code `sandbox_restricted`. The limits are 10 requests per minute and 100 per day, reported in `X-Sandbox-RateLimit-*` response headers, and a key over either limit receives `429` with a `Retry-After` header.
+Sandbox keys can reach the email sending and read-only endpoints. Write operations on domains, webhooks and templates return `403` with the error code `sandbox_restricted`. Sandbox keys have their own rate limits, reported in `X-Sandbox-RateLimit-*` response headers, and a key over a limit receives `429` with a `Retry-After` header.
 
 Because sandbox sends run on an isolated subaccount, they do not trigger the team's webhooks, and the **Sandbox** toggle on the Events page shows sandbox traffic instead. Sandbox keys also work with the [SMTP relay](/glossary/smtp-relay/), where the domain requirement is waived and every message is redirected in the same way.
 
