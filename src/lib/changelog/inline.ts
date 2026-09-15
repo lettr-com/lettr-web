@@ -38,3 +38,16 @@ export function renderInline(text: string): string {
     return match;
   });
 }
+
+/**
+ * The same copy with its markup removed rather than rendered: code spans keep
+ * their text, links keep their label. For places that carry no HTML at all —
+ * meta descriptions, the llms.txt index, feed summaries.
+ */
+export function renderPlain(text: string): string {
+  return text.replace(INLINE, (match, code, label) => {
+    if (typeof code === "string") return code;
+    if (typeof label === "string") return label;
+    return match;
+  });
+}

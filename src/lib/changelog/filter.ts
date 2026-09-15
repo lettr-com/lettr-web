@@ -122,6 +122,7 @@ export function filterMonth(month: ChangelogMonth, tokens: readonly FilterToken[
 
   return {
     id: month.id,
+    published: month.published,
     features: month.features.filter((entry) => matchesFilter(entry, tokens)),
     improvements: month.improvements.filter((entry) => matchesFilter(entry, tokens)),
     bugfixes: month.bugfixes.filter((fix) => matchesFilter(fix, tokens)),

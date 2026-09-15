@@ -3,6 +3,7 @@
 	import { formatMonth } from '$lib/changelog/months';
 	import { renderInline } from '$lib/changelog/inline';
 	import { filterMonth, monthHref, type FilterToken } from '$lib/changelog/filter';
+	import { entryAnchor } from '$lib/changelog/seo';
 	import { sectionAnchor, sectionsOf } from '$lib/changelog/summary';
 	import type { ChangelogMonth } from '$lib/changelog/types';
 	import ChangelogBadge from './ChangelogBadge.svelte';
@@ -109,7 +110,7 @@
 				{#if shown.features.length}
 					<div class="mt-5 space-y-4">
 						{#each shown.features as entry (entry.title)}
-							<ChangelogEntry {entry} />
+							<ChangelogEntry {entry} id={entryAnchor(month, entry)} />
 						{/each}
 					</div>
 				{:else}
@@ -129,7 +130,7 @@
 				{#if shown.improvements.length}
 					<div class="mt-5 space-y-4">
 						{#each shown.improvements as entry (entry.title)}
-							<ChangelogEntry {entry} />
+							<ChangelogEntry {entry} id={entryAnchor(month, entry)} />
 						{/each}
 					</div>
 				{:else}
