@@ -2,7 +2,7 @@
 term: Click Tracking
 question: What is
 description: "Click tracking records link clicks by routing each link through a redirect server. How it works, why it beats open tracking, and how Lettr tracks clicks."
-related: [open-tracking, tracking-domain, tracking-pixel, mail-privacy-protection, email-engagement]
+related: [open-tracking, tracking-domain, tracking-pixel, mail-privacy-protection, utm-parameters]
 reading:
   - title: Tracking Accuracy
     href: https://docs.lettr.com/knowledge-base/troubleshooting/tracking-accuracy

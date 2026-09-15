@@ -2,7 +2,7 @@
 term: Feedback Loop (FBL)
 question: What is
 description: "A feedback loop (FBL) is how a mailbox provider reports spam complaints back to the sender. How FBLs work, which providers run them and how Lettr acts on them."
-related: [spam-complaint, arf, jmrp, suppression-list, google-postmaster-tools]
+related: [spam-complaint, arf, jmrp, yahoo-sender-hub, google-postmaster-tools]
 reading:
   - title: What Are Feedback Loops?
     href: https://docs.lettr.com/knowledge-base/concepts/feedback-loops

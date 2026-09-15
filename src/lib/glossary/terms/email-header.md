@@ -2,8 +2,7 @@
 term: Header
 question: What is
 description: "An email header is the block of fields at the top of a message, such as From and Message-ID. What headers do, header vs envelope, and headers in Lettr."
-related:
-  [from-header, message-id, envelope-from, authentication-results-header, list-unsubscribe-header]
+related: [from-header, message-id, envelope-from, authentication-results-header, x-header]
 reading:
   - title: Email Headers Explained
     href: https://docs.lettr.com/knowledge-base/fundamentals/email-headers

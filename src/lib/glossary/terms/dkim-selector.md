@@ -2,7 +2,7 @@
 term: DKIM Selector
 question: What is
 description: "A DKIM selector names which public key verifies a DKIM signature, so one domain can publish several keys. How selectors work, rotation, and selectors in Lettr."
-related: [dkim, dns, dns-propagation, dmarc-alignment]
+related: [dkim, dns, dns-propagation, dmarc-alignment, key-rotation]
 reading:
   - title: Understanding SPF, DKIM, and DMARC
     href: https://docs.lettr.com/knowledge-base/fundamentals/spf-dkim-dmarc

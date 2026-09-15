@@ -2,7 +2,7 @@
 term: Open Tracking
 question: What is
 description: "Open tracking records when a recipient opens an email by loading an invisible tracking pixel. How it works, why open data is unreliable, and Lettr."
-related: [tracking-pixel, click-tracking, mail-privacy-protection, initial-open, email-engagement]
+related: [tracking-pixel, click-tracking, mail-privacy-protection, initial-open, unique-open]
 reading:
   - title: Open & Click Tracking Accuracy
     href: https://docs.lettr.com/knowledge-base/troubleshooting/tracking-accuracy

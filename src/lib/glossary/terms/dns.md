@@ -3,7 +3,7 @@ term: DNS
 fullName: Domain Name System
 question: What is
 description: "DNS is the internet's directory that maps domain names to servers and stores the records email routing and authentication depend on. How it works and Lettr DNS."
-related: [mx-record, txt-record, cname-record, dns-propagation, ptr-record]
+related: [mx-record, txt-record, cname-record, dns-propagation, zone-file]
 reading:
   - title: Domains Introduction
     href: https://docs.lettr.com/learn/domains/introduction

@@ -3,7 +3,13 @@ term: List Unsubscribe
 question: What is
 description: "A list unsubscribe is an opt-out made with the mail client's own unsubscribe button instead of a link in the email. How it differs from a link unsubscribe."
 related:
-  [list-unsubscribe-header, one-click-unsubscribe, opt-out, preference-center, suppression-list]
+  [
+    list-unsubscribe-header,
+    one-click-unsubscribe,
+    unsubscribe-rate,
+    preference-center,
+    suppression-list,
+  ]
 reading:
   - title: Unsubscribe Best Practices
     href: https://docs.lettr.com/knowledge-base/compliance/unsubscribe-best-practices
