@@ -129,7 +129,7 @@
 			Lettr changelog
 		</span>
 		<h1 data-animate class="mt-3">What's new in {label}</h1>
-		<p data-animate class="mt-5 max-w-[40ch] text-body leading-normal text-muted">
+		<p data-animate class="mt-5 max-w-xl text-body leading-[1.8] text-muted">
 			{@html descriptionHtml}
 		</p>
 		<p data-animate class="mt-4 text-xs text-muted">
