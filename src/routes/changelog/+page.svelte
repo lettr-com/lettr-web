@@ -5,7 +5,9 @@
 	import ChangelogFilter from '$lib/components/changelog/ChangelogFilter.svelte';
 	import ChangelogArchive from '$lib/components/changelog/ChangelogArchive.svelte';
 	import type { FilterToken } from '$lib/changelog/filter';
-	import { MONTHS } from '$lib/changelog/months';
+	import { MONTHS, formatMonth } from '$lib/changelog/months';
+	import { FEED_URL, INDEX_DESCRIPTION, INDEX_TITLE, formatDate, indexJsonLd } from '$lib/changelog/seo';
+	import { jsonLdScript } from '$lib/utils/jsonLd';
 	import { createFromAnimationCleanup } from '$lib/utils/gsap';
 	import type { PageData } from './$types';
 
@@ -34,12 +36,12 @@
 	});
 </script>
 
-<Seo
-	title="Changelog | Lettr"
-	description="Everything we ship to Lettr, month by month: new features, improvements and bugfixes across the transactional API, campaigns, audience and the platform."
-	ogTitle="Lettr Changelog"
-	canonical="/changelog/"
-/>
+<Seo title={INDEX_TITLE} description={INDEX_DESCRIPTION} ogTitle="Lettr Changelog" canonical="/changelog/" />
+
+<svelte:head>
+	<link rel="alternate" type="application/atom+xml" title="Lettr Changelog" href={FEED_URL} />
+	{@html jsonLdScript(indexJsonLd(data.month))}
+</svelte:head>
 
 <section id="top" class="pt-32 pb-24">
 	<div bind:this={header}>
@@ -49,10 +51,14 @@
 		>
 			Changelog
 		</span>
-		<h1 data-animate>Everything we ship,<br class="hidden sm:inline" />month by month</h1>
+		<h1 data-animate>Everything we ship to Lettr,<br class="hidden sm:inline" />month by month</h1>
 		<p data-animate class="mt-6 max-w-xl text-body leading-[1.8] text-muted">
 			Every month we post a summary of what's new in Lettr: features, improvements and
 			bugfixes. Each entry is tagged with the part of the app it affects.
+		</p>
+		<p data-animate class="mt-4 text-xs text-muted">
+			Latest: {formatMonth(data.month.id)}, published
+			<time datetime={data.month.published}>{formatDate(data.month.published)}</time>
 		</p>
 
 		{#if MONTHS.length > 1}

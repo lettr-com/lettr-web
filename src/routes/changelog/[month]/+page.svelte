@@ -17,7 +17,9 @@
 		type FilterToken
 	} from '$lib/changelog/filter';
 	import { formatMonth } from '$lib/changelog/months';
-	import { summarizeMonth, summarizeMonthHtml } from '$lib/changelog/summary';
+	import { FEED_URL, formatDate, monthDescription, monthJsonLd, monthTitle } from '$lib/changelog/seo';
+	import { summarizeMonthHtml } from '$lib/changelog/summary';
+	import { jsonLdScript } from '$lib/utils/jsonLd';
 	import { createFromAnimationCleanup, createScrollRevealCleanup } from '$lib/utils/gsap';
 	import { untrack } from 'svelte';
 	import type { PageData } from './$types';
@@ -38,12 +40,15 @@
 	const filterStatus = $derived(
 		filter.length ? `${summarizeMatches(matches, filter, total)}.` : undefined
 	);
-	// One sentence in two forms: plain for the meta description, and with the
-	// counts marked up for the page, where they are the point of the line.
-	const describe = (summary: string | null) =>
-		summary ? `Everything Lettr shipped in ${label}: ${summary}.` : `Everything Lettr shipped in ${label}.`;
-	const description = $derived(describe(summarizeMonth(data.month)));
-	const descriptionHtml = $derived(describe(summarizeMonthHtml(data.month)));
+	// The hero line, with the counts marked up because they are the point of
+	// it. The meta description is the same sentence plus the headline features,
+	// built in `monthDescription`.
+	const summaryHtml = $derived(summarizeMonthHtml(data.month));
+	const descriptionHtml = $derived(
+		summaryHtml
+			? `Everything Lettr shipped in ${label}: ${summaryHtml}.`
+			: `Everything Lettr shipped in ${label}.`
+	);
 
 	onMount(() => {
 		const cleanups: (() => void)[] = [];
@@ -92,11 +97,19 @@
 </script>
 
 <Seo
-	title="{label} Changelog | Lettr"
-	{description}
+	title={monthTitle(data.month)}
+	description={monthDescription(data.month)}
 	ogTitle="Lettr Changelog — {label}"
+	type="article"
 	canonical="/changelog/{data.month.id}/"
 />
+
+<svelte:head>
+	<meta property="article:published_time" content={data.month.published} />
+	<meta property="article:modified_time" content={data.month.published} />
+	<link rel="alternate" type="application/atom+xml" title="Lettr Changelog" href={FEED_URL} />
+	{@html jsonLdScript(monthJsonLd(data.month))}
+</svelte:head>
 
 <section class="pt-32 pb-24">
 	<div bind:this={header}>
@@ -113,11 +126,14 @@
 			data-animate
 			class="mt-8 block font-heading text-sm text-primary"
 		>
-			Changelog
+			Lettr changelog
 		</span>
-		<h1 data-animate class="mt-3">{label}</h1>
+		<h1 data-animate class="mt-3">What's new in {label}</h1>
 		<p data-animate class="mt-5 max-w-xl text-body leading-[1.8] text-muted">
 			{@html descriptionHtml}
+		</p>
+		<p data-animate class="mt-4 text-xs text-muted">
+			Published <time datetime={data.month.published}>{formatDate(data.month.published)}</time>
 		</p>
 
 		<div data-animate class="mt-10 border-t border-border/50 py-3">

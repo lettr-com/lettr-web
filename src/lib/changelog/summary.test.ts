@@ -7,6 +7,7 @@ const fix = (text: string) => ({ modules: ["platform" as const], text });
 
 const month: ChangelogMonth = {
   id: "2026-08",
+  published: "2026-08-31",
   features: [entry("A")],
   improvements: [entry("B"), entry("C")],
   bugfixes: [fix("Fixed x"), fix("Fixed y"), fix("Fixed z")],

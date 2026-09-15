@@ -2,6 +2,7 @@ import type { ChangelogMonth } from "../types";
 
 export const month: ChangelogMonth = {
   id: "2026-04",
+  published: "2026-04-29",
 
   features: [
     {

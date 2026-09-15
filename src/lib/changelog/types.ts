@@ -51,6 +51,12 @@ export interface ChangelogBugfix {
 export interface ChangelogMonth {
   /** "YYYY-MM"; must equal the data file's name. Asserted by months.test.ts. */
   id: string;
+  /**
+   * "YYYY-MM-DD": the day this month's notes were published. Feeds the page's
+   * dates, structured data and the Atom feed, so it is the date the entry went
+   * up, not the last day of the month.
+   */
+  published: string;
   features: ChangelogEntry[];
   improvements: ChangelogEntry[];
   bugfixes: ChangelogBugfix[];
