@@ -52,7 +52,7 @@
 			Changelog
 		</span>
 		<h1 data-animate>Everything we ship to Lettr,<br class="hidden sm:inline" />month by month</h1>
-		<p data-animate class="mt-6 max-w-xl text-body leading-[1.8] text-muted">
+		<p data-animate class="mt-6 max-w-[45ch] text-body leading-[1.8] text-muted">
 			Every month we post a summary of what's new in Lettr: features, improvements and
 			bugfixes. Each entry is tagged with the part of the app it affects.
 		</p>

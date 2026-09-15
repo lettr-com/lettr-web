@@ -48,7 +48,7 @@
 			Glossary
 		</span>
 		<h1 data-animate>Email terms, explained</h1>
-		<p data-animate class="mt-6 max-w-xl text-body leading-[1.8] text-muted">
+		<p data-animate class="mt-6 max-w-[40ch] text-body leading-normal text-muted">
 			Plain-language explanations of email infrastructure, deliverability, authentication and
 			compliance terms, and how each one shows up in Lettr.
 		</p>
