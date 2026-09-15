@@ -3,6 +3,7 @@
 	import Seo from '$lib/components/Seo.svelte';
 	import GlossaryLetterGroup from '$lib/components/glossary/GlossaryLetterGroup.svelte';
 	import GlossaryLetterNav from '$lib/components/glossary/GlossaryLetterNav.svelte';
+	import { indexJsonLd, jsonLdScript } from '$lib/glossary/seo';
 	import { createFromAnimationCleanup } from '$lib/utils/gsap';
 	import type { PageData } from './$types';
 
@@ -19,24 +20,7 @@
 		`${data.count} email infrastructure, deliverability, authentication and compliance terms, each explained in plain language with how it shows up in Lettr.`
 	);
 
-	const jsonLd = {
-		'@context': 'https://schema.org',
-		'@graph': [
-			{
-				'@type': 'DefinedTermSet',
-				'@id': 'https://lettr.com/glossary/#set',
-				name: 'Lettr Email Glossary',
-				url: 'https://lettr.com/glossary/'
-			},
-			{
-				'@type': 'BreadcrumbList',
-				itemListElement: [
-					{ '@type': 'ListItem', position: 1, name: 'Home', item: 'https://lettr.com/' },
-					{ '@type': 'ListItem', position: 2, name: 'Glossary', item: 'https://lettr.com/glossary/' }
-				]
-			}
-		]
-	};
+	const terms = $derived(data.groups.flatMap((group) => group.terms));
 
 	onMount(() => {
 		if (!header) return;
@@ -55,7 +39,7 @@
 />
 
 <svelte:head>
-	{@html `<script type="application/ld+json">${JSON.stringify(jsonLd)}<\/script>`}
+	{@html jsonLdScript(indexJsonLd(terms, description))}
 </svelte:head>
 
 <section class="pt-32 pb-24">

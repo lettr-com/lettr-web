@@ -1,5 +1,5 @@
 import { parseTermFile } from "./frontmatter";
-import { renderTermBody } from "./render";
+import { definitionFromBody, renderTermBody } from "./render";
 import type { GlossaryTerm, GlossaryTermLink, GlossaryTermSource } from "./types";
 
 export type TermFiles = Readonly<Record<string, string>>;
@@ -79,7 +79,7 @@ export function buildTerm(slug: string, files: TermFiles = termFiles): GlossaryT
   const position = positions.get(slug);
   if (position === undefined) return undefined;
   const { meta, body } = sources[position];
-  return { ...meta, html: renderTermBody(body) };
+  return { ...meta, html: renderTermBody(body), definition: definitionFromBody(body) };
 }
 
 export function buildNeighbours(

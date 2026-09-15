@@ -28,6 +28,8 @@ export interface GlossaryTermMeta {
 export interface GlossaryTerm extends GlossaryTermMeta {
   /** Rendered body. */
   html: string;
+  /** First sentence of the body as plain text. */
+  definition: string;
 }
 
 export interface GlossaryTermLink {

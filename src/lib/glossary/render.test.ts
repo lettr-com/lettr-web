@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vite-plus/test";
-import { renderTermBody } from "./render";
+import { definitionFromBody, renderTermBody } from "./render";
 
 describe("renderTermBody", () => {
   it("opens absolute links in a new tab and keeps relative links in the same tab", () => {
@@ -26,5 +26,21 @@ describe("renderTermBody", () => {
   it("escapes quotes in link titles and hrefs", () => {
     const html = renderTermBody('[x](/glossary/a/ "say \\"hi\\"")');
     expect(html).toContain('title="say &quot;hi&quot;"');
+  });
+});
+
+describe("definitionFromBody", () => {
+  it("returns the first sentence of the first paragraph as plain text", () => {
+    const body =
+      "**DKIM (DomainKeys Identified Mail)** is a `DKIM-Signature` [standard](/glossary/x/) for mail.example.com. It signs mail.\n\n## More\n\nText.";
+    expect(definitionFromBody(body)).toBe(
+      "DKIM (DomainKeys Identified Mail) is a DKIM-Signature standard for mail.example.com.",
+    );
+  });
+
+  it("keeps a one-sentence paragraph whole", () => {
+    expect(definitionFromBody("**Tag** is a label, such as `welcome`.")).toBe(
+      "Tag is a label, such as welcome.",
+    );
   });
 });

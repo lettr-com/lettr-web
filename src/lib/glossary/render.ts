@@ -30,3 +30,21 @@ const markdown = new Marked({ gfm: true }).use({
 export function renderTermBody(body: string): string {
   return markdown.parse(body, { async: false });
 }
+
+/** A sentence ends at . ! or ? followed by whitespace and a capital letter, or at the end. */
+const FIRST_SENTENCE = /^.+?[.!?](?=\s+[A-Z]|$)/s;
+
+/**
+ * The opening sentence of the body as plain text. Every term starts with a
+ * bolded one-sentence definition, which is what structured data and the
+ * glossary llms.txt quote.
+ */
+export function definitionFromBody(body: string): string {
+  const paragraph = body.split(/\n\s*\n/)[0];
+  const plain = paragraph
+    .replace(/\[([^\]]+)\]\([^)]+\)/g, "$1")
+    .replace(/\*\*|__|`/g, "")
+    .replace(/\s+/g, " ")
+    .trim();
+  return FIRST_SENTENCE.exec(plain)?.[0] ?? plain;
+}

@@ -10,6 +10,17 @@ const sources = readSources();
 const wordCount = (text: string) => text.split(/\s+/).filter(Boolean).length;
 
 describe("glossary content set", () => {
+  it("links every term from at least one other term", () => {
+    const linked = new Set<string>();
+    for (const { meta, body } of sources) {
+      const bodyLinks = [...body.matchAll(/\]\(\/glossary\/([^)/]+)\/\)/g)].map(
+        (match) => match[1],
+      );
+      for (const slug of [...meta.related, ...bodyLinks]) if (slug !== meta.slug) linked.add(slug);
+    }
+    expect(sources.map(({ meta }) => meta.slug).filter((slug) => !linked.has(slug))).toEqual([]);
+  });
+
   it("has unique labels", () => {
     expect(new Set(sources.map((source) => source.meta.term.toLowerCase())).size).toBe(
       sources.length,
@@ -67,6 +78,13 @@ for (const { meta, body } of sources) {
     it("uses no em dashes and no first person", () => {
       expect(body).not.toContain(" — ");
       expect(body).not.toMatch(FIRST_PERSON);
+    });
+
+    it("opens with a one-sentence definition of 40 to 240 characters", () => {
+      const definition = buildTerm(meta.slug)?.definition ?? "";
+      expect(definition.length, definition).toBeGreaterThanOrEqual(40);
+      expect(definition.length, definition).toBeLessThanOrEqual(240);
+      expect(definition).toMatch(/[.!?]$/);
     });
 
     it("renders through the real loader", () => {

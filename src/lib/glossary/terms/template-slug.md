@@ -2,7 +2,7 @@
 term: Template Slug
 question: What is
 description: "A template slug is the stable, URL-safe identifier your code uses to send a Lettr template. How slugs are formed and why they beat numeric IDs."
-related: [template-version, project, premade-template, merge-tag]
+related: [template-version, project, premade-template, merge-tag, tag]
 reading:
   - title: Templates Introduction
     href: https://docs.lettr.com/learn/templates/introduction

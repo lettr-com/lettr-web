@@ -4,6 +4,7 @@
 	import Seo from '$lib/components/Seo.svelte';
 	import GlossaryLinkGrid from '$lib/components/glossary/GlossaryLinkGrid.svelte';
 	import GlossaryStepper from '$lib/components/glossary/GlossaryStepper.svelte';
+	import { jsonLdScript, termHeading, termJsonLd, termTitle } from '$lib/glossary/seo';
 	import { createFromAnimationCleanup } from '$lib/utils/gsap';
 	import type { PageData } from './$types';
 
@@ -15,33 +16,9 @@
 
 	let header: HTMLElement | undefined = $state();
 
-	const heading = $derived(`${data.term.question} ${data.term.term}?`);
-	const pageUrl = $derived(`https://lettr.com/glossary/${data.term.slug}/`);
+	const heading = $derived(termHeading(data.term));
 	const readingLinks = $derived(data.term.reading.map(({ href, title }) => ({ href, label: title })));
 	const relatedLinks = $derived(data.related.map(({ href, term }) => ({ href, label: term })));
-
-	const jsonLd = $derived({
-		'@context': 'https://schema.org',
-		'@graph': [
-			{
-				'@type': 'DefinedTerm',
-				'@id': `${pageUrl}#term`,
-				name: data.term.term,
-				...(data.term.fullName ? { alternateName: data.term.fullName } : {}),
-				description: data.term.description,
-				url: pageUrl,
-				inDefinedTermSet: { '@id': 'https://lettr.com/glossary/#set' }
-			},
-			{
-				'@type': 'BreadcrumbList',
-				itemListElement: [
-					{ '@type': 'ListItem', position: 1, name: 'Home', item: 'https://lettr.com/' },
-					{ '@type': 'ListItem', position: 2, name: 'Glossary', item: 'https://lettr.com/glossary/' },
-					{ '@type': 'ListItem', position: 3, name: data.term.term, item: pageUrl }
-				]
-			}
-		]
-	});
 
 	onMount(() => {
 		if (!header) return;
@@ -54,7 +31,7 @@
 </script>
 
 <Seo
-	title="{heading} | Lettr Glossary"
+	title={termTitle(data.term)}
 	description={data.term.description}
 	ogTitle={heading}
 	type="article"
@@ -62,7 +39,7 @@
 />
 
 <svelte:head>
-	{@html `<script type="application/ld+json">${JSON.stringify(jsonLd)}<\/script>`}
+	{@html jsonLdScript(termJsonLd(data.term))}
 </svelte:head>
 
 <article class="pt-32 pb-24">

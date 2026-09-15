@@ -40,7 +40,7 @@ The reasons behind failed deliveries separate those cases. Bounces for unknown u
 
 ## Delivery in Lettr
 
-Lettr tracks each message from the moment it enters the pipeline. **The injection event marks the email as accepted by Lettr and queued**, and the delivery event follows when the recipient's mail server accepts it, shown in the Events dashboard as a green badge. For integrations, the matching webhook is `message.delivery`, triggered when an email is successfully delivered to the recipient's mail server. The Lettr docs note that a delivery event does not guarantee the email reached the inbox, because it could still be filtered to spam or quarantined.
+Lettr tracks each message from the moment it enters the pipeline. **The [injection](/glossary/injection/) event marks the email as accepted by Lettr and queued**, and the delivery event follows when the recipient's mail server accepts it, shown in the Events dashboard as a green badge. For integrations, the matching webhook is `message.delivery`, triggered when an email is successfully delivered to the recipient's mail server. The Lettr docs note that a delivery event does not guarantee the email reached the inbox, because it could still be filtered to spam or quarantined.
 
 A timeline in Message Details that stops at the injection event with nothing after it means the message is still being processed or has stalled. Message Details also shows the Mailbox Provider, the Routing Domain the message was delivered to and the Sending IP that Lettr delivered it from.
 
