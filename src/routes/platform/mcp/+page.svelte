@@ -214,7 +214,7 @@
 		<div bind:this={flowSection} class="mx-auto mt-20 max-w-3xl md:mt-28">
 			<h2 data-reveal class="mb-3 text-center">What you can build</h2>
 			<p data-reveal class="mx-auto mb-8 max-w-lg text-center text-body text-muted">
-				Use the MCP server as a building block for AI-powered email workflows.
+				Use the <a class="text-primary underline underline-offset-2" href="/glossary/mcp/">MCP</a> server as a building block for AI-powered email workflows.
 			</p>
 			<div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
 				{#each useCases as useCase}
