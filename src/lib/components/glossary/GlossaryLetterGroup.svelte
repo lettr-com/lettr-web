@@ -54,6 +54,6 @@
 			<h2 class="text-h3">{group.letter}</h2>
 			<CaretDownIcon size={16} class="shrink-0 transition-transform duration-200 group-open:rotate-180" />
 		</summary>
-		{@render termList('flex-col gap-1 px-2 pt-4 pb-4', 'min-h-9 px-2 py-1.5 text-sm', false)}
+		{@render termList('flex-col gap-1 px-2 pt-4 pb-4', 'min-h-9 p-2 text-lg', false)}
 	</details>
 </section>
