@@ -5,8 +5,8 @@
 	import ChangelogFilter from '$lib/components/changelog/ChangelogFilter.svelte';
 	import ChangelogArchive from '$lib/components/changelog/ChangelogArchive.svelte';
 	import type { FilterToken } from '$lib/changelog/filter';
-	import { MONTHS, formatMonth } from '$lib/changelog/months';
-	import { FEED_URL, INDEX_DESCRIPTION, INDEX_TITLE, formatDate, indexJsonLd } from '$lib/changelog/seo';
+	import { MONTHS } from '$lib/changelog/months';
+	import { FEED_URL, INDEX_DESCRIPTION, INDEX_TITLE, indexJsonLd } from '$lib/changelog/seo';
 	import { jsonLdScript } from '$lib/utils/jsonLd';
 	import { createFromAnimationCleanup } from '$lib/utils/gsap';
 	import type { PageData } from './$types';
@@ -55,10 +55,6 @@
 		<p data-animate class="mt-6 max-w-xl text-body leading-[1.8] text-muted">
 			Every month we post a summary of what's new in Lettr: features, improvements and
 			bugfixes. Each entry is tagged with the part of the app it affects.
-		</p>
-		<p data-animate class="mt-4 text-xs text-muted">
-			Latest: {formatMonth(data.month.id)}, published
-			<time datetime={data.month.published}>{formatDate(data.month.published)}</time>
 		</p>
 
 		{#if MONTHS.length > 1}
