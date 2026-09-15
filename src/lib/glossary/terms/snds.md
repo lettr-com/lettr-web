@@ -1,8 +1,10 @@
 ---
 term: SNDS
 fullName: Smart Network Data Services
-question: What is
+heading: "What is SNDS?"
 description: "SNDS is Microsoft's free service showing how Outlook.com sees mail from a sending IP address. What it reports, how to read it, and SNDS for Lettr senders."
+published: 2026-09-14
+updated: 2026-09-14
 related: [smartscreen, jmrp, google-postmaster-tools, ip-reputation, exchange-online-protection]
 reading:
   - title: Outlook / Microsoft 365 Delivery Issues

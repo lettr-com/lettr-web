@@ -1,7 +1,9 @@
 ---
 term: DNS Propagation
-question: What is
+heading: "What is DNS propagation?"
 description: "DNS propagation is the delay before a DNS change reaches every resolver, caused by cached records. Why it happens, how to plan for it, and Lettr verification."
+published: 2026-09-14
+updated: 2026-09-14
 related: [dns, mx-record, dkim-selector, domain-connect, cname-record]
 reading:
   - title: Domain Verification Failures

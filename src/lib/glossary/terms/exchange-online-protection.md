@@ -1,8 +1,10 @@
 ---
 term: Exchange Online Protection
 fullName: EOP
-question: What is
+heading: "What is Exchange Online Protection?"
 description: "Exchange Online Protection is Microsoft's first filtering layer for Outlook and Microsoft 365 mail. What EOP checks, why mail gets junked and Lettr's part."
+published: 2026-09-14
+updated: 2026-09-14
 related: [smartscreen, snds, ip-reputation, dmarc, focused-inbox]
 reading:
   - title: Outlook / Microsoft 365 Delivery Issues

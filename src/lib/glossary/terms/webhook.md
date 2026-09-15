@@ -1,7 +1,9 @@
 ---
 term: Webhook
-question: What is
+heading: "What is a webhook?"
 description: "A webhook is an HTTP request a service sends to an application when an event happens, such as an email bounce. How webhooks work, what goes wrong, and Lettr."
+published: 2026-09-14
+updated: 2026-09-14
 related: [webhook-signature, idempotency, exponential-backoff, api-key, bounce]
 reading:
   - title: Webhooks

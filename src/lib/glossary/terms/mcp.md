@@ -1,8 +1,10 @@
 ---
 term: MCP
 fullName: Model Context Protocol
-question: What is
+heading: "What is MCP?"
 description: "MCP is an open protocol that connects AI assistants to external tools and data. How MCP servers work and what Lettr's remote and local MCP servers can do."
+published: 2026-09-14
+updated: 2026-09-14
 related: [api-key, webhook, template-slug, esp]
 reading:
   - title: MCP Introduction

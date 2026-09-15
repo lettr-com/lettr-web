@@ -1,7 +1,9 @@
 ---
 term: Relay
-question: What is
+heading: "What is email relay?"
 description: "An email relay is a server passing a message on toward its destination. How relaying works, why open relays get blocked and how Lettr relays inbound mail."
+published: 2026-09-14
+updated: 2026-09-14
 related: [smtp-relay, mx-record, webhook, variable-reply-to-address, mta]
 reading:
   - title: Inbound Introduction

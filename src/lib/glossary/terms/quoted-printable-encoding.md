@@ -1,7 +1,9 @@
 ---
 term: Quoted-Printable Encoding
-question: What is
+heading: "What is quoted-printable encoding?"
 description: "Quoted-printable encoding keeps mostly-ASCII email text readable by escaping other bytes as =XX codes. How it works, where it breaks and how Lettr decodes it."
+published: 2026-09-14
+updated: 2026-09-14
 related: [base64-encoding, mime, character-encoding, multipart-message, dkim]
 reading:
   - title: Email Parsing

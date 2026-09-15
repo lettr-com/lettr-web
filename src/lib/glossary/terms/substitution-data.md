@@ -1,7 +1,9 @@
 ---
 term: Substitution Data
-question: What is
+heading: "What is substitution data?"
 description: "Substitution data is the set of values sent with an email request to fill a template's merge tags. How it works, common pitfalls, and Lettr's format."
+published: 2026-09-14
+updated: 2026-09-14
 related: [merge-tag, loop-block, template-slug, template-version, batch-sending]
 reading:
   - title: Template Language

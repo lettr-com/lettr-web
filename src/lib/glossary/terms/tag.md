@@ -1,7 +1,9 @@
 ---
 term: Tag
-question: What is
+heading: "What is an email tag?"
 description: "A tag is a short label attached to an email at send time to group similar messages in reports. How tags differ from metadata and how Lettr sets them."
+published: 2026-09-14
+updated: 2026-09-14
 related: [template-slug, email-engagement, batch-sending, transactional-email]
 reading:
   - title: Email Tags

@@ -1,8 +1,10 @@
 ---
 term: DMARC
 fullName: Domain-based Message Authentication, Reporting & Conformance
-question: What is
+heading: "What is DMARC?"
 description: "DMARC tells receiving servers what to do with email that fails SPF and DKIM alignment and sends reports back. Policies, rollout, and DMARC setup in Lettr."
+published: 2026-09-14
+updated: 2026-09-14
 related: [spf, dkim, dmarc-alignment, dmarc-aggregate-report, bimi]
 reading:
   - title: Understanding SPF, DKIM, and DMARC

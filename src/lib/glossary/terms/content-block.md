@@ -1,7 +1,9 @@
 ---
 term: Content Block
-question: What is
+heading: "What is a content block?"
 description: "A content block is one element of a drag-and-drop email template, such as text, an image or a button. The block types in Lettr's Topol editor, explained."
+published: 2026-09-14
+updated: 2026-09-14
 related: [topol-email-editor, structure, saved-block, loop-block, merge-tag]
 reading:
   - title: Topol Email Editor

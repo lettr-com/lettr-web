@@ -1,8 +1,10 @@
 ---
 term: PTR Record
 fullName: Pointer Record
-question: What is
+heading: "What is a PTR record?"
 description: "A PTR record maps an IP address back to a hostname for reverse DNS lookups. How mail servers check it, who can set it, and how Lettr handles sending IPs."
+published: 2026-09-14
+updated: 2026-09-14
 related: [reverse-dns, dns, ip-reputation, dedicated-ip, ehlo-helo]
 reading:
   - title: Google & Yahoo Sender Requirements

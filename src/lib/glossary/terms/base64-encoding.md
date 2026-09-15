@@ -1,6 +1,9 @@
 ---
 term: Base64 Encoding
+heading: "What is Base64 encoding?"
 description: "Base64 encoding turns binary data such as attachments into plain ASCII text so it can travel through email. How it works, its overhead and its use in Lettr."
+published: 2026-09-14
+updated: 2026-09-14
 related: [mime, quoted-printable-encoding, multipart-message, character-encoding, cid]
 reading:
   - title: Attachments

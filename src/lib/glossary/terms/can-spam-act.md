@@ -1,7 +1,9 @@
 ---
 term: CAN-SPAM Act
-question: What is
+heading: "What is the CAN-SPAM Act?"
 description: "The CAN-SPAM Act is the US law for commercial email: honest headers, a postal address and a working opt-out. What it requires and how Lettr handles it."
+published: 2026-09-14
+updated: 2026-09-14
 related: [casl, gdpr, transactional-email, marketing-email, suppression-list]
 reading:
   - title: CAN-SPAM Requirements

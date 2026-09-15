@@ -1,7 +1,9 @@
 ---
 term: Merge Tag
-question: What is
+heading: "What is a merge tag?"
 description: "A merge tag is a placeholder in an email template that is replaced with recipient-specific data at send time. How merge tags work and Lettr's template syntax."
+published: 2026-09-14
+updated: 2026-09-14
 related: [substitution-data, loop-block, template-slug, editor-settings, click-tracking]
 reading:
   - title: Personalization and Dynamic Content

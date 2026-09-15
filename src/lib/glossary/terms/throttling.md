@@ -1,7 +1,9 @@
 ---
 term: Throttling
-question: What is
+heading: "What is email throttling?"
 description: "Throttling is a mailbox provider limiting how fast it accepts mail from a sender and deferring the rest with 4xx replies. Causes, handling and Lettr."
+published: 2026-09-14
+updated: 2026-09-15
 related: [deferral, rate-limiting, warm-up, exponential-backoff, graylisting]
 reading:
   - title: Bounce Codes Reference

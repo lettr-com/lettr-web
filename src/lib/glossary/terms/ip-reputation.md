@@ -1,7 +1,9 @@
 ---
 term: IP Reputation
-question: What is
+heading: "What is IP reputation?"
 description: "IP reputation is the trust mailbox providers give a sending IP address based on its mail history. What shapes it, domain vs IP reputation, and Lettr."
+published: 2026-09-14
+updated: 2026-09-15
 related: [domain-reputation, sender-reputation, dedicated-ip, blocklist, ip-pool]
 reading:
   - title: Sending Reputation

@@ -1,7 +1,9 @@
 ---
 term: DKIM Selector
-question: What is
+heading: "What is a DKIM selector?"
 description: "A DKIM selector names which public key verifies a DKIM signature, so one domain can publish several keys. How selectors work, rotation, and selectors in Lettr."
+published: 2026-09-14
+updated: 2026-09-15
 related: [dkim, dns, dns-propagation, dmarc-alignment, key-rotation]
 reading:
   - title: Understanding SPF, DKIM, and DMARC

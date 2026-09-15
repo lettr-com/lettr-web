@@ -1,7 +1,9 @@
 ---
 term: Variable Reply-To Address
-question: What is
+heading: "What is a variable reply-to address?"
 description: "A variable reply-to address encodes an identifier, such as a ticket number, in the Reply-To address so every reply can be matched to its conversation."
+published: 2026-09-14
+updated: 2026-09-14
 related: [plus-addressing, reply-to-header, message-threading, email-relay, mx-record]
 reading:
   - title: Reply Tracking

@@ -1,7 +1,9 @@
 ---
 term: Policy Rejection
-question: What is
+heading: "What is a policy rejection?"
 description: "A policy rejection is an email refused under a rule rather than for a bad address, by the sending platform or the receiving server. How Lettr reports each."
+published: 2026-09-14
+updated: 2026-09-15
 related: [content-filtering, bounce, blocklist, dmarc, acceptable-use-policy]
 reading:
   - title: Event Types

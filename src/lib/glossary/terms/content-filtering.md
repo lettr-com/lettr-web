@@ -1,7 +1,9 @@
 ---
 term: Content Filtering
-question: What is
+heading: "What is content filtering?"
 description: "Content filtering is how receiving mail servers scan subject lines, body text, links and images to catch spam. What filters check and how Lettr helps."
+published: 2026-09-14
+updated: 2026-09-15
 related: [spam-score, sender-reputation, inbox-placement, tracking-domain, phishing]
 reading:
   - title: Emails Landing in Spam

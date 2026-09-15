@@ -1,7 +1,9 @@
 ---
 term: Mailbox Provider
-question: What is
+heading: "What is a mailbox provider?"
 description: "A mailbox provider runs the inboxes recipients read, such as Gmail, Outlook.com or Yahoo Mail, and decides where incoming mail lands. How providers filter mail."
+published: 2026-09-14
+updated: 2026-09-14
 related: [esp, inbox-placement, feedback-loop, google-postmaster-tools, snds]
 reading:
   - title: What Is an Email Service Provider?

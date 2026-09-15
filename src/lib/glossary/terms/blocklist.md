@@ -1,7 +1,10 @@
 ---
 term: Blocklist
 fullName: Blacklist
+heading: "What is a blocklist?"
 description: "A blocklist is a database of IP addresses or domains flagged as spam sources that receiving servers check. How listings happen, how to delist and Lettr's view."
+published: 2026-09-14
+updated: 2026-09-14
 related: [sender-reputation, spam-trap, shared-ip, suppression-list, domain-reputation]
 reading:
   - title: Sending Reputation

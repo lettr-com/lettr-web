@@ -1,7 +1,9 @@
 ---
 term: Project
-question: What is
+heading: "What is a project?"
 description: "A project is a container that groups email templates, typically by brand, product or team. How projects organise templates and how Lettr uses them."
+published: 2026-09-14
+updated: 2026-09-14
 related: [template-slug, template-version, premade-template, editor-settings]
 reading:
   - title: Projects & Folders

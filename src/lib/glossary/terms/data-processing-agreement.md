@@ -1,8 +1,10 @@
 ---
 term: Data Processing Agreement
 fullName: DPA
-question: What is
+heading: "What is a data processing agreement?"
 description: "A Data Processing Agreement (DPA) is the GDPR contract between a data controller and a processor such as an ESP. What it covers and how to get one with Lettr."
+published: 2026-09-14
+updated: 2026-09-14
 related: [gdpr, data-minimization, esp, acceptable-use-policy]
 reading:
   - title: GDPR and Email Sending

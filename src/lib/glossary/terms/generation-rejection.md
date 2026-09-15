@@ -1,7 +1,9 @@
 ---
 term: Generation Rejection
-question: What is
+heading: "What is a generation rejection?"
 description: "A generation rejection is a message the sending platform blocks while it is assembled, before delivery. How it differs from a failure or bounce, and Lettr."
+published: 2026-09-14
+updated: 2026-09-15
 related: [generation-failure, policy-rejection, bounce, webhook]
 reading:
   - title: Webhook Event Types

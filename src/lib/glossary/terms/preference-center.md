@@ -1,7 +1,9 @@
 ---
 term: Preference Center
-question: What is
+heading: "What is a preference center?"
 description: "A preference center is a page where recipients choose which emails they get instead of leaving entirely. How it works and Lettr's hosted preferences page."
+published: 2026-09-14
+updated: 2026-09-14
 related: [opt-out, list-unsubscribe, one-click-unsubscribe, sunset-policy, suppression-list]
 reading:
   - title: Unsubscribe Best Practices

@@ -1,7 +1,9 @@
 ---
 term: Custom Return-Path
-question: What is
+heading: "What is a custom Return-Path?"
 description: "A custom Return-Path swaps an ESP's default bounce domain for the sender's own, so SPF aligns for DMARC. How it works and how to enable it in Lettr."
+published: 2026-09-14
+updated: 2026-09-14
 related: [return-path, envelope-from, spf, dmarc-alignment, bounce]
 reading:
   - title: Custom Return-Path and MAIL FROM

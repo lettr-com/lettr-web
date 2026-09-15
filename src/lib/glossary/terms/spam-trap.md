@@ -1,7 +1,9 @@
 ---
 term: Spam Trap
-question: What is
+heading: "What is a spam trap?"
 description: "A spam trap is an email address that exists to catch senders with poor list practices. Pristine, recycled and typo traps, and how Lettr helps avoid them."
+published: 2026-09-14
+updated: 2026-09-15
 related: [list-hygiene, blocklist, role-based-address, sunset-policy, double-opt-in]
 reading:
   - title: List Hygiene

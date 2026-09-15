@@ -1,7 +1,9 @@
 ---
 term: Exponential Backoff
-question: What is
+heading: "What is exponential backoff?"
 description: "Exponential backoff is a retry strategy where each wait is longer than the last. How it works for SMTP, webhooks and API calls, and where Lettr applies it."
+published: 2026-09-14
+updated: 2026-09-14
 related: [webhook, soft-bounce, deferral, rate-limiting, idempotency]
 reading:
   - title: Webhook Delivery Failures

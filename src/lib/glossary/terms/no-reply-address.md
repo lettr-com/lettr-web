@@ -1,7 +1,9 @@
 ---
 term: No-Reply Address
-question: What is
+heading: "What is a no-reply address?"
 description: "A no-reply address such as noreply@ sends automated mail that nobody reads replies to. Why it frustrates recipients and how Lettr routes replies instead."
+published: 2026-09-15
+updated: 2026-09-15
 related:
   [
     reply-to-header,

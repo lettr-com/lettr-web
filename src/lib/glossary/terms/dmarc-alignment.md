@@ -1,7 +1,9 @@
 ---
-term: Alignment
-question: What is
+term: DMARC Alignment
+heading: "What is DMARC alignment?"
 description: "DMARC alignment requires the domain that passed SPF or DKIM to match the visible From domain. Strict and relaxed modes, common failures, and Lettr's setup."
+published: 2026-09-14
+updated: 2026-09-15
 related: [dmarc, spf, dkim, return-path, custom-return-path]
 reading:
   - title: Understanding SPF, DKIM, and DMARC
@@ -12,7 +14,7 @@ reading:
     href: https://docs.lettr.com/knowledge-base/fundamentals/custom-return-path
 ---
 
-**Alignment** is the DMARC rule that ties email authentication to the address a recipient actually sees. A message passes DMARC only when SPF or DKIM passes and the domain that check authenticated matches the domain in the visible From header. Without that rule, a forger could pass SPF with a domain of their own while putting someone else's domain in the From line.
+**DMARC alignment** is the rule that ties email authentication to the address a recipient actually sees. A message passes DMARC only when SPF or DKIM passes and the domain that check authenticated matches the domain in the visible From header. Without that rule, a forger could pass SPF with a domain of their own while putting someone else's domain in the From line.
 
 ## How DMARC alignment works
 

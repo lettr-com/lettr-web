@@ -1,7 +1,9 @@
 ---
 term: Authentication-Results Header
-question: What is
+heading: "What is the Authentication-Results header?"
 description: "The Authentication-Results header records a receiving server's SPF, DKIM and DMARC verdicts on a message. How to read it and use it to check a Lettr domain."
+published: 2026-09-14
+updated: 2026-09-14
 related: [spf, dkim, dmarc, email-header, arc]
 reading:
   - title: Email Headers Explained

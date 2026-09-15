@@ -1,6 +1,9 @@
 ---
 term: Backscatter
+heading: "What is backscatter?"
 description: "Backscatter is bounce mail sent to an innocent address that spammers forged as the sender. How it happens, how to prevent it and how Lettr handles bounces."
+published: 2026-09-14
+updated: 2026-09-15
 related: [return-path, out-of-band-bounce, dmarc, email-spoofing, dsn]
 reading:
   - title: Understanding SPF, DKIM, and DMARC

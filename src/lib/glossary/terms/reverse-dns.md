@@ -1,7 +1,9 @@
 ---
 term: Reverse DNS
-question: What is
+heading: "What is reverse DNS?"
 description: "Reverse DNS resolves an IP address back to a hostname. How the lookup works, how receiving mail servers use it to judge senders and how Lettr handles it."
+published: 2026-09-14
+updated: 2026-09-14
 related: [ptr-record, ehlo-helo, ip-reputation, dns, mta]
 reading:
   - title: "Google & Yahoo Sender Requirements"

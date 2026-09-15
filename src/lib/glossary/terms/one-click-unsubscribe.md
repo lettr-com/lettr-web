@@ -1,7 +1,9 @@
 ---
 term: One-Click Unsubscribe
-question: What is
+heading: "What is one-click unsubscribe?"
 description: "One-click unsubscribe lets a mail client remove a recipient with a single HTTPS POST, as RFC 8058 defines. How it works, who requires it, and Lettr."
+published: 2026-09-14
+updated: 2026-09-14
 related:
   [list-unsubscribe-header, list-unsubscribe, preference-center, suppression-list, bulk-sender]
 reading:

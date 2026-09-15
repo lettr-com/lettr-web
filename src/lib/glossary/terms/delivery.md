@@ -1,7 +1,9 @@
 ---
 term: Delivery
-question: What is
+heading: "What is email delivery?"
 description: "Delivery means a receiving mail server accepted an email, which is not the same as reaching the inbox. How delivery works and how Lettr reports delivery events."
+published: 2026-09-14
+updated: 2026-09-15
 related: [deliverability, delivery-delay, bounce, smtp, inbox-placement]
 reading:
   - title: How Email Delivery Works

@@ -1,8 +1,10 @@
 ---
 term: VERP
 fullName: Variable Envelope Return Path
-question: What is
+heading: "What is VERP?"
 description: "VERP encodes each recipient's address in the envelope sender, so a bounce identifies the failed recipient by the address it returns to. How it works and why."
+published: 2026-09-14
+updated: 2026-09-14
 related: [return-path, envelope-from, bounce, out-of-band-bounce, plus-addressing]
 reading:
   - title: Custom Return-Path and MAIL FROM

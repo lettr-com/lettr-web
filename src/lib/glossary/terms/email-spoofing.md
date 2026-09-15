@@ -1,7 +1,9 @@
 ---
 term: Spoofing
-question: What is
+heading: "What is email spoofing?"
 description: "Email spoofing forges the sender address so a message appears to come from someone else. How spoofing works, how DMARC stops it, and Lettr's safeguards."
+published: 2026-09-14
+updated: 2026-09-14
 related: [phishing, dmarc, bimi, from-header, dkim]
 reading:
   - title: Understanding SPF, DKIM, and DMARC

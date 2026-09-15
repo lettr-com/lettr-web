@@ -1,7 +1,9 @@
 ---
 term: Domain Status
-question: What is
+heading: "What is domain status?"
 description: "Domain status shows whether a sending domain may send. How approval differs from DNS verification, and what pending, approved and blocked mean in Lettr."
+published: 2026-09-14
+updated: 2026-09-14
 related: [dns, dkim, domain-reputation, acceptable-use-policy]
 reading:
   - title: Domains Introduction

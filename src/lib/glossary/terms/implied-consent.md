@@ -1,7 +1,9 @@
 ---
 term: Implied Consent
-question: What is
+heading: "What is implied consent?"
 description: "Implied consent lets a sender email people it has a business relationship with, for a limited time, under CASL. How long it lasts and tracking it in Lettr."
+published: 2026-09-14
+updated: 2026-09-14
 related: [express-consent, casl, gdpr, double-opt-in, can-spam-act]
 reading:
   - title: CASL (Canadian Anti-Spam Law)

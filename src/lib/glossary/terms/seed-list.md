@@ -1,7 +1,9 @@
 ---
 term: Seed List
-question: What is
+heading: "What is a seed list?"
 description: "A seed list is a set of test mailboxes at major providers used to check where an email lands. What seed testing shows, its limits, and what Lettr offers."
+published: 2026-09-14
+updated: 2026-09-14
 related: [inbox-placement, mailbox-provider, deliverability, spam-score]
 reading:
   - title: Sending Reputation

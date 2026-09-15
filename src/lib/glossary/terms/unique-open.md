@@ -1,6 +1,9 @@
 ---
 term: Unique Open
+heading: "What is a unique open?"
 description: "A unique open counts each recipient who opened an email once, however often they reopened it. How it differs from total opens and where Lettr reports it."
+published: 2026-09-15
+updated: 2026-09-15
 related: [initial-open, open-tracking, mail-privacy-protection, click-tracking, email-engagement]
 reading:
   - title: Reading the Dashboard

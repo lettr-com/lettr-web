@@ -1,7 +1,9 @@
 ---
 term: Character Encoding
-question: What is
+heading: "What is character encoding?"
 description: "Character encoding maps text to bytes in an email. How UTF-8 and the charset parameter work, why mismatches garble text, and how Lettr decodes inbound mail."
+published: 2026-09-14
+updated: 2026-09-14
 related: [mime, base64-encoding, quoted-printable-encoding, multipart-message, rendering-engine]
 reading:
   - title: Email Parsing

@@ -1,7 +1,9 @@
 ---
 term: Rate Limiting
-question: What is
+heading: "What is rate limiting?"
 description: "Rate limiting caps how many requests or messages a sender can submit in a time window. How API limits differ from sending quotas and how Lettr enforces both."
+published: 2026-09-14
+updated: 2026-09-14
 related: [throttling, exponential-backoff, api-error-code, batch-sending, idempotency]
 reading:
   - title: Rate Limits

@@ -1,8 +1,10 @@
 ---
 term: WCAG
 fullName: Web Content Accessibility Guidelines
-question: What is
+heading: "What is WCAG?"
 description: "WCAG is the W3C standard for accessible web content, including HTML email. Its levels, what it asks of email, and how Lettr's docs and editor apply it."
+published: 2026-09-14
+updated: 2026-09-14
 related: [dark-mode-email, multipart-message, rendering-engine, content-block]
 reading:
   - title: Email Accessibility

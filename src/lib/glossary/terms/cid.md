@@ -1,8 +1,10 @@
 ---
 term: CID
 fullName: Content-ID
-question: What is
+heading: "What is CID?"
 description: "CID (Content-ID) lets an email's HTML show an image embedded in the message through a cid: URL. How it works, its trade-offs, and where Lettr stands."
+published: 2026-09-14
+updated: 2026-09-14
 related: [mime, multipart-message, base64-encoding, tracking-pixel]
 reading:
   - title: Attachments

@@ -1,8 +1,10 @@
 ---
 term: MIME
 fullName: Multipurpose Internet Mail Extensions
-question: What is
+heading: "What is MIME?"
 description: "MIME is the standard that lets email carry HTML, attachments, non-ASCII text and multiple parts in one message. How MIME types and encodings work."
+published: 2026-09-14
+updated: 2026-09-14
 related: [multipart-message, base64-encoding, quoted-printable-encoding, character-encoding, cid]
 reading:
   - title: Email Content Types

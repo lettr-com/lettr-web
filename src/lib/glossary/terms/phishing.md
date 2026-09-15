@@ -1,7 +1,9 @@
 ---
 term: Phishing
-question: What is
+heading: "What is phishing?"
 description: "Phishing is email that impersonates a trusted sender to steal data or money. What SPF, DKIM and DMARC stop, what they miss, and Lettr's sending policy."
+published: 2026-09-14
+updated: 2026-09-14
 related: [email-spoofing, dmarc, bimi, acceptable-use-policy, content-filtering]
 reading:
   - title: Acceptable Use Policy for Email

@@ -1,7 +1,9 @@
 ---
 term: Single Opt-In
-question: What is
+heading: "What is single opt-in?"
 description: "Single opt-in adds a subscriber to an email list as soon as they submit a signup form, with no confirmation email. Trade-offs, consent, and Lettr."
+published: 2026-09-14
+updated: 2026-09-14
 related: [double-opt-in, opt-in, express-consent, list-hygiene, gdpr]
 reading:
   - title: Email Consent Best Practices

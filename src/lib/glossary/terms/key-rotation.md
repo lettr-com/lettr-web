@@ -1,6 +1,9 @@
 ---
 term: Key Rotation
+heading: "What is key rotation?"
 description: "Key rotation replaces a credential such as an API key or DKIM key on a schedule or after exposure. How it works without downtime, and rotation in Lettr."
+published: 2026-09-15
+updated: 2026-09-15
 related: [api-key, dkim-selector, dkim, webhook-signature, smtp-relay]
 reading:
   - title: API Keys Introduction

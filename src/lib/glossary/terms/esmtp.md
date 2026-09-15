@@ -1,8 +1,10 @@
 ---
 term: ESMTP
 fullName: Extended SMTP
-question: What is
+heading: "What is ESMTP?"
 description: "ESMTP is the extension framework that adds encryption, authentication and size limits to SMTP. How EHLO negotiates it and how Lettr uses TLS and AUTH."
+published: 2026-09-14
+updated: 2026-09-14
 related: [smtp, ehlo-helo, starttls, tls, smtp-relay]
 reading:
   - title: SMTP Protocol Basics

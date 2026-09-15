@@ -1,8 +1,10 @@
 ---
 term: MUA
 fullName: Mail User Agent
-question: What is
+heading: "What is an MUA?"
 description: "An MUA (mail user agent) is the email client people use to read and send mail, like Outlook, Apple Mail or Gmail. How it works and how it differs from an MTA."
+published: 2026-09-14
+updated: 2026-09-14
 related: [mta, imap, smtp, rendering-engine, mail-privacy-protection]
 reading:
   - title: How Email Delivery Works

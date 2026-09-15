@@ -1,13 +1,22 @@
 import { describe, expect, it } from "vite-plus/test";
-import { glossaryLlmsTxt, indexJsonLd, jsonLdScript, termJsonLd, termTitle } from "./seo";
+import {
+  formatTermDate,
+  glossaryLlmsTxt,
+  indexJsonLd,
+  jsonLdScript,
+  termJsonLd,
+  termTitle,
+} from "./seo";
 import type { GlossaryTerm } from "./types";
 
 const term = (overrides: Partial<GlossaryTerm> = {}): GlossaryTerm => ({
   slug: "dkim",
   term: "DKIM",
   fullName: "DomainKeys Identified Mail",
-  question: "What is",
+  heading: "What is DKIM?",
   description: "DKIM signs outgoing email. How it works and Lettr.",
+  published: "2026-09-14",
+  updated: "2026-09-15",
   related: [],
   reading: [],
   html: "<p>x</p>",
@@ -20,24 +29,51 @@ describe("termTitle", () => {
     expect(termTitle(term())).toBe("What is DKIM (DomainKeys Identified Mail)? | Lettr Glossary");
   });
 
-  it("falls back to the short heading when the full name is too long", () => {
+  it("falls back to the heading when the full name is too long", () => {
     const long = term({
       term: "DMARC",
+      heading: "What is DMARC?",
       fullName: "Domain-based Message Authentication, Reporting & Conformance",
     });
     expect(termTitle(long)).toBe("What is DMARC? | Lettr Glossary");
   });
 
-  it("skips a full name that already contains the label", () => {
-    expect(termTitle(term({ term: "Dark Mode", fullName: "Dark Mode in Email" }))).toBe(
-      "What is Dark Mode? | Lettr Glossary",
-    );
+  it("lowercases the full name with a lowercased label but keeps an acronym", () => {
+    expect(
+      termTitle(
+        term({ term: "Blocklist", heading: "What is a blocklist?", fullName: "Blacklist" }),
+      ),
+    ).toBe("What is a blocklist (blacklist)? | Lettr Glossary");
+    expect(
+      termTitle(
+        term({
+          term: "Non-Delivery Report",
+          heading: "What is a non-delivery report?",
+          fullName: "NDR",
+        }),
+      ),
+    ).toBe("What is a non-delivery report (NDR)? | Lettr Glossary");
   });
 
-  it("uses the short heading when there is no full name", () => {
-    expect(termTitle(term({ term: "Tag", fullName: undefined }))).toBe(
-      "What is Tag? | Lettr Glossary",
-    );
+  it("uses the heading alone when it does not end with the label", () => {
+    expect(
+      termTitle(
+        term({
+          term: "Dark Mode",
+          heading: "What is dark mode in email?",
+          fullName: "Dark Mode in Email",
+        }),
+      ),
+    ).toBe("What is dark mode in email? | Lettr Glossary");
+    expect(
+      termTitle(term({ term: "Tag", heading: "What is an email tag?", fullName: undefined })),
+    ).toBe("What is an email tag? | Lettr Glossary");
+  });
+});
+
+describe("formatTermDate", () => {
+  it("writes an ISO date out in US English", () => {
+    expect(formatTermDate("2026-09-05")).toBe("September 5, 2026");
   });
 });
 
@@ -54,6 +90,8 @@ describe("termJsonLd", () => {
     expect(byType("WebPage")).toMatchObject({
       mainEntity: { "@id": "https://lettr.com/glossary/dkim/#term" },
       description: "DKIM signs outgoing email. How it works and Lettr.",
+      datePublished: "2026-09-14",
+      dateModified: "2026-09-15",
     });
     expect(byType("Organization")["@id"]).toBe("https://lettr.com/#organization");
   });

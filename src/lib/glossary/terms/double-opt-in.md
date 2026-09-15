@@ -1,7 +1,9 @@
 ---
 term: Double Opt-In
-question: What is
+heading: "What is double opt-in?"
 description: "Double opt-in confirms a new subscriber's address with a click in a confirmation email before they join a list. Trade-offs, consent, and the Lettr API flow."
+published: 2026-09-14
+updated: 2026-09-14
 related: [single-opt-in, opt-in, express-consent, gdpr, list-hygiene]
 reading:
   - title: Email Consent Best Practices

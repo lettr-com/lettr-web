@@ -1,7 +1,9 @@
 ---
 term: Data Minimization
-question: What is
+heading: "What is data minimization?"
 description: "Data minimization means collecting and keeping only the personal data a purpose needs. What it requires of email senders and how it applies in Lettr."
+published: 2026-09-14
+updated: 2026-09-14
 related: [gdpr, data-processing-agreement, suppression-list, substitution-data]
 reading:
   - title: Data Retention and Deletion

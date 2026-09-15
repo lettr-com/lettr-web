@@ -1,7 +1,9 @@
 ---
 term: Transactional Email
-question: What is
+heading: "What is transactional email?"
 description: "Transactional email is sent in response to a user action or account event, such as a password reset or receipt. How it differs from marketing mail, and Lettr."
+published: 2026-09-14
+updated: 2026-09-14
 related: [marketing-email, reputation-isolation, list-unsubscribe, can-spam-act, template-slug]
 reading:
   - title: What Is Transactional Email?

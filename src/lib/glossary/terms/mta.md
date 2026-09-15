@@ -1,8 +1,10 @@
 ---
 term: MTA
 fullName: Mail Transfer Agent
-question: What is
+heading: "What is an MTA?"
 description: "An MTA (mail transfer agent) is server software that relays email between servers over SMTP, like Postfix or Exchange. How MTAs queue, retry and deliver mail."
+published: 2026-09-14
+updated: 2026-09-14
 related: [mua, smtp, mx-record, deferral, smtp-relay]
 reading:
   - title: How Email Delivery Works

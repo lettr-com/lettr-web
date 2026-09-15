@@ -1,7 +1,9 @@
 ---
 term: Opt-In
-question: What is
+heading: "What is opt-in?"
 description: "Opt-in is a recipient's permission to receive email, given through single or double opt-in. How the two differ, what consent laws expect, and Lettr."
+published: 2026-09-14
+updated: 2026-09-14
 related: [single-opt-in, double-opt-in, express-consent, implied-consent, opt-out]
 reading:
   - title: Email Consent Best Practices

@@ -1,7 +1,9 @@
 ---
 term: Deliverability
-question: What is
+heading: "What is deliverability?"
 description: "Deliverability is an email's ability to reach the inbox, not just the receiving server. The factors behind it, how to measure it and what Lettr shows about it."
+published: 2026-09-14
+updated: 2026-09-14
 related: [delivery, inbox-placement, sender-reputation, list-hygiene, email-engagement]
 reading:
   - title: What Is Email Deliverability?

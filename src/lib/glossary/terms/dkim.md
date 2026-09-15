@@ -1,8 +1,10 @@
 ---
 term: DKIM
 fullName: DomainKeys Identified Mail
-question: What is
+heading: "What is DKIM?"
 description: "DKIM signs outgoing email with a domain-owned private key so receiving servers can verify it was not altered in transit, and how Lettr manages the keys."
+published: 2026-09-14
+updated: 2026-09-14
 related: [spf, dmarc, dkim-selector, dmarc-alignment]
 reading:
   - title: Understanding SPF, DKIM, and DMARC

@@ -1,6 +1,9 @@
 ---
 term: Batch Sending
+heading: "What is batch sending?"
 description: "Batch sending delivers one email to many recipients through a single API request. How batches work, where they go wrong and Lettr's 50-recipient limit."
+published: 2026-09-14
+updated: 2026-09-14
 related: [bulk-sender, substitution-data, rate-limiting, idempotency, merge-tag]
 reading:
   - title: Batch Sending

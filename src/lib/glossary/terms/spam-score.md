@@ -1,7 +1,9 @@
 ---
 term: Spam Score
-question: What is
+heading: "What is a spam score?"
 description: "A spam score is the number a spam filter gives a message to decide whether it is junk. How filter scoring works, why scores mislead, and what Lettr checks."
+published: 2026-09-14
+updated: 2026-09-14
 related: [content-filtering, spam-complaint, inbox-placement, seed-list, sender-reputation]
 reading:
   - title: Spam Filtering

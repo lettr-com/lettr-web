@@ -1,7 +1,9 @@
 ---
 term: AMP for Email
-question: What is
+heading: "What is AMP for Email?"
 description: "AMP for Email adds interactive components such as forms and carousels to a message. How AMP email works, where it renders, and how Lettr sends it."
+published: 2026-09-14
+updated: 2026-09-15
 related: [multipart-message, mime, open-tracking, click-tracking, rendering-engine]
 reading:
   - title: Email Content Types

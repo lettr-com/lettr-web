@@ -1,7 +1,9 @@
 ---
 term: API Key
-question: What is
+heading: "What is an API key?"
 description: "An API key is the secret token that authenticates requests to an API. How API keys work, how to keep them safe, and how Lettr scopes and restricts them."
+published: 2026-09-14
+updated: 2026-09-15
 related: [api-error-code, sandbox-mode, rate-limiting, webhook-signature, key-rotation]
 reading:
   - title: API Keys Introduction

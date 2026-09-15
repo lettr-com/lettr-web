@@ -1,8 +1,10 @@
 ---
 term: MX Record
 fullName: Mail Exchanger record
-question: What is
+heading: "What is an MX record?"
 description: "An MX record is a DNS record that names the mail servers accepting email for a domain, each with a priority. How MX lookups work and how Lettr uses them."
+published: 2026-09-14
+updated: 2026-09-14
 related: [dns, dns-propagation, subdomain, txt-record, spf]
 reading:
   - title: Inbound Domains

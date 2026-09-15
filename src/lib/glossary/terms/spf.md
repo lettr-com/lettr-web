@@ -1,8 +1,10 @@
 ---
 term: SPF
 fullName: Sender Policy Framework
-question: What is
+heading: "What is SPF?"
 description: "SPF is a DNS record listing which servers may send email for a domain, checked against the envelope sender. How SPF works, where it breaks, and Lettr."
+published: 2026-09-14
+updated: 2026-09-14
 related: [dkim, dmarc, envelope-from, dmarc-alignment, txt-record]
 reading:
   - title: Understanding SPF, DKIM, and DMARC

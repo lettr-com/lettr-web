@@ -1,7 +1,9 @@
 ---
 term: Enhanced Status Code
-question: What is
+heading: "What is an enhanced status code?"
 description: "An enhanced status code like 5.1.1 adds detail to an SMTP reply code. How the class.subject.detail format reads and where Lettr shows it in bounce events."
+published: 2026-09-14
+updated: 2026-09-14
 related: [bounce, hard-bounce, soft-bounce, dsn, esmtp]
 reading:
   - title: Bounce Codes Reference

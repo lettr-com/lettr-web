@@ -1,7 +1,9 @@
 ---
-term: Forensic Report (RUF)
-question: What is
+term: DMARC Forensic Report (RUF)
+heading: "What is a DMARC forensic report (RUF)?"
 description: "A DMARC forensic report (RUF) is a per-message failure report with headers of mail that failed DMARC. What it holds, why few receivers send it, and Lettr."
+published: 2026-09-14
+updated: 2026-09-14
 related: [dmarc, dmarc-aggregate-report, dmarc-alignment, arf, email-spoofing]
 reading:
   - title: DMARC records in Lettr

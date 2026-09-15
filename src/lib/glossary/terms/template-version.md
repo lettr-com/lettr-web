@@ -1,7 +1,9 @@
 ---
 term: Template Version
-question: What is
+heading: "What is a template version?"
 description: "A template version is a saved snapshot of an email template's content. How versions make edits safe to release and roll back, and how Lettr activates them."
+published: 2026-09-14
+updated: 2026-09-14
 related: [template-slug, merge-tag, topol-email-editor, project]
 reading:
   - title: Template Versions

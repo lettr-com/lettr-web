@@ -1,7 +1,9 @@
 ---
 term: STARTTLS
-question: What is
+heading: "What is STARTTLS?"
 description: "STARTTLS is the SMTP command that upgrades a plaintext mail connection to an encrypted TLS session. How it works, downgrade risks, and STARTTLS in Lettr."
+published: 2026-09-14
+updated: 2026-09-14
 related: [tls, esmtp, smtp-relay, smtp, ehlo-helo]
 reading:
   - title: SMTP Protocol Basics

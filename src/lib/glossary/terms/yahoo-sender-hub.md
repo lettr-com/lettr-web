@@ -1,6 +1,9 @@
 ---
 term: Yahoo Sender Hub
+heading: "What is Yahoo Sender Hub?"
 description: "Yahoo Sender Hub is Yahoo's site for senders: its sender requirements, the Complaint Feedback Loop and delivery support. How it compares and how Lettr fits in."
+published: 2026-09-15
+updated: 2026-09-15
 related: [feedback-loop, google-postmaster-tools, bulk-sender, jmrp, arf]
 reading:
   - title: Google & Yahoo Sender Requirements

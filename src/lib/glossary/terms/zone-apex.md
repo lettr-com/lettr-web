@@ -1,6 +1,9 @@
 ---
 term: Zone Apex
+heading: "What is the zone apex?"
 description: "The zone apex is the root of a DNS zone, such as example.com, where SOA, NS and MX records live. Why a CNAME cannot sit there and Lettr's advice."
+published: 2026-09-15
+updated: 2026-09-15
 related: [cname-record, subdomain, dns, zone-file, reputation-isolation]
 reading:
   - title: Subdomain vs Root Domain for Sending

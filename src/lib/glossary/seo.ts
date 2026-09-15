@@ -33,22 +33,31 @@ export function termUrl(slug: string): string {
   return `${GLOSSARY_URL}${slug}/`;
 }
 
-export function termHeading(term: Pick<GlossaryTerm, "question" | "term">): string {
-  return `${term.question} ${term.term}?`;
-}
-
 /**
- * `<title>` for a term page. The full name is added when it is not already
- * part of the label and still fits 60 characters, so both the short and long
- * form of a term ("DKIM", "DomainKeys Identified Mail") match searches.
+ * `<title>` for a term page. When the heading ends with the label, the full
+ * name goes in parentheses before the question mark if the title still fits
+ * 60 characters, so both forms of a term ("DKIM", "DomainKeys Identified
+ * Mail") match searches. A heading that lowercased the label ("What is a
+ * blocklist?") gets a lowercased full name too, unless it is an acronym.
  */
-export function termTitle(term: Pick<GlossaryTerm, "question" | "term" | "fullName">): string {
-  const { fullName } = term;
-  if (fullName && !fullName.toLowerCase().includes(term.term.toLowerCase())) {
-    const long = `${term.question} ${term.term} (${fullName})?${TITLE_SUFFIX}`;
+export function termTitle(term: Pick<GlossaryTerm, "heading" | "term" | "fullName">): string {
+  const { heading, fullName } = term;
+  const question = heading.slice(0, -1);
+  const tail = question.slice(-term.term.length);
+  if (fullName && tail.toLowerCase() === term.term.toLowerCase()) {
+    const lowercase = tail !== term.term && /[a-z]/.test(fullName);
+    const long = `${question} (${lowercase ? fullName.toLowerCase() : fullName})?${TITLE_SUFFIX}`;
     if (long.length <= TITLE_LIMIT) return long;
   }
-  return `${termHeading(term)}${TITLE_SUFFIX}`;
+  return `${heading}${TITLE_SUFFIX}`;
+}
+
+/** "2026-09-15" as "September 15, 2026". */
+export function formatTermDate(date: string): string {
+  return new Intl.DateTimeFormat("en-US", {
+    dateStyle: "long",
+    timeZone: "UTC",
+  }).format(new Date(`${date}T00:00:00Z`));
 }
 
 /** Label with the full name in parentheses when there is one, e.g. "DKIM (DomainKeys Identified Mail)". */
@@ -77,8 +86,10 @@ export function termJsonLd(term: GlossaryTerm) {
         "@type": "WebPage",
         "@id": url,
         url,
-        name: termHeading(term),
+        name: term.heading,
         description: term.description,
+        datePublished: term.published,
+        dateModified: term.updated,
         inLanguage: "en",
         isPartOf: { "@id": website["@id"] },
         publisher: { "@id": organization["@id"] },

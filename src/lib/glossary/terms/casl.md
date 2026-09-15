@@ -1,8 +1,10 @@
 ---
 term: CASL
 fullName: Canadian Anti-Spam Legislation
-question: What is
+heading: "What is CASL?"
 description: "CASL is Canada's anti-spam law, which requires consent before any commercial email is sent. Express vs implied consent, sender ID rules and CASL in Lettr."
+published: 2026-09-14
+updated: 2026-09-14
 related: [can-spam-act, express-consent, implied-consent, double-opt-in, gdpr]
 reading:
   - title: CASL (Canadian Anti-Spam Law)

@@ -1,7 +1,9 @@
 ---
 term: Shared IP
-question: What is
+heading: "What is a shared IP?"
 description: "A shared IP is a sending IP address that carries mail for many senders at once. How shared IPs work, trade-offs against dedicated IPs, and Lettr."
+published: 2026-09-14
+updated: 2026-09-14
 related: [dedicated-ip, ip-pool, ip-reputation, domain-reputation, warm-up]
 reading:
   - title: Dedicated vs Shared IPs

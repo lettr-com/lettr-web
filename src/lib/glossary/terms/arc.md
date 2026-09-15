@@ -1,8 +1,10 @@
 ---
 term: ARC
 fullName: Authenticated Received Chain
-question: What is
+heading: "What is ARC?"
 description: "ARC records the authentication results a message had before a forwarder or mailing list changed it, so later receivers can still trust the original sender."
+published: 2026-09-14
+updated: 2026-09-14
 related: [dkim, dmarc, spf, authentication-results-header, custom-return-path]
 reading:
   - title: Understanding SPF, DKIM, and DMARC

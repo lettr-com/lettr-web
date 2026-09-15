@@ -1,8 +1,10 @@
 ---
 term: Non-Delivery Report
 fullName: NDR
-question: What is
+heading: "What is a non-delivery report?"
 description: "A non-delivery report (NDR) is the bounce message a mail server returns when an email cannot be delivered. How it relates to a DSN and how Lettr handles it."
+published: 2026-09-15
+updated: 2026-09-15
 related: [dsn, bounce, enhanced-status-code, backscatter, return-path]
 reading:
   - title: Bounce Codes Reference

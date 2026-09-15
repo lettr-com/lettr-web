@@ -1,7 +1,9 @@
 ---
-term: Aggregate Report (RUA)
-question: What is
+term: DMARC Aggregate Report (RUA)
+heading: "What is a DMARC aggregate report (RUA)?"
 description: "A DMARC aggregate report is the daily XML summary receivers send about mail using a domain. What RUA reports contain and how they fit a Lettr domain."
+published: 2026-09-14
+updated: 2026-09-14
 related: [dmarc, dmarc-forensic-report, dmarc-alignment, spf, dkim]
 reading:
   - title: Understanding SPF, DKIM, and DMARC

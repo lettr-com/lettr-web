@@ -1,8 +1,10 @@
 ---
 term: Envelope From
 fullName: Return-Path address
-question: What is
+heading: "What is the envelope from address?"
 description: "The envelope from is the hidden SMTP sender address that receives bounces and that SPF checks. How it differs from the From header and how Lettr sets it."
+published: 2026-09-14
+updated: 2026-09-14
 related: [return-path, mail-from, from-header, spf, custom-return-path]
 reading:
   - title: Email Headers Explained

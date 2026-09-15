@@ -1,7 +1,9 @@
 ---
 term: API Error Code
-question: What is
+heading: "What is an API error code?"
 description: "An API error code is a stable, machine-readable string naming why a request failed. How error codes work with HTTP status codes, and the codes Lettr returns."
+published: 2026-09-14
+updated: 2026-09-14
 related: [api-key, rate-limiting, exponential-backoff, idempotency, sandbox-mode]
 reading:
   - title: API Reference Introduction

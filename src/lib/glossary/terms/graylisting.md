@@ -1,7 +1,9 @@
 ---
 term: Graylisting
-question: What is
+heading: "What is graylisting?"
 description: "Graylisting is an anti-spam method where a server temporarily rejects unknown senders and accepts the retry. How it works and how Lettr retries delays."
+published: 2026-09-14
+updated: 2026-09-15
 related: [deferral, soft-bounce, exponential-backoff, delivery-delay, verp]
 reading:
   - title: Bounce Codes Reference

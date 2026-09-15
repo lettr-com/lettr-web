@@ -1,7 +1,9 @@
 ---
 term: Message-ID
-question: What is
+heading: "What is the Message-ID header?"
 description: "Message-ID is the header that gives each email a unique identifier used for threading, deduplication and troubleshooting. How it works and how Lettr sets it."
+published: 2026-09-14
+updated: 2026-09-14
 related: [message-threading, email-header, idempotency, dkim, mta]
 reading:
   - title: Email Headers Explained

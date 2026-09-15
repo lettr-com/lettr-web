@@ -1,8 +1,10 @@
 ---
 term: Acceptable Use Policy
 fullName: AUP
-question: What is
+heading: "What is an acceptable use policy?"
 description: "An acceptable use policy sets the rules for what email a sending platform allows. What an AUP covers, how it is enforced, and what Lettr's policy requires."
+published: 2026-09-14
+updated: 2026-09-14
 related: [spam-trap, spam-complaint, suppression-list, sender-reputation, shared-ip]
 reading:
   - title: Acceptable Use Policy for Email

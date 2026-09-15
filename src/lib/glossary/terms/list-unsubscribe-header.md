@@ -1,7 +1,9 @@
 ---
 term: List-Unsubscribe Header
-question: What is
+heading: "What is the List-Unsubscribe header?"
 description: "The List-Unsubscribe header gives mail clients a machine-readable way to unsubscribe a recipient. How it works with RFC 8058 one-click and how Lettr sets it."
+published: 2026-09-14
+updated: 2026-09-14
 related: [one-click-unsubscribe, list-unsubscribe, bulk-sender, email-header, spam-complaint]
 reading:
   - title: Unsubscribe Best Practices

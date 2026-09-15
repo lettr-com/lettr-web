@@ -1,7 +1,9 @@
 ---
 term: TXT Record
-question: What is
+heading: "What is a TXT record?"
 description: "A TXT record is a DNS record that holds text, used in email to publish SPF, DMARC and BIMI policies and domain verification tokens. Common errors and Lettr."
+published: 2026-09-14
+updated: 2026-09-14
 related: [spf, dmarc, cname-record, dns, bimi]
 reading:
   - title: SPF Records

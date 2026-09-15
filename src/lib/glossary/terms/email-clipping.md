@@ -1,7 +1,9 @@
 ---
 term: Email Clipping
-question: What is
+heading: "What is email clipping?"
 description: "Email clipping is when Gmail cuts off a large message behind a View entire message link. What triggers it, what it hides and how Lettr catches it."
+published: 2026-09-14
+updated: 2026-09-14
 related: [open-tracking, tracking-pixel, inline-css, rendering-engine, can-spam-act]
 reading:
   - title: Email Content Rendering Issues

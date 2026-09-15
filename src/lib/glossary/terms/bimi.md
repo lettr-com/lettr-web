@@ -1,7 +1,10 @@
 ---
 term: BIMI
 fullName: Brand Indicators for Message Identification
+heading: "What is BIMI?"
 description: "BIMI shows a brand's logo next to its emails in supporting inboxes. The DMARC, logo and certificate requirements, and how BIMI fits with a Lettr domain."
+published: 2026-09-14
+updated: 2026-09-14
 related: [dmarc, verified-mark-certificate, dkim, email-spoofing, txt-record]
 reading:
   - title: "BIMI: Brand Indicators for Message Identification"

@@ -1,7 +1,9 @@
 ---
 term: Role-Based Address
-question: What is
+heading: "What is a role-based address?"
 description: "A role-based address like info@ or support@ belongs to a function, not a person. Why it raises complaint risk on marketing lists and how to handle it in Lettr."
+published: 2026-09-14
+updated: 2026-09-14
 related: [list-hygiene, spam-complaint, opt-in, suppression-list, spam-trap]
 reading:
   - title: List Hygiene

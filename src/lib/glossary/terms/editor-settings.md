@@ -1,7 +1,9 @@
 ---
 term: Editor Settings
-question: What is
+heading: "What are editor settings?"
 description: "Editor settings are the team-wide defaults of a visual email editor: fonts, brand colors and merge tags. How they work and what Lettr's three tabs control."
+published: 2026-09-14
+updated: 2026-09-14
 related: [topol-email-editor, merge-tag, loop-block, saved-block, premade-template]
 reading:
   - title: Editor Settings

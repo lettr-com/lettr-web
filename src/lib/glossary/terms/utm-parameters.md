@@ -1,7 +1,9 @@
 ---
 term: UTM Parameters
-question: What are
+heading: "What are UTM parameters?"
 description: "UTM parameters are query string tags on email links that let analytics tools credit a site visit to an email. How they work with click tracking in Lettr."
+published: 2026-09-15
+updated: 2026-09-15
 related: [click-tracking, tracking-domain, merge-tag, email-engagement, marketing-email]
 reading:
   - title: Tracking

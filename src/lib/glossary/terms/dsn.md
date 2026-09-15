@@ -1,8 +1,10 @@
 ---
 term: DSN
 fullName: Delivery Status Notification
-question: What is
+heading: "What is a DSN?"
 description: "A DSN (Delivery Status Notification) is the standard machine-readable bounce message from RFC 3464. Its structure, how it is sent, and bounces in Lettr."
+published: 2026-09-14
+updated: 2026-09-15
 related: [bounce, out-of-band-bounce, enhanced-status-code, non-delivery-report, backscatter]
 reading:
   - title: Bounce Codes Reference

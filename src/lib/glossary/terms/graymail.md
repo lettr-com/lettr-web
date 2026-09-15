@@ -1,7 +1,9 @@
 ---
 term: Graymail
-question: What is
+heading: "What is graymail?"
 description: "Graymail is email a recipient once signed up for but no longer reads. Why it hurts engagement and inbox placement, and the Lettr features that reduce it."
+published: 2026-09-14
+updated: 2026-09-14
 related: [email-engagement, sunset-policy, list-hygiene, preference-center, promotions-tab]
 reading:
   - title: List Hygiene

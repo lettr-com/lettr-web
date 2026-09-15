@@ -45,6 +45,18 @@ function optionalString(
   return value.trim();
 }
 
+const ISO_DATE = /^\d{4}-\d{2}-\d{2}$/;
+
+/** YAML reads an unquoted 2026-09-15 as a Date, so accept that or a YYYY-MM-DD string. */
+function requireDate(data: Record<string, unknown>, key: string, name: string): string {
+  const value = data[key];
+  const date = value instanceof Date ? value.toISOString().slice(0, 10) : value;
+  if (typeof date !== "string" || !ISO_DATE.test(date) || Number.isNaN(Date.parse(date))) {
+    throw new Error(`${name}: frontmatter "${key}" is required and must be a YYYY-MM-DD date`);
+  }
+  return date;
+}
+
 function stringList(data: Record<string, unknown>, key: string, name: string): string[] {
   const value = data[key];
   if (value === undefined || value === null) return [];
@@ -72,8 +84,10 @@ export function parseTermFile(slug: string, raw: string, name = `${slug}.md`): G
     slug,
     term: requireString(data, "term", name),
     fullName: optionalString(data, "fullName", name),
-    question: optionalString(data, "question", name) ?? "What is",
+    heading: requireString(data, "heading", name),
     description: requireString(data, "description", name),
+    published: requireDate(data, "published", name),
+    updated: requireDate(data, "updated", name),
     related: stringList(data, "related", name),
     reading: readingList(data, name),
   };

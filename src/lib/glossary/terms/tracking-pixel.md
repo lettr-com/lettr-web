@@ -1,7 +1,9 @@
 ---
 term: Tracking Pixel
-question: What is
+heading: "What is a tracking pixel?"
 description: "A tracking pixel is a tiny invisible image in an HTML email whose loading signals an open. How it is placed, what blocks it, and what Lettr records."
+published: 2026-09-14
+updated: 2026-09-14
 related: [open-tracking, mail-privacy-protection, initial-open, email-clipping, click-tracking]
 reading:
   - title: Open & Click Tracking Accuracy

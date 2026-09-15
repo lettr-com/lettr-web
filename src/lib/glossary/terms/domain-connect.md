@@ -1,7 +1,9 @@
 ---
 term: Domain Connect
-question: What is
+heading: "What is Domain Connect?"
 description: "Domain Connect is an open protocol that applies a service's DNS records through one signed link. How it works, its limits, and Lettr's Cloudflare setup."
+published: 2026-09-14
+updated: 2026-09-14
 related: [dns, dns-propagation, cname-record, spf, dmarc]
 reading:
   - title: Domains Introduction

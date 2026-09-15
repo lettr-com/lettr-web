@@ -1,7 +1,9 @@
 ---
 term: RCPT TO
-question: What is
+heading: "What is RCPT TO?"
 description: "RCPT TO is the SMTP command that names each envelope recipient of a message. How it differs from the To header, why BCC depends on it and how Lettr reads it."
+published: 2026-09-14
+updated: 2026-09-14
 related: [mail-from, envelope-from, smtp, dsn, smtp-relay]
 reading:
   - title: SMTP Protocol Basics

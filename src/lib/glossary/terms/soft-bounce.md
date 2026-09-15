@@ -1,7 +1,9 @@
 ---
 term: Soft Bounce
-question: What is
+heading: "What is a soft bounce?"
 description: "A soft bounce is a temporary delivery failure, such as a full mailbox or a busy server. How it differs from a hard bounce and how Lettr retries it."
+published: 2026-09-14
+updated: 2026-09-15
 related: [hard-bounce, bounce, deferral, delivery-delay, exponential-backoff]
 reading:
   - title: Bounce Diagnosis

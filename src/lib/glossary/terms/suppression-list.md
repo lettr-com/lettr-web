@@ -1,7 +1,9 @@
 ---
 term: Suppression List
-question: What is
+heading: "What is a suppression list?"
 description: "A suppression list holds addresses a sender must not email, such as hard bounces, complainers and unsubscribes. How suppression works and what Lettr automates."
+published: 2026-09-14
+updated: 2026-09-14
 related: [hard-bounce, spam-complaint, list-unsubscribe, transactional-email, soft-bounce]
 reading:
   - title: Understanding Suppression Lists

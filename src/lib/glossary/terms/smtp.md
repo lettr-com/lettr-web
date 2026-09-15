@@ -1,8 +1,10 @@
 ---
 term: SMTP
 fullName: Simple Mail Transfer Protocol
-question: What is
+heading: "What is SMTP?"
 description: "SMTP is the protocol mail servers use to send email to each other. How an SMTP session works, ports and reply codes, SMTP vs API sending, and Lettr."
+published: 2026-09-14
+updated: 2026-09-14
 related: [ehlo-helo, esmtp, smtp-relay, mta, starttls]
 reading:
   - title: SMTP Protocol Basics

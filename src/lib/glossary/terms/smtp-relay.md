@@ -1,7 +1,9 @@
 ---
 term: SMTP Relay
-question: What is
+heading: "What is an SMTP relay?"
 description: "An SMTP relay is a mail server that accepts authenticated mail from an application and delivers it onward. How relays work, common problems, and Lettr's relay."
+published: 2026-09-14
+updated: 2026-09-14
 related: [smtp, email-relay, starttls, api-key, rcpt-to]
 reading:
   - title: Sending via SMTP vs API

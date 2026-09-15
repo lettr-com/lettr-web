@@ -1,7 +1,9 @@
 ---
 term: Deferral
-question: What is
+heading: "What is a deferral?"
 description: "A deferral is a temporary 4xx refusal that makes the sending server retry an email later. What causes deferrals, how they differ from soft bounces, and Lettr."
+published: 2026-09-14
+updated: 2026-09-14
 related: [soft-bounce, delivery-delay, throttling, graylisting, exponential-backoff]
 reading:
   - title: How Email Delivery Works

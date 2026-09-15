@@ -1,6 +1,9 @@
 ---
 term: Bulk Sender
+heading: "What is a bulk sender?"
 description: "A bulk sender sends 5,000 or more emails a day to Gmail or Yahoo users and must meet their 2024 rules. The requirements, and what Lettr covers for them."
+published: 2026-09-14
+updated: 2026-09-15
 related: [dmarc, one-click-unsubscribe, spam-complaint, google-postmaster-tools, batch-sending]
 reading:
   - title: Google & Yahoo Sender Requirements

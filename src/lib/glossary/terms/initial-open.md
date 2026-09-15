@@ -1,7 +1,9 @@
 ---
 term: Initial Open
-question: What is
+heading: "What is an initial open?"
 description: "An initial open is the first recorded open of an email by a recipient, counted apart from repeat opens. How it is tracked and Lettr's initial_open event."
+published: 2026-09-14
+updated: 2026-09-15
 related: [open-tracking, tracking-pixel, mail-privacy-protection, email-engagement, click-tracking]
 reading:
   - title: Event Types in the Events dashboard

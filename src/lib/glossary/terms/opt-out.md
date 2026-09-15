@@ -1,7 +1,9 @@
 ---
 term: Opt-Out
-question: What is
+heading: "What is an opt-out?"
 description: "An opt-out is a recipient withdrawing permission to receive email, usually by unsubscribing. Legal deadlines, common failures, and how Lettr handles it."
+published: 2026-09-14
+updated: 2026-09-14
 related: [opt-in, list-unsubscribe, one-click-unsubscribe, preference-center, suppression-list]
 reading:
   - title: Unsubscribe Best Practices

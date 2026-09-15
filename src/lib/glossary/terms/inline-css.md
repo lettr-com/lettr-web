@@ -1,7 +1,9 @@
 ---
 term: Inline CSS
-question: What is
+heading: "What is inline CSS?"
 description: "Inline CSS puts styles in each HTML element's style attribute, the most dependable way to style email across clients. Trade-offs, and Lettr's inline_css."
+published: 2026-09-14
+updated: 2026-09-14
 related: [rendering-engine, dark-mode-email, email-clipping, topol-email-editor, cid]
 reading:
   - title: Email Content Rendering Issues

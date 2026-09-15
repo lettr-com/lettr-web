@@ -1,7 +1,9 @@
 ---
 term: Multipart Message
-question: What is
+heading: "What is a multipart message?"
 description: "A multipart message packs several parts of an email, such as plain text and HTML versions, into one MIME container. How it works and why senders include both."
+published: 2026-09-14
+updated: 2026-09-14
 related: [mime, amp-for-email, cid, spam-score, mua]
 reading:
   - title: Email Content Types

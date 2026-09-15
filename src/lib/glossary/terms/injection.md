@@ -1,7 +1,9 @@
 ---
 term: Injection
-question: What is
+heading: "What is injection?"
 description: "Injection is when a sending platform accepts an email and queues it for delivery, the first event in its life. How it differs from delivery, and Lettr."
+published: 2026-09-14
+updated: 2026-09-15
 related: [delivery, bounce-rate, webhook, policy-rejection, inbox-placement]
 reading:
   - title: Event Types in the Events dashboard

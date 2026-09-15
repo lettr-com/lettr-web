@@ -1,7 +1,9 @@
 ---
 term: CNAME Record
-question: What is
+heading: "What is a CNAME record?"
 description: "A CNAME record makes one DNS name an alias of another. How CNAMEs resolve, why they cannot sit at the root domain, and where Lettr uses them."
+published: 2026-09-14
+updated: 2026-09-14
 related: [dns, txt-record, subdomain, tracking-domain, dns-propagation]
 reading:
   - title: Sending Domains

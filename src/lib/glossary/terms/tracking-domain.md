@@ -1,7 +1,9 @@
 ---
 term: Tracking Domain
-question: What is
+heading: "What is a tracking domain?"
 description: "A tracking domain is the hostname used in tracked links and open pixels. Why a custom tracking domain helps, what can break it, and how Lettr sets one up."
+published: 2026-09-14
+updated: 2026-09-14
 related: [click-tracking, open-tracking, cname-record, tracking-pixel, subdomain]
 reading:
   - title: Tracking Domains

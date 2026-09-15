@@ -1,6 +1,9 @@
 ---
 term: Bounce Rate
+heading: "What is bounce rate?"
 description: "Bounce rate is the percentage of sent emails that bounce. How to calculate it, what counts as healthy, what drives it up and where Lettr reports it."
+published: 2026-09-14
+updated: 2026-09-15
 related: [bounce, hard-bounce, list-hygiene, sender-reputation, double-opt-in]
 reading:
   - title: Bounce Diagnosis

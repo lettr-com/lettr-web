@@ -1,8 +1,10 @@
 ---
 term: ARF
 fullName: Abuse Reporting Format
-question: What is
+heading: "What is ARF?"
 description: "ARF is the standard format mailbox providers use to send spam complaint reports back to senders. What an ARF report contains and how Lettr processes it."
+published: 2026-09-14
+updated: 2026-09-15
 related: [feedback-loop, spam-complaint, suppression-list, jmrp, sender-reputation]
 reading:
   - title: What Are Feedback Loops

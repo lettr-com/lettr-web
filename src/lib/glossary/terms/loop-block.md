@@ -1,7 +1,9 @@
 ---
 term: Loop Block
-question: What is
+heading: "What is a loop block?"
 description: "A loop block is a visual email editor element that repeats its layout for each item in an array, such as order line items. How Lettr's Loop Blocks are set up."
+published: 2026-09-14
+updated: 2026-09-14
 related: [merge-tag, content-block, substitution-data, editor-settings, topol-email-editor]
 reading:
   - title: Loop Blocks

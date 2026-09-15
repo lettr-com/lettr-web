@@ -1,7 +1,9 @@
 ---
 term: List Hygiene
-question: What is
+heading: "What is list hygiene?"
 description: "List hygiene keeps an email list clean by removing invalid, bounced, complaining and inactive addresses. Why it drives deliverability and what Lettr automates."
+published: 2026-09-14
+updated: 2026-09-15
 related: [bounce-rate, hard-bounce, sunset-policy, spam-trap, suppression-list]
 reading:
   - title: List Hygiene

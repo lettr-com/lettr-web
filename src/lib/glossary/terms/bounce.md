@@ -1,6 +1,9 @@
 ---
 term: Bounce
+heading: "What is a bounce?"
 description: "A bounce is an email that could not be delivered and was reported back to the sender. How bounces happen, how to read them and how Lettr classifies them."
+published: 2026-09-14
+updated: 2026-09-15
 related: [hard-bounce, soft-bounce, bounce-rate, out-of-band-bounce, suppression-list]
 reading:
   - title: Bounce Codes Reference

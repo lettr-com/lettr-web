@@ -1,7 +1,9 @@
 ---
 term: Reputation Isolation
-question: What is
+heading: "What is reputation isolation?"
 description: "Reputation isolation sends each email stream from its own subdomain or IPs so a problem in one stays contained. How it works and how to set it up in Lettr."
+published: 2026-09-14
+updated: 2026-09-15
 related: [subdomain, domain-reputation, dedicated-ip, transactional-email, marketing-email]
 reading:
   - title: Subdomain vs Root Domain for Sending

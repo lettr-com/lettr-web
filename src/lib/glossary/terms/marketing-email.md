@@ -1,7 +1,9 @@
 ---
 term: Marketing Email
-question: What is
+heading: "What is marketing email?"
 description: "Marketing email promotes a product, service or offer and needs consent and an unsubscribe link. How it differs from transactional email and how Lettr sends it."
+published: 2026-09-14
+updated: 2026-09-14
 related:
   [
     transactional-email,

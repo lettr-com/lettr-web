@@ -1,6 +1,9 @@
 ---
 term: X-Header
+heading: "What is an X-header?"
 description: "An X-header is a custom email header whose name starts with X-, such as X-Mailer. How X-headers work, why the prefix was deprecated, and X-headers in Lettr."
+published: 2026-09-15
+updated: 2026-09-15
 related: [email-header, list-unsubscribe-header, auto-submitted-header, spam-score, message-id]
 reading:
   - title: Custom Headers in the API Reference

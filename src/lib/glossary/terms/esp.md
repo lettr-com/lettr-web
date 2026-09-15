@@ -1,8 +1,10 @@
 ---
 term: ESP
 fullName: Email Service Provider
-question: What is
+heading: "What is an ESP?"
 description: "An ESP is a platform that sends email on a sender's behalf and handles delivery, authentication and bounces. How ESPs work and what Lettr takes care of."
+published: 2026-09-14
+updated: 2026-09-14
 related: [mailbox-provider, transactional-email, marketing-email, feedback-loop, sender-reputation]
 reading:
   - title: What Is an Email Service Provider?

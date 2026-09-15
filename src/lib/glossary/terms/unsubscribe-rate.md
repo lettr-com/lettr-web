@@ -1,6 +1,9 @@
 ---
 term: Unsubscribe Rate
+heading: "What is unsubscribe rate?"
 description: "Unsubscribe rate is the share of delivered emails that lead a recipient to opt out. How it is calculated, how it links to complaints, and where Lettr shows it."
+published: 2026-09-15
+updated: 2026-09-15
 related:
   [spam-complaint, one-click-unsubscribe, list-unsubscribe, suppression-list, preference-center]
 reading:

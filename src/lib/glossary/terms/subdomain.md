@@ -1,7 +1,9 @@
 ---
 term: Subdomain
-question: What is
+heading: "What is a subdomain?"
 description: "A subdomain is a named section of a domain, such as mail.example.com, often used for sending email. How subdomains affect DNS, DMARC and setup in Lettr."
+published: 2026-09-14
+updated: 2026-09-15
 related: [reputation-isolation, dmarc, cname-record, zone-apex, tracking-domain]
 reading:
   - title: Subdomain vs Root Domain for Sending

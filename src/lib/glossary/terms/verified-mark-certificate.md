@@ -1,8 +1,10 @@
 ---
 term: Verified Mark Certificate
 fullName: VMC
-question: What is
+heading: "What is a Verified Mark Certificate?"
 description: "A Verified Mark Certificate (VMC) proves that a brand owns the trademarked logo it shows through BIMI. How VMCs are issued, validated and renewed."
+published: 2026-09-14
+updated: 2026-09-14
 related: [bimi, dmarc, email-spoofing]
 reading:
   - title: "BIMI: Brand Indicators for Message Identification"

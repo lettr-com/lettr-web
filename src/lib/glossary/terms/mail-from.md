@@ -1,7 +1,9 @@
 ---
 term: MAIL FROM
-question: What is
+heading: "What is MAIL FROM?"
 description: "MAIL FROM is the SMTP command that names the envelope sender, the address that receives bounces and that SPF checks. How it works and how Lettr sets it."
+published: 2026-09-14
+updated: 2026-09-14
 related: [envelope-from, return-path, rcpt-to, spf, custom-return-path]
 reading:
   - title: Custom Return-Path and MAIL FROM

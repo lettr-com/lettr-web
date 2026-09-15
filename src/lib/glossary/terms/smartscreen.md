@@ -1,7 +1,9 @@
 ---
 term: SmartScreen
-question: What is
+heading: "What is Microsoft SmartScreen?"
 description: "SmartScreen is Microsoft's machine-learning content filter for email. How it judges messages, the patterns that raise risk, and what Lettr senders can check."
+published: 2026-09-14
+updated: 2026-09-14
 related: [exchange-online-protection, focused-inbox, snds, jmrp, content-filtering]
 reading:
   - title: Outlook / Microsoft 365 Delivery Issues

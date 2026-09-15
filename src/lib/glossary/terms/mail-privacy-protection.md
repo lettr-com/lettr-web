@@ -1,8 +1,10 @@
 ---
 term: Mail Privacy Protection
 fullName: MPP
-question: What is
+heading: "What is Apple Mail Privacy Protection?"
 description: "Mail Privacy Protection is Apple Mail's feature that pre-fetches remote images, tracking pixels included, and inflates opens. How it affects tracking in Lettr."
+published: 2026-09-14
+updated: 2026-09-14
 related: [open-tracking, tracking-pixel, click-tracking, email-engagement, initial-open]
 reading:
   - title: Open & Click Tracking Accuracy

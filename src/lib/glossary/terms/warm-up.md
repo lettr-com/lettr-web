@@ -1,7 +1,9 @@
 ---
 term: Warm-Up
-question: What is
+heading: "What is email warm-up?"
 description: "Warm-up is the gradual increase of sending volume from a new domain or IP address so mailbox providers can build trust. How it works and what Lettr advises."
+published: 2026-09-14
+updated: 2026-09-15
 related: [dedicated-ip, domain-reputation, ip-reputation, sender-reputation, throttling]
 reading:
   - title: IP and Domain Warm-Up Guide

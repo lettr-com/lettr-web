@@ -1,7 +1,9 @@
 ---
 term: Delay
-question: What is
+heading: "What is a delivery delay?"
 description: "A delay means an email's delivery was postponed by a temporary refusal and will be retried. What causes delays, when to act, and how Lettr reports delay events."
+published: 2026-09-14
+updated: 2026-09-15
 related: [deferral, soft-bounce, delivery, throttling, webhook]
 reading:
   - title: Event Types

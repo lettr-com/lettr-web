@@ -1,7 +1,9 @@
 ---
 term: Rendering Engine
-question: What is
+heading: "What is a rendering engine?"
 description: "A rendering engine is the part of an email client that turns HTML and CSS into what the reader sees. Why engines differ and how Lettr helps test across them."
+published: 2026-09-14
+updated: 2026-09-14
 related: [inline-css, dark-mode-email, mua, amp-for-email, email-clipping]
 reading:
   - title: Email Rendering Across Clients

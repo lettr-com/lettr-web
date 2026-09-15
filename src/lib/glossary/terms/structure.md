@@ -1,7 +1,9 @@
 ---
 term: Structure
-question: What is
+heading: "What is a structure in an email template?"
 description: "A structure is a horizontal layout section in a drag-and-drop email editor that holds columns and content. How structures work in Lettr's Topol editor."
+published: 2026-09-14
+updated: 2026-09-14
 related: [content-block, saved-block, topol-email-editor, rendering-engine, email-clipping]
 reading:
   - title: Topol Email Editor

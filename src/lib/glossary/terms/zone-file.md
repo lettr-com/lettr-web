@@ -1,6 +1,9 @@
 ---
 term: Zone File
+heading: "What is a zone file?"
 description: "A zone file is the text file that lists every DNS record in a zone, in the master file format from RFC 1035. Its syntax, common mistakes and Lettr records."
+published: 2026-09-15
+updated: 2026-09-15
 related: [dns, zone-apex, domain-connect, dns-propagation, cname-record]
 reading:
   - title: Domain Connect

@@ -1,7 +1,9 @@
 ---
 term: Auto-Submitted Header
-question: What is
+heading: "What is the Auto-Submitted header?"
 description: "The Auto-Submitted header marks a message as sent by software rather than a person, which prevents auto-reply loops. Its values and how it works with Lettr."
+published: 2026-09-14
+updated: 2026-09-14
 related: [email-header, transactional-email, variable-reply-to-address, bounce, reply-to-header]
 reading:
   - title: Reply Tracking

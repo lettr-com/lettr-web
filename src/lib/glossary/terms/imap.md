@@ -1,8 +1,10 @@
 ---
 term: IMAP
 fullName: Internet Message Access Protocol
-question: What is
+heading: "What is IMAP?"
 description: "IMAP is the protocol mail clients use to read and sync email stored on a server. How it differs from POP3 and SMTP, and how Lettr handles inbound email."
+published: 2026-09-14
+updated: 2026-09-14
 related: [smtp, mua, mx-record, mime, email-relay]
 reading:
   - title: SMTP Protocol Basics

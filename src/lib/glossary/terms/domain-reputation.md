@@ -1,7 +1,9 @@
 ---
 term: Domain Reputation
-question: What is
+heading: "What is domain reputation?"
 description: "Domain reputation is the trust mailbox providers place in a sending domain based on past mail. What shapes it, how it differs from IP reputation, and Lettr."
+published: 2026-09-14
+updated: 2026-09-15
 related: [sender-reputation, ip-reputation, google-postmaster-tools, warm-up, subdomain]
 reading:
   - title: Sending Reputation

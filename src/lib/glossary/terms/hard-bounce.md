@@ -1,7 +1,9 @@
 ---
 term: Hard Bounce
-question: What is
+heading: "What is a hard bounce?"
 description: "A hard bounce is a permanent delivery failure, such as an address that does not exist. How it differs from a soft bounce and how Lettr suppresses it."
+published: 2026-09-14
+updated: 2026-09-15
 related: [soft-bounce, bounce, suppression-list, bounce-rate]
 reading:
   - title: Bounce Diagnosis

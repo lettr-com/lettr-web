@@ -1,7 +1,9 @@
 ---
 term: Message Threading
-question: What is
+heading: "What is message threading?"
 description: "Message threading groups an email and its replies into one conversation using the Message-ID, In-Reply-To and References headers. How Lettr supports it."
+published: 2026-09-14
+updated: 2026-09-14
 related: [message-id, variable-reply-to-address, reply-to-header, mua, email-header]
 reading:
   - title: Reply Tracking

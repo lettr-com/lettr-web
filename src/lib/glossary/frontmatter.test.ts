@@ -4,7 +4,10 @@ import { parseTermFile, splitFrontmatter } from "./frontmatter";
 const raw = `---
 term: DKIM
 fullName: DomainKeys Identified Mail
+heading: "What is DKIM?"
 description: "DKIM signs email: a private key, a public key in DNS."
+published: 2026-09-14
+updated: "2026-09-15"
 related: [spf, dmarc]
 reading:
   - title: Understanding SPF, DKIM, and DMARC
@@ -34,6 +37,9 @@ describe("splitFrontmatter", () => {
   });
 });
 
+const required =
+  'heading: "What is X?"\ndescription: "d"\npublished: 2026-09-14\nupdated: 2026-09-15\n';
+
 describe("parseTermFile", () => {
   it("builds the meta with the slug and defaults", () => {
     const { meta, body } = parseTermFile("dkim", raw);
@@ -41,8 +47,10 @@ describe("parseTermFile", () => {
       slug: "dkim",
       term: "DKIM",
       fullName: "DomainKeys Identified Mail",
-      question: "What is",
+      heading: "What is DKIM?",
       description: "DKIM signs email: a private key, a public key in DNS.",
+      published: "2026-09-14",
+      updated: "2026-09-15",
       related: ["spf", "dmarc"],
       reading: [
         {
@@ -54,39 +62,55 @@ describe("parseTermFile", () => {
     expect(body).toContain("## DKIM in Lettr");
   });
 
-  it("defaults related and reading to empty lists and question to What is", () => {
-    const { meta } = parseTermFile("x", '---\nterm: X\ndescription: "d"\n---\nbody');
-    expect(meta.question).toBe("What is");
+  it("defaults related and reading to empty lists", () => {
+    const { meta } = parseTermFile("x", `---\nterm: X\n${required}---\nbody`);
     expect(meta.related).toEqual([]);
     expect(meta.reading).toEqual([]);
     expect(meta.fullName).toBeUndefined();
   });
 
-  it("keeps an explicit question", () => {
-    const { meta } = parseTermFile(
-      "ehlo-helo",
-      '---\nterm: EHLO / HELO\nquestion: What are\ndescription: "d"\n---\nbody',
-    );
-    expect(meta.question).toBe("What are");
+  it("throws with the file name when the heading or a date is missing or malformed", () => {
+    const without = (key: string) =>
+      `---\nterm: X\n${required
+        .split("\n")
+        .filter((line) => !line.startsWith(`${key}:`))
+        .join("\n")}---\nbody`;
+    expect(() => parseTermFile("x", without("heading"), "x.md")).toThrow(/x\.md.*heading/);
+    expect(() => parseTermFile("x", without("published"), "x.md")).toThrow(/x\.md.*published/);
+    expect(() =>
+      parseTermFile(
+        "x",
+        `---\nterm: X\n${required.replace("2026-09-15", "15.9.2026")}---\nbody`,
+        "x.md",
+      ),
+    ).toThrow(/x\.md.*updated/);
   });
 
   it("throws with the file name when term or description is missing", () => {
-    expect(() => parseTermFile("x", '---\ndescription: "d"\n---\nbody', "x.md")).toThrow(
-      /x\.md.*term/,
-    );
-    expect(() => parseTermFile("x", "---\nterm: X\n---\nbody", "x.md")).toThrow(
-      /x\.md.*description/,
-    );
+    expect(() =>
+      parseTermFile(
+        "x",
+        '---\nheading: "What is X?"\ndescription: "d"\npublished: 2026-09-14\nupdated: 2026-09-15\n---\nbody',
+        "x.md",
+      ),
+    ).toThrow(/x\.md.*term/);
+    expect(() =>
+      parseTermFile("x", '---\nterm: X\nheading: "What is X?"\n---\nbody', "x.md"),
+    ).toThrow(/x\.md.*description/);
   });
 
   it("throws when related is not a list of strings or reading entries lack title/href", () => {
     expect(() =>
-      parseTermFile("x", '---\nterm: X\ndescription: "d"\nrelated: spf\n---\nbody', "x.md"),
+      parseTermFile(
+        "x",
+        '---\nterm: X\nheading: "What is X?"\ndescription: "d"\npublished: 2026-09-14\nupdated: 2026-09-15\nrelated: spf\n---\nbody',
+        "x.md",
+      ),
     ).toThrow(/related/);
     expect(() =>
       parseTermFile(
         "x",
-        '---\nterm: X\ndescription: "d"\nreading:\n  - title: T\n---\nbody',
+        '---\nterm: X\nheading: "What is X?"\ndescription: "d"\npublished: 2026-09-14\nupdated: 2026-09-15\nreading:\n  - title: T\n---\nbody',
         "x.md",
       ),
     ).toThrow(/reading/);

@@ -1,7 +1,9 @@
 ---
 term: Promotions Tab
-question: What is
+heading: "What is the Gmail Promotions tab?"
 description: "The Promotions tab is where Gmail files email it classifies as promotional. How tab placement works, why it differs from spam, and what Lettr can show."
+published: 2026-09-14
+updated: 2026-09-14
 related:
   [
     inbox-placement,

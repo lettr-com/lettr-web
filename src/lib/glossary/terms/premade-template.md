@@ -1,7 +1,9 @@
 ---
 term: Premade Template
-question: What is
+heading: "What is a premade template?"
 description: "A premade template is a ready-made email design used as a starting point instead of building from scratch. How premade designs work and Lettr's gallery."
+published: 2026-09-14
+updated: 2026-09-14
 related: [topol-email-editor, template-version, saved-block, project, template-slug]
 reading:
   - title: Premade Templates

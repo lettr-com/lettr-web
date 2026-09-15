@@ -1,7 +1,9 @@
 ---
 term: Preheader Text
-question: What is
+heading: "What is preheader text?"
 description: "Preheader text is the preview snippet an inbox shows after the subject line. How mail clients pick it, how to set it with a hidden element, and Lettr."
+published: 2026-09-14
+updated: 2026-09-14
 related: [topol-email-editor, inbox-placement, dark-mode-email, marketing-email]
 reading:
   - title: Topol Email Editor

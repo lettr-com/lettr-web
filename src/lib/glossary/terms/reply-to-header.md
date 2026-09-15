@@ -1,7 +1,9 @@
 ---
 term: Reply-To Header
-question: What is
+heading: "What is the Reply-To header?"
 description: "The Reply-To header tells mail clients where to send replies when that differs from the From address. How it works, how it is abused and how Lettr sets it."
+published: 2026-09-14
+updated: 2026-09-15
 related: [from-header, variable-reply-to-address, message-threading, email-header, no-reply-address]
 reading:
   - title: Recipients

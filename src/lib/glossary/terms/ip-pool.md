@@ -1,7 +1,9 @@
 ---
 term: IP Pool
-question: What is
+heading: "What is an IP pool?"
 description: "An IP pool is a group of sending IP addresses an email provider uses together for a set of senders or traffic. Shared vs dedicated pools, and what Lettr shows."
+published: 2026-09-14
+updated: 2026-09-14
 related: [shared-ip, dedicated-ip, ip-reputation, reputation-isolation, warm-up]
 reading:
   - title: Dedicated vs Shared IPs

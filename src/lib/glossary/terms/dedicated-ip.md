@@ -1,7 +1,9 @@
 ---
 term: Dedicated IP
-question: What is
+heading: "What is a dedicated IP?"
 description: "A dedicated IP is a sending IP address used by a single sender. How it differs from a shared IP, why it needs warm-up and volume, and how Lettr offers it."
+published: 2026-09-14
+updated: 2026-09-14
 related: [shared-ip, ip-reputation, warm-up, ip-pool, reputation-isolation]
 reading:
   - title: Dedicated vs Shared IPs

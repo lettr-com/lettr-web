@@ -1,7 +1,9 @@
 ---
 term: Plus Addressing
-question: What is
+heading: "What is plus addressing?"
 description: "Plus addressing adds a tag after a + sign in an email address while mail still reaches the base mailbox. How subaddressing works and how Lettr uses it."
+published: 2026-09-14
+updated: 2026-09-14
 related: [variable-reply-to-address, reply-to-header, email-relay, list-hygiene]
 reading:
   - title: Email Address Anatomy

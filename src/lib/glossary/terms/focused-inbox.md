@@ -1,7 +1,9 @@
 ---
 term: Focused Inbox
-question: What is
+heading: "What is Outlook's Focused Inbox?"
 description: "Focused Inbox is Outlook's split of the inbox into Focused and Other tabs. How Outlook sorts mail between them, how it differs from Junk and what Lettr reports."
+published: 2026-09-14
+updated: 2026-09-14
 related: [promotions-tab, exchange-online-protection, inbox-placement, email-engagement, graymail]
 reading:
   - title: Outlook / Microsoft 365 Delivery Issues

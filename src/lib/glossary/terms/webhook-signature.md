@@ -1,7 +1,9 @@
 ---
 term: Webhook Signature
-question: What is
+heading: "What is a webhook signature?"
 description: "A webhook signature is an HMAC of the request body proving a webhook came from the expected sender unaltered. How to verify it, and how Lettr secures webhooks."
+published: 2026-09-14
+updated: 2026-09-14
 related: [webhook, api-key, base64-encoding, idempotency]
 reading:
   - title: Webhook Delivery Failures

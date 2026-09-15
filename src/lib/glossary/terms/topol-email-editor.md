@@ -1,7 +1,9 @@
 ---
 term: Topol Email Editor
-question: What is
+heading: "What is the Topol Email Editor?"
 description: "The Topol Email Editor is a drag-and-drop tool for building responsive HTML email without code. How visual email editors work and how Lettr uses Topol."
+published: 2026-09-14
+updated: 2026-09-14
 related: [content-block, structure, saved-block, editor-settings, merge-tag]
 reading:
   - title: Topol Email Editor

@@ -1,7 +1,9 @@
 ---
 term: Sender Reputation
-question: What is
+heading: "What is sender reputation?"
 description: "Sender reputation is how mailbox providers judge a sender from its past mail, across domain and IP. What shapes it, how it is read, and Lettr's signals."
+published: 2026-09-14
+updated: 2026-09-15
 related: [domain-reputation, ip-reputation, spam-complaint, bounce-rate, spam-trap]
 reading:
   - title: Sending Reputation

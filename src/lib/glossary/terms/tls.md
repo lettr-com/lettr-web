@@ -1,8 +1,10 @@
 ---
 term: TLS
 fullName: Transport Layer Security
-question: What is
+heading: "What is TLS?"
 description: "TLS encrypts the connection between mail servers so messages cannot be read in transit. Opportunistic vs enforced TLS, its limits, and how Lettr uses it."
+published: 2026-09-14
+updated: 2026-09-14
 related: [starttls, smtp, esmtp, smtp-relay]
 reading:
   - title: SMTP Protocol Basics

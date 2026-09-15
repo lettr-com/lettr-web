@@ -35,6 +35,15 @@ for (const { meta, body } of sources) {
       expect(meta.term.trim()).not.toBe("");
     });
 
+    it("has a question heading that names the term", () => {
+      expect(meta.heading).toMatch(/^What (is|are) [^?]+\?$/);
+      expect(meta.heading).not.toMatch(/^What (is|are) (A|An|The) /);
+    });
+
+    it("was updated on or after it was published", () => {
+      expect(meta.updated >= meta.published, `${meta.published} to ${meta.updated}`).toBe(true);
+    });
+
     it("has a 120 to 160 character description", () => {
       expect(meta.description.length).toBeGreaterThanOrEqual(120);
       expect(meta.description.length).toBeLessThanOrEqual(160);

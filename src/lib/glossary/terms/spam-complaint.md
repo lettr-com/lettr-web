@@ -1,7 +1,9 @@
 ---
 term: Complaint
-question: What is
+heading: "What is a spam complaint?"
 description: "A complaint is recorded when a recipient marks an email as spam. How complaints reach senders through feedback loops, safe rates, and how Lettr handles them."
+published: 2026-09-14
+updated: 2026-09-15
 related: [feedback-loop, suppression-list, sender-reputation, arf, google-postmaster-tools]
 reading:
   - title: List Hygiene

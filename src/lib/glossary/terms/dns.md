@@ -1,8 +1,10 @@
 ---
 term: DNS
 fullName: Domain Name System
-question: What is
+heading: "What is DNS?"
 description: "DNS is the internet's directory that maps domain names to servers and stores the records email routing and authentication depend on. How it works and Lettr DNS."
+published: 2026-09-14
+updated: 2026-09-15
 related: [mx-record, txt-record, cname-record, dns-propagation, zone-file]
 reading:
   - title: Domains Introduction

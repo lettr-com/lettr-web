@@ -1,7 +1,9 @@
 ---
 term: Express Consent
-question: What is
+heading: "What is express consent?"
 description: "Express consent is an explicit, affirmative opt-in to receive email that stays valid until withdrawn. What makes it valid, how to record it and Lettr's tools."
+published: 2026-09-14
+updated: 2026-09-14
 related: [casl, implied-consent, double-opt-in, gdpr, opt-in]
 reading:
   - title: CASL (Canadian Anti-Spam Law)

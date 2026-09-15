@@ -1,7 +1,9 @@
 ---
 term: Inbox Placement
-question: What is
+heading: "What is inbox placement?"
 description: "Inbox placement is where a delivered email lands: the inbox, a tab or the spam folder. Why it differs from delivery rate, how it is measured, and Lettr."
+published: 2026-09-14
+updated: 2026-09-15
 related: [delivery, seed-list, sender-reputation, promotions-tab, deliverability]
 reading:
   - title: Emails Landing in Spam

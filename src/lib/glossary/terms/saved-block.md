@@ -1,7 +1,9 @@
 ---
 term: Saved Block
-question: What is
+heading: "What is a saved block?"
 description: "A saved block is a reusable email section, such as a header or footer, stored once and inserted into many templates. Saved vs synced sections in Lettr."
+published: 2026-09-14
+updated: 2026-09-14
 related: [structure, content-block, topol-email-editor, loop-block]
 reading:
   - title: Saved Blocks

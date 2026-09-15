@@ -1,7 +1,9 @@
 ---
 term: Click Tracking
-question: What is
+heading: "What is click tracking?"
 description: "Click tracking records link clicks by routing each link through a redirect server. How it works, why it beats open tracking, and how Lettr tracks clicks."
+published: 2026-09-14
+updated: 2026-09-15
 related: [open-tracking, tracking-domain, tracking-pixel, mail-privacy-protection, utm-parameters]
 reading:
   - title: Tracking Accuracy

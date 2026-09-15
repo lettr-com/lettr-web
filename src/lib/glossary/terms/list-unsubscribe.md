@@ -1,7 +1,9 @@
 ---
 term: List Unsubscribe
-question: What is
+heading: "What is a list unsubscribe?"
 description: "A list unsubscribe is an opt-out made with the mail client's own unsubscribe button instead of a link in the email. How it differs from a link unsubscribe."
+published: 2026-09-14
+updated: 2026-09-15
 related:
   [
     list-unsubscribe-header,

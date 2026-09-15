@@ -1,8 +1,10 @@
 ---
 term: Dark Mode
 fullName: Dark Mode in Email
-question: What is
+heading: "What is dark mode in email?"
 description: "Dark mode in email recolors messages for dark backgrounds. How email clients apply it, what breaks, how to design defensively and how Lettr helps test it."
+published: 2026-09-14
+updated: 2026-09-15
 related: [rendering-engine, inline-css, wcag, topol-email-editor, preheader-text]
 reading:
   - title: Dark Mode Email Design

@@ -1,7 +1,9 @@
 ---
 term: Sandbox Mode
-question: What is
+heading: "What is sandbox mode?"
 description: "Sandbox mode lets developers test an email integration without reaching real recipients. How test modes work, their limits, and Lettr's sandbox keys."
+published: 2026-09-14
+updated: 2026-09-15
 related: [api-key, rate-limiting, smtp-relay, webhook, mcp]
 reading:
   - title: Sandbox and Testing Mode

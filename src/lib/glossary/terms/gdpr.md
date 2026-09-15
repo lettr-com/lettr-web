@@ -1,8 +1,10 @@
 ---
 term: GDPR
 fullName: General Data Protection Regulation
-question: What is
+heading: "What is GDPR?"
 description: "GDPR is the EU law on personal data, and an email address counts. Lawful bases, consent rules, recipient rights, and how Lettr acts as a data processor."
+published: 2026-09-14
+updated: 2026-09-14
 related: [data-processing-agreement, express-consent, double-opt-in, data-minimization, casl]
 reading:
   - title: GDPR and Email Sending

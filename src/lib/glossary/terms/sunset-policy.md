@@ -1,7 +1,9 @@
 ---
 term: Sunset Policy
-question: What is
+heading: "What is a sunset policy?"
 description: "A sunset policy stops email to subscribers who have not engaged for a set period. How to define inactivity, re-engage first, and apply the rule in Lettr."
+published: 2026-09-14
+updated: 2026-09-14
 related: [list-hygiene, graymail, email-engagement, suppression-list, spam-trap]
 reading:
   - title: List Hygiene

@@ -1,7 +1,9 @@
 ---
 term: Idempotency
-question: What is
+heading: "What is idempotency?"
 description: "Idempotency means repeating a request has the same effect as sending it once. How idempotency keys stop duplicate emails, and Lettr's Idempotency-Key header."
+published: 2026-09-14
+updated: 2026-09-14
 related: [api-error-code, webhook, exponential-backoff, spam-complaint]
 reading:
   - title: Idempotency

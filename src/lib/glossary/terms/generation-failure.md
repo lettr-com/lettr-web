@@ -1,7 +1,9 @@
 ---
 term: Generation Failure
-question: What is
+heading: "What is a generation failure?"
 description: "A generation failure is an error while a message is assembled for sending, before any delivery attempt. How it differs from a bounce and how Lettr reports it."
+published: 2026-09-14
+updated: 2026-09-15
 related: [generation-rejection, bounce, substitution-data, webhook, policy-rejection]
 reading:
   - title: Webhook Event Types

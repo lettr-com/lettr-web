@@ -9,7 +9,7 @@ import {
 } from "./terms";
 
 const file = (term: string, extra = "") =>
-  `---\nterm: ${term}\ndescription: "About ${term}."\n${extra}---\n**${term}** is a thing.\n\n## ${term} in Lettr\n\nText.\n`;
+  `---\nterm: ${term}\nheading: "What is ${term}?"\ndescription: "About ${term}."\npublished: 2026-09-14\nupdated: 2026-09-15\n${extra}---\n**${term}** is a thing.\n\n## ${term} in Lettr\n\nText.\n`;
 
 const files = {
   "./terms/beta.md": file("Beta"),

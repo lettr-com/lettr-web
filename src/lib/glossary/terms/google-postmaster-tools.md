@@ -1,7 +1,9 @@
 ---
 term: Google Postmaster Tools
-question: What is
+heading: "What is Google Postmaster Tools?"
 description: "Google Postmaster Tools is Google's free dashboard of Gmail data for a sending domain, such as spam rate. What it reports and how to use it with Lettr."
+published: 2026-09-14
+updated: 2026-09-15
 related: [feedback-loop, spam-complaint, bulk-sender, domain-reputation, dmarc]
 reading:
   - title: Gmail-Specific Delivery Issues

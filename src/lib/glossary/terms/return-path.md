@@ -1,7 +1,9 @@
 ---
 term: Return-Path
-question: What is
+heading: "What is the Return-Path header?"
 description: "Return-Path is the header a receiving server adds to record the envelope sender, where bounces go. How it is set, how bounces use it and how Lettr manages it."
+published: 2026-09-14
+updated: 2026-09-14
 related: [envelope-from, mail-from, custom-return-path, verp, dsn]
 reading:
   - title: Email Headers Explained

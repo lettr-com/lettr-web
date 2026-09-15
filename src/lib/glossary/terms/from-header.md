@@ -1,7 +1,9 @@
 ---
 term: From Header
-question: What is
+heading: "What is the From header?"
 description: "The From header is the sender address a recipient sees, and the domain DMARC checks. How it differs from the envelope from and how Lettr's from field sets it."
+published: 2026-09-14
+updated: 2026-09-14
 related: [envelope-from, reply-to-header, dmarc-alignment, email-spoofing, bimi]
 reading:
   - title: Email Headers Explained

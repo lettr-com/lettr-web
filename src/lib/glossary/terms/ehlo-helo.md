@@ -1,7 +1,9 @@
 ---
 term: EHLO / HELO
-question: What are
+heading: "What are EHLO and HELO?"
 description: "EHLO and HELO are the SMTP greetings a client sends to open a mail session. How they differ, why EHLO enables extensions and where they appear in Lettr."
+published: 2026-09-14
+updated: 2026-09-14
 related: [smtp, esmtp, starttls, reverse-dns, mta]
 reading:
   - title: SMTP Protocol Basics

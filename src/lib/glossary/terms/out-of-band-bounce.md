@@ -1,7 +1,9 @@
 ---
 term: Out of Band Bounce
-question: What is
+heading: "What is an out-of-band bounce?"
 description: "An out-of-band bounce is a failure notice sent after the receiving server first accepted a message. How it differs from an SMTP rejection, and Lettr."
+published: 2026-09-14
+updated: 2026-09-15
 related: [bounce, hard-bounce, dsn, verp, envelope-from]
 reading:
   - title: Event Types

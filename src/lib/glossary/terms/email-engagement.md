@@ -1,7 +1,9 @@
 ---
 term: Engagement
-question: What is
+heading: "What is email engagement?"
 description: "Email engagement is how recipients interact with messages: opens, clicks, replies and spam reports. How providers use it and how Lettr tracks opens and clicks."
+published: 2026-09-14
+updated: 2026-09-15
 related: [open-tracking, click-tracking, mail-privacy-protection, inbox-placement, sunset-policy]
 reading:
   - title: Open and Click Tracking Accuracy

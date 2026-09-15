@@ -1,8 +1,10 @@
 ---
 term: JMRP
 fullName: Junk Mail Reporting Program
-question: What is
+heading: "What is JMRP?"
 description: "JMRP is Microsoft's feedback loop that reports junk complaints from Outlook.com and Hotmail users to senders. How it works and how Lettr handles complaints."
+published: 2026-09-14
+updated: 2026-09-15
 related: [feedback-loop, snds, spam-complaint, arf, suppression-list]
 reading:
   - title: Outlook / Microsoft 365 Delivery Issues
