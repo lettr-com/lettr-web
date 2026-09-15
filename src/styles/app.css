@@ -261,6 +261,30 @@
   .blog-prose tbody tr:last-child td {
     border-bottom: none;
   }
+
+  /* Rendered Markdown on glossary term pages, layered on .blog-prose. Adds the
+     list rules the blog gets from components (marked emits plain elements) and
+     a scroll margin for linkable H2 ids. */
+  .glossary-prose > h2 {
+    scroll-margin-top: 7rem;
+  }
+
+  .glossary-prose ul,
+  .glossary-prose ol {
+    padding-left: 1.25rem;
+  }
+
+  .glossary-prose ul {
+    list-style: disc;
+  }
+
+  .glossary-prose ol {
+    list-style: decimal;
+  }
+
+  .glossary-prose li + li {
+    margin-top: 0.5rem;
+  }
 }
 
 @layer components {

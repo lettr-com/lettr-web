@@ -12,6 +12,7 @@
 	import TrayIcon from 'phosphor-svelte/lib/TrayIcon';
 	import HeadsetIcon from 'phosphor-svelte/lib/HeadsetIcon';
 	import BookOpenIcon from 'phosphor-svelte/lib/BookOpenIcon';
+	import BookBookmarkIcon from 'phosphor-svelte/lib/BookBookmarkIcon';
 	import ScalesIcon from 'phosphor-svelte/lib/ScalesIcon';
 	import PulseIcon from 'phosphor-svelte/lib/PulseIcon';
 	import InfoIcon from 'phosphor-svelte/lib/InfoIcon';
@@ -128,7 +129,8 @@
 				items: [
 					{ icon: BookOpenIcon, label: 'Getting Started', description: 'Quick start guides', href: 'https://docs.lettr.com/introduction', external: true },
 					{ icon: CodeIcon, label: 'API Reference', description: 'Full API documentation', href: 'https://docs.lettr.com/api-reference/introduction', external: true },
-					{ icon: EnvelopeSimpleIcon, label: 'Changelog', description: 'Latest updates', href: '/changelog/' }
+					{ icon: EnvelopeSimpleIcon, label: 'Changelog', description: 'Latest updates', href: '/changelog/' },
+					{ icon: BookBookmarkIcon, label: 'Glossary', description: 'Email terms, explained', href: '/glossary/' }
 				]
 			},
 			...integrationsSections
