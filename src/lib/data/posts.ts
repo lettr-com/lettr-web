@@ -12,6 +12,16 @@ export interface PostMeta {
 // Used by the blog index listing and the "Related articles" block on each post.
 export const posts: PostMeta[] = [
   {
+    slug: "zaptime-cut-deliverability-tickets-to-zero",
+    category: "Deliverability",
+    title: "Zaptime cut deliverability tickets from dozens a month to zero with Lettr",
+    excerpt:
+      "How Zaptime, a scheduling and booking platform, moved its transactional and marketing email from two vendors onto Lettr in a one-day migration: the missing booking confirmations behind the switch, why Lettr's domain API and EU hosting decided it, and the drop from dozens of deliverability tickets a month to zero.",
+    author: "Jack Zagorski",
+    date: "September 11, 2026",
+    readTime: "4 min read",
+  },
+  {
     slug: "sendgrid-alternatives",
     category: "Fundamentals",
     title: "5 best SendGrid alternatives for email delivery in 2026, compared",
