@@ -10,6 +10,7 @@
 	import RobotIcon from 'phosphor-svelte/lib/RobotIcon';
 	import PaperPlaneTiltIcon from 'phosphor-svelte/lib/PaperPlaneTiltIcon';
 	import TrayIcon from 'phosphor-svelte/lib/TrayIcon';
+	import TranslateIcon from 'phosphor-svelte/lib/TranslateIcon';
 	import HeadsetIcon from 'phosphor-svelte/lib/HeadsetIcon';
 	import BookOpenIcon from 'phosphor-svelte/lib/BookOpenIcon';
 	import BookBookmarkIcon from 'phosphor-svelte/lib/BookBookmarkIcon';
@@ -73,6 +74,7 @@
 			label: 'Features',
 			items: [
 				{ icon: SparkleIcon, label: 'Visual Editor', description: 'Drag-and-drop editor powered by Topol', href: '/platform/templates/' },
+				{ icon: TranslateIcon, label: 'Multilingual Campaigns', description: 'Send one campaign in several languages', href: '/platform/multilingual-campaigns/' },
 				{ icon: ChartBarIcon, label: 'Analytics & Logs', description: 'Delivery metrics, logs, and webhooks', href: '/platform/analytics/' },
 				{ icon: ShieldCheckIcon, label: 'Deliverability', description: 'SPF, DKIM, DMARC, dedicated IPs', href: '/platform/deliverability/' },
 				{ icon: PaperPlaneTiltIcon, label: 'SMTP Relay', description: 'Drop-in SMTP for any app or server', href: '/smtp-relay/' },

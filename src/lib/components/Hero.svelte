@@ -75,12 +75,12 @@
 				<a
 					data-animate
 					style="animation-delay:0s"
-					href="/email-marketing/"
+					href="/platform/multilingual-campaigns/"
 					class="group mb-6 inline-flex w-fit items-center gap-2 border border-primary/20 bg-primary/5 p-1.5 text-sm text-primary transition-colors hover:bg-primary/10"
-					onclick={() => void capturePosthogEvent('hero_announcement_clicked', { href: '/email-marketing/', label: 'Introducing Campaigns' })}
+					onclick={() => void capturePosthogEvent('hero_announcement_clicked', { href: '/platform/multilingual-campaigns/', label: 'Multilingual campaigns' })}
 				>
 					<span class="bg-primary px-2 py-0.5 text-xs font-bold text-white">New</span>
-					Introducing Campaigns — run marketing from the same account
+					Multilingual campaigns — one send, every contact’s language
 					<span class="transition-transform group-hover:translate-x-0.5">&rarr;</span>
 				</a>
 				<h1 data-animate style="animation-delay:0.06s" class="text-surface mb-4">

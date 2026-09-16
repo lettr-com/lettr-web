@@ -240,7 +240,7 @@
 	related={[
 		{ href: '/email-marketing/', label: 'Email Marketing', description: 'Campaigns, audiences, and segments, billed per contact.' },
 		{ href: '/email-api/', label: 'Transactional Email', description: 'Send via REST API and SMTP, billed per email.' },
-		{ href: '/platform/analytics/', label: 'Analytics & Logs', description: 'Delivery metrics, searchable logs, and webhooks.' }
+		{ href: '/platform/multilingual-campaigns/', label: 'Multilingual Campaigns', description: 'Send one campaign in several languages.' }
 	]}
 >
 	{#snippet heading()}
