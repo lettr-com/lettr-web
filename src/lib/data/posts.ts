@@ -16,7 +16,7 @@ export const posts: PostMeta[] = [
     category: "Product",
     title: "Introducing multilingual campaigns",
     excerpt:
-      "Lettr campaigns can now send one email in several languages, with each contact receiving the version that matches their language: how the template, the contact property, and the campaign fit together, how loosely written values like cs-CZ or czech are matched, what the Review & Send panel shows, and why content is locked at scheduling time.",
+      "Lettr campaigns can now send one email in several languages, with each contact receiving the version that matches their language: how the template, the contact property, and the campaign fit together, how loosely written values like de-AT or german are matched, what the Review & Send panel shows, and why content is locked at scheduling time.",
     author: "Erik Vlčák",
     date: "September 16, 2026",
     readTime: "6 min read",

@@ -15,7 +15,7 @@
 <BlogPost
 	category="Product"
 	title="Introducing multilingual campaigns"
-	excerpt="Lettr campaigns can now send one email in several languages, with each contact receiving the version that matches their language: how the template, the contact property, and the campaign fit together, how loosely written values like cs-CZ or czech are matched, what the Review & Send panel shows, and why content is locked at scheduling time."
+	excerpt="Lettr campaigns can now send one email in several languages, with each contact receiving the version that matches their language: how the template, the contact property, and the campaign fit together, how loosely written values like de-AT or german are matched, what the Review & Send panel shows, and why content is locked at scheduling time."
 	metaDescription="Lettr campaigns now send one email in several languages. How the template, contact property, and campaign fit together, how values are matched, and what recipients get."
 	author={{ name: 'Erik Vlčák', role: 'Customer Success Engineer', avatar: '/images/authors/erik.jpg' }}
 	date="September 16, 2026"
@@ -24,8 +24,8 @@
 	slug="introducing-multilingual-campaigns"
 >
 	<Lead>
-		A Lettr campaign can now go out in more than one language. The template holds a Czech and an
-		English version, the campaign targets one audience, and each contact receives the language stored
+		A Lettr campaign can now go out in more than one language. The template holds an English and a
+		German version, the campaign targets one audience, and each contact receives the language stored
 		on their contact record. Until now the same newsletter meant two campaigns, two segments, and two
 		reports to add up afterwards. The feature is automatic: a campaign whose template has more than
 		one language is multilingual, and there is no switch to turn on.
@@ -39,7 +39,7 @@
 				Only the first two need setup.
 			</li>
 			<li>
-				<strong>Matching is forgiving.</strong> cs, CS, cs-CZ, czech, and česky all resolve to the
+				<strong>Matching is forgiving.</strong> de, DE, de-AT, german, and Deutsch all resolve to the
 				same template language, and a contact with no usable value gets the primary language.
 			</li>
 			<li>
@@ -97,8 +97,8 @@
 	</List>
 
 	<Callout variant="info">
-		A campaign can only send the languages its template has. A Czech-and-English template sends Czech
-		or English; a German contact receives the primary language. The
+		A campaign can only send the languages its template has. An English-and-German template sends English
+		or German; a Spanish contact receives the primary language. The
 		<a href="https://docs.lettr.com/learn/multilingual-campaigns/template-languages">template
 		languages docs</a> cover how primary and secondary languages behave in the editor.
 	</Callout>
@@ -106,8 +106,8 @@
 	<Heading level={2}>How a contact's value is matched</Heading>
 
 	<Paragraph>
-		Language values in real audiences are inconsistent. One import writes cs, another cs_CZ, a signup
-		form stores Czech, and someone typed česky by hand. <strong>Lettr compares each value with the
+		Language values in real audiences are inconsistent. One import writes de, another de_AT, a signup
+		form stores German, and someone typed Deutsch by hand. <strong>Lettr compares each value with the
 		template's languages from the strictest rule to the loosest</strong>, and the first rule that
 		matches wins.
 	</Paragraph>
@@ -115,7 +115,7 @@
 	<List>
 		<li>
 			<strong>Same tag.</strong> Case, surrounding spaces, and the choice between a hyphen and an
-			underscore are ignored, so CS and cs both match a template language cs.
+			underscore are ignored, so DE and de both match a template language de.
 		</li>
 		<li>
 			<strong>Same base language.</strong> The region part is dropped in both directions. A contact
@@ -124,7 +124,7 @@
 		</li>
 		<li>
 			<strong>Same language by name.</strong> An alias table maps common names and spellings to codes:
-			czech, cz, and česky match cs, Deutsch matches de, english matches en.
+			german, deu, and Deutsch match de, français matches fr, english matches en.
 		</li>
 	</List>
 
@@ -150,8 +150,8 @@
 		The Compose step has a new "Per-language subject and sender" section under the regular subject and
 		sender fields, with one expandable row per secondary language. Each row can carry its own subject,
 		from name, from email, and reply-to. <strong>An empty field inherits the primary value</strong>, so
-		a translated subject alone is enough, and the English version can go out from the same address as
-		the Czech one without repeating it.
+		a translated subject alone is enough, and the German version can go out from the same address as
+		the English one without repeating it.
 	</Paragraph>
 
 	<Paragraph>
@@ -159,7 +159,7 @@
 		this when the draft is saved rather than at send time.
 	</Paragraph>
 
-	<!-- SCREENSHOT: Compose step, "Per-language subject and sender" section with the EN row expanded. -->
+	<!-- SCREENSHOT: Compose step, "Per-language subject and sender" section with the DE row expanded. -->
 
 	<Heading level={2}>The Review & Send panel</Heading>
 
@@ -203,7 +203,7 @@
 		language keeps an accurate history.
 	</Paragraph>
 
-	<!-- SCREENSHOT: Campaign detail, activity list with EN badges next to recipient addresses. -->
+	<!-- SCREENSHOT: Campaign detail, activity list with DE badges next to recipient addresses. -->
 
 	<Heading level={2}>Content is locked when the campaign is scheduled</Heading>
 
@@ -261,7 +261,7 @@
 			<strong>Yes.</strong> Matching tries the exact tag first, then the base language, then common
 			names and spellings. Case and the hyphen-versus-underscore choice never matter.
 		</FaqItem>
-		<FaqItem question="Can I give the English version a different subject and sender?">
+		<FaqItem question="Can I give the German version a different subject and sender?">
 			<strong>Yes. Each secondary language has its own optional subject, from name, from email, and
 			reply-to.</strong> Any field left empty inherits the primary value, and a per-language from email
 			must belong to one of the team's verified sending domains.
