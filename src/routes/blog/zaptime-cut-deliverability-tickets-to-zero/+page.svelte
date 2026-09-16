@@ -47,9 +47,9 @@
 				a second tool with its own contact database.
 			</li>
 			<li>
-				<strong>The switch</strong>: Lettr replaced both vendors in a one-day migration, creating
-				and verifying each customer's sending domain through its domain API, reporting delivery per
-				message, and keeping data in the EU.
+				<strong>The switch</strong>: Lettr replaced both vendors in a one-day migration. Its domain
+				API creates and verifies each customer's sending domain, delivery is reported per message,
+				and data stays in the EU.
 			</li>
 			<li>
 				<strong>The result</strong>: deliverability tickets dropped from dozens a month to zero.
@@ -91,14 +91,14 @@
 	</Paragraph>
 
 	<Paragraph>
-		The deciding factor was that Lettr treats <strong>deliverability as part of the product</strong>.
-		It creates and verifies each customer's sending domain through its domain API, so Zaptime shows
-		the required <a href="/blog/spf-dkim-dmarc-explained-for-developers/">DNS records</a> in its own
-		UI, and it reports delivery data for every message.
+		The deciding factor was <strong>domain management through the API</strong>. Lettr's domain API
+		creates and verifies each customer's sending domain, so Zaptime shows the required
+		<a href="/blog/spf-dkim-dmarc-explained-for-developers/">DNS records</a> in its own UI, and Lettr
+		reports delivery data for every message.
 	</Paragraph>
 
 	<Paragraph>
-		Two more requirements fit. Lettr is <strong>hosted in the EU</strong>, which many of Zaptime's
+		Lettr also met two other requirements. It is <strong>hosted in the EU</strong>, which many of Zaptime's
 		customers require for data processing, and its
 		<a href="/blog/why-we-built-lettr-on-laravel/">official Laravel package</a> matches Zaptime's
 		stack.
@@ -132,11 +132,12 @@
 	<Heading level={2}>The outcome: zero deliverability tickets</Heading>
 
 	<Paragraph>
-		Booking emails now <strong>reach inboxes reliably</strong>, which is the core promise of a
-		scheduling product. Every outgoing email is tagged with its trigger and customer team, so
+		Booking emails now <strong>reach inboxes reliably</strong>. Every outgoing email is tagged with its trigger and customer team, so
 		delivery and engagement are visible per customer, and users manage their email preferences
 		directly in Zaptime's app.
 	</Paragraph>
+
+	<Paragraph>Tomas Senk on what changed for the team:</Paragraph>
 
 	<Quote>
 		Before the migration, Zaptime was getting dozens of tickets a month. Afterwards, the number
@@ -155,9 +156,9 @@
 
 	<Faq>
 		<FaqItem question="How long did Zaptime's migration to Lettr take?">
-			<strong>One day of engineering.</strong> That covered transactional sending, custom-domain
-			enrollment, contact sync, and the preference-management UI. Both providers ran in parallel
-			during the switch, so customers saw no disruption.
+			<strong>One day of engineering.</strong> That day covered transactional sending,
+			custom-domain enrollment, contact sync, and the preference-management UI, with the old and new
+			providers running in parallel.
 		</FaqItem>
 
 		<FaqItem question="Can one Lettr account send both transactional and marketing email?">
@@ -184,9 +185,8 @@
 		Zaptime's deliverability problems came from two gaps: no visibility into why booking emails went
 		missing, and a do-it-yourself flow for customer sending domains. Moving both kinds of email onto
 		Lettr closed both in <strong>one day of engineering</strong> and brought deliverability tickets
-		to zero. If email is part of what your product promises,
-		<a href="https://app.lettr.com/register">create a free Lettr account</a> and send the first
-		message today, or read the
+		to zero. To try the same setup,
+		<a href="https://app.lettr.com/register">create a free Lettr account</a>, or read the
 		<a href="https://docs.lettr.com/learn/domains/sending-domains">sending domains docs</a> to see how
 		per-customer domains work.
 	</Paragraph>
