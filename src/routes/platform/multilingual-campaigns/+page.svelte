@@ -2,6 +2,15 @@
 	import { onMount } from 'svelte';
 	import CaretDownIcon from 'phosphor-svelte/lib/CaretDownIcon';
 	import CaretRightIcon from 'phosphor-svelte/lib/CaretRightIcon';
+	import TranslateIcon from 'phosphor-svelte/lib/TranslateIcon';
+	import IdentificationCardIcon from 'phosphor-svelte/lib/IdentificationCardIcon';
+	import PaperPlaneTiltIcon from 'phosphor-svelte/lib/PaperPlaneTiltIcon';
+	import ArticleIcon from 'phosphor-svelte/lib/ArticleIcon';
+	import EnvelopeOpenIcon from 'phosphor-svelte/lib/EnvelopeOpenIcon';
+	import SignpostIcon from 'phosphor-svelte/lib/SignpostIcon';
+	import BrowserIcon from 'phosphor-svelte/lib/BrowserIcon';
+	import SlidersHorizontalIcon from 'phosphor-svelte/lib/SlidersHorizontalIcon';
+	import TagIcon from 'phosphor-svelte/lib/TagIcon';
 	import FeaturePageLayout from '$lib/components/FeaturePageLayout.svelte';
 	import { createScrollRevealCleanup } from '$lib/utils/gsap';
 
@@ -10,12 +19,11 @@
 	let reviewSection: HTMLElement | undefined = $state();
 	let composeSection: HTMLElement | undefined = $state();
 	let travelsSection: HTMLElement | undefined = $state();
-	let detailsSection: HTMLElement | undefined = $state();
 
 	onMount(() => {
 		const cleanups: (() => void)[] = [];
 
-		for (const section of [stepsSection, matcherSection, reviewSection, composeSection, travelsSection, detailsSection]) {
+		for (const section of [stepsSection, matcherSection, reviewSection, composeSection, travelsSection]) {
 			if (section) {
 				cleanups.push(
 					createScrollRevealCleanup({
@@ -26,7 +34,15 @@
 			}
 		}
 
-		return () => cleanups.forEach((fn) => fn());
+		measureRoutes();
+		const observer = new ResizeObserver(measureRoutes);
+		if (routesEl) observer.observe(routesEl);
+		inboxEls.forEach((el) => observer.observe(el));
+
+		return () => {
+			observer.disconnect();
+			cleanups.forEach((fn) => fn());
+		};
 	});
 
 	/* ---------- Hero routing diagram ---------- */
@@ -41,16 +57,41 @@
 	}
 
 	const inboxes: Inbox[] = [
-		{ initials: 'JN', name: 'Jana Nováková', stored: 'cs-CZ', code: 'CS', subject: 'Novinky v Lettr: kampaně ve více jazycích', sender: 'Lettr <novinky@lettr.com>' },
 		{ initials: 'TW', name: 'Tom Walker', stored: 'english', code: 'EN', subject: 'What\'s new in Lettr: multilingual campaigns', sender: 'Lettr <news@lettr.com>' },
-		{ initials: 'LB', name: 'Lena Berger', stored: 'de_AT', code: 'DE', subject: 'Neu in Lettr: mehrsprachige Kampagnen', sender: 'Lettr <novinky@lettr.com>' }
+		{ initials: 'LB', name: 'Lena Berger', stored: 'de_AT', code: 'DE', subject: 'Neu in Lettr: mehrsprachige Kampagnen', sender: 'Lettr <hallo@lettr.com>' },
+		{ initials: 'CL', name: 'Camille Laurent', stored: 'fr-FR', code: 'FR', subject: 'Nouveau dans Lettr : les campagnes multilingues', sender: 'Lettr <news@lettr.com>' }
 	];
 
-	const routePaths = [
-		'M 0 120 C 55 120, 65 32, 120 32',
-		'M 0 120 C 55 120, 65 120, 120 120',
-		'M 0 120 C 55 120, 65 208, 120 208'
-	];
+	/*
+	 * The routes are drawn in real pixels, measured from the layout, instead of a
+	 * stretched viewBox. A stretched SVG with non-scaling strokes measures the
+	 * dash in one coordinate space and draws it in another, so the comet stopped
+	 * short of the cards.
+	 */
+	let routesEl: HTMLElement | undefined = $state();
+	let inboxEls: HTMLElement[] = $state([]);
+	let routeBox = $state({ width: 120, height: 240, targets: [32, 120, 208] });
+
+	function measureRoutes() {
+		if (!routesEl) return;
+		const box = routesEl.getBoundingClientRect();
+		if (!box.width || !box.height) return;
+		routeBox = {
+			width: box.width,
+			height: box.height,
+			targets: inboxEls.map((el) => {
+				const rect = el.getBoundingClientRect();
+				return rect.top + rect.height / 2 - box.top;
+			})
+		};
+	}
+
+	const routePaths = $derived(
+		routeBox.targets.map((y) => {
+			const { width, height } = routeBox;
+			return `M 0 ${height / 2} C ${width / 2} ${height / 2}, ${width / 2} ${y}, ${width} ${y}`;
+		})
+	);
 
 	/* ---------- Live matcher ---------- */
 
@@ -61,18 +102,19 @@
 	}
 
 	const templateLanguages: TemplateLanguage[] = [
-		{ code: 'cs', name: 'Czech', primary: true },
-		{ code: 'en', name: 'English' },
-		{ code: 'de', name: 'German' }
+		{ code: 'en', name: 'English', primary: true },
+		{ code: 'de', name: 'German' },
+		{ code: 'fr', name: 'French' }
 	];
 
+	// A subset of CommunicationLanguage::ALIASES in lettr-app.
 	const aliases: Record<string, string[]> = {
-		cs: ['czech', 'cz', 'cze', 'ces', 'česky', 'cesky', 'čeština', 'cestina', 'czech republic'],
-		en: ['english', 'eng', 'anglicky', 'englisch'],
-		de: ['german', 'deutsch', 'ger', 'deu', 'německy', 'nemecky']
+		en: ['eng', 'english'],
+		de: ['deu', 'ger', 'german', 'deutsch', 'germany'],
+		fr: ['fra', 'fre', 'french', 'francais', 'français']
 	};
 
-	const sampleValues = ['cs-CZ', 'Czech', 'česky', 'en_US', 'Deutsch', 'sk', 'klingon', ''];
+	const sampleValues = ['de-AT', 'German', 'français', 'en_US', 'Deutsch', 'it', 'klingon', ''];
 
 	type MatchResult =
 		| { kind: 'match'; language: TemplateLanguage; rule: 1 | 2 | 3 }
@@ -95,22 +137,29 @@
 		return { kind: 'fallback', reason: 'unmatched' };
 	}
 
-	const ruleLabels: Record<1 | 2 | 3, string> = {
-		1: 'Rule 1 · same tag',
-		2: 'Rule 2 · same base language',
-		3: 'Rule 3 · known name or spelling'
-	};
+	const matchRules = [
+		{ title: 'Same tag', description: 'Ignores case and spaces, so DE matches de' },
+		{ title: 'Same base language', description: 'Drops the region, so de-AT matches de' },
+		{ title: 'Known name or spelling', description: 'Looks up names such as German or français' }
+	];
 
-	let matcherInput = $state('cs-CZ');
-	const matchResult = $derived(matchLanguage(matcherInput));
+	function ruleState(result: MatchResult, index: number): 'match' | 'miss' | 'skipped' {
+		if (result.kind === 'fallback') return result.reason === 'empty' ? 'skipped' : 'miss';
+		const rule = index + 1;
+		if (rule === result.rule) return 'match';
+		return rule < result.rule ? 'miss' : 'skipped';
+	}
+
 	const primaryLanguage = templateLanguages.find((l) => l.primary) ?? templateLanguages[0];
+	let matcherInput = $state('de-AT');
+	const matchResult = $derived(matchLanguage(matcherInput));
+	const resolvedLanguage = $derived(matchResult.kind === 'match' ? matchResult.language : primaryLanguage);
 
 	/* ---------- Review & Send panel ---------- */
 
 	interface ReviewRow {
 		code: string;
 		name: string;
-		role: 'Primary' | 'Secondary';
 		recipients: number;
 		subject: string;
 		sender: string;
@@ -119,14 +168,14 @@
 	}
 
 	const reviewRows: ReviewRow[] = [
-		{ code: 'CS', name: 'Czech', role: 'Primary', recipients: 2418, subject: 'Novinky v Lettr: kampaně ve více jazycích', sender: 'novinky@lettr.com', customSubject: false, customSender: false },
-		{ code: 'EN', name: 'English', role: 'Secondary', recipients: 1906, subject: 'What\'s new in Lettr: multilingual campaigns', sender: 'news@lettr.com', customSubject: true, customSender: true },
-		{ code: 'DE', name: 'German', role: 'Secondary', recipients: 731, subject: 'Neu in Lettr: mehrsprachige Kampagnen', sender: 'novinky@lettr.com', customSubject: true, customSender: false }
+		{ code: 'EN', name: 'English', recipients: 2418, subject: 'What\'s new in Lettr: multilingual campaigns', sender: 'news@lettr.com', customSubject: false, customSender: false },
+		{ code: 'DE', name: 'German', recipients: 1906, subject: 'Neu in Lettr: mehrsprachige Kampagnen', sender: 'hallo@lettr.com', customSubject: true, customSender: true },
+		{ code: 'FR', name: 'French', recipients: 731, subject: 'Nouveau dans Lettr : les campagnes multilingues', sender: 'news@lettr.com', customSubject: true, customSender: false }
 	];
 
 	const fallbackNoValue = 289;
 	const fallbackUnmatched = [
-		{ value: 'sk', count: 20 },
+		{ value: 'it', count: 20 },
 		{ value: 'klingon', count: 3 }
 	];
 	const fallbackTotal = fallbackNoValue + fallbackUnmatched.reduce((sum, u) => sum + u.count, 0);
@@ -137,80 +186,50 @@
 	/* ---------- Compose mock ---------- */
 
 	const composeFields = [
-		{ label: 'Subject', value: 'What\'s new in Lettr: multilingual campaigns', inherited: false },
-		{ label: 'From email', value: 'news@lettr.com', inherited: false },
+		{ label: 'Subject', value: 'Neu in Lettr: mehrsprachige Kampagnen', inherited: false },
+		{ label: 'From email', value: 'hallo@lettr.com', inherited: false },
 		{ label: 'From name', value: 'Lettr', inherited: true },
-		{ label: 'Reply-to', value: 'novinky@lettr.com', inherited: true }
+		{ label: 'Reply-to', value: 'news@lettr.com', inherited: true }
 	];
 
 	/* ---------- Copy ---------- */
 
 	const steps = [
 		{
+			icon: TranslateIcon,
 			title: 'Add languages to the template',
 			description:
-				'The Multilingual control in the email editor adds a language to any template. The language the template started in is primary; every other one is secondary. All versions share one layout, only the text differs.'
+				'Use the Multilingual control in the editor. The original language is primary. Every version shares one layout and differs only in its text.'
 		},
 		{
-			title: 'Point Lettr at the language property',
+			icon: IdentificationCardIcon,
+			title: 'Mark the language property',
 			description:
-				'One contact property is marked as the communication language. With no property marked, Lettr reads a property named language, lang, or locale, so an audience imported with a lang column needs no setup.'
+				'Mark one contact property as the communication language. Without one, Lettr reads a property named language, lang, or locale.'
 		},
 		{
+			icon: PaperPlaneTiltIcon,
 			title: 'Send once',
 			description:
-				'Linking the template in Compose makes the campaign multilingual. There is no switch to turn on. Each contact receives the version that matches the value on their record.'
+				'Link a multilingual template in Compose. There is no separate setting, and each contact receives the version matching their record.'
 		}
 	];
 
 	const travels = [
-		{ term: 'Content', description: 'The template version in the recipient\'s language, from the copy stored when the campaign was scheduled.' },
-		{ term: 'Subject, sender, reply-to', description: 'The per-language values where set, the primary ones where not.' },
-		{ term: 'Unsubscribe footer', description: 'Translated for 19 languages. Anything else receives the English footer.' },
-		{ term: 'View in browser', description: 'Opens the same language the recipient received.' },
-		{ term: 'Preferences page', description: 'The hosted preferences, unsubscribe, and web-version pages render in the designated language.' },
-		{ term: 'Activity badge', description: 'Secondary-language recipients carry a language badge in the activity list, fixed at send time.' }
-	];
-
-	const details = [
-		{
-			question: 'What does a contact with no language get?',
-			answer:
-				'The primary language, and so does a value that matches nothing, such as klingon. The Review & Send panel counts both groups separately and lists the unmatched values, so the data can be fixed before the send.'
-		},
-		{
-			question: 'Does en-GB match an en template?',
-			answer:
-				'Yes. Matching tries the exact tag, then the base language, then common names and spellings. Case and the choice between a hyphen and an underscore never matter.'
-		},
-		{
-			question: 'What if the template changes after scheduling?',
-			answer:
-				'Nothing changes for that campaign. Scheduling or starting a send stores a copy of every language version. Unscheduling drops the copy, so rescheduling picks up the current template.'
-		},
-		{
-			question: 'Can a campaign send a language the template lacks?',
-			answer:
-				'No. A campaign sends only the languages its template contains. With a Czech and English template, a German contact receives the primary language.'
-		},
-		{
-			question: 'Do existing campaigns change?',
-			answer:
-				'No. Campaigns sent before this feature behave exactly as they did. Only a campaign whose template has more than one language becomes multilingual.'
-		},
-		{
-			question: 'Can each version be tested before sending?',
-			answer:
-				'Yes. The test email box has a language picker, and a test in a secondary language uses that language\'s content, subject, and sender.'
-		}
+		{ icon: ArticleIcon, title: 'Content', description: 'The template version in the recipient\'s language, from the copy stored when the campaign was scheduled.' },
+		{ icon: EnvelopeOpenIcon, title: 'Subject, sender, reply-to', description: 'The per-language values where set, the primary ones where not.' },
+		{ icon: SignpostIcon, title: 'Unsubscribe footer', description: 'Translated for 19 languages. Anything else receives the English footer.' },
+		{ icon: BrowserIcon, title: 'View in browser', description: 'Opens the same language the recipient received.' },
+		{ icon: SlidersHorizontalIcon, title: 'Preferences page', description: 'The hosted preferences, unsubscribe, and web-version pages render in the designated language.' },
+		{ icon: TagIcon, title: 'Activity badge', description: 'Secondary-language recipients carry a language badge in the activity list, fixed at send time.' }
 	];
 </script>
 
 <FeaturePageLayout
 	title="Multilingual Campaigns"
 	metaDescription="Send one campaign in several languages. Each contact gets the version that matches their language, with per-language subject, sender, footer, and web version."
-	label="Campaigns"
-	description="One campaign, every language in the audience. The template holds the languages, a contact property holds each person's choice, and Lettr picks the version for every recipient."
+	label="MULTILINGUAL CAMPAIGNS"
+	description="The template holds the languages, a contact property holds each person's choice, and Lettr sends every recipient the version in their language."
 	related={[
 		{ href: '/email-marketing/', label: 'Email Marketing', description: 'Campaigns, audiences, and segments, billed per contact.' },
 		{ href: '/platform/templates/', label: 'Visual Editor', description: 'Drag-and-drop email editor powered by Topol.' },
@@ -222,60 +241,54 @@
 	{/snippet}
 
 	{#snippet children()}
-		<!-- Hero routing diagram -->
-		<div class="mlc-hero mx-auto grid max-w-5xl grid-cols-[minmax(0,1fr)] items-stretch gap-6 lg:grid-cols-[minmax(0,300px)_minmax(80px,1fr)_minmax(0,420px)] lg:gap-0">
+		<!-- Routing Diagram -->
+		<div class="mx-auto grid max-w-4xl grid-cols-[minmax(0,1fr)] items-stretch gap-3 lg:grid-cols-[minmax(0,280px)_minmax(56px,1fr)_minmax(0,420px)] lg:gap-0">
 			<!-- Campaign -->
 			<div class="flex flex-col justify-center border border-border/50 bg-white p-6">
 				<div class="mb-5 flex items-center justify-between">
-					<span class="font-heading text-[11px] tracking-[0.15em] text-muted uppercase">Campaign</span>
-					<span class="border border-border/50 px-1.5 py-0.5 text-[10px] font-medium tracking-wide text-muted uppercase">Scheduled</span>
+					<span class="text-xs font-medium text-muted uppercase">Campaign</span>
+					<span class="text-[10px] font-semibold tracking-wider text-primary uppercase">Scheduled</span>
 				</div>
 				<p class="font-heading text-lg text-surface">September product update</p>
 				<p class="mt-1 text-sm text-muted">{format(totalRecipients)} recipients · one audience</p>
-				<div class="mt-6 border-t border-border/40 pt-5">
-					<p class="mb-2 text-[11px] font-medium tracking-wide text-muted uppercase">Template languages</p>
-					<div class="flex flex-wrap gap-1.5">
+				<div class="mt-6 border-t border-border/30 pt-5">
+					<p class="mb-2 text-xs font-medium text-muted uppercase">Template languages</p>
+					<div class="flex flex-wrap items-center gap-1.5">
 						{#each templateLanguages as lang}
-							<span class="inline-flex items-center gap-1.5 border border-border/50 bg-background px-2 py-1 font-code text-xs text-surface">
-								{lang.code.toUpperCase()}
-								{#if lang.primary}<span class="text-[10px] text-primary">primary</span>{/if}
-							</span>
+							<span class="border border-border/60 px-1.5 py-0.5 font-code text-[10px] font-semibold text-surface">{lang.code.toUpperCase()}</span>
 						{/each}
+						<span class="ml-1 text-xs text-muted">{primaryLanguage.name} is primary</span>
 					</div>
 				</div>
-				<div class="mt-5 border-t border-border/40 pt-5">
-					<p class="mb-1 text-[11px] font-medium tracking-wide text-muted uppercase">Language read from</p>
+				<div class="mt-5 border-t border-border/30 pt-5">
+					<p class="mb-1 text-xs font-medium text-muted uppercase">Language read from</p>
 					<p class="font-code text-xs text-surface">communication_language</p>
 				</div>
 			</div>
 
 			<!-- Routes -->
-			<div class="relative hidden lg:block" aria-hidden="true">
-				<svg class="absolute inset-0 h-full w-full" viewBox="0 0 120 240" preserveAspectRatio="none" fill="none">
+			<div bind:this={routesEl} class="relative hidden lg:block" aria-hidden="true">
+				<svg class="absolute inset-0 h-full w-full" viewBox="0 0 {routeBox.width} {routeBox.height}" fill="none">
 					{#each routePaths as d}
-						<path {d} class="stroke-border" stroke-width="1" vector-effect="non-scaling-stroke" />
+						<path {d} class="stroke-border" stroke-width="1" />
 					{/each}
 					{#each routePaths as d, i}
-						<path
-							{d}
-							class="mlc-comet stroke-primary"
-							style="animation-delay:{i * 2.5}s"
-							stroke-width="2"
-							stroke-linecap="round"
-							vector-effect="non-scaling-stroke"
-							pathLength="1"
-						/>
+						<path {d} class="mlc-comet stroke-primary" style="--d:{i * 2.5}s" stroke-width="2" pathLength="1" />
 					{/each}
 				</svg>
 				<span class="absolute top-1/2 left-0 h-2 w-2 -translate-x-1/2 -translate-y-1/2 bg-primary"></span>
 			</div>
 
-			<p class="text-center text-xs text-muted lg:hidden">Routed by each contact's language value</p>
+			<div class="flex flex-col items-center gap-2 lg:hidden">
+				<span class="h-5 w-px bg-border" aria-hidden="true"></span>
+				<span class="text-xs text-muted">Routed by each contact's language value</span>
+				<span class="h-5 w-px bg-border" aria-hidden="true"></span>
+			</div>
 
 			<!-- Inboxes -->
 			<div class="flex flex-col justify-between gap-3">
 				{#each inboxes as inbox, i}
-					<div class="mlc-inbox relative border border-border/50 bg-white p-4" style="animation-delay:{i * 2.5}s">
+					<div bind:this={inboxEls[i]} class="mlc-inbox relative border border-border/50 bg-white p-4" style="--d:{i * 2.5}s">
 						<div class="flex items-start gap-3">
 							<span class="flex h-9 w-9 shrink-0 items-center justify-center bg-surface font-heading text-xs text-white">{inbox.initials}</span>
 							<div class="min-w-0 flex-1">
@@ -288,7 +301,7 @@
 								<p class="mt-1.5 truncate text-sm text-surface">{inbox.subject}</p>
 								<div class="mt-1 flex items-center justify-between gap-2">
 									<span class="truncate text-xs text-muted">{inbox.sender}</span>
-									<span class="mlc-badge shrink-0 border border-border/50 px-1.5 py-0.5 font-code text-[10px] font-semibold text-surface">{inbox.code}</span>
+									<span class="mlc-badge shrink-0 border border-border/60 px-1.5 py-0.5 font-code text-[10px] font-semibold text-surface">{inbox.code}</span>
 								</div>
 							</div>
 						</div>
@@ -297,68 +310,45 @@
 			</div>
 		</div>
 
-		<!-- How it works -->
-		<div bind:this={stepsSection} class="mx-auto mt-24 max-w-5xl md:mt-32">
-			<div data-reveal class="mb-4 inline-flex items-center gap-2 text-[11px] font-medium tracking-[0.18em] text-primary/80 uppercase">
-				<span class="block h-px w-6 bg-primary/60"></span>
-				How it works
-			</div>
-			<h2 data-reveal class="mb-12 max-w-[24ch] text-surface">
-				Three pieces.<br /><span class="text-primary">Two need setup.</span>
-			</h2>
-			<ol class="grid gap-x-10 gap-y-10 md:grid-cols-3">
-				{#each steps as step, i}
-					<li data-reveal class="border-t border-surface/80 pt-5">
-						<span class="font-code text-xs text-muted">0{i + 1}</span>
-						<h3 class="mt-3 text-base font-semibold text-surface">{step.title}</h3>
-						<p class="mt-2 text-sm leading-relaxed text-muted">{step.description}</p>
+		<!-- How It Works -->
+		<div bind:this={stepsSection} class="mx-auto mt-20 max-w-3xl md:mt-28">
+			<h2 data-reveal class="mb-3 text-center">How it works</h2>
+			<p data-reveal class="mx-auto mb-8 max-w-lg text-center text-body text-muted">
+				Add languages to a template, mark which contact property holds the language, and send once.
+			</p>
+			<ol class="grid gap-5 sm:grid-cols-3">
+				{#each steps as step}
+					<li data-reveal class="border border-border/50 bg-white p-6">
+						<div class="mb-3 flex h-10 w-10 items-center justify-center border border-border/50 bg-background">
+							<step.icon size={20} class="text-primary" />
+						</div>
+						<h3 class="mb-2 text-base font-semibold text-surface">{step.title}</h3>
+						<p class="text-sm leading-relaxed text-muted">{step.description}</p>
 					</li>
 				{/each}
 			</ol>
 		</div>
 
-		<!-- Live matcher -->
-		<div bind:this={matcherSection} class="mx-auto mt-24 grid max-w-5xl grid-cols-[minmax(0,1fr)] gap-12 md:mt-32 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.15fr)] lg:items-start">
-			<div>
-				<div data-reveal class="mb-4 inline-flex items-center gap-2 text-[11px] font-medium tracking-[0.18em] text-primary/80 uppercase">
-					<span class="block h-px w-6 bg-primary/60"></span>
-					Matching
-				</div>
-				<h2 data-reveal class="mb-5 text-surface">
-					Real audiences are messy.<br /><span class="text-primary">Matching is forgiving.</span>
-				</h2>
-				<p data-reveal class="mb-8 max-w-[48ch] text-body text-muted">
-					The same language arrives as cs, cs_CZ, Czech, or česky, depending on the import, the form, and the person filling it in. Each value is compared with the template's languages from the strictest rule to the loosest, and the first match wins.
-				</p>
-				<ol data-reveal class="space-y-4 border-l border-border/60 pl-5">
-					<li>
-						<p class="text-sm font-semibold text-surface">1. Same tag</p>
-						<p class="text-sm text-muted">Case, spaces, and hyphen versus underscore are ignored.</p>
-					</li>
-					<li>
-						<p class="text-sm font-semibold text-surface">2. Same base language</p>
-						<p class="text-sm text-muted">The region is dropped in both directions: en-US matches en, and en matches en-GB.</p>
-					</li>
-					<li>
-						<p class="text-sm font-semibold text-surface">3. Known name or spelling</p>
-						<p class="text-sm text-muted">czech, cz, česky, and Deutsch are looked up in an alias table.</p>
-					</li>
-				</ol>
-			</div>
+		<!-- Live Matcher -->
+		<div bind:this={matcherSection} class="mx-auto mt-20 max-w-3xl md:mt-28">
+			<h2 data-reveal class="mb-3 text-center">Language matching</h2>
+			<p data-reveal class="mx-auto mb-8 max-w-lg text-center text-body text-muted">
+				de_AT, Deutsch, and German all get the German version. Three rules run strictest first, and a value that matches nothing gets the primary language.
+			</p>
 
 			<div data-reveal class="border border-border/50 bg-white">
 				<div class="flex flex-wrap items-center justify-between gap-2 border-b border-border/50 bg-background px-5 py-3">
 					<span class="font-heading text-xs font-semibold text-surface uppercase">Try a value</span>
 					<span class="flex items-center gap-1.5 text-xs text-muted">
-						Template:
+						Template languages
 						{#each templateLanguages as lang}
-							<span class="font-code text-surface">{lang.code}</span>
+							<span class="border border-border/60 px-1.5 py-0.5 font-code text-[10px] font-semibold text-surface">{lang.code.toUpperCase()}</span>
 						{/each}
 					</span>
 				</div>
 				<div class="p-5">
 					<label class="block">
-						<span class="mb-1.5 block text-[11px] font-medium tracking-wide text-muted uppercase">Contact's language value</span>
+						<span class="mb-1.5 block text-xs font-medium text-muted uppercase">Contact's language value</span>
 						<input
 							type="text"
 							bind:value={matcherInput}
@@ -372,68 +362,64 @@
 						{#each sampleValues as sample}
 							<button
 								type="button"
+								aria-pressed={matcherInput === sample}
 								onclick={() => (matcherInput = sample)}
-								class="border px-2 py-1 font-code text-xs transition-colors {matcherInput === sample ? 'border-primary bg-primary/5 text-primary' : 'border-border/50 text-muted hover:border-surface/40 hover:text-surface'}"
+								class="border px-2 py-1 font-code text-xs transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary {matcherInput === sample ? 'border-primary text-primary' : 'border-border/50 text-muted hover:border-surface/40 hover:text-surface'}"
 							>
 								{sample === '' ? '(empty)' : sample}
 							</button>
 						{/each}
 					</div>
+				</div>
 
-					<div class="mt-6 grid grid-cols-[auto_1fr] items-center gap-x-4 gap-y-2 border-t border-border/40 pt-5">
-						<span class="text-[11px] font-medium tracking-wide text-muted uppercase">Resolves to</span>
-						{#if matchResult.kind === 'match'}
-							<span class="flex items-center gap-2">
-								<span class="bg-surface px-1.5 py-0.5 font-code text-[11px] font-semibold text-white">{matchResult.language.code.toUpperCase()}</span>
-								<span class="text-sm font-medium text-surface">{matchResult.language.name}</span>
-								{#if matchResult.language.primary}<span class="text-xs text-muted">primary</span>{/if}
+				<ol class="divide-y divide-border/30 border-t border-border/50">
+					{#each matchRules as rule, i}
+						{@const state = ruleState(matchResult, i)}
+						<li class="flex items-center gap-3 px-5 py-3 transition-opacity {state === 'skipped' ? 'opacity-40' : ''}">
+							<span class="flex h-5 w-5 shrink-0 items-center justify-center font-code text-[10px] {state === 'match' ? 'bg-primary text-white' : 'border border-border/60 text-muted'}">{i + 1}</span>
+							<span class="min-w-0 flex-1">
+								<span class="block text-sm font-medium text-surface">{rule.title}</span>
+								<span class="block text-xs text-muted">{rule.description}</span>
 							</span>
-							<span class="text-[11px] font-medium tracking-wide text-muted uppercase">Because</span>
-							<span class="text-sm text-muted">{ruleLabels[matchResult.rule]}</span>
-						{:else}
-							<span class="flex items-center gap-2">
-								<span class="bg-surface px-1.5 py-0.5 font-code text-[11px] font-semibold text-white">{primaryLanguage.code.toUpperCase()}</span>
-								<span class="text-sm font-medium text-surface">{primaryLanguage.name}</span>
-								<span class="border border-primary/30 bg-primary/5 px-1.5 py-0.5 text-[10px] tracking-wide text-primary uppercase">fallback</span>
-							</span>
-							<span class="text-[11px] font-medium tracking-wide text-muted uppercase">Because</span>
-							<span class="text-sm text-muted">
-								{matchResult.reason === 'empty' ? 'No value on the contact. Counted under "no value" in the review panel.' : 'No template language matches. Counted under "unmatched" in the review panel.'}
-							</span>
+							{#if state === 'match'}
+								<span class="shrink-0 text-[10px] font-semibold tracking-wider text-primary uppercase">match</span>
+							{:else if state === 'miss'}
+								<span class="shrink-0 text-[10px] font-semibold tracking-wider text-muted uppercase">no match</span>
+							{/if}
+						</li>
+					{/each}
+				</ol>
+
+				<div class="flex items-center justify-between gap-3 border-t border-border/50 bg-background px-5 py-3" aria-live="polite">
+					<span class="text-xs font-medium text-muted uppercase">Resolves to</span>
+					<span class="flex items-center gap-2">
+						{#if matchResult.kind === 'fallback'}
+							<span class="text-[10px] font-semibold tracking-wider text-primary uppercase">{matchResult.reason === 'empty' ? 'no value' : 'fallback'}</span>
 						{/if}
-					</div>
+						<span class="border border-border/60 px-1.5 py-0.5 font-code text-[10px] font-semibold text-surface">{resolvedLanguage.code.toUpperCase()}</span>
+						<span class="text-sm font-medium text-surface">{resolvedLanguage.name}</span>
+					</span>
 				</div>
 			</div>
 		</div>
 
 		<!-- Review & Send -->
-		<div bind:this={reviewSection} class="mx-auto mt-24 min-w-0 max-w-5xl md:mt-32">
-			<div class="grid grid-cols-[minmax(0,1fr)] gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,2fr)] lg:items-end">
-				<div>
-					<div data-reveal class="mb-4 inline-flex items-center gap-2 text-[11px] font-medium tracking-[0.18em] text-primary/80 uppercase">
-						<span class="block h-px w-6 bg-primary/60"></span>
-						Review &amp; Send
-					</div>
-					<h2 data-reveal class="text-surface">
-						The split,<br /><span class="text-primary">before the send.</span>
-					</h2>
-				</div>
-				<p data-reveal class="max-w-[52ch] text-body text-muted lg:justify-self-end">
-					The last step names the property the language is read from, lists who receives which version with the subject and sender each one uses, and counts everyone who falls back to the primary language and why.
-				</p>
-			</div>
+		<div bind:this={reviewSection} class="mx-auto mt-20 max-w-3xl min-w-0 md:mt-28">
+			<h2 data-reveal class="mb-3 text-center">Review before sending</h2>
+			<p data-reveal class="mx-auto mb-8 max-w-lg text-center text-body text-muted">
+				See who gets which language, the subject and sender each version uses, and who falls back to the primary language.
+			</p>
 
-			<div data-reveal class="mt-10 min-w-0 max-w-full border border-border/50 bg-white">
+			<div data-reveal class="max-w-full min-w-0 border border-border/50 bg-white">
 				<div class="flex flex-wrap items-center justify-between gap-2 border-b border-border/50 bg-background px-5 py-3">
 					<span class="font-heading text-xs font-semibold text-surface uppercase">Multi-language send</span>
 					<span class="text-xs text-muted">
 						Language read from <span class="font-code text-surface">communication_language</span>
-						<span class="ml-1 border border-border/50 px-1.5 py-0.5 text-[10px] tracking-wide text-muted uppercase">designated</span>
 					</span>
 				</div>
 
-				<div class="px-5 pt-5">
-					<div class="flex h-2 w-full gap-px overflow-hidden">
+				<div class="px-5 py-4">
+					<div class="flex h-1.5 w-full gap-px overflow-hidden">
 						{#each reviewRows as row, i}
 							<div class="h-full {i === 0 ? 'bg-surface' : i === 1 ? 'bg-primary' : 'bg-primary/40'}" style="width:{share(row.recipients)}"></div>
 						{/each}
@@ -448,36 +434,31 @@
 					</div>
 				</div>
 
-				<div class="mt-4 overflow-x-auto">
-					<table class="w-full min-w-[600px] text-left text-sm">
+				<div class="hidden overflow-x-auto md:block">
+					<table class="w-full text-left text-sm">
 						<thead>
-							<tr class="border-y border-border/50 text-xs text-muted">
-								<th class="px-5 py-2.5 font-medium">Language</th>
-								<th class="px-5 py-2.5 text-right font-medium">Recipients</th>
-								<th class="px-5 py-2.5 font-medium">Subject</th>
-								<th class="px-5 py-2.5 font-medium">From</th>
+							<tr class="border-y border-border/50 bg-background">
+								<th class="py-3 pr-4 pl-5 text-xs font-semibold text-muted uppercase">Language</th>
+								<th class="px-4 py-3 text-right text-xs font-semibold text-muted uppercase">Recipients</th>
+								<th class="px-4 py-3 text-xs font-semibold text-muted uppercase">Subject</th>
+								<th class="py-3 pr-5 pl-4 text-xs font-semibold text-muted uppercase">From</th>
 							</tr>
 						</thead>
 						<tbody>
 							{#each reviewRows as row}
-								<tr class="border-b border-border/40">
-									<td class="px-5 py-3.5 whitespace-nowrap">
-										<span class="mr-2 inline-block bg-surface px-1.5 py-0.5 font-code text-[10px] font-semibold text-white">{row.code}</span>
-										<span class="text-surface">{row.name}</span>
-										<span class="ml-1.5 text-xs text-muted">{row.role}</span>
+								<tr class="border-b border-border/30 last:border-b-0">
+									<td class="py-3 pr-4 pl-5 whitespace-nowrap">
+										<span class="mr-2 border border-border/60 px-1.5 py-0.5 font-code text-[10px] font-semibold text-surface">{row.code}</span>
+										<span class="font-medium text-surface">{row.name}</span>
 									</td>
-									<td class="px-5 py-3.5 text-right font-code text-surface tabular-nums">{format(row.recipients)}</td>
-									<td class="px-5 py-3.5 text-surface">
+									<td class="px-4 py-3 text-right font-code text-xs text-surface tabular-nums">{format(row.recipients)}</td>
+									<td class="px-4 py-3 text-surface">
 										{row.subject}
-										{#if row.customSubject}
-											<span class="ml-1.5 border border-primary/30 bg-primary/5 px-1.5 py-0.5 text-[10px] tracking-wide text-primary uppercase">custom</span>
-										{/if}
+										{#if row.customSubject}<span class="ml-1.5 text-[10px] font-semibold tracking-wider whitespace-nowrap text-primary uppercase">custom</span>{/if}
 									</td>
-									<td class="px-5 py-3.5 whitespace-nowrap text-muted">
+									<td class="py-3 pr-5 pl-4 whitespace-nowrap text-muted">
 										{row.sender}
-										{#if row.customSender}
-											<span class="ml-1.5 border border-primary/30 bg-primary/5 px-1.5 py-0.5 text-[10px] tracking-wide text-primary uppercase">custom</span>
-										{/if}
+										{#if row.customSender}<span class="ml-1.5 text-[10px] font-semibold tracking-wider text-primary uppercase">custom</span>{/if}
 									</td>
 								</tr>
 							{/each}
@@ -485,9 +466,31 @@
 					</table>
 				</div>
 
-				<div class="grid gap-x-8 gap-y-2 bg-background px-5 py-4 text-xs text-muted sm:grid-cols-[auto_1fr]">
+				<ul class="divide-y divide-border/30 border-t border-border/50 md:hidden">
+					{#each reviewRows as row}
+						<li class="px-5 py-4">
+							<div class="flex items-center justify-between gap-3">
+								<span class="flex items-center gap-2">
+									<span class="border border-border/60 px-1.5 py-0.5 font-code text-[10px] font-semibold text-surface">{row.code}</span>
+									<span class="text-sm font-medium text-surface">{row.name}</span>
+								</span>
+								<span class="font-code text-xs text-surface tabular-nums">{format(row.recipients)}</span>
+							</div>
+							<div class="mt-2 flex items-baseline justify-between gap-3 text-sm text-surface">
+								<span class="min-w-0">{row.subject}</span>
+								{#if row.customSubject}<span class="shrink-0 text-[10px] font-semibold tracking-wider text-primary uppercase">custom</span>{/if}
+							</div>
+							<div class="mt-0.5 flex items-baseline justify-between gap-3 text-sm text-muted">
+								<span class="min-w-0 break-all">{row.sender}</span>
+								{#if row.customSender}<span class="shrink-0 text-[10px] font-semibold tracking-wider text-primary uppercase">custom</span>{/if}
+							</div>
+						</li>
+					{/each}
+				</ul>
+
+				<div class="flex flex-wrap items-center justify-between gap-x-8 gap-y-2 border-t border-border/50 bg-background px-5 py-3 text-xs text-muted">
 					<span class="text-surface">
-						<span class="font-code">{format(fallbackTotal)}</span> of the {format(totalRecipients)} receive Czech as a fallback
+						<span class="font-code">{format(fallbackTotal)}</span> of {format(totalRecipients)} fall back to {primaryLanguage.name}
 					</span>
 					<span class="flex flex-wrap gap-x-4 gap-y-1">
 						<span>no value <span class="font-code text-surface">×{fallbackNoValue}</span></span>
@@ -499,128 +502,65 @@
 			</div>
 		</div>
 
-		<!-- Per-language subject and sender -->
-		<div bind:this={composeSection} class="mx-auto mt-24 grid max-w-5xl grid-cols-[minmax(0,1fr)] gap-12 md:mt-32 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,1fr)] lg:items-center">
-			<div data-reveal class="order-2 border border-border/50 bg-white lg:order-1">
+		<!-- Per-Language Subject and Sender -->
+		<div bind:this={composeSection} class="mx-auto mt-20 max-w-3xl md:mt-28">
+			<h2 data-reveal class="mb-3 text-center">Translate the subject, inherit the rest</h2>
+			<p data-reveal class="mx-auto mb-8 max-w-lg text-center text-body text-muted">
+				Each secondary language has an optional subject, from name, from email, and reply-to. Empty fields take the primary value.
+			</p>
+
+			<div data-reveal class="border border-border/50 bg-white">
 				<div class="border-b border-border/50 bg-background px-5 py-3">
-					<span class="font-heading text-xs font-semibold text-surface uppercase">Compose</span>
+					<span class="font-heading text-xs font-semibold text-surface uppercase">Per-language subject and sender</span>
 				</div>
-				<div class="space-y-3 p-5">
-					<div>
-						<span class="mb-1 block text-[11px] font-medium tracking-wide text-muted uppercase">Subject</span>
-						<div class="border border-border/60 px-3 py-2 text-sm text-surface">Novinky v Lettr: kampaně ve více jazycích</div>
-					</div>
-					<div class="grid grid-cols-[minmax(0,1fr)] gap-3 sm:grid-cols-2">
-						<div class="min-w-0">
-							<span class="mb-1 block text-[11px] font-medium tracking-wide text-muted uppercase">From</span>
-							<div class="truncate border border-border/60 px-3 py-2 text-sm text-surface">Lettr &lt;novinky@lettr.com&gt;</div>
-						</div>
-						<div>
-							<span class="mb-1 block text-[11px] font-medium tracking-wide text-muted uppercase">Reply-to</span>
-							<div class="truncate border border-border/60 px-3 py-2 text-sm text-surface">novinky@lettr.com</div>
-						</div>
-					</div>
-				</div>
-				<div class="border-t border-border/50 px-5 py-3">
-					<span class="text-[11px] font-medium tracking-wide text-muted uppercase">Per-language subject and sender</span>
-				</div>
-				<div class="border-t border-border/40">
-					<div class="flex items-center gap-2 bg-background/60 px-5 py-2.5 text-sm text-surface">
-						<CaretDownIcon size={12} class="text-muted" />
-						<span class="bg-surface px-1.5 py-0.5 font-code text-[10px] font-semibold text-white">EN</span>
-						English
-					</div>
-					<div class="grid grid-cols-[minmax(0,1fr)] gap-3 px-5 py-4 sm:grid-cols-2">
-						{#each composeFields as field}
-							<div class="min-w-0 {field.label === 'Subject' ? 'sm:col-span-2' : ''}">
-								<span class="mb-1 block text-[11px] font-medium tracking-wide text-muted uppercase">{field.label}</span>
-								{#if field.inherited}
-									<div class="flex items-center justify-between gap-2 border border-dashed border-border/70 px-3 py-2 text-sm text-muted/70">
-										<span class="truncate">{field.value}</span>
-										<span class="shrink-0 text-[10px] tracking-wide uppercase">inherited</span>
-									</div>
-								{:else}
-									<div class="flex items-center justify-between gap-2 border border-border/60 px-3 py-2 text-sm text-surface">
-										<span class="truncate">{field.value}</span>
-										<span class="shrink-0 text-[10px] tracking-wide text-primary uppercase">custom</span>
-									</div>
-								{/if}
-							</div>
-						{/each}
-					</div>
-				</div>
-				<div class="flex items-center gap-2 border-t border-border/40 px-5 py-2.5 text-sm text-surface">
-					<CaretRightIcon size={12} class="text-muted" />
-					<span class="bg-surface px-1.5 py-0.5 font-code text-[10px] font-semibold text-white">DE</span>
+				<div class="flex items-center gap-2 px-5 py-3 text-sm font-medium text-surface">
+					<CaretDownIcon size={12} class="text-muted" />
+					<span class="border border-border/60 px-1.5 py-0.5 font-code text-[10px] font-semibold text-surface">DE</span>
 					German
-					<span class="ml-auto text-xs text-muted">1 of 4 set</span>
+					<span class="ml-auto text-xs font-normal text-muted">2 of 4 set</span>
 				</div>
-			</div>
-
-			<div class="order-1 lg:order-2">
-				<div data-reveal class="mb-4 inline-flex items-center gap-2 text-[11px] font-medium tracking-[0.18em] text-primary/80 uppercase">
-					<span class="block h-px w-6 bg-primary/60"></span>
-					Compose
-				</div>
-				<h2 data-reveal class="mb-5 text-surface">
-					Translate the subject.<br /><span class="text-primary">Inherit the rest.</span>
-				</h2>
-				<p data-reveal class="max-w-[46ch] text-body text-muted">
-					Each secondary language has an optional subject, from name, from email, and reply-to. An empty field takes the primary value, so a translated subject alone is a complete setup.
-				</p>
-				<p data-reveal class="mt-4 max-w-[46ch] text-sm text-muted">
-					A per-language from email has to belong to a verified sending domain, and Lettr checks that when the draft is saved rather than at send time.
-				</p>
-			</div>
-		</div>
-
-		<!-- Everything travels -->
-		<div bind:this={travelsSection} class="mx-auto mt-24 max-w-5xl md:mt-32">
-			<div class="grid grid-cols-[minmax(0,1fr)] gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,2fr)]">
-				<div>
-					<div data-reveal class="mb-4 inline-flex items-center gap-2 text-[11px] font-medium tracking-[0.18em] text-primary/80 uppercase">
-						<span class="block h-px w-6 bg-primary/60"></span>
-						What recipients get
-					</div>
-					<h2 data-reveal class="text-surface">
-						Everything follows<br /><span class="text-primary">the language.</span>
-					</h2>
-					<p data-reveal class="mt-5 max-w-[40ch] text-body text-muted">
-						Not only the body. Every recipient-facing surface renders in the matched language.
-					</p>
-				</div>
-				<dl class="grid sm:grid-cols-2">
-					{#each travels as item}
-						<div data-reveal class="border-t border-border/60 py-5 sm:pr-8">
-							<dt class="text-sm font-semibold text-surface">{item.term}</dt>
-							<dd class="mt-1.5 text-sm leading-relaxed text-muted">{item.description}</dd>
+				<div class="divide-y divide-border/30 border-t border-border/30">
+					{#each composeFields as field}
+						<div class="grid grid-cols-[5.5rem_minmax(0,1fr)_auto] items-center gap-x-3 px-5 py-3">
+							<span class="text-xs font-medium text-muted uppercase">{field.label}</span>
+							<span class="min-w-0 text-sm break-words sm:truncate {field.inherited ? 'text-muted' : 'text-surface'}">{field.value}</span>
+							{#if field.inherited}
+								<span class="text-[10px] font-semibold tracking-wider text-muted uppercase">inherited</span>
+							{:else}
+								<span class="text-[10px] font-semibold tracking-wider text-primary uppercase">custom</span>
+							{/if}
 						</div>
 					{/each}
-				</dl>
+				</div>
+				<div class="flex items-center gap-2 border-t border-border/30 px-5 py-3 text-sm font-medium text-surface">
+					<CaretRightIcon size={12} class="text-muted" />
+					<span class="border border-border/60 px-1.5 py-0.5 font-code text-[10px] font-semibold text-surface">FR</span>
+					French
+					<span class="ml-auto text-xs font-normal text-muted">1 of 4 set</span>
+				</div>
+				<div class="border-t border-border/50 bg-background px-5 py-3">
+					<span class="text-xs text-muted">A per-language from email must use a verified sending domain. Lettr checks it when the draft is saved.</span>
+				</div>
 			</div>
 		</div>
 
-		<!-- Details -->
-		<div bind:this={detailsSection} class="mx-auto mt-24 max-w-5xl md:mt-32">
-			<div data-reveal class="mb-4 inline-flex items-center gap-2 text-[11px] font-medium tracking-[0.18em] text-primary/80 uppercase">
-				<span class="block h-px w-6 bg-primary/60"></span>
-				Edge cases
-			</div>
-			<h2 data-reveal class="mb-10 text-surface">
-				Missing values, misspellings,<br /><span class="text-primary">and templates that change.</span>
-			</h2>
-			<dl class="grid gap-x-12 md:grid-cols-2">
-				{#each details as item}
-					<div data-reveal class="border-t border-border/60 py-5">
-						<dt class="text-sm font-semibold text-surface">{item.question}</dt>
-						<dd class="mt-2 text-sm leading-relaxed text-muted">{item.answer}</dd>
+		<!-- What Recipients Get -->
+		<div bind:this={travelsSection} class="mx-auto mt-20 max-w-3xl md:mt-28">
+			<h2 data-reveal class="mb-3 text-center">Everything in their language</h2>
+			<p data-reveal class="mx-auto mb-8 max-w-lg text-center text-body text-muted">
+				The unsubscribe footer, web version, and preferences page match the email the recipient received. The <a class="text-primary underline underline-offset-2" href="/blog/introducing-multilingual-campaigns/">launch post</a> covers the details.
+			</p>
+			<div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+				{#each travels as item}
+					<div data-reveal class="border border-border/50 bg-white p-6">
+						<div class="mb-3 flex h-10 w-10 items-center justify-center border border-border/50 bg-background">
+							<item.icon size={20} class="text-primary" />
+						</div>
+						<h3 class="mb-2 text-base font-semibold text-surface">{item.title}</h3>
+						<p class="text-sm leading-relaxed text-muted">{item.description}</p>
 					</div>
 				{/each}
-			</dl>
-			<p data-reveal class="mt-10 text-sm text-muted">
-				The launch post covers the property-name fallback order, content locking, and the smaller changes shipped alongside:
-				<a class="text-primary underline underline-offset-2" href="/blog/introducing-multilingual-campaigns/">Introducing multilingual campaigns</a>
-			</p>
+			</div>
 		</div>
 	{/snippet}
 </FeaturePageLayout>
@@ -628,91 +568,67 @@
 <style>
 	/*
 	 * The hero diagram loops through the three routes: a comet travels along a
-	 * path, then the matching inbox lights up. One 7.5s cycle, 2.5s per route,
-	 * staggered through animation-delay on each element.
+	 * path, then the matching inbox and its language badge light up. One 7.5s
+	 * cycle, 2.5s per route; --d on each route and inbox staggers them.
+	 *
+	 * With pathLength="1" the dash is 0.18 long and the gap 2, so the pattern
+	 * never repeats inside the path. The offset runs from 0.18 (dash just before
+	 * the start) to -1 (dash just past the end), so exactly one dash is visible.
 	 */
 	.mlc-comet {
-		stroke-dasharray: 0.18 1;
-		stroke-dashoffset: 1.18;
-		animation: mlc-travel 7.5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+		stroke-dasharray: 0.18 2;
+		stroke-dashoffset: 0.18;
+		opacity: 0;
+		animation: mlc-travel 7.5s cubic-bezier(0.4, 0, 0.2, 1) var(--d, 0s) infinite backwards;
 	}
 
 	@keyframes mlc-travel {
 		0% {
-			stroke-dashoffset: 1.18;
-			opacity: 0;
-		}
-		2% {
+			stroke-dashoffset: 0.18;
 			opacity: 1;
 		}
 		16% {
-			stroke-dashoffset: -0.18;
+			stroke-dashoffset: -1;
 			opacity: 1;
 		}
 		17%,
 		100% {
-			stroke-dashoffset: -0.18;
+			stroke-dashoffset: -1;
 			opacity: 0;
 		}
 	}
 
 	.mlc-inbox {
-		animation: mlc-light 7.5s ease-out infinite;
+		animation: mlc-light 7.5s ease-out var(--d, 0s) infinite;
 	}
 
-	.mlc-inbox .mlc-badge {
-		animation: mlc-badge 7.5s ease-out infinite;
-		animation-delay: inherit;
+	.mlc-badge {
+		animation: mlc-badge 7.5s ease-out var(--d, 0s) infinite;
 	}
 
 	@keyframes mlc-light {
 		0%,
-		12% {
+		14% {
 			border-color: color-mix(in oklch, var(--color-border) 50%, transparent);
 		}
-		16%,
+		17%,
 		30% {
 			border-color: var(--color-primary);
 		}
 		40%,
 		100% {
 			border-color: color-mix(in oklch, var(--color-border) 50%, transparent);
-		}
-	}
-
-	/* The 4px nudge only runs beside the routes on desktop; on narrow screens it would push the card past the gutter. */
-	@media (min-width: 1024px) {
-		.mlc-inbox {
-			animation-name: mlc-light-lg;
-		}
-	}
-
-	@keyframes mlc-light-lg {
-		0%,
-		12% {
-			border-color: color-mix(in oklch, var(--color-border) 50%, transparent);
-			transform: translateX(0);
-		}
-		16%,
-		30% {
-			border-color: var(--color-primary);
-			transform: translateX(4px);
-		}
-		40%,
-		100% {
-			border-color: color-mix(in oklch, var(--color-border) 50%, transparent);
-			transform: translateX(0);
 		}
 	}
 
 	@keyframes mlc-badge {
 		0%,
-		12% {
+		14% {
 			background-color: transparent;
 			color: var(--color-surface);
-			border-color: color-mix(in oklch, var(--color-border) 50%, transparent);
+			border-color: color-mix(in oklch, var(--color-border) 60%, transparent);
 		}
-		16%,
+		17%,
 		30% {
 			background-color: var(--color-primary);
 			color: white;
@@ -722,19 +638,14 @@
 		100% {
 			background-color: transparent;
 			color: var(--color-surface);
-			border-color: color-mix(in oklch, var(--color-border) 50%, transparent);
+			border-color: color-mix(in oklch, var(--color-border) 60%, transparent);
 		}
 	}
 
 	@media (prefers-reduced-motion: reduce) {
-		.mlc-comet {
-			animation: none;
-			stroke-dasharray: none;
-			stroke-dashoffset: 0;
-			opacity: 0.5;
-		}
+		.mlc-comet,
 		.mlc-inbox,
-		.mlc-inbox .mlc-badge {
+		.mlc-badge {
 			animation: none;
 		}
 	}
