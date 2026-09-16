@@ -13,7 +13,7 @@ export interface PostMeta {
 export const posts: PostMeta[] = [
   {
     slug: "zaptime-cut-deliverability-tickets-to-zero",
-    category: "Deliverability",
+    category: "Case study",
     title: "Zaptime cut deliverability tickets from dozens a month to zero with Lettr",
     excerpt:
       "How Zaptime, a scheduling and booking platform, moved its transactional and marketing email from two vendors onto Lettr in a one-day migration: the missing booking confirmations behind the switch, why Lettr's domain API and EU hosting decided it, and the drop from dozens of deliverability tickets a month to zero.",
