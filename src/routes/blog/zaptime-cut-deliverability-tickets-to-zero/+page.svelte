@@ -30,10 +30,14 @@
 		workflows. It is fully localized, and customers can manage their scheduling from AI assistants
 		like Claude and ChatGPT through Zaptime's MCP server. Every reservation triggers a confirmation,
 		reminders, and a payment receipt sent from the customer's own domain, so email is a core part of
-		the product. This case study covers how Zaptime moved both its transactional and marketing email
-		onto Lettr in a single day of engineering, and how its deliverability tickets went from dozens a
-		month to zero.
+		the product.
 	</Lead>
+
+	<Paragraph>
+		This case study covers how Zaptime moved both its transactional and marketing email onto Lettr
+		in a single day of engineering, and how its deliverability tickets went from
+		<strong>dozens a month to zero</strong>.
+	</Paragraph>
 
 	<Callout variant="info" title="TL;DR">
 		<TldrList>
