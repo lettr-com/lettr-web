@@ -80,7 +80,7 @@
 					onclick={() => void capturePosthogEvent('hero_announcement_clicked', { href: '/platform/multilingual-campaigns/', label: 'Multilingual campaigns' })}
 				>
 					<span class="bg-primary px-2 py-0.5 text-xs font-bold text-white">New</span>
-					Multilingual campaigns — one send, every contact’s language
+					Multilingual campaigns — each contact gets the email in their language
 					<span class="transition-transform group-hover:translate-x-0.5">&rarr;</span>
 				</a>
 				<h1 data-animate style="animation-delay:0.06s" class="text-surface mb-4">

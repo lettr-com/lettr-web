@@ -121,7 +121,7 @@
 				class="group mb-6 inline-flex w-fit items-center gap-2 border border-primary/20 bg-primary/5 p-1.5 text-sm text-primary transition-colors hover:bg-primary/10"
 			>
 				<span class="bg-primary px-2 py-0.5 text-xs font-bold text-white">New</span>
-				Multilingual campaigns — one send, every contact’s language
+				Multilingual campaigns — each contact gets the email in their language
 				<span class="transition-transform group-hover:translate-x-0.5">&rarr;</span>
 			</a>
 			<h1 data-animate class="text-surface mb-4">
