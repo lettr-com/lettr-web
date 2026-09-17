@@ -167,8 +167,6 @@
 		without a language a one-condition segment.
 	</Paragraph>
 
-	<!-- SCREENSHOT: Review & Send step, "Multi-language send" panel with three languages and the fallback summary. -->
-
 	<Callout variant="info">
 		A campaign can only send the languages its template has. An English-and-German template sends
 		English or German, and a Spanish contact receives the primary language. The
