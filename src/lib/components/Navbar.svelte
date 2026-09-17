@@ -354,14 +354,14 @@
 													{:else}
 														{#each section.items as item}
 															{#if item.comingSoon}
-																<span class="flex items-start gap-3 px-3 py-2 opacity-40 cursor-default">
-																	<div class="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center border border-border/50 bg-background">
+																<span class="flex items-center gap-3 px-3 py-2 opacity-40 cursor-default">
+																	<div class="flex h-7 w-7 shrink-0 items-center justify-center border border-border/50 bg-background">
 																		{#if item.iconSrc}
 																			<img src={item.iconSrc} alt="" class="h-4 w-4" />
 																		{/if}
 																	</div>
 																	<div>
-																		<div class="flex items-center gap-2">
+																		<div class="flex items-center gap-2 leading-snug">
 																			<span class="text-[13px] font-medium text-surface">{item.label}</span>
 																			<span class="border border-border/50 bg-background px-1.5 py-0.5 font-heading text-[9px] tracking-wider text-muted">SOON</span>
 																		</div>
@@ -373,7 +373,7 @@
 																	href={item.href}
 																	target={item.external ? '_blank' : undefined}
 																	rel={item.external ? 'noopener noreferrer' : undefined}
-																	class="group flex {item.badge ? 'items-center' : 'items-start'} gap-3 px-3 py-2 transition-colors hover:bg-background"
+																	class="group flex items-center gap-3 px-3 py-2 transition-colors hover:bg-background"
 																	onclick={() => {
 																		trackNavItemClick('dropdown', item.label, item.href, link.dropdownKey);
 																		openDropdown = null;
@@ -382,7 +382,7 @@
 																	{#if item.badge}
 																		{@render brandBadge(item.badge)}
 																	{:else}
-																		<div class="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center border border-border/50 bg-background transition-colors group-hover:border-primary/30 group-hover:bg-primary/5">
+																		<div class="flex h-7 w-7 shrink-0 items-center justify-center border border-border/50 bg-background transition-colors group-hover:border-primary/30 group-hover:bg-primary/5">
 																			{#if item.iconSrc}
 																				<img src={item.iconSrc} alt="" class="h-4 w-4" />
 																			{:else if item.icon}
@@ -392,7 +392,7 @@
 																		</div>
 																	{/if}
 																	<div>
-																		<span class="text-[13px] font-medium text-surface">{item.label}</span>
+																		<div class="text-[13px] font-medium leading-snug text-surface">{item.label}</div>
 																		<div class="mt-0.5 text-[12px] leading-snug text-muted">{item.description}</div>
 																	</div>
 																</a>
@@ -409,13 +409,13 @@
 													href={item.href}
 													target={item.external ? '_blank' : undefined}
 													rel={item.external ? 'noopener noreferrer' : undefined}
-													class="group flex items-start gap-3 px-3 py-2 transition-colors hover:bg-background"
+													class="group flex items-center gap-3 px-3 py-2 transition-colors hover:bg-background"
 													onclick={() => {
 														trackNavItemClick('dropdown', item.label, item.href, link.dropdownKey);
 														openDropdown = null;
 													}}
 												>
-													<div class="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center border border-border/50 bg-background transition-colors group-hover:border-primary/30 group-hover:bg-primary/5">
+													<div class="flex h-7 w-7 shrink-0 items-center justify-center border border-border/50 bg-background transition-colors group-hover:border-primary/30 group-hover:bg-primary/5">
 														{#if item.iconSrc}
 															<img src={item.iconSrc} alt="" class="h-3.5 w-3.5" />
 														{:else if item.icon}
@@ -424,7 +424,7 @@
 														{/if}
 													</div>
 													<div>
-														<div class="flex items-center gap-2">
+														<div class="flex items-center gap-2 leading-snug">
 															<span class="text-[13px] font-medium text-surface">{item.label}</span>
 															{#if item.external}
 																<svg class="h-2.5 w-2.5 text-muted/50" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
