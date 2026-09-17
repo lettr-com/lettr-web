@@ -34,7 +34,7 @@
 			}
 		}
 
-		measureRoutes();
+		// Observing fires the callback once straight away, so no explicit first measure.
 		const observer = new ResizeObserver(measureRoutes);
 		if (routesEl) observer.observe(routesEl);
 		inboxEls.forEach((el) => observer.observe(el));
@@ -50,16 +50,15 @@
 	interface Inbox {
 		initials: string;
 		name: string;
-		stored: string;
 		code: string;
 		subject: string;
 		sender: string;
 	}
 
 	const inboxes: Inbox[] = [
-		{ initials: 'TW', name: 'Tom Walker', stored: 'english', code: 'EN', subject: 'What\'s new in Lettr: multilingual campaigns', sender: 'Lettr <news@lettr.com>' },
-		{ initials: 'LB', name: 'Lena Berger', stored: 'de_AT', code: 'DE', subject: 'Neu in Lettr: mehrsprachige Kampagnen', sender: 'Lettr <hallo@lettr.com>' },
-		{ initials: 'CL', name: 'Camille Laurent', stored: 'fr-FR', code: 'FR', subject: 'Nouveautés Lettr : campagnes multilingues', sender: 'Lettr <news@lettr.com>' }
+		{ initials: 'TW', name: 'Tom Walker', code: 'EN', subject: 'What\'s new in Lettr: multilingual campaigns', sender: 'Lettr <news@lettr.com>' },
+		{ initials: 'LB', name: 'Lena Berger', code: 'DE', subject: 'Neu in Lettr: mehrsprachige Kampagnen', sender: 'Lettr <hallo@lettr.com>' },
+		{ initials: 'CL', name: 'Camille Laurent', code: 'FR', subject: 'Nouveautés Lettr : campagnes multilingues', sender: 'Lettr <news@lettr.com>' }
 	];
 
 	/*
@@ -182,6 +181,8 @@
 	const totalRecipients = reviewRows.reduce((sum, r) => sum + r.recipients, 0);
 	const format = (n: number) => n.toLocaleString('en-US');
 	const share = (n: number) => `${((n / totalRecipients) * 100).toFixed(1)}%`;
+	/** Bar and legend colour per review row, in row order. */
+	const shareColors = ['bg-surface', 'bg-primary', 'bg-primary/40'];
 
 	/* ---------- Compose mock ---------- */
 
@@ -191,6 +192,7 @@
 		{ label: 'From name', value: 'Lettr', inherited: true },
 		{ label: 'Reply-to', value: 'news@lettr.com', inherited: true }
 	];
+	const composeCustomCount = composeFields.filter((field) => !field.inherited).length;
 
 	/* ---------- Copy ---------- */
 
@@ -225,6 +227,23 @@
 	];
 </script>
 
+{#snippet langBadge(code: string, extra = '')}
+	<span class="{extra} border border-border/60 px-1.5 py-0.5 font-code text-[10px] font-semibold text-surface">{code}</span>
+{/snippet}
+
+{#snippet tag(text: string, tone: 'primary' | 'muted' = 'primary', extra = '')}
+	<span class="{extra} text-[10px] font-semibold tracking-wider uppercase {tone === 'primary' ? 'text-primary' : 'text-muted'}">{text}</span>
+{/snippet}
+
+{#snippet composeHeader(Icon: typeof CaretDownIcon, code: string, name: string, customCount: number, extra = '')}
+	<div class="{extra} flex items-baseline gap-2 px-5 py-3 text-sm font-medium text-surface">
+		<Icon size={12} class="self-center text-muted" />
+		{@render langBadge(code)}
+		{name}
+		<span class="ml-auto text-xs font-normal text-muted">{customCount} custom {customCount === 1 ? 'field' : 'fields'}</span>
+	</div>
+{/snippet}
+
 <FeaturePageLayout
 	title="Multilingual Campaigns"
 	seoTitle="Multilingual Email Campaigns"
@@ -246,24 +265,18 @@
 		<div class="mx-auto grid max-w-3xl grid-cols-[minmax(0,1fr)] items-stretch gap-3 lg:grid-cols-[minmax(0,272px)_minmax(48px,1fr)_minmax(0,400px)] lg:gap-0">
 			<!-- Campaign -->
 			<div class="flex flex-col justify-center border border-border/50 bg-white p-5">
-				<div class="mb-5 flex items-center justify-between">
-					<span class="text-xs font-medium text-muted uppercase">Campaign</span>
-					<span class="text-[10px] font-semibold tracking-wider text-primary uppercase">Scheduled</span>
+				<div class="mb-5">
+					{@render tag('Scheduled')}
 				</div>
 				<p class="font-heading text-lg text-surface">September product update</p>
-				<p class="mt-1 text-sm text-muted">{format(totalRecipients)} recipients · one audience</p>
+				<p class="mt-1 text-sm text-muted">{format(totalRecipients)} recipients</p>
 				<div class="mt-6 border-t border-border/30 pt-5">
-					<p class="mb-2 text-xs font-medium text-muted uppercase">Template languages</p>
 					<div class="flex flex-wrap items-baseline gap-1.5">
 						{#each templateLanguages as lang}
-							<span class="border border-border/60 px-1.5 py-0.5 font-code text-[10px] font-semibold text-surface">{lang.code.toUpperCase()}</span>
+							{@render langBadge(lang.code.toUpperCase())}
 						{/each}
 						<span class="ml-1 text-xs text-muted">{primaryLanguage.name} is primary</span>
 					</div>
-				</div>
-				<div class="mt-5 border-t border-border/30 pt-5">
-					<p class="mb-1 text-xs font-medium text-muted uppercase">Language taken from</p>
-					<p class="font-code text-xs text-surface">communication_language</p>
 				</div>
 			</div>
 
@@ -293,17 +306,12 @@
 						<div class="flex items-start gap-3">
 							<span class="flex h-9 w-9 shrink-0 items-center justify-center bg-surface font-heading text-xs text-white">{inbox.initials}</span>
 							<div class="min-w-0 flex-1">
-								<div class="flex flex-wrap items-baseline justify-between gap-x-2 gap-y-0.5">
+								<div class="flex items-baseline justify-between gap-2">
 									<span class="truncate text-sm font-medium text-surface">{inbox.name}</span>
-									<span class="shrink-0 font-code text-[11px] text-muted">
-										communication_language: <span class="text-surface">{inbox.stored}</span>
-									</span>
+									{@render langBadge(inbox.code, 'mlc-badge shrink-0')}
 								</div>
 								<p class="mt-1.5 truncate text-sm text-surface">{inbox.subject}</p>
-								<div class="mt-1 flex items-baseline justify-between gap-2">
-									<span class="truncate text-xs text-muted">{inbox.sender}</span>
-									<span class="mlc-badge shrink-0 border border-border/60 px-1.5 py-0.5 font-code text-[10px] font-semibold text-surface">{inbox.code}</span>
-								</div>
+								<p class="mt-1 truncate text-xs text-muted">{inbox.sender}</p>
 							</div>
 						</div>
 					</div>
@@ -343,7 +351,7 @@
 					<span class="flex items-baseline gap-1.5 text-xs text-muted">
 						Template languages
 						{#each templateLanguages as lang}
-							<span class="border border-border/60 px-1.5 py-0.5 font-code text-[10px] font-semibold text-surface">{lang.code.toUpperCase()}</span>
+							{@render langBadge(lang.code.toUpperCase())}
 						{/each}
 					</span>
 				</div>
@@ -383,9 +391,9 @@
 								<span class="block text-xs text-muted">{rule.description}</span>
 							</span>
 							{#if state === 'match'}
-								<span class="shrink-0 text-[10px] font-semibold tracking-wider text-primary uppercase">match</span>
+								{@render tag('match', 'primary', 'shrink-0')}
 							{:else if state === 'miss'}
-								<span class="shrink-0 text-[10px] font-semibold tracking-wider text-muted uppercase">no match</span>
+								{@render tag('no match', 'muted', 'shrink-0')}
 							{/if}
 						</li>
 					{/each}
@@ -395,9 +403,9 @@
 					<span class="text-xs font-medium text-muted uppercase">Resolves to</span>
 					<span class="flex items-baseline gap-2">
 						{#if matchResult.kind === 'fallback'}
-							<span class="text-[10px] font-semibold tracking-wider text-primary uppercase">{matchResult.reason === 'empty' ? 'no value' : 'fallback'}</span>
+							{@render tag(matchResult.reason === 'empty' ? 'no value' : 'fallback')}
 						{/if}
-						<span class="border border-border/60 px-1.5 py-0.5 font-code text-[10px] font-semibold text-surface">{resolvedLanguage.code.toUpperCase()}</span>
+						{@render langBadge(resolvedLanguage.code.toUpperCase())}
 						<span class="text-sm font-medium text-surface">{resolvedLanguage.name}</span>
 					</span>
 				</div>
@@ -422,13 +430,13 @@
 				<div class="px-5 py-4">
 					<div class="flex h-1.5 w-full gap-px overflow-hidden">
 						{#each reviewRows as row, i}
-							<div class="h-full {i === 0 ? 'bg-surface' : i === 1 ? 'bg-primary' : 'bg-primary/40'}" style="width:{share(row.recipients)}"></div>
+							<div class="h-full {shareColors[i]}" style="width:{share(row.recipients)}"></div>
 						{/each}
 					</div>
 					<div class="mt-2 flex flex-wrap gap-x-5 gap-y-1 text-xs text-muted">
 						{#each reviewRows as row, i}
 							<span class="flex items-center gap-1.5">
-								<span class="inline-block h-2 w-2 {i === 0 ? 'bg-surface' : i === 1 ? 'bg-primary' : 'bg-primary/40'}"></span>
+								<span class="inline-block h-2 w-2 {shareColors[i]}"></span>
 								{row.name} <span class="font-code text-surface">{share(row.recipients)}</span>
 							</span>
 						{/each}
@@ -450,15 +458,15 @@
 					{#each reviewRows as row}
 						<div class="col-span-4 grid grid-cols-subgrid items-center border-b border-border/30 last:border-b-0" role="row">
 							<span class="py-3 pr-3 pl-5 whitespace-nowrap" role="cell">
-								<span class="mr-2 border border-border/60 px-1.5 py-0.5 font-code text-[10px] font-semibold text-surface">{row.code}</span>
+								{@render langBadge(row.code, 'mr-2')}
 								<span class="font-medium text-surface">{row.name}</span>
 							</span>
 							<span class="px-3 py-3 text-right font-code text-xs text-surface tabular-nums" role="cell">{format(row.recipients)}</span>
 							<span class="truncate px-3 py-3 text-surface" role="cell">
-								{row.subject}{#if row.customSubject}<span class="ml-2 text-[10px] font-semibold tracking-wider text-primary uppercase">custom</span>{/if}
+								{row.subject}{#if row.customSubject}{@render tag('custom', 'primary', 'ml-2')}{/if}
 							</span>
 							<span class="py-3 pr-5 pl-3 whitespace-nowrap text-muted" role="cell">
-								{row.sender}{#if row.customSender}<span class="ml-2 text-[10px] font-semibold tracking-wider text-primary uppercase">custom</span>{/if}
+								{row.sender}{#if row.customSender}{@render tag('custom', 'primary', 'ml-2')}{/if}
 							</span>
 						</div>
 					{/each}
@@ -469,16 +477,16 @@
 						<li class="px-5 py-4">
 							<div class="flex items-baseline justify-between gap-3">
 								<span class="flex items-baseline gap-2">
-									<span class="border border-border/60 px-1.5 py-0.5 font-code text-[10px] font-semibold text-surface">{row.code}</span>
+									{@render langBadge(row.code)}
 									<span class="text-sm font-medium text-surface">{row.name}</span>
 								</span>
 								<span class="font-code text-xs text-surface tabular-nums">{format(row.recipients)}</span>
 							</div>
 							<p class="mt-2 text-sm text-surface">
-								{row.subject}{#if row.customSubject}<span class="ml-2 text-[10px] font-semibold tracking-wider text-primary uppercase">custom</span>{/if}
+								{row.subject}{#if row.customSubject}{@render tag('custom', 'primary', 'ml-2')}{/if}
 							</p>
 							<p class="mt-0.5 text-sm break-all text-muted">
-								{row.sender}{#if row.customSender}<span class="ml-2 text-[10px] font-semibold tracking-wider text-primary uppercase">custom</span>{/if}
+								{row.sender}{#if row.customSender}{@render tag('custom', 'primary', 'ml-2')}{/if}
 							</p>
 						</li>
 					{/each}
@@ -509,31 +517,21 @@
 				<div class="border-b border-border/50 bg-background px-5 py-3">
 					<span class="font-heading text-xs font-semibold text-surface uppercase">Per-language subject and sender</span>
 				</div>
-				<div class="flex items-baseline gap-2 px-5 py-3 text-sm font-medium text-surface">
-					<CaretDownIcon size={12} class="self-center text-muted" />
-					<span class="border border-border/60 px-1.5 py-0.5 font-code text-[10px] font-semibold text-surface">DE</span>
-					German
-					<span class="ml-auto text-xs font-normal text-muted">2 custom fields</span>
-				</div>
+				{@render composeHeader(CaretDownIcon, 'DE', 'German', composeCustomCount)}
 				<div class="divide-y divide-border/30 border-t border-border/30">
 					{#each composeFields as field}
 						<div class="grid grid-cols-[4.75rem_minmax(0,1fr)_auto] sm:grid-cols-[5.5rem_minmax(0,1fr)_auto] items-baseline gap-x-3 px-5 py-3">
 							<span class="text-xs font-medium text-muted uppercase">{field.label}</span>
 							<span class="min-w-0 text-sm break-words sm:truncate {field.inherited ? 'text-muted' : 'text-surface'}">{field.value}</span>
 							{#if field.inherited}
-								<span class="text-[10px] font-semibold tracking-wider text-muted uppercase">inherited</span>
+								{@render tag('inherited', 'muted')}
 							{:else}
-								<span class="text-[10px] font-semibold tracking-wider text-primary uppercase">custom</span>
+								{@render tag('custom')}
 							{/if}
 						</div>
 					{/each}
 				</div>
-				<div class="flex items-baseline gap-2 border-t border-border/30 px-5 py-3 text-sm font-medium text-surface">
-					<CaretRightIcon size={12} class="self-center text-muted" />
-					<span class="border border-border/60 px-1.5 py-0.5 font-code text-[10px] font-semibold text-surface">FR</span>
-					French
-					<span class="ml-auto text-xs font-normal text-muted">1 custom field</span>
-				</div>
+				{@render composeHeader(CaretRightIcon, 'FR', 'French', 1, 'border-t border-border/30')}
 				<div class="border-t border-border/50 bg-background px-5 py-3">
 					<span class="text-xs text-muted">A per-language from email must use one of your verified domains. Lettr checks it on save and again at send time.</span>
 				</div>

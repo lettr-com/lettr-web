@@ -25,6 +25,8 @@
 
 	let { title, seoTitle, metaDescription, label, heading, description, children, related }: Props = $props();
 
+	const pageTitle = $derived(seoTitle ?? title);
+
 	let hero: HTMLElement | undefined = $state();
 	let registerHref: string = $state(registerUrl);
 
@@ -47,11 +49,11 @@
 	});
 </script>
 
-<Seo title="{seoTitle ?? title} | Lettr" description={metaDescription} ogTitle="Lettr — {title}" />
+<Seo title="{pageTitle} | Lettr" description={metaDescription} ogTitle="Lettr — {title}" />
 
 <svelte:head>
 	{@html jsonLdScript(
-		featurePageJsonLd({ path: page.url.pathname, title: seoTitle ?? title, description: metaDescription })
+		featurePageJsonLd({ path: page.url.pathname, title: pageTitle, description: metaDescription })
 	)}
 </svelte:head>
 

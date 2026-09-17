@@ -1,33 +1,13 @@
 import { groupByLetter } from "./letters";
 import type { GlossaryTerm, GlossaryTermLink } from "./types";
+import { SITE_URL, breadcrumb, organization, website } from "../utils/jsonLd";
 
-const SITE_URL = "https://lettr.com";
 const GLOSSARY_URL = `${SITE_URL}/glossary/`;
 const SET_ID = `${GLOSSARY_URL}#set`;
 const TITLE_LIMIT = 60;
 const TITLE_SUFFIX = " | Lettr Glossary";
 
 export const GLOSSARY_NAME = "Lettr Email Glossary";
-
-/**
- * The homepage defines these nodes in full; each glossary page repeats a
- * minimal copy because crawlers do not resolve an `@id` across pages.
- */
-const organization = {
-  "@type": "Organization",
-  "@id": `${SITE_URL}/#organization`,
-  name: "Lettr",
-  url: SITE_URL,
-  logo: { "@type": "ImageObject", url: `${SITE_URL}/logo.svg` },
-};
-
-const website = {
-  "@type": "WebSite",
-  "@id": `${SITE_URL}/#website`,
-  name: "Lettr",
-  url: SITE_URL,
-  publisher: { "@id": organization["@id"] },
-};
 
 export function termUrl(slug: string): string {
   return `${GLOSSARY_URL}${slug}/`;
@@ -63,18 +43,6 @@ export function formatTermDate(date: string): string {
 /** Label with the full name in parentheses when there is one, e.g. "DKIM (DomainKeys Identified Mail)". */
 export function termLabel(term: Pick<GlossaryTerm, "term" | "fullName">): string {
   return term.fullName ? `${term.term} (${term.fullName})` : term.term;
-}
-
-function breadcrumb(id: string, items: { name: string; item: string }[]) {
-  return {
-    "@type": "BreadcrumbList",
-    "@id": id,
-    itemListElement: items.map((entry, index) => ({
-      "@type": "ListItem",
-      position: index + 1,
-      ...entry,
-    })),
-  };
 }
 
 export function termJsonLd(term: GlossaryTerm) {

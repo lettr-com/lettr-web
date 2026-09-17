@@ -4,8 +4,8 @@ import { renderInline, renderPlain } from "./inline";
 import { MONTHS, formatMonth } from "./months";
 import { summarizeMonth } from "./summary";
 import type { ChangelogBugfix, ChangelogEntry, ChangelogMonth } from "./types";
+import { SITE_URL, breadcrumb, organization, website } from "../utils/jsonLd";
 
-const SITE_URL = "https://lettr.com";
 export const CHANGELOG_URL = `${SITE_URL}/changelog/`;
 export const CHANGELOG_NAME = "Lettr Changelog";
 export const FEED_URL = `${CHANGELOG_URL}feed.xml`;
@@ -18,26 +18,6 @@ const DESCRIPTION_LIMIT = 160;
 export const INDEX_TITLE = "Lettr Changelog: New Features, Improvements & Bugfixes";
 export const INDEX_DESCRIPTION =
   "Everything we ship to Lettr, month by month: new features, improvements and bugfixes across the transactional email API, campaigns, audience and the platform.";
-
-/**
- * The homepage defines these nodes in full; each changelog page repeats a
- * minimal copy because crawlers do not resolve an `@id` across pages.
- */
-const organization = {
-  "@type": "Organization",
-  "@id": `${SITE_URL}/#organization`,
-  name: "Lettr",
-  url: SITE_URL,
-  logo: { "@type": "ImageObject", url: `${SITE_URL}/logo.svg` },
-};
-
-const website = {
-  "@type": "WebSite",
-  "@id": `${SITE_URL}/#website`,
-  name: "Lettr",
-  url: SITE_URL,
-  publisher: { "@id": organization["@id"] },
-};
 
 /** The product every entry is about. Minimal, like the two nodes above. */
 const software = {
@@ -99,18 +79,6 @@ export function monthDescription(month: ChangelogMonth): string {
   }
 
   return `${base}.`;
-}
-
-function breadcrumb(id: string, items: { name: string; item: string }[]) {
-  return {
-    "@type": "BreadcrumbList",
-    "@id": id,
-    itemListElement: items.map((entry, index) => ({
-      "@type": "ListItem",
-      position: index + 1,
-      ...entry,
-    })),
-  };
 }
 
 /**

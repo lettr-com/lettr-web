@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { page } from '$app/state';
+	import { SITE_URL, absoluteUrl } from '$lib/utils/jsonLd';
 
-	const SITE_URL = 'https://lettr.com';
 	const DEFAULT_IMAGE = `${SITE_URL}/og-image.png`;
 
 	interface Props {
@@ -29,12 +29,8 @@
 		canonical
 	}: Props = $props();
 
-	function absolute(value: string): string {
-		return value.startsWith('http') ? value : `${SITE_URL}${value}`;
-	}
-
-	const url = $derived(absolute(canonical ?? page.url.pathname));
-	const imageUrl = $derived(absolute(image));
+	const url = $derived(absoluteUrl(canonical ?? page.url.pathname));
+	const imageUrl = $derived(absoluteUrl(image));
 	const socialTitle = $derived(ogTitle ?? title);
 	const socialDescription = $derived(ogDescription ?? description);
 </script>
