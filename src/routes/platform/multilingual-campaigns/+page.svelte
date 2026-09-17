@@ -306,12 +306,12 @@
 						<div class="flex items-start gap-3">
 							<span class="flex h-9 w-9 shrink-0 items-center justify-center bg-surface font-heading text-xs text-white">{inbox.initials}</span>
 							<div class="min-w-0 flex-1">
-								<p class="truncate text-sm font-medium text-surface">{inbox.name}</p>
-								<p class="mt-1.5 truncate text-sm text-surface">{inbox.subject}</p>
-								<div class="mt-1 flex items-baseline justify-between gap-2">
-									<span class="truncate text-xs text-muted">{inbox.sender}</span>
+								<div class="flex items-baseline justify-between gap-2">
+									<span class="truncate text-sm font-medium text-surface">{inbox.name}</span>
 									{@render langBadge(inbox.code, 'mlc-badge shrink-0')}
 								</div>
+								<p class="mt-1.5 truncate text-sm text-surface">{inbox.subject}</p>
+								<p class="mt-1 truncate text-xs text-muted">{inbox.sender}</p>
 							</div>
 						</div>
 					</div>
