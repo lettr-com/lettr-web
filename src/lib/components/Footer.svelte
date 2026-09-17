@@ -52,6 +52,7 @@
 				{ label: 'Transactional Email', href: '/email-api/' },
 				{ label: 'Free Email API', href: '/free-email-api/' },
 				{ label: 'Email Marketing', href: '/email-marketing/' },
+				{ label: 'Multilingual Campaigns', href: '/platform/multilingual-campaigns/' },
 				{ label: 'Template Builder', href: '/platform/templates/' },
 				{ label: 'Analytics', href: '/platform/analytics/' },
 				{ label: 'Deliverability', href: '/platform/deliverability/' },

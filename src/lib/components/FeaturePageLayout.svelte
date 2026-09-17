@@ -4,11 +4,16 @@
 	import { createFromAnimationCleanup } from '$lib/utils/gsap';
 	import { buildRegisterUrl, registerUrl } from '$lib/utils/utm';
 	import { capturePosthogEvent, trackSignupClick } from '$lib/analytics/posthog';
+	import { page } from '$app/state';
 	import Seo from '$lib/components/Seo.svelte';
+	import { jsonLdScript } from '$lib/utils/jsonLd';
+	import { featurePageJsonLd } from '$lib/utils/pageJsonLd';
 	import RelatedFeatures, { type RelatedLink } from '$lib/components/RelatedFeatures.svelte';
 
 	interface Props {
 		title: string;
+		/** Optional <title> override when a more descriptive search title helps. */
+		seoTitle?: string;
 		metaDescription: string;
 		label: string;
 		heading: Snippet;
@@ -18,7 +23,7 @@
 		related?: RelatedLink[];
 	}
 
-	let { title, metaDescription, label, heading, description, children, related }: Props = $props();
+	let { title, seoTitle, metaDescription, label, heading, description, children, related }: Props = $props();
 
 	let hero: HTMLElement | undefined = $state();
 	let registerHref: string = $state(registerUrl);
@@ -42,7 +47,13 @@
 	});
 </script>
 
-<Seo title="{title} | Lettr" description={metaDescription} ogTitle="Lettr — {title}" />
+<Seo title="{seoTitle ?? title} | Lettr" description={metaDescription} ogTitle="Lettr — {title}" />
+
+<svelte:head>
+	{@html jsonLdScript(
+		featurePageJsonLd({ path: page.url.pathname, title: seoTitle ?? title, description: metaDescription })
+	)}
+</svelte:head>
 
 <section class="pt-32 pb-24">
 	<div bind:this={hero} class="text-center">

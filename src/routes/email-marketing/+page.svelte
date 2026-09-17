@@ -117,11 +117,11 @@
 		<div class="flex flex-col">
 			<a
 				data-animate
-				href="/blog/introducing-lettr-marketing-audiences-and-campaigns/"
+				href="/platform/multilingual-campaigns/"
 				class="group mb-6 inline-flex w-fit items-center gap-2 border border-primary/20 bg-primary/5 p-1.5 text-sm text-primary transition-colors hover:bg-primary/10"
 			>
 				<span class="bg-primary px-2 py-0.5 text-xs font-bold text-white">New</span>
-				Introducing Campaigns
+				Multilingual campaigns — each contact gets the email in their language
 				<span class="transition-transform group-hover:translate-x-0.5">&rarr;</span>
 			</a>
 			<h1 data-animate class="text-surface mb-4">
@@ -242,7 +242,7 @@
 	<RelatedFeatures
 		links={[
 			{ href: '/platform/templates/', label: 'Visual Editor', description: 'Drag-and-drop email editor powered by Topol.' },
-			{ href: '/email-api/', label: 'Transactional Email', description: 'Send via REST API and SMTP, billed per email.' },
+			{ href: '/platform/multilingual-campaigns/', label: 'Multilingual Campaigns', description: 'Send one campaign in several languages.' },
 			{ href: '/platform/analytics/', label: 'Analytics & Logs', description: 'Delivery metrics, searchable logs, and webhooks.' }
 		]}
 	/>

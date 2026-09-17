@@ -12,6 +12,16 @@ export interface PostMeta {
 // Used by the blog index listing and the "Related articles" block on each post.
 export const posts: PostMeta[] = [
   {
+    slug: "introducing-multilingual-campaigns",
+    category: "Product",
+    title: "Introducing multilingual campaigns",
+    excerpt:
+      "Lettr campaigns can now send one email in several languages, and each contact receives the version that matches their language. This post covers which audiences benefit, what replaces the one-campaign-per-language setup, how messy language values like de-AT or german are handled, and what recipients see.",
+    author: "Erik Vlčák",
+    date: "September 16, 2026",
+    readTime: "5 min read",
+  },
+  {
     slug: "zaptime-cut-deliverability-tickets-to-zero",
     category: "Case study",
     title: "Zaptime cut deliverability tickets from dozens a month to zero with Lettr",
