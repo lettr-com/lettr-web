@@ -253,7 +253,7 @@
 				<p class="mt-1 text-sm text-muted">{format(totalRecipients)} recipients · one audience</p>
 				<div class="mt-6 border-t border-border/30 pt-5">
 					<p class="mb-2 text-xs font-medium text-muted uppercase">Template languages</p>
-					<div class="flex flex-wrap items-center gap-1.5">
+					<div class="flex flex-wrap items-baseline gap-1.5">
 						{#each templateLanguages as lang}
 							<span class="border border-border/60 px-1.5 py-0.5 font-code text-[10px] font-semibold text-surface">{lang.code.toUpperCase()}</span>
 						{/each}
@@ -292,14 +292,14 @@
 						<div class="flex items-start gap-3">
 							<span class="flex h-9 w-9 shrink-0 items-center justify-center bg-surface font-heading text-xs text-white">{inbox.initials}</span>
 							<div class="min-w-0 flex-1">
-								<div class="flex flex-wrap items-center justify-between gap-x-2 gap-y-0.5">
+								<div class="flex flex-wrap items-baseline justify-between gap-x-2 gap-y-0.5">
 									<span class="truncate text-sm font-medium text-surface">{inbox.name}</span>
 									<span class="shrink-0 font-code text-[11px] text-muted">
 										communication_language: <span class="text-surface">{inbox.stored}</span>
 									</span>
 								</div>
 								<p class="mt-1.5 truncate text-sm text-surface">{inbox.subject}</p>
-								<div class="mt-1 flex items-center justify-between gap-2">
+								<div class="mt-1 flex items-baseline justify-between gap-2">
 									<span class="truncate text-xs text-muted">{inbox.sender}</span>
 									<span class="mlc-badge shrink-0 border border-border/60 px-1.5 py-0.5 font-code text-[10px] font-semibold text-surface">{inbox.code}</span>
 								</div>
@@ -337,9 +337,9 @@
 			</p>
 
 			<div data-reveal class="border border-border/50 bg-white">
-				<div class="flex flex-wrap items-center justify-between gap-2 border-b border-border/50 bg-background px-5 py-3">
+				<div class="flex flex-wrap items-baseline justify-between gap-2 border-b border-border/50 bg-background px-5 py-3">
 					<span class="font-heading text-xs font-semibold text-surface uppercase">Try a value</span>
-					<span class="flex items-center gap-1.5 text-xs text-muted">
+					<span class="flex items-baseline gap-1.5 text-xs text-muted">
 						Template languages
 						{#each templateLanguages as lang}
 							<span class="border border-border/60 px-1.5 py-0.5 font-code text-[10px] font-semibold text-surface">{lang.code.toUpperCase()}</span>
@@ -390,9 +390,9 @@
 					{/each}
 				</ol>
 
-				<div class="flex items-center justify-between gap-3 border-t border-border/50 bg-background px-5 py-3" aria-live="polite">
+				<div class="flex items-baseline justify-between gap-3 border-t border-border/50 bg-background px-5 py-3" aria-live="polite">
 					<span class="text-xs font-medium text-muted uppercase">Resolves to</span>
-					<span class="flex items-center gap-2">
+					<span class="flex items-baseline gap-2">
 						{#if matchResult.kind === 'fallback'}
 							<span class="text-[10px] font-semibold tracking-wider text-primary uppercase">{matchResult.reason === 'empty' ? 'no value' : 'fallback'}</span>
 						{/if}
@@ -411,7 +411,7 @@
 			</p>
 
 			<div data-reveal class="max-w-full min-w-0 border border-border/50 bg-white">
-				<div class="flex flex-wrap items-center justify-between gap-2 border-b border-border/50 bg-background px-5 py-3">
+				<div class="flex flex-wrap items-baseline justify-between gap-2 border-b border-border/50 bg-background px-5 py-3">
 					<span class="font-heading text-xs font-semibold text-surface uppercase">Multi-language send</span>
 					<span class="text-xs text-muted">
 						Language taken from <span class="font-code text-surface">communication_language</span>
@@ -466,8 +466,8 @@
 				<ul class="divide-y divide-border/30 border-t border-border/50 lg:hidden">
 					{#each reviewRows as row}
 						<li class="px-5 py-4">
-							<div class="flex items-center justify-between gap-3">
-								<span class="flex items-center gap-2">
+							<div class="flex items-baseline justify-between gap-3">
+								<span class="flex items-baseline gap-2">
 									<span class="border border-border/60 px-1.5 py-0.5 font-code text-[10px] font-semibold text-surface">{row.code}</span>
 									<span class="text-sm font-medium text-surface">{row.name}</span>
 								</span>
@@ -508,15 +508,15 @@
 				<div class="border-b border-border/50 bg-background px-5 py-3">
 					<span class="font-heading text-xs font-semibold text-surface uppercase">Per-language subject and sender</span>
 				</div>
-				<div class="flex items-center gap-2 px-5 py-3 text-sm font-medium text-surface">
-					<CaretDownIcon size={12} class="text-muted" />
+				<div class="flex items-baseline gap-2 px-5 py-3 text-sm font-medium text-surface">
+					<CaretDownIcon size={12} class="self-center text-muted" />
 					<span class="border border-border/60 px-1.5 py-0.5 font-code text-[10px] font-semibold text-surface">DE</span>
 					German
 					<span class="ml-auto text-xs font-normal text-muted">2 custom fields</span>
 				</div>
 				<div class="divide-y divide-border/30 border-t border-border/30">
 					{#each composeFields as field}
-						<div class="grid grid-cols-[4.75rem_minmax(0,1fr)_auto] sm:grid-cols-[5.5rem_minmax(0,1fr)_auto] items-center gap-x-3 px-5 py-3">
+						<div class="grid grid-cols-[4.75rem_minmax(0,1fr)_auto] sm:grid-cols-[5.5rem_minmax(0,1fr)_auto] items-baseline gap-x-3 px-5 py-3">
 							<span class="text-xs font-medium text-muted uppercase">{field.label}</span>
 							<span class="min-w-0 text-sm break-words sm:truncate {field.inherited ? 'text-muted' : 'text-surface'}">{field.value}</span>
 							{#if field.inherited}
@@ -527,8 +527,8 @@
 						</div>
 					{/each}
 				</div>
-				<div class="flex items-center gap-2 border-t border-border/30 px-5 py-3 text-sm font-medium text-surface">
-					<CaretRightIcon size={12} class="text-muted" />
+				<div class="flex items-baseline gap-2 border-t border-border/30 px-5 py-3 text-sm font-medium text-surface">
+					<CaretRightIcon size={12} class="self-center text-muted" />
 					<span class="border border-border/60 px-1.5 py-0.5 font-code text-[10px] font-semibold text-surface">FR</span>
 					French
 					<span class="ml-auto text-xs font-normal text-muted">1 custom field</span>
