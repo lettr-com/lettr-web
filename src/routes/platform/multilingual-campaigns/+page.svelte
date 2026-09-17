@@ -50,16 +50,15 @@
 	interface Inbox {
 		initials: string;
 		name: string;
-		stored: string;
 		code: string;
 		subject: string;
 		sender: string;
 	}
 
 	const inboxes: Inbox[] = [
-		{ initials: 'TW', name: 'Tom Walker', stored: 'english', code: 'EN', subject: 'What\'s new in Lettr: multilingual campaigns', sender: 'Lettr <news@lettr.com>' },
-		{ initials: 'LB', name: 'Lena Berger', stored: 'de_AT', code: 'DE', subject: 'Neu in Lettr: mehrsprachige Kampagnen', sender: 'Lettr <hallo@lettr.com>' },
-		{ initials: 'CL', name: 'Camille Laurent', stored: 'fr-FR', code: 'FR', subject: 'Nouveautés Lettr : campagnes multilingues', sender: 'Lettr <news@lettr.com>' }
+		{ initials: 'TW', name: 'Tom Walker', code: 'EN', subject: 'What\'s new in Lettr: multilingual campaigns', sender: 'Lettr <news@lettr.com>' },
+		{ initials: 'LB', name: 'Lena Berger', code: 'DE', subject: 'Neu in Lettr: mehrsprachige Kampagnen', sender: 'Lettr <hallo@lettr.com>' },
+		{ initials: 'CL', name: 'Camille Laurent', code: 'FR', subject: 'Nouveautés Lettr : campagnes multilingues', sender: 'Lettr <news@lettr.com>' }
 	];
 
 	/*
@@ -266,24 +265,18 @@
 		<div class="mx-auto grid max-w-3xl grid-cols-[minmax(0,1fr)] items-stretch gap-3 lg:grid-cols-[minmax(0,272px)_minmax(48px,1fr)_minmax(0,400px)] lg:gap-0">
 			<!-- Campaign -->
 			<div class="flex flex-col justify-center border border-border/50 bg-white p-5">
-				<div class="mb-5 flex items-center justify-between">
-					<span class="text-xs font-medium text-muted uppercase">Campaign</span>
+				<div class="mb-5">
 					{@render tag('Scheduled')}
 				</div>
 				<p class="font-heading text-lg text-surface">September product update</p>
-				<p class="mt-1 text-sm text-muted">{format(totalRecipients)} recipients · one audience</p>
+				<p class="mt-1 text-sm text-muted">{format(totalRecipients)} recipients</p>
 				<div class="mt-6 border-t border-border/30 pt-5">
-					<p class="mb-2 text-xs font-medium text-muted uppercase">Template languages</p>
 					<div class="flex flex-wrap items-baseline gap-1.5">
 						{#each templateLanguages as lang}
 							{@render langBadge(lang.code.toUpperCase())}
 						{/each}
 						<span class="ml-1 text-xs text-muted">{primaryLanguage.name} is primary</span>
 					</div>
-				</div>
-				<div class="mt-5 border-t border-border/30 pt-5">
-					<p class="mb-1 text-xs font-medium text-muted uppercase">Language taken from</p>
-					<p class="font-code text-xs text-surface">communication_language</p>
 				</div>
 			</div>
 
@@ -313,12 +306,7 @@
 						<div class="flex items-start gap-3">
 							<span class="flex h-9 w-9 shrink-0 items-center justify-center bg-surface font-heading text-xs text-white">{inbox.initials}</span>
 							<div class="min-w-0 flex-1">
-								<div class="flex flex-wrap items-baseline justify-between gap-x-2 gap-y-0.5">
-									<span class="truncate text-sm font-medium text-surface">{inbox.name}</span>
-									<span class="shrink-0 font-code text-[11px] text-muted">
-										communication_language: <span class="text-surface">{inbox.stored}</span>
-									</span>
-								</div>
+								<p class="truncate text-sm font-medium text-surface">{inbox.name}</p>
 								<p class="mt-1.5 truncate text-sm text-surface">{inbox.subject}</p>
 								<div class="mt-1 flex items-baseline justify-between gap-2">
 									<span class="truncate text-xs text-muted">{inbox.sender}</span>
