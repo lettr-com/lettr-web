@@ -16,7 +16,7 @@ export const posts: PostMeta[] = [
     category: "Case study",
     title: "Zaptime cut deliverability tickets from dozens a month to zero with Lettr",
     excerpt:
-      "How Zaptime, a scheduling and booking platform, moved its transactional and marketing email from two vendors onto Lettr in a one-day migration: the missing booking confirmations behind the switch, why Lettr's domain API and EU hosting decided it, and the drop from dozens of deliverability tickets a month to zero.",
+      "Zaptime's customers were reporting that their clients never received booking confirmations, and Amazon SES gave the team no way to find out why. The switch to Lettr took a single day of engineering, and it came down to two things the alternative could not do: manage sending domains for hundreds of customer teams, and process data in the EU.",
     author: "Jack Zagorski",
     date: "September 11, 2026",
     readTime: "4 min read",
