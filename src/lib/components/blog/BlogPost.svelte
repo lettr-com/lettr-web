@@ -7,6 +7,8 @@
 	import Seo from '$lib/components/Seo.svelte';
 	import TableOfContents from './TableOfContents.svelte';
 	import { getRelatedPosts } from '$lib/data/posts';
+	import { jsonLdScript } from '$lib/utils/jsonLd';
+	import { blogPostJsonLd, type FaqEntry } from '$lib/utils/pageJsonLd';
 
 	export interface BlogAuthor {
 		name: string;
@@ -29,11 +31,15 @@
 		date: string;
 		/** ISO date used for the <time> element and structured data. */
 		datetime?: string;
+		/** ISO date of the last substantial edit, for structured data. Defaults to {@link datetime}. */
+		dateModified?: string;
 		readTime?: string;
 		coverImage?: string;
 		coverAlt?: string;
 		/** Canonical slug, used to build the canonical URL. */
 		slug?: string;
+		/** The article's FAQ as plain text, emitted as FAQPage structured data. */
+		faqs?: readonly FaqEntry[];
 		children: Snippet;
 	}
 
@@ -46,16 +52,33 @@
 		author,
 		date,
 		datetime,
+		dateModified,
 		readTime,
 		coverImage,
 		coverAlt = '',
 		slug,
+		faqs,
 		children
 	}: Props = $props();
 
 	const canonical = $derived(slug ? `/blog/${slug}/` : undefined);
 	const seoDescription = $derived(metaDescription ?? excerpt ?? '');
 	const related = $derived(getRelatedPosts(slug));
+	const jsonLd = $derived(
+		slug
+			? blogPostJsonLd({
+					slug,
+					title,
+					description: seoDescription,
+					datetime,
+					dateModified,
+					category,
+					author,
+					image: coverImage,
+					faqs
+				})
+			: undefined
+	);
 	const initials = $derived(
 		author.name
 			.split(' ')
@@ -104,6 +127,12 @@
 	image={coverImage}
 	{canonical}
 />
+
+<svelte:head>
+	{#if jsonLd}
+		{@html jsonLdScript(jsonLd)}
+	{/if}
+</svelte:head>
 
 <article class="pt-32 pb-24">
 	<div class="mx-auto max-w-[1064px] px-4">

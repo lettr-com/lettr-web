@@ -19,6 +19,7 @@ Key facts for context:
 - [Inbound Email API](https://lettr.com/inbound-email-api): Receive and parse incoming email in your app.
 - [MCP Server](https://lettr.com/platform/mcp): Manage Lettr from AI assistants — Claude, Cursor, and other MCP clients.
 - [Email marketing](https://lettr.com/email-marketing): Audiences and campaigns on the same platform as transactional.
+- [Multilingual campaigns](https://lettr.com/platform/multilingual-campaigns): Send one email campaign in several languages — each contact receives the template version that matches the language stored on their contact record, with per-language subject and sender and a fallback to the primary language.
 - [Visual editor](https://lettr.com/platform/templates): Built-in Topol-powered drag-and-drop template editor — product teams edit without deploys.
 - [Deliverability](https://lettr.com/platform/deliverability): Deliverability tooling — domain authentication, smart alerts.
 - [Analytics & logs](https://lettr.com/platform/analytics): Per-email statistics, event logs, and delivery analytics.

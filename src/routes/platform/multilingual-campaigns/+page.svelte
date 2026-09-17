@@ -227,7 +227,8 @@
 
 <FeaturePageLayout
 	title="Multilingual Campaigns"
-	metaDescription="Send one campaign in several languages. Each contact gets the version that matches their language, with per-language subject, sender, footer, and web version."
+	seoTitle="Multilingual Email Campaigns"
+	metaDescription="Send one email campaign in several languages. Each contact gets the version in their language, with a per-language subject, sender, and footer."
 	label="MULTILINGUAL CAMPAIGNS"
 	description="The template holds the languages, a contact property holds each person's choice, and Lettr sends every recipient the version in their language."
 	related={[

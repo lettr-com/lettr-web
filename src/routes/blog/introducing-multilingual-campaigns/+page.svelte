@@ -10,18 +10,51 @@
 		Faq,
 		FaqItem
 	} from '$lib/components/blog';
+
+	// Single source for the visible FAQ and the FAQPage structured data.
+	const faqItems = [
+		{
+			question: "Do I have to enable multilingual campaigns?",
+			lead: "No. A campaign is multilingual whenever its template has more than one language.",
+			rest: "The only setup is adding languages to the template and making sure a contact property holds each contact's language, either by marking one as the communication language or by naming it language, lang, or locale."
+		},
+		{
+			question: "What happens to a contact with no language, or a value like klingon?",
+			lead: "They receive the primary language.",
+			rest: "Nobody is skipped. Lettr counts both groups before the send and lists the values that did not match, so the data can be fixed first."
+		},
+		{
+			question: "Can the language property be set up through the API?",
+			lead: "Yes. The communication-language flag can be set when a property is created or updated through the API.",
+			rest: "Language values written in the usual formats, such as de, de-AT, or en_US, are matched as they are."
+		},
+		{
+			question: "Can I give the German version a different subject and sender?",
+			lead: "Yes. Each secondary language has its own optional subject, from name, from email, and reply-to.",
+			rest: "Any field left empty inherits the primary value, and a per-language from email must belong to one of the team's verified sending domains."
+		},
+		{
+			question: "What if someone edits the template after I schedule the campaign?",
+			lead: "The campaign is unaffected.",
+			rest: "Lettr stores every language version when the campaign is scheduled or started. Unscheduling drops the stored copy, so rescheduling picks up the current template."
+		},
+	];
+	const faqs = faqItems.map(({ question, lead, rest }) => ({ question, answer: `${lead} ${rest}` }));
 </script>
 
 <BlogPost
 	category="Product"
 	title="Introducing multilingual campaigns"
+	seoTitle="Multilingual email campaigns in Lettr"
 	excerpt="Lettr campaigns can now send one email in several languages, and each contact receives the version that matches their language. This post covers which audiences benefit, what replaces the one-campaign-per-language setup, how messy language values like de-AT or german are handled, and what recipients see."
-	metaDescription="Lettr campaigns now send one email in several languages. Which audiences benefit, what it replaces, how messy language values are matched, and what recipients see."
+	metaDescription="Lettr campaigns now send one email in several languages. Who it is for, how messy language values are matched, and what each recipient sees."
 	author={{ name: 'Erik Vlčák', role: 'Customer Success Engineer', avatar: '/images/authors/erik.jpg' }}
 	date="September 16, 2026"
 	datetime="2026-09-16"
+	dateModified="2026-09-17"
 	readTime="5 min read"
 	slug="introducing-multilingual-campaigns"
+	{faqs}
 >
 	<Lead>
 		A Lettr campaign can now send one email in several languages. The template holds every language
@@ -89,6 +122,8 @@
 		with a table showing how many people received each language. The template works the same way:
 		all language versions share one layout and only the text differs, so a design change is made once
 		and applies to every language.
+		The <a href="/platform/multilingual-campaigns/">Multilingual Campaigns page</a> shows the whole
+		flow, with a live matcher for trying language values.
 	</Paragraph>
 
 	<Heading level={2}>It works with the language data already in the audience</Heading>
@@ -176,31 +211,12 @@
 	<Heading level={2}>FAQ</Heading>
 
 	<Faq>
-		<FaqItem question="Do I have to enable multilingual campaigns?">
-			<strong>No. A campaign is multilingual whenever its template has more than one language.</strong>
-			The only setup is adding languages to the template and making sure a contact property holds
-			each contact's language, either by marking one as the communication language or by naming it
-			language, lang, or locale.
-		</FaqItem>
-		<FaqItem question="What happens to a contact with no language, or a value like klingon?">
-			<strong>They receive the primary language.</strong> Nobody is skipped. Lettr counts both groups
-			before the send and lists the values that did not match, so the data can be fixed first.
-		</FaqItem>
-		<FaqItem question="Can the language property be set up through the API?">
-			<strong>Yes. The communication-language flag can be set when a property is created or updated
-			through the API.</strong> Language values written in the usual formats, such as de, de-AT, or
-			en_US, are matched as they are.
-		</FaqItem>
-		<FaqItem question="Can I give the German version a different subject and sender?">
-			<strong>Yes. Each secondary language has its own optional subject, from name, from email, and
-			reply-to.</strong> Any field left empty inherits the primary value, and a per-language from email
-			must belong to one of the team's verified sending domains.
-		</FaqItem>
-		<FaqItem question="What if someone edits the template after I schedule the campaign?">
-			<strong>The campaign is unaffected.</strong> Lettr stores every language version when the
-			campaign is scheduled or started. Unscheduling drops the stored copy, so rescheduling picks up
-			the current template.
-		</FaqItem>
+		{#each faqItems as item}
+			<FaqItem question={item.question}>
+				<strong>{item.lead}</strong>
+				{item.rest}
+			</FaqItem>
+		{/each}
 	</Faq>
 
 	<Heading level={2}>Bottom line</Heading>
