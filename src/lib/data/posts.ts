@@ -12,6 +12,16 @@ export interface PostMeta {
 // Used by the blog index listing and the "Related articles" block on each post.
 export const posts: PostMeta[] = [
   {
+    slug: "mailgun-alternatives",
+    category: "Fundamentals",
+    title: "5 best Mailgun alternatives for transactional email in 2026",
+    excerpt:
+      "Five Mailgun alternatives (Lettr, Mailtrap, Postmark, Amazon SES, and Twilio SendGrid) compared on log retention, free tiers, pricing at 50,000 and 100,000 emails a month, and traffic separation.",
+    author: "Jack Zagorski",
+    date: "September 18, 2026",
+    readTime: "8 min read",
+  },
+  {
     slug: "introducing-multilingual-campaigns",
     category: "Product",
     title: "Introducing multilingual campaigns",
