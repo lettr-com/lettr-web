@@ -342,7 +342,7 @@
 		<div bind:this={matcherSection} class="mx-auto mt-20 max-w-3xl md:mt-28">
 			<h2 data-reveal class="mb-3 text-center">Language matching</h2>
 			<p data-reveal class="mx-auto mb-8 max-w-lg text-center text-body text-muted">
-				de_AT, Deutsch, and German all get the German version. Three rules run strictest first, and a value that matches nothing gets the primary language.
+				de_AT, Deutsch, and German all get the German version. Three rules run strictest first, and a value that matches nothing gets the <a class="text-primary underline underline-offset-2" href="/glossary/primary-language/">primary language</a>.
 			</p>
 
 			<div data-reveal class="border border-border/50 bg-white">

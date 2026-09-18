@@ -3,8 +3,8 @@ term: Saved Block
 heading: "What is a saved block?"
 description: "A saved block is a reusable email section, such as a header or footer, stored once and inserted into many templates. Saved vs synced sections in Lettr."
 published: 2026-09-14
-updated: 2026-09-14
-related: [structure, content-block, topol-email-editor, loop-block]
+updated: 2026-09-18
+related: [structure, content-block, topol-email-editor, loop-block, multilingual-template]
 reading:
   - title: Saved Blocks
     href: https://docs.lettr.com/learn/templates/saved-blocks
@@ -44,6 +44,6 @@ Lettr's saved blocks live in the [Topol email editor](/glossary/topol-email-edit
 
 Both behaviours are available. A Saved Section inserts an independent copy whose changes affect only that template, and a Synced Section maintains a live link, so saving changes to it updates all templates using it. When a team member updates a synced section, a teammate who has an affected template open sees the updated content without refreshing. A synced section can be unlinked inside a template, which converts it into an independent copy, and any section in the editor can be saved as a new synced section.
 
-Folders organise the library and can be nested inside other folders. In API responses each block carries a `type` of `saved_section`, `synced_section` or `folder`, and a `definition` with its design and content, stored in Topol editor JSON format. Deleting a synced block breaks the templates that use it, so the docs advise checking which templates contain it first. Saved blocks also support translations for multilingual templates.
+Folders organise the library and can be nested inside other folders. In API responses each block carries a `type` of `saved_section`, `synced_section` or `folder`, and a `definition` with its design and content, stored in Topol editor JSON format. Deleting a synced block breaks the templates that use it, so the docs advise checking which templates contain it first. A saved block keeps the language versions it was saved with when it is inserted into a [multilingual template](/glossary/multilingual-template/), and synced sections are skipped by the editor's AI translation.
 
 The [Saved Blocks](https://docs.lettr.com/learn/templates/saved-blocks) page covers creating, editing and converting both types.

@@ -3,7 +3,7 @@ term: Merge Tag
 heading: "What is a merge tag?"
 description: "A merge tag is a placeholder in an email template that is replaced with recipient-specific data at send time. How merge tags work and Lettr's template syntax."
 published: 2026-09-14
-updated: 2026-09-14
+updated: 2026-09-18
 related: [substitution-data, loop-block, template-slug, editor-settings, click-tracking]
 reading:
   - title: Personalization and Dynamic Content
@@ -44,4 +44,4 @@ Keep business logic in the application. Templates can compare and branch, but ca
 
 The `or` operator supplies a default, as in `{{ first_name or 'Customer' }}`. In HTML content, double braces HTML-escape the value, and triple braces insert it unescaped, which the docs reserve for trusted content. Statements use the same braces, with `{{if}}` blocks closed by `{{end}}` and `{{each array}} ... {{end}}` loops. Keys may contain only US-ASCII letters, digits and underscores, cannot start with a digit, and words such as `email`, `address` and `each` are reserved.
 
-In the Topol editor, merge tags come from team-wide [Editor Settings](/glossary/editor-settings/), where a tag's value is generated from its text in uppercase with underscores, so "First Name" becomes `{{ FIRST_NAME }}`. Campaigns add `{{unsubscribe_link}}` and `{{webversion_link}}`, which become signed per-recipient URLs at send time. The [Template Language](https://docs.lettr.com/learn/templates/template-language) page documents every operator and link behavior.
+In the Topol editor, merge tags come from team-wide [Editor Settings](/glossary/editor-settings/), where a tag's value is generated from its text in uppercase with underscores, so "First Name" becomes `{{ FIRST_NAME }}`. Campaigns add `{{unsubscribe_link}}` and `{{webversion_link}}`, which become signed per-recipient URLs at send time. In a multilingual campaign, merge tags work in every language version and are filled from the recipient's contact properties, and the editor's [AI email translation](/glossary/ai-translation/) keeps them exactly as written. The [Template Language](https://docs.lettr.com/learn/templates/template-language) page documents every operator and link behavior.

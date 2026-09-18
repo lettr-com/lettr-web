@@ -3,7 +3,7 @@ term: Preference Center
 heading: "What is a preference center?"
 description: "A preference center is a page where recipients choose which emails they get instead of leaving entirely. How it works and Lettr's hosted preferences page."
 published: 2026-09-14
-updated: 2026-09-14
+updated: 2026-09-18
 related: [opt-out, list-unsubscribe, one-click-unsubscribe, sunset-policy, suppression-list]
 reading:
   - title: Unsubscribe Best Practices
@@ -41,7 +41,7 @@ A preference center works alongside a [sunset policy](/glossary/sunset-policy/).
 
 ## Preference center in Lettr
 
-**Lettr hosts a preference center, the Manage email preferences page**, which every `{{unsubscribe_link}}` in a campaign opens through a signed per-recipient URL. It applies to marketing campaigns only, and transactional emails sent through the API or SMTP are not affected by anything a recipient does there. The page shows the contact's status, one checkbox per public topic plus any private topic the contact already holds, a pause for 30, 60 or 90 days, and up to the ten most recent campaigns the contact received.
+**Lettr hosts a preference center, the Manage email preferences page**, which every `{{unsubscribe_link}}` in a campaign opens through a signed per-recipient URL. It applies to marketing campaigns only, and transactional emails sent through the API or SMTP are not affected by anything a recipient does there. The page shows the contact's status, one checkbox per public topic plus any private topic the contact already holds, a pause for 30, 60 or 90 days, and up to the ten most recent campaigns the contact received. The page exists in 19 languages and follows the contact's [communication language](/glossary/communication-language/) when it is one of them, then the team's **Default communication language**, then English.
 
 Unticking a topic changes only that subscription, and consent is re-checked when a campaign's recipients are resolved and again for every batch. Unticking every box unsubscribes the contact from all marketing email after an optional reason, sets the status to `unsubscribed` and fires the `unsubscribe.link_unsubscribe` webhook event. A pause keeps the contact `subscribed` with a `paused_until` date, and campaigns skip them until that date passes.
 

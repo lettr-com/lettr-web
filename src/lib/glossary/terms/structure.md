@@ -3,7 +3,7 @@ term: Structure
 heading: "What is a structure in an email template?"
 description: "A structure is a horizontal layout section in a drag-and-drop email editor that holds columns and content. How structures work in Lettr's Topol editor."
 published: 2026-09-14
-updated: 2026-09-14
+updated: 2026-09-18
 related: [content-block, saved-block, topol-email-editor, rendering-engine, email-clipping]
 reading:
   - title: Topol Email Editor
@@ -45,6 +45,6 @@ Lettr's visual template editor is the Topol email editor, where **templates are 
 
 Stacking can be disabled per structure when side-by-side rendering is required at all viewport sizes. Individual structures can be limited to one device class with the **Hide on desktop** and **Hide on mobile** toggles. Hidden content is still rendered in the HTML and hidden with CSS, so it counts toward the total email size, and the **Show hidden** toolbar button reveals it for editing.
 
-Structures can be moved, duplicated, deleted or saved as reusable Saved Blocks, either as Saved Sections that insert independent copies or as Synced Sections that keep a live link to the source. In a multilingual template every language version shares the same structural layout, so adding, removing or rearranging structures in one language applies to all versions, and only the text inside blocks differs per language. Converting a custom HTML template to the visual editor parses the HTML into the structure, column and block model, and complex or non-standard HTML may need manual adjustment afterwards.
+Structures can be moved, duplicated, deleted or saved as reusable Saved Blocks, either as Saved Sections that insert independent copies or as Synced Sections that keep a live link to the source. In a [multilingual template](/glossary/multilingual-template/) every language version shares the same structural layout, so adding, removing or rearranging structures in one language applies to all versions, and only the text inside blocks differs per language. Converting a custom HTML template to the visual editor parses the HTML into the structure, column and block model, and complex or non-standard HTML may need manual adjustment afterwards.
 
 The [Email Editor Best Practices](https://docs.lettr.com/knowledge-base/best-practices/email-editor-best-practices) guide covers working with structures and columns in detail.

@@ -139,7 +139,8 @@
 	<Paragraph>
 		The property that holds the language needs little setup. A property named language, lang, or
 		locale is picked up automatically, so an audience imported from a CSV with a lang column works as
-		it is, and any other string property can be marked as the communication language.
+		it is, and any other string property can be marked as the
+		<a href="/glossary/communication-language/">communication language</a>.
 		<strong>The same flag can be set through the API</strong> when a property is created or updated,
 		so a team that manages its audience schema from code can set up the language property in the same
 		script.
@@ -156,7 +157,9 @@
 	<Paragraph>
 		With one campaign per language, a contact whose language field was empty or misspelled matched no
 		segment and received nothing. In a multilingual campaign,
-		<strong>a contact whose language is missing or unrecognized receives the primary language</strong>,
+		<strong>a contact whose language is missing or unrecognized receives the
+			<a href="/glossary/primary-language/">primary language</a></strong
+		>,
 		so the send always covers the whole audience.
 	</Paragraph>
 

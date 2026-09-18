@@ -3,7 +3,7 @@ term: Topol Email Editor
 heading: "What is the Topol Email Editor?"
 description: "The Topol Email Editor is a drag-and-drop tool for building responsive HTML email without code. How visual email editors work and how Lettr uses Topol."
 published: 2026-09-14
-updated: 2026-09-14
+updated: 2026-09-18
 related: [content-block, structure, saved-block, editor-settings, merge-tag]
 reading:
   - title: Topol Email Editor
@@ -41,6 +41,6 @@ They also cut down on rendering bugs and inconsistency. Hand-written email HTML 
 
 **Lettr's visual templates are built in the Topol editor** from structures, columns and 10 content block types. Columns stack vertically on mobile unless stacking is turned off for the structure, and structures and blocks have **Hide on desktop** and **Hide on mobile** toggles. The **Settings** panel holds template-wide defaults, including **Preview text**, the preheader shown next to the subject line in inbox previews.
 
-The toolbar adds **Multilingual**, which keeps several language versions of one template with a shared structure and independent text, and **Autosave history**, where timestamped autosaves can be browsed and restored. Images uploaded through the **File Manager** are available to all team members across all templates. Structures can be saved as Saved Blocks, and merge tags can be placed in text blocks, link URLs, image alt text and button labels, with their values supplied in `substitution_data` in the send request.
+The toolbar adds **Multilingual**, which turns a template into a [multilingual template](/glossary/multilingual-template/) that keeps several language versions with a shared structure and independent text, and **Autosave history**, where timestamped autosaves can be browsed and restored. Images uploaded through the **File Manager** are available to all team members across all templates. Structures can be saved as Saved Blocks, and merge tags can be placed in text blocks, link URLs, image alt text and button labels, with their values supplied in `substitution_data` in the send request.
 
 Fonts, colors and the merge tag list come from Editor Settings, which apply across the team to all templates. A template can be converted to custom HTML from the **More** menu, which exports the generated HTML and stops maintaining the visual structure. Converting custom HTML back to the visual editor parses it into structures, columns and blocks, and complex or non-standard markup may need manual adjustment afterwards. The [Topol Email Editor](https://docs.lettr.com/learn/templates/topol-editor) page documents every block type and setting.
