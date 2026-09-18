@@ -240,7 +240,7 @@
   .blog-prose table {
     width: 100%;
     border-collapse: collapse;
-    font-size: 0.9375rem;
+    font-size: 0.875rem;
     line-height: 1.4;
   }
 
@@ -248,14 +248,21 @@
     text-align: left;
     font-weight: 650;
     color: var(--color-surface);
-    padding: 0.625rem 0.75rem;
+    padding: 0.625rem 0.5rem;
     border-bottom: 2px solid color-mix(in srgb, var(--color-surface) 18%, transparent);
   }
 
   .blog-prose tbody td {
-    padding: 0.625rem 0.75rem;
+    padding: 0.625rem 0.5rem;
     border-bottom: 1px solid color-mix(in srgb, var(--color-surface) 10%, transparent);
     vertical-align: top;
+  }
+
+  /* Flush the first column with the body text; the saved width keeps
+     six-column comparison tables inside the 550px body column. */
+  .blog-prose thead th:first-child,
+  .blog-prose tbody td:first-child {
+    padding-left: 0;
   }
 
   .blog-prose tbody tr:last-child td {
