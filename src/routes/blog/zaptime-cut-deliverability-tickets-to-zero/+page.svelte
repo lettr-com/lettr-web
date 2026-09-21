@@ -21,6 +21,7 @@
 	author={{ name: 'Jack Zagorski', role: 'Content specialist', avatar: '/images/authors/jack.jpg' }}
 	date="September 11, 2026"
 	datetime="2026-09-11"
+	dateModified="2026-09-17"
 	readTime="4 min read"
 	slug="zaptime-cut-deliverability-tickets-to-zero"
 >

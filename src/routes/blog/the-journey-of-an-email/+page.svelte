@@ -52,6 +52,7 @@ Receiving server: 250 2.0.0 OK`;
 	author={{ name: 'Erik Vlčák', role: 'Customer Success Engineer', avatar: '/images/authors/erik.jpg' }}
 	date="February 18, 2026"
 	datetime="2026-02-18"
+	dateModified="2026-06-25"
 	readTime="11 min read"
 	slug="the-journey-of-an-email"
 >
