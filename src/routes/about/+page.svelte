@@ -9,6 +9,8 @@
 	import { createFromAnimationCleanup, createScrollRevealCleanup } from '$lib/utils/gsap';
 	import { buildRegisterUrl, registerUrl } from '$lib/utils/utm';
 	import { capturePosthogEvent, trackSignupClick } from '$lib/analytics/posthog';
+	import { jsonLdScript } from '$lib/utils/jsonLd';
+	import { basicPageJsonLd } from '$lib/utils/pageJsonLd';
 
 	function trackAboutCta(label: string, href: string) {
 		void capturePosthogEvent('cta_clicked', {
@@ -123,6 +125,10 @@
 	ogTitle="About Lettr"
 	ogDescription="Built by a team with 10+ years in email infrastructure, sending 500M+ emails monthly across the globe."
 />
+
+<svelte:head>
+	{@html jsonLdScript(basicPageJsonLd({ path: '/about/', name: 'About Lettr', type: 'AboutPage' }))}
+</svelte:head>
 
 <section class="pt-32 pb-24">
 	<!-- Hero -->

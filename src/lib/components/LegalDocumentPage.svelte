@@ -1,6 +1,8 @@
 <script lang="ts">
 	import type { LegalDocumentData, LegalNavLink } from '$lib/content/legal';
 	import Seo from '$lib/components/Seo.svelte';
+	import { jsonLdScript } from '$lib/utils/jsonLd';
+	import { basicPageJsonLd } from '$lib/utils/pageJsonLd';
 
 	interface Props {
 		document: LegalDocumentData;
@@ -11,6 +13,10 @@
 </script>
 
 <Seo title="{document.title} | Lettr" description={document.description} canonical={document.href} />
+
+<svelte:head>
+	{@html jsonLdScript(basicPageJsonLd({ path: document.href, name: document.title }))}
+</svelte:head>
 
 <section class="pb-20 pt-28">
 	<div class="rounded border border-border/50 bg-white/80 p-5 shadow-[0_20px_50px_-45px_rgba(17,24,39,0.6)]">

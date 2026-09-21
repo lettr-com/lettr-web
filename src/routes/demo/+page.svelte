@@ -11,6 +11,8 @@
 	import { createFromAnimationCleanup } from '$lib/utils/gsap';
 	import { bookZaptimeSlot, fetchZaptimeConfig, fetchZaptimeSlots } from '$lib/zaptime/client';
 	import type { InitData, TimeSlot } from '$lib/zaptime/types';
+	import { jsonLdScript } from '$lib/utils/jsonLd';
+	import { basicPageJsonLd } from '$lib/utils/pageJsonLd';
 
 	let config: InitData | null = $state(null);
 	let slots: TimeSlot[] = $state([]);
@@ -432,6 +434,10 @@
 	description="Book a demo of Lettr — the email platform built for SaaS. Pick a time that works for you, or get started self-serve in minutes."
 	ogDescription="See how Lettr handles transactional and marketing email from one platform. Book a time or get started self-serve."
 />
+
+<svelte:head>
+	{@html jsonLdScript(basicPageJsonLd({ path: '/demo/', name: 'Book a Demo' }))}
+</svelte:head>
 
 <section class="border-b border-border/30 pb-16 pt-30">
 	<div bind:this={section} class="space-y-5">
