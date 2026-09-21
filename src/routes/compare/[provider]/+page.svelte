@@ -10,6 +10,8 @@
 	import { buildRegisterUrl, registerUrl } from '$lib/utils/utm';
 	import { providers } from '$lib/data/providers';
 	import { capturePosthogEvent, trackSignupClick } from '$lib/analytics/posthog';
+	import { jsonLdScript } from '$lib/utils/jsonLd';
+	import { productPageJsonLd } from '$lib/utils/pageJsonLd';
 
 	function trackProviderCta(label: string, href: string) {
 		void capturePosthogEvent('cta_clicked', {
@@ -31,6 +33,10 @@
 		if (!p) error(404, { message: 'Provider not found' });
 		return p;
 	});
+
+	const metaDescription = $derived(
+		`Compare Lettr with ${provider.name} on price, deliverability, and features. ${provider.tagline} — save up to ${provider.averageSavings}% on transactional email.`
+	);
 
 	const otherProviders = $derived(
 		Object.values(providers).filter((p) => p.slug !== data.provider)
@@ -74,10 +80,21 @@
 
 <Seo
 	title="Lettr vs {provider.name} | Lettr"
-	description="Compare Lettr with {provider.name} on price, deliverability, and features. {provider.tagline} — save up to {provider.averageSavings}% on transactional email."
+	description={metaDescription}
 	ogTitle="Lettr vs {provider.name}"
 	ogDescription="{provider.tagline}. Save up to {provider.averageSavings}% on transactional email."
 />
+
+<svelte:head>
+	{@html jsonLdScript(
+		productPageJsonLd({
+			path: `/compare/${provider.slug}/`,
+			name: `Lettr vs ${provider.name}`,
+			description: metaDescription,
+			parent: { name: 'Compare', path: '/compare/' }
+		})
+	)}
+</svelte:head>
 
 <section class="pt-32 pb-24">
 		<!-- Back Link -->
