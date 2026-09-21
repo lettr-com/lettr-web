@@ -12,6 +12,11 @@
 	import { createFromAnimationCleanup, createScrollRevealCleanup } from '$lib/utils/gsap';
 	import { buildRegisterUrl, registerUrl } from '$lib/utils/utm';
 	import { capturePosthogEvent, trackSignupClick } from '$lib/analytics/posthog';
+	import { jsonLdScript } from '$lib/utils/jsonLd';
+	import { productPageJsonLd } from '$lib/utils/pageJsonLd';
+
+	const metaDescription =
+		'Looking for an AWS SES alternative? Compare Lettr, SES, SendGrid, and Postmark on setup, analytics, templates, deliverability, and pricing.';
 
 	let hero: HTMLElement | undefined = $state();
 	let reasonsSection: HTMLElement | undefined = $state();
@@ -239,12 +244,20 @@
 
 <Seo
 	title="AWS SES Alternative: 4 Top Picks Compared (2026) | Lettr"
-	description="Looking for an AWS SES alternative? Compare Lettr, SES, SendGrid, and Postmark on setup, analytics, templates, deliverability, and pricing."
+	description={metaDescription}
 	ogTitle="The Best AWS SES Alternative, Compared"
 	ogDescription="An honest comparison of AWS SES alternatives on setup ease, UI, analytics, templates, deliverability, and pricing."
 />
 
 <svelte:head>
+	{@html jsonLdScript(
+		productPageJsonLd({
+			path: '/compare/aws-ses-alternatives/',
+			name: 'AWS SES alternatives',
+			description: metaDescription,
+			parent: { name: 'Compare', path: '/compare/' }
+		})
+	)}
 	{@html `<script type="application/ld+json">${JSON.stringify({
 		'@context': 'https://schema.org',
 		'@type': 'FAQPage',
