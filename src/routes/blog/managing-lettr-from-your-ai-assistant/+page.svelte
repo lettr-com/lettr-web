@@ -33,6 +33,7 @@
 	author={{ name: 'Erik Vlčák', role: 'Customer Success Engineer', avatar: '/images/authors/erik.jpg' }}
 	date="May 27, 2026"
 	datetime="2026-05-27"
+	dateModified="2026-06-25"
 	readTime="4 min read"
 	slug="managing-lettr-from-your-ai-assistant"
 >

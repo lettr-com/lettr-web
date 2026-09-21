@@ -20,6 +20,7 @@
 	author={{ name: 'Erik Vlčák', role: 'Customer Success Engineer', avatar: '/images/authors/erik.jpg' }}
 	date="February 4, 2026"
 	datetime="2026-02-04"
+	dateModified="2026-06-25"
 	readTime="6 min read"
 	slug="what-is-transactional-email"
 >

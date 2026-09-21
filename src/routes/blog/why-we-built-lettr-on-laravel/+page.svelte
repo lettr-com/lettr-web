@@ -32,6 +32,7 @@ Mail::to('user@example.com')->queue(new WelcomeEmail());`;
 	author={{ name: 'Jakub Gause', role: 'CEO', avatar: '/images/authors/jakub.jpg' }}
 	date="August 11, 2026"
 	datetime="2026-08-11"
+	dateModified="2026-08-31"
 	readTime="6 min read"
 	slug="why-we-built-lettr-on-laravel"
 >
