@@ -126,6 +126,7 @@
 	type="article"
 	image={coverImage}
 	{canonical}
+	author={author.name}
 />
 
 <svelte:head>
