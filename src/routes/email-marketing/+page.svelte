@@ -15,6 +15,11 @@
 	import { createFromAnimationCleanup, createScrollRevealCleanup } from '$lib/utils/gsap';
 	import { buildRegisterUrl, registerUrl } from '$lib/utils/utm';
 	import { capturePosthogEvent, trackSignupClick } from '$lib/analytics/posthog';
+	import { jsonLdScript } from '$lib/utils/jsonLd';
+	import { productPageJsonLd } from '$lib/utils/pageJsonLd';
+
+	const metaDescription =
+		'Run marketing campaigns from the same platform as your transactional email: drag-and-drop editor, contact lists, segmentation, and automations.';
 
 	let hero: HTMLElement | undefined = $state();
 	let featuresSection: HTMLElement | undefined = $state();
@@ -107,9 +112,19 @@
 
 <Seo
 	title="Email Marketing & Campaigns — Lettr"
-	description="Run marketing campaigns from the same platform as your transactional email: drag-and-drop editor, contact lists, segmentation, and automations."
+	description={metaDescription}
 	ogDescription="Run marketing campaigns from the same platform that sends your transactional email."
 />
+
+<svelte:head>
+	{@html jsonLdScript(
+		productPageJsonLd({
+			path: '/email-marketing/',
+			name: 'Email Marketing & Campaigns',
+			description: metaDescription
+		})
+	)}
+</svelte:head>
 
 <div>
 <section bind:this={hero} class="pt-30 pb-16 border-b border-border/30">

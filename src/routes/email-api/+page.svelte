@@ -22,6 +22,11 @@
 	import { createFromAnimationCleanup, createScrollRevealCleanup } from '$lib/utils/gsap';
 	import { buildRegisterUrl, registerUrl } from '$lib/utils/utm';
 	import { capturePosthogEvent, trackSignupClick } from '$lib/analytics/posthog';
+	import { jsonLdScript } from '$lib/utils/jsonLd';
+	import { productPageJsonLd } from '$lib/utils/pageJsonLd';
+
+	const metaDescription =
+		'Send transactional email from your SaaS via a clean REST API and SMTP relay — with sub-second delivery, automatic retries, webhooks, and searchable logs.';
 
 	let hero: HTMLElement | undefined = $state();
 	let featuresSection: HTMLElement | undefined = $state();
@@ -213,9 +218,19 @@ Lettr::emails()->sendHtml(
 
 <Seo
 	title="Transactional Email API — Lettr"
-	description="Send transactional email from your SaaS via a clean REST API and SMTP relay — with sub-second delivery, automatic retries, webhooks, and searchable logs."
+	description={metaDescription}
 	ogDescription="Send transactional email from your SaaS via a clean REST API and SMTP relay. Sub-second delivery, automatic retries, webhooks, and searchable logs."
 />
+
+<svelte:head>
+	{@html jsonLdScript(
+		productPageJsonLd({
+			path: '/email-api/',
+			name: 'Transactional Email API',
+			description: metaDescription
+		})
+	)}
+</svelte:head>
 
 <section bind:this={hero} class="pt-30 pb-16 border-b border-border/30">
 	<div class="grid gap-12 lg:grid-cols-1">

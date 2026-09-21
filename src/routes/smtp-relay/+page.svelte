@@ -23,6 +23,11 @@
 	import { buildRegisterUrl, registerUrl } from '$lib/utils/utm';
 	import { capturePosthogEvent, trackSignupClick } from '$lib/analytics/posthog';
 	import type { CodeTab } from '$lib/utils/shiki';
+	import { jsonLdScript } from '$lib/utils/jsonLd';
+	import { productPageJsonLd } from '$lib/utils/pageJsonLd';
+
+	const metaDescription =
+		'A drop-in SMTP relay for your app: point it at smtp.lettr.com for better deliverability, encrypted ports, analytics, and a free tier.';
 
 	const SMTP_DOCS_URL = 'https://docs.lettr.com/quickstart/smtp/introduction';
 
@@ -350,11 +355,18 @@ func main() {
 
 <Seo
 	title="SMTP Relay Service — Lettr"
-	description="A drop-in SMTP relay for your app: point it at smtp.lettr.com for better deliverability, encrypted ports, analytics, and a free tier."
+	description={metaDescription}
 	ogDescription="A standards-compliant SMTP relay with built-in deliverability, encrypted ports, analytics, and searchable logs. Drop-in setup, free tier, no code changes."
 />
 
 <svelte:head>
+	{@html jsonLdScript(
+		productPageJsonLd({
+			path: '/smtp-relay/',
+			name: 'SMTP Relay Service',
+			description: metaDescription
+		})
+	)}
 	{@html `<script type="application/ld+json">${JSON.stringify({
 		'@context': 'https://schema.org',
 		'@type': 'FAQPage',
