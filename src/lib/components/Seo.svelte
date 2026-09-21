@@ -17,6 +17,8 @@
 		image?: string;
 		/** Canonical path (e.g. "/about/") or absolute URL. Defaults to the current route. */
 		canonical?: string;
+		/** Byline name for `<meta name="author">`, e.g. a blog post's author. */
+		author?: string;
 	}
 
 	let {
@@ -26,7 +28,8 @@
 		ogDescription,
 		type = 'website',
 		image = DEFAULT_IMAGE,
-		canonical
+		canonical,
+		author
 	}: Props = $props();
 
 	const url = $derived(absoluteUrl(canonical ?? page.url.pathname));
@@ -39,6 +42,9 @@
 	<title>{title}</title>
 	<meta name="description" content={description} />
 	<link rel="canonical" href={url} />
+	{#if author}
+		<meta name="author" content={author} />
+	{/if}
 
 	<meta property="og:type" content={type} />
 	<meta property="og:url" content={url} />
