@@ -9,6 +9,11 @@ import ArrowSquareOut from 'phosphor-svelte/lib/ArrowSquareOut';
 	import FAQSection from '$lib/components/FAQSection.svelte';
 	import { createFromAnimationCleanup, createScrollRevealCleanup } from '$lib/utils/gsap';
 	import { capturePosthogEvent } from '$lib/analytics/posthog';
+	import { jsonLdScript } from '$lib/utils/jsonLd';
+	import { productPageJsonLd } from '$lib/utils/pageJsonLd';
+
+	const metaDescription =
+		'Transparent Lettr pricing: transactional bills per email, marketing per contact, with a free tier of 3,000 transactional emails a month.';
 
 	let header: HTMLElement | undefined = $state();
 	let bundleSection: HTMLElement | undefined = $state();
@@ -58,9 +63,19 @@ import ArrowSquareOut from 'phosphor-svelte/lib/ArrowSquareOut';
 
 <Seo
 	title="Pricing — Lettr"
-	description="Transparent Lettr pricing: transactional bills per email, marketing per contact, with a free tier of 3,000 transactional emails a month."
+	description={metaDescription}
 	ogDescription="Transactional per email, Marketing per contact. Free tier of 3,000 emails a month."
 />
+
+<svelte:head>
+	{@html jsonLdScript(
+		productPageJsonLd({
+			path: '/pricing/',
+			name: 'Pricing',
+			description: metaDescription
+		})
+	)}
+</svelte:head>
 
 <section bind:this={header} class="pt-32 pb-8">
 	<div class="text-center">

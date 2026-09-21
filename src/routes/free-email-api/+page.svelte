@@ -17,6 +17,11 @@
 	import { createFromAnimationCleanup, createScrollRevealCleanup } from '$lib/utils/gsap';
 	import { buildRegisterUrl, registerUrl } from '$lib/utils/utm';
 	import { capturePosthogEvent, trackSignupClick } from '$lib/analytics/posthog';
+	import { jsonLdScript } from '$lib/utils/jsonLd';
+	import { productPageJsonLd } from '$lib/utils/pageJsonLd';
+
+	const metaDescription =
+		'Get a free email API key and send up to 3,000 emails a month, no credit card. REST API and SMTP, SDKs for every language, deliverability built in.';
 
 	const DOCS_URL = 'https://docs.lettr.com/introduction';
 
@@ -202,11 +207,18 @@
 
 <Seo
 	title="Free Email API — Send 3,000 Emails/Month Free | Lettr"
-	description="Get a free email API key and send up to 3,000 emails a month, no credit card. REST API and SMTP, SDKs for every language, deliverability built in."
+	description={metaDescription}
 	ogDescription="A genuinely free email API: 3,000 emails/month, REST API and SMTP, SDKs for every language, and SPF/DKIM/DMARC built in. No credit card, no sandbox."
 />
 
 <svelte:head>
+	{@html jsonLdScript(
+		productPageJsonLd({
+			path: '/free-email-api/',
+			name: 'Free Email API',
+			description: metaDescription
+		})
+	)}
 	{@html `<script type="application/ld+json">${JSON.stringify({
 		'@context': 'https://schema.org',
 		'@type': 'FAQPage',
