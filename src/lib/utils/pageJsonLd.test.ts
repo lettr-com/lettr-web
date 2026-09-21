@@ -1,5 +1,10 @@
 import { describe, expect, it } from "vitest";
-import { blogPostJsonLd, featurePageJsonLd } from "./pageJsonLd";
+import {
+  basicPageJsonLd,
+  blogPostJsonLd,
+  featurePageJsonLd,
+  productPageJsonLd,
+} from "./pageJsonLd";
 
 const post = {
   slug: "introducing-multilingual-campaigns",
@@ -69,5 +74,74 @@ describe("featurePageJsonLd", () => {
     expect(page.breadcrumb).toEqual({
       "@id": "https://lettr.com/platform/multilingual-campaigns/#breadcrumb",
     });
+  });
+});
+
+describe("productPageJsonLd", () => {
+  it("describes Lettr with only the four allowed fields", () => {
+    const graph = productPageJsonLd({
+      path: "/pricing/",
+      name: "Pricing",
+      description: "Lettr pricing.",
+    })["@graph"] as Record<string, unknown>[];
+    expect(node(graph, "SoftwareApplication")).toEqual({
+      "@type": "SoftwareApplication",
+      name: "Lettr",
+      description: "Lettr pricing.",
+      applicationCategory: "BusinessApplication",
+      operatingSystem: "Web",
+    });
+    const items = node(graph, "BreadcrumbList")!.itemListElement as Record<string, unknown>[];
+    expect(items.map((item) => item.item)).toEqual([
+      "https://lettr.com/",
+      "https://lettr.com/pricing/",
+    ]);
+  });
+
+  it("names Lettr, not the competitor, and puts the parent in the breadcrumb", () => {
+    const graph = productPageJsonLd({
+      path: "/compare/postmark/",
+      name: "Lettr vs Postmark",
+      description: "d",
+      parent: { name: "Compare", path: "/compare/" },
+    })["@graph"] as Record<string, unknown>[];
+    expect(node(graph, "SoftwareApplication")!.name).toBe("Lettr");
+    const breadcrumb = node(graph, "BreadcrumbList")!;
+    expect(breadcrumb["@id"]).toBe("https://lettr.com/compare/postmark/#breadcrumb");
+    expect(breadcrumb.itemListElement).toEqual([
+      { "@type": "ListItem", position: 1, name: "Home", item: "https://lettr.com/" },
+      { "@type": "ListItem", position: 2, name: "Compare", item: "https://lettr.com/compare/" },
+      {
+        "@type": "ListItem",
+        position: 3,
+        name: "Lettr vs Postmark",
+        item: "https://lettr.com/compare/postmark/",
+      },
+    ]);
+  });
+});
+
+describe("basicPageJsonLd", () => {
+  it("defaults to a WebPage with the shared Organization and WebSite", () => {
+    const graph = basicPageJsonLd({ path: "/support/", name: "Support & Contact" })[
+      "@graph"
+    ] as Record<string, unknown>[];
+    expect(node(graph, "WebPage")).toEqual({
+      "@type": "WebPage",
+      "@id": "https://lettr.com/support/",
+      url: "https://lettr.com/support/",
+      name: "Support & Contact",
+      isPartOf: { "@id": "https://lettr.com/#website" },
+    });
+    expect(node(graph, "Organization")).toBeDefined();
+    expect(node(graph, "WebSite")).toBeDefined();
+  });
+
+  it("uses the given page type", () => {
+    const graph = basicPageJsonLd({ path: "/about/", name: "About Lettr", type: "AboutPage" })[
+      "@graph"
+    ] as Record<string, unknown>[];
+    expect(node(graph, "AboutPage")!.url).toBe("https://lettr.com/about/");
+    expect(node(graph, "WebPage")).toBeUndefined();
   });
 });

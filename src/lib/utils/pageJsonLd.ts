@@ -1,8 +1,9 @@
 import { SITE_URL, absoluteUrl, breadcrumb, organization, website } from "./jsonLd";
 
 /**
- * Structured data for blog posts and feature pages. Each graph ends with the
- * shared minimal Organization and WebSite nodes it references.
+ * Structured data for blog posts, feature, product and compare pages. A graph
+ * that references the Organization or WebSite ends with their shared minimal
+ * nodes.
  */
 
 export interface FaqEntry {
@@ -71,6 +72,60 @@ export function blogPostJsonLd(post: BlogPostJsonLdInput) {
         { name: post.title, item: url },
       ]),
       ...(post.faqs?.length ? [faqPage(url, post.faqs)] : []),
+      website,
+      organization,
+    ],
+  };
+}
+
+export interface PageLink {
+  name: string;
+  /** Root-relative path with the trailing slash, e.g. "/compare/". */
+  path: string;
+}
+
+/**
+ * Compare and product pages: Lettr as a SoftwareApplication plus the page's
+ * breadcrumb (Home → optional parent → page). The application node always
+ * describes Lettr, never a compared provider, and deliberately carries no
+ * offers or ratings.
+ */
+export function productPageJsonLd(page: PageLink & { description: string; parent?: PageLink }) {
+  const url = absoluteUrl(page.path);
+  return {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "SoftwareApplication",
+        name: "Lettr",
+        description: page.description,
+        applicationCategory: "BusinessApplication",
+        operatingSystem: "Web",
+      },
+      breadcrumb(`${url}#breadcrumb`, [
+        { name: "Home", item: `${SITE_URL}/` },
+        ...(page.parent ? [{ name: page.parent.name, item: absoluteUrl(page.parent.path) }] : []),
+        { name: page.name, item: url },
+      ]),
+    ],
+  };
+}
+
+/** Minimal graph for pages without richer structured data. */
+export function basicPageJsonLd(
+  page: PageLink & { type?: "WebPage" | "AboutPage" | "CollectionPage" },
+) {
+  const url = absoluteUrl(page.path);
+  return {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": page.type ?? "WebPage",
+        "@id": url,
+        url,
+        name: page.name,
+        isPartOf: { "@id": website["@id"] },
+      },
       website,
       organization,
     ],
