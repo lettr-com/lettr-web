@@ -9,6 +9,8 @@
 	import { createFromAnimationCleanup, createScrollRevealCleanup } from '$lib/utils/gsap';
 	import { capturePosthogEvent } from '$lib/analytics/posthog';
 	import { openIntercomNewMessage } from '$lib/intercom';
+	import { jsonLdScript } from '$lib/utils/jsonLd';
+	import { basicPageJsonLd } from '$lib/utils/pageJsonLd';
 
 	let hero: HTMLElement | undefined = $state();
 	let channelsSection: HTMLElement | undefined = $state();
@@ -109,6 +111,10 @@
 	description="Get help from the Lettr team by email, live chat, or docs — technical support, billing questions, deliverability advice, or just say hi."
 	ogTitle="Lettr Support & Contact"
 />
+
+<svelte:head>
+	{@html jsonLdScript(basicPageJsonLd({ path: '/support/', name: 'Support & Contact' }))}
+</svelte:head>
 
 <section class="pt-32 pb-24">
 	<!-- Hero -->
