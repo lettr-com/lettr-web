@@ -195,6 +195,26 @@ resource "aws_cloudfront_origin_request_policy" "viewer_country" {
   }
 }
 
+# RFC 8288 Link header pointing agents at machine-readable entry points. RFC 9727
+# also expects it on HEAD /.well-known/api-catalog, which this covers.
+resource "aws_cloudfront_response_headers_policy" "agent_discovery" {
+  name    = "${local.name}-agent-discovery"
+  comment = "Link header advertising the API catalog, OpenAPI spec, API docs and llms.txt."
+
+  custom_headers_config {
+    items {
+      header   = "Link"
+      override = true
+      value = join(", ", [
+        "</.well-known/api-catalog>; rel=\"api-catalog\"",
+        "<https://docs.lettr.com/openapi.json>; rel=\"service-desc\"; type=\"application/json\"",
+        "<https://docs.lettr.com/api-reference/introduction>; rel=\"service-doc\"; type=\"text/html\"",
+        "</llms.txt>; rel=\"describedby\"",
+      ])
+    }
+  }
+}
+
 resource "aws_cloudfront_distribution" "cdn" {
   enabled             = true
   is_ipv6_enabled     = true
@@ -217,8 +237,9 @@ resource "aws_cloudfront_distribution" "cdn" {
     compress               = true
 
     # Managed-CachingOptimized — honors Cache-Control headers set on upload
-    cache_policy_id          = "658327ea-f89d-4fab-a63d-7e88639e58f6"
-    origin_request_policy_id = aws_cloudfront_origin_request_policy.viewer_country.id
+    cache_policy_id            = "658327ea-f89d-4fab-a63d-7e88639e58f6"
+    origin_request_policy_id   = aws_cloudfront_origin_request_policy.viewer_country.id
+    response_headers_policy_id = aws_cloudfront_response_headers_policy.agent_discovery.id
 
     function_association {
       event_type   = "viewer-request"
