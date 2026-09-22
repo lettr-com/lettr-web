@@ -42,7 +42,7 @@ function frontmatter(fields: Record<string, string | undefined>): string {
 
 function redirectTarget(document: HTMLElement): string | undefined {
   const refresh = document.querySelector('meta[http-equiv="refresh"]')?.getAttribute("content");
-  return refresh?.match(/url=(.+)$/i)?.[1];
+  return refresh?.match(/url\s*=\s*['"]?([^'"\s]+)/i)?.[1];
 }
 
 type JsonLdNode = Record<string, unknown>;
