@@ -680,7 +680,7 @@ func main() {
 		</p>
 	</div>
 
-	<div class="space-y-0">
+	<div class="space-y-0" data-markdown="faq">
 		{#each faqs as faq, i}
 			<div data-reveal class="{i < faqs.length - 1 ? 'border-b border-border/20' : ''}">
 				<button

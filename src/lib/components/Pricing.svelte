@@ -300,9 +300,9 @@
 							{#each row.values as val}
 								<td class="py-3 px-4 text-center">
 									{#if val === true}
-										<Check size={16} class="inline text-primary" weight="bold" />
+										<Check size={16} class="inline text-primary" weight="bold" aria-label="Included" />
 									{:else if val === false}
-										<X size={16} class="inline text-border" />
+										<X size={16} class="inline text-border" aria-label="Not included" />
 									{:else}
 										{val}
 									{/if}

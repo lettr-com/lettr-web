@@ -227,7 +227,7 @@
 </section>
 
 {#snippet previewPanel(idx: number, animate: boolean, minHeight: number)}
-	<div class="border border-border/30 overflow-hidden bg-[#fafafa]">
+	<div data-markdown="skip" class="border border-border/30 overflow-hidden bg-[#fafafa]">
 		<!-- Editor toolbar -->
 		<div class="flex items-center justify-between border-b border-border/20 bg-white px-3 py-2">
 			<div class="flex min-w-0 items-center gap-2">

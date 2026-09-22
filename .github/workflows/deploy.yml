@@ -57,6 +57,19 @@ jobs:
         run: |
           aws s3 sync build s3://${{ secrets.S3_BUCKET }} \
             --exclude "_app/immutable/*" \
+            --exclude "*.md" \
+            --cache-control "public, max-age=60, s-maxage=600" \
+            --delete \
+            --only-show-errors
+
+      # Markdown twins of the pages, served for Accept: text/markdown.
+      # RFC 7763 requires the charset parameter, which S3 would not infer.
+      - name: Sync markdown (short cache)
+        run: |
+          aws s3 sync build s3://${{ secrets.S3_BUCKET }} \
+            --exclude "*" \
+            --include "*.md" \
+            --content-type "text/markdown; charset=utf-8" \
             --cache-control "public, max-age=60, s-maxage=600" \
             --delete \
             --only-show-errors

@@ -104,17 +104,44 @@ resource "aws_cloudfront_origin_access_control" "site" {
 resource "aws_cloudfront_function" "append_index" {
   name    = "${local.name}-append-index"
   runtime = "cloudfront-js-2.0"
-  comment = "Rewrite /path/ to /path/index.html so SvelteKit trailing-slash pages resolve on S3."
+  comment = "Rewrite /path/ to /path/index.html (index.md for Accept: text/markdown) so SvelteKit trailing-slash pages resolve on S3."
   publish = true
   code    = <<-EOT
+    // Markdown wins when the client lists text/markdown at least as high as text/html,
+    // so browsers (text/html, */*) keep HTML and agents asking for markdown get it.
+    function prefersMarkdown(accept) {
+      var markdown = 0;
+      var html = 0;
+      var ranges = accept.toLowerCase().split(',');
+      for (var i = 0; i < ranges.length; i++) {
+        var params = ranges[i].split(';');
+        var type = params[0].trim();
+        var q = 1;
+        for (var j = 1; j < params.length; j++) {
+          var param = params[j].trim();
+          if (param.indexOf('q=') === 0) q = parseFloat(param.slice(2));
+        }
+        if (type === 'text/markdown') markdown = q;
+        else if (type === 'text/html') html = q;
+      }
+      return markdown > 0 && markdown >= html;
+    }
+
+    // The build writes an index.md next to every index.html. Rewriting the URI
+    // (not varying on Accept) keeps the two representations apart in the cache.
     function handler(event) {
       var request = event.request;
       var uri = request.uri;
+      var page;
       if (uri.endsWith('/')) {
-        request.uri = uri + 'index.html';
+        page = uri + 'index';
       } else if (!uri.includes('.')) {
-        request.uri = uri + '/index.html';
+        page = uri + '/index';
+      } else {
+        return request;
       }
+      var accept = request.headers['accept'];
+      request.uri = page + (accept && prefersMarkdown(accept.value) ? '.md' : '.html');
       return request;
     }
   EOT
@@ -123,10 +150,12 @@ resource "aws_cloudfront_function" "append_index" {
 # Surfaces the viewer's country (resolved by CloudFront from the source IP) to
 # client JS via a non-HttpOnly cookie. Used by the cookie banner to decide
 # whether explicit consent is required (GDPR/UK PECR/Swiss FADP scope).
+# Also marks pages as negotiated on Accept (HTML vs markdown, see append_index)
+# so caches beyond CloudFront keep the two representations apart.
 resource "aws_cloudfront_function" "viewer_country_cookie" {
   name    = "${local.name}-viewer-country-cookie"
   runtime = "cloudfront-js-2.0"
-  comment = "Expose CloudFront-Viewer-Country to the browser as a viewer_country cookie."
+  comment = "Expose CloudFront-Viewer-Country as a viewer_country cookie; add Vary: Accept to pages."
   publish = true
   code    = <<-EOT
     function handler(event) {
@@ -138,6 +167,11 @@ resource "aws_cloudfront_function" "viewer_country_cookie" {
         value: country,
         attributes: 'Path=/; Max-Age=86400; SameSite=Lax; Secure'
       };
+      var type = response.headers['content-type'];
+      if (type && (type.value.indexOf('text/html') === 0 || type.value.indexOf('text/markdown') === 0)) {
+        var vary = response.headers['vary'];
+        response.headers['vary'] = { value: vary ? vary.value + ', Accept' : 'Accept' };
+      }
       return response;
     }
   EOT
