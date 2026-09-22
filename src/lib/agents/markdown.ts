@@ -45,19 +45,37 @@ function redirectTarget(document: HTMLElement): string | undefined {
   return refresh?.match(/url=(.+)$/i)?.[1];
 }
 
-/** Question/answer pairs from the page's FAQPage structured data, top level or inside `@graph`. */
+type JsonLdNode = Record<string, unknown>;
+
+function isNode(value: unknown): value is JsonLdNode {
+  return typeof value === "object" && value !== null;
+}
+
+/** The nodes of one JSON-LD script, top level or inside `@graph`; none when it is not valid JSON. */
+function jsonLdNodes(text: string): JsonLdNode[] {
+  let data: unknown;
+  try {
+    data = JSON.parse(text);
+  } catch {
+    return [];
+  }
+  const nodes = isNode(data) && Array.isArray(data["@graph"]) ? data["@graph"] : [data];
+  return nodes.filter(isNode);
+}
+
+/** Question/answer pairs from the page's FAQPage structured data, skipping entries of another shape. */
 function faqsFromJsonLd(document: HTMLElement): Faq[] {
   for (const script of document.querySelectorAll('script[type="application/ld+json"]')) {
-    const data = JSON.parse(script.text);
-    const nodes = Array.isArray(data["@graph"]) ? data["@graph"] : [data];
-    const faqPage = nodes.find((node: { "@type"?: string }) => node["@type"] === "FAQPage");
+    const faqPage = jsonLdNodes(script.text).find((node) => node["@type"] === "FAQPage");
     if (!faqPage) continue;
-    return faqPage.mainEntity.map(
-      (entry: { name: string; acceptedAnswer: { text: string } }): Faq => ({
-        question: entry.name,
-        answer: entry.acceptedAnswer.text,
-      }),
-    );
+    return [faqPage.mainEntity].flat().flatMap((entry): Faq[] => {
+      if (!isNode(entry) || !isNode(entry.acceptedAnswer)) return [];
+      const question = entry.name;
+      const answer = entry.acceptedAnswer.text;
+      return typeof question === "string" && typeof answer === "string"
+        ? [{ question, answer }]
+        : [];
+    });
   }
   return [];
 }

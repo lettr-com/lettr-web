@@ -84,6 +84,29 @@ describe("pageToMarkdown", () => {
     expect(md).toContain("## FAQ\n\n### Is it <free>?\n\nYes.");
   });
 
+  it("reads a single FAQPage question and skips malformed JSON-LD and entries", () => {
+    const jsonLd = JSON.stringify({
+      "@type": "FAQPage",
+      mainEntity: { name: "Is it free?", acceptedAnswer: { text: "Yes." } },
+    });
+    const md = pageToMarkdown(
+      page(
+        '<div data-markdown="faq"><button><h3>Is it free?</h3></button></div>',
+        `<script type="application/ld+json">{not json</script><script type="application/ld+json">${jsonLd}</script>`,
+      ),
+      "/",
+    );
+    expect(md).toContain("### Is it free?\n\nYes.");
+
+    const broken = JSON.stringify({ "@type": "FAQPage", mainEntity: [{ name: "No answer" }] });
+    expect(() =>
+      pageToMarkdown(
+        page("<p>x</p>", `<script type="application/ld+json">${broken}</script>`),
+        "/",
+      ),
+    ).not.toThrow();
+  });
+
   it("describes a redirect stub by its target", () => {
     const md = pageToMarkdown('<meta http-equiv="refresh" content="0;url=/demo/">', "/book/");
     expect(md).toBe(
