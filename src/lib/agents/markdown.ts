@@ -88,7 +88,8 @@ function faqsFromJsonLd(document: HTMLElement): Faq[] {
  *
  * Components steer the output with `data-markdown`: "skip" drops a UI mockup,
  * and "faq" marks an accordion whose answers only exist in the FAQPage JSON-LD
- * (collapsed answers are not rendered), so it is rebuilt from that data.
+ * (collapsed answers are not rendered), so it is rebuilt from that data, or
+ * reduced to its question headings when the page has none.
  */
 export function pageToMarkdown(html: string, path: string): string {
   const document = parse(html);
@@ -109,7 +110,8 @@ export function pageToMarkdown(html: string, path: string): string {
     .map(({ question, answer }) => `<h3>${escapeHtml(question)}</h3><p>${escapeHtml(answer)}</p>`)
     .join("");
   for (const accordion of main.querySelectorAll('[data-markdown="faq"]')) {
-    accordion.replaceWith(faqs);
+    const questions = accordion.querySelectorAll("h3").map((heading) => heading.outerHTML);
+    accordion.replaceWith(faqs || questions.join(""));
   }
 
   for (const icon of main.querySelectorAll("svg[aria-label]")) {
