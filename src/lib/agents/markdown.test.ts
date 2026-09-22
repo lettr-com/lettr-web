@@ -121,4 +121,9 @@ describe("pageToMarkdown", () => {
       '---\nurl: "https://lettr.com/book/"\n---\n\nThis page moved to https://lettr.com/demo/\n',
     );
   });
+
+  it("reads a quoted redirect target", () => {
+    const md = pageToMarkdown(`<meta http-equiv="refresh" content="0; url='/demo/'">`, "/book/");
+    expect(md).toContain("This page moved to https://lettr.com/demo/\n");
+  });
 });
