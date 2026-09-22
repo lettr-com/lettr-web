@@ -18,6 +18,7 @@ Operational guide for coding agents working in `lettr-web`.
 - `src/lib/utils/shiki.ts`: syntax highlighting theme + singleton highlighter + sample code tabs.
 - `src/lib/utils/spline.ts`: spline loader + visibility gating helpers.
 - `src/styles/app.css`: Tailwind import, custom theme tokens, base rules, and utility classes.
+- `src/lib/agents/`: build step writing an `index.md` twin of every prerendered page (from `<main>`), which CloudFront serves for `Accept: text/markdown`. Mark UI mockups with `data-markdown="skip"`; mark FAQ accordions whose answers only live in FAQPage JSON-LD with `data-markdown="faq"`; give meaningful icons an `aria-label`.
 
 ## Setup & Core Commands
 

@@ -451,7 +451,7 @@
 <section bind:this={faqSection} class="py-16 border-b border-border/30">
 	<h2 data-reveal class="mb-10 text-surface">A few common questions</h2>
 
-	<div class="space-y-0">
+	<div class="space-y-0" data-markdown="faq">
 		{#each faqs as faq, i}
 			<div data-reveal class="{i < faqs.length - 1 ? 'border-b border-border/20' : ''}">
 				<button
