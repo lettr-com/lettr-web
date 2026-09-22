@@ -107,6 +107,14 @@ describe("pageToMarkdown", () => {
     ).not.toThrow();
   });
 
+  it("keeps the FAQ questions when the page has no FAQPage JSON-LD", () => {
+    const md = pageToMarkdown(
+      page('<div data-markdown="faq"><button><h3>Is it free?</h3></button></div>'),
+      "/",
+    );
+    expect(md).toContain("### Is it free?");
+  });
+
   it("describes a redirect stub by its target", () => {
     const md = pageToMarkdown('<meta http-equiv="refresh" content="0;url=/demo/">', "/book/");
     expect(md).toBe(
