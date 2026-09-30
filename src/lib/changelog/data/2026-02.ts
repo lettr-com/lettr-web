@@ -6,45 +6,35 @@ export const month: ChangelogMonth = {
 
   features: [
     {
-      title: "Lettr Is Live",
+      title: "Public Launch Of The Lettr Email API",
       modules: ["transactional", "platform"],
       tags: ["API", "SDKs", "Deliverability", "UI/UX", "Billing"],
       lead:
-        "An email API built for the Laravel ecosystem, from the team behind Topol.io and" +
-        " DMARCeye.",
+        "Lettr is now open to everyone: an email API built for Laravel, from the team behind" +
+        " Topol.io and DMARCeye.",
       body: [
-        "Setting up transactional email in a new project means wiring a mail driver, picking a" +
-          " service, wrestling DNS records and designing templates in some external tool. Then" +
-          " the visibility runs out: nothing shows what your application is actually sending," +
-          " whether the welcome emails are landing in inboxes or spam folders, or that something" +
-          " broke three days ago. We wanted something that belonged in the ecosystem instead of" +
-          " sitting next to it.",
-        "Install the package, add an API key, and the first email goes out. Templates can be" +
-          " built in the drag-and-drop editor — we brought over the best parts of Topol.io — or" +
-          " written as HTML, whichever you would rather. Merge tags fill them in per recipient," +
-          " and saved sections shared across templates propagate everywhere they are used when" +
-          " you edit one.",
-        "Sending domains walk you through the DNS. Lettr identifies your DNS provider from the" +
-          " nameservers and shows the records next to its name, and for Cloudflare it can" +
-          " generate a one-click setup link rather than making you type anything. Records are" +
-          " re-checked rather than trusted once, with a short grace period and repeated failures" +
-          " required before a domain is marked broken, so one slow lookup does not undo a" +
-          " verified domain. You can also point your own domain at the storage holding the images" +
-          " your emails use.",
-        "There is more than one way in. Beyond the REST API there is an SMTP relay, for" +
-          " applications that already speak SMTP and are not going to be rewritten, and an MCP" +
-          " server so an AI assistant can work with your templates and analytics directly.",
-        "Everything you send is visible. The dashboard covers delivery and open rates with trends;" +
-          " a `tag` on a send — filled in automatically from the template slug if you do not set" +
-          " one — groups your analytics by the kind of email it was, so password resets and" +
-          " invoices can be told apart without any extra work. The event log goes down to" +
-          " individual messages and what happened to them. Alerts cover the things that stop" +
-          " sends: approaching your plan limit, and a domain that is unverified or blocked.",
-        "API keys can be restricted to a set of IP addresses, and every send answers with your" +
-          " remaining quota in the response headers. Requests are throttled at three a second" +
-          " across all of a team's keys.",
-        "The free plan is genuinely free, with no card required: 3,000 emails a month, and 100 a" +
-          " day. Paid plans start at 50,000 a month.",
+        "Installing the `lettr/lettr-laravel` package and adding an API key is all it takes to" +
+          " send the first email. Applications that already send over SMTP can use the SMTP relay" +
+          " instead of the REST API, and an MCP server lets an AI assistant work with your emails" +
+          " and analytics.",
+        "Emails are built in the drag-and-drop Topol editor or written as HTML. Merge tags fill" +
+          " them in for each recipient, and a saved section used in several emails is updated in" +
+          " all of them when it is edited. The images in your emails can be served from your own" +
+          " domain.",
+        "Adding a sending domain shows its DNS records next to the name of your DNS provider," +
+          " which Lettr finds from the domain's nameservers, and for Cloudflare it creates a" +
+          " one-click setup link. Records are checked again after the domain is verified, and a" +
+          " record is only marked broken after a short grace period and several failed checks in" +
+          " a row, so one slow lookup doesn't undo a verified domain.",
+        "The dashboard shows delivery and open rates with trends. A `tag` on a send groups the" +
+          " analytics by kind of email, such as password resets or invoices, and is filled in" +
+          " from the email's slug when it is not set. The event log shows what happened to each" +
+          " message, and alerts warn when you are close to your plan limit or a domain is" +
+          " unverified or blocked.",
+        "API keys can be limited to a set of IP addresses, and every send returns your" +
+          " remaining quota in its response headers. Requests are limited to 3 per second across" +
+          " all of a team's keys. The free plan needs no card and includes 3,000 emails a month," +
+          " with at most 100 a day; paid plans start at 50,000 a month.",
       ],
       code: {
         lang: "bash",
@@ -61,14 +51,16 @@ php artisan lettr:init`,
       modules: ["transactional", "platform"],
       tags: ["API"],
       lead:
-        "A key can be created as Sandbox instead of Live, and needs no verified sending domain to" +
-        " work.",
+        "An API key can now be created as Sandbox instead of Live, and a sandbox key works" +
+        " without a verified sending domain.",
       body: [
-        "A sandbox send costs nothing and reaches nobody: every recipient is replaced with your" +
-          " own address, `cc` and `bcc` are dropped, and it skips billing and your daily limit" +
-          " entirely. Sandbox keys are throttled separately and refused by every write endpoint," +
-          " so nothing you do with one can change your account. The sends are readable back" +
-          " through the same endpoints as everything else.",
+        "A sandbox send costs nothing and reaches only you: every recipient is replaced with" +
+          " your own address, `cc` and `bcc` are left out, and the send doesn't count against" +
+          " your quota or daily limit. Sandbox keys have their own rate limit of 10 requests a" +
+          " minute and 100 a day, and every endpoint that changes your account refuses them with" +
+          " a 403, so a sandbox key can't change anything.",
+        "Sandbox sends can be read back through the same endpoints as other emails, and a new" +
+          " Sandbox switch on the Events page shows them in the app.",
       ],
       docs: {
         label: "Sandbox",
@@ -76,14 +68,16 @@ php artisan lettr:init`,
       },
     },
     {
-      title: "Scheduled Sending Over The API",
+      title: "Scheduled Sending Endpoints With A Three-Day Window",
       modules: ["transactional"],
       tags: ["API"],
-      lead: "Schedule a send, look it up, and cancel it before it goes.",
+      lead:
+        "New endpoints under `/emails/scheduled` schedule a send for later, look it up, and" +
+        " cancel it before it goes out.",
       body: [
-        "`scheduled_at` has to be at least five minutes and at most three days ahead. Scheduling" +
-          " reuses the entire ordinary send path, so domain checks, quota and counters all apply" +
-          " exactly as they do to an immediate send.",
+        "`scheduled_at` must be at least five minutes and at most three days ahead. A scheduled" +
+          " send goes through the same checks as an immediate one, so domain checks, quota and" +
+          " counters all apply in the same way.",
       ],
       code: {
         lang: "bash",
@@ -102,16 +96,37 @@ php artisan lettr:init`,
         href: "https://docs.lettr.com/api-reference/emails/schedule-email",
       },
     },
+  ],
+
+  improvements: [
     {
-      title: "Manage Webhooks Over The API",
+      title: "API Key Scopes Enforced On Every Endpoint",
+      modules: ["platform"],
+      tags: ["API", "Security", "Breaking"],
+      lead:
+        "API key permissions are now checked on every API endpoint, where they used to have no" +
+        " effect.",
+      body: [
+        "Ten scopes cover sending, templates, domains, webhooks and projects. The full preset" +
+          " grants all of them, the sending-only preset grants only the send scopes, and a custom" +
+          " list of scopes is accepted too. A request the key has no permission for returns a 403" +
+          " with `insufficient_scope`.",
+        "A sending-only key used to read templates or domains no longer can, so give any key" +
+          " that needs those reads full access or the matching scopes.",
+      ],
+      docs: {
+        label: "API key permissions",
+        href: "https://docs.lettr.com/learn/api-keys/permissions",
+      },
+    },
+    {
+      title: "Create, Update And Delete Endpoints For Webhooks",
       modules: ["platform"],
       tags: ["API", "Webhooks"],
-      lead:
-        "Webhooks stopped being something you could only create in the interface — they can now be" +
-        " created, updated and deleted from code.",
+      lead: "Webhooks can now be created, updated and deleted through the API, not only in the app.",
       body: [
-        "An update is partial, so you can change a name, a target, an auth type, the events it is" +
-          " subscribed to or whether it is active, without resending the rest.",
+        "An update changes only the fields it sends: the name, the target URL, the auth type," +
+          " the subscribed events or whether the webhook is active.",
       ],
       docs: {
         label: "Create a webhook",
@@ -119,19 +134,19 @@ php artisan lettr:init`,
       },
     },
     {
-      title: "Query Events Across Every Email",
+      title: "Account-Wide Events Endpoint With Typed Event Objects",
       modules: ["transactional"],
       tags: ["API"],
       lead:
-        "A new endpoint searches events across all of your mail rather than one message at a" +
-        " time, filtering by event type, recipient, date range and bounce class.",
+        "The new `GET /emails/events` searches events across all of your emails instead of one" +
+        " message at a time, filtered by event type, recipient, date range and bounce class.",
       body: [
-        "The events themselves gained real shapes at the same time. Eighteen types — delivery," +
-          " bounce, delay, click, open, spam complaint, unsubscribe, policy rejection and the" +
-          " rest — each carry their own fields, with the user agent parsed out into browser," +
-          " operating system and device, and location data alongside. Opens that a mailbox" +
-          " provider prefetched are labelled as such in the event log. `from` and `to` were added" +
-          " to both the list and the detail response.",
+        "Each of the 18 event types, such as delivery, bounce, delay, click, open, spam" +
+          " complaint, unsubscribe and policy rejection, now returns its own fields. Events also" +
+          " include the browser, operating system and device read from the user agent, and" +
+          " location data. Opens that a mailbox provider loaded in advance are labelled as" +
+          " prefetched in the event log. The email list and detail responses now include `from`" +
+          " and `to`.",
       ],
       docs: {
         label: "List email events",
@@ -139,14 +154,16 @@ php artisan lettr:init`,
       },
     },
     {
-      title: "Loops In Substitution Data",
+      title: "Substitution Data Accepts Arrays Of Objects For Loops",
       modules: ["transactional"],
       tags: ["API"],
-      lead: "`data` used to be a flat map of strings. It now takes any scalar, and arrays of objects.",
+      lead:
+        "`data` on a send now accepts numbers, true/false values and arrays of objects, where it" +
+        " used to accept only a flat map of strings.",
       body: [
-        "Which means order lines, itemised receipts and digest lists can be looped over inside the" +
-          " template instead of being rendered into a string before you send them. Objects nested" +
-          " more than one level deep are rejected, and the message names the key that caused it.",
+        "Order lines, itemised receipts and digest lists can now be looped over inside the" +
+          " email instead of being turned into one string before sending. Objects nested more" +
+          " than one level deep are rejected, and the error names the key that caused it.",
       ],
       code: {
         lang: "bash",
@@ -171,36 +188,15 @@ php artisan lettr:init`,
         href: "https://docs.lettr.com/learn/templates/template-language",
       },
     },
-  ],
-
-  improvements: [
     {
-      title: "API Key Scopes Are Enforced",
-      modules: ["platform"],
-      tags: ["API", "Security", "Breaking"],
-      lead: "Key permissions stopped being decorative and are now checked on every route.",
-      body: [
-        "Ten scopes cover sending, templates, domains, webhooks and projects. The two presets map" +
-          " onto them — full grants everything, sending-only grants just the send scopes — and a" +
-          " custom set is accepted too.",
-        "If you issued a sending-only key and used it to read templates or domains, that stops" +
-          " working here. A key carrying a scope we do not recognise is now refused rather than" +
-          " waved through.",
-      ],
-      docs: {
-        label: "API key permissions",
-        href: "https://docs.lettr.com/learn/api-keys/permissions",
-      },
-    },
-    {
-      title: "Every Save Is A Version",
+      title: "Saving An Email Creates A New Version Instead Of A Draft",
       modules: ["transactional"],
       tags: ["UI/UX"],
-      lead: "The separate draft is gone; saving an email creates a version.",
+      lead: "Saving an email now creates a new version, and the separate draft is gone.",
       body: [
-        "The publish-draft step, the draft badge and the next-version indicator went with it." +
-          " Merge tags are extracted and stored as part of the same save, the update response" +
-          " tells you which version it created, and the editor can be opened against any earlier" +
+        "The draft used to need a publish step, with a draft badge and a next-version" +
+          " indicator; all three have been removed. Merge tags are saved with each version, the" +
+          " update response names the version it created, and the editor can open any earlier" +
           " version.",
       ],
       docs: {
@@ -209,16 +205,15 @@ php artisan lettr:init`,
       },
     },
     {
-      title: "Adding A Sending Domain No Longer Waits For Review",
+      title: "Sending Domains Usable Without Manual Approval",
       modules: ["platform"],
       tags: ["Deliverability"],
       lead:
-        "A new domain used to be created pending while it was scored, and could not send until" +
-        " somebody approved it.",
+        "A new sending domain can now send straight away, where it used to stay pending until" +
+        " someone reviewed and approved it.",
       body: [
-        "Domains are usable straight away now. Enforcement moved behind the send instead: a" +
-          " domain that turns out to be a problem is blocked there, and an attempt to send from a" +
-          " blocked domain fails with a message saying so rather than being quietly accepted.",
+        "Problem domains are now blocked at send time instead. A send from a blocked domain" +
+          " fails with an error that says so, where it used to be accepted without one.",
       ],
       docs: {
         label: "Sending domains",
@@ -226,29 +221,31 @@ php artisan lettr:init`,
       },
     },
     {
-      title: "Templates Are Now Called Emails",
-      modules: ["transactional"],
-      tags: ["UI/UX"],
-      lead: "The same thing, named the way everyone was already describing it. The API is unchanged.",
-    },
-    {
-      title: "Merge Tags Can Be Marked Required",
+      title: "Templates Renamed To Emails In The App",
       modules: ["transactional"],
       tags: ["UI/UX"],
       lead:
-        "Click a merge tag's badge on an email to mark it required; required tags render" +
-        " highlighted.",
+        "What the app called templates is now called emails everywhere, and the API stays the" +
+        " same.",
     },
     {
-      title: "Version History Was Redesigned",
+      title: "Required Flag For Merge Tags Per Email Version",
       modules: ["transactional"],
       tags: ["UI/UX"],
       lead:
-        "Clearer wording about what saving and publishing each do, and deleting the last remaining" +
-        " version is now refused rather than allowed.",
+        "A merge tag on an email version can now be marked required by clicking its badge, and" +
+        " required tags are highlighted.",
+    },
+    {
+      title: "Redesigned Version History That Keeps The Last Version",
+      modules: ["transactional"],
+      tags: ["UI/UX"],
+      lead:
+        "Version history has a new layout with clearer wording on what saving and publishing each" +
+        " do, and the last remaining version can no longer be deleted.",
       body: [
-        "Previewing a version that is not the live one is flagged quietly rather than in alarm" +
-          " colours, since looking at an old version is a normal thing to do.",
+        "Previewing a version that isn't the live one is now marked in grey instead of a" +
+          " warning color, since looking at an old version is a normal thing to do.",
       ],
       docs: {
         label: "Versions",
@@ -256,32 +253,34 @@ php artisan lettr:init`,
       },
     },
     {
-      title: "Signing In With Google Or GitHub No Longer Dead-Ends",
+      title: "Expired Google And GitHub Sign-Ins Return To The Login Page",
       modules: ["platform"],
       tags: ["UI/UX", "Security"],
       lead:
-        "Leaving the tab open long enough for the sign-in to expire used to produce an unhandled" +
-        " error rather than a page.",
+        "A Google or GitHub sign-in that expired because the tab was left open now returns to the" +
+        " login page with a message to try again, instead of an error.",
       body: [
-        "You are now returned to the login screen and told the session expired and to try again." +
-          " An oversized avatar URL from a provider can also no longer break account creation.",
+        "A very long avatar URL from the provider can also no longer stop the account from" +
+          " being created.",
       ],
     },
     {
-      title: "Changing Your Password Signs Out Your Other Sessions",
+      title: "Password Changes Sign Out All Other Sessions",
       modules: ["platform"],
       tags: ["Security"],
-      lead:
-        "Which is what most people already assume it does. Names on users and teams are also" +
-        " stripped of markup when saved, so one cannot carry anything into an email or a page.",
+      lead: "Changing your password now signs you out of Lettr on every other device and browser.",
+      body: [
+        "User and team names are also stripped of markup when saved, so a name can't carry code" +
+          " into an email or a page.",
+      ],
     },
     {
-      title: "The API Reference Matches The API",
+      title: "API Reference Updated For Email Detail And All Event Types",
       modules: ["transactional"],
       tags: ["Docs", "API"],
       lead:
-        "Paths and schemas that no longer existed were removed, the email-detail endpoint was" +
-        " documented properly, and the full set of event types was written up.",
+        "The API reference no longer lists paths and schemas that were removed, documents the" +
+        " email detail endpoint properly, and describes every event type.",
       docs: {
         label: "API reference",
         href: "https://docs.lettr.com/api-reference/introduction",
@@ -294,24 +293,22 @@ php artisan lettr:init`,
       modules: ["platform"],
       tags: ["UI/UX"],
       text:
-        "Fixed the quickstart email being sent again every time a verification event arrived for" +
-        " someone already verified. It recorded that it had sent one but never checked first, so" +
-        " re-verifying meant another copy.",
+        "The quickstart email is no longer sent again each time an already verified account" +
+        " receives another verification event.",
     },
     {
       modules: ["transactional"],
       tags: ["API"],
       text:
-        "Fixed the single-email endpoint returning a borrowed error code when a message could not" +
-        " be retrieved, instead of one that says what actually went wrong.",
+        "Fixed the single-email endpoint returning an unrelated error code when a message" +
+        " couldn't be retrieved; it now returns its own code.",
     },
     {
       modules: ["transactional"],
       tags: ["API"],
       text:
-        "Fixed the latitude and longitude on an event changing type between responses — whole" +
-        " numbers came back as numbers and everything else as strings. They are always strings" +
-        " now.",
+        "Event latitude and longitude are now always strings, where whole numbers used to come" +
+        " back as numbers.",
     },
   ],
 };
