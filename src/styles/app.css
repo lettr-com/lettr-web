@@ -6,9 +6,15 @@
 @theme {
   --color-background: #f7f1f3;
   --color-primary: #ec104b;
+  /* Same hue, nudged darker so small white-on-crimson text clears WCAG AA (4.5:1) */
+  --color-primary-strong: #e90f49;
   --color-surface: #111827;
   --color-muted: #1f2937;
   --color-border: #d1d5db;
+  --color-primary-soft: #fde7ed;
+  --color-primary-outline: #f9b7c9;
+  --color-green: #00c851;
+  --color-code-string: #f9a8b8;
 
   /* Changelog module badges: one hue per product area, plus a warning hue
      reserved for the "Breaking" tag. Tinted backgrounds are produced with
@@ -22,6 +28,7 @@
   --font-heading: "Zalando Sans SemiExpanded", sans-serif;
   --font-body: "Manrope", sans-serif;
   --font-code: "DM Mono", monospace;
+  --font-serif: "Fraunces", serif;
 
   --text-h1: 2.5rem;
   --text-h1--line-height: 1.2;
@@ -112,6 +119,14 @@
 }
 
 @layer components {
+  .home-section-heading {
+    font-family: var(--font-heading);
+    font-size: clamp(2rem, 3.2vw, 2.75rem);
+    line-height: 1.12;
+    font-weight: 500;
+    letter-spacing: -0.025em;
+  }
+
   .legal-prose {
     font-family: var(--font-body);
     font-size: 0.95rem;

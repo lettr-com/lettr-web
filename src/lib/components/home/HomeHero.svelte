@@ -1,7 +1,8 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import Button from '$lib/components/Button.svelte';
-	import DitherHero from './DitherHero.svelte';
+	import DitherEdge from './DitherEdge.svelte';
+	import EnvelopeDither from './EnvelopeDither.svelte';
 	import { buildRegisterUrl, registerUrl } from '$lib/utils/utm';
 	import { capturePosthogEvent, trackSignupClick } from '$lib/analytics/posthog';
 
@@ -49,18 +50,10 @@
 		}
 	}
 
-	.hero-grid {
-		background-image:
-			linear-gradient(to right, rgba(17, 24, 39, 0.05) 1px, transparent 1px),
-			linear-gradient(to bottom, rgba(17, 24, 39, 0.05) 1px, transparent 1px);
-		background-size: 48px 48px;
-		background-position: center top;
-		mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0));
-	}
 </style>
 
-<section id="hero" class="relative -mx-6 border-b border-border/30 px-6 pt-32 pb-0">
-	<div class="hero-grid pointer-events-none absolute inset-x-0 top-0 h-[520px]" aria-hidden="true"></div>
+<section id="hero" class="relative -mx-6 overflow-hidden border-b border-border/30 px-6 pt-16 pb-0 md:pt-32">
+	<div class="pointer-events-none absolute -top-48 left-1/2 h-[360px] w-[min(1100px,140%)] -translate-x-1/2 bg-primary opacity-35 blur-[130px]" aria-hidden="true"></div>
 
 	<div class="relative mx-auto flex max-w-[820px] flex-col items-center text-center">
 		<a
@@ -70,33 +63,35 @@
 			class="group mb-8 inline-flex items-center gap-2 border border-primary/20 bg-white p-1 pr-3 text-sm text-surface transition-colors hover:border-primary/50"
 			onclick={() => void capturePosthogEvent('hero_announcement_clicked', { href: '/email-marketing/', label: 'Introducing Campaigns' })}
 		>
-			<span class="bg-primary px-2 py-0.5 text-xs font-bold text-white">New</span>
-			Introducing Campaigns: run marketing from the same account
+			<span class="bg-primary-strong px-2 py-0.5 text-xs font-bold text-white">New</span>
+			Introducing Campaigns<span class="hidden sm:inline">: run marketing from the same account</span>
 			<span class="text-primary transition-transform group-hover:translate-x-0.5">&rarr;</span>
 		</a>
 
 		<h1
 			data-animate
 			style="animation-delay:0.06s"
-			class="mb-6 text-[2.75rem] leading-[1.06] font-medium tracking-[-0.025em] text-surface sm:text-[3.5rem] lg:text-[4rem]"
+			class="mb-6 text-[2.25rem] leading-[1.06] font-normal tracking-[-0.025em] text-surface sm:text-[3.5rem] lg:text-[4rem]"
 		>
 			The email platform<br />
-			<span class="text-primary">built for SaaS</span>
+			<span class="font-serif text-[2.625rem] font-medium text-primary italic sm:text-[4rem] lg:text-[4.5rem]">built for SaaS</span>
 		</h1>
 
-		<p data-animate style="animation-delay:0.12s" class="mb-8 max-w-[640px] text-body text-muted">
+		<p data-animate style="animation-delay:0.12s" class="mb-8 max-w-[640px] text-[1.0625rem] text-muted md:text-body">
 			Build every email in one drag-and-drop editor. Send transactional via API, marketing via
 			campaigns. One platform, one bill.
 		</p>
 
-		<div data-animate style="animation-delay:0.18s" class="mb-5 flex flex-wrap items-center justify-center gap-3">
+		<div data-animate style="animation-delay:0.18s" class="mb-5 flex w-full flex-col items-stretch justify-center gap-3 sm:w-auto sm:flex-row sm:items-center">
 			<Button
 				variant="primary"
+				size="hero"
 				href={registerHref}
 				onclick={() => trackHeroCta('Start sending', registerHref, 'primary')}
 			>Start sending</Button>
 			<Button
 				variant="secondary"
+				size="hero"
 				href="https://docs.lettr.com/introduction"
 				target="_blank"
 				rel="noopener noreferrer"
@@ -104,7 +99,7 @@
 			>See docs</Button>
 		</div>
 
-		<ul data-animate style="animation-delay:0.24s" class="mb-14 flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-sm text-muted">
+		<ul data-animate style="animation-delay:0.24s" class="mb-10 flex flex-wrap md:mb-14 items-center justify-center gap-x-5 gap-y-2 text-sm text-muted">
 			{#each badges as badge}
 				<li class="inline-flex items-center gap-2">
 					<span class="block h-1.5 w-1.5 bg-primary"></span>
@@ -114,7 +109,8 @@
 		</ul>
 	</div>
 
-	<div data-animate style="animation-delay:0.3s" class="-mx-6 narrow:-mx-6">
-		<DitherHero height={460} cell={3} three />
+	<div data-animate style="animation-delay:0.3s" class="relative -mx-6 narrow:-mx-6">
+		<DitherEdge />
+		<EnvelopeDither />
 	</div>
 </section>

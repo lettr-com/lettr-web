@@ -131,7 +131,7 @@
 						onclick={toggleMore}
 					>
 						{isMoreActive ? tabs[activeTab].label : 'More'}
-						<CaretDownIcon size={10} />
+						<CaretDownIcon aria-hidden="true" size={10} />
 					</button>
 					{#if moreOpen}
 						<div class="absolute top-full left-0 z-50 mt-1 min-w-[140px] border border-white/10 bg-surface/95 py-1 shadow-xl backdrop-blur-xl">

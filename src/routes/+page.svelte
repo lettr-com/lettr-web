@@ -1,23 +1,21 @@
 <script lang="ts">
 	import HomeHero from '$lib/components/home/HomeHero.svelte';
 	import ProofStrip from '$lib/components/home/ProofStrip.svelte';
-	import TwoProducts from '$lib/components/home/TwoProducts.svelte';
-	import DeveloperPath from '$lib/components/home/DeveloperPath.svelte';
-	import TeamFeatures from '$lib/components/TeamFeatures.svelte';
-	import UseCasesInbox from '$lib/components/home/UseCasesInbox.svelte';
-	import CampaignsBand from '$lib/components/home/CampaignsBand.svelte';
+	import DevTeamsSection from '$lib/components/home/DevTeamsSection.svelte';
+	import MarqueeBand from '$lib/components/home/MarqueeBand.svelte';
+	import SendingLanesSection from '$lib/components/home/SendingLanesSection.svelte';
+	import AssistantSection from '$lib/components/home/AssistantSection.svelte';
+	import FrameworkSection from '$lib/components/home/FrameworkSection.svelte';
+	import BrandSection from '$lib/components/home/BrandSection.svelte';
 	import PricingSlider from '$lib/components/home/PricingSlider.svelte';
-	import TalkToExpert from '$lib/components/TalkToExpert.svelte';
-	import FAQSection from '$lib/components/FAQSection.svelte';
 </script>
 
 <HomeHero />
 <ProofStrip />
-<TwoProducts />
-<DeveloperPath />
-<TeamFeatures />
-<UseCasesInbox />
-<CampaignsBand />
+<DevTeamsSection />
+<MarqueeBand />
+<SendingLanesSection />
+<BrandSection />
+<FrameworkSection />
 <PricingSlider />
-<TalkToExpert />
-<FAQSection />
+<AssistantSection />

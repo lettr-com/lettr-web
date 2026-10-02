@@ -92,7 +92,7 @@
 
 <section bind:this={section} id="faq" class="py-16 border-b border-border/30">
 	<div class="mb-10" data-faq>
-		<h2 class="mb-3 text-surface">Frequently asked <span class="text-primary">questions</span></h2>
+		<h2 class="mb-3 font-medium text-surface">Frequently asked <span class="block text-primary">questions</span></h2>
 		<p class="text-body text-muted max-w-[55ch]">
 			Common questions about Lettr's email platform for SaaS companies.
 		</p>

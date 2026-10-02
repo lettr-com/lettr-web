@@ -22,7 +22,7 @@ const lettrTheme: ThemeRegistration = {
     },
     {
       scope: ["keyword", "storage.type", "storage.modifier"],
-      settings: { foreground: "#f43f6b" },
+      settings: { foreground: "#ff6b8f" },
     },
     {
       scope: ["entity.name.function", "support.function"],
@@ -46,7 +46,7 @@ const lettrTheme: ThemeRegistration = {
     },
     {
       scope: ["entity.name.tag"],
-      settings: { foreground: "#f43f6b" },
+      settings: { foreground: "#ff6b8f" },
     },
     {
       scope: ["entity.other.attribute-name"],

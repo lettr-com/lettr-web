@@ -6,7 +6,6 @@
 	import BellIcon from 'phosphor-svelte/lib/BellIcon';
 	import MegaphoneIcon from 'phosphor-svelte/lib/MegaphoneIcon';
 	import RocketLaunchIcon from 'phosphor-svelte/lib/RocketLaunchIcon';
-	import SectionLabel from './SectionLabel.svelte';
 	import { createScrollRevealCleanup } from '$lib/utils/gsap';
 
 	let section: HTMLElement | undefined = $state();
@@ -28,9 +27,8 @@
 
 <section bind:this={section} class="border-b border-border/30 py-20">
 	<div data-reveal class="mb-10 max-w-[720px]">
-		<SectionLabel index={3} total={5} label="What SaaS actually sends" />
-		<h2 class="mb-4 text-[2rem] leading-[1.15] tracking-[-0.02em] text-surface sm:text-[2.5rem]">
-			Built for the emails <span class="text-primary">SaaS companies actually send.</span>
+		<h2 class="home-section-heading mb-4 text-surface">
+			Built for the emails <span class="block text-primary">SaaS companies actually send.</span>
 		</h2>
 		<p class="text-body text-muted">Designed for the emails your product already sends.</p>
 	</div>
