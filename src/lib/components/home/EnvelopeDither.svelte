@@ -8,6 +8,10 @@
 	 * image-rendering: pixelated. The pointer etches a fading crimson trail,
 	 * same as DitherHero. Swap this component for DitherHero in HomeHero to
 	 * roll back to the previous 3D treatment.
+	 *
+	 * Besides envelopes the field carries a few other mail-ish objects (plane,
+	 * stamp, key, @, check). Everything just drifts upward; clicking an envelope
+	 * lifts its flap for a moment.
 	 */
 
 	interface Props {
@@ -21,8 +25,10 @@
 
 	let { cell = 4, cellMobile = 3, dither = true }: Props = $props();
 
+	type Kind = 'envelope' | 'face' | 'plane' | 'at' | 'stamp' | 'key' | 'check';
+
 	interface Sprite {
-		kind: 'envelope' | 'face';
+		kind: Kind;
 		// top-left origin + size + clockwise rotation (deg), as laid out in Paper
 		x: number;
 		y: number;
@@ -32,6 +38,10 @@
 		phase: number;
 		/** upward drift in reference px per second; 0 pins the sprite */
 		speed: number;
+		/** envelopes only: time (s) until the flap closes again */
+		openUntil?: number;
+		/** envelopes only: when it was last opened, for the little pop */
+		openAt?: number;
 	}
 
 	interface Layout {
@@ -59,6 +69,17 @@
 		speed
 	});
 
+	const obj = (kind: Kind, x: number, y: number, size: number, rot: number, phase: number, speed: number): Sprite => ({
+		kind,
+		x,
+		y,
+		w: size,
+		h: size,
+		rot,
+		phase,
+		speed
+	});
+
 	const DESKTOP: Layout = {
 		w: 1280,
 		h: 430,
@@ -71,7 +92,12 @@
 			env(972, 65, 92.2, 92.2, -6.67, 5.2, 10),
 			env(894.9, 203.5, 220, 220, -4.1, 0.9, 24),
 			env(1123, -20, 220, 220, -15, 3.7, 28),
-			{ kind: 'face', x: 144, y: 316, w: 60, h: 60, rot: 9.39, phase: 1.2, speed: 18 }
+			{ kind: 'face', x: 144, y: 316, w: 60, h: 60, rot: 9.39, phase: 1.2, speed: 18 },
+			obj('stamp', 372, 36, 84, 12, 2.2, 13),
+			obj('plane', 780, 318, 96, -10, 0.7, 20),
+			obj('key', 706, 14, 86, 24, 3.5, 15),
+			obj('at', 1168, 300, 80, -6, 4.8, 12),
+			obj('check', 250, 18, 66, 8, 1.4, 17)
 		]
 	};
 
@@ -84,7 +110,10 @@
 			env(235, 10, 120, 156, -8.69, 4.4, 22),
 			env(100, 230, 76, 76, -30.58, 3.1, 10),
 			env(322, 20, 64, 64, -6.67, 5.2, 14),
-			{ kind: 'face', x: 24, y: 252, w: 56, h: 56, rot: 9.39, phase: 1.2, speed: 18 }
+			{ kind: 'face', x: 24, y: 252, w: 56, h: 56, rot: 9.39, phase: 1.2, speed: 18 },
+			obj('plane', 16, 120, 64, -14, 0.7, 16),
+			obj('stamp', 296, 232, 58, 12, 2.2, 13),
+			obj('check', 330, 120, 46, 8, 1.4, 17)
 		]
 	};
 
@@ -110,6 +139,16 @@
 	let wrapper: HTMLElement | undefined = $state();
 	let canvas: HTMLCanvasElement | undefined = $state();
 	let faceCanvas: HTMLCanvasElement | undefined = $state();
+	let isOverEnvelope = $state(false);
+
+	const SPRITE_SRC: Record<Exclude<Kind, 'face'>, string> = {
+		envelope: '/hero/envelope.png',
+		plane: '/hero/sprites/paper-plane.png',
+		at: '/hero/sprites/at-sign.png',
+		stamp: '/hero/sprites/stamp.png',
+		key: '/hero/sprites/key.png',
+		check: '/hero/sprites/check.png'
+	};
 
 	onMount(() => {
 		if (!wrapper || !canvas || !faceCanvas) return;
@@ -123,17 +162,26 @@
 		const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 		const start = performance.now();
 
-		const envelopeImg = new Image();
 		const faceImg = new Image();
-		let loaded = 0;
+		const openImg = new Image();
+		const spriteImgs = {} as Record<Exclude<Kind, 'face'>, HTMLImageElement>;
 		const onLoad = () => {
-			loaded += 1;
 			if (reducedMotion) render(performance.now());
 		};
-		envelopeImg.onload = onLoad;
 		faceImg.onload = onLoad;
-		envelopeImg.src = '/hero/envelope.png';
+		openImg.onload = onLoad;
 		faceImg.src = '/hero/designer.png';
+		openImg.src = '/hero/sprites/envelope-open.png';
+		for (const key of Object.keys(SPRITE_SRC) as Exclude<Kind, 'face'>[]) {
+			const img = new Image();
+			img.onload = onLoad;
+			img.src = SPRITE_SRC[key];
+			spriteImgs[key] = img;
+		}
+		// view transform of the last drawn frame, for hit-testing clicks
+		let viewScale = 1;
+		let viewOx = 0;
+		let viewOy = 0;
 
 		let cols = 0;
 		let rows = 0;
@@ -162,39 +210,65 @@
 			out = ctx!.createImageData(cols, rows);
 		}
 
-		function drawSprite(s: Sprite, t: number, scale: number, ox: number, oy: number) {
-			const img = s.kind === 'face' ? faceImg : envelopeImg;
-			if (!img.complete || !img.naturalWidth) return;
-			const sway = reducedMotion ? 0 : Math.sin(t * 0.5 + s.phase) * 0.05;
+		// Paper rotates around the top-left corner; recover the centre
+		function spriteCenter(s: Sprite, t: number) {
 			const bob = reducedMotion || s.speed === 0 ? 0 : Math.sin(t * 0.7 + s.phase * 1.3) * 5;
 			const rad = (s.rot * Math.PI) / 180;
-			// Paper rotates around the top-left corner; recover the centre
 			const cx = s.x + (s.w / 2) * Math.cos(rad) - (s.h / 2) * Math.sin(rad);
 			let cy = s.y + (s.w / 2) * Math.sin(rad) + (s.h / 2) * Math.cos(rad) + bob;
-			if (s.speed > 0 && !reducedMotion) {
-				cy = wrapY(cy, s, t);
-			}
+			if (s.speed > 0 && !reducedMotion) cy = wrapY(cy, s, t);
+			return { cx, cy, rad };
+		}
+
+		function drawSprite(s: Sprite, t: number, scale: number, ox: number, oy: number) {
+			const isOpen = s.kind === 'envelope' && (s.openUntil ?? 0) > t;
+			const img = s.kind === 'face' ? faceImg : isOpen ? openImg : spriteImgs[s.kind];
+			if (!img.complete || !img.naturalWidth) return;
+			const sway = reducedMotion ? 0 : Math.sin(t * 0.5 + s.phase) * 0.05;
+			const { cx, cy, rad } = spriteCenter(s, t);
 			const w = s.w * scale;
 			const h = s.h * scale;
-			// background-size: cover, centred
-			const ratio = w / h;
-			const sw = ratio >= 1 ? img.naturalWidth : img.naturalHeight * ratio;
-			const sh = ratio >= 1 ? img.naturalWidth / ratio : img.naturalHeight;
+			// a small pop as the flap lifts, then it settles back to normal size
+			const pop = isOpen ? 1 + 0.08 * Math.sin(Math.min(1, (t - (s.openAt ?? 0)) / 0.5) * Math.PI) : 1;
 			octx!.save();
 			octx!.translate(ox + cx * scale, oy + cy * scale);
 			octx!.rotate(rad + sway);
-			octx!.drawImage(
-				img,
-				(img.naturalWidth - sw) / 2,
-				(img.naturalHeight - sh) / 2,
-				sw,
-				sh,
-				-w / 2,
-				-h / 2,
-				w,
-				h
-			);
+			octx!.scale(pop, pop);
+			if (isOpen) {
+				// the open envelope fills its square, so shrink it to match the closed one
+				const side = Math.max(w, h) * 0.84;
+				octx!.drawImage(img, -side / 2, -side / 2, side, side);
+			} else {
+				// background-size: cover, centred
+				const ratio = w / h;
+				const sw = ratio >= 1 ? img.naturalWidth : img.naturalHeight * ratio;
+				const sh = ratio >= 1 ? img.naturalWidth / ratio : img.naturalHeight;
+				octx!.drawImage(img, (img.naturalWidth - sw) / 2, (img.naturalHeight - sh) / 2, sw, sh, -w / 2, -h / 2, w, h);
+			}
 			octx!.restore();
+		}
+
+		function envelopeAt(clientX: number, clientY: number): Sprite | undefined {
+			const rect = host.getBoundingClientRect();
+			const lx = (((clientX - rect.left) / rect.width) * cols - viewOx) / viewScale;
+			const ly = (((clientY - rect.top) / rect.height) * rows - viewOy) / viewScale;
+			const t = reducedMotion ? 0 : (performance.now() - start) / 1000;
+			const sprites = layout.sprites;
+			for (let i = sprites.length - 1; i >= 0; i--) {
+				const s = sprites[i];
+				if (s.kind !== 'envelope') continue;
+				const { cx, cy, rad } = spriteCenter(s, t);
+				const a = rad + Math.sin(t * 0.5 + s.phase) * 0.05;
+				const dx = lx - cx;
+				const dy = ly - cy;
+				const x = dx * Math.cos(-a) - dy * Math.sin(-a);
+				const y = dx * Math.sin(-a) + dy * Math.cos(-a);
+				const base = Math.max(s.w, s.h);
+				const hw = Math.min(base * 0.74, s.w) / 2;
+				const hh = (base * 0.55) / 2;
+				if (Math.abs(x) <= hw && Math.abs(y) <= hh) return s;
+			}
+			return undefined;
 		}
 
 		// The face sits on its own full-resolution canvas so it stays crisp.
@@ -237,6 +311,9 @@
 			const scale = Math.max(cols / layout.w, rows / layout.h);
 			const ox = (cols - layout.w * scale) / 2;
 			const oy = (rows - layout.h * scale) / 2;
+			viewScale = scale;
+			viewOx = ox;
+			viewOy = oy;
 			for (const s of layout.sprites) if (s.kind !== 'face') drawSprite(s, t, scale, ox, oy);
 			drawFace(t, scale, ox, oy);
 		}
@@ -343,11 +420,35 @@
 				stamp(x, y, t);
 			}
 			last = { x, y };
-			if (reducedMotion) render(performance.now());
+			if (reducedMotion) {
+				render(performance.now());
+			} else {
+				isOverEnvelope = !!envelopeAt(ev.clientX, ev.clientY);
+			}
 		}
 
 		function onPointerLeave() {
 			last = null;
+			isOverEnvelope = false;
+		}
+
+		// A tap or click on an envelope lifts its flap for a couple of seconds
+		let down: { x: number; y: number; at: number } | null = null;
+
+		function onPointerDown(ev: PointerEvent) {
+			down = { x: ev.clientX, y: ev.clientY, at: performance.now() };
+		}
+
+		function onPointerUp(ev: PointerEvent) {
+			const d = down;
+			down = null;
+			if (!d || reducedMotion) return;
+			if (Math.hypot(ev.clientX - d.x, ev.clientY - d.y) > 8 || performance.now() - d.at > 500) return;
+			const hit = envelopeAt(ev.clientX, ev.clientY);
+			if (!hit) return;
+			const t = (performance.now() - start) / 1000;
+			hit.openAt = t;
+			hit.openUntil = t + 2.2;
 		}
 
 		resize();
@@ -360,19 +461,23 @@
 		ro.observe(host);
 		host.addEventListener('pointermove', onPointerMove, { passive: true });
 		host.addEventListener('pointerleave', onPointerLeave);
+		host.addEventListener('pointerdown', onPointerDown);
+		host.addEventListener('pointerup', onPointerUp);
 
 		return () => {
 			cancelAnimationFrame(raf);
 			ro.disconnect();
 			host.removeEventListener('pointermove', onPointerMove);
 			host.removeEventListener('pointerleave', onPointerLeave);
+			host.removeEventListener('pointerdown', onPointerDown);
+			host.removeEventListener('pointerup', onPointerUp);
 		};
 	});
 </script>
 
 <div
 	bind:this={wrapper}
-	class="relative h-[320px] w-full overflow-hidden bg-[#23020B] md:h-[430px]"
+	class="relative h-[320px] w-full overflow-hidden bg-[#23020B] md:h-[430px] {isOverEnvelope ? 'cursor-pointer' : ''}"
 	aria-hidden="true"
 >
 	<canvas

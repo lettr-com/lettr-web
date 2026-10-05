@@ -121,3 +121,18 @@ The first developer feature concept was **three large visual stories** (send, au
 - **Directions considered:** (1) widen the existing alternating developer bands; they would still read as rows rather than individual feature canvases. (2) build a two-column system of large linked feature cards and use it selectively; **chosen** for its close fit to the owner's reference and the ability to give each point room. (3) show one oversized feature at a time in a carousel; it would hide too many useful facts and repeat the Devs/Teams switch.
 - **Response:** Added a reusable large feature card pattern with Lettr typography, background/white surfaces, pink accents, square corners, and an individual graphic. Applied it to the developer capabilities and replaced the Campaigns section's four compact text cards with two large stories: audiences and campaign volume. Kept the team editor and inbox sections in their different layouts to preserve pacing.
 - **Status:** implemented; ready for owner visual review.
+
+### 2026-10-05 — CTAs, copy, version history, pricing links
+
+- **Owner requests:** Use "Get started" for every CTA and add one to almost every section. Underline "accessible" in the Devs/Teams heading with a dotted line and a tooltip (“Everyone on your team can edit, send, and track all emails.”). Add a version history section, designed in Paper first. Make the homepage pricing cards link to their tier on `/pricing/`, with only the arrow and "See full pricing" clickable. Crop the framework terminal instead of letting it scroll. Rewrite every section's copy: casual, short to medium, direct, focused on how each feature helps the SaaS.
+- **Response:** Added `GetStartedButton` (shared tracking) to the Devs/Teams, lanes, brand, version history, framework and pricing sections, and renamed the navbar, hero and footer CTAs. Added the reusable `TooltipWord` component (hover, focus, tap). Built `VersionHistorySection` from the Paper artboard "Version history section — Desktop"; it is interactive (select a version, restore it). The pricing tiles now link to `/pricing/?plan=transactional|marketing`, which the pricing page reads on mount. The terminal is clipped, not scrollable, and stays pinned to the latest line. Copy rewritten in all sections; the repeated placeholder lines under three section headings and on the lane cards are replaced.
+- **Analytics note:** the CTA label sent with `cta_clicked` changed from "Start sending" / "Start sending in minutes" to "Get started"; `signup_clicked` still fires from the same placements.
+- **Status:** implemented; ready for owner visual review.
+
+### 2026-10-05 — Hero: more objects, calm interaction
+
+- **Owner request:** make the envelope band more interactive. After trying a full physics version (bouncing, collisions, dithered impact shockwaves, drag and throw), the owner found it cheap and asked to keep only the new objects floating, remove physics and the impact dither, and keep click-to-open on envelopes.
+- **What shipped:** the original floating field (slow upward drift, gentle sway, crimson pointer trail) now also carries five generated objects in the same glossy pink style (paper plane, stamp, key, @, check; `static/hero/sprites/`). Clicking or tapping an envelope lifts its flap for about two seconds with a small pop; the pointer cursor shows over envelopes. Nothing else reacts.
+- **Lesson to retain:** for this hero, restraint reads as quality. Motion should be ambient and one interaction should be a clear reward; physics, shake and impact effects pushed the page toward a toy.
+- **Roll back:** swap `EnvelopeDither` for `DitherHero` in `HomeHero.svelte`. Reduced motion renders a still frame and ignores clicks.
+- **Status:** implemented; ready for owner visual review.
