@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import GetStartedButton from './GetStartedButton.svelte';
+	import StageGlow from './StageGlow.svelte';
 	import { createScrollRevealCleanup } from '$lib/utils/gsap';
 	import { capturePosthogEvent } from '$lib/analytics/posthog';
 
@@ -105,7 +106,7 @@
 
 	<div data-reveal class="mx-auto max-w-[1100px]">
 		<div class="relative overflow-hidden bg-[#23020b] px-5 pt-10 pb-8 md:px-12 lg:h-[516px] lg:pt-12 lg:pb-0">
-			<div class="pointer-events-none absolute -bottom-48 left-1/2 h-[420px] w-[min(1393px,127%)] -translate-x-1/2 bg-primary blur-[150px]" aria-hidden="true"></div>
+			<StageGlow />
 			<div class="relative mx-auto flex max-w-[902px] flex-col gap-10 lg:h-full lg:flex-row lg:items-start lg:gap-7">
 				<!-- Email, cropped at the stage edge -->
 				<div class="flex h-[380px] justify-center overflow-hidden lg:h-full lg:w-[494px] lg:shrink-0" role="img" aria-label="An email with the section changed by the selected version highlighted">
