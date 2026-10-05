@@ -108,16 +108,8 @@ export async function sendWelcome() {
   },
 ];
 
-/** Everything a user would type, ready for the clipboard. */
-export function scriptToClipboard(script: TerminalScript): string {
-  return script.steps
-    .flatMap((step) => {
-      if (step.kind === "cmd") return [step.text];
-      if (step.kind === "file") {
-        const comment = step.name.endsWith(".py") ? "#" : "//";
-        return [`${comment} ${step.name}`, step.text];
-      }
-      return [];
-    })
-    .join("\n");
+/** The first command of a script (the install line), which is all the Copy button copies. */
+export function installCommand(script: TerminalScript): string {
+  const first = script.steps.find((step) => step.kind === "cmd");
+  return first?.kind === "cmd" ? first.text : "";
 }

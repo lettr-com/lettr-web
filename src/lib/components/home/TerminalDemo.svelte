@@ -2,13 +2,13 @@
 	import { onMount, tick, untrack } from 'svelte';
 	import CheckIcon from 'phosphor-svelte/lib/CheckIcon';
 	import CopyIcon from 'phosphor-svelte/lib/CopyIcon';
-	import { scriptToClipboard, type TerminalScript } from '$lib/home/terminalScripts';
+	import { installCommand, type TerminalScript } from '$lib/home/terminalScripts';
 	import { capturePosthogEvent } from '$lib/analytics/posthog';
 
 	/*
 	 * Terminal that slides in when it scrolls into view, then types a script
 	 * out and replays it whenever the script changes. Text is real DOM text, so
-	 * it stays selectable, and the Copy button puts every command and file on
+	 * it stays selectable, and the Copy button puts just the install command on
 	 * the clipboard.
 	 */
 
@@ -109,7 +109,7 @@
 
 	async function copy() {
 		try {
-			await navigator.clipboard.writeText(scriptToClipboard(script));
+			await navigator.clipboard.writeText(installCommand(script));
 			didCopy = true;
 			clearTimeout(copyTimer);
 			copyTimer = window.setTimeout(() => (didCopy = false), 1800);
@@ -213,7 +213,7 @@
 			type="button"
 			onclick={copy}
 			class="flex h-7 cursor-pointer items-center gap-1.5 border border-white/15 px-2.5 text-[12px] font-medium text-white/80 transition-colors hover:border-primary hover:text-white"
-			aria-label={didCopy ? 'Copied to clipboard' : `Copy ${script.label} commands and code`}
+			aria-label={didCopy ? 'Copied to clipboard' : `Copy ${script.label} install command`}
 		>
 			{#if didCopy}
 				<CheckIcon aria-hidden="true" size={13} class="text-green" />Copied
