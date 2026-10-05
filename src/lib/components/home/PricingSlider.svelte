@@ -2,7 +2,6 @@
 	import { onMount } from 'svelte';
 	import ArrowRightIcon from 'phosphor-svelte/lib/ArrowRightIcon';
 	import DitherSide from './DitherSide.svelte';
-	import GetStartedButton from './GetStartedButton.svelte';
 	import { capturePosthogEvent } from '$lib/analytics/posthog';
 	import { createScrollRevealCleanup } from '$lib/utils/gsap';
 
@@ -130,7 +129,7 @@
 	}
 </style>
 
-<section bind:this={section} id="pricing" aria-labelledby="pricing-heading" class="pt-14 pb-14 md:pt-24 md:pb-16">
+<section bind:this={section} id="pricing" aria-labelledby="pricing-heading" class="py-14 md:py-24">
 	<div data-reveal class="mx-auto mb-10 flex max-w-[860px] flex-col items-center gap-4 text-center md:mb-14">
 		<h2
 			id="pricing-heading"
@@ -264,9 +263,5 @@
 				</div>
 			{/each}
 		</div>
-	</div>
-
-	<div data-reveal class="mt-10 flex justify-center md:mt-14">
-		<GetStartedButton placement="home_pricing" />
 	</div>
 </section>
