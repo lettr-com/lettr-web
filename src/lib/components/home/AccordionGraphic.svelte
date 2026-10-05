@@ -49,7 +49,7 @@
 	let available = $state(WIDTH);
 	let scale = $derived(Math.min(1, available / WIDTH));
 
-	const sdks = ['Laravel', 'Node.js', 'PHP', 'Python', 'Go', 'Ruby'];
+	const sdks = ['Laravel', 'Node.js', 'PHP', 'Python', 'Ruby'];
 	const languages = ['EN', 'DE', 'FR', 'ES', 'IT', 'PT'];
 	const events = [
 		{ label: 'delivered', color: 'bg-green' },

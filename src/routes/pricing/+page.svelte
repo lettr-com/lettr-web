@@ -37,6 +37,10 @@ import ArrowSquareOut from 'phosphor-svelte/lib/ArrowSquareOut';
 	}
 
 	onMount(() => {
+		// Prerendered page, so the tab is read client-side: /pricing/?plan=marketing opens Marketing
+		const plan = new URLSearchParams(window.location.search).get('plan');
+		if (plan === 'marketing' || plan === 'transactional') mode = plan;
+
 		const cleanups: (() => void)[] = [];
 		if (header) {
 			cleanups.push(

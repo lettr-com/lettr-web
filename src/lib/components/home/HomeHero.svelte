@@ -20,7 +20,7 @@
 			variant,
 			destination_type: /^https?:\/\//.test(href) ? 'external' : 'internal'
 		});
-		if (label === 'Start sending') {
+		if (label === 'Get started') {
 			trackSignupClick('home_hero', href);
 		}
 	}
@@ -78,8 +78,8 @@
 		</h1>
 
 		<p data-animate style="animation-delay:0.12s" class="mb-8 max-w-[640px] text-[1.0625rem] text-muted md:text-body">
-			Build every email in one drag-and-drop editor. Send transactional via API, marketing via
-			campaigns. One platform, one bill.
+			Your team builds every email in one editor. You send transactional by API and marketing by
+			campaign. One platform, one bill.
 		</p>
 
 		<div data-animate style="animation-delay:0.18s" class="mb-5 flex w-full flex-col items-stretch justify-center gap-3 sm:w-auto sm:flex-row sm:items-center">
@@ -87,8 +87,8 @@
 				variant="primary"
 				size="hero"
 				href={registerHref}
-				onclick={() => trackHeroCta('Start sending', registerHref, 'primary')}
-			>Start sending</Button>
+				onclick={() => trackHeroCta('Get started', registerHref, 'primary')}
+			>Get started</Button>
 			<Button
 				variant="secondary"
 				size="hero"

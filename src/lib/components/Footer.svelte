@@ -39,7 +39,7 @@
 	function trackFooterCtaClick() {
 		void capturePosthogEvent('cta_clicked', {
 			placement: 'footer',
-			label: 'Start sending in minutes',
+			label: 'Get started',
 			href: registerHref,
 			destination_type: 'internal'
 		});
@@ -113,7 +113,7 @@
 				class="inline-flex items-center justify-center bg-primary-strong px-6 py-4 text-lg font-bold text-white transition duration-200 ease-out hover:-translate-y-0.5 hover:bg-primary-strong/90 motion-reduce:transition-none motion-reduce:hover:translate-y-0 md:px-10 md:py-5 md:text-[1.375rem]"
 				onclick={trackFooterCtaClick}
 			>
-				Start sending in minutes
+				Get started
 			</a>
 		</div>
 

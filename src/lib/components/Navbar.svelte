@@ -210,7 +210,7 @@
 		});
 		if (label === 'Sign in') {
 			trackSigninClick(`navbar_${placement}`, href);
-		} else if (label === 'Start sending') {
+		} else if (label === 'Get started') {
 			trackSignupClick(`navbar_${placement}`, href);
 		}
 	}
@@ -483,9 +483,9 @@
 				<a
 					href={registerHref}
 					class="flex items-center justify-center px-4 py-2 text-sm font-semibold bg-primary-strong text-white transition-colors hover:bg-primary-strong/90"
-					onclick={() => trackNavCtaClick('Start sending', registerHref, 'desktop')}
+					onclick={() => trackNavCtaClick('Get started', registerHref, 'desktop')}
 				>
-					Start sending
+					Get started
 				</a>
 			</div>
 
@@ -493,9 +493,9 @@
 			<a
 				href={registerHref}
 				class="ml-auto flex items-center justify-center bg-primary-strong px-3.5 py-2 text-sm font-semibold text-white md:hidden"
-				onclick={() => trackNavCtaClick('Start sending', registerHref, 'mobile')}
+				onclick={() => trackNavCtaClick('Get started', registerHref, 'mobile')}
 			>
-				Start sending
+				Get started
 			</a>
 
 			<!-- Mobile toggle -->
@@ -607,11 +607,11 @@
 							href={registerHref}
 							class="block font-bold text-primary transition-colors hover:text-primary/90"
 							onclick={() => {
-								trackNavCtaClick('Start sending', registerHref, 'mobile');
+								trackNavCtaClick('Get started', registerHref, 'mobile');
 								closeMobile();
 							}}
 						>
-							Start sending
+							Get started
 						</a>
 					</div>
 				</div>

@@ -2,6 +2,7 @@
 	import { onMount } from 'svelte';
 	import ArrowRightIcon from 'phosphor-svelte/lib/ArrowRightIcon';
 	import DitherSide from './DitherSide.svelte';
+	import GetStartedButton from './GetStartedButton.svelte';
 	import { capturePosthogEvent } from '$lib/analytics/posthog';
 	import { createScrollRevealCleanup } from '$lib/utils/gsap';
 
@@ -60,7 +61,7 @@
 		void capturePosthogEvent('cta_clicked', {
 			placement: `pricing_preview_${key}`,
 			label: 'See full pricing',
-			href: '/pricing/',
+			href: `/pricing/?plan=${key}`,
 			destination_type: 'internal'
 		});
 	}
@@ -129,7 +130,7 @@
 	}
 </style>
 
-<section bind:this={section} id="pricing" aria-labelledby="pricing-heading" class="py-14 md:py-24">
+<section bind:this={section} id="pricing" aria-labelledby="pricing-heading" class="pt-14 pb-14 md:pt-24 md:pb-16">
 	<div data-reveal class="mx-auto mb-10 flex max-w-[860px] flex-col items-center gap-4 text-center md:mb-14">
 		<h2
 			id="pricing-heading"
@@ -139,7 +140,7 @@
 			<em class="block font-serif text-[2.125rem] leading-none font-medium text-primary md:text-[2.875rem]">pricing.</em>
 		</h2>
 		<p class="max-w-[520px] text-[1.0625rem] leading-[1.5] text-surface md:text-[1.1875rem]">
-			Both products start free. Transactional bills per email, Marketing bills per contact. Bundle them for a discount.
+			Start free. Transactional is billed per email, Marketing per contact. Bundle both and save.
 		</p>
 	</div>
 
@@ -212,11 +213,7 @@
 		<div class="grid gap-4 md:grid-cols-2">
 			{#each tiles as tile}
 				{@const isTransactional = tile.key === 'transactional'}
-				<a
-					href="/pricing/"
-					onclick={() => trackTile(tile.key)}
-					class="group relative flex flex-col gap-5 overflow-hidden p-6 md:gap-7 md:p-8 {isTransactional ? 'bg-[#23020b]' : 'bg-[#002010]'}"
-				>
+				<div class="relative flex flex-col gap-5 overflow-hidden p-6 md:gap-7 md:p-8 {isTransactional ? 'bg-[#23020b]' : 'bg-[#002010]'}">
 					<DitherSide color={isTransactional ? '#ec104b' : '#00c851'} variant={isTransactional ? 'ripple' : 'noise'} width={isTransactional ? 20 : 30} />
 					<div class="relative flex flex-col gap-3.5 md:gap-5">
 						<div class="flex h-11 items-center justify-between gap-3">
@@ -246,17 +243,30 @@
 						{/each}
 					</ul>
 
-					<span class="relative flex items-center justify-between">
-						<span class="text-[0.9375rem] font-semibold text-white md:text-base">See full pricing</span>
-						<span
-							class="flex h-10 w-10 items-center justify-center transition-transform duration-300 group-hover:translate-x-1 md:h-11 md:w-11 {isTransactional ? 'bg-primary text-white' : 'bg-green text-[#002010]'}"
+					<div class="relative flex items-center justify-between">
+						<a
+							href="/pricing/?plan={tile.key}"
+							onclick={() => trackTile(tile.key)}
+							class="text-[0.9375rem] font-semibold text-white underline-offset-4 hover:underline md:text-base"
+						>
+							See full pricing
+						</a>
+						<a
+							href="/pricing/?plan={tile.key}"
+							onclick={() => trackTile(tile.key)}
+							tabindex="-1"
 							aria-hidden="true"
+							class="flex h-10 w-10 items-center justify-center transition-transform duration-300 hover:translate-x-1 md:h-11 md:w-11 {isTransactional ? 'bg-primary text-white' : 'bg-green text-[#002010]'}"
 						>
 							<ArrowRightIcon size={22} weight="bold" />
-						</span>
-					</span>
-				</a>
+						</a>
+					</div>
+				</div>
 			{/each}
 		</div>
+	</div>
+
+	<div data-reveal class="mt-10 flex justify-center md:mt-14">
+		<GetStartedButton placement="home_pricing" />
 	</div>
 </section>

@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import DitherSide from './DitherSide.svelte';
+	import GetStartedButton from './GetStartedButton.svelte';
 	import FeatureAccordion, { type AccordionItem } from './FeatureAccordion.svelte';
 	import { createScrollRevealCleanup } from '$lib/utils/gsap';
 
@@ -10,34 +11,34 @@
 		{
 			id: 'onboarding',
 			title: 'Onboarding sequences',
-			description: 'Set up a welcome series once. It goes out on schedule as new people sign up.'
+			description: 'Set up a welcome series once and it goes out as people sign up.'
 		},
 		{
 			id: 'security',
 			title: 'Password resets & security',
-			description: 'Resets and login alerts jump the queue, even while a campaign is sending.'
+			description: 'Resets and login alerts jump the queue, even mid-campaign.'
 		},
 		{
 			id: 'trial',
 			title: 'Trial expiry & upgrade nudges',
-			description: 'Remind people before their trial ends and nudge them toward a paid plan.'
+			description: 'Remind people before a trial ends and nudge them to upgrade.'
 		}
 	];
 	const marketingItems: AccordionItem[] = [
 		{
 			id: 'segments',
 			title: 'Contacts, lists & segments',
-			description: 'Keep your contacts in lists and segments, so each send reaches the right people.'
+			description: 'Group contacts into lists and segments so every send hits the right people.'
 		},
 		{
 			id: 'campaigns',
 			title: 'Unlimited campaigns',
-			description: "Send as many campaigns as you like. There's no cap on how many you run."
+			description: 'Send as many campaigns as you want. No caps.'
 		},
 		{
 			id: 'analytics',
 			title: 'Dashboards & analytics',
-			description: 'See what got delivered, opened and clicked, across every email you send.'
+			description: 'See what was delivered, opened and clicked across every email, in one place.'
 		}
 	];
 
@@ -47,7 +48,7 @@
 	});
 </script>
 
-<section bind:this={section} aria-labelledby="lanes-heading" class="py-14 md:py-24">
+<section bind:this={section} aria-labelledby="lanes-heading" class="pt-14 pb-14 md:pt-24 md:pb-16">
 	<div data-reveal class="mx-auto mb-10 flex max-w-[860px] flex-col items-center gap-4 text-center md:mb-14">
 		<h2
 			id="lanes-heading"
@@ -57,8 +58,8 @@
 			Separate
 			<em class="block font-serif text-[2.125rem] leading-none font-medium text-primary md:inline md:text-[2.875rem]">sending lanes.</em>
 		</h2>
-		<p class="max-w-[364px] text-[1.0625rem] leading-[1.5] text-surface md:text-[1.1875rem]">
-			Protect critical product email while campaigns run alongside it.
+		<p class="max-w-[480px] text-[1.0625rem] leading-[1.5] text-surface md:text-[1.1875rem]">
+			A big campaign never holds up a password reset.
 		</p>
 	</div>
 
@@ -92,7 +93,7 @@
 					</g>
 				</svg>
 				<p class="relative max-w-[429px] text-[1.25rem] leading-[1.4] text-white md:text-2xl">
-					Connected to a visual editor your whole team can use independently.
+					The emails your app triggers, sent the moment something happens.
 				</p>
 			</div>
 			<FeatureAccordion items={transactionalItems} name="transactional" />
@@ -127,10 +128,14 @@
 					</g>
 				</svg>
 				<p class="relative max-w-[429px] text-[1.25rem] leading-[1.4] text-white md:text-2xl">
-					Connected to a visual editor your whole team can use independently.
+					Campaigns for your whole audience, sent from the same account.
 				</p>
 			</div>
 			<FeatureAccordion items={marketingItems} name="marketing" />
 		</div>
+	</div>
+
+	<div data-reveal class="mt-10 flex justify-center md:mt-14">
+		<GetStartedButton placement="home_sending_lanes" />
 	</div>
 </section>

@@ -34,8 +34,8 @@
 			<em class="font-serif text-[2.125rem] leading-none font-medium text-primary md:text-[2.875rem]">Laravel.</em><br />
 			Compatible with most.
 		</h2>
-		<p class="max-w-[364px] text-[1.0625rem] leading-[1.5] text-surface md:text-[1.1875rem]">
-			Protect critical product email while campaigns run alongside it.
+		<p class="max-w-[480px] text-[1.0625rem] leading-[1.5] text-surface md:text-[1.1875rem]">
+			Laravel gets a first-party package. Everything else works with our SDKs, REST API or SMTP.
 		</p>
 	</div>
 

@@ -190,35 +190,6 @@
 		animation: cursor-blink 1s steps(1, end) infinite;
 	}
 
-	/* Slim square scrollbar in the brand colours, for code that overflows on any device */
-	.term-scroll {
-		scrollbar-width: thin;
-		scrollbar-color: #ec104b #0b1220;
-	}
-
-	.term-scroll::-webkit-scrollbar {
-		width: 8px;
-		height: 8px;
-	}
-
-	.term-scroll::-webkit-scrollbar-track {
-		background: #0b1220;
-		border-left: 1px solid rgba(255, 255, 255, 0.06);
-	}
-
-	.term-scroll::-webkit-scrollbar-thumb {
-		background: #ec104b;
-		border: 2px solid #0b1220;
-	}
-
-	.term-scroll::-webkit-scrollbar-thumb:hover {
-		background: #ff3b6e;
-	}
-
-	.term-scroll::-webkit-scrollbar-corner {
-		background: #0b1220;
-	}
-
 	@media (prefers-reduced-motion: reduce) {
 		.cursor {
 			animation: none;
@@ -255,7 +226,7 @@
 	<!-- screen -->
 	<div
 		bind:this={body}
-		class="term-scroll h-[330px] overflow-auto px-5 py-5 font-code text-[12.5px] leading-[1.65] text-white sm:h-[351px] sm:px-6 sm:text-[13px]"
+		class="h-[330px] overflow-hidden px-5 py-5 font-code text-[12.5px] leading-[1.65] text-white sm:h-[351px] sm:px-6 sm:text-[13px]"
 		aria-hidden="true"
 	>
 		{#each lines as line, i}
