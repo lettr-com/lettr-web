@@ -17,6 +17,7 @@
 		{ name: 'Google Analytics', purpose: 'Website analytics' },
 		{ name: 'Google Tag Manager (GTM)', purpose: 'Tag management' },
 		{ name: 'Reddit Pixel', purpose: 'Ad performance measurement' },
+		{ name: 'OpenAI Ads Pixel', purpose: 'Ad performance measurement' },
 	];
 
 	let visible = $state(false);
