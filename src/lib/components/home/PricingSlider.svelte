@@ -313,9 +313,14 @@
 							onclick={() => trackTile(tile.key)}
 							tabindex="-1"
 							aria-hidden="true"
-							class="flex h-10 w-10 items-center justify-center transition-transform duration-300 hover:translate-x-1 md:h-11 md:w-11 {isTransactional ? 'bg-primary text-white' : 'bg-green text-[#002010]'}"
+							class="group flex h-10 w-10 md:h-11 md:w-11"
 						>
-							<ArrowRightIcon size={22} weight="bold" />
+							<!-- The square slides, the link stays put: a link that moves under the pointer blips (see Button.svelte). -->
+							<span
+								class="flex h-full w-full items-center justify-center transition-transform duration-300 group-hover:translate-x-1 {isTransactional ? 'bg-primary text-white' : 'bg-green text-[#002010]'}"
+							>
+								<ArrowRightIcon size={22} weight="bold" />
+							</span>
 						</a>
 					</div>
 				</div>
