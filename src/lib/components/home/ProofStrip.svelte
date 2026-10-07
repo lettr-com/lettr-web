@@ -5,8 +5,8 @@
 	let section: HTMLElement | undefined = $state();
 
 	const stats = [
-		{ value: '40,000+', label: 'companies use Topol' },
-		{ value: '12,000+', label: 'organizations use Ecomail' },
+		{ value: '40,000+', label: 'companies use our email editor' },
+		{ value: '12,000+', label: 'organizations run campaigns with us' },
 		{ value: '12 years', label: 'running email infrastructure' }
 	];
 
