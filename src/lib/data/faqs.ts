@@ -38,7 +38,7 @@ export const faqs: { question: string; answer: string }[] = [
   {
     question: "What programming languages does Lettr support?",
     answer:
-      "Lettr provides official SDKs for six languages: Laravel (PHP), PHP, Node.js, Go, Java, and Rust. It also offers a standard REST API and SMTP relay compatible with any language or framework. The Laravel SDK includes first-class support with a one-command installation.",
+      "Lettr provides official SDKs for seven languages: Laravel (PHP), PHP, Node.js, Python, Go, Java, and Rust. It also offers a standard REST API and SMTP relay compatible with any language or framework. The Laravel SDK includes first-class support with a one-command installation.",
   },
   {
     question: "Does Lettr include an email template editor?",

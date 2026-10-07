@@ -26,7 +26,7 @@
 			stage: 'Install',
 			title: 'SDKs for every language',
 			description:
-				'First-class Laravel package with one-command install. Official SDKs for PHP, Node.js, Go, Java, and Rust — all typed and documented.'
+				'First-class Laravel package with one-command install. Official SDKs for PHP, Node.js, Python, Go, Java, and Rust — all typed and documented.'
 		},
 		{
 			icon: ShieldCheckIcon,

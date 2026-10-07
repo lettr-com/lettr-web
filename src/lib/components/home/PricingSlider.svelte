@@ -169,7 +169,7 @@
 			<em class="block font-serif text-[2.125rem] leading-none font-medium text-primary md:text-[2.875rem]">pricing.</em>
 		</h2>
 		<p class="max-w-[520px] text-[1.0625rem] leading-[1.5] text-surface md:text-[1.1875rem]">
-			Start free. Transactional is billed per email, Marketing per contact. Bundle both and save.
+			Start free. Transactional is billed per email, Marketing per contact.
 		</p>
 	</div>
 

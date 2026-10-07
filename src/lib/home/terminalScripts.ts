@@ -13,10 +13,7 @@ export interface TerminalScript {
   steps: TerminalStep[];
 }
 
-/*
- * Package names for Laravel and Node come from the live docs. The PHP, Python
- * and React installs are placeholders until the matching SDKs are confirmed.
- */
+/* Install lines and calls come from the live quickstarts at docs.lettr.com. */
 export const terminalScripts: TerminalScript[] = [
   {
     id: "laravel",
@@ -49,13 +46,18 @@ export const terminalScripts: TerminalScript[] = [
         text: `<?php
 use Lettr\\Lettr;
 
-$lettr = new Lettr(getenv('LETTR_API_KEY'));
-$lettr->sendTemplate('welcome-email', [
-    'to' => 'user@example.com',
-]);`,
+$lettr = Lettr::client($_ENV['LETTR_API_KEY']);
+
+$lettr->emails()->send(
+    $lettr->emails()->create()
+        ->from('hello@yourdomain.com', 'Your App')
+        ->to(['user@example.com'])
+        ->subject('Welcome aboard')
+        ->html('<p>Glad you are here.</p>')
+);`,
       },
       { kind: "cmd", text: "php send.php" },
-      { kind: "out", text: "✓ Sent welcome-email to user@example.com", tone: "ok" },
+      { kind: "out", text: "✓ Sent to user@example.com", tone: "ok" },
     ],
   },
   {
@@ -69,41 +71,42 @@ $lettr->sendTemplate('welcome-email', [
         kind: "file",
         name: "send.py",
         text: `import os
-from lettr import Lettr
+import lettr
 
-client = Lettr(api_key=os.environ["LETTR_API_KEY"])
-client.send_template(
-    "welcome-email",
-    to="user@example.com",
+client = lettr.Lettr(os.environ["LETTR_API_KEY"])
+client.emails.send(
+    from_email="hello@yourdomain.com",
+    to=["user@example.com"],
+    subject="Welcome aboard",
+    html="<p>Glad you are here.</p>",
 )`,
       },
       { kind: "cmd", text: "python send.py" },
-      { kind: "out", text: "✓ Sent welcome-email to user@example.com", tone: "ok" },
+      { kind: "out", text: "✓ Sent to user@example.com", tone: "ok" },
     ],
   },
   {
-    id: "react",
-    label: "React",
+    id: "node",
+    label: "Node.js",
     title: "my-app — zsh",
     steps: [
-      { kind: "cmd", text: "npm install @lettr/node" },
-      { kind: "out", text: "✓ Installed @lettr/node", tone: "ok" },
+      { kind: "cmd", text: "npm install lettr" },
+      { kind: "out", text: "✓ Installed lettr", tone: "ok" },
       {
         kind: "file",
-        name: "app/actions.ts",
-        text: `'use server';
-import { Lettr } from '@lettr/node';
+        name: "send.mjs",
+        text: `import { Lettr } from "lettr";
 
-const lettr = new Lettr(process.env.LETTR_API_KEY);
-
-export async function sendWelcome() {
-  await lettr.sendTemplate('welcome-email', {
-    to: 'user@example.com',
-  });
-}`,
+const client = new Lettr(process.env.LETTR_API_KEY);
+await client.emails.send({
+  from: "hello@yourdomain.com",
+  to: ["user@example.com"],
+  subject: "Welcome aboard",
+  html: "<p>Glad you are here.</p>",
+});`,
       },
-      { kind: "cmd", text: "npm run dev" },
-      { kind: "out", text: "✓ Ready on http://localhost:3000", tone: "ok" },
+      { kind: "cmd", text: "node send.mjs" },
+      { kind: "out", text: "✓ Sent to user@example.com", tone: "ok" },
     ],
   },
 ];
