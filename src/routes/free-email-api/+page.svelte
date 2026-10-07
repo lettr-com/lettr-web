@@ -5,6 +5,7 @@
 	import Button from '$lib/components/Button.svelte';
 	import CodeSnippet from '$lib/components/CodeSnippet.svelte';
 	import TalkToExpert from '$lib/components/TalkToExpert.svelte';
+	import ProductLinks from '$lib/components/ProductLinks.svelte';
 	import CheckIcon from 'phosphor-svelte/lib/CheckIcon';
 	import MinusIcon from 'phosphor-svelte/lib/MinusIcon';
 	import CaretDownIcon from 'phosphor-svelte/lib/CaretDownIcon';
@@ -563,6 +564,10 @@
 		{/each}
 	</div>
 </section>
+
+<div class="pb-4">
+	<ProductLinks />
+</div>
 
 <!-- Final CTA -->
 <section bind:this={finalCtaSection} class="py-20">

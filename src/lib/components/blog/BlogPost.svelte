@@ -7,6 +7,7 @@
 	import Seo from '$lib/components/Seo.svelte';
 	import TableOfContents from './TableOfContents.svelte';
 	import { getRelatedPosts } from '$lib/data/posts';
+	import { postLinks } from '$lib/blog/links';
 	import { jsonLdScript } from '$lib/utils/jsonLd';
 	import { blogPostJsonLd, type FaqEntry } from '$lib/utils/pageJsonLd';
 
@@ -64,6 +65,7 @@
 	const canonical = $derived(slug ? `/blog/${slug}/` : undefined);
 	const seoDescription = $derived(metaDescription ?? excerpt ?? '');
 	const related = $derived(getRelatedPosts(slug));
+	const goDeeper = $derived(slug ? postLinks[slug] : undefined);
 	const jsonLd = $derived(
 		slug
 			? blogPostJsonLd({
@@ -213,6 +215,37 @@
 			</div>
 		</aside>
 	</div>
+
+	{#if goDeeper}
+		<div class="mx-auto mt-20 max-w-[1064px] px-4">
+			<div class="border-t border-border/50 pt-12">
+				<h2 class="font-heading text-xs tracking-[0.15em] text-primary uppercase">Go deeper</h2>
+				<div class="mt-6 grid gap-4 sm:grid-cols-3">
+					{#each [goDeeper.product, goDeeper.compare].filter((link) => link !== undefined) as link (link.href)}
+						<a
+							href={link.href}
+							class="group flex flex-col border border-border/50 bg-white p-6 transition-colors hover:border-primary/30"
+						>
+							<h3 class="text-base leading-snug transition-colors group-hover:text-primary">{link.label}</h3>
+							<p class="mt-2 text-sm leading-relaxed text-muted">{link.description}</p>
+						</a>
+					{/each}
+					<div class="flex flex-col border border-border/50 bg-white p-6">
+						<h3 class="text-base leading-snug">In the glossary</h3>
+						<ul class="mt-3 flex flex-col gap-1.5 text-sm">
+							{#each goDeeper.terms as term (term.slug)}
+								<li>
+									<a href="/glossary/{term.slug}/" class="text-muted underline-offset-4 transition-colors hover:text-primary hover:underline">
+										{term.label}
+									</a>
+								</li>
+							{/each}
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	{/if}
 
 	{#if related.length}
 		<div class="mx-auto mt-20 max-w-[1064px] px-4">

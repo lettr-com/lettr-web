@@ -50,7 +50,7 @@
 	});
 </script>
 
-<section bind:this={section} aria-labelledby="dev-teams-heading" class="pt-14 pb-14 md:pt-24 md:pb-16">
+<section bind:this={section} id="features" aria-labelledby="dev-teams-heading" class="pt-14 pb-14 md:pt-24 md:pb-16">
 	<div data-reveal class="mx-auto mb-10 flex max-w-[860px] flex-col items-center gap-4 text-center md:mb-14">
 		<h2
 			id="dev-teams-heading"

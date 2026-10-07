@@ -18,6 +18,8 @@
 
 	const readingLinks = $derived(data.term.reading.map(({ href, title }) => ({ href, label: title })));
 	const relatedLinks = $derived(data.related.map(({ href, term }) => ({ href, label: term })));
+	// the product page and the blog post this term leads into
+	const lettrLinks = $derived(data.lettr ? [data.lettr.product, data.lettr.post] : []);
 
 	onMount(() => {
 		if (!header) return;
@@ -69,6 +71,10 @@
 		<div class="blog-prose glossary-prose mt-10 text-body text-surface">
 			{@html data.term.html}
 		</div>
+
+		{#if lettrLinks.length > 0}
+			<GlossaryLinkGrid id="glossary-on-lettr" heading="On Lettr" links={lettrLinks} />
+		{/if}
 
 		{#if readingLinks.length > 0}
 			<GlossaryLinkGrid id="glossary-further-reading" heading="Further reading" links={readingLinks} />

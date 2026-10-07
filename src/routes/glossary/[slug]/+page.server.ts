@@ -1,6 +1,7 @@
 import { error } from "@sveltejs/kit";
 import type { EntryGenerator, PageServerLoad } from "./$types";
 
+import { linksForTerm } from "$lib/glossary/links";
 import { buildIndex, buildNeighbours, buildTerm, resolveRelated } from "$lib/glossary/terms";
 
 /**
@@ -20,5 +21,6 @@ export const load: PageServerLoad = ({ params }) => {
     prev,
     next,
     related: resolveRelated(term.related),
+    lettr: linksForTerm(params.slug),
   };
 };

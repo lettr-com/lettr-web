@@ -61,6 +61,7 @@ export function readPage(html: string, path: string): PageFacts {
     robots: document.querySelector('meta[name="robots"]')?.getAttribute("content"),
     headings,
     links: document.querySelectorAll("a[href]").map((link) => link.getAttribute("href")!),
+    mainLinks: (main?.querySelectorAll("a[href]") ?? []).map((link) => link.getAttribute("href")!),
     navLinks: (document.querySelector("nav")?.querySelectorAll("a[href]") ?? []).map(
       (link) => link.getAttribute("href")!,
     ),

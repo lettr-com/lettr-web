@@ -7,6 +7,8 @@
 </script>
 
 <script lang="ts">
+	import ProductLinks from './ProductLinks.svelte';
+
 	interface Props {
 		links: RelatedLink[];
 		/** Eyebrow heading shown above the cards. */
@@ -38,3 +40,7 @@
 		</div>
 	</div>
 {/if}
+
+<div class="mt-12">
+	<ProductLinks />
+</div>

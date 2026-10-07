@@ -157,6 +157,69 @@ describe("checkPage", () => {
   });
 });
 
+describe("linking modules", () => {
+  const rules = (page: PageFacts) => checkPage(page, context).map((issue) => issue.rule);
+  const mainLinks = (...hrefs: string[]) => hrefs;
+
+  it("sends a glossary term to a product page and a blog post, from the page body", () => {
+    const term = { path: "/glossary/dkim/", canonical: "https://lettr.com/glossary/dkim/" };
+    expect(rules(facts({ ...term, mainLinks: mainLinks("/glossary/spf/") }))).toEqual([
+      "glossary-term-without-product-link",
+      "glossary-term-without-post-link",
+    ]);
+    expect(
+      rules(
+        facts({
+          ...term,
+          mainLinks: mainLinks("/platform/deliverability/", "/blog/why-emails-go-to-spam/"),
+        }),
+      ),
+    ).not.toContain("glossary-term-without-product-link");
+  });
+
+  it("does not count a header link as a link from the page", () => {
+    const term = facts({
+      path: "/glossary/dkim/",
+      canonical: "https://lettr.com/glossary/dkim/",
+      navLinks: ["/email-api/"],
+      mainLinks: [],
+    });
+    expect(rules(term)).toContain("glossary-term-without-product-link");
+  });
+
+  it("wants a blog post to link two glossary terms and a product page", () => {
+    const post = { path: "/blog/some-post/", canonical: "https://lettr.com/blog/some-post/" };
+    expect(rules(facts({ ...post, mainLinks: mainLinks("/glossary/spf/") }))).toEqual([
+      "blog-post-without-glossary-links",
+      "blog-post-without-product-link",
+    ]);
+    expect(
+      rules(
+        facts({
+          ...post,
+          mainLinks: mainLinks("/glossary/spf/", "/glossary/dkim/", "/email-api/"),
+        }),
+      ),
+    ).toEqual([]);
+  });
+
+  it("wants a core product page to lead into the docs and a comparison", () => {
+    const api = { path: "/email-api/", canonical: "https://lettr.com/email-api/" };
+    expect(rules(facts({ ...api, mainLinks: [] }))).toEqual([
+      "product-page-without-docs-link",
+      "product-page-without-compare-link",
+    ]);
+    expect(
+      rules(
+        facts({
+          ...api,
+          mainLinks: mainLinks("https://docs.lettr.com/introduction", "/compare/resend/"),
+        }),
+      ),
+    ).toEqual([]);
+  });
+});
+
 describe("checkSite", () => {
   const baseline: Baseline = {
     takenOn: "2026-10-07",

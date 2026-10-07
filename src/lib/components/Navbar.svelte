@@ -132,7 +132,8 @@
 					{ icon: BookOpenIcon, label: 'Getting Started', description: 'Quick start guides', href: 'https://docs.lettr.com/introduction', external: true },
 					{ icon: CodeIcon, label: 'API Reference', description: 'Full API documentation', href: 'https://docs.lettr.com/api-reference/introduction', external: true },
 					{ icon: EnvelopeSimpleIcon, label: 'Changelog', description: 'Latest updates', href: '/changelog/' },
-					{ icon: BookBookmarkIcon, label: 'Glossary', description: 'Email terms, explained', href: '/glossary/' }
+					{ icon: BookBookmarkIcon, label: 'Glossary', description: 'Email terms, explained', href: '/glossary/' },
+					{ icon: ScalesIcon, label: 'Compare & Migrate', description: 'How Lettr compares to other providers', href: '/compare/' }
 				]
 			},
 			...integrationsSections
@@ -312,9 +313,11 @@
 								/>
 							</button>
 
-							{#if openDropdown === link.dropdownKey && link.dropdownKey}
+							<!-- Always rendered, hidden until opened, so the links are in the server HTML for crawlers. -->
+							{#if link.dropdownKey}
 								{@const ddConfig = dropdownConfigs[link.dropdownKey]}
 								<div
+									hidden={openDropdown !== link.dropdownKey}
 									class="absolute top-full mt-2 border border-border/50 bg-white shadow-[0_16px_48px_rgba(0,0,0,0.1)] {ddConfig?.align === 'left' ? 'left-0' : 'left-1/2 -translate-x-1/2'} {ddConfig?.wide ? 'w-[580px]' : 'w-[300px]'}"
 								>
 									{#if ddConfig?.sections}
@@ -330,7 +333,7 @@
 																{#if item.comingSoon}
 																	<span class="flex items-center justify-center h-12 w-12 opacity-30 cursor-default" title="{item.label} (Coming soon)">
 																		{#if item.iconSrc}
-																			<img src={item.iconSrc} alt={item.label} class="h-8 w-8" />
+																			<img loading="lazy" src={item.iconSrc} alt={item.label} class="h-8 w-8" />
 																		{/if}
 																	</span>
 																{:else}
@@ -346,7 +349,7 @@
 																		}}
 																	>
 																		{#if item.iconSrc}
-																			<img src={item.iconSrc} alt={item.label} class="h-8 w-8" />
+																			<img loading="lazy" src={item.iconSrc} alt={item.label} class="h-8 w-8" />
 																		{/if}
 																	</a>
 																{/if}
@@ -358,7 +361,7 @@
 																<span class="flex items-center gap-3 px-3 py-2 opacity-40 cursor-default">
 																	<div class="flex h-7 w-7 shrink-0 items-center justify-center border border-border/50 bg-background">
 																		{#if item.iconSrc}
-																			<img src={item.iconSrc} alt="" class="h-4 w-4" />
+																			<img loading="lazy" src={item.iconSrc} alt="" class="h-4 w-4" />
 																		{/if}
 																	</div>
 																	<div>
@@ -385,7 +388,7 @@
 																	{:else}
 																		<div class="flex h-7 w-7 shrink-0 items-center justify-center border border-border/50 bg-background transition-colors group-hover:border-primary/30 group-hover:bg-primary/5">
 																			{#if item.iconSrc}
-																				<img src={item.iconSrc} alt="" class="h-4 w-4" />
+																				<img loading="lazy" src={item.iconSrc} alt="" class="h-4 w-4" />
 																			{:else if item.icon}
 																				{@const Icon = item.icon}
 																				<Icon aria-hidden="true" size={14} class="text-muted transition-colors group-hover:text-primary" />
@@ -418,7 +421,7 @@
 												>
 													<div class="flex h-7 w-7 shrink-0 items-center justify-center border border-border/50 bg-background transition-colors group-hover:border-primary/30 group-hover:bg-primary/5">
 														{#if item.iconSrc}
-															<img src={item.iconSrc} alt="" class="h-3.5 w-3.5" />
+															<img loading="lazy" src={item.iconSrc} alt="" class="h-3.5 w-3.5" />
 														{:else if item.icon}
 															{@const Icon = item.icon}
 															<Icon aria-hidden="true" size={14} class="text-muted transition-colors group-hover:text-primary" />
@@ -557,7 +560,7 @@
 															{#if item.badge}
 																{@render brandBadge(item.badge)}
 															{:else if item.iconSrc}
-																<img src={item.iconSrc} alt="" class="h-4 w-4" />
+																<img loading="lazy" src={item.iconSrc} alt="" class="h-4 w-4" />
 															{:else if item.icon}
 																{@const Icon = item.icon}
 																<Icon aria-hidden="true" size={16} class="text-muted" />
@@ -580,7 +583,7 @@
 													}}
 												>
 													{#if item.iconSrc}
-														<img src={item.iconSrc} alt="" class="h-4 w-4" />
+														<img loading="lazy" src={item.iconSrc} alt="" class="h-4 w-4" />
 													{:else if item.icon}
 														{@const Icon = item.icon}
 														<Icon aria-hidden="true" size={16} class="text-muted" />

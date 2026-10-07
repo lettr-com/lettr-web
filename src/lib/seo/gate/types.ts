@@ -18,6 +18,8 @@ export interface PageFacts {
   headings: Heading[];
   /** Every href on the page, as written. */
   links: string[];
+  /** Hrefs inside <main>: the page's own links, without the header and footer. */
+  mainLinks: string[];
   /** Hrefs inside the first <nav>, the site header. */
   navLinks: string[];
   /** Schema.org @type values from every JSON-LD block, sorted and unique. */

@@ -24,6 +24,30 @@ export const REQUIRED_FILES = [
   "blog/feed.xml",
 ];
 
+/** Pages that sell something: a glossary term or blog post should lead into one of these. */
+export const PRODUCT_PATHS = [
+  "/email-api/",
+  "/free-email-api/",
+  "/smtp-relay/",
+  "/inbound-email-api/",
+  "/email-marketing/",
+  "/platform/templates/",
+  "/platform/analytics/",
+  "/platform/deliverability/",
+  "/platform/mcp/",
+  "/platform/multilingual-campaigns/",
+  "/channels/email/",
+];
+
+/** Product pages that must also lead on to the docs and a comparison. */
+export const CORE_PRODUCT_PATHS = [
+  "/email-api/",
+  "/free-email-api/",
+  "/smtp-relay/",
+  "/inbound-email-api/",
+  "/email-marketing/",
+];
+
 export interface SiteContext {
   /** Every built page path. */
   pages: ReadonlySet<string>;
@@ -46,6 +70,37 @@ export function internalPath(href: string): { path: string; hasSlash: boolean } 
 function sample(values: string[], max = 4): string {
   const shown = values.slice(0, max).join(", ");
   return values.length > max ? `${shown} (+${values.length - max} more)` : shown;
+}
+
+/** The links each page type must carry in its own body (report fix B4), not just in the header. */
+function checkLinkingModule(page: PageFacts, add: (rule: string, detail: string) => void): void {
+  const targets = page.mainLinks.map(
+    (href) => internalPath(href)?.path ?? href.split("#")[0].split("?")[0],
+  );
+  const distinct = (prefix: string, own?: string) =>
+    new Set(targets.filter((path) => path.startsWith(prefix) && path !== prefix && path !== own))
+      .size;
+
+  if (/^\/glossary\/[^/]+\/$/.test(page.path)) {
+    if (!targets.some((path) => PRODUCT_PATHS.includes(path)))
+      add("glossary-term-without-product-link", "no link to a product page");
+    if (!distinct("/blog/")) add("glossary-term-without-post-link", "no link to a blog post");
+  }
+  if (/^\/blog\/[^/]+\/$/.test(page.path)) {
+    if (distinct("/glossary/") < 2)
+      add(
+        "blog-post-without-glossary-links",
+        `${distinct("/glossary/")} glossary link(s), needs 2`,
+      );
+    if (!targets.some((path) => PRODUCT_PATHS.includes(path)))
+      add("blog-post-without-product-link", "no link to a product page");
+  }
+  if (CORE_PRODUCT_PATHS.includes(page.path)) {
+    if (!page.mainLinks.some((href) => href.startsWith("https://docs.lettr.com/")))
+      add("product-page-without-docs-link", "no link into the docs");
+    if (!distinct("/compare/"))
+      add("product-page-without-compare-link", "no link to a comparison page");
+  }
 }
 
 export function checkPage(page: PageFacts, context: SiteContext): Issue[] {
@@ -93,6 +148,8 @@ export function checkPage(page: PageFacts, context: SiteContext): Issue[] {
   }
   if (slashless.length) add("internal-link-without-slash", sample([...new Set(slashless)]));
   if (broken.length) add("internal-link-broken", sample([...new Set(broken)]));
+
+  checkLinkingModule(page, add);
 
   if (page.badJsonLd) add("json-ld-invalid", `${page.badJsonLd} block(s) do not parse`);
 
