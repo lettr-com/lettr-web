@@ -68,7 +68,7 @@
 
 	<div class="mx-auto grid max-w-[1100px] items-start gap-6 lg:grid-cols-2 lg:gap-4">
 		<!-- Developers -->
-		<div data-reveal class="flex flex-col gap-6 md:gap-4">
+		<div data-reveal class="flex min-w-0 flex-col gap-6 md:gap-4">
 			<div class="relative flex flex-col gap-6 overflow-hidden bg-surface p-6 lg:block lg:h-[560px]">
 				<h3 class="relative font-heading text-[1.75rem] leading-[1.2] tracking-[-0.05em] text-white md:text-[2rem]">
 					Dev integrate.
@@ -85,7 +85,7 @@
 		</div>
 
 		<!-- Teams -->
-		<div data-reveal class="flex flex-col gap-6 md:gap-4">
+		<div data-reveal class="flex min-w-0 flex-col gap-6 md:gap-4">
 			<div class="relative flex flex-col gap-6 overflow-hidden bg-primary p-6 lg:block lg:h-[560px]">
 				<h3 class="relative font-serif text-4xl leading-[1.2] tracking-[-0.04em] text-white md:text-[2.5rem]">
 					Teams create.
