@@ -15,8 +15,10 @@
 
 	// Hover lift handled in pure CSS (transform) instead of gsap so this
 	// above-the-fold component pulls no animation library into the critical path.
+	// The after: strip keeps the 2px the button leaves behind when it lifts inside the
+	// hover area; without it a pointer on the bottom edge flickers the button up and down.
 	const baseClasses =
-		'inline-flex items-center justify-center font-bold cursor-pointer transition duration-200 ease-out hover:-translate-y-0.5 motion-reduce:transition-none motion-reduce:hover:translate-y-0';
+		"relative after:absolute after:inset-x-0 after:top-full after:h-0.5 after:content-[''] inline-flex items-center justify-center font-bold cursor-pointer transition duration-200 ease-out hover:-translate-y-0.5 motion-reduce:transition-none motion-reduce:hover:translate-y-0";
 	const variants = {
 		primary: 'bg-primary-strong text-white hover:bg-primary-strong/90',
 		secondary: 'text-primary-strong bg-white hover:bg-primary/10',

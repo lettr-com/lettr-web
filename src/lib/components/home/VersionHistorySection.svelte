@@ -188,7 +188,7 @@
 							type="button"
 							onclick={restore}
 							disabled={isCurrent}
-							class="flex w-full cursor-pointer items-center justify-center bg-primary-strong px-6 py-3.5 text-[15px] leading-5 font-bold text-white transition duration-200 ease-out enabled:hover:-translate-y-0.5 enabled:hover:bg-primary-strong/90 disabled:cursor-default disabled:bg-border disabled:text-muted motion-reduce:transition-none"
+							class="relative after:absolute after:inset-x-0 after:top-full after:h-0.5 after:content-[''] flex w-full cursor-pointer items-center justify-center bg-primary-strong px-6 py-3.5 text-[15px] leading-5 font-bold text-white transition duration-200 ease-out enabled:hover:-translate-y-0.5 enabled:hover:bg-primary-strong/90 disabled:cursor-default disabled:bg-border disabled:text-muted motion-reduce:transition-none"
 						>
 							{isCurrent ? 'This is the current version' : 'Restore this version'}
 						</button>
