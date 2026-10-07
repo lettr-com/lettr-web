@@ -1,6 +1,36 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
+/* Redaction (SIL OFL): the serif accent face. "Redaction 50" is its pixelated cut. */
+@font-face {
+  font-family: "Redaction";
+  src: url("/fonts/Redaction-Italic.woff2") format("woff2");
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Redaction";
+  src: url("/fonts/Redaction-Regular.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Redaction 50";
+  src: url("/fonts/Redaction50-Italic.woff2") format("woff2");
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Redaction 50";
+  src: url("/fonts/Redaction50-Regular.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+
 @custom-variant narrow (@media (max-width: 500px));
 
 @theme {
@@ -28,7 +58,8 @@
   --font-heading: "Zalando Sans SemiExpanded", sans-serif;
   --font-body: "Manrope", sans-serif;
   --font-code: "DM Mono", monospace;
-  --font-serif: "Fraunces", serif;
+  --font-serif: "Redaction", serif;
+  --font-pixel: "Redaction 50", serif;
 
   --text-h1: 2.5rem;
   --text-h1--line-height: 1.2;

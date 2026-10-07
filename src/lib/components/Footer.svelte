@@ -102,7 +102,7 @@
 			<div class="flex flex-col gap-3 md:gap-4">
 				<h3 class="m-0 flex flex-col font-heading text-[2rem] leading-[38px] font-normal tracking-[-0.025em] text-white md:text-[3rem] md:leading-[54px]">
 					Ready to
-					<em class="font-serif text-[2.375rem] leading-10 font-medium text-primary-outline md:text-[3.375rem] md:leading-[54px]">get started?</em>
+					<em class="font-pixel text-[2.375rem] leading-10 font-medium text-primary-outline md:text-[3.375rem] md:leading-[54px]">get started?</em>
 				</h3>
 				<p class="m-0 text-[1.0625rem] leading-[1.5] text-white/80 md:text-[1.1875rem]">
 					Start sending for free. No credit card required.
