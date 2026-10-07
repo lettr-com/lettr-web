@@ -133,7 +133,7 @@
 </script>
 
 <div bind:this={container} class="relative max-w-2xl w-full overflow-visible bg-gray-950 p-[6px] pt-[2px] {shadow ? 'shadow-[0_0_40px_-10px_rgba(236,16,75,0.15)]' : ''}">
-	<div class="flex items-center {copyable ? 'gap-3' : 'justify-between'}">
+	<div class="flex items-center {copyable ? 'flex-wrap gap-x-2 gap-y-1 sm:gap-x-3' : 'justify-between'}">
 		{#if filename}
 			<div class="px-3 py-2 text-[12px] text-gray-300">{filename}</div>
 		{:else}
@@ -179,13 +179,13 @@
 			<button
 				type="button"
 				onclick={copyCode}
-				class="flex h-7 shrink-0 cursor-pointer items-center gap-1.5 border border-white/15 px-2.5 text-[12px] font-medium text-white/80 transition-colors hover:border-primary hover:text-white"
+				class="ml-auto flex h-7 shrink-0 cursor-pointer items-center justify-center gap-1.5 border border-white/15 px-2 text-[12px] font-medium sm:px-2.5 text-white/80 transition-colors hover:border-primary hover:text-white"
 				aria-label={didCopy ? 'Copied to clipboard' : `Copy ${tabs[activeTab].label} code`}
 			>
 				{#if didCopy}
-					<CheckIcon aria-hidden="true" size={13} class="text-green" />Copied
+					<CheckIcon aria-hidden="true" size={13} class="text-green" /><span class="hidden sm:inline">Copied</span>
 				{:else}
-					<CopyIcon aria-hidden="true" size={13} />Copy
+					<CopyIcon aria-hidden="true" size={13} /><span class="hidden sm:inline">Copy</span>
 				{/if}
 			</button>
 		{/if}

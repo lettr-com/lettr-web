@@ -180,7 +180,7 @@
 			style="--accent: {isTransactional ? '#ec104b' : '#00c851'}; --halo: {isTransactional ? '#fde7ed' : '#d9f7e6'}"
 		>
 			<div class="grid gap-x-6 gap-y-5 md:grid-cols-[1fr_auto] md:gap-y-3">
-				<div role="tablist" aria-label="Pricing mode" class="order-first grid grid-cols-2 gap-1.5 md:order-none md:col-start-2 md:row-start-1 md:flex md:self-center">
+				<div role="tablist" aria-label="Pricing mode" class="order-first grid grid-cols-2 gap-1.5 md:order-none md:col-start-2 md:row-start-1 md:flex md:justify-self-end md:self-center">
 					{#each modes as m, i}
 						{@const active = mode === m}
 						<button
@@ -206,7 +206,7 @@
 				<p class="m-0 font-heading text-[2.75rem] leading-[46px] tracking-[-0.025em] text-surface md:col-start-1 md:row-start-2 md:self-end md:text-[4rem] md:leading-[64px]" aria-live="polite">
 					{current.volume}
 				</p>
-				<div class="flex items-baseline justify-between gap-2 border-t border-border/60 pt-4 md:col-start-2 md:row-start-2 md:flex-col md:items-end md:gap-2.5 md:border-t-0 md:pt-0">
+				<div class="flex flex-col gap-1.5 border-t border-border/60 pt-4 md:col-start-2 md:row-start-2 md:flex-col md:items-end md:gap-2.5 md:border-t-0 md:pt-0">
 					<p class="m-0 text-[0.9375rem] leading-[22px] text-muted md:text-base md:leading-6">{planCaption}</p>
 					<p class="m-0 flex h-9 flex-wrap content-end items-baseline gap-x-2 md:h-14 md:gap-x-3">
 						{#if planName}
@@ -214,7 +214,7 @@
 						{/if}
 						<span
 							class="font-serif leading-none font-medium italic {isTransactional
-								? 'text-primary text-[1.75rem] md:text-[2.75rem]'
+								? 'text-primary text-[2.25rem] md:text-[3.5rem]'
 								: 'text-[#00873d] text-[2.25rem] md:text-[3.5rem]'}"
 						>
 							{price}
