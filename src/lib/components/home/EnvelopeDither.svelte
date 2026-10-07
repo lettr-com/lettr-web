@@ -5,7 +5,7 @@
 	 * Envelope field from the 2026 homepage design: flat envelope illustrations
 	 * floating on an ink background, composed on a low-resolution canvas and
 	 * ordered-dithered (Bayer 8x8) into the brand palette, then scaled up with
-	 * image-rendering: pixelated. The pointer etches a fading crimson trail,
+	 * image-rendering: pixelated. The pointer leaves a faint, quickly fading flicker of specks,
 	 * same as DitherHero. Swap this component for DitherHero in HomeHero to
 	 * roll back to the previous 3D treatment.
 	 *
@@ -129,6 +129,8 @@
 	];
 	const THRESHOLDS = [0.1, 0.22, 0.34, 0.5, 0.68, 0.84];
 	const SPREAD = 0.1;
+	/** Peak brightness the pointer trail lifts the dark ground to: just enough to flicker a few cells. */
+	const TINGLE = 0.085;
 
 	const BAYER = [
 		0, 32, 8, 40, 2, 34, 10, 42, 48, 16, 56, 24, 50, 18, 58, 26, 12, 44, 4, 36, 14, 46, 6, 38, 60,
@@ -206,7 +208,7 @@
 			target.height = rows;
 			trail = new Float32Array(cols * rows);
 			trailNext = new Float32Array(cols * rows);
-			stampR = Math.max(6, Math.round(54 / size));
+			stampR = Math.max(3, Math.round(22 / size));
 			out = ctx!.createImageData(cols, rows);
 		}
 
@@ -328,7 +330,7 @@
 					const i = y * w + x;
 					const n =
 						trail[up + x] + trail[dn + x] + trail[i - (x > 0 ? 1 : 0)] + trail[i + (x < w - 1 ? 1 : 0)];
-					const v = (trail[i] * 0.64 + n * 0.09) * 0.985;
+					const v = (trail[i] * 0.5 + n * 0.07) * 0.94;
 					trailNext[i] = v < 0.003 ? 0 : v;
 				}
 			}
@@ -383,9 +385,8 @@
 					let lum = (src[p] * 0.299 + src[p + 1] * 0.587 + src[p + 2] * 0.114) / 255;
 					const trailV = trail[i];
 					if (trailV > 0.02) {
-						// pull dark ground toward crimson where the pointer passed
-						const k = Math.min(1, trailV * 1.15);
-						lum = lum * (1 - k) + 0.45 * k;
+						// a few faint specks on the dark ground where the pointer passed
+						if (lum < TINGLE) lum += (TINGLE - lum) * Math.min(1, trailV * 1.2);
 					}
 					const threshold = (BAYER[by + (x & 7)] + 0.5) / 64;
 					const v = lum + (threshold - 0.5) * SPREAD;
