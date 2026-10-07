@@ -7,8 +7,8 @@
  *   node src/lib/seo/gate/check.ts --update-known   record today's issues (and drop fixed ones)
  *   node src/lib/seo/gate/check.ts --write-baseline snapshot the built site as the baseline
  *
- * The data lives in docs/seo: baseline.json (every URL that must survive),
- * redirects.json (old path to new path) and known-issues.json (the ratchet).
+ * The data lives in docs/seo (baseline.json: every URL that must survive;
+ * known-issues.json: the ratchet) and terraform/redirects.json (old path to new path).
  */
 import { existsSync, readFileSync, writeFileSync } from "node:fs";
 import { readdir } from "node:fs/promises";
@@ -24,8 +24,8 @@ const buildDir =
   process.argv.find((arg) => arg.startsWith("--build-dir="))?.split("=")[1] ?? "build";
 const DATA = "docs/seo";
 
-/** Built pages the sitemap leaves out on purpose; mirrors `ignore` in vite.config.ts. */
-const SITEMAP_IGNORE = ["/terms-15-02-2026/", "/book/"];
+/** Built pages the sitemap leaves out on purpose; mirrors LEFT_OUT in src/lib/seo/sitemap.ts. */
+const SITEMAP_IGNORE = ["/terms-15-02-2026/"];
 
 function readJson<T>(file: string, fallback: T): T {
   return existsSync(file) ? (JSON.parse(readFileSync(file, "utf8")) as T) : fallback;
@@ -78,7 +78,7 @@ if (args.has("--write-baseline")) {
 }
 
 const baseline = readJson<Baseline>(`${DATA}/baseline.json`, { takenOn: "", pages: {} });
-const redirects = readJson<Redirects>(`${DATA}/redirects.json`, {});
+const redirects = readJson<Redirects>("terraform/redirects.json", {});
 const known = readJson<Known>(`${DATA}/known-issues.json`, {});
 const sitemap = readText("sitemap.xml") ?? "";
 const llms = readText("llms.txt") ?? "";
@@ -92,6 +92,7 @@ const issues: Issue[] = [
     baseline,
     redirects,
     sitemapUrls: [...sitemap.matchAll(/<loc>(.*?)<\/loc>/g)].map((match) => match[1]),
+    sitemapXml: sitemap,
     sitemapIgnore: SITEMAP_IGNORE,
     llmsLinks: [...llms.matchAll(/\]\((https:\/\/lettr\.com[^)\s]*)\)/g)].map((match) => match[1]),
     robotsTxt: readText("robots.txt"),

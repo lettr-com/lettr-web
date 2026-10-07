@@ -1,8 +1,6 @@
 {
-  "canonical-not-self": ["/"],
   "description-long": ["/blog/why-emails-go-to-spam/"],
   "heading-in-mockup": ["/", "/email-marketing/"],
-  "llms-txt-link-without-slash": ["llms.txt"],
   "nav-links-missing": ["/"],
   "title-duplicate": ["/terms-15-02-2026/", "/terms/"],
   "title-long": [

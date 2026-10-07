@@ -15,6 +15,15 @@ export const REQUIRED_NAV_LINKS = [
   "https://docs.lettr.com",
 ];
 
+/** Files a crawler or feed reader expects to find, relative to the site root. */
+export const REQUIRED_FILES = [
+  "sitemap.xml",
+  "robots.txt",
+  "llms.txt",
+  "favicon.ico",
+  "blog/feed.xml",
+];
+
 export interface SiteContext {
   /** Every built page path. */
   pages: ReadonlySet<string>;
@@ -106,6 +115,8 @@ export interface SiteInput {
   sitemapUrls: string[];
   /** Paths the sitemap deliberately leaves out. */
   sitemapIgnore: string[];
+  /** The raw sitemap.xml, to check its dates. */
+  sitemapXml?: string;
   /** Links found in llms.txt, as written. */
   llmsLinks: string[];
   robotsTxt: string | undefined;
@@ -158,6 +169,16 @@ export function checkSite(input: SiteInput): Issue[] {
       /noindex/i.test(page.robots ?? "");
     if (!left && !inSitemap.has(page.path))
       add("page-missing-from-sitemap", page.path, "built but not listed");
+  }
+
+  for (const [, date] of (input.sitemapXml ?? "").matchAll(/<lastmod>(.*?)<\/lastmod>/g)) {
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(date) || Number.isNaN(Date.parse(date))) {
+      add("sitemap-lastmod-invalid", "sitemap.xml", date);
+    }
+  }
+
+  for (const file of REQUIRED_FILES) {
+    if (!input.fileExists(`/${file}`)) add("site-file-missing", file, "not in the build");
   }
 
   const seenLinks = new Set<string>();

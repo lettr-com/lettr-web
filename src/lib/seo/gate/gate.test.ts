@@ -179,7 +179,7 @@ describe("checkSite", () => {
     sitemapIgnore: [],
     llmsLinks: [],
     robotsTxt: "User-agent: *\nDisallow:\n\nSitemap: https://lettr.com/sitemap.xml\n",
-    fileExists: () => false,
+    fileExists: () => true,
   };
   const rules = (override: Partial<SiteInput> = {}) =>
     checkSite({ ...base, ...override }).map((issue) => `${issue.rule} ${issue.url}`);
@@ -207,6 +207,19 @@ describe("checkSite", () => {
     expect(
       rules({ redirects, sitemapUrls: ["https://lettr.com/pricing/", "https://lettr.com/ghost/"] }),
     ).toEqual(["sitemap-url-without-page /ghost/"]);
+  });
+
+  it("wants the files crawlers and feed readers look for, and honest sitemap dates", () => {
+    const redirects = { "/old/": "/pricing/" };
+    expect(rules({ redirects, fileExists: (path) => path !== "/favicon.ico" })).toEqual([
+      "site-file-missing favicon.ico",
+    ]);
+    const xml =
+      "<lastmod>2026-09-18</lastmod><lastmod>September 18</lastmod><lastmod>2026-13-45</lastmod>";
+    expect(rules({ redirects, sitemapXml: xml })).toEqual([
+      "sitemap-lastmod-invalid sitemap.xml",
+      "sitemap-lastmod-invalid sitemap.xml",
+    ]);
   });
 
   it("checks the links in llms.txt", () => {

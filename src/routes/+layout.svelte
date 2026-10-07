@@ -20,11 +20,13 @@
 </script>
 
 <svelte:head>
+	<link rel="icon" href="/favicon.ico" sizes="48x48" />
 	<link rel="icon" href="/favicon.svg" type="image/svg+xml" />
 	<link rel="icon" href="/favicon.png" type="image/png" />
+	<link rel="alternate" type="application/atom+xml" title="Lettr Blog" href="/blog/feed.xml" />
 	{#if isHomeRoute}
 		<title>Lettr — The Email Platform Built for SaaS</title>
-		<link rel="canonical" href="https://lettr.com" />
+		<link rel="canonical" href="https://lettr.com/" />
 
 		<!-- Primary Meta Tags -->
 		<meta name="title" content="Lettr — The Email Platform Built for SaaS" />
@@ -35,7 +37,7 @@
 
 		<!-- Open Graph / Facebook -->
 		<meta property="og:type" content="website" />
-		<meta property="og:url" content="https://lettr.com" />
+		<meta property="og:url" content="https://lettr.com/" />
 		<meta property="og:title" content="Lettr — The Email Platform Built for SaaS" />
 		<meta property="og:description" content="Transactional and marketing email in one platform. Developers integrate once via a clean API; your team ships content with a drag-and-drop editor." />
 		<meta property="og:image" content="https://lettr.com/og-image.png" />
@@ -46,7 +48,7 @@
 
 		<!-- Twitter -->
 		<meta name="twitter:card" content="summary_large_image" />
-		<meta name="twitter:url" content="https://lettr.com" />
+		<meta name="twitter:url" content="https://lettr.com/" />
 		<meta name="twitter:title" content="Lettr — The Email Platform Built for SaaS" />
 		<meta name="twitter:description" content="Transactional and marketing email in one platform. Developers integrate once via a clean API; your team ships content with a drag-and-drop editor." />
 		<meta name="twitter:image" content="https://lettr.com/og-image.png" />
