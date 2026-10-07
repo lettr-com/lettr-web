@@ -110,7 +110,7 @@
 				{/if}
 				<span
 					class="font-serif leading-none font-medium italic {accent === 'primary'
-						? 'text-primary text-[2rem] sm:text-[2.75rem]'
+						? 'text-primary text-[2.5rem] sm:text-[3.5rem]'
 						: 'text-[#00873d] text-[2.5rem] sm:text-[3.5rem]'}"
 				>
 					{price}
