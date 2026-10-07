@@ -180,7 +180,7 @@
 			style="--accent: {isTransactional ? '#ec104b' : '#00c851'}; --halo: {isTransactional ? '#fde7ed' : '#d9f7e6'}"
 		>
 			<div class="grid gap-x-6 gap-y-5 md:grid-cols-[1fr_auto] md:gap-y-3">
-				<div role="tablist" aria-label="Pricing mode" class="order-first grid grid-cols-2 gap-1.5 md:order-none md:col-start-2 md:row-start-1 md:flex md:self-center">
+				<div role="tablist" aria-label="Pricing mode" class="order-first grid grid-cols-2 gap-1.5 md:order-none md:col-start-2 md:row-start-1 md:flex md:justify-self-end md:self-center">
 					{#each modes as m, i}
 						{@const active = mode === m}
 						<button
