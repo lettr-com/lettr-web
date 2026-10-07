@@ -1,0 +1,38 @@
+{
+  "canonical-not-self": ["/"],
+  "description-long": ["/blog/why-emails-go-to-spam/"],
+  "heading-in-mockup": ["/", "/email-marketing/"],
+  "llms-txt-link-without-slash": ["llms.txt"],
+  "nav-links-missing": ["/"],
+  "title-duplicate": ["/terms-15-02-2026/", "/terms/"],
+  "title-long": [
+    "/blog/best-transactional-email-services/",
+    "/blog/mailgun-alternatives/",
+    "/blog/sendgrid-alternatives/",
+    "/blog/separate-transactional-and-marketing-email/",
+    "/blog/smtp-vs-rest-api-how-to-choose/",
+    "/blog/zaptime-cut-deliverability-tickets-to-zero/",
+    "/glossary/",
+    "/inbound-email-api/"
+  ],
+  "title-short": [
+    "/channels/email/",
+    "/compare/",
+    "/compare/mailersend/",
+    "/compare/mailgun/",
+    "/compare/postmark/",
+    "/compare/resend/",
+    "/compare/sendgrid/",
+    "/demo/",
+    "/platform/analytics/",
+    "/platform/deliverability/",
+    "/platform/mcp/",
+    "/platform/templates/",
+    "/pricing/",
+    "/privacy-policy/",
+    "/smtp-relay/",
+    "/support/",
+    "/terms-15-02-2026/",
+    "/terms/"
+  ]
+}

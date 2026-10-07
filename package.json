@@ -11,7 +11,8 @@
     "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
     "check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
     "test:unit": "vp test run",
-    "test:unit:watch": "vp test"
+    "test:unit:watch": "vp test",
+    "seo:check": "node src/lib/seo/gate/check.ts"
   },
   "dependencies": {
     "@splinetool/loader": "^1.12.52",

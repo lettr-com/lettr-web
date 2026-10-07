@@ -1,0 +1,1780 @@
+{
+  "takenOn": "2026-10-07",
+  "pages": {
+    "/about/": {
+      "title": "About Lettr — the Team Behind Your Email Platform",
+      "h1": "We've been doing email for a while",
+      "canonical": "https://lettr.com/about/",
+      "jsonLdTypes": ["AboutPage", "Organization", "WebSite"],
+      "noindex": false
+    },
+    "/accessibility-statement/": {
+      "title": "Accessibility Statement | Lettr",
+      "h1": "Accessibility Statement",
+      "canonical": "https://lettr.com/accessibility-statement/",
+      "jsonLdTypes": ["Organization", "WebPage", "WebSite"],
+      "noindex": false
+    },
+    "/blog/best-transactional-email-services/": {
+      "title": "Best transactional email services in 2026, compared | Lettr Blog",
+      "h1": "Best transactional email services in 2026, compared",
+      "canonical": "https://lettr.com/blog/best-transactional-email-services/",
+      "jsonLdTypes": ["BlogPosting", "BreadcrumbList", "Organization", "WebSite"],
+      "noindex": false
+    },
+    "/blog/email-attachment-size-limits/": {
+      "title": "Email attachment size limits by provider | Lettr Blog",
+      "h1": "Email attachment size limits by provider (and how to send large files)",
+      "canonical": "https://lettr.com/blog/email-attachment-size-limits/",
+      "jsonLdTypes": ["BlogPosting", "BreadcrumbList", "Organization", "WebSite"],
+      "noindex": false
+    },
+    "/blog/email-deliverability-checklist/": {
+      "title": "Email deliverability checklist | Lettr Blog",
+      "h1": "Email deliverability checklist",
+      "canonical": "https://lettr.com/blog/email-deliverability-checklist/",
+      "jsonLdTypes": ["BlogPosting", "BreadcrumbList", "Organization", "WebSite"],
+      "noindex": false
+    },
+    "/blog/email-signature-size-and-dimensions/": {
+      "title": "Email signature size and dimensions | Lettr Blog",
+      "h1": "Email signature size and dimensions",
+      "canonical": "https://lettr.com/blog/email-signature-size-and-dimensions/",
+      "jsonLdTypes": ["BlogPosting", "BreadcrumbList", "Organization", "WebSite"],
+      "noindex": false
+    },
+    "/blog/hard-bounce-vs-soft-bounce/": {
+      "title": "Hard bounce vs. soft bounce explained | Lettr Blog",
+      "h1": "Hard bounce vs. soft bounce: what email bounces mean and how to handle them",
+      "canonical": "https://lettr.com/blog/hard-bounce-vs-soft-bounce/",
+      "jsonLdTypes": ["BlogPosting", "BreadcrumbList", "Organization", "WebSite"],
+      "noindex": false
+    },
+    "/blog/how-to-send-bulk-email/": {
+      "title": "How to send bulk email the right way | Lettr Blog",
+      "h1": "How to send bulk email the right way",
+      "canonical": "https://lettr.com/blog/how-to-send-bulk-email/",
+      "jsonLdTypes": ["BlogPosting", "BreadcrumbList", "Organization", "WebSite"],
+      "noindex": false
+    },
+    "/blog/how-to-warm-up-a-sending-domain/": {
+      "title": "How to warm up a new sending domain | Lettr Blog",
+      "h1": "How to warm up a new sending domain",
+      "canonical": "https://lettr.com/blog/how-to-warm-up-a-sending-domain/",
+      "jsonLdTypes": ["BlogPosting", "BreadcrumbList", "Organization", "WebSite"],
+      "noindex": false
+    },
+    "/blog/": {
+      "title": "Lettr Blog — Email Deliverability & Engineering",
+      "h1": "Email, written down",
+      "canonical": "https://lettr.com/blog/",
+      "jsonLdTypes": ["CollectionPage", "Organization", "WebSite"],
+      "noindex": false
+    },
+    "/blog/introducing-lettr-marketing-audiences-and-campaigns/": {
+      "title": "Introducing marketing emails | Lettr Blog",
+      "h1": "Introducing marketing emails",
+      "canonical": "https://lettr.com/blog/introducing-lettr-marketing-audiences-and-campaigns/",
+      "jsonLdTypes": ["BlogPosting", "BreadcrumbList", "Organization", "WebSite"],
+      "noindex": false
+    },
+    "/blog/introducing-multilingual-campaigns/": {
+      "title": "Multilingual email campaigns in Lettr | Lettr Blog",
+      "h1": "Introducing multilingual campaigns",
+      "canonical": "https://lettr.com/blog/introducing-multilingual-campaigns/",
+      "jsonLdTypes": [
+        "BlogPosting",
+        "BreadcrumbList",
+        "FAQPage",
+        "Organization",
+        "Question",
+        "WebSite"
+      ],
+      "noindex": false
+    },
+    "/blog/mailer-daemon-mail-delivery-subsystem/": {
+      "title": "Mailer Daemon & Mail Delivery Subsystem errors | Lettr Blog",
+      "h1": "Mailer Daemon and Mail Delivery Subsystem errors explained (and how to fix them)",
+      "canonical": "https://lettr.com/blog/mailer-daemon-mail-delivery-subsystem/",
+      "jsonLdTypes": ["BlogPosting", "BreadcrumbList", "Organization", "WebSite"],
+      "noindex": false
+    },
+    "/blog/mailgun-alternatives/": {
+      "title": "5 Best Mailgun Alternatives for Transactional Email [2026] | Lettr Blog",
+      "h1": "5 best Mailgun alternatives for transactional email in 2026",
+      "canonical": "https://lettr.com/blog/mailgun-alternatives/",
+      "jsonLdTypes": ["BlogPosting", "BreadcrumbList", "Organization", "WebSite"],
+      "noindex": false
+    },
+    "/blog/managing-lettr-from-your-ai-assistant/": {
+      "title": "Managing Lettr from your AI assistant | Lettr Blog",
+      "h1": "Managing Lettr from your AI assistant",
+      "canonical": "https://lettr.com/blog/managing-lettr-from-your-ai-assistant/",
+      "jsonLdTypes": ["BlogPosting", "BreadcrumbList", "Organization", "WebSite"],
+      "noindex": false
+    },
+    "/blog/meet-adamko/": {
+      "title": "Meet Adamko, Lettr's AI assistant | Lettr Blog",
+      "h1": "Meet Adamko, Lettr's AI assistant",
+      "canonical": "https://lettr.com/blog/meet-adamko/",
+      "jsonLdTypes": ["BlogPosting", "BreadcrumbList", "Organization", "WebSite"],
+      "noindex": false
+    },
+    "/blog/onboarding-email-best-practices/": {
+      "title": "Onboarding email best practices | Lettr Blog",
+      "h1": "Onboarding email best practices (with examples and templates)",
+      "canonical": "https://lettr.com/blog/onboarding-email-best-practices/",
+      "jsonLdTypes": ["BlogPosting", "BreadcrumbList", "Organization", "WebSite"],
+      "noindex": false
+    },
+    "/blog/sendgrid-alternatives/": {
+      "title": "5 Best SendGrid Alternatives for Email Delivery [2026] | Lettr Blog",
+      "h1": "5 best SendGrid alternatives for email delivery in 2026, compared",
+      "canonical": "https://lettr.com/blog/sendgrid-alternatives/",
+      "jsonLdTypes": ["BlogPosting", "BreadcrumbList", "Organization", "WebSite"],
+      "noindex": false
+    },
+    "/blog/separate-transactional-and-marketing-email/": {
+      "title": "Why you should separate transactional and marketing email | Lettr Blog",
+      "h1": "Why you should separate transactional and marketing email",
+      "canonical": "https://lettr.com/blog/separate-transactional-and-marketing-email/",
+      "jsonLdTypes": ["BlogPosting", "BreadcrumbList", "Organization", "WebSite"],
+      "noindex": false
+    },
+    "/blog/smtp-relay/": {
+      "title": "SMTP relay: what it is and how to set one up | Lettr Blog",
+      "h1": "SMTP relay: what it is and how to set one up",
+      "canonical": "https://lettr.com/blog/smtp-relay/",
+      "jsonLdTypes": ["BlogPosting", "BreadcrumbList", "Organization", "WebSite"],
+      "noindex": false
+    },
+    "/blog/smtp-vs-rest-api-how-to-choose/": {
+      "title": "SMTP vs. REST API: how to choose and when to switch | Lettr Blog",
+      "h1": "SMTP vs. REST API: how to choose and when to switch",
+      "canonical": "https://lettr.com/blog/smtp-vs-rest-api-how-to-choose/",
+      "jsonLdTypes": ["BlogPosting", "BreadcrumbList", "Organization", "WebSite"],
+      "noindex": false
+    },
+    "/blog/spf-dkim-dmarc-explained-for-developers/": {
+      "title": "SPF, DKIM, and DMARC explained for developers | Lettr Blog",
+      "h1": "SPF, DKIM, and DMARC explained for developers",
+      "canonical": "https://lettr.com/blog/spf-dkim-dmarc-explained-for-developers/",
+      "jsonLdTypes": ["BlogPosting", "BreadcrumbList", "Organization", "WebSite"],
+      "noindex": false
+    },
+    "/blog/the-hidden-cost-of-diy-transactional-email/": {
+      "title": "The hidden cost of DIY transactional email | Lettr Blog",
+      "h1": "The hidden cost of DIY transactional email",
+      "canonical": "https://lettr.com/blog/the-hidden-cost-of-diy-transactional-email/",
+      "jsonLdTypes": ["BlogPosting", "BreadcrumbList", "Organization", "WebSite"],
+      "noindex": false
+    },
+    "/blog/the-journey-of-an-email/": {
+      "title": "The journey of an email: from API call to inbox | Lettr Blog",
+      "h1": "The journey of an email: from API call to inbox",
+      "canonical": "https://lettr.com/blog/the-journey-of-an-email/",
+      "jsonLdTypes": ["BlogPosting", "BreadcrumbList", "Organization", "WebSite"],
+      "noindex": false
+    },
+    "/blog/what-is-an-email-api/": {
+      "title": "Email API: what it is and how to choose one | Lettr Blog",
+      "h1": "Email API: what it is and how to choose one",
+      "canonical": "https://lettr.com/blog/what-is-an-email-api/",
+      "jsonLdTypes": ["BlogPosting", "BreadcrumbList", "Organization", "WebSite"],
+      "noindex": false
+    },
+    "/blog/what-is-transactional-email/": {
+      "title": "How transactional email actually works | Lettr Blog",
+      "h1": "How transactional email actually works",
+      "canonical": "https://lettr.com/blog/what-is-transactional-email/",
+      "jsonLdTypes": ["BlogPosting", "BreadcrumbList", "Organization", "WebSite"],
+      "noindex": false
+    },
+    "/blog/why-emails-go-to-spam/": {
+      "title": "Why your emails go to spam (and how to fix it) | Lettr Blog",
+      "h1": "Why your emails go to spam (and how to fix it)",
+      "canonical": "https://lettr.com/blog/why-emails-go-to-spam/",
+      "jsonLdTypes": ["BlogPosting", "BreadcrumbList", "Organization", "WebSite"],
+      "noindex": false
+    },
+    "/blog/why-lettr-runs-on-lambda-with-bref/": {
+      "title": "Why Lettr runs on AWS Lambda with Bref | Lettr Blog",
+      "h1": "Why Lettr runs on AWS Lambda with Bref",
+      "canonical": "https://lettr.com/blog/why-lettr-runs-on-lambda-with-bref/",
+      "jsonLdTypes": ["BlogPosting", "BreadcrumbList", "Organization", "WebSite"],
+      "noindex": false
+    },
+    "/blog/why-we-built-lettr-on-laravel/": {
+      "title": "Why we built Lettr on Laravel | Lettr Blog",
+      "h1": "Why we built Lettr on Laravel",
+      "canonical": "https://lettr.com/blog/why-we-built-lettr-on-laravel/",
+      "jsonLdTypes": ["BlogPosting", "BreadcrumbList", "Organization", "WebSite"],
+      "noindex": false
+    },
+    "/blog/zaptime-cut-deliverability-tickets-to-zero/": {
+      "title": "Zaptime cut deliverability tickets to zero with Lettr | Lettr Blog",
+      "h1": "Zaptime cut deliverability tickets from dozens a month to zero with Lettr",
+      "canonical": "https://lettr.com/blog/zaptime-cut-deliverability-tickets-to-zero/",
+      "jsonLdTypes": ["BlogPosting", "BreadcrumbList", "Organization", "WebSite"],
+      "noindex": false
+    },
+    "/book/": {
+      "jsonLdTypes": [],
+      "noindex": false
+    },
+    "/changelog/2026-02/": {
+      "title": "February 2026 Changelog: What's New in Lettr",
+      "h1": "What's new in February 2026",
+      "canonical": "https://lettr.com/changelog/2026-02/",
+      "jsonLdTypes": [
+        "BreadcrumbList",
+        "ItemList",
+        "Organization",
+        "SoftwareApplication",
+        "TechArticle",
+        "WebPage",
+        "WebSite"
+      ],
+      "noindex": false
+    },
+    "/changelog/2026-03/": {
+      "title": "March 2026 Changelog: What's New in Lettr",
+      "h1": "What's new in March 2026",
+      "canonical": "https://lettr.com/changelog/2026-03/",
+      "jsonLdTypes": [
+        "BreadcrumbList",
+        "ItemList",
+        "Organization",
+        "SoftwareApplication",
+        "TechArticle",
+        "WebPage",
+        "WebSite"
+      ],
+      "noindex": false
+    },
+    "/changelog/2026-04/": {
+      "title": "April 2026 Changelog: What's New in Lettr",
+      "h1": "What's new in April 2026",
+      "canonical": "https://lettr.com/changelog/2026-04/",
+      "jsonLdTypes": [
+        "BreadcrumbList",
+        "ItemList",
+        "Organization",
+        "SoftwareApplication",
+        "TechArticle",
+        "WebPage",
+        "WebSite"
+      ],
+      "noindex": false
+    },
+    "/changelog/2026-05/": {
+      "title": "May 2026 Changelog: What's New in Lettr",
+      "h1": "What's new in May 2026",
+      "canonical": "https://lettr.com/changelog/2026-05/",
+      "jsonLdTypes": [
+        "BreadcrumbList",
+        "ItemList",
+        "Organization",
+        "SoftwareApplication",
+        "TechArticle",
+        "WebPage",
+        "WebSite"
+      ],
+      "noindex": false
+    },
+    "/changelog/2026-06/": {
+      "title": "June 2026 Changelog: What's New in Lettr",
+      "h1": "What's new in June 2026",
+      "canonical": "https://lettr.com/changelog/2026-06/",
+      "jsonLdTypes": [
+        "BreadcrumbList",
+        "ItemList",
+        "Organization",
+        "SoftwareApplication",
+        "TechArticle",
+        "WebPage",
+        "WebSite"
+      ],
+      "noindex": false
+    },
+    "/changelog/2026-07/": {
+      "title": "July 2026 Changelog: What's New in Lettr",
+      "h1": "What's new in July 2026",
+      "canonical": "https://lettr.com/changelog/2026-07/",
+      "jsonLdTypes": [
+        "BreadcrumbList",
+        "ItemList",
+        "Organization",
+        "SoftwareApplication",
+        "TechArticle",
+        "WebPage",
+        "WebSite"
+      ],
+      "noindex": false
+    },
+    "/changelog/2026-08/": {
+      "title": "August 2026 Changelog: What's New in Lettr",
+      "h1": "What's new in August 2026",
+      "canonical": "https://lettr.com/changelog/2026-08/",
+      "jsonLdTypes": [
+        "BreadcrumbList",
+        "ItemList",
+        "Organization",
+        "SoftwareApplication",
+        "TechArticle",
+        "WebPage",
+        "WebSite"
+      ],
+      "noindex": false
+    },
+    "/changelog/2026-09/": {
+      "title": "September 2026 Changelog: What's New in Lettr",
+      "h1": "What's new in September 2026",
+      "canonical": "https://lettr.com/changelog/2026-09/",
+      "jsonLdTypes": [
+        "BreadcrumbList",
+        "ItemList",
+        "Organization",
+        "SoftwareApplication",
+        "TechArticle",
+        "WebPage",
+        "WebSite"
+      ],
+      "noindex": false
+    },
+    "/changelog/": {
+      "title": "Lettr Changelog: New Features, Improvements & Bugfixes",
+      "h1": "Everything we ship to Lettr, month by month",
+      "canonical": "https://lettr.com/changelog/",
+      "jsonLdTypes": [
+        "BreadcrumbList",
+        "CollectionPage",
+        "ItemList",
+        "Organization",
+        "SoftwareApplication",
+        "WebSite"
+      ],
+      "noindex": false
+    },
+    "/channels/email/": {
+      "title": "Email Channel | Lettr",
+      "h1": "The most reliable way to reach the inbox.",
+      "canonical": "https://lettr.com/channels/email/",
+      "jsonLdTypes": ["BreadcrumbList", "Organization", "WebPage", "WebSite"],
+      "noindex": false
+    },
+    "/compare/aws-ses-alternatives/": {
+      "title": "AWS SES Alternative: 4 Top Picks Compared (2026) | Lettr",
+      "h1": "Looking for an AWS SES alternative?",
+      "canonical": "https://lettr.com/compare/aws-ses-alternatives/",
+      "jsonLdTypes": ["BreadcrumbList", "FAQPage", "Question", "SoftwareApplication"],
+      "noindex": false
+    },
+    "/compare/": {
+      "title": "Compare | Lettr",
+      "h1": "Switch to Lettr from any provider",
+      "canonical": "https://lettr.com/compare/",
+      "jsonLdTypes": ["BreadcrumbList", "SoftwareApplication"],
+      "noindex": false
+    },
+    "/compare/mailerlite-alternatives/": {
+      "title": "5 Best MailerLite Alternatives in 2026 (Compared) | Lettr",
+      "h1": "Thinking of leaving MailerLite?",
+      "canonical": "https://lettr.com/compare/mailerlite-alternatives/",
+      "jsonLdTypes": ["BreadcrumbList", "FAQPage", "Question", "SoftwareApplication"],
+      "noindex": false
+    },
+    "/compare/mailersend/": {
+      "title": "Lettr vs MailerSend | Lettr",
+      "h1": "Lettr vs MailerSend",
+      "canonical": "https://lettr.com/compare/mailersend/",
+      "jsonLdTypes": ["BreadcrumbList", "SoftwareApplication"],
+      "noindex": false
+    },
+    "/compare/mailgun/": {
+      "title": "Lettr vs Mailgun | Lettr",
+      "h1": "Lettr vs Mailgun",
+      "canonical": "https://lettr.com/compare/mailgun/",
+      "jsonLdTypes": ["BreadcrumbList", "SoftwareApplication"],
+      "noindex": false
+    },
+    "/compare/postmark/": {
+      "title": "Lettr vs Postmark | Lettr",
+      "h1": "Lettr vs Postmark",
+      "canonical": "https://lettr.com/compare/postmark/",
+      "jsonLdTypes": ["BreadcrumbList", "SoftwareApplication"],
+      "noindex": false
+    },
+    "/compare/resend/": {
+      "title": "Lettr vs Resend | Lettr",
+      "h1": "Lettr vs Resend",
+      "canonical": "https://lettr.com/compare/resend/",
+      "jsonLdTypes": ["BreadcrumbList", "SoftwareApplication"],
+      "noindex": false
+    },
+    "/compare/sendgrid/": {
+      "title": "Lettr vs SendGrid | Lettr",
+      "h1": "Lettr vs SendGrid",
+      "canonical": "https://lettr.com/compare/sendgrid/",
+      "jsonLdTypes": ["BreadcrumbList", "SoftwareApplication"],
+      "noindex": false
+    },
+    "/demo/": {
+      "title": "Book a Demo — Lettr",
+      "h1": "Book your Lettr demo",
+      "canonical": "https://lettr.com/demo/",
+      "jsonLdTypes": ["Organization", "WebPage", "WebSite"],
+      "noindex": false
+    },
+    "/email-api/": {
+      "title": "Transactional Email API — Lettr",
+      "h1": "Transactional email your product can rely on.",
+      "canonical": "https://lettr.com/email-api/",
+      "jsonLdTypes": ["BreadcrumbList", "FAQPage", "Question", "SoftwareApplication"],
+      "noindex": false
+    },
+    "/email-marketing/": {
+      "title": "Email Marketing & Campaigns — Lettr",
+      "h1": "Marketing campaigns, in the same editor.",
+      "canonical": "https://lettr.com/email-marketing/",
+      "jsonLdTypes": ["BreadcrumbList", "FAQPage", "Question", "SoftwareApplication"],
+      "noindex": false
+    },
+    "/free-email-api/": {
+      "title": "Free Email API — Send 3,000 Emails/Month Free | Lettr",
+      "h1": "Send up to 3,000 emails a month, free.",
+      "canonical": "https://lettr.com/free-email-api/",
+      "jsonLdTypes": ["BreadcrumbList", "FAQPage", "Question", "SoftwareApplication"],
+      "noindex": false
+    },
+    "/glossary/acceptable-use-policy/": {
+      "title": "What is an acceptable use policy (AUP)? | Lettr Glossary",
+      "h1": "What is an acceptable use policy?",
+      "canonical": "https://lettr.com/glossary/acceptable-use-policy/",
+      "jsonLdTypes": ["BreadcrumbList", "DefinedTerm", "Organization", "WebPage", "WebSite"],
+      "noindex": false
+    },
+    "/glossary/ai-translation/": {
+      "title": "What is AI email translation? | Lettr Glossary",
+      "h1": "What is AI email translation?",
+      "canonical": "https://lettr.com/glossary/ai-translation/",
+      "jsonLdTypes": ["BreadcrumbList", "DefinedTerm", "Organization", "WebPage", "WebSite"],
+      "noindex": false
+    },
+    "/glossary/amp-for-email/": {
+      "title": "What is AMP for Email? | Lettr Glossary",
+      "h1": "What is AMP for Email?",
+      "canonical": "https://lettr.com/glossary/amp-for-email/",
+      "jsonLdTypes": ["BreadcrumbList", "DefinedTerm", "Organization", "WebPage", "WebSite"],
+      "noindex": false
+    },
+    "/glossary/api-error-code/": {
+      "title": "What is an API error code? | Lettr Glossary",
+      "h1": "What is an API error code?",
+      "canonical": "https://lettr.com/glossary/api-error-code/",
+      "jsonLdTypes": ["BreadcrumbList", "DefinedTerm", "Organization", "WebPage", "WebSite"],
+      "noindex": false
+    },
+    "/glossary/api-key/": {
+      "title": "What is an API key? | Lettr Glossary",
+      "h1": "What is an API key?",
+      "canonical": "https://lettr.com/glossary/api-key/",
+      "jsonLdTypes": ["BreadcrumbList", "DefinedTerm", "Organization", "WebPage", "WebSite"],
+      "noindex": false
+    },
+    "/glossary/arc/": {
+      "title": "What is ARC (Authenticated Received Chain)? | Lettr Glossary",
+      "h1": "What is ARC?",
+      "canonical": "https://lettr.com/glossary/arc/",
+      "jsonLdTypes": ["BreadcrumbList", "DefinedTerm", "Organization", "WebPage", "WebSite"],
+      "noindex": false
+    },
+    "/glossary/arf/": {
+      "title": "What is ARF (Abuse Reporting Format)? | Lettr Glossary",
+      "h1": "What is ARF?",
+      "canonical": "https://lettr.com/glossary/arf/",
+      "jsonLdTypes": ["BreadcrumbList", "DefinedTerm", "Organization", "WebPage", "WebSite"],
+      "noindex": false
+    },
+    "/glossary/authentication-results-header/": {
+      "title": "What is the Authentication-Results header? | Lettr Glossary",
+      "h1": "What is the Authentication-Results header?",
+      "canonical": "https://lettr.com/glossary/authentication-results-header/",
+      "jsonLdTypes": ["BreadcrumbList", "DefinedTerm", "Organization", "WebPage", "WebSite"],
+      "noindex": false
+    },
+    "/glossary/auto-submitted-header/": {
+      "title": "What is the Auto-Submitted header? | Lettr Glossary",
+      "h1": "What is the Auto-Submitted header?",
+      "canonical": "https://lettr.com/glossary/auto-submitted-header/",
+      "jsonLdTypes": ["BreadcrumbList", "DefinedTerm", "Organization", "WebPage", "WebSite"],
+      "noindex": false
+    },
+    "/glossary/backscatter/": {
+      "title": "What is backscatter? | Lettr Glossary",
+      "h1": "What is backscatter?",
+      "canonical": "https://lettr.com/glossary/backscatter/",
+      "jsonLdTypes": ["BreadcrumbList", "DefinedTerm", "Organization", "WebPage", "WebSite"],
+      "noindex": false
+    },
+    "/glossary/base64-encoding/": {
+      "title": "What is Base64 encoding? | Lettr Glossary",
+      "h1": "What is Base64 encoding?",
+      "canonical": "https://lettr.com/glossary/base64-encoding/",
+      "jsonLdTypes": ["BreadcrumbList", "DefinedTerm", "Organization", "WebPage", "WebSite"],
+      "noindex": false
+    },
+    "/glossary/batch-sending/": {
+      "title": "What is batch sending? | Lettr Glossary",
+      "h1": "What is batch sending?",
+      "canonical": "https://lettr.com/glossary/batch-sending/",
+      "jsonLdTypes": ["BreadcrumbList", "DefinedTerm", "Organization", "WebPage", "WebSite"],
+      "noindex": false
+    },
+    "/glossary/bimi/": {
+      "title": "What is BIMI? | Lettr Glossary",
+      "h1": "What is BIMI?",
+      "canonical": "https://lettr.com/glossary/bimi/",
+      "jsonLdTypes": ["BreadcrumbList", "DefinedTerm", "Organization", "WebPage", "WebSite"],
+      "noindex": false
+    },
+    "/glossary/blocklist/": {
+      "title": "What is a blocklist (blacklist)? | Lettr Glossary",
+      "h1": "What is a blocklist?",
+      "canonical": "https://lettr.com/glossary/blocklist/",
+      "jsonLdTypes": ["BreadcrumbList", "DefinedTerm", "Organization", "WebPage", "WebSite"],
+      "noindex": false
+    },
+    "/glossary/bounce-rate/": {
+      "title": "What is bounce rate? | Lettr Glossary",
+      "h1": "What is bounce rate?",
+      "canonical": "https://lettr.com/glossary/bounce-rate/",
+      "jsonLdTypes": ["BreadcrumbList", "DefinedTerm", "Organization", "WebPage", "WebSite"],
+      "noindex": false
+    },
+    "/glossary/bounce/": {
+      "title": "What is a bounce? | Lettr Glossary",
+      "h1": "What is a bounce?",
+      "canonical": "https://lettr.com/glossary/bounce/",
+      "jsonLdTypes": ["BreadcrumbList", "DefinedTerm", "Organization", "WebPage", "WebSite"],
+      "noindex": false
+    },
+    "/glossary/bulk-sender/": {
+      "title": "What is a bulk sender? | Lettr Glossary",
+      "h1": "What is a bulk sender?",
+      "canonical": "https://lettr.com/glossary/bulk-sender/",
+      "jsonLdTypes": ["BreadcrumbList", "DefinedTerm", "Organization", "WebPage", "WebSite"],
+      "noindex": false
+    },
+    "/glossary/can-spam-act/": {
+      "title": "What is the CAN-SPAM Act? | Lettr Glossary",
+      "h1": "What is the CAN-SPAM Act?",
+      "canonical": "https://lettr.com/glossary/can-spam-act/",
+      "jsonLdTypes": ["BreadcrumbList", "DefinedTerm", "Organization", "WebPage", "WebSite"],
+      "noindex": false
+    },
+    "/glossary/casl/": {
+      "title": "What is CASL? | Lettr Glossary",
+      "h1": "What is CASL?",
+      "canonical": "https://lettr.com/glossary/casl/",
+      "jsonLdTypes": ["BreadcrumbList", "DefinedTerm", "Organization", "WebPage", "WebSite"],
+      "noindex": false
+    },
+    "/glossary/character-encoding/": {
+      "title": "What is character encoding? | Lettr Glossary",
+      "h1": "What is character encoding?",
+      "canonical": "https://lettr.com/glossary/character-encoding/",
+      "jsonLdTypes": ["BreadcrumbList", "DefinedTerm", "Organization", "WebPage", "WebSite"],
+      "noindex": false
+    },
+    "/glossary/cid/": {
+      "title": "What is CID (Content-ID)? | Lettr Glossary",
+      "h1": "What is CID?",
+      "canonical": "https://lettr.com/glossary/cid/",
+      "jsonLdTypes": ["BreadcrumbList", "DefinedTerm", "Organization", "WebPage", "WebSite"],
+      "noindex": false
+    },
+    "/glossary/click-tracking/": {
+      "title": "What is click tracking? | Lettr Glossary",
+      "h1": "What is click tracking?",
+      "canonical": "https://lettr.com/glossary/click-tracking/",
+      "jsonLdTypes": ["BreadcrumbList", "DefinedTerm", "Organization", "WebPage", "WebSite"],
+      "noindex": false
+    },
+    "/glossary/cname-record/": {
+      "title": "What is a CNAME record? | Lettr Glossary",
+      "h1": "What is a CNAME record?",
+      "canonical": "https://lettr.com/glossary/cname-record/",
+      "jsonLdTypes": ["BreadcrumbList", "DefinedTerm", "Organization", "WebPage", "WebSite"],
+      "noindex": false
+    },
+    "/glossary/communication-language/": {
+      "title": "What is a communication language? | Lettr Glossary",
+      "h1": "What is a communication language?",
+      "canonical": "https://lettr.com/glossary/communication-language/",
+      "jsonLdTypes": ["BreadcrumbList", "DefinedTerm", "Organization", "WebPage", "WebSite"],
+      "noindex": false
+    },
+    "/glossary/content-block/": {
+      "title": "What is a content block? | Lettr Glossary",
+      "h1": "What is a content block?",
+      "canonical": "https://lettr.com/glossary/content-block/",
+      "jsonLdTypes": ["BreadcrumbList", "DefinedTerm", "Organization", "WebPage", "WebSite"],
+      "noindex": false
+    },
+    "/glossary/content-filtering/": {
+      "title": "What is content filtering? | Lettr Glossary",
+      "h1": "What is content filtering?",
+      "canonical": "https://lettr.com/glossary/content-filtering/",
+      "jsonLdTypes": ["BreadcrumbList", "DefinedTerm", "Organization", "WebPage", "WebSite"],
+      "noindex": false
+    },
+    "/glossary/custom-return-path/": {
+      "title": "What is a custom Return-Path? | Lettr Glossary",
+      "h1": "What is a custom Return-Path?",
+      "canonical": "https://lettr.com/glossary/custom-return-path/",
+      "jsonLdTypes": ["BreadcrumbList", "DefinedTerm", "Organization", "WebPage", "WebSite"],
+      "noindex": false
+    },
+    "/glossary/dark-mode-email/": {
+      "title": "What is dark mode in email? | Lettr Glossary",
+      "h1": "What is dark mode in email?",
+      "canonical": "https://lettr.com/glossary/dark-mode-email/",
+      "jsonLdTypes": ["BreadcrumbList", "DefinedTerm", "Organization", "WebPage", "WebSite"],
+      "noindex": false
+    },
+    "/glossary/data-minimization/": {
+      "title": "What is data minimization? | Lettr Glossary",
+      "h1": "What is data minimization?",
+      "canonical": "https://lettr.com/glossary/data-minimization/",
+      "jsonLdTypes": ["BreadcrumbList", "DefinedTerm", "Organization", "WebPage", "WebSite"],
+      "noindex": false
+    },
+    "/glossary/data-processing-agreement/": {
+      "title": "What is a data processing agreement (DPA)? | Lettr Glossary",
+      "h1": "What is a data processing agreement?",
+      "canonical": "https://lettr.com/glossary/data-processing-agreement/",
+      "jsonLdTypes": ["BreadcrumbList", "DefinedTerm", "Organization", "WebPage", "WebSite"],
+      "noindex": false
+    },
+    "/glossary/dedicated-ip/": {
+      "title": "What is a dedicated IP? | Lettr Glossary",
+      "h1": "What is a dedicated IP?",
+      "canonical": "https://lettr.com/glossary/dedicated-ip/",
+      "jsonLdTypes": ["BreadcrumbList", "DefinedTerm", "Organization", "WebPage", "WebSite"],
+      "noindex": false
+    },
+    "/glossary/deferral/": {
+      "title": "What is a deferral? | Lettr Glossary",
+      "h1": "What is a deferral?",
+      "canonical": "https://lettr.com/glossary/deferral/",
+      "jsonLdTypes": ["BreadcrumbList", "DefinedTerm", "Organization", "WebPage", "WebSite"],
+      "noindex": false
+    },
+    "/glossary/deliverability/": {
+      "title": "What is deliverability? | Lettr Glossary",
+      "h1": "What is deliverability?",
+      "canonical": "https://lettr.com/glossary/deliverability/",
+      "jsonLdTypes": ["BreadcrumbList", "DefinedTerm", "Organization", "WebPage", "WebSite"],
+      "noindex": false
+    },
+    "/glossary/delivery-delay/": {
+      "title": "What is a delivery delay? | Lettr Glossary",
+      "h1": "What is a delivery delay?",
+      "canonical": "https://lettr.com/glossary/delivery-delay/",
+      "jsonLdTypes": ["BreadcrumbList", "DefinedTerm", "Organization", "WebPage", "WebSite"],
+      "noindex": false
+    },
+    "/glossary/delivery/": {
+      "title": "What is email delivery? | Lettr Glossary",
+      "h1": "What is email delivery?",
+      "canonical": "https://lettr.com/glossary/delivery/",
+      "jsonLdTypes": ["BreadcrumbList", "DefinedTerm", "Organization", "WebPage", "WebSite"],
+      "noindex": false
+    },
+    "/glossary/dkim-selector/": {
+      "title": "What is a DKIM selector? | Lettr Glossary",
+      "h1": "What is a DKIM selector?",
+      "canonical": "https://lettr.com/glossary/dkim-selector/",
+      "jsonLdTypes": ["BreadcrumbList", "DefinedTerm", "Organization", "WebPage", "WebSite"],
+      "noindex": false
+    },
+    "/glossary/dkim/": {
+      "title": "What is DKIM (DomainKeys Identified Mail)? | Lettr Glossary",
+      "h1": "What is DKIM?",
+      "canonical": "https://lettr.com/glossary/dkim/",
+      "jsonLdTypes": ["BreadcrumbList", "DefinedTerm", "Organization", "WebPage", "WebSite"],
+      "noindex": false
+    },
+    "/glossary/dmarc-aggregate-report/": {
+      "title": "What is a DMARC aggregate report (RUA)? | Lettr Glossary",
+      "h1": "What is a DMARC aggregate report (RUA)?",
+      "canonical": "https://lettr.com/glossary/dmarc-aggregate-report/",
+      "jsonLdTypes": ["BreadcrumbList", "DefinedTerm", "Organization", "WebPage", "WebSite"],
+      "noindex": false
+    },
+    "/glossary/dmarc-alignment/": {
+      "title": "What is DMARC alignment? | Lettr Glossary",
+      "h1": "What is DMARC alignment?",
+      "canonical": "https://lettr.com/glossary/dmarc-alignment/",
+      "jsonLdTypes": ["BreadcrumbList", "DefinedTerm", "Organization", "WebPage", "WebSite"],
+      "noindex": false
+    },
+    "/glossary/dmarc-forensic-report/": {
+      "title": "What is a DMARC forensic report (RUF)? | Lettr Glossary",
+      "h1": "What is a DMARC forensic report (RUF)?",
+      "canonical": "https://lettr.com/glossary/dmarc-forensic-report/",
+      "jsonLdTypes": ["BreadcrumbList", "DefinedTerm", "Organization", "WebPage", "WebSite"],
+      "noindex": false
+    },
+    "/glossary/dmarc/": {
+      "title": "What is DMARC? | Lettr Glossary",
+      "h1": "What is DMARC?",
+      "canonical": "https://lettr.com/glossary/dmarc/",
+      "jsonLdTypes": ["BreadcrumbList", "DefinedTerm", "Organization", "WebPage", "WebSite"],
+      "noindex": false
+    },
+    "/glossary/dns-propagation/": {
+      "title": "What is DNS propagation? | Lettr Glossary",
+      "h1": "What is DNS propagation?",
+      "canonical": "https://lettr.com/glossary/dns-propagation/",
+      "jsonLdTypes": ["BreadcrumbList", "DefinedTerm", "Organization", "WebPage", "WebSite"],
+      "noindex": false
+    },
+    "/glossary/dns/": {
+      "title": "What is DNS (Domain Name System)? | Lettr Glossary",
+      "h1": "What is DNS?",
+      "canonical": "https://lettr.com/glossary/dns/",
+      "jsonLdTypes": ["BreadcrumbList", "DefinedTerm", "Organization", "WebPage", "WebSite"],
+      "noindex": false
+    },
+    "/glossary/domain-connect/": {
+      "title": "What is Domain Connect? | Lettr Glossary",
+      "h1": "What is Domain Connect?",
+      "canonical": "https://lettr.com/glossary/domain-connect/",
+      "jsonLdTypes": ["BreadcrumbList", "DefinedTerm", "Organization", "WebPage", "WebSite"],
+      "noindex": false
+    },
+    "/glossary/domain-reputation/": {
+      "title": "What is domain reputation? | Lettr Glossary",
+      "h1": "What is domain reputation?",
+      "canonical": "https://lettr.com/glossary/domain-reputation/",
+      "jsonLdTypes": ["BreadcrumbList", "DefinedTerm", "Organization", "WebPage", "WebSite"],
+      "noindex": false
+    },
+    "/glossary/domain-status/": {
+      "title": "What is domain status? | Lettr Glossary",
+      "h1": "What is domain status?",
+      "canonical": "https://lettr.com/glossary/domain-status/",
+      "jsonLdTypes": ["BreadcrumbList", "DefinedTerm", "Organization", "WebPage", "WebSite"],
+      "noindex": false
+    },
+    "/glossary/double-opt-in/": {
+      "title": "What is double opt-in? | Lettr Glossary",
+      "h1": "What is double opt-in?",
+      "canonical": "https://lettr.com/glossary/double-opt-in/",
+      "jsonLdTypes": ["BreadcrumbList", "DefinedTerm", "Organization", "WebPage", "WebSite"],
+      "noindex": false
+    },
+    "/glossary/dsn/": {
+      "title": "What is a DSN? | Lettr Glossary",
+      "h1": "What is a DSN?",
+      "canonical": "https://lettr.com/glossary/dsn/",
+      "jsonLdTypes": ["BreadcrumbList", "DefinedTerm", "Organization", "WebPage", "WebSite"],
+      "noindex": false
+    },
+    "/glossary/editor-settings/": {
+      "title": "What are editor settings? | Lettr Glossary",
+      "h1": "What are editor settings?",
+      "canonical": "https://lettr.com/glossary/editor-settings/",
+      "jsonLdTypes": ["BreadcrumbList", "DefinedTerm", "Organization", "WebPage", "WebSite"],
+      "noindex": false
+    },
+    "/glossary/ehlo-helo/": {
+      "title": "What are EHLO and HELO? | Lettr Glossary",
+      "h1": "What are EHLO and HELO?",
+      "canonical": "https://lettr.com/glossary/ehlo-helo/",
+      "jsonLdTypes": ["BreadcrumbList", "DefinedTerm", "Organization", "WebPage", "WebSite"],
+      "noindex": false
+    },
+    "/glossary/email-clipping/": {
+      "title": "What is email clipping? | Lettr Glossary",
+      "h1": "What is email clipping?",
+      "canonical": "https://lettr.com/glossary/email-clipping/",
+      "jsonLdTypes": ["BreadcrumbList", "DefinedTerm", "Organization", "WebPage", "WebSite"],
+      "noindex": false
+    },
+    "/glossary/email-engagement/": {
+      "title": "What is email engagement? | Lettr Glossary",
+      "h1": "What is email engagement?",
+      "canonical": "https://lettr.com/glossary/email-engagement/",
+      "jsonLdTypes": ["BreadcrumbList", "DefinedTerm", "Organization", "WebPage", "WebSite"],
+      "noindex": false
+    },
+    "/glossary/email-header/": {
+      "title": "What is an email header? | Lettr Glossary",
+      "h1": "What is an email header?",
+      "canonical": "https://lettr.com/glossary/email-header/",
+      "jsonLdTypes": ["BreadcrumbList", "DefinedTerm", "Organization", "WebPage", "WebSite"],
+      "noindex": false
+    },
+    "/glossary/email-localization/": {
+      "title": "What is email localization? | Lettr Glossary",
+      "h1": "What is email localization?",
+      "canonical": "https://lettr.com/glossary/email-localization/",
+      "jsonLdTypes": ["BreadcrumbList", "DefinedTerm", "Organization", "WebPage", "WebSite"],
+      "noindex": false
+    },
+    "/glossary/email-relay/": {
+      "title": "What is email relay? | Lettr Glossary",
+      "h1": "What is email relay?",
+      "canonical": "https://lettr.com/glossary/email-relay/",
+      "jsonLdTypes": ["BreadcrumbList", "DefinedTerm", "Organization", "WebPage", "WebSite"],
+      "noindex": false
+    },
+    "/glossary/email-spoofing/": {
+      "title": "What is email spoofing? | Lettr Glossary",
+      "h1": "What is email spoofing?",
+      "canonical": "https://lettr.com/glossary/email-spoofing/",
+      "jsonLdTypes": ["BreadcrumbList", "DefinedTerm", "Organization", "WebPage", "WebSite"],
+      "noindex": false
+    },
+    "/glossary/enhanced-status-code/": {
+      "title": "What is an enhanced status code? | Lettr Glossary",
+      "h1": "What is an enhanced status code?",
+      "canonical": "https://lettr.com/glossary/enhanced-status-code/",
+      "jsonLdTypes": ["BreadcrumbList", "DefinedTerm", "Organization", "WebPage", "WebSite"],
+      "noindex": false
+    },
+    "/glossary/envelope-from/": {
+      "title": "What is the envelope from address? | Lettr Glossary",
+      "h1": "What is the envelope from address?",
+      "canonical": "https://lettr.com/glossary/envelope-from/",
+      "jsonLdTypes": ["BreadcrumbList", "DefinedTerm", "Organization", "WebPage", "WebSite"],
+      "noindex": false
+    },
+    "/glossary/esmtp/": {
+      "title": "What is ESMTP (Extended SMTP)? | Lettr Glossary",
+      "h1": "What is ESMTP?",
+      "canonical": "https://lettr.com/glossary/esmtp/",
+      "jsonLdTypes": ["BreadcrumbList", "DefinedTerm", "Organization", "WebPage", "WebSite"],
+      "noindex": false
+    },
+    "/glossary/esp/": {
+      "title": "What is an ESP (Email Service Provider)? | Lettr Glossary",
+      "h1": "What is an ESP?",
+      "canonical": "https://lettr.com/glossary/esp/",
+      "jsonLdTypes": ["BreadcrumbList", "DefinedTerm", "Organization", "WebPage", "WebSite"],
+      "noindex": false
+    },
+    "/glossary/exchange-online-protection/": {
+      "title": "What is Exchange Online Protection (EOP)? | Lettr Glossary",
+      "h1": "What is Exchange Online Protection?",
+      "canonical": "https://lettr.com/glossary/exchange-online-protection/",
+      "jsonLdTypes": ["BreadcrumbList", "DefinedTerm", "Organization", "WebPage", "WebSite"],
+      "noindex": false
+    },
+    "/glossary/exponential-backoff/": {
+      "title": "What is exponential backoff? | Lettr Glossary",
+      "h1": "What is exponential backoff?",
+      "canonical": "https://lettr.com/glossary/exponential-backoff/",
+      "jsonLdTypes": ["BreadcrumbList", "DefinedTerm", "Organization", "WebPage", "WebSite"],
+      "noindex": false
+    },
+    "/glossary/express-consent/": {
+      "title": "What is express consent? | Lettr Glossary",
+      "h1": "What is express consent?",
+      "canonical": "https://lettr.com/glossary/express-consent/",
+      "jsonLdTypes": ["BreadcrumbList", "DefinedTerm", "Organization", "WebPage", "WebSite"],
+      "noindex": false
+    },
+    "/glossary/feedback-loop/": {
+      "title": "What is a feedback loop (FBL)? | Lettr Glossary",
+      "h1": "What is a feedback loop (FBL)?",
+      "canonical": "https://lettr.com/glossary/feedback-loop/",
+      "jsonLdTypes": ["BreadcrumbList", "DefinedTerm", "Organization", "WebPage", "WebSite"],
+      "noindex": false
+    },
+    "/glossary/focused-inbox/": {
+      "title": "What is Outlook's Focused Inbox? | Lettr Glossary",
+      "h1": "What is Outlook's Focused Inbox?",
+      "canonical": "https://lettr.com/glossary/focused-inbox/",
+      "jsonLdTypes": ["BreadcrumbList", "DefinedTerm", "Organization", "WebPage", "WebSite"],
+      "noindex": false
+    },
+    "/glossary/from-header/": {
+      "title": "What is the From header? | Lettr Glossary",
+      "h1": "What is the From header?",
+      "canonical": "https://lettr.com/glossary/from-header/",
+      "jsonLdTypes": ["BreadcrumbList", "DefinedTerm", "Organization", "WebPage", "WebSite"],
+      "noindex": false
+    },
+    "/glossary/gdpr/": {
+      "title": "What is GDPR? | Lettr Glossary",
+      "h1": "What is GDPR?",
+      "canonical": "https://lettr.com/glossary/gdpr/",
+      "jsonLdTypes": ["BreadcrumbList", "DefinedTerm", "Organization", "WebPage", "WebSite"],
+      "noindex": false
+    },
+    "/glossary/generation-failure/": {
+      "title": "What is a generation failure? | Lettr Glossary",
+      "h1": "What is a generation failure?",
+      "canonical": "https://lettr.com/glossary/generation-failure/",
+      "jsonLdTypes": ["BreadcrumbList", "DefinedTerm", "Organization", "WebPage", "WebSite"],
+      "noindex": false
+    },
+    "/glossary/generation-rejection/": {
+      "title": "What is a generation rejection? | Lettr Glossary",
+      "h1": "What is a generation rejection?",
+      "canonical": "https://lettr.com/glossary/generation-rejection/",
+      "jsonLdTypes": ["BreadcrumbList", "DefinedTerm", "Organization", "WebPage", "WebSite"],
+      "noindex": false
+    },
+    "/glossary/google-postmaster-tools/": {
+      "title": "What is Google Postmaster Tools? | Lettr Glossary",
+      "h1": "What is Google Postmaster Tools?",
+      "canonical": "https://lettr.com/glossary/google-postmaster-tools/",
+      "jsonLdTypes": ["BreadcrumbList", "DefinedTerm", "Organization", "WebPage", "WebSite"],
+      "noindex": false
+    },
+    "/glossary/graylisting/": {
+      "title": "What is graylisting? | Lettr Glossary",
+      "h1": "What is graylisting?",
+      "canonical": "https://lettr.com/glossary/graylisting/",
+      "jsonLdTypes": ["BreadcrumbList", "DefinedTerm", "Organization", "WebPage", "WebSite"],
+      "noindex": false
+    },
+    "/glossary/graymail/": {
+      "title": "What is graymail? | Lettr Glossary",
+      "h1": "What is graymail?",
+      "canonical": "https://lettr.com/glossary/graymail/",
+      "jsonLdTypes": ["BreadcrumbList", "DefinedTerm", "Organization", "WebPage", "WebSite"],
+      "noindex": false
+    },
+    "/glossary/hard-bounce/": {
+      "title": "What is a hard bounce? | Lettr Glossary",
+      "h1": "What is a hard bounce?",
+      "canonical": "https://lettr.com/glossary/hard-bounce/",
+      "jsonLdTypes": ["BreadcrumbList", "DefinedTerm", "Organization", "WebPage", "WebSite"],
+      "noindex": false
+    },
+    "/glossary/idempotency/": {
+      "title": "What is idempotency? | Lettr Glossary",
+      "h1": "What is idempotency?",
+      "canonical": "https://lettr.com/glossary/idempotency/",
+      "jsonLdTypes": ["BreadcrumbList", "DefinedTerm", "Organization", "WebPage", "WebSite"],
+      "noindex": false
+    },
+    "/glossary/imap/": {
+      "title": "What is IMAP? | Lettr Glossary",
+      "h1": "What is IMAP?",
+      "canonical": "https://lettr.com/glossary/imap/",
+      "jsonLdTypes": ["BreadcrumbList", "DefinedTerm", "Organization", "WebPage", "WebSite"],
+      "noindex": false
+    },
+    "/glossary/implied-consent/": {
+      "title": "What is implied consent? | Lettr Glossary",
+      "h1": "What is implied consent?",
+      "canonical": "https://lettr.com/glossary/implied-consent/",
+      "jsonLdTypes": ["BreadcrumbList", "DefinedTerm", "Organization", "WebPage", "WebSite"],
+      "noindex": false
+    },
+    "/glossary/inbox-placement/": {
+      "title": "What is inbox placement? | Lettr Glossary",
+      "h1": "What is inbox placement?",
+      "canonical": "https://lettr.com/glossary/inbox-placement/",
+      "jsonLdTypes": ["BreadcrumbList", "DefinedTerm", "Organization", "WebPage", "WebSite"],
+      "noindex": false
+    },
+    "/glossary/": {
+      "title": "Email Glossary: Deliverability, Authentication & API Terms | Lettr",
+      "h1": "Email terms, explained",
+      "canonical": "https://lettr.com/glossary/",
+      "jsonLdTypes": [
+        "BreadcrumbList",
+        "CollectionPage",
+        "DefinedTermSet",
+        "Organization",
+        "WebSite"
+      ],
+      "noindex": false
+    },
+    "/glossary/initial-open/": {
+      "title": "What is an initial open? | Lettr Glossary",
+      "h1": "What is an initial open?",
+      "canonical": "https://lettr.com/glossary/initial-open/",
+      "jsonLdTypes": ["BreadcrumbList", "DefinedTerm", "Organization", "WebPage", "WebSite"],
+      "noindex": false
+    },
+    "/glossary/injection/": {
+      "title": "What is injection? | Lettr Glossary",
+      "h1": "What is injection?",
+      "canonical": "https://lettr.com/glossary/injection/",
+      "jsonLdTypes": ["BreadcrumbList", "DefinedTerm", "Organization", "WebPage", "WebSite"],
+      "noindex": false
+    },
+    "/glossary/inline-css/": {
+      "title": "What is inline CSS? | Lettr Glossary",
+      "h1": "What is inline CSS?",
+      "canonical": "https://lettr.com/glossary/inline-css/",
+      "jsonLdTypes": ["BreadcrumbList", "DefinedTerm", "Organization", "WebPage", "WebSite"],
+      "noindex": false
+    },
+    "/glossary/ip-pool/": {
+      "title": "What is an IP pool? | Lettr Glossary",
+      "h1": "What is an IP pool?",
+      "canonical": "https://lettr.com/glossary/ip-pool/",
+      "jsonLdTypes": ["BreadcrumbList", "DefinedTerm", "Organization", "WebPage", "WebSite"],
+      "noindex": false
+    },
+    "/glossary/ip-reputation/": {
+      "title": "What is IP reputation? | Lettr Glossary",
+      "h1": "What is IP reputation?",
+      "canonical": "https://lettr.com/glossary/ip-reputation/",
+      "jsonLdTypes": ["BreadcrumbList", "DefinedTerm", "Organization", "WebPage", "WebSite"],
+      "noindex": false
+    },
+    "/glossary/jmrp/": {
+      "title": "What is JMRP (Junk Mail Reporting Program)? | Lettr Glossary",
+      "h1": "What is JMRP?",
+      "canonical": "https://lettr.com/glossary/jmrp/",
+      "jsonLdTypes": ["BreadcrumbList", "DefinedTerm", "Organization", "WebPage", "WebSite"],
+      "noindex": false
+    },
+    "/glossary/key-rotation/": {
+      "title": "What is key rotation? | Lettr Glossary",
+      "h1": "What is key rotation?",
+      "canonical": "https://lettr.com/glossary/key-rotation/",
+      "jsonLdTypes": ["BreadcrumbList", "DefinedTerm", "Organization", "WebPage", "WebSite"],
+      "noindex": false
+    },
+    "/glossary/language-code/": {
+      "title": "What is a language code? | Lettr Glossary",
+      "h1": "What is a language code?",
+      "canonical": "https://lettr.com/glossary/language-code/",
+      "jsonLdTypes": ["BreadcrumbList", "DefinedTerm", "Organization", "WebPage", "WebSite"],
+      "noindex": false
+    },
+    "/glossary/list-hygiene/": {
+      "title": "What is list hygiene? | Lettr Glossary",
+      "h1": "What is list hygiene?",
+      "canonical": "https://lettr.com/glossary/list-hygiene/",
+      "jsonLdTypes": ["BreadcrumbList", "DefinedTerm", "Organization", "WebPage", "WebSite"],
+      "noindex": false
+    },
+    "/glossary/list-unsubscribe-header/": {
+      "title": "What is the List-Unsubscribe header? | Lettr Glossary",
+      "h1": "What is the List-Unsubscribe header?",
+      "canonical": "https://lettr.com/glossary/list-unsubscribe-header/",
+      "jsonLdTypes": ["BreadcrumbList", "DefinedTerm", "Organization", "WebPage", "WebSite"],
+      "noindex": false
+    },
+    "/glossary/list-unsubscribe/": {
+      "title": "What is a list unsubscribe? | Lettr Glossary",
+      "h1": "What is a list unsubscribe?",
+      "canonical": "https://lettr.com/glossary/list-unsubscribe/",
+      "jsonLdTypes": ["BreadcrumbList", "DefinedTerm", "Organization", "WebPage", "WebSite"],
+      "noindex": false
+    },
+    "/glossary/loop-block/": {
+      "title": "What is a loop block? | Lettr Glossary",
+      "h1": "What is a loop block?",
+      "canonical": "https://lettr.com/glossary/loop-block/",
+      "jsonLdTypes": ["BreadcrumbList", "DefinedTerm", "Organization", "WebPage", "WebSite"],
+      "noindex": false
+    },
+    "/glossary/mail-from/": {
+      "title": "What is MAIL FROM? | Lettr Glossary",
+      "h1": "What is MAIL FROM?",
+      "canonical": "https://lettr.com/glossary/mail-from/",
+      "jsonLdTypes": ["BreadcrumbList", "DefinedTerm", "Organization", "WebPage", "WebSite"],
+      "noindex": false
+    },
+    "/glossary/mail-privacy-protection/": {
+      "title": "What is Apple Mail Privacy Protection? | Lettr Glossary",
+      "h1": "What is Apple Mail Privacy Protection?",
+      "canonical": "https://lettr.com/glossary/mail-privacy-protection/",
+      "jsonLdTypes": ["BreadcrumbList", "DefinedTerm", "Organization", "WebPage", "WebSite"],
+      "noindex": false
+    },
+    "/glossary/mailbox-provider/": {
+      "title": "What is a mailbox provider? | Lettr Glossary",
+      "h1": "What is a mailbox provider?",
+      "canonical": "https://lettr.com/glossary/mailbox-provider/",
+      "jsonLdTypes": ["BreadcrumbList", "DefinedTerm", "Organization", "WebPage", "WebSite"],
+      "noindex": false
+    },
+    "/glossary/marketing-email/": {
+      "title": "What is marketing email? | Lettr Glossary",
+      "h1": "What is marketing email?",
+      "canonical": "https://lettr.com/glossary/marketing-email/",
+      "jsonLdTypes": ["BreadcrumbList", "DefinedTerm", "Organization", "WebPage", "WebSite"],
+      "noindex": false
+    },
+    "/glossary/mcp/": {
+      "title": "What is MCP (Model Context Protocol)? | Lettr Glossary",
+      "h1": "What is MCP?",
+      "canonical": "https://lettr.com/glossary/mcp/",
+      "jsonLdTypes": ["BreadcrumbList", "DefinedTerm", "Organization", "WebPage", "WebSite"],
+      "noindex": false
+    },
+    "/glossary/merge-tag/": {
+      "title": "What is a merge tag? | Lettr Glossary",
+      "h1": "What is a merge tag?",
+      "canonical": "https://lettr.com/glossary/merge-tag/",
+      "jsonLdTypes": ["BreadcrumbList", "DefinedTerm", "Organization", "WebPage", "WebSite"],
+      "noindex": false
+    },
+    "/glossary/message-id/": {
+      "title": "What is the Message-ID header? | Lettr Glossary",
+      "h1": "What is the Message-ID header?",
+      "canonical": "https://lettr.com/glossary/message-id/",
+      "jsonLdTypes": ["BreadcrumbList", "DefinedTerm", "Organization", "WebPage", "WebSite"],
+      "noindex": false
+    },
+    "/glossary/message-threading/": {
+      "title": "What is message threading? | Lettr Glossary",
+      "h1": "What is message threading?",
+      "canonical": "https://lettr.com/glossary/message-threading/",
+      "jsonLdTypes": ["BreadcrumbList", "DefinedTerm", "Organization", "WebPage", "WebSite"],
+      "noindex": false
+    },
+    "/glossary/mime/": {
+      "title": "What is MIME? | Lettr Glossary",
+      "h1": "What is MIME?",
+      "canonical": "https://lettr.com/glossary/mime/",
+      "jsonLdTypes": ["BreadcrumbList", "DefinedTerm", "Organization", "WebPage", "WebSite"],
+      "noindex": false
+    },
+    "/glossary/mta/": {
+      "title": "What is an MTA (Mail Transfer Agent)? | Lettr Glossary",
+      "h1": "What is an MTA?",
+      "canonical": "https://lettr.com/glossary/mta/",
+      "jsonLdTypes": ["BreadcrumbList", "DefinedTerm", "Organization", "WebPage", "WebSite"],
+      "noindex": false
+    },
+    "/glossary/mua/": {
+      "title": "What is an MUA (Mail User Agent)? | Lettr Glossary",
+      "h1": "What is an MUA?",
+      "canonical": "https://lettr.com/glossary/mua/",
+      "jsonLdTypes": ["BreadcrumbList", "DefinedTerm", "Organization", "WebPage", "WebSite"],
+      "noindex": false
+    },
+    "/glossary/multilingual-campaign/": {
+      "title": "What is a multilingual email campaign? | Lettr Glossary",
+      "h1": "What is a multilingual email campaign?",
+      "canonical": "https://lettr.com/glossary/multilingual-campaign/",
+      "jsonLdTypes": ["BreadcrumbList", "DefinedTerm", "Organization", "WebPage", "WebSite"],
+      "noindex": false
+    },
+    "/glossary/multilingual-template/": {
+      "title": "What is a multilingual email template? | Lettr Glossary",
+      "h1": "What is a multilingual email template?",
+      "canonical": "https://lettr.com/glossary/multilingual-template/",
+      "jsonLdTypes": ["BreadcrumbList", "DefinedTerm", "Organization", "WebPage", "WebSite"],
+      "noindex": false
+    },
+    "/glossary/multipart-message/": {
+      "title": "What is a multipart message? | Lettr Glossary",
+      "h1": "What is a multipart message?",
+      "canonical": "https://lettr.com/glossary/multipart-message/",
+      "jsonLdTypes": ["BreadcrumbList", "DefinedTerm", "Organization", "WebPage", "WebSite"],
+      "noindex": false
+    },
+    "/glossary/mx-record/": {
+      "title": "What is an MX record? | Lettr Glossary",
+      "h1": "What is an MX record?",
+      "canonical": "https://lettr.com/glossary/mx-record/",
+      "jsonLdTypes": ["BreadcrumbList", "DefinedTerm", "Organization", "WebPage", "WebSite"],
+      "noindex": false
+    },
+    "/glossary/no-reply-address/": {
+      "title": "What is a no-reply address? | Lettr Glossary",
+      "h1": "What is a no-reply address?",
+      "canonical": "https://lettr.com/glossary/no-reply-address/",
+      "jsonLdTypes": ["BreadcrumbList", "DefinedTerm", "Organization", "WebPage", "WebSite"],
+      "noindex": false
+    },
+    "/glossary/non-delivery-report/": {
+      "title": "What is a non-delivery report (NDR)? | Lettr Glossary",
+      "h1": "What is a non-delivery report?",
+      "canonical": "https://lettr.com/glossary/non-delivery-report/",
+      "jsonLdTypes": ["BreadcrumbList", "DefinedTerm", "Organization", "WebPage", "WebSite"],
+      "noindex": false
+    },
+    "/glossary/one-click-unsubscribe/": {
+      "title": "What is one-click unsubscribe? | Lettr Glossary",
+      "h1": "What is one-click unsubscribe?",
+      "canonical": "https://lettr.com/glossary/one-click-unsubscribe/",
+      "jsonLdTypes": ["BreadcrumbList", "DefinedTerm", "Organization", "WebPage", "WebSite"],
+      "noindex": false
+    },
+    "/glossary/open-tracking/": {
+      "title": "What is open tracking? | Lettr Glossary",
+      "h1": "What is open tracking?",
+      "canonical": "https://lettr.com/glossary/open-tracking/",
+      "jsonLdTypes": ["BreadcrumbList", "DefinedTerm", "Organization", "WebPage", "WebSite"],
+      "noindex": false
+    },
+    "/glossary/opt-in/": {
+      "title": "What is opt-in? | Lettr Glossary",
+      "h1": "What is opt-in?",
+      "canonical": "https://lettr.com/glossary/opt-in/",
+      "jsonLdTypes": ["BreadcrumbList", "DefinedTerm", "Organization", "WebPage", "WebSite"],
+      "noindex": false
+    },
+    "/glossary/opt-out/": {
+      "title": "What is an opt-out? | Lettr Glossary",
+      "h1": "What is an opt-out?",
+      "canonical": "https://lettr.com/glossary/opt-out/",
+      "jsonLdTypes": ["BreadcrumbList", "DefinedTerm", "Organization", "WebPage", "WebSite"],
+      "noindex": false
+    },
+    "/glossary/out-of-band-bounce/": {
+      "title": "What is an out-of-band bounce? | Lettr Glossary",
+      "h1": "What is an out-of-band bounce?",
+      "canonical": "https://lettr.com/glossary/out-of-band-bounce/",
+      "jsonLdTypes": ["BreadcrumbList", "DefinedTerm", "Organization", "WebPage", "WebSite"],
+      "noindex": false
+    },
+    "/glossary/phishing/": {
+      "title": "What is phishing? | Lettr Glossary",
+      "h1": "What is phishing?",
+      "canonical": "https://lettr.com/glossary/phishing/",
+      "jsonLdTypes": ["BreadcrumbList", "DefinedTerm", "Organization", "WebPage", "WebSite"],
+      "noindex": false
+    },
+    "/glossary/plus-addressing/": {
+      "title": "What is plus addressing? | Lettr Glossary",
+      "h1": "What is plus addressing?",
+      "canonical": "https://lettr.com/glossary/plus-addressing/",
+      "jsonLdTypes": ["BreadcrumbList", "DefinedTerm", "Organization", "WebPage", "WebSite"],
+      "noindex": false
+    },
+    "/glossary/policy-rejection/": {
+      "title": "What is a policy rejection? | Lettr Glossary",
+      "h1": "What is a policy rejection?",
+      "canonical": "https://lettr.com/glossary/policy-rejection/",
+      "jsonLdTypes": ["BreadcrumbList", "DefinedTerm", "Organization", "WebPage", "WebSite"],
+      "noindex": false
+    },
+    "/glossary/preference-center/": {
+      "title": "What is a preference center? | Lettr Glossary",
+      "h1": "What is a preference center?",
+      "canonical": "https://lettr.com/glossary/preference-center/",
+      "jsonLdTypes": ["BreadcrumbList", "DefinedTerm", "Organization", "WebPage", "WebSite"],
+      "noindex": false
+    },
+    "/glossary/preheader-text/": {
+      "title": "What is preheader text? | Lettr Glossary",
+      "h1": "What is preheader text?",
+      "canonical": "https://lettr.com/glossary/preheader-text/",
+      "jsonLdTypes": ["BreadcrumbList", "DefinedTerm", "Organization", "WebPage", "WebSite"],
+      "noindex": false
+    },
+    "/glossary/premade-template/": {
+      "title": "What is a premade template? | Lettr Glossary",
+      "h1": "What is a premade template?",
+      "canonical": "https://lettr.com/glossary/premade-template/",
+      "jsonLdTypes": ["BreadcrumbList", "DefinedTerm", "Organization", "WebPage", "WebSite"],
+      "noindex": false
+    },
+    "/glossary/primary-language/": {
+      "title": "What is a primary language in email? | Lettr Glossary",
+      "h1": "What is a primary language in email?",
+      "canonical": "https://lettr.com/glossary/primary-language/",
+      "jsonLdTypes": ["BreadcrumbList", "DefinedTerm", "Organization", "WebPage", "WebSite"],
+      "noindex": false
+    },
+    "/glossary/project/": {
+      "title": "What is a project? | Lettr Glossary",
+      "h1": "What is a project?",
+      "canonical": "https://lettr.com/glossary/project/",
+      "jsonLdTypes": ["BreadcrumbList", "DefinedTerm", "Organization", "WebPage", "WebSite"],
+      "noindex": false
+    },
+    "/glossary/promotions-tab/": {
+      "title": "What is the Gmail Promotions tab? | Lettr Glossary",
+      "h1": "What is the Gmail Promotions tab?",
+      "canonical": "https://lettr.com/glossary/promotions-tab/",
+      "jsonLdTypes": ["BreadcrumbList", "DefinedTerm", "Organization", "WebPage", "WebSite"],
+      "noindex": false
+    },
+    "/glossary/ptr-record/": {
+      "title": "What is a PTR record (pointer record)? | Lettr Glossary",
+      "h1": "What is a PTR record?",
+      "canonical": "https://lettr.com/glossary/ptr-record/",
+      "jsonLdTypes": ["BreadcrumbList", "DefinedTerm", "Organization", "WebPage", "WebSite"],
+      "noindex": false
+    },
+    "/glossary/quoted-printable-encoding/": {
+      "title": "What is quoted-printable encoding? | Lettr Glossary",
+      "h1": "What is quoted-printable encoding?",
+      "canonical": "https://lettr.com/glossary/quoted-printable-encoding/",
+      "jsonLdTypes": ["BreadcrumbList", "DefinedTerm", "Organization", "WebPage", "WebSite"],
+      "noindex": false
+    },
+    "/glossary/rate-limiting/": {
+      "title": "What is rate limiting? | Lettr Glossary",
+      "h1": "What is rate limiting?",
+      "canonical": "https://lettr.com/glossary/rate-limiting/",
+      "jsonLdTypes": ["BreadcrumbList", "DefinedTerm", "Organization", "WebPage", "WebSite"],
+      "noindex": false
+    },
+    "/glossary/rcpt-to/": {
+      "title": "What is RCPT TO? | Lettr Glossary",
+      "h1": "What is RCPT TO?",
+      "canonical": "https://lettr.com/glossary/rcpt-to/",
+      "jsonLdTypes": ["BreadcrumbList", "DefinedTerm", "Organization", "WebPage", "WebSite"],
+      "noindex": false
+    },
+    "/glossary/rendering-engine/": {
+      "title": "What is a rendering engine? | Lettr Glossary",
+      "h1": "What is a rendering engine?",
+      "canonical": "https://lettr.com/glossary/rendering-engine/",
+      "jsonLdTypes": ["BreadcrumbList", "DefinedTerm", "Organization", "WebPage", "WebSite"],
+      "noindex": false
+    },
+    "/glossary/reply-to-header/": {
+      "title": "What is the Reply-To header? | Lettr Glossary",
+      "h1": "What is the Reply-To header?",
+      "canonical": "https://lettr.com/glossary/reply-to-header/",
+      "jsonLdTypes": ["BreadcrumbList", "DefinedTerm", "Organization", "WebPage", "WebSite"],
+      "noindex": false
+    },
+    "/glossary/reputation-isolation/": {
+      "title": "What is reputation isolation? | Lettr Glossary",
+      "h1": "What is reputation isolation?",
+      "canonical": "https://lettr.com/glossary/reputation-isolation/",
+      "jsonLdTypes": ["BreadcrumbList", "DefinedTerm", "Organization", "WebPage", "WebSite"],
+      "noindex": false
+    },
+    "/glossary/return-path/": {
+      "title": "What is the Return-Path header? | Lettr Glossary",
+      "h1": "What is the Return-Path header?",
+      "canonical": "https://lettr.com/glossary/return-path/",
+      "jsonLdTypes": ["BreadcrumbList", "DefinedTerm", "Organization", "WebPage", "WebSite"],
+      "noindex": false
+    },
+    "/glossary/reverse-dns/": {
+      "title": "What is reverse DNS? | Lettr Glossary",
+      "h1": "What is reverse DNS?",
+      "canonical": "https://lettr.com/glossary/reverse-dns/",
+      "jsonLdTypes": ["BreadcrumbList", "DefinedTerm", "Organization", "WebPage", "WebSite"],
+      "noindex": false
+    },
+    "/glossary/role-based-address/": {
+      "title": "What is a role-based address? | Lettr Glossary",
+      "h1": "What is a role-based address?",
+      "canonical": "https://lettr.com/glossary/role-based-address/",
+      "jsonLdTypes": ["BreadcrumbList", "DefinedTerm", "Organization", "WebPage", "WebSite"],
+      "noindex": false
+    },
+    "/glossary/sandbox-mode/": {
+      "title": "What is sandbox mode? | Lettr Glossary",
+      "h1": "What is sandbox mode?",
+      "canonical": "https://lettr.com/glossary/sandbox-mode/",
+      "jsonLdTypes": ["BreadcrumbList", "DefinedTerm", "Organization", "WebPage", "WebSite"],
+      "noindex": false
+    },
+    "/glossary/saved-block/": {
+      "title": "What is a saved block? | Lettr Glossary",
+      "h1": "What is a saved block?",
+      "canonical": "https://lettr.com/glossary/saved-block/",
+      "jsonLdTypes": ["BreadcrumbList", "DefinedTerm", "Organization", "WebPage", "WebSite"],
+      "noindex": false
+    },
+    "/glossary/seed-list/": {
+      "title": "What is a seed list? | Lettr Glossary",
+      "h1": "What is a seed list?",
+      "canonical": "https://lettr.com/glossary/seed-list/",
+      "jsonLdTypes": ["BreadcrumbList", "DefinedTerm", "Organization", "WebPage", "WebSite"],
+      "noindex": false
+    },
+    "/glossary/sender-reputation/": {
+      "title": "What is sender reputation? | Lettr Glossary",
+      "h1": "What is sender reputation?",
+      "canonical": "https://lettr.com/glossary/sender-reputation/",
+      "jsonLdTypes": ["BreadcrumbList", "DefinedTerm", "Organization", "WebPage", "WebSite"],
+      "noindex": false
+    },
+    "/glossary/shared-ip/": {
+      "title": "What is a shared IP? | Lettr Glossary",
+      "h1": "What is a shared IP?",
+      "canonical": "https://lettr.com/glossary/shared-ip/",
+      "jsonLdTypes": ["BreadcrumbList", "DefinedTerm", "Organization", "WebPage", "WebSite"],
+      "noindex": false
+    },
+    "/glossary/single-opt-in/": {
+      "title": "What is single opt-in? | Lettr Glossary",
+      "h1": "What is single opt-in?",
+      "canonical": "https://lettr.com/glossary/single-opt-in/",
+      "jsonLdTypes": ["BreadcrumbList", "DefinedTerm", "Organization", "WebPage", "WebSite"],
+      "noindex": false
+    },
+    "/glossary/smartscreen/": {
+      "title": "What is Microsoft SmartScreen? | Lettr Glossary",
+      "h1": "What is Microsoft SmartScreen?",
+      "canonical": "https://lettr.com/glossary/smartscreen/",
+      "jsonLdTypes": ["BreadcrumbList", "DefinedTerm", "Organization", "WebPage", "WebSite"],
+      "noindex": false
+    },
+    "/glossary/smtp-relay/": {
+      "title": "What is an SMTP relay? | Lettr Glossary",
+      "h1": "What is an SMTP relay?",
+      "canonical": "https://lettr.com/glossary/smtp-relay/",
+      "jsonLdTypes": ["BreadcrumbList", "DefinedTerm", "Organization", "WebPage", "WebSite"],
+      "noindex": false
+    },
+    "/glossary/smtp/": {
+      "title": "What is SMTP? | Lettr Glossary",
+      "h1": "What is SMTP?",
+      "canonical": "https://lettr.com/glossary/smtp/",
+      "jsonLdTypes": ["BreadcrumbList", "DefinedTerm", "Organization", "WebPage", "WebSite"],
+      "noindex": false
+    },
+    "/glossary/snds/": {
+      "title": "What is SNDS (Smart Network Data Services)? | Lettr Glossary",
+      "h1": "What is SNDS?",
+      "canonical": "https://lettr.com/glossary/snds/",
+      "jsonLdTypes": ["BreadcrumbList", "DefinedTerm", "Organization", "WebPage", "WebSite"],
+      "noindex": false
+    },
+    "/glossary/soft-bounce/": {
+      "title": "What is a soft bounce? | Lettr Glossary",
+      "h1": "What is a soft bounce?",
+      "canonical": "https://lettr.com/glossary/soft-bounce/",
+      "jsonLdTypes": ["BreadcrumbList", "DefinedTerm", "Organization", "WebPage", "WebSite"],
+      "noindex": false
+    },
+    "/glossary/spam-complaint/": {
+      "title": "What is a spam complaint? | Lettr Glossary",
+      "h1": "What is a spam complaint?",
+      "canonical": "https://lettr.com/glossary/spam-complaint/",
+      "jsonLdTypes": ["BreadcrumbList", "DefinedTerm", "Organization", "WebPage", "WebSite"],
+      "noindex": false
+    },
+    "/glossary/spam-score/": {
+      "title": "What is a spam score? | Lettr Glossary",
+      "h1": "What is a spam score?",
+      "canonical": "https://lettr.com/glossary/spam-score/",
+      "jsonLdTypes": ["BreadcrumbList", "DefinedTerm", "Organization", "WebPage", "WebSite"],
+      "noindex": false
+    },
+    "/glossary/spam-trap/": {
+      "title": "What is a spam trap? | Lettr Glossary",
+      "h1": "What is a spam trap?",
+      "canonical": "https://lettr.com/glossary/spam-trap/",
+      "jsonLdTypes": ["BreadcrumbList", "DefinedTerm", "Organization", "WebPage", "WebSite"],
+      "noindex": false
+    },
+    "/glossary/spf/": {
+      "title": "What is SPF (Sender Policy Framework)? | Lettr Glossary",
+      "h1": "What is SPF?",
+      "canonical": "https://lettr.com/glossary/spf/",
+      "jsonLdTypes": ["BreadcrumbList", "DefinedTerm", "Organization", "WebPage", "WebSite"],
+      "noindex": false
+    },
+    "/glossary/starttls/": {
+      "title": "What is STARTTLS? | Lettr Glossary",
+      "h1": "What is STARTTLS?",
+      "canonical": "https://lettr.com/glossary/starttls/",
+      "jsonLdTypes": ["BreadcrumbList", "DefinedTerm", "Organization", "WebPage", "WebSite"],
+      "noindex": false
+    },
+    "/glossary/structure/": {
+      "title": "What is a structure in an email template? | Lettr Glossary",
+      "h1": "What is a structure in an email template?",
+      "canonical": "https://lettr.com/glossary/structure/",
+      "jsonLdTypes": ["BreadcrumbList", "DefinedTerm", "Organization", "WebPage", "WebSite"],
+      "noindex": false
+    },
+    "/glossary/subdomain/": {
+      "title": "What is a subdomain? | Lettr Glossary",
+      "h1": "What is a subdomain?",
+      "canonical": "https://lettr.com/glossary/subdomain/",
+      "jsonLdTypes": ["BreadcrumbList", "DefinedTerm", "Organization", "WebPage", "WebSite"],
+      "noindex": false
+    },
+    "/glossary/substitution-data/": {
+      "title": "What is substitution data? | Lettr Glossary",
+      "h1": "What is substitution data?",
+      "canonical": "https://lettr.com/glossary/substitution-data/",
+      "jsonLdTypes": ["BreadcrumbList", "DefinedTerm", "Organization", "WebPage", "WebSite"],
+      "noindex": false
+    },
+    "/glossary/sunset-policy/": {
+      "title": "What is a sunset policy? | Lettr Glossary",
+      "h1": "What is a sunset policy?",
+      "canonical": "https://lettr.com/glossary/sunset-policy/",
+      "jsonLdTypes": ["BreadcrumbList", "DefinedTerm", "Organization", "WebPage", "WebSite"],
+      "noindex": false
+    },
+    "/glossary/suppression-list/": {
+      "title": "What is a suppression list? | Lettr Glossary",
+      "h1": "What is a suppression list?",
+      "canonical": "https://lettr.com/glossary/suppression-list/",
+      "jsonLdTypes": ["BreadcrumbList", "DefinedTerm", "Organization", "WebPage", "WebSite"],
+      "noindex": false
+    },
+    "/glossary/tag/": {
+      "title": "What is an email tag? | Lettr Glossary",
+      "h1": "What is an email tag?",
+      "canonical": "https://lettr.com/glossary/tag/",
+      "jsonLdTypes": ["BreadcrumbList", "DefinedTerm", "Organization", "WebPage", "WebSite"],
+      "noindex": false
+    },
+    "/glossary/template-slug/": {
+      "title": "What is a template slug? | Lettr Glossary",
+      "h1": "What is a template slug?",
+      "canonical": "https://lettr.com/glossary/template-slug/",
+      "jsonLdTypes": ["BreadcrumbList", "DefinedTerm", "Organization", "WebPage", "WebSite"],
+      "noindex": false
+    },
+    "/glossary/template-version/": {
+      "title": "What is a template version? | Lettr Glossary",
+      "h1": "What is a template version?",
+      "canonical": "https://lettr.com/glossary/template-version/",
+      "jsonLdTypes": ["BreadcrumbList", "DefinedTerm", "Organization", "WebPage", "WebSite"],
+      "noindex": false
+    },
+    "/glossary/throttling/": {
+      "title": "What is email throttling? | Lettr Glossary",
+      "h1": "What is email throttling?",
+      "canonical": "https://lettr.com/glossary/throttling/",
+      "jsonLdTypes": ["BreadcrumbList", "DefinedTerm", "Organization", "WebPage", "WebSite"],
+      "noindex": false
+    },
+    "/glossary/tls/": {
+      "title": "What is TLS (Transport Layer Security)? | Lettr Glossary",
+      "h1": "What is TLS?",
+      "canonical": "https://lettr.com/glossary/tls/",
+      "jsonLdTypes": ["BreadcrumbList", "DefinedTerm", "Organization", "WebPage", "WebSite"],
+      "noindex": false
+    },
+    "/glossary/topol-email-editor/": {
+      "title": "What is the Topol Email Editor? | Lettr Glossary",
+      "h1": "What is the Topol Email Editor?",
+      "canonical": "https://lettr.com/glossary/topol-email-editor/",
+      "jsonLdTypes": ["BreadcrumbList", "DefinedTerm", "Organization", "WebPage", "WebSite"],
+      "noindex": false
+    },
+    "/glossary/tracking-domain/": {
+      "title": "What is a tracking domain? | Lettr Glossary",
+      "h1": "What is a tracking domain?",
+      "canonical": "https://lettr.com/glossary/tracking-domain/",
+      "jsonLdTypes": ["BreadcrumbList", "DefinedTerm", "Organization", "WebPage", "WebSite"],
+      "noindex": false
+    },
+    "/glossary/tracking-pixel/": {
+      "title": "What is a tracking pixel? | Lettr Glossary",
+      "h1": "What is a tracking pixel?",
+      "canonical": "https://lettr.com/glossary/tracking-pixel/",
+      "jsonLdTypes": ["BreadcrumbList", "DefinedTerm", "Organization", "WebPage", "WebSite"],
+      "noindex": false
+    },
+    "/glossary/transactional-email/": {
+      "title": "What is transactional email? | Lettr Glossary",
+      "h1": "What is transactional email?",
+      "canonical": "https://lettr.com/glossary/transactional-email/",
+      "jsonLdTypes": ["BreadcrumbList", "DefinedTerm", "Organization", "WebPage", "WebSite"],
+      "noindex": false
+    },
+    "/glossary/txt-record/": {
+      "title": "What is a TXT record? | Lettr Glossary",
+      "h1": "What is a TXT record?",
+      "canonical": "https://lettr.com/glossary/txt-record/",
+      "jsonLdTypes": ["BreadcrumbList", "DefinedTerm", "Organization", "WebPage", "WebSite"],
+      "noindex": false
+    },
+    "/glossary/unique-open/": {
+      "title": "What is a unique open? | Lettr Glossary",
+      "h1": "What is a unique open?",
+      "canonical": "https://lettr.com/glossary/unique-open/",
+      "jsonLdTypes": ["BreadcrumbList", "DefinedTerm", "Organization", "WebPage", "WebSite"],
+      "noindex": false
+    },
+    "/glossary/unsubscribe-rate/": {
+      "title": "What is unsubscribe rate? | Lettr Glossary",
+      "h1": "What is unsubscribe rate?",
+      "canonical": "https://lettr.com/glossary/unsubscribe-rate/",
+      "jsonLdTypes": ["BreadcrumbList", "DefinedTerm", "Organization", "WebPage", "WebSite"],
+      "noindex": false
+    },
+    "/glossary/utm-parameters/": {
+      "title": "What are UTM parameters? | Lettr Glossary",
+      "h1": "What are UTM parameters?",
+      "canonical": "https://lettr.com/glossary/utm-parameters/",
+      "jsonLdTypes": ["BreadcrumbList", "DefinedTerm", "Organization", "WebPage", "WebSite"],
+      "noindex": false
+    },
+    "/glossary/variable-reply-to-address/": {
+      "title": "What is a variable reply-to address? | Lettr Glossary",
+      "h1": "What is a variable reply-to address?",
+      "canonical": "https://lettr.com/glossary/variable-reply-to-address/",
+      "jsonLdTypes": ["BreadcrumbList", "DefinedTerm", "Organization", "WebPage", "WebSite"],
+      "noindex": false
+    },
+    "/glossary/verified-mark-certificate/": {
+      "title": "What is a Verified Mark Certificate (VMC)? | Lettr Glossary",
+      "h1": "What is a Verified Mark Certificate?",
+      "canonical": "https://lettr.com/glossary/verified-mark-certificate/",
+      "jsonLdTypes": ["BreadcrumbList", "DefinedTerm", "Organization", "WebPage", "WebSite"],
+      "noindex": false
+    },
+    "/glossary/verp/": {
+      "title": "What is VERP? | Lettr Glossary",
+      "h1": "What is VERP?",
+      "canonical": "https://lettr.com/glossary/verp/",
+      "jsonLdTypes": ["BreadcrumbList", "DefinedTerm", "Organization", "WebPage", "WebSite"],
+      "noindex": false
+    },
+    "/glossary/warm-up/": {
+      "title": "What is email warm-up? | Lettr Glossary",
+      "h1": "What is email warm-up?",
+      "canonical": "https://lettr.com/glossary/warm-up/",
+      "jsonLdTypes": ["BreadcrumbList", "DefinedTerm", "Organization", "WebPage", "WebSite"],
+      "noindex": false
+    },
+    "/glossary/wcag/": {
+      "title": "What is WCAG? | Lettr Glossary",
+      "h1": "What is WCAG?",
+      "canonical": "https://lettr.com/glossary/wcag/",
+      "jsonLdTypes": ["BreadcrumbList", "DefinedTerm", "Organization", "WebPage", "WebSite"],
+      "noindex": false
+    },
+    "/glossary/webhook-signature/": {
+      "title": "What is a webhook signature? | Lettr Glossary",
+      "h1": "What is a webhook signature?",
+      "canonical": "https://lettr.com/glossary/webhook-signature/",
+      "jsonLdTypes": ["BreadcrumbList", "DefinedTerm", "Organization", "WebPage", "WebSite"],
+      "noindex": false
+    },
+    "/glossary/webhook/": {
+      "title": "What is a webhook? | Lettr Glossary",
+      "h1": "What is a webhook?",
+      "canonical": "https://lettr.com/glossary/webhook/",
+      "jsonLdTypes": ["BreadcrumbList", "DefinedTerm", "Organization", "WebPage", "WebSite"],
+      "noindex": false
+    },
+    "/glossary/x-header/": {
+      "title": "What is an X-header? | Lettr Glossary",
+      "h1": "What is an X-header?",
+      "canonical": "https://lettr.com/glossary/x-header/",
+      "jsonLdTypes": ["BreadcrumbList", "DefinedTerm", "Organization", "WebPage", "WebSite"],
+      "noindex": false
+    },
+    "/glossary/yahoo-sender-hub/": {
+      "title": "What is Yahoo Sender Hub? | Lettr Glossary",
+      "h1": "What is Yahoo Sender Hub?",
+      "canonical": "https://lettr.com/glossary/yahoo-sender-hub/",
+      "jsonLdTypes": ["BreadcrumbList", "DefinedTerm", "Organization", "WebPage", "WebSite"],
+      "noindex": false
+    },
+    "/glossary/zone-apex/": {
+      "title": "What is the zone apex? | Lettr Glossary",
+      "h1": "What is the zone apex?",
+      "canonical": "https://lettr.com/glossary/zone-apex/",
+      "jsonLdTypes": ["BreadcrumbList", "DefinedTerm", "Organization", "WebPage", "WebSite"],
+      "noindex": false
+    },
+    "/glossary/zone-file/": {
+      "title": "What is a zone file? | Lettr Glossary",
+      "h1": "What is a zone file?",
+      "canonical": "https://lettr.com/glossary/zone-file/",
+      "jsonLdTypes": ["BreadcrumbList", "DefinedTerm", "Organization", "WebPage", "WebSite"],
+      "noindex": false
+    },
+    "/inbound-email-api/": {
+      "title": "Inbound Email API — receive & parse email programmatically | Lettr",
+      "h1": "Inbound Email API receive and parse email in your app.",
+      "canonical": "https://lettr.com/inbound-email-api/",
+      "jsonLdTypes": ["BreadcrumbList", "FAQPage", "Question", "SoftwareApplication"],
+      "noindex": false
+    },
+    "/": {
+      "title": "Lettr — The Email Platform Built for SaaS",
+      "h1": "The email platform built for SaaS",
+      "canonical": "https://lettr.com",
+      "jsonLdTypes": ["Organization", "SoftwareApplication", "WebSite"],
+      "noindex": false
+    },
+    "/platform/analytics/": {
+      "title": "Analytics & Logs | Lettr",
+      "h1": "Know what your emails are doing.",
+      "canonical": "https://lettr.com/platform/analytics/",
+      "jsonLdTypes": ["BreadcrumbList", "Organization", "WebPage", "WebSite"],
+      "noindex": false
+    },
+    "/platform/deliverability/": {
+      "title": "Deliverability | Lettr",
+      "h1": "Every email. Every inbox.",
+      "canonical": "https://lettr.com/platform/deliverability/",
+      "jsonLdTypes": ["BreadcrumbList", "Organization", "WebPage", "WebSite"],
+      "noindex": false
+    },
+    "/platform/mcp/": {
+      "title": "MCP Server | Lettr",
+      "h1": "Your email API, AI-native.",
+      "canonical": "https://lettr.com/platform/mcp/",
+      "jsonLdTypes": ["BreadcrumbList", "Organization", "WebPage", "WebSite"],
+      "noindex": false
+    },
+    "/platform/multilingual-campaigns/": {
+      "title": "Multilingual Email Campaigns | Lettr",
+      "h1": "One campaign. Every contact's language.",
+      "canonical": "https://lettr.com/platform/multilingual-campaigns/",
+      "jsonLdTypes": ["BreadcrumbList", "Organization", "WebPage", "WebSite"],
+      "noindex": false
+    },
+    "/platform/templates/": {
+      "title": "Visual Editor | Lettr",
+      "h1": "Your team edits. No dev tickets required.",
+      "canonical": "https://lettr.com/platform/templates/",
+      "jsonLdTypes": ["BreadcrumbList", "Organization", "WebPage", "WebSite"],
+      "noindex": false
+    },
+    "/pricing/": {
+      "title": "Pricing — Lettr",
+      "h1": "Pricing that grows with you.",
+      "canonical": "https://lettr.com/pricing/",
+      "jsonLdTypes": ["BreadcrumbList", "FAQPage", "Question", "SoftwareApplication"],
+      "noindex": false
+    },
+    "/privacy-policy/": {
+      "title": "Privacy Policy | Lettr",
+      "h1": "Privacy Policy",
+      "canonical": "https://lettr.com/privacy-policy/",
+      "jsonLdTypes": ["Organization", "WebPage", "WebSite"],
+      "noindex": false
+    },
+    "/smtp-relay/": {
+      "title": "SMTP Relay Service — Lettr",
+      "h1": "The SMTP relay your app can rely on.",
+      "canonical": "https://lettr.com/smtp-relay/",
+      "jsonLdTypes": ["BreadcrumbList", "FAQPage", "Question", "SoftwareApplication"],
+      "noindex": false
+    },
+    "/support/": {
+      "title": "Support & Contact | Lettr",
+      "h1": "How can we help you?",
+      "canonical": "https://lettr.com/support/",
+      "jsonLdTypes": ["Organization", "WebPage", "WebSite"],
+      "noindex": false
+    },
+    "/terms-15-02-2026/": {
+      "title": "Terms of Use | Lettr",
+      "h1": "Terms of Use",
+      "canonical": "https://lettr.com/terms-15-02-2026/",
+      "jsonLdTypes": ["Organization", "WebPage", "WebSite"],
+      "noindex": false
+    },
+    "/terms/": {
+      "title": "Terms of Use | Lettr",
+      "h1": "Terms of Use",
+      "canonical": "https://lettr.com/terms/",
+      "jsonLdTypes": ["Organization", "WebPage", "WebSite"],
+      "noindex": false
+    }
+  }
+}
