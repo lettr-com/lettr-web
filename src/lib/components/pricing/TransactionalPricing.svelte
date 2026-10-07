@@ -7,7 +7,7 @@
 	import { buildRegisterUrl, registerUrl } from '$lib/utils/utm';
 	import { capturePosthogEvent, trackSignupClick } from '$lib/analytics/posthog';
 
-	let step = $state(0);
+	let step = $state(1);
 	let registerHref: string = $state(registerUrl);
 	let debounce: ReturnType<typeof setTimeout> | null = null;
 
