@@ -2,40 +2,72 @@
 	import { onMount } from 'svelte';
 	import ArrowRightIcon from 'phosphor-svelte/lib/ArrowRightIcon';
 	import DitherSide from './DitherSide.svelte';
+	import { marketingSteps, transactionalSteps, type Mode } from '$lib/data/pricing';
 	import { capturePosthogEvent } from '$lib/analytics/posthog';
 	import { createScrollRevealCleanup } from '$lib/utils/gsap';
 
 	let section: HTMLElement | undefined = $state();
 
 	/*
-	 * Volume steps and plan mapping mirror the public tiers in the site's
-	 * structured data (Free 3,000/mo, Pro from $15 up to 100,000, Business from
-	 * $110 up to 200,000). Exact per-step prices live on /pricing.
+	 * The stops and prices come from $lib/data/pricing, the same data the
+	 * /pricing page uses, so the two can't drift apart.
 	 */
-	const steps = [
-		{ label: '3k', volume: 3_000, plan: 'Free', price: '$0', from: false },
-		{ label: '10k', volume: 10_000, plan: 'Pro', price: '$15', from: true },
-		{ label: '25k', volume: 25_000, plan: 'Pro', price: '$15', from: true },
-		{ label: '50k', volume: 50_000, plan: 'Pro', price: '$15', from: true },
-		{ label: '100k', volume: 100_000, plan: 'Pro', price: '$15', from: true },
-		{ label: '200k', volume: 200_000, plan: 'Business', price: '$110', from: true }
-	];
-
 	const THUMB = 28;
-	const last = steps.length - 1;
+	const modes: Mode[] = ['transactional', 'marketing'];
 
+	let mode: Mode = $state('transactional');
 	let stepIndex = $state(0);
-	let current = $derived(steps[stepIndex]);
-	const formatter = new Intl.NumberFormat('en-US');
+
+	const isTransactional = $derived(mode === 'transactional');
+	const steps = $derived(isTransactional ? transactionalSteps : marketingSteps);
+	const last = $derived(steps.length - 1);
+	const current = $derived(steps[Math.min(stepIndex, last)]);
+	const isEnterprise = $derived(stepIndex >= last);
 
 	/** Horizontal position of step `i` along the track, matching where the native thumb centres. */
 	const at = (i: number) => `calc(${THUMB / 2}px + (100% - ${THUMB}px) * ${i / last})`;
 
-	const zones = [
-		{ label: 'Free', step: 0, align: 'left' },
-		{ label: 'Pro', step: 1, align: 'center' },
-		{ label: 'Business', step: last, align: 'right' }
-	] as const;
+	// plan zones above the transactional track; marketing has a single plan, so none
+	const zones = $derived(
+		isTransactional
+			? ([
+					{ label: 'Free', plan: 'free', step: 0, align: 'left' },
+					{ label: 'Pro', plan: 'pro', step: 1, align: 'center' },
+					{ label: 'Business', plan: 'business', step: 3, align: 'center' },
+					{ label: 'Enterprise', plan: 'enterprise', step: last, align: 'right' }
+				] as const)
+			: []
+	);
+
+	const planCaption = $derived(
+		isTransactional ? 'Transactional plan' : isEnterprise ? 'Enterprise plan' : 'Marketing plan'
+	);
+	const planName = $derived(isTransactional ? (current as (typeof transactionalSteps)[number]).name : '');
+	const price = $derived(!isTransactional && isEnterprise ? 'Custom' : current.price);
+	const showPeriod = $derived(!isEnterprise);
+	const question = $derived(isTransactional ? 'How many emails do you send per month?' : 'How many contacts do you have?');
+	const valueText = $derived(
+		isTransactional
+			? `${current.volume} emails per month, ${planName} plan`
+			: `${current.volume} contacts, ${isEnterprise ? 'Enterprise' : 'Marketing'} plan`
+	);
+
+	function setMode(next: Mode) {
+		if (next === mode) return;
+		mode = next;
+		// each mode opens on its first paid-looking stop: 3,000 emails (free) or 2,000 contacts
+		stepIndex = next === 'transactional' ? 0 : 1;
+		void capturePosthogEvent('pricing_mode_changed', { mode: next, placement: 'home_pricing' });
+	}
+
+	function onModeKeydown(event: KeyboardEvent, index: number) {
+		const step = event.key === 'ArrowRight' ? 1 : event.key === 'ArrowLeft' ? -1 : 0;
+		if (!step) return;
+		event.preventDefault();
+		const next = modes[(index + step + modes.length) % modes.length];
+		setMode(next);
+		document.getElementById(`home-pricing-tab-${next}`)?.focus();
+	}
 
 	const tiles = [
 		{
@@ -65,10 +97,6 @@
 		});
 	}
 
-	function zoneOf(index: number) {
-		return index === 0 ? 'Free' : index === last ? 'Business' : 'Pro';
-	}
-
 	onMount(() => {
 		if (!section) return;
 		return createScrollRevealCleanup({ scope: section, targets: '[data-reveal]' });
@@ -89,7 +117,7 @@
 
 	.volume-range::-webkit-slider-runnable-track {
 		height: 8px;
-		background: linear-gradient(to right, #ec104b var(--fill), #e5e7eb var(--fill));
+		background: linear-gradient(to right, var(--accent) var(--fill), #e5e7eb var(--fill));
 	}
 
 	.volume-range::-moz-range-track {
@@ -99,7 +127,7 @@
 
 	.volume-range::-moz-range-progress {
 		height: 8px;
-		background: #ec104b;
+		background: var(--accent);
 	}
 
 	.volume-range::-webkit-slider-thumb {
@@ -108,8 +136,8 @@
 		width: 28px;
 		height: 28px;
 		margin-top: -10px;
-		background: #ec104b;
-		border: 4px solid #fde7ed;
+		background: var(--accent);
+		border: 4px solid var(--halo);
 		border-radius: 0;
 		box-sizing: border-box;
 	}
@@ -117,14 +145,14 @@
 	.volume-range::-moz-range-thumb {
 		width: 28px;
 		height: 28px;
-		background: #ec104b;
-		border: 4px solid #fde7ed;
+		background: var(--accent);
+		border: 4px solid var(--halo);
 		border-radius: 0;
 		box-sizing: border-box;
 	}
 
 	.volume-range:focus-visible {
-		outline: 2px solid #ec104b;
+		outline: 2px solid var(--accent);
 		outline-offset: 6px;
 	}
 </style>
@@ -144,23 +172,53 @@
 	</div>
 
 	<div data-reveal class="mx-auto flex max-w-[1100px] flex-col gap-4">
-		<div class="flex flex-col gap-8 bg-white px-5 py-6 md:gap-9 md:p-10">
+		<div
+			class="flex flex-col gap-8 bg-white px-5 py-6 md:gap-9 md:p-10"
+			style="--accent: {isTransactional ? '#ec104b' : '#00c851'}; --halo: {isTransactional ? '#fde7ed' : '#d9f7e6'}"
+		>
+			<div role="tablist" aria-label="Pricing mode" class="grid grid-cols-2 gap-2 md:flex md:w-fit">
+				{#each modes as m, i}
+					{@const active = mode === m}
+					<button
+						type="button"
+						role="tab"
+						id="home-pricing-tab-{m}"
+						aria-selected={active}
+						tabindex={active ? 0 : -1}
+						onclick={() => setMode(m)}
+						onkeydown={(event) => onModeKeydown(event, i)}
+						class="cursor-pointer border-2 px-5 py-2.5 text-center font-heading text-sm leading-5 transition-colors md:px-6 {active
+							? m === 'transactional'
+								? 'border-primary bg-[#23020b] text-white'
+								: 'border-green bg-[#002010] text-white'
+							: 'border-border/60 bg-white text-muted hover:border-primary-outline hover:text-surface'}"
+					>
+						{m === 'transactional' ? 'Transactional' : 'Marketing'}
+					</button>
+				{/each}
+			</div>
+
 			<div class="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
 				<div class="flex flex-col gap-2 md:gap-2.5">
-					<label for="volume-range" class="text-[0.9375rem] leading-[22px] text-muted md:text-base md:leading-6">How many emails do you send per month?</label>
+					<label for="volume-range" class="text-[0.9375rem] leading-[22px] text-muted md:text-base md:leading-6">{question}</label>
 					<p class="m-0 font-heading text-[2.75rem] leading-[46px] tracking-[-0.025em] text-surface md:text-[4rem] md:leading-[64px]" aria-live="polite">
-						{formatter.format(current.volume)}
+						{current.volume}
 					</p>
 				</div>
 				<div class="flex items-baseline justify-between gap-2 border-t border-border/60 pt-4 md:flex-col md:items-end md:gap-2.5 md:border-t-0 md:pt-0">
-					<p class="m-0 text-[0.9375rem] leading-[22px] text-muted md:text-base md:leading-6">Transactional plan</p>
+					<p class="m-0 text-[0.9375rem] leading-[22px] text-muted md:text-base md:leading-6">{planCaption}</p>
 					<p class="m-0 flex items-baseline gap-2 md:gap-3">
-						<span class="font-heading text-[1.375rem] leading-7 tracking-[-0.02em] text-surface md:text-4xl md:leading-10">{current.plan}</span>
-						<span class="flex items-baseline gap-1.5">
-							{#if current.from}<span class="text-sm text-muted">from</span>{/if}
-							<span class="font-serif text-[1.75rem] leading-[30px] font-medium text-primary italic md:text-[2.75rem] md:leading-11">{current.price}</span>
+						{#if planName}
+							<span class="font-heading text-[1.375rem] leading-7 tracking-[-0.02em] text-surface md:text-4xl md:leading-10">{planName}</span>
+						{/if}
+						<span
+							class="font-serif leading-none font-medium italic {isTransactional
+								? 'text-primary text-[1.75rem] md:text-[2.75rem]'
+								: 'text-[#00873d] text-[2.25rem] md:text-[3.5rem]'}"
+						>
+							{price}
 						</span>
-						<span class="text-sm text-muted md:text-base">/mo</span>
+						{#if showPeriod}<span class="text-sm text-muted md:text-base">/mo</span>{/if}
 					</p>
 				</div>
 			</div>
@@ -169,7 +227,7 @@
 				<div class="relative h-[18px]" aria-hidden="true">
 					{#each zones as zone}
 						<span
-							class="absolute top-0 text-[11px] leading-[14px] tracking-[0.06em] transition-colors {zoneOf(stepIndex) === zone.label ? 'text-[#d40e43]' : 'text-muted'}"
+							class="absolute top-0 text-[11px] leading-[14px] tracking-[0.06em] transition-colors {zone.plan === (current as { plan?: string }).plan ? 'text-[#d40e43]' : 'text-muted'} {zone.plan === 'business' ? 'hidden sm:block' : ''}"
 							style="left: {zone.align === 'right' ? 'auto' : at(zone.step)}; right: {zone.align === 'right' ? '0' : 'auto'}; transform: translateX({zone.align === 'center' ? '-50%' : '0'})"
 						>
 							{zone.label}
@@ -192,14 +250,14 @@
 						bind:value={stepIndex}
 						class="volume-range relative"
 						style="--fill: {at(stepIndex)}"
-						aria-valuetext="{formatter.format(current.volume)} emails per month, {current.plan} plan"
+						aria-valuetext={valueText}
 					/>
 				</div>
 
 				<div class="relative h-4" aria-hidden="true">
 					{#each steps as step, i}
 						<span
-							class="absolute top-0 w-10 -translate-x-1/2 text-center font-code text-[11px] leading-4 md:text-[13px] {i === stepIndex ? 'text-surface' : 'text-muted'}"
+							class="absolute top-0 w-10 -translate-x-1/2 text-center font-code text-[11px] leading-4 md:text-[13px] {i === stepIndex ? 'text-surface' : 'text-muted'} {i % 2 === 1 ? 'hidden sm:block' : ''}"
 							style="left: {at(i)}"
 						>
 							{step.label}
