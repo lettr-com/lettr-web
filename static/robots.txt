@@ -1,5 +1,10 @@
 # allow crawling everything by default
+#
+# Content Signals (https://contentsignals.org/) declare how the content may be
+# used once accessed: search = search indexing and results, ai-input = feeding
+# AI answers in real time (RAG, grounding), ai-train = training AI models.
 User-agent: *
+Content-Signal: search=yes, ai-input=yes, ai-train=yes
 Disallow:
 
 Sitemap: https://lettr.com/sitemap.xml

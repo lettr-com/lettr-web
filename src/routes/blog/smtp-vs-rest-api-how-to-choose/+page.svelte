@@ -60,6 +60,7 @@ with smtplib.SMTP("smtp.provider.com", 587) as server:
 	author={{ name: 'Erik Vlčák', role: 'Customer Success Engineer', avatar: '/images/authors/erik.jpg' }}
 	date="March 18, 2026"
 	datetime="2026-03-18"
+	dateModified="2026-06-25"
 	readTime="8 min read"
 	slug="smtp-vs-rest-api-how-to-choose"
 >

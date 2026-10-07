@@ -20,6 +20,7 @@
 	author={{ name: 'Erik Vlčák', role: 'Customer Success Engineer', avatar: '/images/authors/erik.jpg' }}
 	date="June 29, 2026"
 	datetime="2026-06-29"
+	dateModified="2026-09-03"
 	readTime="11 min read"
 	slug="best-transactional-email-services"
 >

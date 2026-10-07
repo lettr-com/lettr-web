@@ -1,0 +1,28 @@
+{
+  "linkset": [
+    {
+      "anchor": "https://app.lettr.com/api",
+      "service-desc": [
+        {
+          "href": "https://docs.lettr.com/openapi.json",
+          "type": "application/json"
+        }
+      ],
+      "service-doc": [
+        {
+          "href": "https://docs.lettr.com/api-reference/introduction",
+          "type": "text/html"
+        }
+      ]
+    },
+    {
+      "anchor": "https://app.lettr.com/mcp",
+      "service-doc": [
+        {
+          "href": "https://docs.lettr.com/learn/mcp/introduction",
+          "type": "text/html"
+        }
+      ]
+    }
+  ]
+}

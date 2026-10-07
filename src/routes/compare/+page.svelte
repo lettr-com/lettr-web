@@ -6,6 +6,11 @@
 	import { buildRegisterUrl, registerUrl } from '$lib/utils/utm';
 	import { providerList } from '$lib/data/providers';
 	import { capturePosthogEvent, trackSignupClick } from '$lib/analytics/posthog';
+	import { jsonLdScript } from '$lib/utils/jsonLd';
+	import { productPageJsonLd } from '$lib/utils/pageJsonLd';
+
+	const metaDescription =
+		'See how Lettr compares to other email providers. Switch from Resend, Postmark, SendGrid, Mailgun, or MailerSend and save up to 78%.';
 
 	function trackProviderClick(slug: string, name: string, savings: string | number) {
 		void capturePosthogEvent('compare_provider_clicked', {
@@ -87,10 +92,16 @@
 
 <Seo
 	title="Compare | Lettr"
-	description="See how Lettr compares to other email providers. Switch from Resend, Postmark, SendGrid, Mailgun, or MailerSend and save up to 78%."
+	description={metaDescription}
 	ogTitle="Compare Email Providers | Lettr"
 	ogDescription="See how Lettr compares to other email providers. Switch from Resend, Postmark, SendGrid, Mailgun, or MailerSend."
 />
+
+<svelte:head>
+	{@html jsonLdScript(
+		productPageJsonLd({ path: '/compare/', name: 'Compare', description: metaDescription })
+	)}
+</svelte:head>
 
 <section class="pt-32 pb-24">
 	<!-- Hero -->

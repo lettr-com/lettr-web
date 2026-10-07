@@ -62,6 +62,7 @@ dmarc=pass (p=REJECT dis=NONE) header.from=yourapp.com`;
 	author={{ name: 'Erik Vlčák', role: 'Customer Success Engineer', avatar: '/images/authors/erik.jpg' }}
 	date="March 4, 2026"
 	datetime="2026-03-04"
+	dateModified="2026-06-25"
 	readTime="7 min read"
 	slug="spf-dkim-dmarc-explained-for-developers"
 >

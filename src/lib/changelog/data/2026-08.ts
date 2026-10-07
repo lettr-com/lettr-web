@@ -2,27 +2,65 @@ import type { ChangelogMonth } from "../types";
 
 export const month: ChangelogMonth = {
   id: "2026-08",
+  published: "2026-08-31",
 
   features: [
     {
-      title: "Bulk Contact Import Over The API",
+      title: "Manage Email Preferences Page Replaces The Unsubscribe Screen",
+      modules: ["audience", "campaigns"],
+      tags: ["UI/UX"],
+      lead:
+        "The unsubscribe link in every email now opens a page where recipients choose their" +
+        " topics, pause emails or unsubscribe, instead of a screen that could only unsubscribe.",
+      body: [
+        "The page shows the recipient's current status (Subscribed, Paused, Unsubscribed or Not" +
+          " receiving emails), a checkbox for each topic, a pause of 30, 60 or 90 days, and the" +
+          " campaigns they recently received, each linked to its web version. One “Update" +
+          " preferences” button saves everything. Unticking every topic unsubscribes, after" +
+          " asking for a reason, and ticking topics again brings an unsubscribed recipient back.",
+        "Topic opt-outs and pauses are checked again just before each part of a campaign is" +
+          " sent, so a change made during a large send still counts. A full unsubscribe also" +
+          " removes the recipient from private topics for good, so subscribing again does not" +
+          " bring them back.",
+        "The page still opens when a link carries a broken parameter. Its limits count requests" +
+          " per contact, not per IP address, so security gateways that open links before delivery" +
+          " can't stop a real recipient from unsubscribing.",
+        "Pauses show in Audiences too: a Paused badge with its end date, a Paused filter (the" +
+          " Subscribed filter no longer includes paused contacts), and the status and a" +
+          " `paused_until` column in CSV exports. The API adds a `paused_until` field that can be" +
+          " `null`; `status` still reads `subscribed` for a paused contact, and nothing else" +
+          " changes.",
+      ],
+      docs: {
+        label: "Email preferences",
+        href: "https://docs.lettr.com/learn/audience/email-preferences",
+      },
+    },
+  ],
+
+  improvements: [
+    {
+      title: "Bulk Contacts Endpoint Accepts Per-Contact Properties, Lists And Topics",
       modules: ["audience"],
       tags: ["API"],
       lead:
-        "One call now imports a whole batch of contacts, each row carrying its own properties," +
-        " list memberships and topic subscriptions.",
+        "`POST /audience/contacts/bulk` now takes a list of contacts, each with its own" +
+        " properties, lists and topic subscriptions, and imports them in one call.",
       body: [
-        "Importing contacts used to cost one request per contact, against a per-team throttle of" +
-          " three requests a second. Ten thousand contacts with properties and two topics each" +
-          " came to roughly 30,000 requests and the better part of three hours. The same import" +
-          " is now about ten requests and a few seconds.",
-        "The response returns the ids of everything created, so there is no paging through the" +
-          " audience afterwards to find them. Rows that fail validation are skipped and reported" +
-          " individually rather than failing the batch, and `update_existing` merges properties" +
-          " into contacts that already exist. Topics gained their own bulk endpoints alongside" +
-          " the ones lists already had.",
-        "The old `{emails, list_id, properties}` payload keeps its exact semantics, so existing" +
-          " integrations and lettr-php 2.4.0 keep working untouched.",
+        "Importing contacts with their own properties used to take one request per contact, and" +
+          " more for topics, at 3 requests per second for each team. Ten thousand contacts with" +
+          " properties and two topics each took about 30,000 requests and almost three hours; the" +
+          " same import now takes about 10 requests and a few seconds.",
+        "The response includes the ids of the new contacts, so there is no need to page through" +
+          " the audience to find them. Rows that fail validation are skipped and listed in the" +
+          " response while the rest are imported, and `update_existing` updates the properties of" +
+          " contacts that already exist. Top-level `properties`, `list_ids` and `topics` apply to" +
+          " every row unless the row sets its own. A topic set to `opt_out` keeps a new contact" +
+          " out of a topic that would otherwise subscribe them automatically.",
+        "New `POST` and `DELETE /audience/contacts/topics/bulk` endpoints add and remove topics" +
+          " for many contacts at once, like the existing ones for lists. The old `{emails," +
+          " list_id, properties}` request works exactly as before, so existing integrations and" +
+          " lettr-php 2.4.0 need no changes.",
       ],
       code: {
         lang: "bash",
@@ -56,52 +94,20 @@ export const month: ChangelogMonth = {
       },
     },
     {
-      title: "Manage Email Preferences",
-      modules: ["audience", "campaigns"],
-      tags: ["UI/UX"],
-      lead:
-        "The signed link in every email now opens a full preferences page instead of a" +
-        " single-purpose unsubscribe screen.",
-      body: [
-        "Recipients see a derived status — Subscribed, Paused, Unsubscribed or Not receiving" +
-          " emails — a checkbox per topic, a pause of 30, 60 or 90 days, and the campaigns they" +
-          " recently received, each linked to its web version.",
-        "One button commits all of it. Unticking everything unsubscribes, behind a reason" +
-          " dialog; ticking topics again brings a recipient back, and a full unsubscribe" +
-          " detaches private topics for good rather than quietly resurrecting them later. Topic" +
-          " opt-outs genuinely suppress sends: consent is re-checked when recipients are" +
-          " materialised and again per batch, because there is no provider-side backstop for" +
-          " Lettr topics.",
-        "The page is built not to fail closed — refusing to render an unsubscribe page is worse" +
-          " than dropping a bad parameter — and its rate limiting is keyed by contact rather" +
-          " than by IP, so a security gateway prefetching links cannot throttle a real recipient" +
-          " out of unsubscribing.",
-        "Pauses are visible on your side too. Audiences shows a Paused badge with its end date" +
-          " and a matching filter, CSV exports carry the derived status and a `paused_until`" +
-          " column, and the API additively gains a nullable `paused_until` field that changes" +
-          " nothing you already parse.",
-      ],
-      docs: {
-        label: "Email preferences",
-        href: "https://docs.lettr.com/learn/audience/email-preferences",
-      },
-    },
-  ],
-
-  improvements: [
-    {
-      title: "Import Opt-Outs Are Always Honoured",
+      title: "Topic Opt-Outs In Bulk Imports Apply To Existing Contacts",
       modules: ["audience"],
       tags: ["API", "Breaking"],
       lead:
-        "A row-level `opt_out` for a contact Lettr already knew about is no longer discarded" +
-        " when `update_existing` is unset.",
+        "An `opt_out` in a bulk import now unsubscribes an existing contact from that topic," +
+        " whether or not `update_existing` is set.",
       body: [
-        "The request returned 201, reported no error row, and left the contact subscribed. The" +
-          " flag now governs property merges only. A withdrawal of consent is not a data field" +
-          " that a request flag gets to override.",
-        "Bulk topic changes also write consent-history activity rows, which pivot-level writes" +
-          " had been skipping entirely.",
+        "Without `update_existing`, the opt-out used to be ignored: the request returned 201" +
+          " with no error and the contact stayed subscribed. `update_existing` now only controls" +
+          " whether properties are updated, because withdrawing consent is not something a" +
+          " request option should override. Check any import that counted on opt-outs being" +
+          " ignored.",
+        "Topic changes made through the bulk endpoints are now also recorded in each contact's" +
+          " consent history, which they used to skip.",
       ],
       docs: {
         label: "Bulk create contacts",
@@ -113,12 +119,13 @@ export const month: ChangelogMonth = {
       modules: ["transactional"],
       tags: ["API", "Breaking"],
       lead:
-        "The documented 50-recipient limit is now enforced across `to`, `cc` and `bcc`" +
-        " combined.",
+        "The 50-recipient limit on sends now counts `to`, `cc` and `bcc` together, as the" +
+        " documentation always said.",
       body: [
-        "Only `to` was capped before, so a single request could carry — and be billed for —" +
-          " arbitrarily many recipients. Anything over 50 combined now returns a 422. Check your" +
-          " fan-out before you upgrade.",
+        "Only `to` used to be limited, so one request could carry, and be billed for, any" +
+          " number of recipients. A request with more than 50 in total now returns a 422, and" +
+          " scheduled sends follow the same limit, so check how many recipients your integration" +
+          " puts on one send.",
       ],
       docs: {
         label: "Recipients",
@@ -130,12 +137,11 @@ export const month: ChangelogMonth = {
       modules: ["transactional"],
       tags: ["API", "Docs", "Breaking"],
       lead:
-        "The spec now states what was always true: `options.transactional` defaults to `true`," +
-        " so an API send bypasses unsubscribe suppression unless it is set to `false`.",
+        "The API reference now states that `options.transactional` defaults to `true`, so an API" +
+        " send also goes to unsubscribed recipients unless it is set to `false`.",
       body: [
-        "The behaviour has not changed. The reference had simply never said so, which is the" +
-          " kind of omission that only surfaces after something marketing-shaped has already" +
-          " gone out. If you send campaigns through the API, turn the option off.",
+        "Sending has always worked this way; only the reference was missing it. Marketing" +
+          " emails sent through the API need `options.transactional` set to `false`.",
       ],
       docs: {
         label: "Complaints and unsubscribes",
@@ -143,14 +149,13 @@ export const month: ChangelogMonth = {
       },
     },
     {
-      title: "Adamko Is Open To Every Team",
+      title: "Adamko AI Assistant Available To Every Team",
       modules: ["platform"],
       tags: ["AI"],
-      lead: "The flag gating the AI assistant is now on for everyone while it is in beta.",
+      lead: "Adamko, the AI assistant, is now available to every team while it is in beta.",
       body: [
-        "The rollout came with onboarding polish: the panel auto-opens with its introduction" +
-          " once per team rather than on every visit, and the onboarding banner can be dismissed" +
-          " for good.",
+        "The chat panel now opens with its introduction only once for each team, instead of on" +
+          " every visit, and the onboarding banner on the dashboard can be dismissed for good.",
       ],
       docs: {
         label: "Meet Adamko",
@@ -161,15 +166,16 @@ export const month: ChangelogMonth = {
       title: "Adamko Creates API Keys And Sending Domains In Conversation",
       modules: ["platform"],
       tags: ["AI", "Security"],
-      lead: "Both actions used to work only inside the guided “Set up everything” scenario.",
+      lead:
+        "Adamko can now create an API key or add a sending domain when asked in chat, not only in" +
+        " the “Set up everything” scenario.",
       body: [
-        "Asked to do either in ordinary chat, Adamko refused with confident, invented reasons —" +
-          " that the full secret is shown only once and must be copied by you, that adding a" +
-          " domain requires your registrar login. Neither was ever true, and registering a" +
-          " domain in Lettr never touches your registrar.",
-        "He now presses the same buttons the setup scenario presses, relays the real reason when" +
-          " a domain is already taken or blacklisted, and still hands off to the DNS walkthrough" +
-          " when you ask to be walked through it rather than done for you.",
+        "In ordinary chat he used to refuse, with reasons that were not true, such as needing" +
+          " your domain registrar login. Adding a sending domain in Lettr never needs one.",
+        "He now takes the same steps as the setup scenario. An API key can be live or sandbox," +
+          " with full or sending-only access. When a domain is already in use or blocked, he" +
+          " gives the real reason, and he still walks you through the DNS setup when you ask for" +
+          " that instead.",
       ],
       docs: {
         label: "Onboarding and setup",
@@ -177,25 +183,31 @@ export const month: ChangelogMonth = {
       },
     },
     {
-      title: "Stop And Queue Messages In The Adamko Chat",
+      title: "Stop Button And Message Queue In The Adamko Chat",
       modules: ["platform"],
       tags: ["AI", "UI/UX"],
       lead:
-        "A response can be stopped mid-generation, and a follow-up can be queued while one is" +
-        " still in flight.",
-      body: ["The composer used to stay locked until Adamko had finished."],
+        "A reply from Adamko can now be stopped while he is writing it, and a new message can be" +
+        " queued while he is still answering.",
+      body: [
+        "The message box used to stay locked until he finished. A stopped reply keeps the text" +
+          " already shown, and a queued message sends itself when the current reply ends. Work he" +
+          " has already started in the background, such as a brand kit or a set of emails, still" +
+          " finishes, and the stopped reply says so.",
+      ],
     },
     {
-      title: "Repeat DNS Alerts Back Off",
+      title: "Backoff Schedule For Repeat DNS Failure Alerts",
       modules: ["platform"],
       tags: ["Deliverability"],
       lead:
-        "A record that stays broken now alerts on day 0, 1, 4 and 11 and then goes quiet," +
-        " instead of firing daily forever.",
+        "With the default settings, a DNS record that stays broken now alerts on day 0, 1, 4 and" +
+        " 11 and then goes quiet, instead of alerting every day.",
       body: [
-        "Nothing is hidden by the silence: the domain keeps showing as failing in the app. A" +
-          " newly broken record still alerts immediately, and a recovery resets the schedule." +
-          " The alert-settings slider was relabelled to match.",
+        "The domain still shows as failing in the app, and the summary email follows the same" +
+          " schedule. A record that newly breaks still alerts right away, and fixing a record" +
+          " starts the schedule again. The alert settings slider, now called “First repeat" +
+          " after”, sets the first gap; the next two are three and seven times as long.",
       ],
       docs: {
         label: "Alerts",
@@ -203,23 +215,25 @@ export const month: ChangelogMonth = {
       },
     },
     {
-      title: "Folder Pickers Stay Inside Their Own Module",
+      title: "Move And Duplicate Folder Pickers Limited To The Email's Module",
       modules: ["transactional", "campaigns"],
       tags: ["UI/UX"],
       lead:
-        "Moving or duplicating an email into a folder from the other module can no longer" +
-        " silently flip its type.",
+        "The folder pickers for moving and duplicating an email now list only folders of the same" +
+        " kind, marketing or transactional.",
       body: [
-        "Both pickers are now scoped to the template’s own module, and the duplicate picker" +
-          " preselects a sensible folder — the email’s own, the module’s home folder, or the" +
-          " first one offered — instead of opening on an empty placeholder.",
+        "Picking a folder of the other kind used to change the email's type without warning." +
+          " The duplicate picker now opens on a folder (the email's own, the module's main folder" +
+          " or the first one offered) instead of an empty choice. Marketing email cards also get" +
+          " “Copy to Transactional”, and a copy made for the other module now goes into one of" +
+          " that module's folders.",
       ],
     },
     {
-      title: "A Documentation Link In The Topbar",
+      title: "Documentation Link In The App Top Bar",
       modules: ["platform"],
       tags: ["Docs", "UI/UX"],
-      lead: "The app topbar now links straight to the documentation.",
+      lead: "The top bar of the app now links straight to the documentation.",
     },
   ],
 
@@ -228,122 +242,120 @@ export const month: ChangelogMonth = {
       modules: ["platform"],
       tags: ["UI/UX"],
       text:
-        "Fixed confirmation and warning toasts not firing anywhere in the app: `status` and" +
-        " `warning` flash messages were never shared under the key ten pages read them from, so" +
-        " a redirect worked but its message never appeared. Seven distinct messages were being" +
-        " dropped silently, domain create, delete and update among them. The email" +
-        " editor-settings page also stopped toasting its save twice.",
+        "Confirmation and warning messages appear again after actions such as adding or deleting" +
+        " a domain, and editor settings no longer confirm a save twice.",
     },
     {
       modules: ["platform"],
       tags: ["Billing"],
       text:
-        "Fixed the dashboard returning a 500 for a team whose Stripe subscription no longer" +
-        " exists — the page died while merely trying to label a plan tier. A missing" +
-        " subscription now falls back to free-tier limits and is logged; every other Stripe" +
-        " error still surfaces, and write paths still fail loudly.",
+        "Fixed the dashboard returning a 500 error for teams whose subscription no longer exists;" +
+        " they now see the free plan's limits.",
     },
     {
       modules: ["platform"],
       tags: ["Deliverability"],
       text:
-        "Fixed a deleted domain leaving its health alert, and a “Check domain” link that 404’d," +
-        " on the dashboard forever. All four delete paths now clean up, a reconcile pass heals" +
-        " rows already stale in production, and a stale link from an old email or the" +
-        " notification bell lands on the domain list with an explanation.",
+        "Deleting a domain now removes its health alert from the dashboard, including alerts from" +
+        " earlier deletions, and old “Check domain” links open the domain list.",
     },
     {
       modules: ["transactional", "campaigns"],
       tags: ["UI/UX"],
       text:
-        "Fixed picking a premade template in the Create Email modal restyling the app behind it," +
-        " with stretched thumbnails and a resized logo. The preview was injecting the" +
-        " template’s global email CSS into the app document; it now renders in a sandboxed" +
-        " iframe like every other email preview.",
+        "Fixed previewing a premade email in the Create Email dialog changing the look of the app" +
+        " behind it, with stretched thumbnails and a resized logo.",
     },
     {
       modules: ["platform"],
       tags: ["AI"],
       text:
-        "Fixed a closed Adamko panel reopening itself after every hard refresh and every sign-in" +
-        " for anyone who had not finished the onboarding wizard — which, for someone who never" +
-        " wants it, is forever. Panel state is now remembered per team.",
+        "A closed Adamko panel now stays closed after a page reload or a new sign-in, even before" +
+        " onboarding is finished.",
     },
     {
       modules: ["platform"],
       tags: ["AI"],
       text:
-        "Fixed the Adamko drawer parking on the first message rather than scrolling to the" +
-        " latest when reopened, and the “Drop your CSV to attach it” overlay latching on and" +
-        " blocking the chat until a hard refresh.",
+        "Fixed the Adamko chat opening on the first message instead of the latest one when" +
+        " reopened.",
     },
     {
       modules: ["platform"],
       tags: ["AI"],
       text:
-        "Fixed Adamko’s suggested quick-action chips going stale: registering a sending domain" +
-        " yourself left the “Help me set up my sending domain” chip sitting there until a hard" +
-        " refresh. They now refresh whenever the panel is opened.",
+        "The “Drop your CSV to attach it” overlay in the Adamko chat no longer gets stuck and" +
+        " blocks the chat until the page is reloaded.",
     },
     {
       modules: ["platform"],
       tags: ["AI"],
       text:
-        "Fixed “Set up everything” reporting emails as already created, and refusing to generate" +
-        " the set, when the account held nothing but a single blank untitled draft.",
+        "Fixed Adamko's suggested quick actions not updating, so “Help me set up my sending" +
+        " domain” stayed after a domain was already added.",
     },
     {
       modules: ["platform"],
       tags: ["AI"],
       text:
-        "Fixed brand kit logo detection picking another site’s logo off the page — a partner" +
-        " badge named `…logo.png` outranked the site’s own mark, and one academy site shipped a" +
-        " tourism portal’s logo in its email footers. Candidates are now weighed by who serves" +
-        " them, and an image wrapped in the homepage link is promoted.",
+        "“Set up everything” now creates the emails when the account has only one blank untitled" +
+        " draft, instead of reporting them as already created.",
     },
     {
       modules: ["platform"],
       tags: ["AI"],
       text:
-        "Fixed brand kit logos rendering blank on a same-color background, or as a broken image" +
-        " during generation. The light or dark variant is now chosen correctly, a near-white" +
-        " logo with no light-surface twin gets a mid-tone tile to stay visible on, and a" +
-        " fallback that published the logo to a storage bucket nobody could read is gone.",
+        "Brand kit logo detection no longer picks another site's logo from the page, such as a" +
+        " partner badge, over the site's own logo.",
     },
     {
       modules: ["platform"],
       tags: ["AI"],
       text:
-        "Fixed generated emails shipping a pink divider to brands with no pink in them. Every" +
-        " foreign color is now ranked, and those past the brand palette are recolored to a" +
-        " brand-hued tone at their own lightness, so a pale hairline stays pale.",
-    },
-    {
-      modules: ["platform", "campaigns"],
-      tags: ["AI"],
-      text:
-        "Fixed a brand kit that extracted only one color leaving generated emails with unfilled" +
-        " content blocks and large empty gaps. Fills now resolve against a tint ladder derived" +
-        " from the primary color, corner radius scales by element so a “pill” brand no longer" +
-        " stamps 100px on a page-tall card, and campaign drafts are no longer filed into" +
-        " transactional folders.",
+        "Brand kit logos now use the right light or dark version, and very light logos get a" +
+        " darker tile, instead of vanishing against the background.",
     },
     {
       modules: ["platform"],
       tags: ["AI"],
       text:
-        "Fixed brand kit social icons vanishing on saturated footers. The premade library" +
-        " authors every social icon as one mid-grey glyph; each is now republished as a white" +
-        " twin and swapped in on dark surfaces, alpha and geometry intact.",
+        "Fixed brand kit logos sometimes showing as a broken image while emails were being" +
+        " generated.",
     },
     {
       modules: ["platform"],
       tags: ["AI"],
       text:
-        "Fixed a site that blocks crawling producing a raw HTTP error, and the setup wizard" +
-        " then scaffolding “successful” emails whose only text was the team name against a" +
-        " brand kit that did not exist. A failure now names the host and a next step, offers" +
-        " another URL, and the wizard refuses to scaffold without a completed kit.",
+        "Generated emails no longer include pink dividers or other colors from outside the brand;" +
+        " those now become a shade of the brand color.",
+    },
+    {
+      modules: ["platform"],
+      tags: ["AI"],
+      text:
+        "Fixed brand kits with only one color producing generated emails with empty content" +
+        " blocks, large gaps and oversized rounded corners.",
+    },
+    {
+      modules: ["campaigns"],
+      tags: ["AI"],
+      text:
+        "Campaign drafts that Adamko creates now go into a marketing folder instead of a" +
+        " transactional one.",
+    },
+    {
+      modules: ["platform"],
+      tags: ["AI"],
+      text:
+        "Social icons in generated emails now turn white on dark or strongly colored footers," +
+        " where the grey icons used to disappear.",
+    },
+    {
+      modules: ["platform"],
+      tags: ["AI"],
+      text:
+        "A brand kit website that can't be read now gets a clear explanation and a prompt to try" +
+        " another address, instead of near-empty setup emails.",
     },
   ],
 };

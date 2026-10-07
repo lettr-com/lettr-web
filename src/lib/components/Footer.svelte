@@ -53,6 +53,7 @@
 				{ label: 'Transactional Email', href: '/email-api/' },
 				{ label: 'Free Email API', href: '/free-email-api/' },
 				{ label: 'Email Marketing', href: '/email-marketing/' },
+				{ label: 'Multilingual Campaigns', href: '/platform/multilingual-campaigns/' },
 				{ label: 'Template Builder', href: '/platform/templates/' },
 				{ label: 'Analytics', href: '/platform/analytics/' },
 				{ label: 'Deliverability', href: '/platform/deliverability/' },
@@ -70,11 +71,7 @@
 				{ label: 'Blog', href: '/blog/' },
 				{ label: 'Changelog', href: '/changelog/' },
 				{ label: 'Compare', href: '/compare/' },
-				{
-					label: 'Email glossary',
-					href: 'https://docs.lettr.com/knowledge-base/glossary/email-glossary',
-					external: true
-				},
+				{ label: 'Email glossary', href: '/glossary/' },
 				{ label: 'Status', href: 'https://status.lettr.com', external: true }
 			]
 		},

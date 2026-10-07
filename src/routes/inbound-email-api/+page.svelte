@@ -22,6 +22,11 @@
 	import { buildRegisterUrl, registerUrl } from '$lib/utils/utm';
 	import { capturePosthogEvent, trackSignupClick } from '$lib/analytics/posthog';
 	import type { CodeTab } from '$lib/utils/shiki';
+	import { jsonLdScript } from '$lib/utils/jsonLd';
+	import { productPageJsonLd } from '$lib/utils/pageJsonLd';
+
+	const metaDescription =
+		'Receive and parse inbound email via API and webhooks. Point your domain at Lettr and get every message as clean JSON fired to your endpoint.';
 
 	const INBOUND_DOCS_URL = 'https://docs.lettr.com/learn/receiving/introduction';
 
@@ -286,11 +291,18 @@ end`
 
 <Seo
 	title="Inbound Email API — receive & parse email programmatically | Lettr"
-	description="Receive and parse inbound email via API and webhooks. Point your domain at Lettr and get every message as clean JSON fired to your endpoint."
+	description={metaDescription}
 	ogDescription="Receive inbound email as parsed JSON via webhooks. Build email-to-ticket support, reply handling, and email-to-app workflows on the same platform you send from."
 />
 
 <svelte:head>
+	{@html jsonLdScript(
+		productPageJsonLd({
+			path: '/inbound-email-api/',
+			name: 'Inbound Email API',
+			description: metaDescription
+		})
+	)}
 	{@html `<script type="application/ld+json">${JSON.stringify({
 		'@context': 'https://schema.org',
 		'@type': 'FAQPage',
@@ -687,7 +699,7 @@ end`
 		</p>
 	</div>
 
-	<div class="space-y-0">
+	<div class="space-y-0" data-markdown="faq">
 		{#each faqs as faq, i}
 			<div data-reveal class="{i < faqs.length - 1 ? 'border-b border-border/20' : ''}">
 				<button

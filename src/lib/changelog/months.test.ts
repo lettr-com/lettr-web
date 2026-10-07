@@ -29,6 +29,15 @@ describe("MONTHS registry", () => {
     }
   });
 
+  it("gives every month a published date on or after its first day", async () => {
+    for (const id of MONTHS) {
+      const month = await loadMonth(id);
+      expect(month.published, id).toMatch(/^\d{4}-\d{2}-\d{2}$/);
+      expect(Number.isNaN(Date.parse(`${month.published}T00:00:00Z`)), id).toBe(false);
+      expect(month.published >= `${id}-01`, `${id} published ${month.published}`).toBe(true);
+    }
+  });
+
   it("gives every entry at least one module and a non-empty title and lead", async () => {
     for (const id of MONTHS) {
       const month = await loadMonth(id);

@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { page } from '$app/state';
+	import { SITE_URL, absoluteUrl } from '$lib/utils/jsonLd';
 
-	const SITE_URL = 'https://lettr.com';
 	const DEFAULT_IMAGE = `${SITE_URL}/og-image.png`;
 
 	interface Props {
@@ -17,6 +17,8 @@
 		image?: string;
 		/** Canonical path (e.g. "/about/") or absolute URL. Defaults to the current route. */
 		canonical?: string;
+		/** Byline name for `<meta name="author">`, e.g. a blog post's author. */
+		author?: string;
 	}
 
 	let {
@@ -26,15 +28,12 @@
 		ogDescription,
 		type = 'website',
 		image = DEFAULT_IMAGE,
-		canonical
+		canonical,
+		author
 	}: Props = $props();
 
-	function absolute(value: string): string {
-		return value.startsWith('http') ? value : `${SITE_URL}${value}`;
-	}
-
-	const url = $derived(absolute(canonical ?? page.url.pathname));
-	const imageUrl = $derived(absolute(image));
+	const url = $derived(absoluteUrl(canonical ?? page.url.pathname));
+	const imageUrl = $derived(absoluteUrl(image));
 	const socialTitle = $derived(ogTitle ?? title);
 	const socialDescription = $derived(ogDescription ?? description);
 </script>
@@ -43,6 +42,9 @@
 	<title>{title}</title>
 	<meta name="description" content={description} />
 	<link rel="canonical" href={url} />
+	{#if author}
+		<meta name="author" content={author} />
+	{/if}
 
 	<meta property="og:type" content={type} />
 	<meta property="og:url" content={url} />

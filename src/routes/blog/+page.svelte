@@ -5,6 +5,8 @@
 	import ClockIcon from 'phosphor-svelte/lib/ClockIcon';
 	import { createFromAnimationCleanup, createScrollRevealCleanup } from '$lib/utils/gsap';
 	import { posts } from '$lib/data/posts';
+	import { jsonLdScript } from '$lib/utils/jsonLd';
+	import { basicPageJsonLd } from '$lib/utils/pageJsonLd';
 
 	const [featured, ...rest] = posts;
 
@@ -34,6 +36,10 @@
 	ogTitle="Lettr Blog"
 	description="Notes on transactional and marketing email, deliverability, and building email infrastructure that SaaS teams can trust."
 />
+
+<svelte:head>
+	{@html jsonLdScript(basicPageJsonLd({ path: '/blog/', name: 'Lettr Blog', type: 'CollectionPage' }))}
+</svelte:head>
 
 <section class="pt-32 pb-24">
 	<div bind:this={header}>

@@ -3,6 +3,8 @@ import tailwindcss from "@tailwindcss/vite";
 import { svelteSitemap } from "svelte-sitemap/vite";
 import { defineConfig } from "vite-plus";
 
+import { markdownForAgents } from "./src/lib/agents/vite.ts";
+
 export default defineConfig({
   staged: {
     "*": "vp check --fix",
@@ -26,5 +28,6 @@ export default defineConfig({
       // matches `build/404.html`); the other two are route directories.
       ignore: ["404.html", "terms-15-02-2026", "book"],
     }),
+    markdownForAgents(),
   ],
 });

@@ -17,7 +17,9 @@
 		type FilterToken
 	} from '$lib/changelog/filter';
 	import { formatMonth } from '$lib/changelog/months';
-	import { summarizeMonth } from '$lib/changelog/summary';
+	import { FEED_URL, formatDate, monthDescription, monthJsonLd, monthTitle } from '$lib/changelog/seo';
+	import { summarizeMonthHtml } from '$lib/changelog/summary';
+	import { jsonLdScript } from '$lib/utils/jsonLd';
 	import { createFromAnimationCleanup, createScrollRevealCleanup } from '$lib/utils/gsap';
 	import { untrack } from 'svelte';
 	import type { PageData } from './$types';
@@ -38,12 +40,15 @@
 	const filterStatus = $derived(
 		filter.length ? `${summarizeMatches(matches, filter, total)}.` : undefined
 	);
-	const description = $derived.by(() => {
-		const summary = summarizeMonth(data.month);
-		return summary
-			? `Everything Lettr shipped in ${label}: ${summary}.`
-			: `Everything Lettr shipped in ${label}.`;
-	});
+	// The hero line, with the counts marked up because they are the point of
+	// it. The meta description is the same sentence plus the headline features,
+	// built in `monthDescription`.
+	const summaryHtml = $derived(summarizeMonthHtml(data.month));
+	const descriptionHtml = $derived(
+		summaryHtml
+			? `Everything Lettr shipped in ${label}: ${summaryHtml}.`
+			: `Everything Lettr shipped in ${label}.`
+	);
 
 	onMount(() => {
 		const cleanups: (() => void)[] = [];
@@ -92,11 +97,19 @@
 </script>
 
 <Seo
-	title="{label} Changelog | Lettr"
-	{description}
+	title={monthTitle(data.month)}
+	description={monthDescription(data.month)}
 	ogTitle="Lettr Changelog — {label}"
+	type="article"
 	canonical="/changelog/{data.month.id}/"
 />
+
+<svelte:head>
+	<meta property="article:published_time" content={data.month.published} />
+	<meta property="article:modified_time" content={data.month.published} />
+	<link rel="alternate" type="application/atom+xml" title="Lettr Changelog" href={FEED_URL} />
+	{@html jsonLdScript(monthJsonLd(data.month))}
+</svelte:head>
 
 <section class="pt-32 pb-24">
 	<div bind:this={header}>
@@ -111,13 +124,16 @@
 
 		<span
 			data-animate
-			class="mt-8 block font-heading text-xs tracking-[0.15em] text-primary uppercase"
+			class="mt-8 block font-heading text-sm text-primary"
 		>
-			Changelog
+			Lettr changelog
 		</span>
-		<h1 data-animate class="mt-3">{label}</h1>
+		<h1 data-animate class="mt-3">What's new in {label}</h1>
 		<p data-animate class="mt-5 max-w-xl text-body leading-[1.8] text-muted">
-			{description}
+			{@html descriptionHtml}
+		</p>
+		<p data-animate class="mt-4 text-xs text-muted">
+			Published <time datetime={data.month.published}>{formatDate(data.month.published)}</time>
 		</p>
 
 		<div data-animate class="mt-10 border-t border-border/50 py-3">
@@ -162,14 +178,14 @@
 
 	{#if data.newer || data.older}
 		<nav aria-label="Other months" class="mt-20 border-t border-border/50 pt-12">
-			<h2 class="font-heading text-xs tracking-[0.15em] text-primary uppercase">Other months</h2>
+			<h2 class="font-heading text-sm text-primary">Other months</h2>
 			<div class="mt-6 grid gap-4 sm:grid-cols-2">
 				{#if data.older}
 					<a
 						href={monthHref(data.older, filter)}
 						class="group flex flex-col border border-border/50 bg-white p-6 transition-colors hover:border-primary/30"
 					>
-						<span class="text-xs font-medium tracking-[0.1em] text-muted uppercase">Earlier</span>
+						<span class="text-xs font-medium text-muted">Earlier</span>
 						<span
 							class="mt-2 inline-flex items-center gap-2 font-heading text-h3 text-surface transition-colors group-hover:text-primary"
 						>
@@ -189,7 +205,7 @@
 						href={monthHref(data.newer, filter)}
 						class="group flex flex-col border border-border/50 bg-white p-6 transition-colors hover:border-primary/30 sm:items-end sm:text-right"
 					>
-						<span class="text-xs font-medium tracking-[0.1em] text-muted uppercase">Later</span>
+						<span class="text-xs font-medium text-muted">Later</span>
 						<span
 							class="mt-2 inline-flex items-center gap-2 font-heading text-h3 text-surface transition-colors group-hover:text-primary"
 						>

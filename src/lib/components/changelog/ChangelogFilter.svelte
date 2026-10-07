@@ -99,13 +99,13 @@
 		would strand the last line's few words against the far edge.
 	-->
 	<div class="flex items-baseline gap-x-4 gap-y-1.5 px-4 py-3 max-sm:flex-wrap sm:gap-x-6 sm:px-5">
-		<h2 id="changelog-filter-heading" class="shrink-0 font-heading text-xs">
+		<h2 id="changelog-filter-heading" class="shrink-0 font-heading text-sm">
 			<button
 				type="button"
 				aria-expanded={isOpen}
 				aria-controls="changelog-filter-badges"
 				onclick={() => (isOpen = !isOpen)}
-				class="inline-flex cursor-pointer items-center gap-1.5 tracking-[0.15em] text-primary uppercase transition-colors hover:text-primary/70"
+				class="inline-flex cursor-pointer items-center gap-1.5 text-primary transition-colors hover:text-primary/70"
 			>
 				Filter the log
 				<CaretDownIcon
@@ -142,7 +142,7 @@
 			<div class="divide-y divide-border/40 border-t border-border/40 px-4 sm:px-5">
 				<div class={rowClass}>
 					<p class="text-sm font-medium text-surface">Product area</p>
-					<div class="flex flex-wrap gap-1.5" role="group" aria-label="Filter by product area">
+					<div class="flex flex-wrap gap-2" role="group" aria-label="Filter by product area">
 						{#each MODULES as module (module)}
 							<ChangelogBadge
 								{module}
@@ -155,7 +155,7 @@
 
 				<div class={rowClass}>
 					<p class="text-sm font-medium text-surface">Type of change</p>
-					<div class="flex flex-wrap gap-1.5" role="group" aria-label="Filter by type of change">
+					<div class="flex flex-wrap gap-2" role="group" aria-label="Filter by type of change">
 						{#each FEATURE_TAGS as tag (tag)}
 							<ChangelogBadge {tag} pressed={tokens.includes(tag)} onToggle={() => toggle(tag)} />
 						{/each}

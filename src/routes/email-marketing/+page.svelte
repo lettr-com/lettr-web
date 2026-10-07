@@ -15,6 +15,11 @@
 	import { createFromAnimationCleanup, createScrollRevealCleanup } from '$lib/utils/gsap';
 	import { buildRegisterUrl, registerUrl } from '$lib/utils/utm';
 	import { capturePosthogEvent, trackSignupClick } from '$lib/analytics/posthog';
+	import { jsonLdScript } from '$lib/utils/jsonLd';
+	import { productPageJsonLd } from '$lib/utils/pageJsonLd';
+
+	const metaDescription =
+		'Run marketing campaigns from the same platform as your transactional email: drag-and-drop editor, contact lists, segmentation, and automations.';
 
 	let hero: HTMLElement | undefined = $state();
 	let featuresSection: HTMLElement | undefined = $state();
@@ -107,9 +112,19 @@
 
 <Seo
 	title="Email Marketing & Campaigns — Lettr"
-	description="Run marketing campaigns from the same platform as your transactional email: drag-and-drop editor, contact lists, segmentation, and automations."
+	description={metaDescription}
 	ogDescription="Run marketing campaigns from the same platform that sends your transactional email."
 />
+
+<svelte:head>
+	{@html jsonLdScript(
+		productPageJsonLd({
+			path: '/email-marketing/',
+			name: 'Email Marketing & Campaigns',
+			description: metaDescription
+		})
+	)}
+</svelte:head>
 
 <div>
 <section bind:this={hero} class="pt-30 pb-16 border-b border-border/30">
@@ -117,11 +132,11 @@
 		<div class="flex flex-col">
 			<a
 				data-animate
-				href="/blog/introducing-lettr-marketing-audiences-and-campaigns/"
+				href="/platform/multilingual-campaigns/"
 				class="group mb-6 inline-flex w-fit items-center gap-2 border border-primary/20 bg-primary/5 p-1.5 text-sm text-primary transition-colors hover:bg-primary/10"
 			>
 				<span class="bg-primary px-2 py-0.5 text-xs font-bold text-white">New</span>
-				Introducing Campaigns
+				Multilingual campaigns — each contact gets the email in their language
 				<span class="transition-transform group-hover:translate-x-0.5">&rarr;</span>
 			</a>
 			<h1 data-animate class="text-surface mb-4">
@@ -242,7 +257,7 @@
 	<RelatedFeatures
 		links={[
 			{ href: '/platform/templates/', label: 'Visual Editor', description: 'Drag-and-drop email editor powered by Topol.' },
-			{ href: '/email-api/', label: 'Transactional Email', description: 'Send via REST API and SMTP, billed per email.' },
+			{ href: '/platform/multilingual-campaigns/', label: 'Multilingual Campaigns', description: 'Send one campaign in several languages.' },
 			{ href: '/platform/analytics/', label: 'Analytics & Logs', description: 'Delivery metrics, searchable logs, and webhooks.' }
 		]}
 	/>

@@ -14,6 +14,7 @@ import type { ChangelogMonth } from "./types";
 
 const month: ChangelogMonth = {
   id: "2026-08",
+  published: "2026-08-31",
   features: [
     { title: "Retries", modules: ["transactional"], tags: ["API"], lead: "Lead." },
     { title: "Editor", modules: ["campaigns"], tags: ["UI/UX"], lead: "Lead." },

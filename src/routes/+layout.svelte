@@ -82,47 +82,9 @@
 					"@type": "SoftwareApplication",
 					"@id": "https://lettr.com/#software",
 					"name": "Lettr",
-					"url": "https://lettr.com",
-					"description": "Lettr is an email platform built exclusively for SaaS companies, combining a clean REST API for developers with a drag-and-drop visual editor for marketing and product teams. Send both transactional and marketing emails from one platform, built in the same editor.",
-					"applicationCategory": "DeveloperApplication",
-					"operatingSystem": "Web",
-					"offers": [
-						{
-							"@type": "Offer",
-							"name": "Free",
-							"price": "0",
-							"priceCurrency": "USD",
-							"description": "3,000 emails per month, 100 per day limit"
-						},
-						{
-							"@type": "Offer",
-							"name": "Pro",
-							"price": "15",
-							"priceCurrency": "USD",
-							"description": "Up to 100,000 emails per month, 10 sending domains"
-						},
-						{
-							"@type": "Offer",
-							"name": "Business",
-							"price": "110",
-							"priceCurrency": "USD",
-							"description": "Up to 200,000 emails per month, unlimited domains, dedicated IPs"
-						}
-					],
-					"featureList": [
-						"REST API and SMTP relay",
-						"Drag-and-drop email editor powered by Topol",
-						"SDKs for Laravel, PHP, Node.js, Go, Java, and Rust",
-						"Transactional and marketing emails from one platform",
-						"SPF, DKIM, and DMARC authentication",
-						"Real-time webhooks for delivery events",
-						"Searchable email logs",
-						"Multilingual template management",
-						"Synced sections across templates",
-						"Draft and publish workflow with version history",
-						"Custom tracking domains"
-					],
-					"creator": { "@id": "https://lettr.com/#organization" }
+					"description": "Transactional and marketing email in one platform. Developers integrate once via a clean API; your team ships content with a drag-and-drop editor.",
+					"applicationCategory": "BusinessApplication",
+					"operatingSystem": "Web"
 				}
 			]
 		})}<\/script>`}

@@ -12,6 +12,36 @@ export interface PostMeta {
 // Used by the blog index listing and the "Related articles" block on each post.
 export const posts: PostMeta[] = [
   {
+    slug: "mailgun-alternatives",
+    category: "Fundamentals",
+    title: "5 best Mailgun alternatives for transactional email in 2026",
+    excerpt:
+      "Five Mailgun alternatives (Lettr, Mailtrap, Postmark, Amazon SES, and Twilio SendGrid) compared on log retention, free tiers, pricing at 50,000 and 100,000 emails a month, and traffic separation.",
+    author: "Jack Zagorski",
+    date: "September 18, 2026",
+    readTime: "8 min read",
+  },
+  {
+    slug: "introducing-multilingual-campaigns",
+    category: "Product",
+    title: "Introducing multilingual campaigns",
+    excerpt:
+      "Lettr campaigns can now send one email in several languages, and each contact receives the version that matches their language. This post covers which audiences benefit, what replaces the one-campaign-per-language setup, how messy language values like de-AT or german are handled, and what recipients see.",
+    author: "Erik Vlčák",
+    date: "September 16, 2026",
+    readTime: "5 min read",
+  },
+  {
+    slug: "zaptime-cut-deliverability-tickets-to-zero",
+    category: "Case study",
+    title: "Zaptime cut deliverability tickets from dozens a month to zero with Lettr",
+    excerpt:
+      "Zaptime's customers were reporting that their clients never received booking confirmations, and Amazon SES gave the team no way to find out why. The switch to Lettr took a single day of engineering, and it came down to two things the alternative could not do: manage sending domains for hundreds of customer teams, and process data in the EU.",
+    author: "Jack Zagorski",
+    date: "September 11, 2026",
+    readTime: "4 min read",
+  },
+  {
     slug: "sendgrid-alternatives",
     category: "Fundamentals",
     title: "5 best SendGrid alternatives for email delivery in 2026, compared",

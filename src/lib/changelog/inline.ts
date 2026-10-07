@@ -10,19 +10,13 @@
  * inside a code span be rewritten into an anchor.
  */
 
+import { escapeHtml } from "../utils/html";
+
 /** Schemes an authored link may use. Anything else renders as plain text. */
 const SAFE_HREF = /^(https?:\/\/|\/|#|mailto:)/;
 
 /** A code span, or a link — whichever starts first wins. */
 const INLINE = /`([^`]+)`|\[([^\]]+)\]\(([^)\s]+)\)/g;
-
-function escapeHtml(value: string): string {
-  return value
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;");
-}
 
 function renderLink(label: string, href: string): string {
   if (!SAFE_HREF.test(href)) return label;
@@ -41,6 +35,19 @@ export function renderInline(text: string): string {
   return escapeHtml(text).replace(INLINE, (match, code, label, href) => {
     if (typeof code === "string") return `<code class="changelog-code">${code}</code>`;
     if (typeof label === "string" && typeof href === "string") return renderLink(label, href);
+    return match;
+  });
+}
+
+/**
+ * The same copy with its markup removed rather than rendered: code spans keep
+ * their text, links keep their label. For places that carry no HTML at all —
+ * meta descriptions, the llms.txt index, feed summaries.
+ */
+export function renderPlain(text: string): string {
+  return text.replace(INLINE, (match, code, label) => {
+    if (typeof code === "string") return code;
+    if (typeof label === "string") return label;
     return match;
   });
 }

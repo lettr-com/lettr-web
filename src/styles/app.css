@@ -286,7 +286,7 @@
   .blog-prose table {
     width: 100%;
     border-collapse: collapse;
-    font-size: 0.9375rem;
+    font-size: 0.875rem;
     line-height: 1.4;
   }
 
@@ -294,18 +294,49 @@
     text-align: left;
     font-weight: 650;
     color: var(--color-surface);
-    padding: 0.625rem 0.75rem;
+    padding: 0.625rem 0.5rem;
     border-bottom: 2px solid color-mix(in srgb, var(--color-surface) 18%, transparent);
   }
 
   .blog-prose tbody td {
-    padding: 0.625rem 0.75rem;
+    padding: 0.625rem 0.5rem;
     border-bottom: 1px solid color-mix(in srgb, var(--color-surface) 10%, transparent);
     vertical-align: top;
   }
 
+  /* Flush the first column with the body text; the saved width keeps
+     six-column comparison tables inside the 550px body column. */
+  .blog-prose thead th:first-child,
+  .blog-prose tbody td:first-child {
+    padding-left: 0;
+  }
+
   .blog-prose tbody tr:last-child td {
     border-bottom: none;
+  }
+
+  /* Rendered Markdown on glossary term pages, layered on .blog-prose. Adds the
+     list rules the blog gets from components (marked emits plain elements) and
+     a scroll margin for linkable H2 ids. */
+  .glossary-prose > h2 {
+    scroll-margin-top: 7rem;
+  }
+
+  .glossary-prose ul,
+  .glossary-prose ol {
+    padding-left: 1.25rem;
+  }
+
+  .glossary-prose ul {
+    list-style: disc;
+  }
+
+  .glossary-prose ol {
+    list-style: decimal;
+  }
+
+  .glossary-prose li + li {
+    margin-top: 0.5rem;
   }
 }
 
@@ -329,6 +360,15 @@
     font-size: 0.875em;
     padding: 0.15em 0.4em;
     background-color: rgba(17, 24, 39, 0.06);
+    color: var(--color-surface);
+  }
+
+  /* A count in the month hero, from summarizeMonthHtml(). Set in the heading
+     face and the surface color so it reads at a glance against the muted
+     sentence around it. */
+  .changelog-count {
+    font-family: var(--font-heading);
+    font-weight: 500;
     color: var(--color-surface);
   }
 }

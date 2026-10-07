@@ -7,16 +7,19 @@
 
 	interface Props {
 		entry: ChangelogEntry;
+		/** Anchor id, so a single entry can be linked to and cited. */
+		id?: string;
 	}
 
-	let { entry }: Props = $props();
+	let { entry, id }: Props = $props();
 </script>
 
 <!-- data-entry-title is read by the delegated PostHog handler on the container. -->
 <article
+	{id}
 	data-reveal
 	data-entry-title={entry.title}
-	class="border border-border/50 bg-white p-6 shadow-[0_20px_50px_-45px_rgba(17,24,39,0.6)] md:p-8"
+	class="scroll-mt-28 border border-border/50 bg-white p-6 shadow-[0_20px_50px_-45px_rgba(17,24,39,0.6)] md:p-8"
 >
 	<div class="flex flex-wrap items-center gap-1.5">
 		{#each entry.modules as module (module)}

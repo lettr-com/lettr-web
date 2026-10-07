@@ -10,6 +10,11 @@
 	import PricingFaq from '$lib/components/pricing/PricingFaq.svelte';
 	import type { Mode } from '$lib/data/pricing';
 	import { capturePosthogEvent } from '$lib/analytics/posthog';
+	import { jsonLdScript } from '$lib/utils/jsonLd';
+	import { productPageJsonLd } from '$lib/utils/pageJsonLd';
+
+	const metaDescription =
+		'Transparent Lettr pricing: transactional bills per email, marketing per contact, with a free tier of 3,000 transactional emails a month.';
 
 	let mode: Mode = $state('transactional');
 
@@ -26,9 +31,19 @@
 
 <Seo
 	title="Pricing — Lettr"
-	description="Transparent Lettr pricing: transactional bills per email, marketing per contact, with a free tier of 3,000 transactional emails a month."
+	description={metaDescription}
 	ogDescription="Transactional per email, Marketing per contact. Free tier of 3,000 emails a month."
 />
+
+<svelte:head>
+	{@html jsonLdScript(
+		productPageJsonLd({
+			path: '/pricing/',
+			name: 'Pricing',
+			description: metaDescription
+		})
+	)}
+</svelte:head>
 
 <section class="pt-32 pb-10 md:pt-[148px] md:pb-14">
 	<div class="mx-auto flex max-w-[700px] flex-col items-center gap-5 text-center md:gap-6">

@@ -116,7 +116,7 @@
 	});
 </script>
 
-<div class="w-full overflow-hidden border border-border/40 bg-white shadow-[0_0_60px_-15px_rgba(236,16,75,0.12)]">
+<div data-markdown="skip" class="w-full overflow-hidden border border-border/40 bg-white shadow-[0_0_60px_-15px_rgba(236,16,75,0.12)]">
 	<!-- Top bar -->
 	<div class="flex items-center justify-between border-b border-border/30 bg-white px-3 py-2">
 		<div class="flex min-w-0 items-center gap-2">

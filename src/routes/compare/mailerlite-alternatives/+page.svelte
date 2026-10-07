@@ -12,6 +12,11 @@
 	import { createFromAnimationCleanup, createScrollRevealCleanup } from '$lib/utils/gsap';
 	import { buildRegisterUrl, registerUrl } from '$lib/utils/utm';
 	import { capturePosthogEvent, trackSignupClick } from '$lib/analytics/posthog';
+	import { jsonLdScript } from '$lib/utils/jsonLd';
+	import { productPageJsonLd } from '$lib/utils/pageJsonLd';
+
+	const metaDescription =
+		'Thinking of leaving MailerLite? An honest, plain-English look at the best alternatives — Lettr, Brevo, Resend and MailerSend — and how to switch in minutes.';
 
 	let hero: HTMLElement | undefined = $state();
 	let reasonsSection: HTMLElement | undefined = $state();
@@ -218,12 +223,20 @@
 
 <Seo
 	title="5 Best MailerLite Alternatives in 2026 (Compared) | Lettr"
-	description="Thinking of leaving MailerLite? An honest, plain-English look at the best alternatives — Lettr, Brevo, Resend and MailerSend — and how to switch in minutes."
+	description={metaDescription}
 	ogTitle="The Best MailerLite Alternatives, Honestly"
 	ogDescription="A plain-English comparison of the top MailerLite alternatives — and where MailerLite is still a great fit."
 />
 
 <svelte:head>
+	{@html jsonLdScript(
+		productPageJsonLd({
+			path: '/compare/mailerlite-alternatives/',
+			name: 'MailerLite alternatives',
+			description: metaDescription,
+			parent: { name: 'Compare', path: '/compare/' }
+		})
+	)}
 	{@html `<script type="application/ld+json">${JSON.stringify({
 		'@context': 'https://schema.org',
 		'@type': 'FAQPage',
@@ -438,7 +451,7 @@
 <section bind:this={faqSection} class="py-16 border-b border-border/30">
 	<h2 data-reveal class="mb-10 text-surface">A few common questions</h2>
 
-	<div class="space-y-0">
+	<div class="space-y-0" data-markdown="faq">
 		{#each faqs as faq, i}
 			<div data-reveal class="{i < faqs.length - 1 ? 'border-b border-border/20' : ''}">
 				<button

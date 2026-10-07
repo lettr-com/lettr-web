@@ -30,6 +30,7 @@ Lettr::to($user->email)
 	author={{ name: 'Erik Vlčák', role: 'Customer Success Engineer', avatar: '/images/authors/erik.jpg' }}
 	date="May 13, 2026"
 	datetime="2026-05-13"
+	dateModified="2026-06-25"
 	readTime="5 min read"
 	slug="the-hidden-cost-of-diy-transactional-email"
 >

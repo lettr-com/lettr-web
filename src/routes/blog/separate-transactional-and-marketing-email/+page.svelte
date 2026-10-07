@@ -20,6 +20,7 @@
 	author={{ name: 'Erik Vlčák', role: 'Customer Success Engineer', avatar: '/images/authors/erik.jpg' }}
 	date="April 8, 2026"
 	datetime="2026-04-08"
+	dateModified="2026-06-25"
 	readTime="5 min read"
 	slug="separate-transactional-and-marketing-email"
 >
