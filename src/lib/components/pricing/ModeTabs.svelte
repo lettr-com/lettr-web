@@ -1,4 +1,5 @@
 <script lang="ts">
+	import DitherSide from '$lib/components/home/DitherSide.svelte';
 	import type { Mode } from '$lib/data/pricing';
 
 	interface Props {
@@ -38,7 +39,7 @@
 			tabindex={isActive ? 0 : -1}
 			onclick={() => select(mode)}
 			onkeydown={(event) => onKeydown(event, index)}
-			class="flex cursor-pointer items-center gap-4 border-2 p-4 text-left transition-colors sm:gap-5 sm:px-6 sm:py-[22px] {isActive
+			class="relative flex cursor-pointer items-center gap-4 overflow-hidden border-2 p-4 text-left transition-colors sm:gap-5 sm:px-6 sm:py-[22px] {isActive
 				? isTransactional
 					? 'border-primary bg-[#23020b]'
 					: 'border-green bg-[#002010]'
@@ -46,7 +47,7 @@
 		>
 			<span
 				aria-hidden="true"
-				class="flex h-12 w-12 shrink-0 items-center justify-center {isTransactional ? 'bg-primary' : 'bg-green'}"
+				class="relative flex h-12 w-12 shrink-0 items-center justify-center {isTransactional ? 'bg-primary' : 'bg-green'}"
 			>
 				{#if isTransactional}
 					<svg width="20" height="26" viewBox="0 0 19 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -64,7 +65,16 @@
 					</svg>
 				{/if}
 			</span>
-			<span class="flex min-w-0 flex-col gap-1">
+			{#if isActive}
+				<DitherSide
+					color={isTransactional ? '#ec104b' : '#00c851'}
+					variant={isTransactional ? 'ripple' : 'noise'}
+					edge="bottom"
+					width={18}
+					cell={6}
+				/>
+			{/if}
+			<span class="relative flex min-w-0 flex-col gap-1">
 				<span
 					class="leading-[26px] {isTransactional
 						? 'font-heading text-xl tracking-[-0.03em] sm:text-[1.375rem]'

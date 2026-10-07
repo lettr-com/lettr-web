@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
+	import Button from '$lib/components/Button.svelte';
 	import VolumeCard from './VolumeCard.svelte';
 	import EnterpriseRow from './EnterpriseRow.svelte';
 	import { transactionalPlans, transactionalSteps, type PlanKey } from '$lib/data/pricing';
@@ -104,15 +105,14 @@
 					{/each}
 				</ul>
 
-				<a
+				<Button
 					href={registerHref}
 					onclick={() => trackPlanCta(plan.key, plan.name, plan.cta)}
-					class="flex h-12 items-center justify-center text-[0.9375rem] font-semibold transition-colors {selected
-						? 'bg-primary text-white hover:bg-primary-strong'
-						: 'border border-border text-surface hover:border-primary hover:text-primary'}"
+					variant={selected ? 'primary' : 'outline'}
+					class="w-full"
 				>
 					{plan.cta}
-				</a>
+				</Button>
 			</div>
 		{/each}
 	</div>

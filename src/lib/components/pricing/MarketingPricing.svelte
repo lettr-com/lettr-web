@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
+	import Button from '$lib/components/Button.svelte';
 	import VolumeCard from './VolumeCard.svelte';
 	import EnterpriseRow from './EnterpriseRow.svelte';
 	import { marketingFeatures, marketingSteps } from '$lib/data/pricing';
@@ -60,15 +61,9 @@
 				</p>
 				<p class="m-0 text-lg leading-[26px] {isEnterprise ? 'text-muted' : 'text-[#aaffd5]'}">{current.contacts}</p>
 			</div>
-			<a
-				href={registerHref}
-				onclick={trackPlanCta}
-				class="flex h-[52px] items-center justify-center text-base font-bold transition-colors {isEnterprise
-					? 'border border-border text-surface hover:border-green hover:text-[#00873d]'
-					: 'bg-[#03bd4c] text-white hover:brightness-95'}"
-			>
+			<Button href={registerHref} onclick={trackPlanCta} variant={isEnterprise ? 'outline' : 'green'} class="w-full">
 				{cta}
-			</a>
+			</Button>
 		</div>
 		<ul class="m-0 flex flex-1 list-none flex-col border-t p-0 {isEnterprise ? 'border-border/60' : 'border-white/15'}">
 			{#each marketingFeatures as feature}

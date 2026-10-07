@@ -1,4 +1,5 @@
 <script lang="ts">
+	import Button from '$lib/components/Button.svelte';
 	import { capturePosthogEvent } from '$lib/analytics/posthog';
 
 	function track(label: string, href: string, external: boolean) {
@@ -14,10 +15,9 @@
 <section aria-labelledby="bundle-heading" class="mx-auto max-w-[1100px]">
 	<div class="flex flex-col gap-8 border border-primary-outline bg-white p-6 sm:p-10 lg:flex-row lg:items-center lg:justify-between lg:gap-12">
 		<div class="flex flex-col gap-5 sm:flex-row sm:items-start sm:gap-6">
-			<span
-				class="flex h-12 w-12 shrink-0 items-center justify-center border border-primary-outline bg-primary-soft font-heading text-xl leading-6 font-bold text-primary"
-				aria-hidden="true">T</span
-			>
+			<span class="flex h-12 w-12 shrink-0 items-center justify-center border border-primary-outline bg-primary-soft" aria-hidden="true">
+				<img src="/images/logos/topol-icon.svg" alt="" width="24" height="24" class="h-6 w-6" />
+			</span>
 			<div class="flex flex-col gap-3">
 				<h2 id="bundle-heading" class="m-0 flex flex-wrap items-baseline gap-x-3 font-heading text-[1.75rem] leading-[34px] tracking-[-0.025em] text-surface sm:text-4xl sm:leading-[42px]">
 					Bundle
@@ -28,23 +28,18 @@
 				</p>
 			</div>
 		</div>
-		<div class="flex shrink-0 flex-col gap-3 sm:flex-row lg:w-[180px] lg:flex-col">
-			<a
-				href="/demo/"
-				onclick={() => track('Talk to us', '/demo/', false)}
-				class="flex h-12 flex-1 items-center justify-center gap-2.5 bg-primary text-[0.9375rem] font-semibold text-white transition-colors hover:bg-primary-strong"
-			>
-				Talk to us <span class="text-lg" aria-hidden="true">→</span>
-			</a>
-			<a
+		<div class="flex shrink-0 flex-col gap-3 sm:flex-row lg:w-[200px] lg:flex-col">
+			<Button href="/demo/" onclick={() => track('Talk to us', '/demo/', false)} class="flex-1">Talk to us</Button>
+			<Button
 				href="https://topol.io"
 				target="_blank"
 				rel="noopener noreferrer"
+				variant="outline"
 				onclick={() => track('Explore Topol', 'https://topol.io', true)}
-				class="flex h-12 flex-1 items-center justify-center gap-2.5 border border-border text-[0.9375rem] font-semibold text-surface transition-colors hover:border-primary hover:text-primary"
+				class="flex-1"
 			>
-				Explore Topol <span aria-hidden="true">↗</span>
-			</a>
+				Explore Topol
+			</Button>
 		</div>
 	</div>
 </section>

@@ -2,22 +2,26 @@
 	import { onMount } from 'svelte';
 
 	/*
-	 * Animated ordered-dither strip that runs down the right edge of a card,
-	 * matching the Paper ripple / simplex Dithering shaders. Density falls off
-	 * from the outer edge inwards.
+	 * Animated ordered-dither strip that runs down the right edge of a card (or
+	 * along its bottom edge), matching the Paper ripple / simplex Dithering
+	 * shaders. Density falls off from the outer edge inwards.
 	 */
 
 	interface Props {
 		color: string;
 		/** `ripple` = rolling bands, `noise` = drifting blotches. */
 		variant?: 'ripple' | 'noise';
-		/** Strip width in px. */
+		/** Strip thickness in px. */
 		width?: number;
+		/** Which edge of the parent the strip hugs. */
+		edge?: 'right' | 'bottom';
 		/** Size of one dither cell in px. */
 		cell?: number;
 	}
 
-	let { color, variant = 'ripple', width = 40, cell = 10 }: Props = $props();
+	let { color, variant = 'ripple', width = 40, edge = 'right', cell = 10 }: Props = $props();
+
+	const horizontal = $derived(edge === 'bottom');
 
 	const BAYER = [
 		0, 32, 8, 40, 2, 34, 10, 42, 48, 16, 56, 24, 50, 18, 58, 26, 12, 44, 4, 36, 14, 46, 6, 38, 60,
@@ -34,13 +38,20 @@
 		if (!ctx) return;
 
 		const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-		const cols = Math.max(1, Math.round(width / cell));
+		const thickness = Math.max(1, Math.round(width / cell));
+		let cols = 1;
 		let rows = 1;
 		let raf = 0;
 		const start = performance.now();
 
 		function resize() {
-			rows = Math.max(1, Math.ceil(target.clientHeight / cell));
+			if (horizontal) {
+				cols = Math.max(1, Math.ceil(target.clientWidth / cell));
+				rows = thickness;
+			} else {
+				cols = thickness;
+				rows = Math.max(1, Math.ceil(target.clientHeight / cell));
+			}
 			target.width = cols;
 			target.height = rows;
 		}
@@ -63,8 +74,11 @@
 			ctx!.fillStyle = color;
 			for (let y = 0; y < rows; y++) {
 				for (let x = 0; x < cols; x++) {
-					const edge = (x + 1) / cols; // 1 at the outer (right) edge
-					const v = field(x, y, t) * edge * 1.25 - 0.1;
+					// `across` runs from the parent's inside to the strip's outer edge, `along` follows the edge
+					const across = horizontal ? y : x;
+					const along = horizontal ? x : y;
+					const outer = (across + 1) / (horizontal ? rows : cols); // 1 at the outer edge
+					const v = field(across, along, t) * outer * 1.25 - 0.1;
 					const threshold = (BAYER[(y & 7) * 8 + (x & 7)] + 0.5) / 64;
 					if (v > threshold) ctx!.fillRect(x, y, 1, 1);
 				}
@@ -89,7 +103,7 @@
 
 <canvas
 	bind:this={canvas}
-	class="pointer-events-none absolute top-0 right-0 h-full"
-	style="width: {width}px; image-rendering: pixelated;"
+	class="pointer-events-none absolute {horizontal ? 'bottom-0 left-0 w-full' : 'top-0 right-0 h-full'}"
+	style="{horizontal ? `height: ${width}px` : `width: ${width}px`}; image-rendering: pixelated;"
 	aria-hidden="true"
 ></canvas>

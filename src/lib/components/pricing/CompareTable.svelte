@@ -10,7 +10,7 @@
 <section aria-labelledby="compare-heading" class="mx-auto mt-8 max-w-[1100px] bg-white p-5 sm:p-8">
 	<div class="mb-5 flex items-baseline justify-between gap-3">
 		<h2 id="compare-heading" class="m-0 font-heading text-[1.75rem] leading-[34px] tracking-[-0.02em] text-surface">Compare plans</h2>
-		<span class="text-xs text-muted lg:hidden">Swipe to compare →</span>
+		<span class="text-xs text-muted lg:hidden">Swipe to compare</span>
 	</div>
 
 	<div class="-mx-5 overflow-x-auto px-5 sm:-mx-8 sm:px-8">

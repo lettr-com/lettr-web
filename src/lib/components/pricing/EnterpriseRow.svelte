@@ -1,4 +1,5 @@
 <script lang="ts">
+	import Button from '$lib/components/Button.svelte';
 	import { capturePosthogEvent } from '$lib/analytics/posthog';
 
 	interface Props {
@@ -34,15 +35,12 @@
 		<h3 class="m-0 font-heading text-base leading-5 font-semibold {selected ? 'text-white' : 'text-surface'}">Enterprise</h3>
 		<p class="m-0 text-[0.9375rem] leading-[22px] {selected ? 'text-white/80' : 'text-muted'}">{description}</p>
 	</div>
-	<a
+	<Button
 		href="/demo/"
 		onclick={track}
-		class="flex h-12 shrink-0 items-center justify-center gap-2.5 border px-[22px] text-[0.9375rem] font-semibold transition-colors {selected
-			? tone === 'primary'
-				? 'border-primary bg-primary text-white hover:bg-primary-strong'
-				: 'border-green bg-green text-white hover:brightness-95'
-			: 'border-surface text-surface hover:border-primary hover:text-primary'}"
+		variant={selected ? (tone === 'primary' ? 'primary' : 'green') : 'outline'}
+		class="shrink-0"
 	>
-		Contact sales <span class="text-lg" aria-hidden="true">→</span>
-	</a>
+		Contact sales
+	</Button>
 </div>
