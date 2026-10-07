@@ -15,8 +15,11 @@
 	const THUMB = 28;
 	const modes: Mode[] = ['transactional', 'marketing'];
 
+	// each mode opens on a paid-looking stop: 50,000 emails (Pro) or 2,000 contacts
+	const defaultStep: Record<Mode, number> = { transactional: 1, marketing: 1 };
+
 	let mode: Mode = $state('transactional');
-	let stepIndex = $state(0);
+	let stepIndex = $state(defaultStep.transactional);
 
 	const isTransactional = $derived(mode === 'transactional');
 	const steps = $derived(isTransactional ? transactionalSteps : marketingSteps);
@@ -55,8 +58,7 @@
 	function setMode(next: Mode) {
 		if (next === mode) return;
 		mode = next;
-		// each mode opens on its first paid-looking stop: 3,000 emails (free) or 2,000 contacts
-		stepIndex = next === 'transactional' ? 0 : 1;
+		stepIndex = defaultStep[next];
 		void capturePosthogEvent('pricing_mode_changed', { mode: next, placement: 'home_pricing' });
 	}
 
@@ -176,36 +178,34 @@
 			class="flex flex-col gap-8 bg-white px-5 py-6 md:gap-9 md:p-10"
 			style="--accent: {isTransactional ? '#ec104b' : '#00c851'}; --halo: {isTransactional ? '#fde7ed' : '#d9f7e6'}"
 		>
-			<div role="tablist" aria-label="Pricing mode" class="grid grid-cols-2 gap-2 md:flex md:w-fit">
-				{#each modes as m, i}
-					{@const active = mode === m}
-					<button
-						type="button"
-						role="tab"
-						id="home-pricing-tab-{m}"
-						aria-selected={active}
-						tabindex={active ? 0 : -1}
-						onclick={() => setMode(m)}
-						onkeydown={(event) => onModeKeydown(event, i)}
-						class="cursor-pointer border-2 px-5 py-2.5 text-center font-heading text-sm leading-5 transition-colors md:px-6 {active
-							? m === 'transactional'
-								? 'border-primary bg-[#23020b] text-white'
-								: 'border-green bg-[#002010] text-white'
-							: 'border-border/60 bg-white text-muted hover:border-primary-outline hover:text-surface'}"
-					>
-						{m === 'transactional' ? 'Transactional' : 'Marketing'}
-					</button>
-				{/each}
-			</div>
-
-			<div class="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
-				<div class="flex flex-col gap-2 md:gap-2.5">
-					<label for="volume-range" class="text-[0.9375rem] leading-[22px] text-muted md:text-base md:leading-6">{question}</label>
-					<p class="m-0 font-heading text-[2.75rem] leading-[46px] tracking-[-0.025em] text-surface md:text-[4rem] md:leading-[64px]" aria-live="polite">
-						{current.volume}
-					</p>
+			<div class="grid gap-x-6 gap-y-5 md:grid-cols-[1fr_auto] md:gap-y-3">
+				<div role="tablist" aria-label="Pricing mode" class="order-first grid grid-cols-2 gap-1.5 md:order-none md:col-start-2 md:row-start-1 md:flex md:self-center">
+					{#each modes as m, i}
+						{@const active = mode === m}
+						<button
+							type="button"
+							role="tab"
+							id="home-pricing-tab-{m}"
+							aria-selected={active}
+							tabindex={active ? 0 : -1}
+							onclick={() => setMode(m)}
+							onkeydown={(event) => onModeKeydown(event, i)}
+							class="cursor-pointer border-2 px-3.5 py-1.5 text-center font-heading text-[13px] leading-5 transition-colors {active
+								? m === 'transactional'
+									? 'border-primary bg-[#23020b] text-white'
+									: 'border-green bg-[#002010] text-white'
+								: 'border-border/60 bg-white text-muted hover:border-primary-outline hover:text-surface'}"
+						>
+							{m === 'transactional' ? 'Transactional' : 'Marketing'}
+						</button>
+					{/each}
 				</div>
-				<div class="flex items-baseline justify-between gap-2 border-t border-border/60 pt-4 md:flex-col md:items-end md:gap-2.5 md:border-t-0 md:pt-0">
+
+				<label for="volume-range" class="text-[0.9375rem] leading-[22px] text-muted md:col-start-1 md:row-start-1 md:self-center md:text-base md:leading-6">{question}</label>
+				<p class="m-0 font-heading text-[2.75rem] leading-[46px] tracking-[-0.025em] text-surface md:col-start-1 md:row-start-2 md:self-end md:text-[4rem] md:leading-[64px]" aria-live="polite">
+					{current.volume}
+				</p>
+				<div class="flex items-baseline justify-between gap-2 border-t border-border/60 pt-4 md:col-start-2 md:row-start-2 md:flex-col md:items-end md:gap-2.5 md:border-t-0 md:pt-0">
 					<p class="m-0 text-[0.9375rem] leading-[22px] text-muted md:text-base md:leading-6">{planCaption}</p>
 					<p class="m-0 flex items-baseline gap-2 md:gap-3">
 						{#if planName}
