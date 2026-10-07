@@ -141,7 +141,7 @@ Lettr::emails()->sendHtml(
 			icon: LightningIcon,
 			title: 'SDKs for every language',
 			description:
-				'First-class Laravel package with a one-command install. Typed, documented SDKs for PHP, Node.js, Go, Java, and Rust — plus a plain REST API for everything else.'
+				'First-class Laravel package with a one-command install. Typed, documented SDKs for PHP, Node.js, Python, Go, Java, and Rust — plus a plain REST API for everything else.'
 		},
 		{
 			icon: ShieldCheckIcon,

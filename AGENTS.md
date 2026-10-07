@@ -2,6 +2,13 @@
 
 Operational guide for coding agents working in `lettr-web`.
 
+## Marketing design context
+
+- For marketing-page design or redesign, read `docs/design/product-positioning.md`, `docs/design/visual-system.md`, and `docs/design/design-direction.md` before concepts or code. Use the repo skill `.agents/skills/marketing-web-design/SKILL.md` for the full research, exploration, critique, and visual QA workflow.
+- Treat `src/styles/app.css` and current components as the source of truth for implemented tokens. Preserve the intentional global zero border radius. Use the design documents to distinguish brand rules from changeable homepage composition.
+- For homepage work, also read `docs/design/homepage-critique.md`. Add the owner's section observations there as page-specific evidence; promote them to Lettr-wide guidance only when the owner identifies a general principle.
+- Before publishing product, pricing, deliverability, or competitor claims, check the current relevant route and product material. `lettr-positioning-framework.md` is strategic background; its older roadmap and prices are not a live specification.
+
 ## Project Snapshot
 
 - Stack: SvelteKit 2 + Svelte 5 (runes) + TypeScript + Vite 7.

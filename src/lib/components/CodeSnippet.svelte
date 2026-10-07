@@ -2,6 +2,8 @@
 	import { onMount } from 'svelte';
 	import { loadGsap } from '$lib/utils/gsap';
 	import CaretDownIcon from 'phosphor-svelte/lib/CaretDownIcon';
+	import CheckIcon from 'phosphor-svelte/lib/CheckIcon';
+	import CopyIcon from 'phosphor-svelte/lib/CopyIcon';
 	import { codeTabs as defaultTabs, type CodeTab } from '$lib/utils/shiki';
 	import { getHighlighter } from '$lib/utils/shiki';
 	import { capturePosthogEvent } from '$lib/analytics/posthog';
@@ -12,6 +14,8 @@
 		moreTabIndices?: number[];
 		shadow?: boolean;
 		filename?: string;
+		/** Show a Copy button that copies the code of the active tab. */
+		copyable?: boolean;
 	}
 
 	let {
@@ -19,7 +23,8 @@
 		primaryTabIndices = [0, 2],
 		moreTabIndices = [1, 3, 4, 5, 6],
 		shadow = true,
-		filename
+		filename,
+		copyable = false
 	}: Props = $props();
 
 	let activeTab: number = $state(0);
@@ -27,6 +32,10 @@
 	let container: HTMLElement | undefined = $state();
 	let codeEl: HTMLElement | undefined = $state();
 	let moreOpen: boolean = $state(false);
+	let didCopy: boolean = $state(false);
+	let copyTimer: number | undefined;
+
+	const tabPadding = $derived(copyable ? 'px-4' : 'px-8');
 
 	let isMoreActive = $derived(moreTabIndices.includes(activeTab));
 
@@ -88,6 +97,21 @@
 			.catch(() => void highlight(tabs[index]));
 	}
 
+	async function copyCode() {
+		try {
+			await navigator.clipboard.writeText(tabs[activeTab].code);
+			didCopy = true;
+			clearTimeout(copyTimer);
+			copyTimer = window.setTimeout(() => (didCopy = false), 1800);
+			void capturePosthogEvent('code_snippet_copied', {
+				tab_label: tabs[activeTab].label,
+				tab_lang: tabs[activeTab].lang
+			});
+		} catch {
+			didCopy = false;
+		}
+	}
+
 	function toggleMore() {
 		moreOpen = !moreOpen;
 	}
@@ -103,19 +127,20 @@
 		document.addEventListener('click', handleClickOutside);
 		return () => {
 			document.removeEventListener('click', handleClickOutside);
+			clearTimeout(copyTimer);
 		};
 	});
 </script>
 
 <div bind:this={container} class="relative max-w-2xl w-full overflow-visible bg-gray-950 p-[6px] pt-[2px] {shadow ? 'shadow-[0_0_40px_-10px_rgba(236,16,75,0.15)]' : ''}">
-	<div class="flex items-center justify-between">
+	<div class="flex items-center {copyable ? 'gap-3' : 'justify-between'}">
 		{#if filename}
 			<div class="px-3 py-2 text-[12px] text-gray-300">{filename}</div>
 		{:else}
 			<div class="flex items-center gap-0">
 				{#each primaryTabIndices as tabIndex}
 					<button
-						class="whitespace-nowrap border-b-2 px-8 py-2 text-[13px] transition-colors {activeTab === tabIndex
+						class="whitespace-nowrap border-b-2 {tabPadding} py-2 text-[13px] transition-colors {activeTab === tabIndex
 							? 'border-primary text-white'
 							: 'border-transparent text-gray-300 hover:text-gray-200'}"
 						onclick={() => selectTab(tabIndex)}
@@ -125,13 +150,13 @@
 				{/each}
 				<div class="relative">
 					<button
-						class="flex items-center gap-1 whitespace-nowrap border-b-2 px-8 py-2 text-[13px] transition-colors {isMoreActive
+						class="flex items-center gap-1 whitespace-nowrap border-b-2 {tabPadding} py-2 text-[13px] transition-colors {isMoreActive
 							? 'border-primary text-white'
 							: 'border-transparent text-gray-300 hover:text-gray-200'}"
 						onclick={toggleMore}
 					>
 						{isMoreActive ? tabs[activeTab].label : 'More'}
-						<CaretDownIcon size={10} />
+						<CaretDownIcon aria-hidden="true" size={10} />
 					</button>
 					{#if moreOpen}
 						<div class="absolute top-full left-0 z-50 mt-1 min-w-[140px] border border-white/10 bg-surface/95 py-1 shadow-xl backdrop-blur-xl">
@@ -149,6 +174,20 @@
 					{/if}
 				</div>
 			</div>
+		{/if}
+		{#if copyable}
+			<button
+				type="button"
+				onclick={copyCode}
+				class="flex h-7 shrink-0 cursor-pointer items-center gap-1.5 border border-white/15 px-2.5 text-[12px] font-medium text-white/80 transition-colors hover:border-primary hover:text-white"
+				aria-label={didCopy ? 'Copied to clipboard' : `Copy ${tabs[activeTab].label} code`}
+			>
+				{#if didCopy}
+					<CheckIcon aria-hidden="true" size={13} class="text-green" />Copied
+				{:else}
+					<CopyIcon aria-hidden="true" size={13} />Copy
+				{/if}
+			</button>
 		{/if}
 	</div>
 

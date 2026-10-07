@@ -4,7 +4,6 @@
 
 	import '../styles/app.css';
 	import Navbar from '$lib/components/Navbar.svelte';
-	import SplineFooter from '$lib/components/SplineFooter.svelte';
 	import Footer from '$lib/components/Footer.svelte';
 	import CookieBanner from '$lib/components/CookieBanner.svelte';
 	import { bootIntercom } from '$lib/intercom';
@@ -12,7 +11,6 @@
 
 	let { children } = $props();
 
-	const splineSceneUrl = 'https://prod.spline.design/dMdfll98hZskLD9o/scene.splinecode';
 	const isHomeRoute = $derived(page.url.pathname === '/');
 
 	onMount(() => {
@@ -94,17 +92,23 @@
 
 </svelte:head>
 
+<a
+	href="#main-content"
+	class="fixed top-3 left-3 z-[100] -translate-y-24 bg-white px-4 py-2 text-sm font-semibold text-surface shadow-lg transition-transform focus:translate-y-0 focus:outline-2 focus:outline-offset-2 focus:outline-primary motion-reduce:transition-none"
+>
+	Skip to content
+</a>
+
 <Navbar />
 
-<div class="relative z-10 bg-background lg:mb-[30vh]">
-	<div class="relative mx-auto max-w-4xl narrow:max-w-none border-x border-border/30 narrow:border-x-0 px-6">
-		<main class="relative z-10 ">
+<div class="relative z-10 bg-background">
+	<div class="relative mx-auto max-w-[1200px] narrow:max-w-none border-x border-border/30 narrow:border-x-0 px-6">
+		<main id="main-content" tabindex="-1" class="relative z-10 focus:outline-none">
 			{@render children()}
 		</main>
 	</div>
 	<Footer />
 </div>
 
-<SplineFooter sceneUrl={splineSceneUrl} />
 
 <CookieBanner />

@@ -214,7 +214,7 @@
 		});
 		if (label === 'Sign in') {
 			trackSigninClick(`navbar_${placement}`, href);
-		} else if (label === 'Start sending') {
+		} else if (label === 'Get started') {
 			trackSignupClick(`navbar_${placement}`, href);
 		}
 	}
@@ -279,7 +279,7 @@
 <div class="fixed top-0 right-0 left-0 z-50 flex justify-center">
 <nav
 	bind:this={nav}
-	class="flex flex-col w-full max-w-4xl narrow:max-w-none bg-white border-x border-b border-border/30 narrow:border-x-0"
+	class="flex flex-col w-full max-w-[1200px] narrow:max-w-none bg-white border-x border-b border-border/30 narrow:border-x-0"
 	aria-label="Main navigation"
 >
 	<div class="flex h-[60px] w-full items-center justify-between px-6">
@@ -306,6 +306,7 @@
 							>
 								{link.label}
 								<CaretDown
+									aria-hidden="true"
 									size={12}
 									class="transition-transform duration-200 {openDropdown === link.dropdownKey ? 'rotate-180' : ''}"
 								/>
@@ -387,7 +388,7 @@
 																				<img src={item.iconSrc} alt="" class="h-4 w-4" />
 																			{:else if item.icon}
 																				{@const Icon = item.icon}
-																				<Icon size={14} class="text-muted transition-colors group-hover:text-primary" />
+																				<Icon aria-hidden="true" size={14} class="text-muted transition-colors group-hover:text-primary" />
 																			{/if}
 																		</div>
 																	{/if}
@@ -420,7 +421,7 @@
 															<img src={item.iconSrc} alt="" class="h-3.5 w-3.5" />
 														{:else if item.icon}
 															{@const Icon = item.icon}
-															<Icon size={14} class="text-muted transition-colors group-hover:text-primary" />
+															<Icon aria-hidden="true" size={14} class="text-muted transition-colors group-hover:text-primary" />
 														{/if}
 													</div>
 													<div>
@@ -485,24 +486,33 @@
 				</a>
 				<a
 					href={registerHref}
-					class="flex items-center justify-center px-4 py-2 text-sm font-semibold bg-primary text-white transition-colors hover:bg-primary/90"
-					onclick={() => trackNavCtaClick('Start sending', registerHref, 'desktop')}
+					class="flex items-center justify-center px-4 py-2 text-sm font-semibold bg-primary-strong text-white transition-colors hover:bg-primary-strong/90"
+					onclick={() => trackNavCtaClick('Get started', registerHref, 'desktop')}
 				>
-					Start sending
+					Get started
 				</a>
 			</div>
 
+			<!-- Mobile CTA -->
+			<a
+				href={registerHref}
+				class="ml-auto flex items-center justify-center bg-primary-strong px-3.5 py-2 text-sm font-semibold text-white md:hidden"
+				onclick={() => trackNavCtaClick('Get started', registerHref, 'mobile')}
+			>
+				Get started
+			</a>
+
 			<!-- Mobile toggle -->
 			<button
-				class="ml-auto flex items-center justify-center md:hidden"
+				class="ml-4 flex items-center justify-center md:hidden"
 				onclick={toggleMobile}
 				aria-label="Toggle menu"
 				aria-expanded={mobileOpen}
 			>
 				{#if mobileOpen}
-					<X size={24} />
+					<X aria-hidden="true" size={24} />
 				{:else}
-					<List size={24} />
+					<List aria-hidden="true" size={24} />
 				{/if}
 			</button>
 		</div>
@@ -520,6 +530,7 @@
 								>
 									{link.label}
 									<CaretDown
+										aria-hidden="true"
 										size={16}
 										class="transition-transform duration-200 {mobileExpanded === link.dropdownKey ? 'rotate-180' : ''}"
 									/>
@@ -549,7 +560,7 @@
 																<img src={item.iconSrc} alt="" class="h-4 w-4" />
 															{:else if item.icon}
 																{@const Icon = item.icon}
-																<Icon size={16} class="text-muted" />
+																<Icon aria-hidden="true" size={16} class="text-muted" />
 															{/if}
 															<span class="text-sm">{item.label}</span>
 														</a>
@@ -572,7 +583,7 @@
 														<img src={item.iconSrc} alt="" class="h-4 w-4" />
 													{:else if item.icon}
 														{@const Icon = item.icon}
-														<Icon size={16} class="text-muted" />
+														<Icon aria-hidden="true" size={16} class="text-muted" />
 													{/if}
 													<span class="text-sm">{item.label}</span>
 												</a>
@@ -600,11 +611,11 @@
 							href={registerHref}
 							class="block font-bold text-primary transition-colors hover:text-primary/90"
 							onclick={() => {
-								trackNavCtaClick('Start sending', registerHref, 'mobile');
+								trackNavCtaClick('Get started', registerHref, 'mobile');
 								closeMobile();
 							}}
 						>
-							Start sending
+							Get started
 						</a>
 					</div>
 				</div>

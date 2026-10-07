@@ -109,26 +109,26 @@
 	<div class="flex items-center justify-between border-b border-border/30 bg-white px-3 py-2">
 		<div class="flex min-w-0 items-center gap-2">
 			<span class="truncate text-[12px] font-medium text-surface">trial-welcome-email</span>
-			<PencilSimpleIcon size={12} class="shrink-0 text-muted" />
-			<span class="hidden shrink-0 border border-green-200 bg-green-50 px-1.5 py-0.5 text-[9px] font-semibold tracking-wide text-green-600 uppercase sm:inline">Draft</span>
+			<PencilSimpleIcon aria-hidden="true" size={12} class="shrink-0 text-muted" />
+			<span class="hidden shrink-0 border border-green-200 bg-green-50 px-1.5 py-0.5 text-[9px] font-semibold tracking-wide text-green-800 uppercase sm:inline">Draft</span>
 		</div>
 		<div class="flex items-center gap-1.5 sm:gap-2">
 			<div class="flex items-center gap-0.5 border border-border/30 bg-gray-50">
-				<span class="flex h-6 w-6 items-center justify-center text-muted"><ArrowCounterClockwiseIcon size={11} /></span>
+				<span class="flex h-6 w-6 items-center justify-center text-muted"><ArrowCounterClockwiseIcon aria-hidden="true" size={11} /></span>
 				<span class="h-4 w-px bg-border/40"></span>
-				<span class="flex h-6 w-6 items-center justify-center text-muted"><ArrowClockwiseIcon size={11} /></span>
+				<span class="flex h-6 w-6 items-center justify-center text-muted"><ArrowClockwiseIcon aria-hidden="true" size={11} /></span>
 			</div>
 			<div class="hidden items-center gap-1 border border-border/30 bg-gray-50 px-2 py-1 text-[10px] font-medium text-surface sm:flex">
-				<EyeIcon size={11} />
+				<EyeIcon aria-hidden="true" size={11} />
 				<span>Preview</span>
 			</div>
 			<div class="hidden items-center gap-1 border border-border/30 bg-gray-50 px-2 py-1 text-[10px] font-medium text-surface md:flex">
 				<span>Create mutation</span>
-				<CaretDownIcon size={10} />
+				<CaretDownIcon aria-hidden="true" size={10} />
 			</div>
 			<div class="flex items-center gap-0.5 border border-border/30 bg-gray-50">
-				<span class="flex h-6 w-6 items-center justify-center text-muted"><DeviceMobileIcon size={11} /></span>
-				<span class="flex h-6 w-6 items-center justify-center border border-primary/60 bg-primary/5 text-primary"><MonitorIcon size={11} /></span>
+				<span class="flex h-6 w-6 items-center justify-center text-muted"><DeviceMobileIcon aria-hidden="true" size={11} /></span>
+				<span class="flex h-6 w-6 items-center justify-center border border-primary/60 bg-primary/5 text-primary"><MonitorIcon aria-hidden="true" size={11} /></span>
 			</div>
 		</div>
 	</div>
@@ -163,7 +163,7 @@
 							class="flex aspect-square flex-col items-center justify-center gap-1 border border-border/30 bg-gray-50/60 text-muted transition-all duration-150 hover:border-primary/30 hover:bg-primary/[0.03] hover:text-primary"
 							class:block-active={isActive}
 						>
-							<Icon size={14} />
+							<Icon aria-hidden="true" size={14} />
 							<span class="text-[9px] font-medium">{block.label}</span>
 						</div>
 					{/each}
@@ -181,13 +181,13 @@
 				</div>
 
 				<!-- Heading -->
-				<h2 class="mt-6 font-heading text-[20px] font-semibold text-surface leading-tight min-h-[24px]">
+				<p class="m-0 mt-6 font-heading text-[20px] font-semibold text-surface leading-tight min-h-[24px]">
 					{headingText}{#if cursorTarget === 'heading'}<span class="typing-cursor"></span>{/if}
-				</h2>
+				</p>
 
 				<!-- Body -->
 				<p class="mt-3 text-[12px] leading-relaxed text-muted min-h-[44px]">
-					{bodyPrefix}{#if showVariable}<span class="inline-flex items-center border border-dashed border-primary/50 bg-primary/[0.04] px-1 font-code text-[11px] text-primary variable-pop">{'{{first_name}}'}</span>{/if}{bodySuffix}{#if cursorTarget === 'body'}<span class="typing-cursor"></span>{/if}
+					{bodyPrefix}{#if showVariable}<span class="inline-flex items-center border border-dashed border-primary/50 bg-primary/[0.04] px-1 font-code text-[11px] text-[#c70d3f] variable-pop">{'{{first_name}}'}</span>{/if}{bodySuffix}{#if cursorTarget === 'body'}<span class="typing-cursor"></span>{/if}
 				</p>
 
 				<!-- CTA button slot (reserves space to prevent layout shift) -->

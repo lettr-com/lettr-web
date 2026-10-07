@@ -1,0 +1,12 @@
+{
+  "name": "lettr-hero-dither",
+  "private": true,
+  "description": "Offline ordered-dither pipeline for the homepage hero loop",
+  "type": "module",
+  "scripts": {
+    "dither": "node dither.mjs"
+  },
+  "dependencies": {
+    "pngjs": "^7.0.0"
+  }
+}
