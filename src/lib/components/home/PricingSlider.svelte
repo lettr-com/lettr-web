@@ -175,6 +175,7 @@
 
 	<div data-reveal class="mx-auto flex max-w-[1100px] flex-col gap-4">
 		<div
+			data-markdown="skip"
 			class="flex flex-col gap-8 bg-white px-5 py-6 md:gap-9 md:p-10"
 			style="--accent: {isTransactional ? '#ec104b' : '#00c851'}; --halo: {isTransactional ? '#fde7ed' : '#d9f7e6'}"
 		>
@@ -282,7 +283,7 @@
 								{tile.label}.
 							</h3>
 							<span class="shrink-0 border px-2 py-0.5 font-code text-[11px] whitespace-nowrap leading-[14px] tracking-[0.02em] md:px-2.5 md:py-1 {isTransactional ? 'border-primary text-primary-outline' : 'border-green text-[#aaffd5]'}">
-								<span class="lg:hidden">{tile.unitShort}</span><span class="hidden lg:inline">{tile.unit}</span>
+								<span class="lg:hidden" data-markdown="skip">{tile.unitShort}</span><span class="hidden lg:inline">{tile.unit}</span>
 							</span>
 						</div>
 						<p class="m-0 text-[1.1875rem] leading-[1.4] text-white md:text-[1.375rem]">

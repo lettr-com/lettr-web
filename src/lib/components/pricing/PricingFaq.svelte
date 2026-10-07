@@ -33,7 +33,7 @@
 		<p class="m-0 text-[1.0625rem] leading-[27px] text-muted">Common questions about Lettr's email platform for SaaS companies.</p>
 	</div>
 
-	<div class="flex-1 border-t border-surface">
+	<div class="flex-1 border-t border-surface" data-markdown="faq">
 		{#each faqs as faq, i}
 			{@const isOpen = openIndex === i}
 			<div class="border-b border-border">
@@ -46,7 +46,7 @@
 						class="flex w-full cursor-pointer items-center justify-between gap-6 py-[22px] text-left"
 					>
 						<span class="font-heading text-base leading-[26px] font-medium text-surface sm:text-lg">{faq.question}</span>
-						<span class="w-5 shrink-0 text-center text-[1.625rem] leading-[26px] {isOpen ? 'text-primary' : 'text-surface'}" aria-hidden="true">{isOpen ? '−' : '+'}</span>
+						<span class="w-5 shrink-0 text-center text-[1.625rem] leading-[26px] {isOpen ? "text-primary after:content-['−']" : "text-surface after:content-['+']"}" aria-hidden="true"></span>
 					</button>
 				</h3>
 				{#if isOpen}

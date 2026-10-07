@@ -51,6 +51,7 @@
 </script>
 
 <div class="mx-auto flex max-w-[1100px] flex-col gap-4">
+	<h2 class="sr-only">Transactional plans</h2>
 	<VolumeCard
 		question="How many emails do you send per month?"
 		labels={transactionalSteps.map((s) => s.label)}
@@ -76,7 +77,7 @@
 					<div class="flex h-[22px] items-center justify-between">
 						<h3 class="m-0 font-heading text-base leading-5 font-semibold {selected ? 'text-primary-outline' : 'text-muted'}">{plan.name}</h3>
 						{#if selected}
-							<span class="bg-primary px-2 py-[3px] text-xs leading-4 font-semibold text-white">Your volume</span>
+							<span data-markdown="skip" class="bg-primary px-2 py-[3px] text-xs leading-4 font-semibold text-white">Your volume</span>
 						{/if}
 					</div>
 					<p class="m-0 flex items-baseline gap-1.5">

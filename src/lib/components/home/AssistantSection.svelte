@@ -62,7 +62,7 @@
 		</span>
 	</h2>
 
-	<div class="mx-auto mb-10 flex max-w-[640px] items-center justify-center gap-4 md:mb-14 md:gap-0">
+	<div data-markdown="skip" class="mx-auto mb-10 flex max-w-[640px] items-center justify-center gap-4 md:mb-14 md:gap-0">
 		<div
 			class="h-[110px] w-[110px] shrink-0 rotate-[9.39deg] transition-[opacity,transform] duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] motion-reduce:transition-none md:h-[164px] md:w-[164px] {isVisible ? 'scale-100 opacity-100' : 'scale-75 opacity-0'}"
 		>

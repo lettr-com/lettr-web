@@ -91,6 +91,7 @@
 </style>
 
 <div
+	data-markdown="skip"
 	class="bg-white p-5 sm:p-10"
 	style="--accent: {accent === 'primary' ? '#ec104b' : '#00c851'}; --halo: {accent === 'primary' ? '#fde7ed' : '#d9f7e6'}"
 >

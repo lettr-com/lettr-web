@@ -9,8 +9,6 @@
 
 	let { tip, children }: Props = $props();
 
-	const id = `tip-${Math.random().toString(36).slice(2, 9)}`;
-
 	function dismiss(event: KeyboardEvent) {
 		if (event.key === 'Escape') (event.currentTarget as HTMLElement).blur();
 	}
@@ -19,22 +17,21 @@
 <!--
 	Underlines a word with a dotted line and shows a short explanation on hover,
 	keyboard focus or tap. Wrap any inline text: <TooltipWord tip="...">word</TooltipWord>
+	The tip is drawn from `data-tip` with pseudo-elements, so it never becomes text in
+	the page (a tooltip inside a heading would otherwise end up in the heading's text).
 -->
 <span
-	class="group relative inline-block cursor-help underline decoration-primary decoration-dotted decoration-2 underline-offset-[0.2em] outline-none focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary"
+	class="relative inline-block cursor-help underline decoration-primary decoration-dotted decoration-2 underline-offset-[0.2em] outline-none focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary
+		before:pointer-events-none before:invisible before:absolute before:bottom-[calc(100%+0.25rem)] before:left-1/2 before:z-20 before:h-0 before:w-0 before:-translate-x-1/2 before:translate-y-1 before:border-x-[6px] before:border-t-[6px] before:border-x-transparent before:border-t-surface before:opacity-0 before:transition before:duration-150 before:ease-out before:content-['']
+		after:pointer-events-none after:invisible after:absolute after:bottom-[calc(100%+0.625rem)] after:left-1/2 after:z-20 after:w-[min(17rem,calc(100vw-3rem))] after:-translate-x-1/2 after:translate-y-1 after:bg-surface after:px-4 after:py-3 after:text-left after:font-body after:text-[0.9375rem] after:leading-[1.45] after:font-normal after:tracking-normal after:text-white after:opacity-0 after:transition after:duration-150 after:ease-out after:content-[attr(data-tip)]
+		hover:before:visible hover:before:translate-y-0 hover:before:opacity-100 hover:after:visible hover:after:translate-y-0 hover:after:opacity-100
+		focus:before:visible focus:before:translate-y-0 focus:before:opacity-100 focus:after:visible focus:after:translate-y-0 focus:after:opacity-100
+		motion-reduce:before:transition-none motion-reduce:after:transition-none"
 	tabindex="0"
 	role="button"
-	aria-describedby={id}
+	data-tip={tip}
+	{...{ 'aria-description': tip }}
 	onkeydown={dismiss}
 >
 	{@render children()}
-	<span
-		{id}
-		role="tooltip"
-		aria-hidden="true"
-		class="pointer-events-none invisible absolute bottom-[calc(100%+0.625rem)] left-1/2 z-20 w-[min(17rem,calc(100vw-3rem))] -translate-x-1/2 translate-y-1 bg-surface px-4 py-3 text-left font-body text-[0.9375rem] leading-[1.45] font-normal tracking-normal text-white no-underline opacity-0 transition duration-150 ease-out group-hover:visible group-hover:translate-y-0 group-hover:opacity-100 group-focus:visible group-focus:translate-y-0 group-focus:opacity-100 motion-reduce:transition-none"
-	>
-		{tip}
-		<span class="absolute top-full left-1/2 h-0 w-0 -translate-x-1/2 border-x-[6px] border-t-[6px] border-x-transparent border-t-surface" aria-hidden="true"></span>
-	</span>
 </span>

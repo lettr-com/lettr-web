@@ -87,6 +87,7 @@ function faqsFromJsonLd(document: HTMLElement): Faq[] {
  * absolute because the markdown is often read outside the site.
  *
  * Components steer the output with `data-markdown`: "skip" drops a UI mockup,
+ * "only" is a `hidden` block written for agents (it is converted like any other),
  * and "faq" marks an accordion whose answers only exist in the FAQPage JSON-LD
  * (collapsed answers are not rendered), so it is rebuilt from that data, or
  * reduced to its question headings when the page has none.
@@ -114,6 +115,10 @@ export function pageToMarkdown(html: string, path: string): string {
     accordion.replaceWith(faqs || questions.join(""));
   }
 
+  // Accordion titles are buttons inside headings: keep the title, drop the control.
+  for (const button of main.querySelectorAll("h1 button, h2 button, h3 button, h4 button")) {
+    button.replaceWith(button.innerHTML);
+  }
   for (const icon of main.querySelectorAll("svg[aria-label]")) {
     icon.replaceWith(escapeHtml(icon.getAttribute("aria-label")!));
   }

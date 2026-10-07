@@ -36,6 +36,7 @@
 </script>
 
 <div class="mx-auto flex max-w-[1100px] flex-col gap-4">
+	<h2 class="sr-only">Marketing plan</h2>
 	<VolumeCard
 		question="How many contacts do you have?"
 		labels={marketingSteps.map((s) => s.label)}

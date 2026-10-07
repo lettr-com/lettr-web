@@ -5,6 +5,7 @@
 	import TransactionalPricing from '$lib/components/pricing/TransactionalPricing.svelte';
 	import MarketingPricing from '$lib/components/pricing/MarketingPricing.svelte';
 	import CompareTable from '$lib/components/pricing/CompareTable.svelte';
+	import PricingTables from '$lib/components/pricing/PricingTables.svelte';
 	import EuNote from '$lib/components/pricing/EuNote.svelte';
 	import TopolBundle from '$lib/components/pricing/TopolBundle.svelte';
 	import PricingFaq from '$lib/components/pricing/PricingFaq.svelte';
@@ -55,7 +56,7 @@
 		<p class="m-0 max-w-[534px] text-[1.0625rem] leading-[1.6] text-muted md:text-[1.1875rem] md:leading-[30px]">
 			Pay per email for transactional. Pay per contact for marketing.
 		</p>
-		<div class="max-w-[340px] md:hidden">
+		<div class="max-w-[340px] md:hidden" data-markdown="skip">
 			<EuNote />
 		</div>
 	</div>
@@ -76,6 +77,8 @@
 {#if mode === 'transactional'}
 	<CompareTable />
 {/if}
+
+<PricingTables />
 
 <div class="mx-auto mt-10 hidden max-w-[1100px] md:block">
 	<EuNote />

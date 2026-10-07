@@ -35,6 +35,28 @@ describe("pageToMarkdown", () => {
     }
   });
 
+  it("keeps the title of an accordion button inside a heading", () => {
+    const md = pageToMarkdown(
+      page(
+        '<h3><button aria-expanded="false"><span>Clean REST API</span><span aria-hidden="true">+</span></button></h3><p>Send with one call.</p>',
+      ),
+      "/",
+    );
+    expect(md).toContain("### Clean REST API");
+    expect(md).not.toContain("+");
+  });
+
+  it("converts a hidden agent-only block like any other content", () => {
+    const md = pageToMarkdown(
+      page(
+        '<section hidden data-markdown="only"><table><thead><tr><th>Contacts</th><th>Price</th></tr></thead><tbody><tr><td>2,000</td><td>$10</td></tr></tbody></table></section>',
+      ),
+      "/pricing/",
+    );
+    expect(md).toContain("| Contacts | Price |");
+    expect(md).toMatch(/\| 2,000\s+\| \$10\s+\|/);
+  });
+
   it("makes site-relative links and images absolute and drops images without alt text", () => {
     const md = pageToMarkdown(
       page(

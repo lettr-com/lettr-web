@@ -41,7 +41,7 @@
 					class="flex min-h-[68px] w-full cursor-pointer items-center justify-between gap-4 py-[22px] pr-5 pl-5 text-left transition-colors md:pr-[26px] md:pl-5 {isOpen ? 'bg-primary-soft' : ''}"
 				>
 					<span class="font-body text-[1.0625rem] leading-6 font-semibold text-surface md:text-xl {isOpen ? '' : 'text-muted group-hover:text-surface'}">{item.title}</span>
-					<span class="w-6 shrink-0 text-center text-2xl leading-6 text-primary {isOpen ? '' : 'opacity-0 group-hover:opacity-100'} transition-opacity" aria-hidden="true">{isOpen ? '−' : '+'}</span>
+					<span class="w-6 shrink-0 text-center text-2xl leading-6 text-primary {isOpen ? "after:content-['−']" : "opacity-0 group-hover:opacity-100 after:content-['+']"} transition-opacity" aria-hidden="true"></span>
 				</button>
 			</h3>
 
