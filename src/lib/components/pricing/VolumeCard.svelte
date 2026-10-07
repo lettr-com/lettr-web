@@ -6,9 +6,7 @@
 		labels: string[];
 		/** Big number for the current stop. */
 		volume: string;
-		/** "Selected plan" or "Marketing plan". */
-		planCaption: string;
-		/** Plan name next to the price (transactional only). */
+		/** Plan name next to the price, when the plan has one. */
 		planName?: string;
 		price: string;
 		/** Whether the price reads as a number with /mo after it. */
@@ -22,7 +20,6 @@
 		question,
 		labels,
 		volume,
-		planCaption,
 		planName,
 		price,
 		showPeriod = true,
@@ -103,7 +100,6 @@
 			</p>
 		</div>
 		<div class="flex items-baseline justify-between gap-3 border-t border-border/60 pt-4 md:flex-col md:items-end md:gap-2.5 md:border-t-0 md:pt-0">
-			<p class="m-0 text-base leading-6 text-muted">{planCaption}</p>
 			<p class="m-0 flex items-baseline gap-2 sm:gap-3">
 				{#if planName}
 					<span class="font-heading text-2xl leading-8 tracking-[-0.02em] text-surface sm:text-4xl sm:leading-10">{planName}</span>

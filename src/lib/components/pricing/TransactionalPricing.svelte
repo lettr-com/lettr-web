@@ -56,7 +56,6 @@
 		question="How many emails do you send per month?"
 		labels={transactionalSteps.map((s) => s.label)}
 		volume={current.volume}
-		planCaption="Selected plan"
 		planName={current.name}
 		price={current.price}
 		showPeriod={current.plan !== 'enterprise'}

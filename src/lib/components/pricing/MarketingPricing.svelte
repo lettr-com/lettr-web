@@ -41,7 +41,7 @@
 		question="How many contacts do you have?"
 		labels={marketingSteps.map((s) => s.label)}
 		volume={current.volume}
-		planCaption={isEnterprise ? 'Enterprise plan' : 'Marketing plan'}
+		planName={isEnterprise ? 'Enterprise' : undefined}
 		price={isEnterprise ? 'Custom' : current.price}
 		showPeriod={!isEnterprise}
 		accent="green"
