@@ -48,7 +48,7 @@
 	const planName = $derived(isTransactional ? (current as (typeof transactionalSteps)[number]).name : '');
 	const price = $derived(!isTransactional && isEnterprise ? 'Custom' : current.price);
 	const showPeriod = $derived(!isEnterprise);
-	const question = $derived(isTransactional ? 'How many emails do you send per month?' : 'How many contacts do you have?');
+	const question = $derived(isTransactional ? 'How many emails per month?' : 'How many contacts do you have?');
 	const valueText = $derived(
 		isTransactional
 			? `${current.volume} emails per month, ${planName} plan`
@@ -207,7 +207,7 @@
 				</p>
 				<div class="flex items-baseline justify-between gap-2 border-t border-border/60 pt-4 md:col-start-2 md:row-start-2 md:flex-col md:items-end md:gap-2.5 md:border-t-0 md:pt-0">
 					<p class="m-0 text-[0.9375rem] leading-[22px] text-muted md:text-base md:leading-6">{planCaption}</p>
-					<p class="m-0 flex items-baseline gap-2 md:gap-3">
+					<p class="m-0 flex h-9 flex-wrap content-end items-baseline gap-x-2 md:h-14 md:gap-x-3">
 						{#if planName}
 							<span class="font-heading text-[1.375rem] leading-7 tracking-[-0.02em] text-surface md:text-4xl md:leading-10">{planName}</span>
 						{/if}

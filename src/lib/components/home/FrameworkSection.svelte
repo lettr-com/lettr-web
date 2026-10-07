@@ -32,7 +32,7 @@
 			class="font-heading text-balance text-[1.875rem] leading-[1.27] tracking-[-0.02em] text-surface md:text-[2.625rem] md:leading-[50px]"
 		>
 			Built for
-			<em class="font-serif text-[2.125rem] leading-none font-medium text-primary md:text-[2.875rem]">Laravel.</em><br />
+			<em class="font-pixel text-[2.125rem] leading-none font-medium text-primary md:text-[2.875rem]">Laravel.</em><br />
 			Compatible with most.
 		</h2>
 		<p class="max-w-[480px] text-[1.0625rem] leading-[1.5] text-surface md:text-[1.1875rem]">

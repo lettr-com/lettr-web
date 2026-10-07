@@ -56,10 +56,10 @@
 			id="dev-teams-heading"
 			class="font-heading text-balance text-[1.875rem] leading-[1.27] tracking-[-0.02em] text-surface md:text-[2.625rem] md:leading-[50px]"
 		>
-			Make <em class="font-pixel text-[2.125rem] leading-none font-medium text-primary md:text-[2.875rem]">all</em>
+			Make <em class="font-serif text-[2.125rem] leading-none font-medium text-primary md:text-[2.875rem]">all</em>
 			your emails<br class="hidden md:block" />
 			<TooltipWord tip="Everyone on your team can edit, send, and track all emails.">accessible</TooltipWord> to
-			<em class="block font-pixel text-[2.125rem] leading-none font-medium text-primary md:inline md:text-[2.875rem]">everyone</em>
+			<em class="block font-serif text-[2.125rem] leading-none font-medium text-primary md:inline md:text-[2.875rem]">everyone</em>
 		</h2>
 		<p class="max-w-[364px] text-[1.0625rem] leading-[1.5] text-surface md:text-[1.1875rem]">
 			Your devs connect sending once. After that, your team owns the emails.
@@ -87,7 +87,7 @@
 		<!-- Teams -->
 		<div data-reveal class="flex flex-col gap-6 md:gap-4">
 			<div class="relative flex flex-col gap-6 overflow-hidden bg-primary p-6 lg:block lg:h-[560px]">
-				<h3 class="relative font-pixel text-4xl italic leading-[1.2] tracking-[-0.04em] text-white md:text-[2.5rem]">
+				<h3 class="relative font-serif text-4xl leading-[1.2] tracking-[-0.04em] text-white md:text-[2.5rem]">
 					Teams create.
 				</h3>
 				<div class="w-full max-w-[560px] lg:absolute lg:top-[calc(50%-14px)] lg:left-[91px] lg:w-[529px] lg:max-w-none lg:-translate-y-1/2">
