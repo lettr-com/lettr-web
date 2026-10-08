@@ -100,24 +100,27 @@ describe("transitions", () => {
     );
   });
 
-  it("no component transitions background-color or lifts a button with translate", () => {
+  it("no component transitions background-color or lifts a button off its own layer", () => {
     const offenders: string[] = [];
     const forbidden = [
       // transition-all would animate background-color too
       /\btransition-all\b/,
       /\btransition-\[[^\]]*(background|\ball\b)/,
       /\btransition(-property)?\s*:[^;{}<>"]*(background|\ball\b)/,
-      // A hover lift by translate runs on a GPU layer, where Chrome drops ClearType: the label
-      // thins for the lift and snaps back heavier as it ends. Lift with top instead.
-      /(^|[\s"'`])(enabled:)?hover:-?translate-y-/,
     ];
+    // A hover lift by translate runs on a GPU layer, where Chrome drops ClearType. Unless the
+    // layer is permanent (will-change-transform), the label thins for the lift and snaps back
+    // heavier as it ends.
+    const hoverLift = /(^|[\s"'`])(enabled:)?hover:-?translate-y-/;
+    const isUnpinnedLift = (line: string) =>
+      hoverLift.test(line) && !/\bwill-change-transform\b/.test(line);
 
     for (const file of sourceFiles(srcDir)) {
       const text = readFileSync(file, "utf8")
         .replace(/\/\*[\s\S]*?\*\//g, "")
         .replace(/<!--[\s\S]*?-->/g, "");
       text.split("\n").forEach((line, i) => {
-        if (forbidden.some((pattern) => pattern.test(line))) {
+        if (forbidden.some((pattern) => pattern.test(line)) || isUnpinnedLift(line)) {
           offenders.push(`${path.relative(srcDir, file)}:${i + 1}`);
         }
       });
