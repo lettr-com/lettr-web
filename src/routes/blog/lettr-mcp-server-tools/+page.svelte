@@ -34,8 +34,13 @@
 		},
 		{
 			question: "Do I still need the lettr-mcp npm package?",
-			lead: "No. The local server is deprecated, and new tools land on the remote server only.",
+			lead: "No. The local server is deprecated.",
 			rest: "The remote server now accepts the same lttr_ API key, which was the one thing the local package offered that a browser sign-in could not."
+		},
+		{
+			question: "Will Lettr add more MCP tools?",
+			lead: "Yes. New tools land on the remote server as new Lettr features ship.",
+			rest: "The tools reference always lists the current set, and a connected client picks up new tools the next time it starts a session."
 		}
 	];
 	const faqs = faqItems.map(({ question, lead, rest }) => ({ question, answer: `${lead} ${rest}` }));
@@ -43,22 +48,23 @@
 
 <BlogPost
 	category="Product"
-	title="Manage an email platform from your AI assistant: Lettr's 77 MCP tools"
+	title="Manage an email platform from your AI assistant: Lettr's 79 MCP tools"
 	seoTitle="Manage an email platform from your AI assistant with MCP"
-	excerpt="An AI assistant such as Claude, ChatGPT, or Cursor can operate Lettr through 77 MCP tools, from sending and scheduling to campaigns, audience management, and delivery diagnostics. This article covers what the tools do, the two ways to connect, and the guardrails that keep an assistant from sending anything by mistake."
-	metaDescription="Manage an email platform from Claude, ChatGPT, or Cursor. Lettr's MCP server gives an AI assistant 77 tools for sending, campaigns, audience, and diagnostics."
+	excerpt="An AI assistant such as Claude, ChatGPT, or Cursor can operate Lettr through 79 MCP tools, from sending and scheduling to campaigns, audience management, and delivery diagnostics, with more added as Lettr ships new features. This article covers what the tools do, the two ways to connect, and the guardrails that keep an assistant from sending anything by mistake."
+	metaDescription="Manage an email platform from Claude, ChatGPT, or Cursor. Lettr's MCP server gives an AI assistant 79 tools, and counting, for sending, campaigns, and audience."
 	author={{ name: 'Jack Zagorski', role: 'Content specialist', avatar: '/images/authors/jack.jpg' }}
 	date="October 6, 2026"
 	datetime="2026-10-06"
 	readTime="4 min read"
-	slug="lettr-mcp-server-77-tools"
+	slug="lettr-mcp-server-tools"
 	{faqs}
 >
 	<Lead>
 		Lettr hosts a remote MCP server at <code>app.lettr.com/mcp</code> that AI assistants such as
-		Claude, ChatGPT, and Cursor connect to. The September 2026 release grew it from 18 tools to 77,
-		organized into ten areas of the product, which is enough for an assistant to operate the whole of
-		Lettr: sending, scheduling, campaigns, the audience, and delivery diagnostics.
+		Claude, ChatGPT, and Cursor connect to. It has 79 tools across ten areas of the product, up from
+		18 before the September 2026 release, which is enough for an assistant to operate the whole of
+		Lettr: sending, scheduling, campaigns, the audience, and delivery diagnostics. The count keeps
+		rising, because new tools ship alongside new Lettr features.
 	</Lead>
 
 	<Callout variant="info" title="TL;DR">
@@ -121,7 +127,8 @@
 	<Paragraph>
 		<strong>Signing in connects the server through OAuth</strong>, and every tool then acts as the
 		signed-in user, in the team they choose. Each call goes through the same team permission checks
-		as the dashboard. The sign-in flow works from Claude.ai, Claude Desktop, Claude Code, ChatGPT,
+		as the dashboard, and two account tools, <code>list_teams</code> and <code>current_team</code>,
+		show which teams the connection can reach and which one a call would act on. The sign-in flow works from Claude.ai, Claude Desktop, Claude Code, ChatGPT,
 		Cursor, and GitHub Copilot, and it is the right choice for interactive use.
 	</Paragraph>
 

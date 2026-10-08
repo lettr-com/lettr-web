@@ -12,11 +12,11 @@ export interface PostMeta {
 // Used by the blog index listing and the "Related articles" block on each post.
 export const posts: PostMeta[] = [
   {
-    slug: "lettr-mcp-server-77-tools",
+    slug: "lettr-mcp-server-tools",
     category: "Product",
-    title: "Manage an email platform from your AI assistant: Lettr's 77 MCP tools",
+    title: "Manage an email platform from your AI assistant: Lettr's 79 MCP tools",
     excerpt:
-      "An AI assistant such as Claude, ChatGPT, or Cursor can operate Lettr through 77 MCP tools, from sending and scheduling to campaigns, audience management, and delivery diagnostics. This article covers what the tools do, the two ways to connect, and the guardrails that keep an assistant from sending anything by mistake.",
+      "An AI assistant such as Claude, ChatGPT, or Cursor can operate Lettr through 79 MCP tools, from sending and scheduling to campaigns, audience management, and delivery diagnostics, with more added as Lettr ships new features. This article covers what the tools do, the two ways to connect, and the guardrails that keep an assistant from sending anything by mistake.",
     author: "Jack Zagorski",
     date: "October 6, 2026",
     readTime: "4 min read",
