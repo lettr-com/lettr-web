@@ -95,7 +95,6 @@
 
 	const companyItems: DropdownItem[] = [
 		{ icon: InfoIcon, label: 'About', description: 'Our story, team, and mission', href: '/about/' },
-		{ iconSrc: '/images/logos/lettr-icon.svg', label: 'Lettr', description: 'The email platform built for SaaS', href: '/' },
 		{ iconSrc: '/images/logos/topol-icon.svg', label: 'Topol', description: 'Email editor trusted by 40,000+ companies', href: 'https://topol.io', external: true },
 		{ iconSrc: '/images/logos/dmarceye-icon.svg', label: 'DMARCeye', description: 'DMARC monitoring and reporting', href: 'https://dmarceye.com', external: true }
 	];
