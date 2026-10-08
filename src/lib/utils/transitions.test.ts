@@ -65,15 +65,30 @@ describe("transitions", () => {
   );
 
   it("bg-fade-* paints from the registered --fade-bg, alpha modifier included", async () => {
-    const css = await compileUtilities(["bg-fade-white", "hover:bg-fade-primary/10"]);
+    const css = await compileUtilities([
+      "bg-fade-white",
+      "hover:bg-fade-primary/10",
+      "hover:bg-fade-primary-strong/90",
+    ]);
 
     expect(css).toMatch(/@property --fade-bg\s*\{[^}]*syntax:\s*"<color>"/);
     expect(css).toMatch(
       /\.bg-fade-white\s*\{[^}]*--fade-bg:\s*var\(--color-white\);[^}]*background-color:\s*var\(--fade-bg\)/,
     );
-    expect(css).toMatch(
-      /--fade-bg:\s*color-mix\(in oklab, var\(--color-primary\) 10%, transparent\)/,
+    // An invalid colour does not fall back to the base: the registered property drops to
+    // transparent and the button loses its background, so every alpha value must be a real
+    // percentage ("90 %" is two tokens and invalid).
+    const alphas = [
+      ...css.matchAll(
+        /--fade-bg:\s*color-mix\(in \w+, (?:var\([^)]*\)|#\w+) (.+?), transparent\)/g,
+      ),
+    ];
+    expect(alphas.map((match) => match[1])).toEqual(
+      expect.arrayContaining([expect.stringMatching(/10/), expect.stringMatching(/90/)]),
     );
+    for (const [, alpha] of alphas) {
+      expect(alpha).toMatch(/^(\d+%|calc\(\d+ \* 1%\))$/);
+    }
   });
 
   it("keeps the transition timing and lets motion-reduce:transition-none win", async () => {
@@ -85,13 +100,16 @@ describe("transitions", () => {
     );
   });
 
-  it("no component transitions background-color", () => {
+  it("no component transitions background-color or lifts a button with translate", () => {
     const offenders: string[] = [];
     const forbidden = [
       // transition-all would animate background-color too
       /\btransition-all\b/,
       /\btransition-\[[^\]]*(background|\ball\b)/,
       /\btransition(-property)?\s*:[^;{}<>"]*(background|\ball\b)/,
+      // A hover lift by translate runs on a GPU layer, where Chrome drops ClearType: the label
+      // thins for the lift and snaps back heavier as it ends. Lift with top instead.
+      /(^|[\s"'`])(enabled:)?hover:-?translate-y-/,
     ];
 
     for (const file of sourceFiles(srcDir)) {

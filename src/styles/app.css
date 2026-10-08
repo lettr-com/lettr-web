@@ -386,7 +386,9 @@
 
 @utility bg-fade-* {
   --fade-bg: --value(--color-*, [color]);
-  --fade-bg: --alpha(--value(--color-*, [color]) / --modifier(integer) %);
+  /* calc keeps the percentage one token: the formatter splits "--modifier(integer)%" into
+     "90 %", an invalid colour that leaves --fade-bg transparent */
+  --fade-bg: --alpha(--value(--color-*, [color]) / calc(--modifier(integer) * 1%));
   background-color: var(--fade-bg);
 }
 

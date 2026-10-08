@@ -13,12 +13,14 @@
 	let { variant = 'primary', size = 'default', href, onclick, class: className = '', children, ...rest }: Props & Record<string, unknown> =
 		$props();
 
-	// Hover lift handled in pure CSS (transform) instead of gsap so this
-	// above-the-fold component pulls no animation library into the critical path.
+	// Hover lift handled in pure CSS instead of gsap so this above-the-fold component
+	// pulls no animation library into the critical path. It animates top, not translate:
+	// Chrome runs a translate on a GPU layer and drops ClearType there, so the label
+	// thinned during the lift and snapped back heavier as it ended.
 	// The after: strip keeps the 2px the button leaves behind when it lifts inside the
 	// hover area; without it a pointer on the bottom edge flickers the button up and down.
 	const baseClasses =
-		"relative after:absolute after:inset-x-0 after:top-full after:h-0.5 after:content-[''] inline-flex items-center justify-center font-bold cursor-pointer transition duration-200 ease-out hover:-translate-y-0.5 motion-reduce:transition-none motion-reduce:hover:translate-y-0";
+		"relative after:absolute after:inset-x-0 after:top-full after:h-0.5 after:content-[''] inline-flex items-center justify-center font-bold cursor-pointer top-0 transition-[top,color,--fade-bg] duration-200 ease-out hover:-top-0.5 motion-reduce:transition-none motion-reduce:hover:top-0";
 	const variants = {
 		primary: 'bg-fade-primary-strong text-white hover:bg-fade-primary-strong/90',
 		secondary: 'text-primary-strong bg-fade-white hover:bg-fade-primary/10',
