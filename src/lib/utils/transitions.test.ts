@@ -59,8 +59,22 @@ describe("transitions", () => {
       const effective = declared.at(-1)!;
       expect(effective).not.toMatch(/background|\ball\b/);
       expect(effective).toMatch(/\bcolor\b/);
+      // bg-fade-* backgrounds still fade, through the registered --fade-bg
+      expect(effective).toMatch(/--fade-bg/);
     },
   );
+
+  it("bg-fade-* paints from the registered --fade-bg, alpha modifier included", async () => {
+    const css = await compileUtilities(["bg-fade-white", "hover:bg-fade-primary/10"]);
+
+    expect(css).toMatch(/@property --fade-bg\s*\{[^}]*syntax:\s*"<color>"/);
+    expect(css).toMatch(
+      /\.bg-fade-white\s*\{[^}]*--fade-bg:\s*var\(--color-white\);[^}]*background-color:\s*var\(--fade-bg\)/,
+    );
+    expect(css).toMatch(
+      /--fade-bg:\s*color-mix\(in oklab, var\(--color-primary\) 10%, transparent\)/,
+    );
+  });
 
   it("keeps the transition timing and lets motion-reduce:transition-none win", async () => {
     const css = await compileUtilities(["transition", "motion-reduce:transition-none"]);

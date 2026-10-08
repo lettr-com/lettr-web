@@ -374,9 +374,22 @@
 }
 
 /* Chrome runs background-color transitions on the compositor, and as one ends it can paint
-   the pre-transition colour for a single frame: the hover blip on buttons. So backgrounds
-   swap instantly while every other property still eases. Never transition background-color
-   (no transition-all either); src/lib/utils/transitions.test.ts enforces it. */
+   the pre-transition colour for a single frame: the hover blip on buttons. So no transition
+   ever animates background-color (no transition-all either); src/lib/utils/transitions.test.ts
+   enforces it. A background that should fade uses bg-fade-*, which transitions the registered
+   --fade-bg instead: Chrome animates that on the main thread, where there is no stale frame. */
+@property --fade-bg {
+  syntax: "<color>";
+  inherits: false;
+  initial-value: transparent;
+}
+
+@utility bg-fade-* {
+  --fade-bg: --value(--color-*, [color]);
+  --fade-bg: --alpha(--value(--color-*, [color]) / --modifier(integer) %);
+  background-color: var(--fade-bg);
+}
+
 @utility transition {
   transition-property:
     color,
@@ -400,13 +413,14 @@
     display,
     content-visibility,
     overlay,
-    pointer-events;
+    pointer-events,
+    --fade-bg;
 }
 
 @utility transition-colors {
   transition-property:
     color, border-color, outline-color, text-decoration-color, fill, stroke, --tw-gradient-from,
-    --tw-gradient-via, --tw-gradient-to;
+    --tw-gradient-via, --tw-gradient-to, --fade-bg;
 }
 
 @utility glass {

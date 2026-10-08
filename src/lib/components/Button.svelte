@@ -20,11 +20,11 @@
 	const baseClasses =
 		"relative after:absolute after:inset-x-0 after:top-full after:h-0.5 after:content-[''] inline-flex items-center justify-center font-bold cursor-pointer transition duration-200 ease-out hover:-translate-y-0.5 motion-reduce:transition-none motion-reduce:hover:translate-y-0";
 	const variants = {
-		primary: 'bg-primary-strong text-white hover:bg-primary-strong/90',
-		secondary: 'text-primary-strong bg-white hover:bg-primary/10',
+		primary: 'bg-fade-primary-strong text-white hover:bg-fade-primary-strong/90',
+		secondary: 'text-primary-strong bg-fade-white hover:bg-fade-primary/10',
 		// for white surfaces, where the plain white secondary would vanish
-		outline: 'border border-primary-outline text-primary-strong bg-white hover:bg-primary-soft',
-		green: 'bg-[#03bd4c] text-white hover:bg-[#03bd4c]/90'
+		outline: 'border border-primary-outline text-primary-strong bg-fade-white hover:bg-fade-primary-soft',
+		green: 'bg-fade-[#03bd4c] text-white hover:bg-fade-[#03bd4c]/90'
 	};
 	const sizes = {
 		default: 'min-w-[180px] px-6 py-3',

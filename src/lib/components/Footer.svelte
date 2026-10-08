@@ -107,7 +107,7 @@
 			</div>
 			<a
 				href={registerHref}
-				class="relative after:absolute after:inset-x-0 after:top-full after:h-0.5 after:content-[''] inline-flex items-center justify-center bg-primary-strong px-6 py-4 text-lg font-bold text-white transition duration-200 ease-out hover:-translate-y-0.5 hover:bg-primary-strong/90 motion-reduce:transition-none motion-reduce:hover:translate-y-0 md:px-10 md:py-5 md:text-[1.375rem]"
+				class="relative after:absolute after:inset-x-0 after:top-full after:h-0.5 after:content-[''] inline-flex items-center justify-center bg-fade-primary-strong px-6 py-4 text-lg font-bold text-white transition duration-200 ease-out hover:-translate-y-0.5 hover:bg-fade-primary-strong/90 motion-reduce:transition-none motion-reduce:hover:translate-y-0 md:px-10 md:py-5 md:text-[1.375rem]"
 				onclick={trackFooterCtaClick}
 			>
 				Get started
