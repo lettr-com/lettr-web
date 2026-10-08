@@ -184,7 +184,7 @@
 						{@const Icon = block.Icon}
 						{@const isActive = activeBlock === block.label}
 						<div
-							class="flex aspect-square flex-col items-center justify-center gap-1 border border-border/30 bg-gray-50/60 text-muted transition-all duration-150 hover:border-primary/30 hover:bg-primary/[0.03] hover:text-primary"
+							class="flex aspect-square flex-col items-center justify-center gap-1 border border-border/30 bg-gray-50/60 text-muted transition duration-150 hover:border-primary/30 hover:bg-primary/[0.03] hover:text-primary"
 							class:block-active={isActive}
 						>
 							<Icon size={14} />

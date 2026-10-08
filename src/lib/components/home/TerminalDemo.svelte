@@ -205,7 +205,7 @@
 	<div class="relative flex h-10 items-center justify-between border-b border-white/10 bg-[#030712] pr-2 pl-4">
 		<div class="flex items-center gap-3" aria-hidden="true">
 			<span
-				class="h-2.5 w-2.5 transition-[box-shadow,background-color] duration-100 {blip === 'flare' ? 'bg-[#ff3b6e] shadow-[0_0_14px_4px_rgba(255,59,110,0.9)]' : blip === 'dim' ? 'bg-[#7a0a2a] shadow-none' : 'bg-primary shadow-[0_0_7px_1px_rgba(236,16,75,0.65)]'}"
+				class="h-2.5 w-2.5 transition-shadow duration-100 {blip === 'flare' ? 'bg-[#ff3b6e] shadow-[0_0_14px_4px_rgba(255,59,110,0.9)]' : blip === 'dim' ? 'bg-[#7a0a2a] shadow-none' : 'bg-primary shadow-[0_0_7px_1px_rgba(236,16,75,0.65)]'}"
 			></span>
 			<span class="font-code text-[11px] text-white/60">{script.title}</span>
 		</div>

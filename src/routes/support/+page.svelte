@@ -179,7 +179,7 @@
 							href={faq.href}
 							target="_blank"
 							rel="noopener noreferrer"
-							class="flex items-center justify-between px-3 py-2 text-sm text-muted transition-all duration-200 hover:bg-background hover:text-surface"
+							class="flex items-center justify-between px-3 py-2 text-sm text-muted transition duration-200 hover:bg-background hover:text-surface"
 							onclick={() => trackFaqLinkClick(faq.q, faq.href)}
 						>
 							{faq.q}

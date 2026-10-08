@@ -76,7 +76,7 @@
 				href="/pricing/"
 				data-reveal
 				onclick={() => trackTileCta(tile)}
-				class="group flex flex-col p-6 border border-border/30 bg-white transition-all duration-300
+				class="group flex flex-col p-6 border border-border/30 bg-white transition duration-300
 					hover:border-primary/40 hover:shadow-lg hover:shadow-primary/5"
 			>
 				<div class="mb-5 flex items-center gap-3">

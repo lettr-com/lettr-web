@@ -77,7 +77,7 @@
 			{#each useCases as useCase}
 				<div data-usecase class="group">
 					<h3 class="text-sm text-surface font-medium leading-tight tracking-tight mb-3">{useCase.title}</h3>
-					<div class="border border-border/40 bg-white p-3 transition-all duration-200 group-hover:-translate-y-0.5 group-hover:shadow-[0_8px_24px_-12px_rgba(236,16,75,0.2)] group-hover:border-primary/40">
+					<div class="border border-border/40 bg-white p-3 transition duration-200 group-hover:-translate-y-0.5 group-hover:shadow-[0_8px_24px_-12px_rgba(236,16,75,0.2)] group-hover:border-primary/40">
 						<div class="flex items-center gap-2 mb-2">
 							<div class="w-7 h-7 bg-primary/10 flex items-center justify-center flex-shrink-0">
 								<useCase.icon size={14} class="text-primary" />

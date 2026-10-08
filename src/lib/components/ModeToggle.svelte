@@ -41,7 +41,7 @@
 			role="tab"
 			aria-selected={isActive}
 			onclick={() => select(option.key)}
-			class="group relative flex cursor-pointer items-start gap-3 border p-4 text-left transition-all duration-200
+			class="group relative flex cursor-pointer items-start gap-3 border p-4 text-left transition duration-200
 				{isActive
 					? isTransactional
 						? 'border-[#EC104B] bg-[#FFEFF4] shadow-[0_8px_24px_-12px_rgba(236,16,75,0.25)]'

@@ -197,7 +197,7 @@
 			{@const isHighlighted = highlightedPlan === plan.key}
 			{@const isMobileVisible = mobileVisiblePlan === plan.key}
 			<div
-				class="flex-col p-5 border transition-all duration-300
+				class="flex-col p-5 border transition duration-300
 					{isMobileVisible ? 'flex' : 'hidden sm:flex'}
 					{isHighlighted
 					? 'border-primary bg-white shadow-lg shadow-primary/5'

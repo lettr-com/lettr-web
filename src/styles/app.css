@@ -373,6 +373,42 @@
   }
 }
 
+/* Chrome runs background-color transitions on the compositor, and as one ends it can paint
+   the pre-transition colour for a single frame: the hover blip on buttons. So backgrounds
+   swap instantly while every other property still eases. Never transition background-color
+   (no transition-all either); src/lib/utils/transitions.test.ts enforces it. */
+@utility transition {
+  transition-property:
+    color,
+    border-color,
+    outline-color,
+    text-decoration-color,
+    fill,
+    stroke,
+    --tw-gradient-from,
+    --tw-gradient-via,
+    --tw-gradient-to,
+    opacity,
+    box-shadow,
+    transform,
+    translate,
+    scale,
+    rotate,
+    filter,
+    -webkit-backdrop-filter,
+    backdrop-filter,
+    display,
+    content-visibility,
+    overlay,
+    pointer-events;
+}
+
+@utility transition-colors {
+  transition-property:
+    color, border-color, outline-color, text-decoration-color, fill, stroke, --tw-gradient-from,
+    --tw-gradient-via, --tw-gradient-to;
+}
+
 @utility glass {
   backdrop-filter: blur(8px);
   background-color: rgba(247, 241, 243, 0.7);
