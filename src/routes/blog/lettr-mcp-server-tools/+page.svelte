@@ -23,14 +23,14 @@
 			rest: "Any other client that supports a streamable HTTP MCP server with custom headers can connect with an API key instead."
 		},
 		{
-			question: "Is the remote MCP server still read-only?",
-			lead: "No. Since the September 2026 release it can send email, run campaigns, and change the audience.",
-			rest: "The tools that send, overwrite, or delete are marked as destructive, so a client such as Claude asks before calling one."
+			question: "Can the remote MCP server run campaigns and change the audience?",
+			lead: "Yes, since the September 2026 release.",
+			rest: "It sends, schedules, and reports on campaigns built in the dashboard, and manages contacts, lists, topics, properties, and segments. Tools that send email right away, overwrite data, or delete it are marked as destructive, so a client such as Claude can ask before calling one."
 		},
 		{
 			question: "Can I limit what an agent is allowed to do?",
 			lead: "Yes, by connecting it with an API key scoped to the tools it needs.",
-			rest: "A tool outside the key's scopes is not listed at all, and a sending-only key sees just the four send and schedule tools."
+			rest: "A tool outside the key's scopes is not listed at all, and a sending-only key sees only the tools that send, schedule, and cancel email, plus the two that report its team."
 		},
 		{
 			question: "Do I still need the lettr-mcp npm package?",
@@ -50,36 +50,36 @@
 	category="Product"
 	title="Manage an email platform from your AI assistant: Lettr's 79 MCP tools"
 	seoTitle="Manage an email platform from your AI assistant with MCP"
-	excerpt="An AI assistant such as Claude, ChatGPT, or Cursor can operate Lettr through 79 MCP tools, from sending and scheduling to campaigns, audience management, and delivery diagnostics, with more added as Lettr ships new features. This article covers what the tools do, the two ways to connect, and the guardrails that keep an assistant from sending anything by mistake."
+	excerpt="An AI assistant such as Claude, ChatGPT, or Cursor can operate Lettr through 79 MCP tools, from sending and scheduling to campaigns, audience management, and delivery diagnostics, with more added as Lettr ships new features. This article covers what the tools do, the two ways to connect, and the guardrails that limit what an assistant can send or change."
 	metaDescription="Manage an email platform from Claude, ChatGPT, or Cursor. Lettr's MCP server gives an AI assistant 79 tools, and counting, for sending, campaigns, and audience."
 	author={{ name: 'Jack Zagorski', role: 'Content specialist', avatar: '/images/authors/jack.jpg' }}
 	date="October 6, 2026"
 	datetime="2026-10-06"
-	readTime="4 min read"
+	readTime="5 min read"
 	slug="lettr-mcp-server-tools"
 	{faqs}
 >
 	<Lead>
 		Lettr hosts a remote MCP server at <code>app.lettr.com/mcp</code> that AI assistants such as
 		Claude, ChatGPT, and Cursor connect to. It has 79 tools across ten areas of the product, up from
-		18 before the September 2026 release, which is enough for an assistant to operate the whole of
-		Lettr: sending, scheduling, campaigns, the audience, and delivery diagnostics. The count keeps
+		18 before the September 2026 release, and covers most day-to-day work in Lettr: sending,
+		scheduling, campaigns, the audience, and delivery diagnostics. The count keeps
 		rising, because new tools ship alongside new Lettr features.
 	</Lead>
 
 	<Callout variant="info" title="TL;DR">
 		<TldrList>
 			<li>
-				<strong>The remote server now covers the whole product</strong>, including campaigns and
-				audience management, which used to need the dashboard.
+				<strong>Campaigns and the audience are now in reach</strong>: the remote server could not
+				touch either before September 2026.
 			</li>
 			<li>
 				<strong>Sign in for chat, use a scoped API key for anything unattended</strong>: CI jobs, cron
 				scripts, and headless agents.
 			</li>
 			<li>
-				<strong>Destructive tools ask first</strong>, a key only sees the tools its scopes allow, and
-				every call lands in the API logs.
+				<strong>Destructive tools are flagged for confirmation</strong>, a key only sees the tools its
+				scopes allow, and every call made with a key lands in the API logs.
 			</li>
 		</TldrList>
 	</Callout>
@@ -87,34 +87,36 @@
 	<Heading level={2}>What the Lettr MCP server covers</Heading>
 
 	<Paragraph>
-		<strong>Each tool does exactly what the matching API endpoint does</strong>, so a tool call reads
-		and writes the same data an API client would. The ten areas are emails, scheduled emails,
+		<strong>Every tool with a REST counterpart reuses that endpoint's action</strong>, so a tool call
+		reads and writes the same data an API client would. The ten areas are emails, scheduled emails,
 		templates with their folders and projects, sending domains, the other domain types (tracking,
 		inbound, and storage), webhooks, campaigns, the audience, analytics and monitoring, and the
 		account itself.
 	</Paragraph>
 
 	<Paragraph>
-		We introduced <a href="/blog/managing-lettr-from-your-ai-assistant/">the MCP integration in May
-		2026</a> with a smaller, read-only set. The September release added everything that writes, so the
-		remote server now <strong>matches the <code>lettr-mcp</code> npm package</strong>, and the npm
-		package is deprecated.
+		When we <a href="/blog/managing-lettr-from-your-ai-assistant/">wrote about the MCP integration
+		in May 2026</a>, the remote server had 16 tools, mostly for reading account data, plus sending
+		email and creating and updating templates. The September release brought it to
+		<strong>parity with the <code>lettr-mcp</code> npm package</strong>, adding campaigns, the
+		audience, scheduling, domains, and webhooks. Once the remote server also accepted API keys, the
+		one thing the npm package offered that a sign-in could not, the package was deprecated.
 	</Paragraph>
 
 	<Heading level={2}>What an assistant can do with the full set</Heading>
 
 	<Paragraph>
-		<strong>The clearest additions are campaigns and audience management</strong>, the parts of an
-		email platform that normally need a dashboard. A question like "How did last week's newsletter
-		campaign perform?" gets the campaign's numbers, and "create an opt-in topic called Product
-		updates" creates it. Neither needs the dashboard open.
+		<strong>The largest additions are campaigns and the audience.</strong> A question like "How did
+		last week's newsletter campaign perform?" returns the campaign's engagement stats, and "create an
+		opt-in topic called Product updates" creates the topic. Campaigns are still built in the
+		dashboard; the assistant sends, schedules, and reports on them.
 	</Paragraph>
 
 	<Paragraph>
-		The remote server also carries <strong>four diagnostic tools</strong>: DNS diagnosis, a sending
-		health check, analytics, and API logs. They answer questions such as why a message failed to
-		deliver, or whether a domain is verified and ready to send, in the same conversation that sent the
-		email.
+		The remote server also carries <strong>four diagnostic tools</strong> the npm package never had:
+		DNS diagnosis, a sending health check, analytics, and API logs. Together with each email's
+		delivery timeline, they answer questions such as why a message failed to deliver, or whether a
+		domain is verified and ready to send, in the same conversation that sent the email.
 	</Paragraph>
 
 	<Callout variant="info">
@@ -155,16 +157,15 @@
 	<Heading level={2}>What stops an assistant from sending email by mistake?</Heading>
 
 	<Paragraph>
-		<strong>Four guardrails</strong> apply to every connection: two stop a call before it runs, one
-		limits where a test email can go, and one records what happened.
+		<strong>Four guardrails</strong> limit what an assistant can do. The first applies to every
+		connection, and the other three apply to connections made with an API key.
 	</Paragraph>
 
 	<List>
 		<li>
-			<strong>Destructive annotations.</strong> Tools that send email, overwrite data, or remove data
-			in a way that can't be undone carry the MCP destructive annotation, so a client such as Claude
-			asks before calling one, and even a misread request needs a confirmation before any email goes
-			out.
+			<strong>Destructive annotations.</strong> Tools that send email right away, overwrite data, or
+			delete it carry the MCP destructive annotation, so a client such as Claude can ask for
+			confirmation before calling one.
 		</li>
 		<li>
 			<strong>Scopes.</strong> When nobody is present to confirm, the key's scopes do the restricting.
@@ -175,8 +176,9 @@
 			rewritten, so an agent holding one cannot email a real customer, whatever its prompt says.
 		</li>
 		<li>
-			<strong>API logs.</strong> Every call an agent makes is recorded in the API logs with its key's
-			ID, so its actions can be reviewed afterwards.
+			<strong>API logs.</strong> Every call made with an API key is recorded in the API logs with the
+			key's ID, so an agent's actions can be reviewed afterwards. Calls made by signing in belong to a
+			person rather than a key and don't appear there.
 		</li>
 	</List>
 
@@ -207,14 +209,14 @@
 	<Heading level={2}>Bottom line</Heading>
 
 	<Paragraph>
-		<strong>The dashboard is no longer the only way to operate Lettr</strong>, since campaigns and
-		audience work now take a plain-language request. Sign in for chat and give anything unattended a
-		scoped key; the same guardrails apply to both.
+		<strong>An assistant can now send campaigns and manage the audience</strong>, on top of the
+		sending, templates, and diagnostics it already handled. Sign in for chat, and give anything unattended
+		a scoped key so its scopes and the API logs keep it in check.
 	</Paragraph>
 
 	<Paragraph>
 		<a href="https://app.lettr.com/register">Create a free Lettr account</a> to connect an assistant;
-		the free plan needs no credit card and includes the full API. Once you're in, the
+		the free plan needs no credit card, and the MCP server works on it. Once you're in, the
 		<a href="https://docs.lettr.com/learn/mcp/introduction">MCP docs</a> walk through each client.
 	</Paragraph>
 </BlogPost>
