@@ -76,20 +76,39 @@
 					if (y === rows - 1 || v > threshold) ctx!.fillRect(x, y, 1, 1);
 				}
 			}
-			if (!reducedMotion) raf = requestAnimationFrame(render);
+			raf = running ? requestAnimationFrame(render) : 0;
+		}
+
+		// Animate only while the strip is on screen and the tab is visible.
+		let visible = false;
+		let running = false;
+		function sync() {
+			const next = !reducedMotion && visible && !document.hidden;
+			if (next === running) return;
+			running = next;
+			if (running) raf = requestAnimationFrame(render);
+			else cancelAnimationFrame(raf);
 		}
 
 		resize();
 		render(performance.now());
 		const ro = new ResizeObserver(() => {
 			resize();
-			if (reducedMotion) render(performance.now());
+			if (!running) render(performance.now());
 		});
 		ro.observe(target);
+		const io = new IntersectionObserver(([entry]) => {
+			visible = entry.isIntersecting;
+			sync();
+		});
+		io.observe(target);
+		document.addEventListener('visibilitychange', sync);
 
 		return () => {
 			cancelAnimationFrame(raf);
 			ro.disconnect();
+			io.disconnect();
+			document.removeEventListener('visibilitychange', sync);
 		};
 	});
 </script>
