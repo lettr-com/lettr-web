@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
+	import { page } from '$app/state';
 	import { buildRegisterUrl, registerUrl } from '$lib/utils/utm';
 	import DitherEdge from '$lib/components/home/DitherEdge.svelte';
 	import EnvelopeSimpleIcon from 'phosphor-svelte/lib/EnvelopeSimpleIcon';
@@ -9,6 +10,21 @@
 	import { capturePosthogEvent, trackSignupClick } from '$lib/analytics/posthog';
 
 	let registerHref: string = $state(registerUrl);
+
+	interface FooterCta {
+		title: string;
+		accent: string;
+		description: string;
+	}
+
+	// A page can swap the sign-up line by returning `footerCta` from its load.
+	const cta: FooterCta = $derived(
+		(page.data as { footerCta?: FooterCta }).footerCta ?? {
+			title: 'Ready to',
+			accent: 'get started?',
+			description: 'Start sending for free. No credit card required.'
+		}
+	);
 
 	onMount(() => {
 		registerHref = buildRegisterUrl(new URL(window.location.href), document.cookie);
@@ -59,6 +75,7 @@
 				{ label: 'Deliverability', href: '/platform/deliverability/' },
 				{ label: 'SMTP Relay', href: '/smtp-relay/' },
 				{ label: 'Inbound Email API', href: '/inbound-email-api/' },
+				{ label: 'Laravel', href: '/laravel/' },
 				{ label: 'Email Channel', href: '/channels/email/' },
 				{ label: 'MCP Server', href: '/platform/mcp/' }
 			]
@@ -98,11 +115,11 @@
 		<div id="signup" class="flex flex-col gap-6 pb-9 md:flex-row md:items-end md:justify-between md:gap-10 md:pb-16">
 			<div class="flex flex-col gap-3 md:gap-4">
 				<h3 class="m-0 flex flex-col font-heading text-[2rem] leading-[38px] font-normal tracking-[-0.025em] text-white md:text-[3rem] md:leading-[54px]">
-					Ready to
-					<em class="font-pixel text-[2.375rem] leading-10 font-medium text-primary-outline md:text-[3.375rem] md:leading-[54px]">get started?</em>
+					{cta.title}
+					<em class="font-serif-35 text-[2.375rem] leading-10 font-medium text-primary-outline md:text-[3.375rem] md:leading-[54px]">{cta.accent}</em>
 				</h3>
 				<p class="m-0 text-[1.0625rem] leading-[1.5] text-white/80 md:text-[1.1875rem]">
-					Start sending for free. No credit card required.
+					{cta.description}
 				</p>
 			</div>
 			<a

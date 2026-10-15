@@ -1,6 +1,6 @@
 import type { Highlighter, ThemeRegistration } from "shiki";
 
-const lettrTheme: ThemeRegistration = {
+export const lettrTheme: ThemeRegistration = {
   name: "lettr",
   type: "dark",
   colors: {
@@ -18,6 +18,10 @@ const lettrTheme: ThemeRegistration = {
     },
     {
       scope: ["string", "string.quoted"],
+      settings: { foreground: "#f9a8b8" },
+    },
+    {
+      scope: ["property.value.dotenv"],
       settings: { foreground: "#f9a8b8" },
     },
     {
