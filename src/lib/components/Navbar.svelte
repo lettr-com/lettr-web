@@ -1,174 +1,224 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
+	import { onMount, tick } from 'svelte';
+	import { afterNavigate } from '$app/navigation';
+	import { page } from '$app/state';
+	import CaretDown from 'phosphor-svelte/lib/CaretDown';
 	import List from 'phosphor-svelte/lib/List';
 	import X from 'phosphor-svelte/lib/X';
-	import CaretDown from 'phosphor-svelte/lib/CaretDown';
-	import CodeIcon from 'phosphor-svelte/lib/CodeIcon';
-	import SparkleIcon from 'phosphor-svelte/lib/SparkleIcon';
-	import ChartBarIcon from 'phosphor-svelte/lib/ChartBarIcon';
-	import ShieldCheckIcon from 'phosphor-svelte/lib/ShieldCheckIcon';
-	import RobotIcon from 'phosphor-svelte/lib/RobotIcon';
-	import PaperPlaneTiltIcon from 'phosphor-svelte/lib/PaperPlaneTiltIcon';
-	import TrayIcon from 'phosphor-svelte/lib/TrayIcon';
-	import TranslateIcon from 'phosphor-svelte/lib/TranslateIcon';
-	import HeadsetIcon from 'phosphor-svelte/lib/HeadsetIcon';
-	import BookOpenIcon from 'phosphor-svelte/lib/BookOpenIcon';
-	import BookBookmarkIcon from 'phosphor-svelte/lib/BookBookmarkIcon';
-	import ScalesIcon from 'phosphor-svelte/lib/ScalesIcon';
-	import PulseIcon from 'phosphor-svelte/lib/PulseIcon';
-	import InfoIcon from 'phosphor-svelte/lib/InfoIcon';
-	import EnvelopeSimpleIcon from 'phosphor-svelte/lib/EnvelopeSimpleIcon';
-	import ChatDotsIcon from 'phosphor-svelte/lib/ChatDotsIcon';
-	import WhatsappLogoIcon from 'phosphor-svelte/lib/WhatsappLogoIcon';
-	import { createFromAnimationCleanup } from '$lib/utils/gsap';
+	import MobileMenu from '$lib/components/nav/MobileMenu.svelte';
+	import NavPanel from '$lib/components/nav/NavPanel.svelte';
+	import SalesStrip from '$lib/components/nav/SalesStrip.svelte';
+	import {
+		activeSection,
+		menus,
+		pricingHref,
+		salesHref,
+		signInHref,
+		type MenuKey,
+		type NavItem
+	} from '$lib/navigation/menu';
+	import { isStripAllowed, nextStripVisibility, salesPromptFor } from '$lib/navigation/salesStrip';
 	import { buildRegisterUrl, registerUrl } from '$lib/utils/utm';
 	import { capturePosthogEvent, trackSigninClick, trackSignupClick } from '$lib/analytics/posthog';
 
-	interface DropdownItem {
-		icon?: typeof CodeIcon;
-		iconSrc?: string;
-		badge?: 'transactional' | 'marketing';
-		label: string;
-		description: string;
-		href: string;
-		external?: boolean;
-		comingSoon?: boolean;
-	}
+	const openDelay = 80;
+	const closeDelay = 180;
+	// Match the keyframes in app.css: menus slide for 250ms, the viewport tilts away in 200ms.
+	const exitDuration = 250;
+	const closeDuration = 200;
 
-	interface DropdownSection {
-		label: string;
-		items: DropdownItem[];
-		iconGrid?: boolean;
+	type Motion = 'none' | 'from-start' | 'from-end' | 'to-start' | 'to-end';
+	interface MenuLayer {
+		key: MenuKey;
+		motion: Motion;
 	}
+	const closeOnScrollDistance = 40;
+	const stripDismissKey = 'lettr_sales_strip_dismissed';
 
-	interface DropdownConfig {
-		items?: DropdownItem[];
-		sections?: DropdownSection[];
-		footer?: { label: string; href: string };
-		wide?: boolean;
-		align?: 'center' | 'left';
-	}
+	let header: HTMLElement | undefined = $state();
+	let mobileToggle: HTMLButtonElement | undefined = $state();
+	let openMenu: MenuKey | null = $state(null);
+	// One shared viewport (as on laravel.com): it stays mounted while the visitor moves between
+	// menus, morphs its height, and slides the new content in from the side of the new trigger.
+	let layers: MenuLayer[] = $state([]);
+	let viewportState: 'open' | 'closed' | null = $state(null);
+	let viewportHeight = $state(0);
+	let isHeightInstant = $state(true);
+	const layerEls: Partial<Record<MenuKey, HTMLElement>> = {};
+	let mobileOpen = $state(false);
+	let isScrolled = $state(false);
+	let stripReached = $state(false);
+	let stripDismissed = $state(false);
+	let footerInView = $state(false);
+	let registerHref = $state(registerUrl);
 
-	interface NavLink {
-		label: string;
-		href: string;
-		dropdownKey?: string;
-	}
-
-	let nav: HTMLElement | undefined = $state();
-	let mobileOpen: boolean = $state(false);
-	let openDropdown: string | null = $state(null);
-	let mobileExpanded: string | null = $state(null);
+	let openTimer: ReturnType<typeof setTimeout> | null = null;
+	let unmountTimer: ReturnType<typeof setTimeout> | null = null;
 	let closeTimer: ReturnType<typeof setTimeout> | null = null;
-	let registerHref: string = $state(registerUrl);
+	let openedByHoverAt = 0;
+	let scrollYAtOpen = 0;
+	let stripTracked = false;
 
-	const platformSections: DropdownSection[] = [
-		{
-			label: 'Products',
-			items: [
-				{ badge: 'transactional', label: 'Transactional Email', description: 'Send via REST API & SMTP — pay per email', href: '/email-api/' },
-				{ badge: 'marketing', label: 'Email Marketing', description: 'Campaigns, lists & segments — pay per contact', href: '/email-marketing/' }
-			]
-		},
-		{
-			label: 'Features',
-			items: [
-				{ icon: SparkleIcon, label: 'Visual Editor', description: 'Drag-and-drop editor powered by Topol', href: '/platform/templates/' },
-				{ icon: TranslateIcon, label: 'Multilingual Campaigns', description: 'Send one campaign in several languages', href: '/platform/multilingual-campaigns/' },
-				{ icon: ChartBarIcon, label: 'Analytics & Logs', description: 'Delivery metrics, logs, and webhooks', href: '/platform/analytics/' },
-				{ icon: ShieldCheckIcon, label: 'Deliverability', description: 'SPF, DKIM, DMARC, dedicated IPs', href: '/platform/deliverability/' },
-				{ icon: PaperPlaneTiltIcon, label: 'SMTP Relay', description: 'Drop-in SMTP for any app or server', href: '/smtp-relay/' },
-				{ icon: TrayIcon, label: 'Inbound Email API', description: 'Receive & parse incoming email via webhooks', href: '/inbound-email-api/' },
-				{ icon: RobotIcon, label: 'MCP Integration', description: 'Connect AI agents and LLMs to Lettr', href: '/platform/mcp/' },
-				{ icon: EnvelopeSimpleIcon, label: 'Email Channel', description: 'Multi-region delivery infrastructure', href: '/channels/email/' }
-			]
-		}
-	];
-
-	const resourcesItems: DropdownItem[] = [
-		{ icon: HeadsetIcon, label: 'Support & Contact', description: 'Get help or reach out to our team', href: '/support/' },
-		{ icon: BookOpenIcon, label: 'Docs', description: 'Guides, API reference, and examples', href: 'https://docs.lettr.com', external: true },
-		{ icon: ScalesIcon, label: 'Compare & Migrate', description: 'See how Lettr compares to other providers', href: '/compare/' },
-		{ icon: PulseIcon, label: 'Status', description: 'System uptime and incident history', href: 'https://status.lettr.com', external: true },
-		{ icon: EnvelopeSimpleIcon, label: 'Changelog', description: 'Latest updates and improvements', href: '/changelog/' }
-	];
-
-	const companyItems: DropdownItem[] = [
-		{ icon: InfoIcon, label: 'About', description: 'Our story, team, and mission', href: '/about/' },
-		{ iconSrc: '/images/logos/topol-icon.svg', label: 'Topol', description: 'Email editor trusted by 40,000+ companies', href: 'https://topol.io', external: true },
-		{ iconSrc: '/images/logos/dmarceye-icon.svg', label: 'DMARCeye', description: 'DMARC monitoring and reporting', href: 'https://dmarceye.com', external: true }
-	];
-
-	const integrationsSections: DropdownSection[] = [
-		{
-			label: 'SDKs',
-			iconGrid: true,
-			items: [
-				{ iconSrc: '/images/icons/laravel.svg', label: 'Laravel', description: 'First-class Laravel package', href: 'https://docs.lettr.com/quickstart/laravel/introduction', external: true },
-				{ iconSrc: '/images/icons/php.svg', label: 'PHP', description: 'Standalone PHP SDK', href: 'https://docs.lettr.com/quickstart/php/introduction', external: true },
-				{ iconSrc: '/images/icons/node-js.svg', label: 'Node.js', description: 'JavaScript & TypeScript', href: 'https://docs.lettr.com/quickstart/nodejs/introduction', external: true },
-				{ iconSrc: '/images/icons/golang.svg', label: 'Go', description: 'Go client library', href: 'https://docs.lettr.com/quickstart/go/quickstart', external: true },
-				{ iconSrc: '/images/icons/java.svg', label: 'Java', description: 'Java client library', href: 'https://docs.lettr.com/quickstart/java/quickstart', external: true },
-				{ iconSrc: '/images/icons/rust.svg', label: 'Rust', description: 'Rust client library', href: 'https://docs.lettr.com/quickstart/rust/quickstart', external: true }
-			]
-		},
-		{
-			label: 'Integrations',
-			items: [
-				{ iconSrc: '/images/icons/api.svg', label: 'API', description: 'RESTful HTTP API', href: 'https://docs.lettr.com/api-reference/introduction', external: true },
-				{ iconSrc: '/images/icons/smtp.svg', label: 'SMTP', description: 'Standard SMTP relay', href: 'https://docs.lettr.com/quickstart/smtp/introduction', external: true },
-				{ iconSrc: '/images/icons/mcp.svg', label: 'MCP', description: 'Model Context Protocol', href: 'https://docs.lettr.com/mcp/introduction', external: true }
-			]
-		}
-	];
-
-	const dropdownConfigs: Record<string, DropdownConfig> = {
-		platform: { sections: platformSections, wide: true, align: 'left', footer: { label: 'View all features', href: '/#features' } },
-		docs: { sections: [
-			{
-				label: 'Documentation',
-				items: [
-					{ icon: BookOpenIcon, label: 'Getting Started', description: 'Quick start guides', href: 'https://docs.lettr.com/introduction', external: true },
-					{ icon: CodeIcon, label: 'API Reference', description: 'Full API documentation', href: 'https://docs.lettr.com/api-reference/introduction', external: true },
-					{ icon: EnvelopeSimpleIcon, label: 'Changelog', description: 'Latest updates', href: '/changelog/' },
-					{ icon: BookBookmarkIcon, label: 'Glossary', description: 'Email terms, explained', href: '/glossary/' }
-				]
-			},
-			...integrationsSections
-		], wide: true, footer: { label: 'View full documentation', href: 'https://docs.lettr.com' } },
-		company: { items: companyItems },
-		resources: { items: resourcesItems, footer: { label: 'Visit documentation', href: 'https://docs.lettr.com' } }
+	const menuOrder = menus.map((menu) => menu.key);
+	const menuByKey = Object.fromEntries(menus.map((menu) => [menu.key, menu])) as Record<
+		MenuKey,
+		(typeof menus)[number]
+	>;
+	const layerMotion: Record<Motion, string> = {
+		none: '',
+		'from-start': 'nav-enter-from-left',
+		'from-end': 'nav-enter-from-right',
+		'to-start': 'nav-exit-to-left',
+		'to-end': 'nav-exit-to-right'
 	};
 
-	const navLinks: NavLink[] = [
-		{ label: 'Platform', href: '/#features', dropdownKey: 'platform' },
-		{ label: 'Docs', href: 'https://docs.lettr.com', dropdownKey: 'docs' },
-		{ label: 'Pricing', href: '/pricing/' },
-		{ label: 'Blog', href: '/blog/' },
-		{ label: 'Company', href: '#', dropdownKey: 'company' }
-	];
+	const pathname = $derived(page.url.pathname);
+	const current = $derived(activeSection(pathname));
+	const prompt = $derived(salesPromptFor(pathname));
+	const showStrip = $derived(
+		isStripAllowed(pathname) && stripReached && !stripDismissed && !footerInView && !mobileOpen
+	);
 
-	function getAllItems(config: DropdownConfig): DropdownItem[] {
-		if (config.items) return config.items;
-		if (config.sections) return config.sections.flatMap((s) => s.items);
-		return [];
+	const focusRing =
+		'focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary';
+
+	function clearTimers() {
+		if (openTimer) clearTimeout(openTimer);
+		if (closeTimer) clearTimeout(closeTimer);
+		openTimer = null;
+		closeTimer = null;
 	}
 
-	function handleMouseEnter(key: string) {
-		if (closeTimer) {
-			clearTimeout(closeTimer);
-			closeTimer = null;
+	function setMenu(key: MenuKey | null, device: 'desktop' | 'mobile' = 'desktop') {
+		if (key === openMenu) return;
+		const previous = openMenu;
+		if (unmountTimer) clearTimeout(unmountTimer);
+		unmountTimer = null;
+
+		if (key && previous) {
+			// Moving right slides the new menu in from the right and the old one out to the left.
+			const forward = menuOrder.indexOf(key) > menuOrder.indexOf(previous);
+			isHeightInstant = false;
+			layers = [
+				{ key: previous, motion: forward ? 'to-start' : 'to-end' },
+				{ key, motion: forward ? 'from-end' : 'from-start' }
+			];
+			unmountTimer = setTimeout(() => {
+				layers = layers.filter((layer) => layer.key === openMenu);
+			}, exitDuration);
+		} else if (key) {
+			isHeightInstant = viewportState === null;
+			layers = [{ key, motion: 'none' }];
+			viewportState = 'open';
+		} else {
+			viewportState = 'closed';
+			unmountTimer = setTimeout(() => {
+				viewportState = null;
+				layers = [];
+			}, closeDuration);
 		}
-		if (openDropdown !== key) {
-			void capturePosthogEvent('nav_dropdown_opened', { dropdown: key, device: 'desktop' });
+
+		if (key) {
+			scrollYAtOpen = window.scrollY;
+			void capturePosthogEvent('nav_dropdown_opened', { dropdown: key, device });
 		}
-		openDropdown = key;
+		openMenu = key;
 	}
 
-	function handleMouseLeave() {
-		closeTimer = setTimeout(() => {
-			openDropdown = null;
-		}, 150);
+	function focusables(root: HTMLElement | null | undefined): HTMLElement[] {
+		return root ? [...root.querySelectorAll<HTMLElement>('a[href], button:not([disabled])')] : [];
+	}
+
+	function triggerFor(key: MenuKey): HTMLElement | null {
+		return document.querySelector<HTMLElement>(`[aria-controls="nav-panel-${key}"]`);
+	}
+
+	// The viewport sits after the triggers in the DOM, so Tab is routed by hand:
+	// open trigger -> its links -> the next trigger, and Shift+Tab back out to the trigger.
+	function handleViewportKeydown(event: KeyboardEvent) {
+		if (event.key !== 'Tab' || !openMenu) return;
+		const links = focusables(layerEls[openMenu]);
+		const target = event.target as HTMLElement;
+		if (event.shiftKey && target === links[0]) {
+			event.preventDefault();
+			triggerFor(openMenu)?.focus();
+		} else if (!event.shiftKey && target === links.at(-1)) {
+			event.preventDefault();
+			const index = menuOrder.indexOf(openMenu);
+			const next =
+				index < menuOrder.length - 1
+					? triggerFor(menuOrder[index + 1])
+					: header?.querySelector<HTMLElement>(`a[href="${pricingHref}"]`);
+			closeAll();
+			next?.focus();
+		}
+	}
+
+	function handleHeaderFocusOut(event: FocusEvent) {
+		const next = event.relatedTarget as Node | null;
+		if (openMenu && next && header && !header.contains(next)) closeAll();
+	}
+
+	function handlePointerEnter(event: PointerEvent, key: MenuKey) {
+		if (event.pointerType !== 'mouse') return;
+		clearTimers();
+		if (openMenu) {
+			setMenu(key);
+			return;
+		}
+		openTimer = setTimeout(() => {
+			openedByHoverAt = Date.now();
+			setMenu(key);
+		}, openDelay);
+	}
+
+	function handlePointerLeave(event: PointerEvent) {
+		if (event.pointerType !== 'mouse') return;
+		clearTimers();
+		closeTimer = setTimeout(() => setMenu(null), closeDelay);
+	}
+
+	function handleTriggerClick(key: MenuKey) {
+		clearTimers();
+		// A click that lands right after hover opened the menu should not close it again.
+		if (openMenu === key && Date.now() - openedByHoverAt < 400) return;
+		setMenu(openMenu === key ? null : key);
+	}
+
+	async function focusFirstLink(key: MenuKey) {
+		await tick();
+		document.getElementById(`nav-panel-${key}`)?.querySelector<HTMLElement>('a')?.focus();
+	}
+
+	function handleTriggerKeydown(event: KeyboardEvent, key: MenuKey) {
+		const intoPanel = event.key === 'ArrowDown' || (event.key === 'Tab' && !event.shiftKey && openMenu === key);
+		if (!intoPanel) return;
+		event.preventDefault();
+		clearTimers();
+		setMenu(key);
+		void focusFirstLink(key);
+	}
+
+	// Keep the viewport height in step with the menu being shown, including on resize.
+	$effect(() => {
+		if (!openMenu || !viewportState) return;
+		const element = layerEls[openMenu];
+		if (!element) return;
+		viewportHeight = element.offsetHeight;
+		const observer = new ResizeObserver(() => {
+			viewportHeight = element.offsetHeight;
+		});
+		observer.observe(element);
+		return () => observer.disconnect();
+	});
+
+	function closeAll(returnFocus = false) {
+		const wasOpen = openMenu;
+		clearTimers();
+		setMenu(null);
+		if (returnFocus && wasOpen) {
+			document.querySelector<HTMLElement>(`[aria-controls="nav-panel-${wasOpen}"]`)?.focus();
+		}
 	}
 
 	function toggleMobile() {
@@ -176,449 +226,337 @@
 		void capturePosthogEvent('nav_mobile_toggled', { open: mobileOpen });
 	}
 
-	function closeMobile() {
+	function closeMobile(returnFocus = false) {
+		if (!mobileOpen) return;
 		mobileOpen = false;
-		mobileExpanded = null;
+		if (returnFocus) mobileToggle?.focus();
 	}
 
-	function toggleMobileMenu(key: string) {
-		const willOpen = mobileExpanded !== key;
-		mobileExpanded = willOpen ? key : null;
-		if (willOpen) {
-			void capturePosthogEvent('nav_dropdown_opened', { dropdown: key, device: 'mobile' });
-		}
-	}
-
-	function trackNavItemClick(
-		location: 'dropdown' | 'dropdown_footer' | 'mobile_dropdown' | 'mobile_link' | 'top_level',
-		label: string,
-		href: string,
-		dropdownKey?: string
+	function trackLink(
+		item: NavItem,
+		location: 'dropdown' | 'mobile_dropdown' | 'mobile_link' | 'top_level' | 'logo',
+		dropdown: MenuKey | null
 	) {
 		void capturePosthogEvent('nav_link_clicked', {
 			location,
-			label,
-			href,
-			dropdown: dropdownKey ?? null,
-			is_external: /^https?:\/\//.test(href)
+			label: item.label,
+			href: item.href,
+			dropdown,
+			is_external: /^https?:\/\//.test(item.href)
 		});
 	}
 
-	function trackNavCtaClick(label: string, href: string, placement: 'desktop' | 'mobile') {
+	function trackCta(
+		label: 'Sign in' | 'Get started' | 'Contact sales',
+		href: string,
+		placement: 'desktop' | 'mobile' | 'sales_strip'
+	) {
 		void capturePosthogEvent('cta_clicked', {
 			placement: `navbar_${placement}`,
 			label,
 			href,
 			destination_type: /^https?:\/\//.test(href) ? 'external' : 'internal'
 		});
-		if (label === 'Sign in') {
-			trackSigninClick(`navbar_${placement}`, href);
-		} else if (label === 'Get started') {
-			trackSignupClick(`navbar_${placement}`, href);
+		if (label === 'Sign in') trackSigninClick(`navbar_${placement}`, href);
+		if (label === 'Get started') trackSignupClick(`navbar_${placement}`, href);
+	}
+
+	function dismissStrip() {
+		stripDismissed = true;
+		try {
+			sessionStorage.setItem(stripDismissKey, '1');
+		} catch {
+			// Private mode or blocked storage: the strip stays hidden for this page view only.
+		}
+		void capturePosthogEvent('nav_sales_strip_dismissed', { page_path: pathname });
+	}
+
+	function measureScroll() {
+		const root = document.documentElement;
+		const snapshot = {
+			scrollY: window.scrollY,
+			scrollHeight: root.scrollHeight,
+			viewportHeight: window.innerHeight
+		};
+		isScrolled = snapshot.scrollY > 8;
+		stripReached = nextStripVisibility(stripReached, snapshot);
+		if (openMenu && Math.abs(snapshot.scrollY - scrollYAtOpen) > closeOnScrollDistance) {
+			setMenu(null);
 		}
 	}
 
-	function trackLogoClick() {
-		void capturePosthogEvent('nav_link_clicked', {
-			location: 'logo',
-			label: 'Lettr logo',
-			href: '/',
-			dropdown: null,
-			is_external: false
-		});
-	}
+	$effect(() => {
+		if (!showStrip || stripTracked) return;
+		stripTracked = true;
+		void capturePosthogEvent('nav_sales_strip_shown', { page_path: pathname });
+	});
+
+	// Lock page scroll behind the mobile sheet.
+	$effect(() => {
+		if (!mobileOpen) return;
+		const root = document.documentElement;
+		const previous = root.style.overflow;
+		root.style.overflow = 'hidden';
+		return () => {
+			root.style.overflow = previous;
+		};
+	});
+
+	afterNavigate(() => {
+		closeAll();
+		mobileOpen = false;
+		stripReached = false;
+		stripTracked = false;
+		requestAnimationFrame(measureScroll);
+	});
 
 	onMount(() => {
 		registerHref = buildRegisterUrl(new URL(window.location.href), document.cookie);
+		try {
+			stripDismissed = sessionStorage.getItem(stripDismissKey) === '1';
+		} catch {
+			stripDismissed = false;
+		}
 
-		if (!nav) return;
+		// One measurement per frame at most, and state only changes when a threshold
+		// is crossed, so scrolling does not re-render the header.
+		let frame = 0;
+		const onScroll = () => {
+			if (frame) return;
+			frame = requestAnimationFrame(() => {
+				frame = 0;
+				measureScroll();
+			});
+		};
 
-		return createFromAnimationCleanup({
-			scope: nav,
-			targets: nav,
-			vars: { y: -20, opacity: 0, duration: 0.6, ease: 'power2.out' }
-		});
+		const onKeydown = (event: KeyboardEvent) => {
+			if (event.key !== 'Escape') return;
+			if (mobileOpen) closeMobile(true);
+			else if (openMenu) closeAll(true);
+		};
+
+		const onPointerDown = (event: PointerEvent) => {
+			if (openMenu && header && !header.contains(event.target as Node)) closeAll();
+		};
+
+		const desktopQuery = window.matchMedia('(min-width: 1024px)');
+		const onBreakpoint = () => {
+			if (desktopQuery.matches) mobileOpen = false;
+			else closeAll();
+		};
+
+		// The footer has its own sign-up block; the strip steps aside while it is on screen.
+		const footer = document.querySelector('footer');
+		const footerObserver = footer
+			? new IntersectionObserver(([entry]) => {
+					footerInView = entry.isIntersecting;
+				})
+			: null;
+		if (footer) footerObserver?.observe(footer);
+
+		measureScroll();
+		window.addEventListener('scroll', onScroll, { passive: true });
+		window.addEventListener('resize', onScroll, { passive: true });
+		window.addEventListener('keydown', onKeydown);
+		document.addEventListener('pointerdown', onPointerDown);
+		desktopQuery.addEventListener('change', onBreakpoint);
+
+		return () => {
+			cancelAnimationFrame(frame);
+			clearTimers();
+			footerObserver?.disconnect();
+			window.removeEventListener('scroll', onScroll);
+			window.removeEventListener('resize', onScroll);
+			window.removeEventListener('keydown', onKeydown);
+			document.removeEventListener('pointerdown', onPointerDown);
+			desktopQuery.removeEventListener('change', onBreakpoint);
+		};
 	});
 </script>
 
-{#snippet brandBadge(mode: 'transactional' | 'marketing')}
-	{#if mode === 'transactional'}
-		<span class="flex h-10 w-10 shrink-0 items-center justify-center bg-[#EC104B]">
-			<svg width="16" height="20" viewBox="0 0 19 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="block">
-				<path
-					d="M11.3896 13.832L15 17.334L12.251 20L9.5 17.334L6.75098 20L4 17.334L6.75098 14.666L9.5 12L11.3896 13.832ZM15 6.66602L11.748 9.82031L9.5 12L6.75098 9.33398L4 6.66602L6.75098 4L9.5 6.66602L12.251 4L15 6.66602Z"
-					fill="url(#nav_tx_grad)"
-				/>
-				<defs>
-					<linearGradient id="nav_tx_grad" x1="9.5" y1="4" x2="9.5" y2="20" gradientUnits="userSpaceOnUse">
-						<stop stop-color="#FFEFF4" />
-						<stop offset="1" stop-color="#FF90AE" />
-					</linearGradient>
-				</defs>
-			</svg>
-		</span>
-	{:else}
-		<span class="flex h-10 w-10 shrink-0 items-center justify-center bg-[#00D46B]">
-			<svg width="20" height="20" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg" class="block">
-				<path
-					d="M11 15L7 19L3 15L7 11L11 15ZM19 15L15 19L11 15L15 11L19 15ZM11 7L7 11L3 7L7 3L11 7ZM19 7L15 11L11 7L15 3L19 7Z"
-					fill="url(#nav_mk_grad)"
-				/>
-				<defs>
-					<linearGradient id="nav_mk_grad" x1="11" y1="3" x2="11" y2="19" gradientUnits="userSpaceOnUse">
-						<stop stop-color="white" />
-						<stop offset="1" stop-color="#AAFFD5" />
-					</linearGradient>
-				</defs>
-			</svg>
-		</span>
-	{/if}
-{/snippet}
+<header bind:this={header} class="fixed inset-x-0 top-0 z-50" onfocusout={handleHeaderFocusOut}>
+	<nav
+		aria-label="Main"
+		class="relative z-10 border-b bg-white transition-colors duration-200 {isScrolled || openMenu || mobileOpen
+			? 'border-[#E9E2E5]'
+			: 'border-transparent'}"
+	>
+		<div
+			class="mx-auto flex h-[55px] max-w-[1200px] items-center justify-between pr-3 pl-4 lg:h-[59px] lg:px-6"
+		>
+			<div class="flex items-center gap-9">
+				<a
+					href="/"
+					class="flex shrink-0 items-center {focusRing}"
+					onclick={() => trackLink({ label: 'Lettr logo', href: '/' }, 'logo', null)}
+				>
+					<img src="/logo.svg" alt="Lettr home" class="h-5" />
+				</a>
 
-<div class="fixed top-0 right-0 left-0 z-50 flex justify-center">
-<nav
-	bind:this={nav}
-	class="flex flex-col w-full max-w-[1200px] narrow:max-w-none bg-white border-x border-b border-border/30 narrow:border-x-0"
-	aria-label="Main navigation"
->
-	<div class="flex h-[60px] w-full items-center justify-between px-6">
-		<!-- Logo -->
-		<a href="/" class="flex items-center shrink-0" onclick={trackLogoClick}>
-			<img src="/logo.svg" alt="Lettr" class="h-5" />
-		</a>
-
-		<!-- Desktop nav links -->
-		<div class="hidden items-center gap-1 md:flex ml-8 flex-1">
-				{#each navLinks as link}
-					{#if link.dropdownKey}
-						<!-- svelte-ignore a11y_no_static_element_interactions -->
-						<div
-							class="relative"
-							onmouseenter={() => link.dropdownKey && handleMouseEnter(link.dropdownKey)}
-							onmouseleave={handleMouseLeave}
+				<ul class="hidden items-center gap-0.5 lg:flex">
+					{#each menus as menu (menu.key)}
+						{@const isOpen = openMenu === menu.key}
+						<li
+							class="flex h-[59px] items-center"
+							onpointerenter={(event) => handlePointerEnter(event, menu.key)}
+							onpointerleave={handlePointerLeave}
 						>
 							<button
-								class="flex items-center gap-1 px-2.5 py-2 text-sm text-muted transition-colors hover:text-surface"
-								onclick={() => (openDropdown = openDropdown === link.dropdownKey ? null : link.dropdownKey ?? null)}
-								aria-expanded={openDropdown === link.dropdownKey}
-								aria-haspopup="true"
+								type="button"
+								class="relative flex h-9 items-center gap-1.5 px-3 text-sm transition-colors {focusRing} {isOpen
+									? 'bg-background text-surface'
+									: 'text-[#1F2937] hover:bg-background hover:text-surface'} {current === menu.key
+									? 'font-semibold text-surface'
+									: 'font-medium'}"
+								aria-expanded={isOpen}
+								aria-controls="nav-panel-{menu.key}"
+								onclick={() => handleTriggerClick(menu.key)}
+								onkeydown={(event) => handleTriggerKeydown(event, menu.key)}
 							>
-								{link.label}
+								{menu.label}
 								<CaretDown
-									aria-hidden="true"
 									size={12}
-									class="transition-transform duration-200 {openDropdown === link.dropdownKey ? 'rotate-180' : ''}"
+									class="text-subtle transition-transform duration-200 motion-reduce:transition-none {isOpen
+										? 'rotate-180'
+										: ''}"
+									aria-hidden="true"
 								/>
+								{#if current === menu.key}
+									<span class="absolute inset-x-3 -bottom-3 h-0.5 bg-primary" aria-hidden="true"></span>
+								{/if}
 							</button>
-
-							{#if openDropdown === link.dropdownKey && link.dropdownKey}
-								{@const ddConfig = dropdownConfigs[link.dropdownKey]}
-								<div
-									class="absolute top-full mt-2 border border-border/50 bg-white shadow-[0_16px_48px_rgba(0,0,0,0.1)] {ddConfig?.align === 'left' ? 'left-0' : 'left-1/2 -translate-x-1/2'} {ddConfig?.wide ? 'w-[580px]' : 'w-[300px]'}"
-								>
-									{#if ddConfig?.sections}
-										<div class="grid {ddConfig.sections.length > 2 ? 'sm:grid-cols-3' : ddConfig.sections.length > 1 ? 'sm:grid-cols-2' : ''}">
-											{#each ddConfig.sections as section, si}
-												<div class="p-3 {si > 0 ? 'border-t border-border/30 sm:border-t-0 sm:border-l' : ''}">
-													<div class="mb-1 px-3 py-1.5 font-heading text-[10px] tracking-[0.12em] text-muted uppercase">
-														{section.label}
-													</div>
-													{#if section.iconGrid}
-														<div class="grid grid-cols-3 gap-2 px-2 py-1">
-															{#each section.items as item}
-																{#if item.comingSoon}
-																	<span class="flex items-center justify-center h-12 w-12 opacity-30 cursor-default" title="{item.label} (Coming soon)">
-																		{#if item.iconSrc}
-																			<img src={item.iconSrc} alt={item.label} class="h-8 w-8" />
-																		{/if}
-																	</span>
-																{:else}
-																	<a
-																		href={item.href}
-																		target={item.external ? '_blank' : undefined}
-																		rel={item.external ? 'noopener noreferrer' : undefined}
-																		class="flex items-center justify-center h-12 w-12 opacity-60 hover:opacity-100 transition-opacity"
-																		title={item.label}
-																		onclick={() => {
-																			trackNavItemClick('dropdown', item.label, item.href, link.dropdownKey);
-																			openDropdown = null;
-																		}}
-																	>
-																		{#if item.iconSrc}
-																			<img src={item.iconSrc} alt={item.label} class="h-8 w-8" />
-																		{/if}
-																	</a>
-																{/if}
-															{/each}
-														</div>
-													{:else}
-														{#each section.items as item}
-															{#if item.comingSoon}
-																<span class="flex items-center gap-3 px-3 py-2 opacity-40 cursor-default">
-																	<div class="flex h-7 w-7 shrink-0 items-center justify-center border border-border/50 bg-background">
-																		{#if item.iconSrc}
-																			<img src={item.iconSrc} alt="" class="h-4 w-4" />
-																		{/if}
-																	</div>
-																	<div>
-																		<div class="flex items-center gap-2 leading-snug">
-																			<span class="text-[13px] font-medium text-surface">{item.label}</span>
-																			<span class="border border-border/50 bg-background px-1.5 py-0.5 font-heading text-[9px] tracking-wider text-muted">SOON</span>
-																		</div>
-																		<div class="mt-0.5 text-[12px] leading-snug text-muted">{item.description}</div>
-																	</div>
-																</span>
-															{:else}
-																<a
-																	href={item.href}
-																	target={item.external ? '_blank' : undefined}
-																	rel={item.external ? 'noopener noreferrer' : undefined}
-																	class="group flex items-center gap-3 px-3 py-2 transition-colors hover:bg-background"
-																	onclick={() => {
-																		trackNavItemClick('dropdown', item.label, item.href, link.dropdownKey);
-																		openDropdown = null;
-																	}}
-																>
-																	{#if item.badge}
-																		{@render brandBadge(item.badge)}
-																	{:else}
-																		<div class="flex h-7 w-7 shrink-0 items-center justify-center border border-border/50 bg-background transition-colors group-hover:border-primary/30 group-hover:bg-primary/5">
-																			{#if item.iconSrc}
-																				<img src={item.iconSrc} alt="" class="h-4 w-4" />
-																			{:else if item.icon}
-																				{@const Icon = item.icon}
-																				<Icon aria-hidden="true" size={14} class="text-muted transition-colors group-hover:text-primary" />
-																			{/if}
-																		</div>
-																	{/if}
-																	<div>
-																		<div class="text-[13px] font-medium leading-snug text-surface">{item.label}</div>
-																		<div class="mt-0.5 text-[12px] leading-snug text-muted">{item.description}</div>
-																	</div>
-																</a>
-															{/if}
-														{/each}
-													{/if}
-												</div>
-											{/each}
-										</div>
-									{:else if ddConfig?.items}
-										<div class="p-2">
-											{#each ddConfig.items as item}
-												<a
-													href={item.href}
-													target={item.external ? '_blank' : undefined}
-													rel={item.external ? 'noopener noreferrer' : undefined}
-													class="group flex items-center gap-3 px-3 py-2 transition-colors hover:bg-background"
-													onclick={() => {
-														trackNavItemClick('dropdown', item.label, item.href, link.dropdownKey);
-														openDropdown = null;
-													}}
-												>
-													<div class="flex h-7 w-7 shrink-0 items-center justify-center border border-border/50 bg-background transition-colors group-hover:border-primary/30 group-hover:bg-primary/5">
-														{#if item.iconSrc}
-															<img src={item.iconSrc} alt="" class="h-3.5 w-3.5" />
-														{:else if item.icon}
-															{@const Icon = item.icon}
-															<Icon aria-hidden="true" size={14} class="text-muted transition-colors group-hover:text-primary" />
-														{/if}
-													</div>
-													<div>
-														<div class="flex items-center gap-2 leading-snug">
-															<span class="text-[13px] font-medium text-surface">{item.label}</span>
-															{#if item.external}
-																<svg class="h-2.5 w-2.5 text-muted/50" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-																	<path d="M3.5 1.5H10.5V8.5" />
-																	<path d="M10.5 1.5L1.5 10.5" />
-																</svg>
-															{/if}
-														</div>
-														<div class="mt-0.5 text-[12px] leading-snug text-muted">{item.description}</div>
-													</div>
-												</a>
-											{/each}
-										</div>
-									{/if}
-
-									{#if ddConfig?.footer}
-										<div class="border-t border-border/30 bg-background px-5 py-3">
-											<a
-												href={ddConfig.footer.href}
-												target={ddConfig.footer.href.startsWith('http') ? '_blank' : undefined}
-												rel={ddConfig.footer.href.startsWith('http') ? 'noopener noreferrer' : undefined}
-												class="flex items-center gap-1.5 text-[13px] font-medium text-muted transition-colors hover:text-primary"
-												onclick={() => {
-													if (ddConfig.footer) {
-														trackNavItemClick('dropdown_footer', ddConfig.footer.label, ddConfig.footer.href, link.dropdownKey);
-													}
-													openDropdown = null;
-												}}
-											>
-												{ddConfig.footer.label} &rarr;
-											</a>
-										</div>
-									{/if}
-								</div>
-							{/if}
-						</div>
-					{:else}
-						<a
-							href={link.href}
-							class="px-2.5 py-2 text-sm text-muted transition-colors hover:text-surface"
-							onclick={() => trackNavItemClick('top_level', link.label, link.href)}
-						>
-							{link.label}
-						</a>
-					{/if}
-				{/each}
-
+						</li>
+					{/each}
+				</ul>
 			</div>
 
-			<!-- Desktop CTAs -->
-			<div class="hidden md:flex items-center gap-5">
+			<div class="flex items-center gap-1.5 lg:gap-5">
 				<a
-					href="https://app.lettr.com"
-					class="text-sm text-muted transition-colors hover:text-surface"
-					onclick={() => trackNavCtaClick('Sign in', 'https://app.lettr.com', 'desktop')}
+					href={pricingHref}
+					aria-current={current === 'pricing' ? 'page' : undefined}
+					class="group relative flex h-10 items-center gap-2 px-2 text-sm font-semibold transition-colors lg:px-1 {focusRing} {current ===
+					'pricing'
+						? 'text-primary'
+						: 'text-surface hover:text-primary'}"
+					onclick={() => trackLink({ label: 'Pricing', href: pricingHref }, 'top_level', null)}
+				>
+					<span
+						class="size-1.5 bg-primary transition-transform duration-150 group-hover:rotate-45 motion-reduce:transition-none motion-reduce:group-hover:rotate-0"
+						aria-hidden="true"
+					></span>
+					Pricing
+					{#if current === 'pricing'}
+						<span class="absolute inset-x-0 -bottom-2.5 hidden h-0.5 bg-primary lg:block" aria-hidden="true"
+						></span>
+					{/if}
+				</a>
+
+				<span class="hidden h-5 w-px bg-[#E3DCDF] lg:block" aria-hidden="true"></span>
+
+				<a
+					href={signInHref}
+					class="hidden text-sm font-medium text-[#1F2937] underline-offset-4 transition-colors hover:text-surface hover:underline lg:block {focusRing}"
+					onclick={() => trackCta('Sign in', signInHref, 'desktop')}
 				>
 					Sign in
 				</a>
+
 				<a
 					href={registerHref}
-					class="flex items-center justify-center px-4 py-2 text-sm font-semibold bg-primary-strong text-white transition-colors hover:bg-primary-strong/90"
-					onclick={() => trackNavCtaClick('Get started', registerHref, 'desktop')}
+					class="flex items-center bg-fade-primary-strong px-3 py-[7px] text-[13px] leading-5 font-semibold text-white transition-colors hover:bg-fade-primary-strong/90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-surface max-[359px]:hidden lg:px-4 lg:py-2 lg:text-sm lg:leading-[21px]"
+					onclick={() =>
+						trackCta(
+							'Get started',
+							registerHref,
+							window.matchMedia('(min-width: 1024px)').matches ? 'desktop' : 'mobile'
+						)}
 				>
 					Get started
 				</a>
+
+				<button
+					bind:this={mobileToggle}
+					type="button"
+					class="flex size-10 items-center justify-center text-surface transition-colors lg:hidden {focusRing} {mobileOpen
+						? 'bg-background'
+						: ''}"
+					aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
+					aria-expanded={mobileOpen}
+					aria-controls="mobile-menu"
+					onclick={toggleMobile}
+				>
+					{#if mobileOpen}
+						<X size={20} aria-hidden="true" />
+					{:else}
+						<List size={22} aria-hidden="true" />
+					{/if}
+				</button>
 			</div>
-
-			<!-- Mobile CTA -->
-			<a
-				href={registerHref}
-				class="ml-auto flex items-center justify-center bg-primary-strong px-3.5 py-2 text-sm font-semibold text-white md:hidden"
-				onclick={() => trackNavCtaClick('Get started', registerHref, 'mobile')}
-			>
-				Get started
-			</a>
-
-			<!-- Mobile toggle -->
-			<button
-				class="ml-4 flex items-center justify-center md:hidden"
-				onclick={toggleMobile}
-				aria-label="Toggle menu"
-				aria-expanded={mobileOpen}
-			>
-				{#if mobileOpen}
-					<X aria-hidden="true" size={24} />
-				{:else}
-					<List aria-hidden="true" size={24} />
-				{/if}
-			</button>
 		</div>
 
-		<!-- Mobile menu -->
-		{#if mobileOpen}
-			<div class="border-t border-border/30 px-4 pb-6 md:hidden max-h-[calc(100vh-60px)] overflow-y-auto">
-				<div class="flex flex-col gap-2 pt-4">
-					{#each navLinks as link}
-						{#if link.dropdownKey}
-							<div>
-								<button
-									class="flex w-full items-center justify-between py-3 text-surface"
-									onclick={() => link.dropdownKey && toggleMobileMenu(link.dropdownKey)}
-								>
-									{link.label}
-									<CaretDown
-										aria-hidden="true"
-										size={16}
-										class="transition-transform duration-200 {mobileExpanded === link.dropdownKey ? 'rotate-180' : ''}"
-									/>
-								</button>
-								{#if mobileExpanded === link.dropdownKey}
-									<div class="pb-2 pl-2">
-										{#if dropdownConfigs[link.dropdownKey].sections}
-											{#each dropdownConfigs[link.dropdownKey].sections as section}
-												<div class="px-2 pt-2 pb-1 font-heading text-[10px] tracking-[0.12em] text-muted uppercase">
-													{section.label}
-												</div>
-												{#each section.items as item}
-													{#if !item.comingSoon}
-														<a
-															href={item.href}
-															target={item.external ? '_blank' : undefined}
-															rel={item.external ? 'noopener noreferrer' : undefined}
-															class="flex items-center gap-3 px-2 py-2 text-muted transition-colors hover:text-surface"
-															onclick={() => {
-																trackNavItemClick('mobile_dropdown', item.label, item.href, link.dropdownKey);
-																closeMobile();
-															}}
-														>
-															{#if item.badge}
-																{@render brandBadge(item.badge)}
-															{:else if item.iconSrc}
-																<img src={item.iconSrc} alt="" class="h-4 w-4" />
-															{:else if item.icon}
-																{@const Icon = item.icon}
-																<Icon aria-hidden="true" size={16} class="text-muted" />
-															{/if}
-															<span class="text-sm">{item.label}</span>
-														</a>
-													{/if}
-												{/each}
-											{/each}
-										{:else}
-											{#each getAllItems(dropdownConfigs[link.dropdownKey]) as item}
-												<a
-													href={item.href}
-													target={item.external ? '_blank' : undefined}
-													rel={item.external ? 'noopener noreferrer' : undefined}
-													class="flex items-center gap-3 px-2 py-2.5 text-muted transition-colors hover:text-surface"
-													onclick={() => {
-														trackNavItemClick('mobile_dropdown', item.label, item.href, link.dropdownKey);
-														closeMobile();
-													}}
-												>
-													{#if item.iconSrc}
-														<img src={item.iconSrc} alt="" class="h-4 w-4" />
-													{:else if item.icon}
-														{@const Icon = item.icon}
-														<Icon aria-hidden="true" size={16} class="text-muted" />
-													{/if}
-													<span class="text-sm">{item.label}</span>
-												</a>
-											{/each}
-										{/if}
-									</div>
-								{/if}
-							</div>
-						{:else}
-							<a
-								href={link.href}
-								class="py-3 text-surface transition-colors"
-								onclick={() => {
-									trackNavItemClick('mobile_link', link.label, link.href);
-									closeMobile();
-								}}
-							>
-								{link.label}
-							</a>
-						{/if}
-					{/each}
-
-					<div class="mt-2 border-t border-border/30 pt-4">
-						<a
-							href={registerHref}
-							class="block font-bold text-primary transition-colors hover:text-primary/90"
-							onclick={() => {
-								trackNavCtaClick('Get started', registerHref, 'mobile');
-								closeMobile();
-							}}
+		{#if viewportState}
+			<!-- svelte-ignore a11y_no_static_element_interactions -->
+			<div
+				class="absolute inset-x-0 top-full z-20 hidden perspective-[2000px] lg:block"
+				onpointerenter={(event) => event.pointerType === 'mouse' && clearTimers()}
+				onpointerleave={handlePointerLeave}
+				onkeydown={handleViewportKeydown}
+			>
+				<div
+					data-state={viewportState}
+					class="relative origin-top overflow-hidden border-y border-t-hairline border-b-[#E9E2E5] bg-white shadow-[0_24px_48px_-24px_rgba(35,2,11,0.18)] {viewportState ===
+					'open'
+						? 'nav-scale-in'
+						: 'nav-scale-out'} {isHeightInstant
+						? ''
+						: 'transition-[height] duration-250 ease-out motion-reduce:transition-none'}"
+					style:height="{viewportHeight}px"
+				>
+					{#each layers as layer (layer.key)}
+						<div
+							bind:this={layerEls[layer.key]}
+							class="absolute inset-x-0 top-0 {layerMotion[layer.motion]}"
+							inert={layer.key !== openMenu}
 						>
-							Get started
-						</a>
-					</div>
+							<NavPanel
+								menu={menuByKey[layer.key]}
+								id="nav-panel-{layer.key}"
+								{pathname}
+								onLinkClick={(item) => {
+									trackLink(item, 'dropdown', layer.key);
+									closeAll();
+								}}
+							/>
+						</div>
+					{/each}
 				</div>
 			</div>
 		{/if}
 	</nav>
-</div>
+
+	{#if isStripAllowed(pathname)}
+		<SalesStrip
+			visible={showStrip}
+			{prompt}
+			onContact={() => trackCta('Contact sales', salesHref, 'sales_strip')}
+			onDismiss={dismissStrip}
+		/>
+	{/if}
+
+	{#if mobileOpen}
+		<MobileMenu
+			id="mobile-menu"
+			{pathname}
+			{registerHref}
+			onDrill={(key) => void capturePosthogEvent('nav_dropdown_opened', { dropdown: key, device: 'mobile' })}
+			onLinkClick={(item, menu) => {
+				trackLink(item, menu ? 'mobile_dropdown' : 'mobile_link', menu);
+				closeMobile();
+			}}
+			onCta={(label, href) => {
+				trackCta(label, href, 'mobile');
+				closeMobile();
+			}}
+		/>
+	{/if}
+</header>
