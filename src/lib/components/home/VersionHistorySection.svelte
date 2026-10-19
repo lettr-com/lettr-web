@@ -148,7 +148,7 @@
 				<!-- Version list -->
 				<div class="w-full bg-white shadow-[0_0_40px_-12px_rgba(17,24,39,0.2)] lg:w-[380px] lg:shrink-0 lg:self-start">
 					<div class="flex items-center justify-between border-b border-[#f3e6ea] px-6 py-5">
-						<h3 class="m-0 font-heading text-lg leading-6 tracking-[-0.02em] text-surface">Version history</h3>
+						<p class="m-0 font-heading text-lg leading-6 tracking-[-0.02em] text-surface">Version history</p>
 						<p class="m-0 font-code text-xs leading-4 tracking-[0.08em] text-muted uppercase" aria-live="polite">{total} versions</p>
 					</div>
 					<ul class="m-0 list-none p-0">
