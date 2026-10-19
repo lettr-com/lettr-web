@@ -173,8 +173,8 @@
 							<li>
 								<a
 									href={item.href}
-									target="_blank"
-									rel="noopener noreferrer"
+									target={item.external ? '_blank' : undefined}
+									rel={item.external ? 'noopener noreferrer' : undefined}
 									class="flex h-13 items-center gap-2.5 border border-hairline px-3.5 text-sm font-semibold text-surface transition-colors hover:border-primary-outline hover:bg-background {focusRing}"
 									onclick={() => onLinkClick(item)}
 								>
@@ -182,7 +182,9 @@
 										<img src={item.icon} alt="" class="size-5" loading="lazy" />
 									{/if}
 									{item.label}
-									<span class="sr-only">quickstart (opens in a new tab)</span>
+									{#if item.external}
+										<span class="sr-only">quickstart (opens in a new tab)</span>
+									{/if}
 								</a>
 							</li>
 						{/each}

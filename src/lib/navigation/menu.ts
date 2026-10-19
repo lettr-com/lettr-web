@@ -183,8 +183,7 @@ const developersMenu: NavMenu = {
       items: [
         {
           label: "Laravel",
-          href: `${docsUrl}/quickstart/laravel/introduction`,
-          external: true,
+          href: "/laravel/",
           icon: "/images/icons/laravel.svg",
         },
         {
@@ -220,7 +219,7 @@ const developersMenu: NavMenu = {
       ],
     },
   ],
-  activePrefixes: [],
+  activePrefixes: ["/laravel/"],
 };
 
 const resourcesMenu: NavMenu = {

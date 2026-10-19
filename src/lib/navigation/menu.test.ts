@@ -15,6 +15,10 @@ describe("activeSection", () => {
     expect(activeSection("/compare/resend/")).toBe("resources");
   });
 
+  it("marks Developers on the Laravel page", () => {
+    expect(activeSection("/laravel/")).toBe("developers");
+  });
+
   it("returns null for the homepage", () => {
     expect(activeSection("/")).toBeNull();
   });
