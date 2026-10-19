@@ -149,6 +149,14 @@ export const postLinks: Record<string, PostLinks> = {
       description: "Features and pricing side by side.",
     },
   },
+  "lettr-mcp-server-tools": {
+    terms: [term("mcp", "MCP"), term("api-key", "API Key"), term("webhook", "Webhook")],
+    product: {
+      href: "/platform/mcp/",
+      label: "MCP server",
+      description: "Connect an AI assistant to your Lettr account.",
+    },
+  },
   "managing-lettr-from-your-ai-assistant": {
     terms: [term("mcp", "MCP"), term("api-key", "API Key"), term("webhook", "Webhook")],
     product: {
