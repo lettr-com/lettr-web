@@ -15,7 +15,7 @@
 <BlogPost
 	category="Case study"
 	title="Zaptime cut deliverability tickets from dozens a month to zero with Lettr"
-	seoTitle="Zaptime cut deliverability tickets to zero with Lettr"
+	seoTitle="Zaptime Cut Deliverability Tickets to Zero"
 	excerpt="Zaptime's customers were reporting that their clients never received booking confirmations, and Amazon SES gave the team no way to find out why. The switch to Lettr took a single day of engineering, and it came down to two things the alternative could not do: manage sending domains for hundreds of customer teams, and process data in the EU."
 	metaDescription="Zaptime replaced two email vendors with Lettr in a one-day migration, and went from dozens of deliverability tickets a month to zero."
 	author={{ name: 'Jack Zagorski', role: 'Content specialist', avatar: '/images/authors/jack.jpg' }}

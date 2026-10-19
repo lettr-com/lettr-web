@@ -8,6 +8,7 @@
 	import LockKeyIcon from 'phosphor-svelte/lib/LockKeyIcon';
 	import FeaturePageLayout from '$lib/components/FeaturePageLayout.svelte';
 	import { createScrollRevealCleanup } from '$lib/utils/gsap';
+	import { ecomailOrganizations, emailInfraYears } from '$lib/data/company';
 
 	let scoreSection: HTMLElement | undefined = $state();
 	let dnsSection: HTMLElement | undefined = $state();
@@ -113,9 +114,10 @@
 
 <FeaturePageLayout
 	title="Deliverability"
-	metaDescription="Enterprise-grade email deliverability from 12 years of infrastructure: guided DNS setup, DMARC monitoring, dedicated IPs, and custom tracking domains."
+	seoTitle="Email Deliverability – Authentication Set Up for You"
+	metaDescription="Enterprise-grade email deliverability from {emailInfraYears} years of infrastructure: guided DNS setup, DMARC monitoring, dedicated IPs, and custom tracking domains."
 	label="DELIVERABILITY"
-	description="Enterprise-grade infrastructure backed by 12 years of Ecomail operations. Guided DNS setup, dedicated IPs, and first-party domain control from day one."
+	description="Enterprise-grade infrastructure backed by {emailInfraYears} years of Ecomail operations. Guided DNS setup, dedicated IPs, and first-party domain control from day one."
 	related={[
 		{ href: '/email-api/', label: 'Transactional Email', description: 'Send via REST API and SMTP, billed per email.' },
 		{ href: '/platform/analytics/', label: 'Analytics & Logs', description: 'Delivery metrics, searchable logs, and webhooks.' },
@@ -167,7 +169,7 @@
 						<p class="text-xs font-medium tracking-wider text-muted uppercase">Deliverability Score</p>
 						<p class="mt-2 font-heading text-2xl text-surface">Inbox Placement</p>
 						<p class="mt-2 text-sm leading-relaxed text-muted">
-							Based on authentication, reputation, and infrastructure health. Backed by the same infrastructure serving 12,000+ organizations for over 12 years.
+							Based on authentication, reputation, and infrastructure health. Backed by the same infrastructure serving {ecomailOrganizations} organizations for {emailInfraYears} years.
 						</p>
 						<div class="mt-4 flex flex-wrap justify-center gap-4 sm:justify-start">
 							<div class="flex items-center gap-1.5">

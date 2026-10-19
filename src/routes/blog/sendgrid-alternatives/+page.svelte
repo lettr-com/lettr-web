@@ -14,7 +14,7 @@
 <BlogPost
 	category="Fundamentals"
 	title="5 best SendGrid alternatives for email delivery in 2026, compared"
-	seoTitle="5 Best SendGrid Alternatives for Email Delivery [2026]"
+	seoTitle="5 Best SendGrid Alternatives in 2026"
 	excerpt="Five SendGrid alternatives (Lettr, Mailtrap, Postmark, Amazon SES, and Mailgun) compared on free tiers, pricing at 50,000 and 100,000 emails a month, traffic separation, and what each one is actually good at."
 	metaDescription="Compare five SendGrid alternatives (Lettr, Mailtrap, Postmark, Amazon SES, and Mailgun) on free tiers, pricing, and traffic separation in 2026."
 	author={{ name: 'Jack Zagorski', role: 'Content specialist', avatar: '/images/authors/jack.jpg' }}

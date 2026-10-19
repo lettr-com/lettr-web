@@ -290,7 +290,7 @@ end`
 </script>
 
 <Seo
-	title="Inbound Email API — receive & parse email programmatically | Lettr"
+	title="Inbound Email API – Receive and Parse Email | Lettr"
 	description={metaDescription}
 	ogDescription="Receive inbound email as parsed JSON via webhooks. Build email-to-ticket support, reply handling, and email-to-app workflows on the same platform you send from."
 />

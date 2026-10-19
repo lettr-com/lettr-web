@@ -107,7 +107,7 @@
 </script>
 
 <Seo
-	title="Support & Contact | Lettr"
+	title="Support and Contact – 4-Hour Replies on Weekdays | Lettr"
 	description="Get help from the Lettr team by email, live chat, or docs — technical support, billing questions, deliverability advice, or just say hi."
 	ogTitle="Lettr Support & Contact"
 />

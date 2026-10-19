@@ -11,6 +11,7 @@
 	import { capturePosthogEvent, trackSignupClick } from '$lib/analytics/posthog';
 	import { jsonLdScript } from '$lib/utils/jsonLd';
 	import { basicPageJsonLd } from '$lib/utils/pageJsonLd';
+	import { emailInfraYears, monthlyEmails } from '$lib/data/company';
 
 	function trackAboutCta(label: string, href: string) {
 		void capturePosthogEvent('cta_clicked', {
@@ -62,8 +63,8 @@
 	});
 
 	const stats = [
-		{ value: '10+', label: 'Years in email infrastructure' },
-		{ value: '500M+', label: 'Emails sent per month' },
+		{ value: `${emailInfraYears}`, label: 'Years in email infrastructure' },
+		{ value: monthlyEmails, label: 'Emails sent per month' },
 		{ value: 'Global', label: 'Multi-region delivery' }
 	];
 
@@ -121,9 +122,9 @@
 
 <Seo
 	title="About Lettr — the Team Behind Your Email Platform"
-	description="The story behind Lettr — built by a team with 10+ years in email infrastructure, sending 500M+ emails monthly across the globe."
+	description="The story behind Lettr — built by a team with {emailInfraYears} years in email infrastructure, sending {monthlyEmails} emails monthly across the globe."
 	ogTitle="About Lettr"
-	ogDescription="Built by a team with 10+ years in email infrastructure, sending 500M+ emails monthly across the globe."
+	ogDescription="Built by a team with {emailInfraYears} years in email infrastructure, sending {monthlyEmails} emails monthly across the globe."
 />
 
 <svelte:head>
@@ -140,8 +141,8 @@
 			We've been doing<br />email for a while
 		</h1>
 		<p data-animate class="mt-6 text-body leading-[1.8] text-muted">
-			Lettr is built by a European company that's been running an email marketing and automation platform for over a
-			decade. Our infrastructure handles more than 500 million emails per month across the globe — built by passionate
+			Lettr is built by a European company that's been running an email marketing and automation platform for
+			{emailInfraYears} years. Our infrastructure handles {monthlyEmails} emails a month across the globe — built by passionate
 			developers who genuinely enjoy what they do.
 		</p>
 	</div>

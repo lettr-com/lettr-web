@@ -31,7 +31,7 @@
 </script>
 
 <Seo
-	title="Pricing — Lettr"
+	title="Email API Pricing – Free to 3,000/mo, Pro from $15 | Lettr"
 	description={metaDescription}
 	ogDescription="Transactional per email, Marketing per contact. Free tier of 3,000 emails a month."
 />
@@ -50,8 +50,8 @@
 	<div class="mx-auto flex max-w-[700px] flex-col items-center gap-5 text-center md:gap-6">
 		<p class="m-0 font-code text-[0.8125rem] leading-4 tracking-[0.08em] text-primary-strong uppercase md:hidden">Pricing</p>
 		<h1 class="m-0 flex flex-col items-center font-heading text-[2.5rem] leading-[1.1] font-normal tracking-[-0.025em] text-surface md:text-[3.75rem] md:leading-[66px]">
-			Pricing that
-			<em class="font-serif text-[2.75rem] leading-[1.1] font-medium tracking-[-0.02em] text-primary md:text-[4.125rem] md:leading-[66px]">grows with you.</em>
+			Email API pricing
+			<em class="font-serif text-[2.75rem] leading-[1.1] font-medium tracking-[-0.02em] text-primary md:text-[4.125rem] md:leading-[66px]">that grows with&nbsp;you.</em>
 		</h1>
 		<p class="m-0 max-w-[534px] text-[1.0625rem] leading-[1.6] text-muted md:text-[1.1875rem] md:leading-[30px]">
 			Pay per email for transactional. Pay per contact for marketing.

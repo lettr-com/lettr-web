@@ -15,6 +15,7 @@
 <BlogPost
 	category="Fundamentals"
 	title="Best transactional email services in 2026, compared"
+	seoTitle="10 Best Transactional Email Services in 2026"
 	excerpt="A comparison of ten transactional email services (Lettr, Mailtrap, Postmark, SendGrid, Mailgun, Amazon SES, Resend, MailerSend, Brevo, SMTP2GO): current free tiers, pricing at 50,000 and 100,000 emails a month, deliverability track records, and which service fits which use case."
 	metaDescription="Ten transactional email services compared on free tiers, pricing at 50k and 100k emails a month, deliverability, and features, with a pick per use case."
 	author={{ name: 'Erik Vlčák', role: 'Customer Success Engineer', avatar: '/images/authors/erik.jpg' }}

@@ -14,7 +14,7 @@
 <BlogPost
 	category="Fundamentals"
 	title="5 best Mailgun alternatives for transactional email in 2026"
-	seoTitle="5 Best Mailgun Alternatives for Transactional Email [2026]"
+	seoTitle="5 Best Mailgun Alternatives in 2026"
 	excerpt="Five Mailgun alternatives (Lettr, Mailtrap, Postmark, Amazon SES, and Twilio SendGrid) compared on log retention, free tiers, pricing at 50,000 and 100,000 emails a month, and traffic separation."
 	metaDescription="Compare five Mailgun alternatives (Lettr, Mailtrap, Postmark, Amazon SES, and Twilio SendGrid) on log retention, pricing, and traffic separation in 2026."
 	author={{ name: 'Jack Zagorski', role: 'Content specialist', avatar: '/images/authors/jack.jpg' }}

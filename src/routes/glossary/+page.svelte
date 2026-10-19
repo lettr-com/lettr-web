@@ -33,7 +33,7 @@
 </script>
 
 <Seo
-	title="Email Glossary: Deliverability, Authentication & API Terms | Lettr"
+	title="Email Glossary – Deliverability, Auth and API Terms | Lettr"
 	{description}
 	canonical="/glossary/"
 />

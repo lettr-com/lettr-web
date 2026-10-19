@@ -7,13 +7,14 @@
 	import ArrowRightIcon from 'phosphor-svelte/lib/ArrowRightIcon';
 	import { createScrollRevealCleanup } from '$lib/utils/gsap';
 	import { capturePosthogEvent } from '$lib/analytics/posthog';
+	import { topolCompanies } from '$lib/data/company';
 
 	let section: HTMLElement | undefined = $state();
 
 	const features = [
 		{
 			icon: PaintBrushIcon,
-			title: 'The editor 40,000+ teams trust',
+			title: `The editor ${topolCompanies} teams trust`,
 			description:
 				'Powered by Topol. Drag, drop, ship — your team launches campaigns in minutes, no dev tickets and no Figma exports required.'
 		},

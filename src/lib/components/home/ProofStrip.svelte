@@ -1,13 +1,14 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import { createScrollRevealCleanup } from '$lib/utils/gsap';
+	import { ecomailOrganizations, emailInfraYears, topolCompanies } from '$lib/data/company';
 
 	let section: HTMLElement | undefined = $state();
 
 	const stats = [
-		{ value: '40,000+', label: 'companies use our email editor' },
-		{ value: '12,000+', label: 'organizations run campaigns with us' },
-		{ value: '12 years', label: 'running email infrastructure' }
+		{ value: topolCompanies, label: 'companies use our email editor' },
+		{ value: ecomailOrganizations, label: 'organizations run campaigns with us' },
+		{ value: `${emailInfraYears} years`, label: 'running email infrastructure' }
 	];
 
 	onMount(() => {

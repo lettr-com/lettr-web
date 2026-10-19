@@ -430,7 +430,7 @@
 </script>
 
 <Seo
-	title="Book a Demo — Lettr"
+	title="Book a Demo – Walk Through the API and Campaigns | Lettr"
 	description="Book a demo of Lettr — the email platform built for SaaS. Pick a time that works for you, or get started self-serve in minutes."
 	ogDescription="See how Lettr handles transactional and marketing email from one platform. Book a time or get started self-serve."
 />

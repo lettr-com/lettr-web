@@ -9,6 +9,7 @@
 	import FeaturePageLayout from '$lib/components/FeaturePageLayout.svelte';
 	import EditorPreview from '$lib/components/EditorPreview.svelte';
 	import { createScrollRevealCleanup } from '$lib/utils/gsap';
+	import { topolCompanies } from '$lib/data/company';
 
 	let editorSection: HTMLElement | undefined = $state();
 	let featuresSection: HTMLElement | undefined = $state();
@@ -234,9 +235,10 @@
 
 <FeaturePageLayout
 	title="Visual Editor"
+	seoTitle="Email Template Builder – No-Code, Drag and Drop"
 	metaDescription="Best-in-class drag-and-drop email editor powered by Topol. Your team designs, edits, and manages templates — no dev tickets required."
 	label="VISUAL EDITOR"
-	description="The same drag-and-drop editor trusted by 40,000+ companies. Your team manages templates, content, and campaigns — without filing a single dev ticket."
+	description="The same drag-and-drop editor trusted by {topolCompanies} companies. Your team manages templates, content, and campaigns — without filing a single dev ticket."
 	related={[
 		{ href: '/email-marketing/', label: 'Email Marketing', description: 'Campaigns, audiences, and segments, billed per contact.' },
 		{ href: '/email-api/', label: 'Transactional Email', description: 'Send via REST API and SMTP, billed per email.' },
@@ -260,7 +262,7 @@
 		<div bind:this={featuresSection} class="mx-auto mt-20 md:mt-28">
 			<h2 data-reveal class="mb-3 text-center">Everything your team needs</h2>
 			<p data-reveal class="mx-auto mb-8 max-w-lg text-center text-body text-muted">
-				A complete template toolkit your whole team can use — designers, marketers, and product people. Powered by the Topol editor trusted by 40,000+ companies.
+				A complete template toolkit your whole team can use — designers, marketers, and product people. Powered by the Topol editor trusted by {topolCompanies} companies.
 			</p>
 			<div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
 				{#each features as feature}
