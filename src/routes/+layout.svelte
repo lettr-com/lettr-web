@@ -8,6 +8,7 @@
 	import CookieBanner from '$lib/components/CookieBanner.svelte';
 	import { bootIntercom } from '$lib/intercom';
 	import { persistUtmParamsFromUrl } from '$lib/utils/utm';
+	import { ecomailOrganizations, emailInfraYears, topolCompanies } from '$lib/data/company';
 
 	let { children } = $props();
 
@@ -25,11 +26,11 @@
 	<link rel="icon" href="/favicon.png" type="image/png" />
 	<link rel="alternate" type="application/atom+xml" title="Lettr Blog" href="/blog/feed.xml" />
 	{#if isHomeRoute}
-		<title>Lettr — The Email Platform Built for SaaS</title>
+		<title>Email API for SaaS – Transactional and Marketing | Lettr</title>
 		<link rel="canonical" href="https://lettr.com/" />
 
 		<!-- Primary Meta Tags -->
-		<meta name="title" content="Lettr — The Email Platform Built for SaaS" />
+		<meta name="title" content="Email API for SaaS – Transactional and Marketing | Lettr" />
 		<meta name="description" content="Transactional and marketing email in one platform. Developers integrate once via a clean API; your team ships content with a drag-and-drop editor." />
 		<meta name="keywords" content="SaaS email platform, transactional email API, email for SaaS, developer email API, marketing email SaaS, email delivery, REST API email, SMTP relay, drag-and-drop email editor, email infrastructure" />
 		<meta name="author" content="Lettr" />
@@ -38,7 +39,7 @@
 		<!-- Open Graph / Facebook -->
 		<meta property="og:type" content="website" />
 		<meta property="og:url" content="https://lettr.com/" />
-		<meta property="og:title" content="Lettr — The Email Platform Built for SaaS" />
+		<meta property="og:title" content="Email API for SaaS – Transactional and Marketing | Lettr" />
 		<meta property="og:description" content="Transactional and marketing email in one platform. Developers integrate once via a clean API; your team ships content with a drag-and-drop editor." />
 		<meta property="og:image" content="https://lettr.com/og-image.png" />
 		<meta property="og:image:width" content="1200" />
@@ -49,7 +50,7 @@
 		<!-- Twitter -->
 		<meta name="twitter:card" content="summary_large_image" />
 		<meta name="twitter:url" content="https://lettr.com/" />
-		<meta name="twitter:title" content="Lettr — The Email Platform Built for SaaS" />
+		<meta name="twitter:title" content="Email API for SaaS – Transactional and Marketing | Lettr" />
 		<meta name="twitter:description" content="Transactional and marketing email in one platform. Developers integrate once via a clean API; your team ships content with a drag-and-drop editor." />
 		<meta name="twitter:image" content="https://lettr.com/og-image.png" />
 
@@ -66,7 +67,7 @@
 						"@type": "ImageObject",
 						"url": "https://lettr.com/logo.svg"
 					},
-					"description": "Lettr is built by the Big Good group — the team behind Topol (40,000+ companies), Ecomail (12,000+ organizations, 12 years of infrastructure), and DMARCeye.",
+					"description": `Lettr is built by the Big Good group — the team behind Topol (${topolCompanies} companies), Ecomail (${ecomailOrganizations} organizations, ${emailInfraYears} years of infrastructure), and DMARCeye.`,
 					"contactPoint": {
 						"@type": "ContactPoint",
 						"email": "support@lettr.com",

@@ -91,7 +91,7 @@
 </script>
 
 <Seo
-	title="Compare | Lettr"
+	title="Best Email APIs Compared – SendGrid, Mailgun, Resend | Lettr"
 	description={metaDescription}
 	ogTitle="Compare Email Providers | Lettr"
 	ogDescription="See how Lettr compares to other email providers. Switch from Resend, Postmark, SendGrid, Mailgun, or MailerSend."

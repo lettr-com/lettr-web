@@ -20,6 +20,8 @@ export interface LegalNavLink {
 export interface LegalDocumentData {
   key: LegalDocumentKey;
   title: string;
+  /** <title> text before " | Lettr", when the visible title alone is too short for search. */
+  seoTitle?: string;
   description: string;
   updatedAt: string;
   href: string;
@@ -28,6 +30,7 @@ export interface LegalDocumentData {
 
 interface LegalDocumentEntry {
   title: string;
+  seoTitle?: string;
   description: string;
   updatedAt: string;
   href: string;
@@ -39,6 +42,7 @@ const googleDocReferencePattern = /\[(\d+)\\?\.\]\(https:\/\/docs\.google\.com\/
 const legalDocuments: Record<LegalDocumentKey, LegalDocumentEntry> = {
   privacyPolicy: {
     title: "Privacy Policy",
+    seoTitle: "Privacy Policy – How We Handle Your Data and Emails",
     description:
       "How Lettr collects, uses, stores, and protects your personal data, the rights you have over it, and the third-party processors we rely on.",
     updatedAt: "February 15, 2026",
@@ -47,6 +51,7 @@ const legalDocuments: Record<LegalDocumentKey, LegalDocumentEntry> = {
   },
   termsOfUse: {
     title: "Terms of Use",
+    seoTitle: "Terms of Use – Lettr Email API and Platform",
     description:
       "The rules and contractual terms for using Lettr's email platform, covering accounts, acceptable use, billing, liability, and termination.",
     updatedAt: "June 4, 2026",
@@ -55,6 +60,7 @@ const legalDocuments: Record<LegalDocumentKey, LegalDocumentEntry> = {
   },
   termsOfUse20260215: {
     title: "Terms of Use",
+    seoTitle: "Terms of Use – Version of February 15, 2026",
     description:
       "Archived Terms of Use for Lettr, effective February 15, 2026 — kept for reference and superseded by the current Terms of Use.",
     updatedAt: "February 15, 2026",
@@ -99,6 +105,7 @@ export async function getLegalDocumentData(key: LegalDocumentKey): Promise<Legal
   return {
     key,
     title: document.title,
+    seoTitle: document.seoTitle,
     description: document.description,
     updatedAt: document.updatedAt,
     href: document.href,

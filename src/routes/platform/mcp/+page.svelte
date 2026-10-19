@@ -129,6 +129,7 @@
 
 <FeaturePageLayout
 	title="MCP Server"
+	seoTitle="Email MCP Server – Use Lettr from Claude and Cursor"
 	metaDescription="Control your SaaS email infrastructure from any AI assistant — send emails, debug delivery, and monitor domains in natural language via MCP."
 	label="MCP"
 	description="Control your email infrastructure from any AI assistant. Send transactional and marketing emails, debug delivery, and monitor domains — all through natural language."

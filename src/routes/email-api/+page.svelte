@@ -217,7 +217,7 @@ Lettr::emails()->sendHtml(
 </script>
 
 <Seo
-	title="Transactional Email API — Lettr"
+	title="Transactional Email API – EU-hosted, 3,000 free/mo | Lettr"
 	description={metaDescription}
 	ogDescription="Send transactional email from your SaaS via a clean REST API and SMTP relay. Sub-second delivery, automatic retries, webhooks, and searchable logs."
 />

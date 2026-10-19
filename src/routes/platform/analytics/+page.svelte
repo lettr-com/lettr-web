@@ -147,6 +147,7 @@
 
 <FeaturePageLayout
 	title="Analytics & Logs"
+	seoTitle="Email Analytics and Logs – Every Event, Searchable"
 	metaDescription="Real-time delivery metrics, searchable logs, and webhooks for every email event. Know exactly what your SaaS emails are doing."
 	label="ANALYTICS & LOGS"
 	description="Delivery metrics, searchable logs for debugging, and webhooks for every event. Real-time visibility into every email — transactional and marketing."
