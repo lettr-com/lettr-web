@@ -6,10 +6,11 @@
 	import { transactionalPlans, transactionalSteps, type PlanKey } from '$lib/data/pricing';
 	import { buildRegisterUrl, registerUrl } from '$lib/utils/utm';
 	import { capturePosthogEvent, trackSignupClick } from '$lib/analytics/posthog';
+	import { createChangeTracker } from '$lib/analytics/changeTracker';
 
 	let step = $state(1);
 	let registerHref: string = $state(registerUrl);
-	let debounce: ReturnType<typeof setTimeout> | null = null;
+	const trackVolume = createChangeTracker();
 
 	const current = $derived(transactionalSteps[step]);
 	const plans = $derived(transactionalPlans(step));
@@ -21,10 +22,9 @@
 		const label = current.label;
 		const value = step;
 		const plan = highlighted;
-		if (debounce) clearTimeout(debounce);
-		debounce = setTimeout(() => {
+		trackVolume(value, () => {
 			void capturePosthogEvent('pricing_volume_changed', { slider_value: value, volume_label: label, highlighted_plan: plan });
-		}, 400);
+		});
 	});
 
 	function trackPlanCta(key: PlanKey, name: string, cta: string) {

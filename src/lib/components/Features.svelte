@@ -169,7 +169,7 @@
 				class="timeline-node relative mb-12 last:mb-0"
 			>
 				<div
-					class="timeline-icon absolute -left-14 sm:-left-20 top-0 flex h-10 w-10 items-center justify-center border border-white/10 bg-surface text-white/40 transition-all duration-700"
+					class="timeline-icon absolute -left-14 sm:-left-20 top-0 flex h-10 w-10 items-center justify-center border border-white/10 bg-surface text-white/40 transition duration-700"
 				>
 					<feature.icon size={18} />
 					<span class="timeline-pulse" aria-hidden="true"></span>

@@ -5,6 +5,7 @@
 	import { createFromAnimationCleanup } from '$lib/utils/gsap';
 	import { buildRegisterUrl, registerUrl } from '$lib/utils/utm';
 	import { capturePosthogEvent, trackSignupClick } from '$lib/analytics/posthog';
+	import { createChangeTracker } from '$lib/analytics/changeTracker';
 
 	let section: HTMLElement | undefined = $state();
 	let sliderValue: number = $state(1);
@@ -35,18 +36,17 @@
 		'Advanced analytics'
 	];
 
-	let sliderDebounce: ReturnType<typeof setTimeout> | null = null;
+	const trackVolume = createChangeTracker();
 
 	$effect(() => {
 		const currentValue = sliderValue;
 		const currentLabel = sliderLabels[currentValue];
-		if (sliderDebounce) clearTimeout(sliderDebounce);
-		sliderDebounce = setTimeout(() => {
+		trackVolume(currentValue, () => {
 			void capturePosthogEvent('campaigns_pricing_volume_changed', {
 				slider_value: currentValue,
 				volume_label: currentLabel
 			});
-		}, 400);
+		});
 	});
 
 	function trackPlanCta() {

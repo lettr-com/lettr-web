@@ -7,6 +7,7 @@
 	import { createScrollRevealCleanup, createFromAnimationCleanup } from '$lib/utils/gsap';
 	import { buildRegisterUrl, registerUrl } from '$lib/utils/utm';
 	import { capturePosthogEvent, trackSignupClick } from '$lib/analytics/posthog';
+	import { createChangeTracker } from '$lib/analytics/changeTracker';
 
 	let { sectionClass = 'py-16', animateOnMount = false }: { sectionClass?: string; animateOnMount?: boolean } = $props();
 
@@ -116,20 +117,19 @@
 		{ feature: 'SLA guarantee', values: [false, false, false, true] }
 	];
 
-	let sliderDebounce: ReturnType<typeof setTimeout> | null = null;
+	const trackVolume = createChangeTracker();
 
 	$effect(() => {
 		const currentValue = sliderValue;
 		const currentLabel = sliderLabels[currentValue];
 		const currentPlan = highlightedPlan;
-		if (sliderDebounce) clearTimeout(sliderDebounce);
-		sliderDebounce = setTimeout(() => {
+		trackVolume(currentValue, () => {
 			void capturePosthogEvent('pricing_volume_changed', {
 				slider_value: currentValue,
 				volume_label: currentLabel,
 				highlighted_plan: currentPlan
 			});
-		}, 400);
+		});
 	});
 
 	function trackPlanCta(planKey: PlanKey, planName: string, cta: string) {
@@ -197,7 +197,7 @@
 			{@const isHighlighted = highlightedPlan === plan.key}
 			{@const isMobileVisible = mobileVisiblePlan === plan.key}
 			<div
-				class="flex-col p-5 border transition-all duration-300
+				class="flex-col p-5 border transition duration-300
 					{isMobileVisible ? 'flex' : 'hidden sm:flex'}
 					{isHighlighted
 					? 'border-primary bg-white shadow-lg shadow-primary/5'

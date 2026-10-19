@@ -6,10 +6,11 @@
 	import { marketingFeatures, marketingSteps } from '$lib/data/pricing';
 	import { buildRegisterUrl, registerUrl } from '$lib/utils/utm';
 	import { capturePosthogEvent, trackSignupClick } from '$lib/analytics/posthog';
+	import { createChangeTracker } from '$lib/analytics/changeTracker';
 
 	let step = $state(1);
 	let registerHref: string = $state(registerUrl);
-	let debounce: ReturnType<typeof setTimeout> | null = null;
+	const trackVolume = createChangeTracker();
 
 	const last = marketingSteps.length - 1;
 	const current = $derived(marketingSteps[step]);
@@ -19,10 +20,9 @@
 	$effect(() => {
 		const label = current.label;
 		const value = step;
-		if (debounce) clearTimeout(debounce);
-		debounce = setTimeout(() => {
+		trackVolume(value, () => {
 			void capturePosthogEvent('campaigns_pricing_volume_changed', { slider_value: value, volume_label: label });
-		}, 400);
+		});
 	});
 
 	function trackPlanCta() {
