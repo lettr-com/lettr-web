@@ -1,6 +1,9 @@
 data "aws_caller_identity" "current" {}
 
 locals {
+  # Old page path to new page path, applied as 301s by the viewer-request function.
+  redirects = jsondecode(file("${path.module}/redirects.json"))
+
   name   = var.project_name
   bucket = var.bucket_name != "" ? var.bucket_name : "${var.project_name}-${data.aws_caller_identity.current.account_id}"
 }
@@ -104,47 +107,9 @@ resource "aws_cloudfront_origin_access_control" "site" {
 resource "aws_cloudfront_function" "append_index" {
   name    = "${local.name}-append-index"
   runtime = "cloudfront-js-2.0"
-  comment = "Rewrite /path/ to /path/index.html (index.md for Accept: text/markdown) so SvelteKit trailing-slash pages resolve on S3."
+  comment = "One URL per page (301 to the lowercase trailing-slash path and through redirects.json), then /path/ to /path/index.html (index.md for Accept: text/markdown) so SvelteKit trailing-slash pages resolve on S3."
   publish = true
-  code    = <<-EOT
-    // Markdown wins when the client lists text/markdown at least as high as text/html,
-    // so browsers (text/html, */*) keep HTML and agents asking for markdown get it.
-    function prefersMarkdown(accept) {
-      var markdown = 0;
-      var html = 0;
-      var ranges = accept.toLowerCase().split(',');
-      for (var i = 0; i < ranges.length; i++) {
-        var params = ranges[i].split(';');
-        var type = params[0].trim();
-        var q = 1;
-        for (var j = 1; j < params.length; j++) {
-          var param = params[j].trim();
-          if (param.indexOf('q=') === 0) q = parseFloat(param.slice(2));
-        }
-        if (type === 'text/markdown') markdown = q;
-        else if (type === 'text/html') html = q;
-      }
-      return markdown > 0 && markdown >= html;
-    }
-
-    // The build writes an index.md next to every index.html. Rewriting the URI
-    // (not varying on Accept) keeps the two representations apart in the cache.
-    function handler(event) {
-      var request = event.request;
-      var uri = request.uri;
-      var page;
-      if (uri.endsWith('/')) {
-        page = uri + 'index';
-      } else if (!uri.includes('.')) {
-        page = uri + '/index';
-      } else {
-        return request;
-      }
-      var accept = request.headers['accept'];
-      request.uri = page + (accept && prefersMarkdown(accept.value) ? '.md' : '.html');
-      return request;
-    }
-  EOT
+  code    = replace(file("${path.module}/cloudfront/viewer-request.js"), "__REDIRECTS__", jsonencode(local.redirects))
 }
 
 # Surfaces the viewer's country (resolved by CloudFront from the source IP) to

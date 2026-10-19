@@ -49,7 +49,7 @@
 <BlogPost
 	category="Product"
 	title="Manage an email platform from your AI assistant: Lettr's 79 MCP tools"
-	seoTitle="Manage an email platform from your AI assistant with MCP"
+	seoTitle="Manage email from your AI assistant with MCP"
 	excerpt="An AI assistant such as Claude, ChatGPT, or Cursor can operate Lettr through 79 MCP tools, from sending and scheduling to campaigns, audience management, and delivery diagnostics, with more added as Lettr ships new features. This article covers what the tools do, the two ways to connect, and the guardrails that limit what an assistant can send or change."
 	metaDescription="Manage an email platform from Claude, ChatGPT, or Cursor. Lettr's MCP server gives an AI assistant 79 tools, and counting, for sending, campaigns, and audience."
 	author={{ name: 'Jack Zagorski', role: 'Content specialist', avatar: '/images/authors/jack.jpg' }}

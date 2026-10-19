@@ -60,10 +60,6 @@
 	let stripTracked = false;
 
 	const menuOrder = menus.map((menu) => menu.key);
-	const menuByKey = Object.fromEntries(menus.map((menu) => [menu.key, menu])) as Record<
-		MenuKey,
-		(typeof menus)[number]
-	>;
 	const layerMotion: Record<Motion, string> = {
 		none: '',
 		'from-start': 'nav-enter-from-left',
@@ -494,44 +490,49 @@
 			</div>
 		</div>
 
-		{#if viewportState}
-			<!-- svelte-ignore a11y_no_static_element_interactions -->
+		<!-- Every panel is always rendered, hidden until opened, so the links are in the server HTML for crawlers. -->
+		<!-- svelte-ignore a11y_no_static_element_interactions -->
+		<div
+			hidden={!viewportState}
+			class="absolute inset-x-0 top-full z-20 hidden perspective-[2000px] lg:block"
+			onpointerenter={(event) => event.pointerType === 'mouse' && clearTimers()}
+			onpointerleave={handlePointerLeave}
+			onkeydown={handleViewportKeydown}
+		>
 			<div
-				class="absolute inset-x-0 top-full z-20 hidden perspective-[2000px] lg:block"
-				onpointerenter={(event) => event.pointerType === 'mouse' && clearTimers()}
-				onpointerleave={handlePointerLeave}
-				onkeydown={handleViewportKeydown}
+				data-state={viewportState}
+				class="relative origin-top overflow-hidden border-y border-t-hairline border-b-[#E9E2E5] bg-white shadow-[0_24px_48px_-24px_rgba(35,2,11,0.18)] {viewportState ===
+				'open'
+					? 'nav-scale-in'
+					: 'nav-scale-out'} {isHeightInstant
+					? ''
+					: 'transition-[height] duration-250 ease-out motion-reduce:transition-none'}"
+				style:height="{viewportHeight}px"
 			>
-				<div
-					data-state={viewportState}
-					class="relative origin-top overflow-hidden border-y border-t-hairline border-b-[#E9E2E5] bg-white shadow-[0_24px_48px_-24px_rgba(35,2,11,0.18)] {viewportState ===
-					'open'
-						? 'nav-scale-in'
-						: 'nav-scale-out'} {isHeightInstant
-						? ''
-						: 'transition-[height] duration-250 ease-out motion-reduce:transition-none'}"
-					style:height="{viewportHeight}px"
-				>
-					{#each layers as layer (layer.key)}
-						<div
-							bind:this={layerEls[layer.key]}
-							class="absolute inset-x-0 top-0 {layerMotion[layer.motion]}"
-							inert={layer.key !== openMenu}
-						>
-							<NavPanel
-								menu={menuByKey[layer.key]}
-								id="nav-panel-{layer.key}"
-								{pathname}
-								onLinkClick={(item) => {
-									trackLink(item, 'dropdown', layer.key);
-									closeAll();
-								}}
-							/>
-						</div>
-					{/each}
-				</div>
+				{#each menus as menu (menu.key)}
+					{@const layer = layers.find((candidate) => candidate.key === menu.key)}
+					<div
+						bind:this={layerEls[menu.key]}
+						hidden={!layer}
+						class="absolute inset-x-0 top-0 {layer ? layerMotion[layer.motion] : ''} {menu.key ===
+						openMenu
+							? 'z-10'
+							: ''}"
+						inert={menu.key !== openMenu}
+					>
+						<NavPanel
+							{menu}
+							id="nav-panel-{menu.key}"
+							{pathname}
+							onLinkClick={(item) => {
+								trackLink(item, 'dropdown', menu.key);
+								closeAll();
+							}}
+						/>
+					</div>
+				{/each}
 			</div>
-		{/if}
+		</div>
 	</nav>
 
 	{#if isStripAllowed(pathname)}
