@@ -3,7 +3,7 @@
 	import Button from '$lib/components/Button.svelte';
 	import VolumeCard from './VolumeCard.svelte';
 	import EnterpriseRow from './EnterpriseRow.svelte';
-	import { transactionalPlans, transactionalSteps, type PlanKey } from '$lib/data/pricing';
+	import { transactionalPlans, transactionalSteps, transactionalZones, type PlanKey } from '$lib/data/pricing';
 	import { buildRegisterUrl, registerUrl } from '$lib/utils/utm';
 	import { capturePosthogEvent, trackSignupClick } from '$lib/analytics/posthog';
 	import { createChangeTracker } from '$lib/analytics/changeTracker';
@@ -62,6 +62,8 @@
 		accent="primary"
 		bind:value={step}
 		valueText="{current.volume} emails per month, {current.name} plan"
+		zones={transactionalZones}
+		activePlan={highlighted}
 	/>
 
 	<div class="grid gap-4 md:grid-cols-3">

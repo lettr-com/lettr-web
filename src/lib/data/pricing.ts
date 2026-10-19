@@ -41,6 +41,22 @@ export const transactionalSteps = [
   },
 ];
 
+export interface PlanZone {
+  label: string;
+  plan: PlanKey;
+  /** Index into `transactionalSteps` the label sits over; `left` and `right` zones pin to the track ends instead. */
+  step: number;
+  align: "left" | "center" | "right";
+}
+
+/** Plan names above the transactional slider, each over the first stop of its plan. */
+export const transactionalZones: PlanZone[] = [
+  { label: "Free", plan: "free", step: 0, align: "left" },
+  { label: "Pro", plan: "pro", step: 1, align: "center" },
+  { label: "Business", plan: "business", step: 3, align: "center" },
+  { label: "Enterprise", plan: "enterprise", step: transactionalSteps.length - 1, align: "right" },
+];
+
 export interface PlanFeature {
   text: string;
   excluded?: boolean;

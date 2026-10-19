@@ -3,7 +3,7 @@
 	import ArrowRightIcon from 'phosphor-svelte/lib/ArrowRightIcon';
 	import DitherSide from './DitherSide.svelte';
 	import DitherEdge from './DitherEdge.svelte';
-	import { marketingSteps, transactionalSteps, type Mode } from '$lib/data/pricing';
+	import { marketingSteps, transactionalSteps, transactionalZones, type Mode } from '$lib/data/pricing';
 	import { capturePosthogEvent } from '$lib/analytics/posthog';
 	import { createScrollRevealCleanup } from '$lib/utils/gsap';
 
@@ -50,16 +50,7 @@
 	const at = (i: number) => `calc(${THUMB / 2}px + (100% - ${THUMB}px) * ${i / last})`;
 
 	// plan zones above the transactional track; marketing has a single plan, so none
-	const zones = $derived(
-		isTransactional
-			? ([
-					{ label: 'Free', plan: 'free', step: 0, align: 'left' },
-					{ label: 'Pro', plan: 'pro', step: 1, align: 'center' },
-					{ label: 'Business', plan: 'business', step: 3, align: 'center' },
-					{ label: 'Enterprise', plan: 'enterprise', step: last, align: 'right' }
-				] as const)
-			: []
-	);
+	const zones = $derived(isTransactional ? transactionalZones : []);
 
 	// Marketing has a single plan, so only its Enterprise stop gets a name
 	const planName = $derived(
@@ -250,8 +241,8 @@
 				<div class="relative h-[18px]" aria-hidden="true">
 					{#each zones as zone}
 						<span
-							class="absolute top-0 text-[11px] leading-[14px] tracking-[0.06em] transition-colors {zone.plan === (current as { plan?: string }).plan ? 'text-[#d40e43]' : 'text-muted'} {zone.plan === 'business' ? 'hidden sm:block' : ''}"
-							style="left: {zone.align === 'right' ? 'auto' : at(zone.step)}; right: {zone.align === 'right' ? '0' : 'auto'}; transform: translateX({zone.align === 'center' ? '-50%' : '0'})"
+							class="absolute top-0 text-[11px] leading-[14px] tracking-[0.06em] transition-colors {zone.plan === (current as { plan?: string }).plan ? 'text-[#d40e43]' : 'text-muted'}"
+							style="left: {zone.align === 'left' ? '0' : zone.align === 'right' ? 'auto' : at(zone.step)}; right: {zone.align === 'right' ? '0' : 'auto'}; transform: translateX({zone.align === 'center' ? '-50%' : '0'})"
 						>
 							{zone.label}
 						</span>

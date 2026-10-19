@@ -1,4 +1,6 @@
 <script lang="ts">
+	import type { PlanKey, PlanZone } from '$lib/data/pricing';
+
 	interface Props {
 		/** The question above the big number. */
 		question: string;
@@ -14,6 +16,10 @@
 		accent: 'primary' | 'green';
 		value: number;
 		valueText: string;
+		/** Plan names above the track. */
+		zones?: PlanZone[];
+		/** Plan of the current stop, whose zone label is highlighted. */
+		activePlan?: PlanKey;
 	}
 
 	let {
@@ -25,7 +31,9 @@
 		showPeriod = true,
 		accent,
 		value = $bindable(),
-		valueText
+		valueText,
+		zones = [],
+		activePlan
 	}: Props = $props();
 
 	const THUMB = 28;
@@ -117,6 +125,18 @@
 	</div>
 
 	<div class="mt-8 flex flex-col gap-3.5 md:mt-9">
+		{#if zones.length}
+			<div class="relative h-[18px]" aria-hidden="true">
+				{#each zones as zone}
+					<span
+						class="absolute top-0 text-[11px] leading-[14px] tracking-[0.06em] transition-colors {zone.plan === activePlan ? 'text-[#d40e43]' : 'text-muted'}"
+						style="left: {zone.align === 'left' ? '0' : zone.align === 'right' ? 'auto' : at(zone.step)}; right: {zone.align === 'right' ? '0' : 'auto'}; transform: translateX({zone.align === 'center' ? '-50%' : '0'})"
+					>
+						{zone.label}
+					</span>
+				{/each}
+			</div>
+		{/if}
 		<div class="relative">
 			<div class="pointer-events-none absolute inset-x-0 top-1 h-5" aria-hidden="true">
 				{#each labels as _, i}
