@@ -54,15 +54,15 @@ const productMenu: NavMenu = {
       subtitle: "Triggered by your app, billed per email",
       lane: "transactional",
       items: [
-        { label: "Email API", description: "Send from your code over REST", href: "/email-api/" },
+        { label: "Email API", description: "Send from code over REST", href: "/email-api/" },
         {
           label: "SMTP relay",
-          description: "Point any app or framework at Lettr",
+          description: "Drop-in SMTP for any app",
           href: "/smtp-relay/",
         },
         {
           label: "Inbound email",
-          description: "Receive replies and parse them by webhook",
+          description: "Parse replies by webhook",
           href: "/inbound-email-api/",
         },
       ],
@@ -75,12 +75,12 @@ const productMenu: NavMenu = {
       items: [
         {
           label: "Campaigns",
-          description: "Newsletters and launches, with audiences and segments",
+          description: "Newsletters and launches",
           href: "/email-marketing/",
         },
         {
           label: "Multilingual campaigns",
-          description: "One send, each contact gets their language",
+          description: "One send, every language",
           href: "/platform/multilingual-campaigns/",
         },
       ],
@@ -93,27 +93,27 @@ const productMenu: NavMenu = {
       items: [
         {
           label: "Visual editor",
-          description: "Drag-and-drop templates, built on Topol",
+          description: "Drag-and-drop templates",
           href: "/platform/templates/",
         },
         {
           label: "Analytics and logs",
-          description: "Every event, searchable, with webhooks",
+          description: "Every event, searchable",
           href: "/platform/analytics/",
         },
         {
           label: "Deliverability",
-          description: "SPF, DKIM, DMARC and dedicated IPs",
+          description: "SPF, DKIM and DMARC",
           href: "/platform/deliverability/",
         },
         {
           label: "MCP server",
-          description: "Run Lettr from Claude, ChatGPT or Cursor",
+          description: "Lettr in Claude and Cursor",
           href: "/platform/mcp/",
         },
         {
           label: "Multi-region sending",
-          description: "Routed through the closest data center",
+          description: "Nearest data center",
           href: "/channels/email/",
         },
       ],
@@ -141,7 +141,7 @@ const developersMenu: NavMenu = {
       items: [
         {
           label: "Documentation",
-          description: "Guides, API reference and examples",
+          description: "Guides and API reference",
           href: docsUrl,
           external: true,
         },
@@ -153,7 +153,7 @@ const developersMenu: NavMenu = {
       items: [
         {
           label: "API reference",
-          description: "Every endpoint, with request examples",
+          description: "Every endpoint, with examples",
           href: `${docsUrl}/api-reference/introduction`,
           external: true,
         },
@@ -165,13 +165,13 @@ const developersMenu: NavMenu = {
         },
         {
           label: "MCP setup",
-          description: "Connect Claude, Cursor or ChatGPT",
+          description: "Connect Claude or Cursor",
           href: `${docsUrl}/mcp/introduction`,
           external: true,
         },
         {
           label: "Status",
-          description: "Live uptime and incident history",
+          description: "Uptime and incidents",
           href: "https://status.lettr.com",
           external: true,
         },
@@ -232,15 +232,15 @@ const resourcesMenu: NavMenu = {
       id: "learn",
       title: "Learn",
       items: [
-        { label: "Blog", description: "Deliverability, APIs and product news", href: "/blog/" },
+        { label: "Blog", description: "Guides and product news", href: "/blog/" },
         {
           label: "Compare providers",
-          description: "Lettr next to SendGrid, Mailgun, SES and more",
+          description: "Lettr vs SendGrid, Mailgun, SES",
           href: "/compare/",
         },
         {
           label: "Email glossary",
-          description: "Email terms, explained plainly",
+          description: "Email terms, explained",
           href: "/glossary/",
         },
         { label: "Changelog", description: "What shipped, month by month", href: "/changelog/" },
@@ -250,15 +250,15 @@ const resourcesMenu: NavMenu = {
       id: "company",
       title: "Company",
       items: [
-        { label: "About", description: "The team behind Topol and Ecomail", href: "/about/" },
+        { label: "About", description: "The team behind Topol", href: "/about/" },
         {
           label: "Support",
-          description: "Replies within 4 hours on business days",
+          description: "4-hour replies on weekdays",
           href: "/support/",
         },
         {
           label: "Talk to the team",
-          description: "Book a call about volume or migration",
+          description: "Book a call with the team",
           href: salesHref,
         },
       ],
