@@ -17,6 +17,7 @@
 	import { capturePosthogEvent, trackSignupClick } from '$lib/analytics/posthog';
 	import { jsonLdScript } from '$lib/utils/jsonLd';
 	import { productPageJsonLd } from '$lib/utils/pageJsonLd';
+	import { topolCompanies } from '$lib/data/company';
 
 	const metaDescription =
 		'Run marketing campaigns from the same platform as your transactional email: drag-and-drop editor, contact lists, segmentation, and automations.';
@@ -44,7 +45,7 @@
 			icon: PaintBrushIcon,
 			title: 'Best-in-class drag-and-drop editor',
 			description:
-				'The same Topol editor trusted by 40,000+ companies. Synced sections, multilingual templates, version history, draft and publish workflow — built for teams that actually ship.'
+				`The same Topol editor trusted by ${topolCompanies} companies. Synced sections, multilingual templates, version history, draft and publish workflow — built for teams that actually ship.`
 		},
 		{
 			icon: UsersThreeIcon,

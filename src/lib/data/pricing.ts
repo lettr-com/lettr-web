@@ -117,13 +117,27 @@ export function transactionalPlans(step: number): Plan[] {
   ];
 }
 
+/**
+ * The volumes a paid plan covers across the slider, e.g. "50K–100K emails", so the
+ * comparison table states the same range the plan cards move through.
+ */
+export function planVolumes(plan: PlanKey): string {
+  const labels = transactionalSteps
+    .filter((step) => step.plan === plan)
+    .map((step) => step.label.toUpperCase());
+  return labels.length > 1 ? `${labels[0]}–${labels.at(-1)} emails` : `${labels[0]} emails`;
+}
+
 export type CellValue = string | boolean;
 
 export const comparisonRows: {
   feature: string;
   values: [CellValue, CellValue, CellValue, CellValue];
 }[] = [
-  { feature: "Monthly emails", values: ["3,000", "100K emails", "200K emails", "Unlimited"] },
+  {
+    feature: "Monthly emails",
+    values: ["3,000", planVolumes("pro"), planVolumes("business"), "Unlimited"],
+  },
   { feature: "Daily limit", values: ["100 / day", "No limit", "No limit", "No limit"] },
   { feature: "Sending domains", values: ["1 domain", "10 domains", "Unlimited", "Unlimited"] },
   { feature: "Inbound routes", values: [false, "1", "10", "Unlimited"] },
