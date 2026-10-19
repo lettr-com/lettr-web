@@ -1,10 +1,29 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
+	import { onMount, type Snippet } from 'svelte';
 	import ArrowRightIcon from 'phosphor-svelte/lib/ArrowRightIcon';
 	import DitherSide from './DitherSide.svelte';
+	import DitherEdge from './DitherEdge.svelte';
 	import { marketingSteps, transactionalSteps, type Mode } from '$lib/data/pricing';
 	import { capturePosthogEvent } from '$lib/analytics/posthog';
 	import { createScrollRevealCleanup } from '$lib/utils/gsap';
+
+	interface Props {
+		/** Sent with the analytics events. */
+		placement?: string;
+		/** Replaces the centred heading. Give its h2 the id `pricing-heading`. */
+		header?: Snippet;
+		/** The volume question in transactional mode. */
+		transactionalQuestion?: string;
+		/** `side` dithers the card edges, `edge` runs a wave along the bottom of the transactional card. */
+		dither?: 'side' | 'edge';
+	}
+
+	let {
+		placement = 'home_pricing',
+		header,
+		transactionalQuestion = 'How many emails per month?',
+		dither = 'side'
+	}: Props = $props();
 
 	let section: HTMLElement | undefined = $state();
 
@@ -48,7 +67,7 @@
 	);
 	const price = $derived(!isTransactional && isEnterprise ? 'Custom' : current.price);
 	const showPeriod = $derived(!isEnterprise);
-	const question = $derived(isTransactional ? 'How many emails per month?' : 'How many contacts do you have?');
+	const question = $derived(isTransactional ? transactionalQuestion : 'How many contacts do you have?');
 	const valueText = $derived(
 		isTransactional
 			? `${current.volume} emails per month, ${planName} plan`
@@ -59,7 +78,7 @@
 		if (next === mode) return;
 		mode = next;
 		stepIndex = defaultStep[next];
-		void capturePosthogEvent('pricing_mode_changed', { mode: next, placement: 'home_pricing' });
+		void capturePosthogEvent('pricing_mode_changed', { mode: next, placement });
 	}
 
 	function onModeKeydown(event: KeyboardEvent, index: number) {
@@ -160,18 +179,22 @@
 </style>
 
 <section bind:this={section} id="pricing" aria-labelledby="pricing-heading" class="py-14 md:py-24">
-	<div data-reveal class="mx-auto mb-10 flex max-w-[860px] flex-col items-center gap-4 text-center md:mb-14">
-		<h2
-			id="pricing-heading"
-			class="font-heading text-balance text-[1.875rem] leading-[1.27] tracking-[-0.02em] text-surface md:text-[2.625rem] md:leading-[50px]"
-		>
-			Simple, usage-based
-			<em class="block font-serif text-[2.125rem] leading-none font-medium text-primary md:text-[2.875rem]">pricing.</em>
-		</h2>
-		<p class="max-w-[520px] text-[1.0625rem] leading-[1.5] text-surface md:text-[1.1875rem]">
-			Start free. Transactional is billed per email, Marketing per contact.
-		</p>
-	</div>
+	{#if header}
+		{@render header()}
+	{:else}
+		<div data-reveal class="mx-auto mb-10 flex max-w-[860px] flex-col items-center gap-4 text-center md:mb-14">
+			<h2
+				id="pricing-heading"
+				class="font-heading text-balance text-[1.875rem] leading-[1.27] tracking-[-0.02em] text-surface md:text-[2.625rem] md:leading-[50px]"
+			>
+				Simple, usage-based
+				<em class="block font-serif text-[2.125rem] leading-none font-medium text-primary md:text-[2.875rem]">pricing.</em>
+			</h2>
+			<p class="max-w-[520px] text-[1.0625rem] leading-[1.5] text-surface md:text-[1.1875rem]">
+				Start free. Transactional is billed per email, Marketing per contact.
+			</p>
+		</div>
+	{/if}
 
 	<div data-reveal class="mx-auto flex max-w-[1100px] flex-col gap-4">
 		<div
@@ -270,8 +293,12 @@
 		<div class="grid gap-4 md:grid-cols-2">
 			{#each tiles as tile}
 				{@const isTransactional = tile.key === 'transactional'}
-				<div class="relative flex flex-col gap-5 overflow-hidden p-6 md:gap-7 md:p-8 {isTransactional ? 'bg-[#23020b]' : 'bg-[#002010]'}">
-					<DitherSide color={isTransactional ? '#ec104b' : '#00c851'} variant={isTransactional ? 'ripple' : 'noise'} width={isTransactional ? 20 : 30} />
+				<div class="relative flex flex-col gap-5 overflow-hidden p-6 md:gap-7 md:p-8 {isTransactional ? 'bg-[#23020b]' : 'bg-[#002010]'} {dither === 'edge' && isTransactional ? 'pb-24 md:pb-[104px]' : ''}">
+					{#if dither === 'side'}
+						<DitherSide color={isTransactional ? '#ec104b' : '#00c851'} variant={isTransactional ? 'ripple' : 'noise'} width={isTransactional ? 20 : 30} />
+					{:else if isTransactional}
+						<DitherEdge placement="inside" color="#ec104b" height={72} cell={8} />
+					{/if}
 					<div class="relative flex flex-col gap-3.5 md:gap-5">
 						<div class="flex h-11 items-center justify-between gap-3">
 							<h3

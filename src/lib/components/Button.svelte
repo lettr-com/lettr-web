@@ -2,7 +2,7 @@
 	import { type Snippet } from 'svelte';
 
 	interface Props {
-		variant?: 'primary' | 'secondary' | 'outline' | 'green';
+		variant?: 'primary' | 'secondary' | 'outline' | 'green' | 'ghost';
 		size?: 'default' | 'hero';
 		href?: string;
 		onclick?: () => void;
@@ -26,7 +26,9 @@
 		secondary: 'text-primary-strong bg-fade-white hover:bg-fade-primary/10',
 		// for white surfaces, where the plain white secondary would vanish
 		outline: 'border border-primary-outline text-primary-strong bg-fade-white hover:bg-fade-primary-soft',
-		green: 'bg-fade-[#03bd4c] text-white hover:bg-fade-[#03bd4c]/90'
+		green: 'bg-fade-[#03bd4c] text-white hover:bg-fade-[#03bd4c]/90',
+		// for dark surfaces: a hairline frame that fills in faintly on hover
+		ghost: 'text-white bg-fade-white/0 shadow-[inset_0_0_0_1px_rgb(255_255_255/0.28)] hover:bg-fade-white/10'
 	};
 	const sizes = {
 		default: 'min-w-[180px] px-6 py-3',

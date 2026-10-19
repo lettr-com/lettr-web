@@ -1,7 +1,7 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
-/* Redaction (SIL OFL): the serif accent face. "Redaction 50" is its pixelated cut. */
+/* Redaction (SIL OFL): the serif accent face. "Redaction 35" and "Redaction 50" are its degraded cuts. */
 @font-face {
   font-family: "Redaction";
   src: url("/fonts/Redaction-Italic.woff2") format("woff2");
@@ -13,6 +13,13 @@
   font-family: "Redaction";
   src: url("/fonts/Redaction-Regular.woff2") format("woff2");
   font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Redaction 35";
+  src: url("/fonts/Redaction35-Italic.woff2") format("woff2");
+  font-style: italic;
   font-weight: 400;
   font-display: swap;
 }
@@ -65,6 +72,7 @@
   --font-code: "DM Mono", monospace;
   --font-serif: "Redaction", serif;
   --font-pixel: "Redaction 50", serif;
+  --font-serif-35: "Redaction 35", "Redaction", serif;
 
   --text-h1: 2.5rem;
   --text-h1--line-height: 1.2;
@@ -428,6 +436,16 @@
   transition-property:
     color, border-color, outline-color, text-decoration-color, fill, stroke, --tw-gradient-from,
     --tw-gradient-via, --tw-gradient-to, --fade-bg;
+}
+
+/* Full-bleed band inside the 1200px page frame. Pages that use it clip the
+   scrollbar's width of overflow that 100vw leaves on the root. */
+@utility bleed {
+  margin-inline: calc(50% - 50vw);
+}
+
+html:has(.bleed) {
+  overflow-x: clip;
 }
 
 @utility glass {
