@@ -45,6 +45,11 @@
   --color-primary-outline: #f9b7c9;
   --color-green: #00c851;
   --color-code-string: #f9a8b8;
+  /* Main navigation: muted copy, hairlines and the transactional plum. */
+  --color-subtle: #39485f;
+  --color-hairline: #eee7ea;
+  --color-plum: #23020b;
+  --color-plum-raised: #3a0716;
 
   /* Changelog module badges: one hue per product area, plus a warning hue
      reserved for the "Breaking" tag. Tinted backgrounds are produced with
@@ -428,4 +433,160 @@
 @utility glass {
   backdrop-filter: blur(8px);
   background-color: rgba(247, 241, 243, 0.7);
+}
+
+/* Main navigation motion. Calm by design: short fades and small drops, and
+   under reduced motion nothing moves, it only fades. */
+@layer components {
+  /* Dropdowns, after laravel.com: the shared viewport tilts in and out, and menu content
+     slides 200px sideways toward or away from the trigger the visitor moved to. */
+  .nav-scale-in {
+    animation: nav-scale-in 200ms ease both;
+  }
+
+  .nav-scale-out {
+    animation: nav-scale-out 200ms ease both;
+  }
+
+  .nav-enter-from-left {
+    animation: nav-enter-from-left 250ms ease both;
+  }
+
+  .nav-enter-from-right {
+    animation: nav-enter-from-right 250ms ease both;
+  }
+
+  .nav-exit-to-left {
+    animation: nav-exit-to-left 250ms ease both;
+  }
+
+  .nav-exit-to-right {
+    animation: nav-exit-to-right 250ms ease both;
+  }
+
+  .nav-sheet {
+    animation: nav-rise 200ms cubic-bezier(0.2, 0, 0, 1);
+  }
+
+  .nav-drill {
+    animation: nav-slide 200ms cubic-bezier(0.2, 0, 0, 1);
+  }
+
+  /* The strip slides out from under the bar. visibility keeps a hidden strip
+     out of the tab order and the accessibility tree once it has slid away. */
+  .nav-strip {
+    transform: translateY(-100%);
+    visibility: hidden;
+    transition:
+      transform 180ms ease-in,
+      visibility 0s linear 180ms;
+  }
+
+  .nav-strip[data-visible="true"] {
+    transform: none;
+    visibility: visible;
+    transition:
+      transform 240ms cubic-bezier(0.2, 0, 0, 1),
+      visibility 0s;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .nav-scale-in,
+    .nav-enter-from-left,
+    .nav-enter-from-right,
+    .nav-sheet,
+    .nav-drill {
+      animation: nav-fade 200ms ease both;
+    }
+
+    .nav-scale-out,
+    .nav-exit-to-left,
+    .nav-exit-to-right {
+      animation: nav-fade-out 200ms ease both;
+    }
+
+    .nav-strip,
+    .nav-strip[data-visible="true"] {
+      transform: none;
+      opacity: 0;
+      transition:
+        opacity 100ms linear,
+        visibility 0s linear 100ms;
+    }
+
+    .nav-strip[data-visible="true"] {
+      opacity: 1;
+      transition:
+        opacity 100ms linear,
+        visibility 0s;
+    }
+  }
+}
+
+@keyframes nav-scale-in {
+  from {
+    opacity: 0;
+    transform: rotateX(-8deg) scale(0.96);
+  }
+}
+
+@keyframes nav-scale-out {
+  to {
+    opacity: 0;
+    transform: rotateX(-8deg) scale(0.96);
+  }
+}
+
+@keyframes nav-enter-from-left {
+  from {
+    opacity: 0;
+    transform: translateX(-200px);
+  }
+}
+
+@keyframes nav-enter-from-right {
+  from {
+    opacity: 0;
+    transform: translateX(200px);
+  }
+}
+
+@keyframes nav-exit-to-left {
+  to {
+    opacity: 0;
+    transform: translateX(-200px);
+  }
+}
+
+@keyframes nav-exit-to-right {
+  to {
+    opacity: 0;
+    transform: translateX(200px);
+  }
+}
+
+@keyframes nav-fade-out {
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes nav-fade {
+  from {
+    opacity: 0;
+  }
+}
+
+@keyframes nav-rise {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+}
+
+@keyframes nav-slide {
+  from {
+    opacity: 0;
+    transform: translateX(24px);
+  }
 }
