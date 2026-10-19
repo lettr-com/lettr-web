@@ -223,13 +223,13 @@
 						onclick={() => onLinkClick({ label: post.title, href: `/blog/${post.slug}/` })}
 					>
 						<span class="font-code text-[11px] tracking-[0.12em] text-primary uppercase">
-							{post.category} · {post.readTime}
+							From the blog · {post.readTime}
 						</span>
 						<span class="font-heading text-xl leading-[27px] tracking-[-0.02em] text-surface">
 							{post.title}
 						</span>
 						<span class="flex items-center gap-1.5 pt-1 text-[13px] font-semibold text-surface">
-							Read the story
+							Read the article
 							<ArrowRight size={12} class="transition-transform group-hover:translate-x-0.5" aria-hidden="true" />
 						</span>
 					</a>

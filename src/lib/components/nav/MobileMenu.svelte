@@ -193,7 +193,7 @@
 								onclick={() => onLinkClick({ label: post.title, href: `/blog/${post.slug}/` }, 'resources')}
 							>
 								<span class="font-code text-[11px] tracking-[0.12em] text-primary uppercase">
-									{post.category} · {post.readTime}
+									From the blog · {post.readTime}
 								</span>
 								<span class="font-heading text-base leading-[22px] tracking-[-0.02em] text-surface">
 									{post.title}
