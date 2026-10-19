@@ -15,6 +15,7 @@
 <BlogPost
 	category="Deliverability"
 	title="Why you should separate transactional and marketing email"
+	seoTitle="Separate Transactional and Marketing Email"
 	excerpt="Why transactional and marketing email belong on separate subdomains: how shared sender reputation lets a marketing campaign drag 2FA codes into spam, how to classify the gray-area emails that sit between the two, and what the legal rules add on top."
 	metaDescription="Why transactional and marketing email belong on separate subdomains, how shared reputation drags 2FA codes into spam, and how to classify gray-area mail."
 	author={{ name: 'Erik Vlčák', role: 'Customer Success Engineer', avatar: '/images/authors/erik.jpg' }}

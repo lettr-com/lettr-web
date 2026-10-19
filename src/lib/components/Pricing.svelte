@@ -8,6 +8,7 @@
 	import { buildRegisterUrl, registerUrl } from '$lib/utils/utm';
 	import { capturePosthogEvent, trackSignupClick } from '$lib/analytics/posthog';
 	import { createChangeTracker } from '$lib/analytics/changeTracker';
+	import { comparisonRows, transactionalPlans, transactionalSteps, type PlanKey } from '$lib/data/pricing';
 
 	let { sectionClass = 'py-16', animateOnMount = false }: { sectionClass?: string; animateOnMount?: boolean } = $props();
 
@@ -15,107 +16,15 @@
 	let sliderValue: number = $state(1);
 	let registerHref: string = $state(registerUrl);
 
-	const sliderLabels = ['3K', '50K', '100K', '200K', '500K', '1M', '2M+'];
+	const sliderLabels = transactionalSteps.map((step) => step.label.toUpperCase());
 
-	type PlanKey = 'free' | 'pro' | 'business' | 'enterprise';
-	type PlanFeature = string | { text: string; excluded: true };
-
-	let highlightedPlan: PlanKey = $derived(
-		sliderValue === 0 ? 'free' :
-		sliderValue <= 2 ? 'pro' :
-		sliderValue <= 5 ? 'business' :
-		'enterprise'
-	);
+	let highlightedPlan: PlanKey = $derived(transactionalSteps[sliderValue].plan);
 
 	let mobileVisiblePlan: PlanKey = $derived(
 		highlightedPlan === 'enterprise' ? 'business' : highlightedPlan
 	);
 
-	const proTier = $derived.by(() => {
-		if (sliderValue <= 1) return { price: '$15', desc: '50K emails · $0.80 / 1,000 extra' };
-		return { price: '$30', desc: '100K emails · $0.80 / 1,000 extra' };
-	});
-
-	const businessTier = $derived.by(() => {
-		if (sliderValue <= 3) return { price: '$110', desc: '200K emails · $0.80 / 1,000 extra' };
-		if (sliderValue === 4) return { price: '$250', desc: '500K emails · $0.80 / 1,000 extra' };
-		return { price: '$450', desc: '1M emails · $0.80 / 1,000 extra' };
-	});
-
-	const plans = $derived.by(() => [
-		{
-			key: 'free' as PlanKey,
-			name: 'Free',
-			price: '$0',
-			period: '/mo',
-			description: '3,000 emails/month · 100/day',
-			features: [
-				'3,000 emails per month',
-				'100 emails per day',
-				'1 sending domain',
-				'Email API & SMTP',
-				'Basic analytics',
-				'7-day data retention'
-			] as PlanFeature[],
-			cta: 'Start for free'
-		},
-		{
-			key: 'pro' as PlanKey,
-			name: 'Pro',
-			price: proTier.price,
-			period: '/mo',
-			description: proTier.desc,
-			features: [
-				'Up to 10 sending domains',
-				'1 inbound route',
-				'Up to 10 webhook endpoints',
-				'No daily sending limit',
-				'Advanced analytics',
-				'30-day data retention',
-				{ text: 'No dedicated IPs', excluded: true }
-			] as PlanFeature[],
-			cta: 'Get started'
-		},
-		{
-			key: 'business' as PlanKey,
-			name: 'Business',
-			price: businessTier.price,
-			period: '/mo',
-			description: businessTier.desc,
-			features: [
-				'Unlimited sending domains',
-				'10 inbound routes',
-				'Unlimited webhook endpoints',
-				'Everything in Pro',
-				'30-day data retention',
-				'Dedicated IPs (add-on)',
-				'Priority support',
-				'Dedicated account manager',
-				'Deliverability consultation'
-			] as PlanFeature[],
-			cta: 'Get started'
-		}
-	]);
-
-	type CellValue = string | boolean;
-
-	const comparisonRows: Array<{
-		feature: string;
-		values: [CellValue, CellValue, CellValue, CellValue];
-	}> = [
-		{ feature: 'Monthly emails', values: ['3,000', '100K emails', '200K emails', 'Unlimited'] },
-		{ feature: 'Daily limit', values: ['100 / day', 'No limit', 'No limit', 'No limit'] },
-		{ feature: 'Sending domains', values: ['1 domain', '10 domains', 'Unlimited', 'Unlimited'] },
-		{ feature: 'Inbound routes', values: [false, '1', '10', 'Unlimited'] },
-		{ feature: 'Webhook endpoints', values: ['1', '10', 'Unlimited', 'Unlimited'] },
-		{ feature: 'Email API & SMTP', values: [true, true, true, true] },
-		{ feature: 'Analytics', values: ['Basic', 'Advanced', 'Advanced', 'Advanced'] },
-		{ feature: 'Data retention', values: ['7 days', '30 days', '30 days', '90 days'] },
-		{ feature: 'Team members', values: [true, true, true, true] },
-		{ feature: 'Dedicated IPs', values: [false, false, 'Add-on', true] },
-		{ feature: 'Priority support', values: [false, false, true, true] },
-		{ feature: 'SLA guarantee', values: [false, false, false, true] }
-	];
+	const plans = $derived(transactionalPlans(sliderValue));
 
 	const trackVolume = createChangeTracker();
 
@@ -209,18 +118,16 @@
 
 				<div class="flex items-baseline gap-1 mb-1">
 					<span class="text-2xl font-bold text-surface">{plan.price}</span>
-					{#if plan.period}
-						<span class="text-sm text-muted">{plan.period}</span>
-					{/if}
+					<span class="text-sm text-muted">/mo</span>
 				</div>
-				<p class="text-[12px] text-muted mb-5">{plan.description}</p>
+				<p class="text-[12px] text-muted mb-5">{plan.blurb}</p>
 
 				<ul class="flex flex-col gap-2 mb-6 flex-1">
 					{#each plan.features as feature}
-						{#if typeof feature === 'string'}
+						{#if !feature.excluded}
 							<li class="flex items-start gap-2 text-[13px] leading-5 text-muted">
 								<span class="mt-2 block w-1 h-1 rounded-full bg-border shrink-0"></span>
-								<span>{feature}</span>
+								<span>{feature.text}</span>
 							</li>
 						{:else}
 							<li class="flex items-start gap-2 text-[13px] leading-5 text-muted/40">

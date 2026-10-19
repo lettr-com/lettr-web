@@ -1,14 +1,19 @@
+import {
+  ecomailOrganizations,
+  emailInfraSince,
+  emailInfraYears,
+  topolCompanies,
+} from "$lib/data/company";
+
 // Shared by FAQSection and the pricing page FAQ, and used for the FAQPage JSON-LD.
 export const faqs: { question: string; answer: string }[] = [
   {
     question: "What is Lettr?",
-    answer:
-      "Lettr is an email infrastructure platform built for SaaS companies. It combines a clean REST API and SMTP relay for developers with a drag-and-drop visual editor (powered by Topol, trusted by 40,000+ companies) for marketing and product teams. Unlike general-purpose email tools, every feature, template, and metric is designed for the emails SaaS products send: onboarding sequences, password resets, trial nudges, product updates, and marketing campaigns.",
+    answer: `Lettr is an email infrastructure platform built for SaaS companies. It combines a clean REST API and SMTP relay for developers with a drag-and-drop visual editor (powered by Topol, trusted by ${topolCompanies} companies) for marketing and product teams. Unlike general-purpose email tools, every feature, template, and metric is designed for the emails SaaS products send: onboarding sequences, password resets, trial nudges, product updates, and marketing campaigns.`,
   },
   {
     question: "How is Lettr different from Resend, Postmark, or SendGrid?",
-    answer:
-      "Resend offers a developer-friendly API and code-based templates (React Email), but no drag-and-drop editor that non-technical teammates can use. Postmark is strong on transactional deliverability but has only limited campaign tooling and no drag-and-drop editor. SendGrid and Mailchimp serve a very broad audience and split transactional and marketing into separate products. Lettr is built specifically for SaaS: it pairs a developer-friendly REST API and SMTP relay with a drag-and-drop editor powered by Topol (used by 40,000+ companies), and handles both transactional and marketing email from one platform with one bill.",
+    answer: `Resend offers a developer-friendly API and code-based templates (React Email), but no drag-and-drop editor that non-technical teammates can use. Postmark is strong on transactional deliverability but has only limited campaign tooling and no drag-and-drop editor. SendGrid and Mailchimp serve a very broad audience and split transactional and marketing into separate products. Lettr is built specifically for SaaS: it pairs a developer-friendly REST API and SMTP relay with a drag-and-drop editor powered by Topol (used by ${topolCompanies} companies), and handles both transactional and marketing email from one platform with one bill.`,
   },
   {
     question: "Is Lettr free?",
@@ -27,8 +32,7 @@ export const faqs: { question: string; answer: string }[] = [
   },
   {
     question: "Is Lettr EU-hosted and GDPR-compliant?",
-    answer:
-      "Yes. Lettr runs on EU-hosted infrastructure, with primary infrastructure in the EU, so your email and data stay under EU jurisdiction. This applies on every plan, including the free tier. Data residency is not gated behind an enterprise upgrade, as it is with some US providers. Lettr is GDPR-compliant by default and is built by the Big Good group, a European company operating email infrastructure since 2014.",
+    answer: `Yes. Lettr runs on EU-hosted infrastructure, with primary infrastructure in the EU, so your email and data stay under EU jurisdiction. This applies on every plan, including the free tier. Data residency is not gated behind an enterprise upgrade, as it is with some US providers. Lettr is GDPR-compliant by default and is built by the Big Good group, a European company operating email infrastructure since ${emailInfraSince}.`,
   },
   {
     question: "Can I send both transactional and marketing emails with Lettr?",
@@ -42,13 +46,11 @@ export const faqs: { question: string; answer: string }[] = [
   },
   {
     question: "Does Lettr include an email template editor?",
-    answer:
-      "Yes. Lettr includes a full drag-and-drop email editor powered by Topol, a technology trusted by over 40,000 companies. Features include synced sections that update across all templates at once, a draft-and-publish workflow with version history, multilingual template support, dynamic placeholders for personalization, and pre-built templates for SaaS use cases like onboarding, alerts, and product updates.",
+    answer: `Yes. Lettr includes a full drag-and-drop email editor powered by Topol, a technology trusted by ${topolCompanies} companies. Features include synced sections that update across all templates at once, a draft-and-publish workflow with version history, multilingual template support, dynamic placeholders for personalization, and pre-built templates for SaaS use cases like onboarding, alerts, and product updates.`,
   },
   {
     question: "Who built Lettr?",
-    answer:
-      "Lettr is built by the Big Good group, the team behind Topol (email editor used by 40,000+ companies), Ecomail (email marketing platform serving 12,000+ organizations for over 12 years), and DMARCeye (DMARC monitoring and reporting). Lettr leverages this deep email infrastructure expertise to deliver enterprise-grade reliability at startup-friendly pricing.",
+    answer: `Lettr is built by the Big Good group, the team behind Topol (email editor used by ${topolCompanies} companies), Ecomail (email marketing platform serving ${ecomailOrganizations} organizations for ${emailInfraYears} years), and DMARCeye (DMARC monitoring and reporting). Lettr leverages this deep email infrastructure expertise to deliver enterprise-grade reliability at startup-friendly pricing.`,
   },
   {
     question: "When is Lettr not the right fit?",

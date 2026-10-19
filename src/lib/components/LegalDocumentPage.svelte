@@ -12,7 +12,7 @@
 	let { document, links }: Props = $props();
 </script>
 
-<Seo title="{document.title} | Lettr" description={document.description} canonical={document.href} />
+<Seo title="{document.seoTitle ?? document.title} | Lettr" description={document.description} canonical={document.href} />
 
 <svelte:head>
 	{@html jsonLdScript(basicPageJsonLd({ path: document.href, name: document.title }))}

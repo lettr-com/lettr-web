@@ -354,7 +354,7 @@ func main() {
 </script>
 
 <Seo
-	title="SMTP Relay Service — Lettr"
+	title="SMTP Relay Service – Drop-in SMTP for Any App | Lettr"
 	description={metaDescription}
 	ogDescription="A standards-compliant SMTP relay with built-in deliverability, encrypted ports, analytics, and searchable logs. Drop-in setup, free tier, no code changes."
 />

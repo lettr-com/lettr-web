@@ -79,7 +79,7 @@
 </script>
 
 <Seo
-	title="Lettr vs {provider.name} | Lettr"
+	title="{provider.name} Alternative – Lettr vs {provider.name} (2026) | Lettr"
 	description={metaDescription}
 	ogTitle="Lettr vs {provider.name}"
 	ogDescription="{provider.tagline}. Save up to {provider.averageSavings}% on transactional email."

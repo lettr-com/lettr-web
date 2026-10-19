@@ -73,7 +73,7 @@
 			style="animation-delay:0.06s"
 			class="mb-6 text-[2.25rem] leading-[1.06] font-normal tracking-[-0.025em] text-surface sm:text-[3.5rem] lg:text-[4rem]"
 		>
-			The email platform<br />
+			Transactional and marketing email<br />
 			<span class="font-serif text-[2.625rem] font-medium text-primary italic sm:text-[4rem] lg:text-[4.5rem]">built for SaaS</span>
 		</h1>
 

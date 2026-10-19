@@ -218,9 +218,9 @@
 				</div>
 
 				<!-- Heading -->
-				<h2 class="mt-5 font-heading text-[20px] font-semibold text-surface leading-tight min-h-[24px]">
+				<p class="mt-5 font-heading text-[20px] font-semibold text-surface leading-tight min-h-[24px]">
 					{headingText}{#if cursorTarget === 'heading'}<span class="typing-cursor"></span>{/if}
-				</h2>
+				</p>
 
 				<!-- Body -->
 				<p class="mt-3 text-[12px] leading-relaxed text-muted min-h-[44px]">

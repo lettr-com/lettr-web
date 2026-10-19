@@ -11,6 +11,7 @@
 	import { createScrollRevealCleanup } from '$lib/utils/gsap';
 	import { buildRegisterUrl, registerUrl } from '$lib/utils/utm';
 	import { capturePosthogEvent, trackSignupClick } from '$lib/analytics/posthog';
+	import { monthlyEmails } from '$lib/data/company';
 
 	function trackChannelCta(label: string, href: string) {
 		void capturePosthogEvent('cta_clicked', {
@@ -50,8 +51,7 @@
 	});
 
 	const stats = [
-		{ value: '6T+', label: 'Emails delivered across our platform' },
-		{ value: '40%', label: 'Of B2C companies use email as primary channel' },
+		{ value: monthlyEmails, label: 'Emails sent across our platform every month' },
 		{ value: '99.99%', label: 'Uptime across all sending regions' },
 		{ value: '<3s', label: 'Average delivery time to inbox' }
 	];
@@ -108,6 +108,7 @@
 
 <FeaturePageLayout
 	title="Email Channel"
+	seoTitle="Email Delivery Infrastructure – Multi-region Sending"
 	metaDescription="Enterprise-grade email delivery infrastructure. Multi-region, adaptive routing, 99.99% uptime, and sub-3-second delivery times."
 	label="EMAIL"
 	description="Enterprise-grade email delivery infrastructure built for transactional email. Multi-region, adaptive routing, and sub-3-second delivery."
@@ -124,7 +125,7 @@
 	{#snippet children()}
 		<!-- Stat Cards -->
 		<div bind:this={statsSection} class="mx-auto max-w-3xl">
-			<div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+			<div class="grid gap-4 sm:grid-cols-3">
 				{#each stats as stat}
 					<div data-reveal class="border border-border/50 bg-white p-5 text-center">
 						<div class="font-heading text-2xl text-primary">{stat.value}</div>
