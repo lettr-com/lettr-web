@@ -67,6 +67,14 @@ export const postLinks: Record<string, PostLinks> = {
     ],
     product: api,
   },
+  "email-campaigns-from-chatgpt-or-claude": {
+    terms: [
+      term("mcp", "MCP"),
+      term("double-opt-in", "Double Opt-In"),
+      term("multilingual-campaign", "Multilingual Campaign"),
+    ],
+    product: marketing,
+  },
   "email-deliverability-checklist": {
     terms: [
       term("spf", "SPF"),
@@ -159,6 +167,19 @@ export const postLinks: Record<string, PostLinks> = {
   },
   "managing-lettr-from-your-ai-assistant": {
     terms: [term("mcp", "MCP"), term("api-key", "API Key"), term("webhook", "Webhook")],
+    product: {
+      href: "/platform/mcp/",
+      label: "MCP server",
+      description: "Connect an AI assistant to your Lettr account.",
+    },
+  },
+  "mcp-api-key-scopes": {
+    terms: [
+      term("mcp", "MCP"),
+      term("api-key", "API Key"),
+      term("sandbox-mode", "Sandbox Mode"),
+      term("rate-limiting", "Rate Limiting"),
+    ],
     product: {
       href: "/platform/mcp/",
       label: "MCP server",

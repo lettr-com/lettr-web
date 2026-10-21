@@ -12,6 +12,26 @@ export interface PostMeta {
 // Used by the blog index listing and the "Related articles" block on each post.
 export const posts: PostMeta[] = [
   {
+    slug: "email-campaigns-from-chatgpt-or-claude",
+    category: "Product",
+    title: "For marketers: check, schedule, and send email campaigns from ChatGPT or Claude",
+    excerpt:
+      "ChatGPT and Claude connect to Lettr with one sign-in, and from the chat an assistant can report a campaign's results, build its segments, and schedule or send the campaign. This article covers the sign-in, what the assistant can do before and after a send, and the confirmation step before anything goes out.",
+    author: "Jack Zagorski",
+    date: "October 21, 2026",
+    readTime: "4 min read",
+  },
+  {
+    slug: "mcp-api-key-scopes",
+    category: "Product",
+    title: "Scoped API keys for AI agents on Lettr's MCP server",
+    excerpt:
+      "An AI agent can connect to Lettr's MCP server with its own API key, and the key's permission level fixes which tools the server offers it. This article covers what Full access and Sending only keys give an agent, testing with a sandbox key, and reading one agent's calls in the API logs.",
+    author: "Jack Zagorski",
+    date: "October 16, 2026",
+    readTime: "5 min read",
+  },
+  {
     slug: "lettr-mcp-server-tools",
     category: "Product",
     title: "Manage an email platform from your AI assistant: Lettr's 79 MCP tools",
