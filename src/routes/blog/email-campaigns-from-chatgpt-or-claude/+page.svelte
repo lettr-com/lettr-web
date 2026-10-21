@@ -85,10 +85,10 @@
 	<Heading level={3}>In ChatGPT</Heading>
 
 	<Paragraph>
-		Custom MCP servers are available on ChatGPT Business, Enterprise, and Edu on the web, and
-		workspace admins decide who can add one, as
-		<a href="https://help.openai.com/en/articles/12584461-connecting-custom-mcp-servers-in-chatgpt"
-			>OpenAI's guide to custom MCP servers</a
+		ChatGPT adds custom MCP servers as plugins, on the web. They aren't available on every plan, and
+		on Business, Enterprise, and Edu workspaces an admin decides who can add one, as
+		<a href="https://help.openai.com/en/articles/12584461-creating-custom-mcp-apps-in-chatgpt"
+			>OpenAI's guide to custom MCP apps</a
 		> explains.
 	</Paragraph>
 
