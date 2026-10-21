@@ -52,8 +52,8 @@
 	excerpt="An AI agent can connect to Lettr's MCP server with its own API key, and the key's permission level fixes which tools the server offers it. This article covers what Full access and Sending only keys give an agent, testing with a sandbox key, and reading one agent's calls in the API logs."
 	metaDescription="Give each AI agent its own Lettr API key for the MCP server, see which tools each permission level allows, and test agents safely with a sandbox key."
 	author={{ name: 'Jack Zagorski', role: 'Content specialist', avatar: '/images/authors/jack.jpg' }}
-	date="October 21, 2026"
-	datetime="2026-10-21"
+	date="October 16, 2026"
+	datetime="2026-10-16"
 	readTime="5 min read"
 	slug="mcp-api-key-scopes"
 	{faqs}

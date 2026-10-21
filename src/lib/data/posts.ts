@@ -28,7 +28,7 @@ export const posts: PostMeta[] = [
     excerpt:
       "An AI agent can connect to Lettr's MCP server with its own API key, and the key's permission level fixes which tools the server offers it. This article covers what Full access and Sending only keys give an agent, testing with a sandbox key, and reading one agent's calls in the API logs.",
     author: "Jack Zagorski",
-    date: "October 21, 2026",
+    date: "October 16, 2026",
     readTime: "5 min read",
   },
   {
