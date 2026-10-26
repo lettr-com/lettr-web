@@ -1,1 +1,20 @@
-{}
+{
+  "/acceptable-use/": "/terms/",
+  "/accessibility/": "/accessibility-statement/",
+  "/blog/email-best-practices/": "/blog/onboarding-email-best-practices/",
+  "/blog/introducing-audiences-and-campaigns/": "/blog/introducing-lettr-marketing-audiences-and-campaigns/",
+  "/blog/lettr-best-practices/": "/blog/onboarding-email-best-practices/",
+  "/blog/lettr-mcp-server-77-tools/": "/blog/lettr-mcp-server-tools/",
+  "/email-api/laravel/": "/laravel/",
+  "/email-api/mcp/": "/platform/mcp/",
+  "/email-api/sync/": "/",
+  "/email-marketing/es-marketing/": "/email-marketing/",
+  "/legal/": "/terms/",
+  "/migrate/": "/compare/",
+  "/migrate/mailgun/": "/compare/mailgun/",
+  "/migrate/postmark/": "/compare/postmark/",
+  "/migrate/sendgrid/": "/compare/sendgrid/",
+  "/platform/laravel/": "/laravel/",
+  "/platform/sync/": "/",
+  "/privacy/": "/privacy-policy/"
+}
