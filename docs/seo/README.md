@@ -15,7 +15,7 @@ Rules and command live in `src/lib/seo/gate/` (rules tested in `gate.test.ts`); 
 ## The three data files
 
 - `baseline.json`: every page of the deployed site on 2026-10-07 (242 pages: the 240 in the sitemap plus the `/book/` redirect and the old terms version), with its title, H1, canonical and structured-data types. Each of these URLs must be built or redirected, forever.
-- `terraform/redirects.json`: old path to new path, both lowercase with trailing slashes. Empty today. Terraform inlines it into the CloudFront function (`terraform/cloudfront/viewer-request.js`), which answers each entry with a 301; the gate reads the same file, so the map and the check cannot drift.
+- `terraform/redirects.json`: old path to new path, both lowercase with trailing slashes. It holds the dead URLs Google and backlinks still request (from the 2026-10-26 coverage report and Ahrefs). Terraform inlines it into the CloudFront function (`terraform/cloudfront/viewer-request.js`), which answers each entry with a 301; the gate reads the same file, so the map and the check cannot drift.
 - `known-issues.json`: the ratchet. Today's problems, by rule and URL. A new problem fails the gate. A problem that was fixed has to be removed from this file (`--update-known`), so it cannot quietly return. The file should only ever get shorter.
 
 ## What it checks
