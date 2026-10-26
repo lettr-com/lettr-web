@@ -87,7 +87,7 @@
 								class="flex w-full cursor-pointer items-start justify-between gap-6 py-[22px] text-left text-pretty text-base leading-[22px] font-semibold text-surface md:text-[17px]"
 							>
 								{faq.question}
-								<span class="w-4 shrink-0 text-center text-xl leading-6 font-normal {open ? 'text-primary' : 'text-surface'}" aria-hidden="true">{open ? '−' : '+'}</span>
+								<span class="w-4 shrink-0 text-center text-xl leading-6 font-normal {open ? "text-primary after:content-['−']" : "text-surface after:content-['+']"}" aria-hidden="true"></span>
 							</button>
 						</h3>
 						<div id="laravel-faq-a{i}" role="region" aria-labelledby="laravel-faq-q{i}" hidden={!open} class="-mt-2 pb-[26px]">
