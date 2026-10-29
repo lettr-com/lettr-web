@@ -39,9 +39,13 @@
 
 		const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 		const thickness = Math.max(1, Math.round(width / cell));
+		// The bands drift slowly, so ~30 redraws a second look the same as one per display frame.
+		// The slack keeps a 60 Hz screen on every second frame despite timing jitter.
+		const minFrameGap = 1000 / 30 - 4;
 		let cols = 1;
 		let rows = 1;
 		let raf = 0;
+		let lastDraw = -Infinity;
 		const start = performance.now();
 
 		function resize() {
@@ -69,6 +73,11 @@
 		}
 
 		function render(now: number) {
+			if (running && now - lastDraw < minFrameGap) {
+				raf = requestAnimationFrame(render);
+				return;
+			}
+			lastDraw = now;
 			const t = reducedMotion ? 0 : (now - start) / 1000;
 			ctx!.clearRect(0, 0, cols, rows);
 			ctx!.fillStyle = color;
@@ -83,20 +92,39 @@
 					if (v > threshold) ctx!.fillRect(x, y, 1, 1);
 				}
 			}
-			if (!reducedMotion) raf = requestAnimationFrame(render);
+			raf = running ? requestAnimationFrame(render) : 0;
+		}
+
+		// Animate only while the strip is on screen and the tab is visible.
+		let visible = false;
+		let running = false;
+		function sync() {
+			const next = !reducedMotion && visible && !document.hidden;
+			if (next === running) return;
+			running = next;
+			if (running) raf = requestAnimationFrame(render);
+			else cancelAnimationFrame(raf);
 		}
 
 		resize();
 		render(performance.now());
 		const ro = new ResizeObserver(() => {
 			resize();
-			if (reducedMotion) render(performance.now());
+			if (!running) render(performance.now());
 		});
 		ro.observe(target);
+		const io = new IntersectionObserver(([entry]) => {
+			visible = entry.isIntersecting;
+			sync();
+		});
+		io.observe(target);
+		document.addEventListener('visibilitychange', sync);
 
 		return () => {
 			cancelAnimationFrame(raf);
 			ro.disconnect();
+			io.disconnect();
+			document.removeEventListener('visibilitychange', sync);
 		};
 	});
 </script>

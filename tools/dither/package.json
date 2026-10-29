@@ -1,12 +1,14 @@
 {
   "name": "lettr-hero-dither",
   "private": true,
-  "description": "Offline ordered-dither pipeline for the homepage hero loop",
+  "description": "Offline ordered-dither pipelines for the homepage hero",
   "type": "module",
   "scripts": {
+    "bake-hero": "node bake-hero.mjs",
     "dither": "node dither.mjs"
   },
   "dependencies": {
-    "pngjs": "^7.0.0"
+    "pngjs": "^7.0.0",
+    "sharp": "^0.35.5"
   }
 }

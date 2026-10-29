@@ -1,8 +1,7 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import Button from '$lib/components/Button.svelte';
-	import DitherEdge from './DitherEdge.svelte';
-	import EnvelopeDither from './EnvelopeDither.svelte';
+	import HeroArtStatic from './HeroArtStatic.svelte';
 	import { buildRegisterUrl, registerUrl } from '$lib/utils/utm';
 	import { capturePosthogEvent, trackSignupClick } from '$lib/analytics/posthog';
 
@@ -110,7 +109,6 @@
 	</div>
 
 	<div data-animate style="animation-delay:0.3s" class="relative -mx-6 narrow:-mx-6">
-		<DitherEdge />
-		<EnvelopeDither />
+		<HeroArtStatic />
 	</div>
 </section>

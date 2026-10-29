@@ -1,13 +1,26 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
+	import {
+		bayer8 as BAYER,
+		designCenter,
+		heroFaceSource,
+		heroLayouts,
+		heroPalette as PALETTE,
+		heroSpread as SPREAD,
+		heroSpriteSources as SPRITE_SRC,
+		heroThresholds as THRESHOLDS,
+		type HeroLayout as Layout,
+		type HeroSprite as Sprite,
+		type HeroSpriteKind as Kind
+	} from '$lib/hero/envelopeField';
 
 	/*
 	 * Envelope field from the 2026 homepage design: flat envelope illustrations
 	 * floating on an ink background, composed on a low-resolution canvas and
 	 * ordered-dithered (Bayer 8x8) into the brand palette, then scaled up with
 	 * image-rendering: pixelated. The pointer leaves a faint, quickly fading flicker of specks,
-	 * same as DitherHero. Swap this component for DitherHero in HomeHero to
-	 * roll back to the previous 3D treatment.
+	 * same as DitherHero. The homepage shows HeroArtStatic, the same field baked
+	 * into still images; this live version is kept for a desktop-only enhancement.
 	 *
 	 * Besides envelopes and the @ the field carries a few of the blog art's clay
 	 * sprites (tools/blog-images/sprites/), shrunk to 256px WebP and dimmed to 80%
@@ -25,131 +38,20 @@
 		dither?: boolean;
 	}
 
-	let { cell = 3, cellMobile = 2, dither = true }: Props = $props();
+	let { cell = heroLayouts.desktop.cell, cellMobile = heroLayouts.mobile.cell, dither = true }: Props = $props();
 
-	type Kind = 'envelope' | 'face' | 'at' | 'stamp' | 'megaphone' | 'bell' | 'mailbox';
+	// Clicks mark envelopes open, so each mount works on its own copy of the layouts
+	const copy = (layout: Layout): Layout => ({ ...layout, sprites: layout.sprites.map((s) => ({ ...s })) });
+	const DESKTOP = copy(heroLayouts.desktop);
+	const MOBILE = copy(heroLayouts.mobile);
 
-	interface Sprite {
-		kind: Kind;
-		// top-left origin + size + clockwise rotation (deg), as laid out in Paper
-		x: number;
-		y: number;
-		w: number;
-		h: number;
-		rot: number;
-		phase: number;
-		/** upward drift in reference px per second; 0 pins the sprite */
-		speed: number;
-		/** envelopes only: time (s) until the flap closes again */
-		openUntil?: number;
-		/** envelopes only: when it was last opened, for the little pop */
-		openAt?: number;
-	}
-
-	interface Layout {
-		w: number;
-		h: number;
-		sprites: Sprite[];
-	}
-
-	const env = (
-		x: number,
-		y: number,
-		w: number,
-		h: number,
-		rot: number,
-		phase: number,
-		speed: number
-	): Sprite => ({
-		kind: 'envelope',
-		x,
-		y,
-		w,
-		h,
-		rot,
-		phase,
-		speed
-	});
-
-	const obj = (kind: Kind, x: number, y: number, size: number, rot: number, phase: number, speed: number): Sprite => ({
-		kind,
-		x,
-		y,
-		w: size,
-		h: size,
-		rot,
-		phase,
-		speed
-	});
-
-	const DESKTOP: Layout = {
-		w: 1280,
-		h: 430,
-		sprites: [
-			env(63, -114, 280.8, 366.2, 44.15, 0.4, 26),
-			env(270.2, 143.7, 172.5, 172.5, 4.44, 1.9, 16),
-			env(608, 76, 196.3, 256, -8.69, 4.4, 22),
-			env(514, 324, 149.3, 194.6, 15, 2.6, 14),
-			env(894.9, 203.5, 220, 220, -4.1, 0.9, 24),
-			env(1123, -20, 220, 220, -15, 3.7, 28),
-			{ kind: 'face', x: 144, y: 316, w: 60, h: 60, rot: 9.39, phase: 1.2, speed: 18 },
-			obj('stamp', 372, 36, 84, 12, 2.2, 13),
-			obj('megaphone', 780, 318, 96, -10, 0.7, 20),
-			obj('bell', 706, 14, 86, 10, 3.5, 15),
-			obj('mailbox', 1168, 300, 80, -6, 4.8, 12),
-			obj('at', 452, 196, 70, -8, 2.9, 15)
-		]
-	};
-
-	const MOBILE: Layout = {
-		w: 390,
-		h: 320,
-		sprites: [
-			env(40, -20, 190, 248, 44.15, 0.4, 20),
-			env(190, 170, 150, 150, -4.1, 1.9, 14),
-			env(235, 10, 120, 156, -8.69, 4.4, 22),
-			env(100, 230, 76, 76, -30.58, 3.1, 10),
-			{ kind: 'face', x: 24, y: 252, w: 56, h: 56, rot: 9.39, phase: 1.2, speed: 18 },
-			obj('megaphone', 16, 120, 64, -14, 0.7, 16),
-			obj('stamp', 296, 232, 58, 12, 2.2, 13),
-			obj('at', 196, 282, 46, -8, 2.9, 12)
-		]
-	};
-
-	// ink, deep crimson, crimson, hot rose, rose, blush, paper
-	const PALETTE: [number, number, number][] = [
-		[35, 2, 11],
-		[120, 8, 40],
-		[200, 14, 66],
-		[236, 16, 75],
-		[244, 126, 156],
-		[250, 206, 218],
-		[247, 241, 243]
-	];
-	const THRESHOLDS = [0.1, 0.22, 0.34, 0.5, 0.68, 0.84];
-	const SPREAD = 0.1;
 	/** Peak brightness the pointer trail lifts the dark ground to: just enough to flicker a few cells. */
 	const TINGLE = 0.085;
-
-	const BAYER = [
-		0, 32, 8, 40, 2, 34, 10, 42, 48, 16, 56, 24, 50, 18, 58, 26, 12, 44, 4, 36, 14, 46, 6, 38, 60,
-		28, 52, 20, 62, 30, 54, 22, 3, 35, 11, 43, 1, 33, 9, 41, 51, 19, 59, 27, 49, 17, 57, 25, 15,
-		47, 7, 39, 13, 45, 5, 37, 63, 31, 55, 23, 61, 29, 53, 21
-	];
 
 	let wrapper: HTMLElement | undefined = $state();
 	let canvas: HTMLCanvasElement | undefined = $state();
 	let faceCanvas: HTMLCanvasElement | undefined = $state();
 	let isOverEnvelope = $state(false);
-
-	const SPRITE_SRC: Record<Exclude<Kind, 'face'>, string> = {
-		envelope: '/hero/envelope.png',
-		at: '/hero/sprites/at-sign.png',
-		stamp: '/hero/objects/stamp.webp',
-		megaphone: '/hero/objects/megaphone.webp',
-		bell: '/hero/objects/bell.webp',
-		mailbox: '/hero/objects/mailbox.webp'
-	};
 
 	onMount(() => {
 		if (!wrapper || !canvas || !faceCanvas) return;
@@ -171,7 +73,7 @@
 		};
 		faceImg.onload = onLoad;
 		openImg.onload = onLoad;
-		faceImg.src = '/hero/designer.png';
+		faceImg.src = heroFaceSource;
 		openImg.src = '/hero/sprites/envelope-open.png';
 		for (const key of Object.keys(SPRITE_SRC) as Exclude<Kind, 'face'>[]) {
 			const img = new Image();
@@ -211,12 +113,11 @@
 			out = ctx!.createImageData(cols, rows);
 		}
 
-		// Paper rotates around the top-left corner; recover the centre
+		// The designed centre, bobbing and drifting upward over time
 		function spriteCenter(s: Sprite, t: number) {
 			const bob = reducedMotion || s.speed === 0 ? 0 : Math.sin(t * 0.7 + s.phase * 1.3) * 5;
-			const rad = (s.rot * Math.PI) / 180;
-			const cx = s.x + (s.w / 2) * Math.cos(rad) - (s.h / 2) * Math.sin(rad);
-			let cy = s.y + (s.w / 2) * Math.sin(rad) + (s.h / 2) * Math.cos(rad) + bob;
+			const { cx, cy: rest, rad } = designCenter(s);
+			let cy = rest + bob;
 			if (s.speed > 0 && !reducedMotion) cy = wrapY(cy, s, t);
 			return { cx, cy, rad };
 		}
@@ -286,10 +187,8 @@
 			fctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 			fctx.clearRect(0, 0, host.clientWidth, host.clientHeight);
 			const sway = reducedMotion ? 0 : Math.sin(t * 0.9 + face.phase) * 0.12;
-			const rad = (face.rot * Math.PI) / 180;
-			const cx = face.x + (face.w / 2) * Math.cos(rad) - (face.h / 2) * Math.sin(rad);
-			let cy = face.y + (face.w / 2) * Math.sin(rad) + (face.h / 2) * Math.cos(rad);
-			if (!reducedMotion) cy = wrapY(cy, face, t);
+			const { cx, cy: rest, rad } = designCenter(face);
+			const cy = reducedMotion ? rest : wrapY(rest, face, t);
 			const w = face.w * scale * px;
 			fctx.save();
 			fctx.translate((ox + cx * scale) * px, (oy + cy * scale) * px);

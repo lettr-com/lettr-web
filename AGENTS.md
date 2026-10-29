@@ -36,6 +36,7 @@ Operational guide for coding agents working in `lettr-web`.
 - Preview production build: `pnpm preview`
 - Sync SvelteKit types/config: `pnpm prepare`
 - Render blog art (cover, thumbnail, strip, OG) from each post's `art` in `posts.ts`: `vp run blog:images -- <slug>`; leave out the slug for every post. One-time setup and details in `tools/blog-images/README.md`. Commit the files it writes to `static/blog/<slug>/`.
+- Bake the homepage hero stills from the layout in `src/lib/hero/envelopeField.ts`: `vp run hero:bake`. Re-run it whenever that layout or the hero sprites change, and commit the files it writes to `static/hero/baked/`. One-time setup in `tools/dither/README.md`.
 
 ## Lint / Typecheck / Test Commands
 
