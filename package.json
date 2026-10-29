@@ -13,7 +13,8 @@
     "test:unit": "vp test run",
     "test:unit:watch": "vp test",
     "seo:check": "node src/lib/seo/gate/check.ts",
-    "blog:images": "node tools/blog-images/render.mjs"
+    "blog:images": "node tools/blog-images/render.mjs",
+    "hero:bake": "node tools/dither/bake-hero.mjs"
   },
   "dependencies": {
     "@splinetool/loader": "^1.12.52",

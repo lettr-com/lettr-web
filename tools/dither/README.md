@@ -1,14 +1,38 @@
-# Hero loop dither pipeline
-
-Turns a rendered envelope loop into the four-colour ordered-dither used by the
-homepage hero, the same way Browserbase pre-renders its mountain loop.
+# Hero dither pipelines
 
 ## One-time setup
 
 ```bash
 cd tools/dither
-pnpm install
+pnpm install --ignore-workspace
 ```
+
+## Hero stills (current homepage)
+
+The homepage hero (`HeroArtStatic.svelte`) is the envelope field from
+`src/lib/hero/envelopeField.ts`, dithered offline into still images:
+
+```bash
+vp run hero:bake
+```
+
+It writes `static/hero/baked/`: one field image per breakpoint at one pixel per
+dither cell (3 px cells on desktop, 2 px on mobile), the ragged top edge, and the
+designer portrait. The page scales the fields up with
+`image-rendering: pixelated`, so they stay a few KB and the dots never blur. Keep
+them as palette PNGs: lossy formats smear single-cell dots.
+
+Re-bake after changing the layout, the palette or a sprite in `static/hero/`,
+look at the homepage at a desktop and a phone width, and commit the files. The
+output is deterministic.
+
+`EnvelopeDither.svelte` renders the same field live on a canvas from the same
+module; the homepage no longer mounts it.
+
+## Hero loop (retired)
+
+Turns a rendered envelope loop into the four-colour ordered-dither used by the
+earlier `DitherHero.svelte`, the same way Browserbase pre-renders its mountain loop.
 
 `ffmpeg` must be on your PATH for the split and encode steps.
 
