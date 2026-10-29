@@ -9,7 +9,8 @@
 		Callout,
 		Code,
 		Faq,
-		FaqItem
+		FaqItem,
+		ProductNote
 	} from '$lib/components/blog';
 
 	// Every post is just data + composed typography components.
@@ -69,6 +70,8 @@ Lettr::to($user->email)
 		authentication, sender reputation, delivery logging, and template maintenance that the application
 		needs once it is sending real volume to real recipients, none of which a setup tutorial covers.
 	</Paragraph>
+
+	<ProductNote />
 
 	<Heading level={2}>What it costs in the long run</Heading>
 

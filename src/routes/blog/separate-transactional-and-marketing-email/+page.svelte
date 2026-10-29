@@ -8,7 +8,8 @@
 		TldrList,
 		Callout,
 		Faq,
-		FaqItem
+		FaqItem,
+		ProductNote
 	} from '$lib/components/blog';
 </script>
 
@@ -68,6 +69,8 @@
 		<strong>No alert fires when this happens</strong>, so the problem usually surfaces only after
 		delivery has already degraded.
 	</Paragraph>
+
+	<ProductNote />
 
 	<Heading level={2}>How subdomain separation works</Heading>
 

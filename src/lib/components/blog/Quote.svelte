@@ -10,8 +10,8 @@
 	let { cite, children }: Props = $props();
 </script>
 
-<blockquote data-reveal class="border-l-2 border-primary pl-5">
-	<p class="font-heading text-h3 leading-[1.5] text-surface">
+<blockquote class="border-l-2 border-primary pl-5">
+	<p class="font-heading text-[20px] leading-[1.5] text-surface">
 		{@render children()}
 	</p>
 	{#if cite}

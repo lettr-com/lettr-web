@@ -8,7 +8,8 @@
 		TldrList,
 		Callout,
 		Faq,
-		FaqItem
+		FaqItem,
+		ProductNote
 	} from '$lib/components/blog';
 </script>
 
@@ -74,6 +75,8 @@
 		from another, because the domains carry different histories. This is why diagnosing starts
 		with the sender's evidence rather than with rewriting the email.
 	</Paragraph>
+
+	<ProductNote />
 
 	<Heading level={2}>Find the evidence before changing anything</Heading>
 

@@ -9,7 +9,8 @@
 		Callout,
 		Code,
 		Faq,
-		FaqItem
+		FaqItem,
+		ProductNote
 	} from '$lib/components/blog';
 
 	const rfcMessage = `From: notifications@yourapp.com
@@ -104,6 +105,8 @@ Receiving server: 250 2.0.0 OK`;
 		The takeaway: a successful response means the message survived validation, not that it was
 		delivered. The riskiest sends are stopped here, before they ever leave.
 	</Callout>
+
+	<ProductNote />
 
 	<Heading level={2}>Step 2: Message assembly</Heading>
 

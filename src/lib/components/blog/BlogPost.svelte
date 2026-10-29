@@ -1,14 +1,23 @@
 <script lang="ts">
 	import { onMount, type Snippet } from 'svelte';
-	import ArrowLeftIcon from 'phosphor-svelte/lib/ArrowLeftIcon';
-	import ClockIcon from 'phosphor-svelte/lib/ClockIcon';
-	import { createFromAnimationCleanup, createScrollRevealCleanup } from '$lib/utils/gsap';
 	import { openLinksInNewTab } from '$lib/utils/blogLinks';
 	import Seo from '$lib/components/Seo.svelte';
 	import TableOfContents from './TableOfContents.svelte';
-	import { getRelatedPosts } from '$lib/data/posts';
-	import { postLinks } from '$lib/blog/links';
+	import ArtImage from './ArtImage.svelte';
+	import EndCta from './EndCta.svelte';
+	import ReadNext from './ReadNext.svelte';
+	import { posts } from '$lib/data/posts';
+	import { artAlt, artPaths } from '$lib/blog/art';
+	import { readMinutes, setArticle } from '$lib/blog/article';
+	import {
+		newDepths,
+		trackArticleLink,
+		trackArticleViewed,
+		trackReadProgress,
+		type BlogPlacement
+	} from '$lib/analytics/blog';
 	import { jsonLdScript } from '$lib/utils/jsonLd';
+	import { noWidow } from '$lib/utils/typography';
 	import { blogPostJsonLd, type FaqEntry } from '$lib/utils/pageJsonLd';
 
 	export interface BlogAuthor {
@@ -18,14 +27,14 @@
 	}
 
 	interface Props {
-		/** Small eyebrow label above the title, e.g. "Engineering" or "Deliverability". */
+		/** The post's category, shown in the breadcrumb, e.g. "Engineering" or "Deliverability". */
 		category?: string;
 		title: string;
 		/** Optional <title> override when the visible headline is too long for SEO. */
 		seoTitle?: string;
-		/** Short summary shown under the title and used as the meta description. */
+		/** Long summary, used for the meta description when there is no shorter one. */
 		excerpt?: string;
-		/** Optional meta description override when the visible excerpt is too long for SEO. */
+		/** The meta description; also shown under the title, where a short dek reads better than the excerpt. */
 		metaDescription?: string;
 		author: BlogAuthor;
 		/** Human-readable publish date, e.g. "May 29, 2026". */
@@ -35,9 +44,10 @@
 		/** ISO date of the last substantial edit, for structured data. Defaults to {@link datetime}. */
 		dateModified?: string;
 		readTime?: string;
+		/** Overrides the generated Open Graph image (static/blog/<slug>/og.png). */
 		coverImage?: string;
 		coverAlt?: string;
-		/** Canonical slug, used to build the canonical URL. */
+		/** Canonical slug, used to build the canonical URL and find the post's art. */
 		slug?: string;
 		/** The article's FAQ as plain text, emitted as FAQPage structured data. */
 		faqs?: readonly FaqEntry[];
@@ -56,16 +66,21 @@
 		dateModified,
 		readTime,
 		coverImage,
-		coverAlt = '',
+		coverAlt,
 		slug,
 		faqs,
 		children
 	}: Props = $props();
 
+	const post = posts.find((candidate) => candidate.slug === slug);
+	if (post) setArticle(post);
+
 	const canonical = $derived(slug ? `/blog/${slug}/` : undefined);
 	const seoDescription = $derived(metaDescription ?? excerpt ?? '');
-	const related = $derived(getRelatedPosts(slug));
-	const goDeeper = $derived(slug ? postLinks[slug] : undefined);
+	const dek = $derived(metaDescription ?? excerpt);
+	const ogImage = $derived(coverImage ?? (post ? artPaths(post.slug).og : undefined));
+	const ogAlt = $derived(coverAlt ?? (post ? `${artAlt(post.art)} with the title “${title}”` : undefined));
+	const minutes = $derived(readMinutes(readTime ?? ''));
 	const jsonLd = $derived(
 		slug
 			? blogPostJsonLd({
@@ -76,7 +91,7 @@
 					dateModified,
 					category,
 					author,
-					image: coverImage,
+					image: ogImage,
 					faqs
 				})
 			: undefined
@@ -93,31 +108,46 @@
 	let header: HTMLElement | undefined = $state();
 	let body: HTMLElement | undefined = $state();
 
+	const articleContext = $derived({ slug: slug ?? '', category: category ?? '' });
+
+	/** One handler for every tracked link in the article: body copy, the product note, the end block, read-next. */
+	function handleClick(event: MouseEvent) {
+		if (!slug || !(event.target instanceof Element)) return;
+		const link = event.target.closest('a');
+		const href = link?.getAttribute('href');
+		if (!link || !href || href.startsWith('#')) return;
+		const block = link.closest<HTMLElement>('[data-blog-placement]');
+		const placement = (block?.dataset.blogPlacement ?? (body?.contains(link) ? 'blog_body' : null)) as BlogPlacement | null;
+		if (placement) trackArticleLink(articleContext, href, placement);
+	}
+
 	onMount(() => {
-		const cleanups: (() => void)[] = [];
+		if (!body) return;
+		const content = body;
+		// Links that leave lettr.com open in a new tab so readers keep their place.
+		openLinksInNewTab(content);
 
-		if (header) {
-			cleanups.push(
-				createFromAnimationCleanup({
-					scope: header,
-					targets: '[data-animate]',
-					vars: { y: 20, opacity: 0, duration: 0.6, stagger: 0.08, ease: 'power3.out' }
-				})
-			);
+		if (!slug) return;
+		const article = articleContext;
+		trackArticleViewed(article, minutes);
+
+		let reached = 0;
+		let frame = 0;
+		function measure() {
+			frame = 0;
+			const rect = content.getBoundingClientRect();
+			const depth = Math.min(100, Math.max(0, ((window.innerHeight - rect.top) / rect.height) * 100));
+			for (const step of newDepths(reached, depth)) trackReadProgress(article, step);
+			reached = Math.max(reached, depth);
 		}
-
-		if (body) {
-			// Every link in the article body opens in a new tab so readers keep their place.
-			openLinksInNewTab(body);
-			cleanups.push(
-				createScrollRevealCleanup({
-					scope: body,
-					targets: '[data-reveal]'
-				})
-			);
+		function onScroll() {
+			if (!frame) frame = requestAnimationFrame(measure);
 		}
-
-		return () => cleanups.forEach((fn) => fn());
+		window.addEventListener('scroll', onScroll, { passive: true });
+		return () => {
+			cancelAnimationFrame(frame);
+			window.removeEventListener('scroll', onScroll);
+		};
 	});
 </script>
 
@@ -126,7 +156,8 @@
 	description={seoDescription}
 	ogTitle={title}
 	type="article"
-	image={coverImage}
+	image={ogImage}
+	imageAlt={ogAlt}
 	{canonical}
 	author={author.name}
 />
@@ -137,145 +168,91 @@
 	{/if}
 </svelte:head>
 
-<article class="pt-32 pb-24">
-	<div class="mx-auto max-w-[1064px] px-4">
-		<!-- Header -->
-		<header bind:this={header} class="max-w-[800px]">
-			<a
-				data-animate
-				href="/blog/"
-				class="inline-flex items-center gap-1.5 text-sm font-medium text-muted transition-colors hover:text-primary"
-			>
-				<ArrowLeftIcon size={15} />
-				All posts
-			</a>
+<!-- Click tracking only: the links inside stay the interactive elements. -->
+<!-- svelte-ignore a11y_click_events_have_key_events, a11y_no_noninteractive_element_interactions -->
+<article class="pb-24 pt-[60px] md:pt-28" onclick={handleClick}>
+	{#if post}
+		<div class="-mx-6 md:hidden" data-markdown="skip">
+			<ArtImage slug={post.slug} category={post.category} art={post.art} variant="strip" decorative loading="eager" class="w-full" />
+		</div>
+	{/if}
 
-			{#if category}
-				<span
-					data-animate
-					class="mt-8 block font-heading text-xs tracking-[0.15em] text-primary uppercase"
-				>
-					{category}
-				</span>
-			{/if}
-
-			<h1 data-animate class="mt-3">{title}</h1>
-
-			{#if excerpt}
-				<p data-animate class="mt-5 text-h3 leading-[1.5] text-muted">{excerpt}</p>
-			{/if}
-
-			<div data-animate class="mt-8 flex items-center gap-3 border-y border-border/50 py-4">
-				<div
-					class="flex h-10 w-10 shrink-0 items-center justify-center overflow-hidden border border-border/50 bg-background"
-				>
-					{#if author.avatar}
-						<img src={author.avatar} alt={author.name} class="h-full w-full object-cover" />
-					{:else}
-						<span class="font-heading text-sm text-surface">{initials}</span>
+	<div class="mx-auto max-w-[848px]">
+		<header bind:this={header} class="flex items-start gap-12 border-b border-border/60 pt-5 pb-6 md:pt-0 md:pb-7">
+			<div class="min-w-0 flex-1">
+				<nav aria-label="Breadcrumb" class="flex items-center gap-2 text-sm font-medium text-subtle">
+					<a href="/blog/" class="transition-colors hover:text-primary">Blog</a>
+					{#if category}
+						<span aria-hidden="true" class="text-border">/</span>
+						<a href="/blog/?topic={encodeURIComponent(category)}" class="text-surface transition-colors hover:text-primary">{category}</a>
 					{/if}
-				</div>
-				<div class="leading-tight">
-					<div class="text-sm font-semibold text-surface">{author.name}</div>
-					{#if author.role}
-						<div class="text-xs text-muted">{author.role}</div>
-					{/if}
-				</div>
-				<div class="ml-auto flex items-center gap-3 text-xs text-muted">
+				</nav>
+
+				<h1
+					class="mt-3.5 text-[30px] leading-[1.17] tracking-[-0.02em] text-balance text-surface md:mt-4 md:text-[44px] md:leading-[1.14] md:tracking-[-0.025em]"
+				>
+					{noWidow(title)}
+				</h1>
+
+				{#if dek}
+					<p class="mt-3.5 text-[17px] leading-[1.55] text-pretty text-subtle md:mt-4 md:text-[19px]">{dek}</p>
+				{/if}
+
+				<div class="mt-4 flex flex-wrap items-center gap-x-2 gap-y-1 text-[13px] text-subtle md:mt-5 md:text-sm">
+					<span class="flex h-7 w-7 shrink-0 items-center justify-center overflow-hidden border border-border/60 bg-background">
+						{#if author.avatar}
+							<img src={author.avatar} alt="" width="28" height="28" class="h-full w-full object-cover" />
+						{:else}
+							<span class="font-heading text-[11px] text-surface">{initials}</span>
+						{/if}
+					</span>
+					<span class="font-semibold text-surface">{author.name}</span>
+					<span aria-hidden="true" class="text-border">·</span>
 					<time datetime={datetime ?? undefined}>{date}</time>
 					{#if readTime}
-						<span class="flex items-center gap-1">
-							<ClockIcon size={13} />
-							{readTime}
-						</span>
+						<span aria-hidden="true" class="text-border">·</span>
+						<span>{readTime}</span>
 					{/if}
 				</div>
 			</div>
+
+			{#if post}
+				<ArtImage
+					slug={post.slug}
+					category={post.category}
+					art={post.art}
+					variant="square"
+					decorative
+					loading="eager"
+					class="hidden size-[232px] shrink-0 md:block"
+				/>
+			{/if}
 		</header>
 
-		{#if coverImage}
-			<figure class="mt-10 max-w-[800px]">
-				<img
-					src={coverImage}
-					alt={coverAlt}
-					class="w-full border border-border/50 bg-white object-cover"
-				/>
-			</figure>
-		{/if}
-	</div>
-
-	<!-- Body + table of contents -->
-	<div class="mx-auto mt-12 flex max-w-[1064px] gap-10 px-4">
-		<div bind:this={body} class="blog-prose w-full max-w-[800px] min-w-0">
-			{@render children()}
-		</div>
-		<aside class="hidden w-56 shrink-0 lg:block">
-			<div class="sticky top-32">
-				<TableOfContents container={body} />
+		<div class="relative">
+			<div bind:this={body} class="blog-prose article-prose max-w-[680px] min-w-0 pt-8 md:pt-9">
+				{@render children()}
 			</div>
-		</aside>
-	</div>
-
-	{#if goDeeper}
-		<div class="mx-auto mt-20 max-w-[1064px] px-4">
-			<div class="border-t border-border/50 pt-12">
-				<h2 class="font-heading text-xs tracking-[0.15em] text-primary uppercase">Go deeper</h2>
-				<div class="mt-6 grid gap-4 sm:grid-cols-3">
-					{#each [goDeeper.product, goDeeper.compare].filter((link) => link !== undefined) as link (link.href)}
-						<a
-							href={link.href}
-							class="group flex flex-col border border-border/50 bg-white p-6 transition-colors hover:border-primary/30"
-						>
-							<h3 class="text-base leading-snug transition-colors group-hover:text-primary">{link.label}</h3>
-							<p class="mt-2 text-sm leading-relaxed text-muted">{link.description}</p>
-						</a>
-					{/each}
-					<div class="flex flex-col border border-border/50 bg-white p-6">
-						<h3 class="text-base leading-snug">In the glossary</h3>
-						<ul class="mt-3 flex flex-col gap-1.5 text-sm">
-							{#each goDeeper.terms as term (term.slug)}
-								<li>
-									<a href="/glossary/{term.slug}/" class="text-muted underline-offset-4 transition-colors hover:text-primary hover:underline">
-										{term.label}
-									</a>
-								</li>
-							{/each}
-						</ul>
+			{#if slug}
+				<!-- Sits in the page margin beside the column; after the body so its container is bound. -->
+				<div class="absolute top-9 bottom-0 -left-14 xl:-left-20">
+					<div class="sticky top-40">
+						<TableOfContents
+							container={body}
+							{header}
+							article={articleContext}
+						/>
 					</div>
 				</div>
-			</div>
+			{/if}
 		</div>
-	{/if}
 
-	{#if related.length}
-		<div class="mx-auto mt-20 max-w-[1064px] px-4">
-			<div class="border-t border-border/50 pt-12">
-				<h2 class="font-heading text-xs tracking-[0.15em] text-primary uppercase">
-					Related articles
-				</h2>
-				<div class="mt-6 grid gap-4 sm:grid-cols-3">
-					{#each related as post}
-						<a
-							href="/blog/{post.slug}/"
-							class="group flex flex-col border border-border/50 bg-white p-6 transition-colors hover:border-primary/30"
-						>
-							<span class="font-heading text-xs tracking-[0.15em] text-primary uppercase">
-								{post.category}
-							</span>
-							<h3 class="mt-2 text-base leading-snug transition-colors group-hover:text-primary">
-								{post.title}
-							</h3>
-							<div class="mt-auto pt-5 flex items-center gap-2 text-xs text-muted">
-								<span>{post.date}</span>
-								<span class="flex items-center gap-1">
-									<ClockIcon size={12} />
-									{post.readTime}
-								</span>
-							</div>
-						</a>
-					{/each}
-				</div>
-			</div>
+		<div class="mt-12 max-w-[680px]">
+			<EndCta />
 		</div>
-	{/if}
+
+		<div class="mt-16">
+			<ReadNext />
+		</div>
+	</div>
 </article>

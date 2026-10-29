@@ -9,7 +9,8 @@
 		Callout,
 		Code,
 		Faq,
-		FaqItem
+		FaqItem,
+		ProductNote
 	} from '$lib/components/blog';
 	import ChecksIcon from 'phosphor-svelte/lib/ChecksIcon';
 
@@ -92,6 +93,8 @@
 		one, while reputation and engagement build slowly and are the parts no setup step can shortcut.
 		Work top to bottom.
 	</Paragraph>
+
+	<ProductNote />
 
 	<Heading level={2}>Authentication setup (SPF, DKIM, DMARC)</Heading>
 

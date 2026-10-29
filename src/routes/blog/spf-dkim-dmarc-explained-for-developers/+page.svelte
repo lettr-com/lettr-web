@@ -8,7 +8,8 @@
 		Callout,
 		Code,
 		Faq,
-		FaqItem
+		FaqItem,
+		ProductNote
 	} from '$lib/components/blog';
 
 	const spfRecord = `v=spf1 include:spf.lettr.com include:_spf.google.com ~all`;
@@ -119,6 +120,8 @@ dmarc=pass (p=REJECT dis=NONE) header.from=yourapp.com`;
 		on its real domain and still display any <code>From</code> address it likes. SPF also breaks under forwarding,
 		because the forwarder's IP isn't in your record. Both gaps are why DKIM and DMARC exist.
 	</Paragraph>
+
+	<ProductNote />
 
 	<Heading level={2}>DKIM: signing each message cryptographically</Heading>
 

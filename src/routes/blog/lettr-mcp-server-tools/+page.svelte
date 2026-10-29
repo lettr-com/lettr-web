@@ -9,7 +9,8 @@
 		Callout,
 		Code,
 		Faq,
-		FaqItem
+		FaqItem,
+		ProductNote
 	} from '$lib/components/blog';
 
 	const apiKeyConnect = `claude mcp add --transport http lettr https://app.lettr.com/mcp \\
@@ -102,6 +103,8 @@
 		audience, scheduling, domains, and webhooks. Once the remote server also accepted API keys, the
 		one thing the npm package offered that a sign-in could not, the package was deprecated.
 	</Paragraph>
+
+	<ProductNote />
 
 	<Heading level={2}>What an assistant can do with the full set</Heading>
 

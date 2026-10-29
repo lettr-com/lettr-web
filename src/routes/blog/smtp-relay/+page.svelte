@@ -9,7 +9,8 @@
 		Callout,
 		Code,
 		Faq,
-		FaqItem
+		FaqItem,
+		ProductNote
 	} from '$lib/components/blog';
 
 	const relayEnvExample = `SMTP_HOST=smtp.lettr.com
@@ -102,6 +103,8 @@ await transport.sendMail({
 		filters or routes mail in both directions, while a relay specifically forwards outbound mail to
 		its destination. For sending application mail, the service is a relay.
 	</Callout>
+
+	<ProductNote />
 
 	<Heading level={2}>Relay vs. a mailbox SMTP server</Heading>
 

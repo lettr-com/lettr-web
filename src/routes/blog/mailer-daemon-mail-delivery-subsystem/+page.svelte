@@ -8,7 +8,8 @@
 		TldrList,
 		Callout,
 		Faq,
-		FaqItem
+		FaqItem,
+		ProductNote
 	} from '$lib/components/blog';
 </script>
 
@@ -76,6 +77,8 @@
 		sending setup</strong>. The rest of this article is about reading that report and acting on what
 		it says.
 	</Paragraph>
+
+	<ProductNote />
 
 	<Heading level={2}>"Mail Delivery Subsystem" and other names for the same thing</Heading>
 

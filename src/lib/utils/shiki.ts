@@ -76,7 +76,18 @@ export async function getHighlighter(): Promise<Highlighter> {
     const { createHighlighter } = await import("shiki");
     highlighter = await createHighlighter({
       themes: [lettrTheme],
-      langs: ["php", "javascript", "python", "go", "ruby", "java", "bash", "shell"],
+      langs: [
+        "php",
+        "javascript",
+        "typescript",
+        "json",
+        "python",
+        "go",
+        "ruby",
+        "java",
+        "bash",
+        "shell",
+      ],
     });
   }
   return highlighter;

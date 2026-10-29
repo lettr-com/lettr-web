@@ -9,7 +9,8 @@
 		Callout,
 		Code,
 		Faq,
-		FaqItem
+		FaqItem,
+		ProductNote
 	} from '$lib/components/blog';
 
 	const installCommands = `composer require lettr/lettr-laravel
@@ -87,6 +88,8 @@ Mail::to('user@example.com')->queue(new WelcomeEmail());`;
 		you need OAuth2. Start with the default and <strong>drop down a layer only when requirements
 		demand it</strong>. Most applications never need to.
 	</Paragraph>
+
+	<ProductNote />
 
 	<Heading level={2}>Mail is the case we care most about</Heading>
 

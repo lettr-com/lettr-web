@@ -9,7 +9,8 @@
 		Callout,
 		Code,
 		Faq,
-		FaqItem
+		FaqItem,
+		ProductNote
 	} from '$lib/components/blog';
 
 	// Visual email mockups for the "examples" section, modeled on the card design
@@ -211,6 +212,8 @@ await lettr.emails.schedule({
 		<a href="/blog/separate-transactional-and-marketing-email/">why you should separate transactional
 		and marketing email</a>.
 	</Paragraph>
+
+	<ProductNote />
 
 	<Heading level={2}>Onboarding sequence timing and structure</Heading>
 

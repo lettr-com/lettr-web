@@ -9,7 +9,8 @@
 		Callout,
 		Code,
 		Faq,
-		FaqItem
+		FaqItem,
+		ProductNote
 	} from '$lib/components/blog';
 
 	const topolServerless = `service: topol-app
@@ -168,6 +169,8 @@ functions:
 		<code>runtime: php-84-fpm</code>. Three years and three major versions later, the whole
 		deployment is still a single file the team can read.
 	</Paragraph>
+
+	<ProductNote />
 
 	<Heading level={2}>What Bref does</Heading>
 

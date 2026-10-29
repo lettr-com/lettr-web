@@ -2,10 +2,19 @@ import { describe, expect, it } from "vite-plus/test";
 import { isNewTabLink, withSafeRel } from "./blogLinks";
 
 describe("isNewTabLink", () => {
-  it("opens external, internal, and other-blog links in a new tab", () => {
+  it("opens links that leave lettr.com in a new tab", () => {
     expect(isNewTabLink("https://docs.lettr.com/learn/domains/sending-domains")).toBe(true);
-    expect(isNewTabLink("/pricing/")).toBe(true);
-    expect(isNewTabLink("/blog/what-is-transactional-email/")).toBe(true);
+    expect(isNewTabLink("https://app.lettr.com/register")).toBe(true);
+    expect(isNewTabLink("https://www.rfc-editor.org/rfc/rfc5321")).toBe(true);
+    expect(isNewTabLink("//cdn.example.com/file.pdf")).toBe(true);
+  });
+
+  it("keeps links to other lettr.com pages in the same tab", () => {
+    expect(isNewTabLink("/pricing/")).toBe(false);
+    expect(isNewTabLink("/blog/what-is-transactional-email/")).toBe(false);
+    expect(isNewTabLink("https://lettr.com/email-api/")).toBe(false);
+    expect(isNewTabLink("https://www.lettr.com/compare/")).toBe(false);
+    expect(isNewTabLink("glossary/spf/")).toBe(false);
   });
 
   it("keeps in-page anchors and non-navigational schemes in the same tab", () => {

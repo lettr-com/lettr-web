@@ -9,7 +9,8 @@
 		Callout,
 		Code,
 		Faq,
-		FaqItem
+		FaqItem,
+		ProductNote
 	} from '$lib/components/blog';
 
 	const restTemplateExample = `POST /emails
@@ -109,6 +110,8 @@ with smtplib.SMTP("smtp.provider.com", 587) as server:
 		a response, and that's the entire interaction. There's no connection to manage and no session state
 		to clean up.
 	</Paragraph>
+
+	<ProductNote />
 
 	<Heading level={2}>Why the difference matters in modern infrastructure</Heading>
 

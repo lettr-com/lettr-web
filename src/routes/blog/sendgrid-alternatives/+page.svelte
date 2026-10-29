@@ -7,7 +7,8 @@
 		TldrList,
 		Callout,
 		Faq,
-		FaqItem
+		FaqItem,
+		ProductNote
 	} from '$lib/components/blog';
 </script>
 
@@ -129,6 +130,8 @@
 			</tbody>
 		</table>
 	</div>
+
+	<ProductNote />
 
 	<Heading level={2}>1. Lettr: best for full-featured sending with marketing in one account</Heading>
 
