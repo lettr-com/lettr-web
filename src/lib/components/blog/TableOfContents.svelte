@@ -5,7 +5,7 @@
 	import { slugify } from '$lib/utils/slug';
 	import { resolveActiveId, hasReachedPinned } from '$lib/utils/scrollSpy';
 	import { trackContentsClicked, type BlogArticleContext, type BlogPlacement } from '$lib/analytics/blog';
-	import { showsContents } from '$lib/blog/article';
+	import { readProgress, showsContents } from '$lib/blog/article';
 
 	interface Props {
 		/** The blog body element whose <h2>s populate the contents. */
@@ -114,8 +114,14 @@
 		function measure() {
 			frame = 0;
 			const rect = body.getBoundingClientRect();
-			const read = window.innerHeight - rect.top;
-			progress = Math.min(1, Math.max(0, read / rect.height));
+			const first = body.firstElementChild;
+			progress = readProgress({
+				top: rect.top,
+				height: rect.height,
+				firstLine: first ? parseFloat(getComputedStyle(first).lineHeight) || 0 : 0,
+				topEdge: document.querySelector('header')?.getBoundingClientRect().bottom ?? 0,
+				viewportHeight: window.innerHeight
+			});
 			pastHeader = (header?.getBoundingClientRect().bottom ?? 0) < 0;
 			const y = window.scrollY;
 			if (Math.abs(y - lastY) > 4) scrollingUp = y < lastY;

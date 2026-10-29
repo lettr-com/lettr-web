@@ -27,6 +27,35 @@ export function showsContents(sections: number): boolean {
   return sections >= 4;
 }
 
+/** Where the post body sits, in viewport pixels, when reading progress is measured. */
+export interface BodyGeometry {
+  top: number;
+  height: number;
+  /** Height of the body's first line. */
+  firstLine: number;
+  /** Bottom of the fixed header: text above it is out of view. */
+  topEdge: number;
+  viewportHeight: number;
+}
+
+/**
+ * 0..1 through the post body. Stays at 0 until the first line has scrolled
+ * out of view under the header, and reaches 1 when the end of the body is on
+ * screen.
+ */
+export function readProgress({
+  top,
+  height,
+  firstLine,
+  topEdge,
+  viewportHeight,
+}: BodyGeometry): number {
+  const start = topEdge - firstLine;
+  const end = viewportHeight - height;
+  if (start <= end) return top <= start ? 1 : 0;
+  return Math.min(1, Math.max(0, (start - top) / (start - end)));
+}
+
 export type EndCta =
   | { kind: "compare"; compare: { href: string; label: string; description: string } }
   | { kind: "product"; product: { href: string; label: string; description: string } };
