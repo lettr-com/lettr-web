@@ -9,9 +9,11 @@
 	 * same as DitherHero. Swap this component for DitherHero in HomeHero to
 	 * roll back to the previous 3D treatment.
 	 *
-	 * Besides envelopes the field carries a few other mail-ish objects (plane,
-	 * stamp, key, @, check). Everything just drifts upward; clicking an envelope
-	 * lifts its flap for a moment.
+	 * Besides envelopes and the @ the field carries a few of the blog art's clay
+	 * sprites (tools/blog-images/sprites/), shrunk to 256px WebP and dimmed to 80%
+	 * in static/hero/objects/ so they dither to primary rather than rose: stamp,
+	 * megaphone, bell, mailbox. Everything just drifts upward;
+	 * clicking an envelope lifts its flap for a moment.
 	 */
 
 	interface Props {
@@ -23,9 +25,9 @@
 		dither?: boolean;
 	}
 
-	let { cell = 4, cellMobile = 3, dither = true }: Props = $props();
+	let { cell = 3, cellMobile = 2, dither = true }: Props = $props();
 
-	type Kind = 'envelope' | 'face' | 'plane' | 'at' | 'stamp' | 'key' | 'check';
+	type Kind = 'envelope' | 'face' | 'at' | 'stamp' | 'megaphone' | 'bell' | 'mailbox';
 
 	interface Sprite {
 		kind: Kind;
@@ -86,18 +88,16 @@
 		sprites: [
 			env(63, -114, 280.8, 366.2, 44.15, 0.4, 26),
 			env(270.2, 143.7, 172.5, 172.5, 4.44, 1.9, 16),
-			env(412, -5, 118.4, 118.4, -30.58, 3.1, 12),
 			env(608, 76, 196.3, 256, -8.69, 4.4, 22),
 			env(514, 324, 149.3, 194.6, 15, 2.6, 14),
-			env(972, 65, 92.2, 92.2, -6.67, 5.2, 10),
 			env(894.9, 203.5, 220, 220, -4.1, 0.9, 24),
 			env(1123, -20, 220, 220, -15, 3.7, 28),
 			{ kind: 'face', x: 144, y: 316, w: 60, h: 60, rot: 9.39, phase: 1.2, speed: 18 },
 			obj('stamp', 372, 36, 84, 12, 2.2, 13),
-			obj('plane', 780, 318, 96, -10, 0.7, 20),
-			obj('key', 706, 14, 86, 24, 3.5, 15),
-			obj('at', 1168, 300, 80, -6, 4.8, 12),
-			obj('check', 250, 18, 66, 8, 1.4, 17)
+			obj('megaphone', 780, 318, 96, -10, 0.7, 20),
+			obj('bell', 706, 14, 86, 10, 3.5, 15),
+			obj('mailbox', 1168, 300, 80, -6, 4.8, 12),
+			obj('at', 452, 196, 70, -8, 2.9, 15)
 		]
 	};
 
@@ -109,11 +109,10 @@
 			env(190, 170, 150, 150, -4.1, 1.9, 14),
 			env(235, 10, 120, 156, -8.69, 4.4, 22),
 			env(100, 230, 76, 76, -30.58, 3.1, 10),
-			env(322, 20, 64, 64, -6.67, 5.2, 14),
 			{ kind: 'face', x: 24, y: 252, w: 56, h: 56, rot: 9.39, phase: 1.2, speed: 18 },
-			obj('plane', 16, 120, 64, -14, 0.7, 16),
+			obj('megaphone', 16, 120, 64, -14, 0.7, 16),
 			obj('stamp', 296, 232, 58, 12, 2.2, 13),
-			obj('check', 330, 120, 46, 8, 1.4, 17)
+			obj('at', 196, 282, 46, -8, 2.9, 12)
 		]
 	};
 
@@ -145,11 +144,11 @@
 
 	const SPRITE_SRC: Record<Exclude<Kind, 'face'>, string> = {
 		envelope: '/hero/envelope.png',
-		plane: '/hero/sprites/paper-plane.png',
 		at: '/hero/sprites/at-sign.png',
-		stamp: '/hero/sprites/stamp.png',
-		key: '/hero/sprites/key.png',
-		check: '/hero/sprites/check.png'
+		stamp: '/hero/objects/stamp.webp',
+		megaphone: '/hero/objects/megaphone.webp',
+		bell: '/hero/objects/bell.webp',
+		mailbox: '/hero/objects/mailbox.webp'
 	};
 
 	onMount(() => {
