@@ -1,15 +1,80 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
+	import { onMount, type Component } from 'svelte';
 	import Button from '$lib/components/Button.svelte';
 	import HeroArtStatic from './HeroArtStatic.svelte';
 	import { buildRegisterUrl, registerUrl } from '$lib/utils/utm';
 	import { capturePosthogEvent, trackSignupClick } from '$lib/analytics/posthog';
 
 	let registerHref: string = $state(registerUrl);
+	let artHost: HTMLElement | undefined = $state();
+	let LiveArt: Component<{ onfail?: () => void }> | null = $state(null);
+
+	/** Session flag set when the live field was too slow here, so it is not loaded again. */
+	const liveArtOffKey = 'lettr:hero-live-off';
 
 	onMount(() => {
 		registerHref = buildRegisterUrl(new URL(window.location.href), document.cookie);
+		return enhanceArt();
 	});
+
+	/*
+	 * The baked stills are the hero. On a large screen with a mouse, once the art is in view
+	 * and the browser is idle, the live canvas (its own chunk, with its sprites) loads over
+	 * them. Phones, reduced motion and Save-Data never download it.
+	 */
+	function enhanceArt(): (() => void) | undefined {
+		const capable = window.matchMedia(
+			'(min-width: 1024px) and (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference)'
+		).matches;
+		const saveData = (navigator as Navigator & { connection?: { saveData?: boolean } }).connection?.saveData;
+		if (!capable || saveData || !artHost || liveArtWasTooSlow()) return;
+
+		let cancelled = false;
+		let cancelIdle: (() => void) | undefined;
+		const load = () => {
+			import('./EnvelopeDither.svelte')
+				.then((module) => {
+					if (!cancelled) LiveArt = module.default;
+				})
+				.catch(() => {});
+		};
+		const io = new IntersectionObserver(([entry]) => {
+			if (!entry.isIntersecting) return;
+			io.disconnect();
+			// Safari has no requestIdleCallback
+			if ('requestIdleCallback' in window) {
+				const handle = requestIdleCallback(load, { timeout: 3000 });
+				cancelIdle = () => cancelIdleCallback(handle);
+			} else {
+				const handle = setTimeout(load, 200);
+				cancelIdle = () => clearTimeout(handle);
+			}
+		});
+		io.observe(artHost);
+
+		return () => {
+			cancelled = true;
+			io.disconnect();
+			cancelIdle?.();
+		};
+	}
+
+	function liveArtWasTooSlow(): boolean {
+		try {
+			return sessionStorage.getItem(liveArtOffKey) === '1';
+		} catch {
+			return false;
+		}
+	}
+
+	function stopLiveArt() {
+		LiveArt = null;
+		try {
+			sessionStorage.setItem(liveArtOffKey, '1');
+		} catch {
+			// private mode: it simply retries on the next page view
+		}
+	}
 
 	function trackHeroCta(label: string, href: string, variant: 'primary' | 'secondary') {
 		void capturePosthogEvent('cta_clicked', {
@@ -108,7 +173,12 @@
 		</ul>
 	</div>
 
-	<div data-animate style="animation-delay:0.3s" class="relative -mx-6 narrow:-mx-6">
+	<div bind:this={artHost} data-animate style="animation-delay:0.3s" class="relative -mx-6 narrow:-mx-6">
 		<HeroArtStatic />
+		{#if LiveArt}
+			<div class="absolute inset-0">
+				<LiveArt onfail={stopLiveArt} />
+			</div>
+		{/if}
 	</div>
 </section>

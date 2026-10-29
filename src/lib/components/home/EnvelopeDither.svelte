@@ -19,8 +19,10 @@
 	 * floating on an ink background, composed on a low-resolution canvas and
 	 * ordered-dithered (Bayer 8x8) into the brand palette, then scaled up with
 	 * image-rendering: pixelated. The pointer leaves a faint, quickly fading flicker of specks,
-	 * same as DitherHero. The homepage shows HeroArtStatic, the same field baked
-	 * into still images; this live version is kept for a desktop-only enhancement.
+	 * same as DitherHero. The homepage shows HeroArtStatic, the same field baked into
+	 * still images, and HomeHero loads this live version over it only on desktops with
+	 * a mouse. It fades in once its sprites are in, draws ~30 frames a second, pauses
+	 * off screen, and calls `onfail` if the first frames cost too much.
 	 *
 	 * Besides envelopes and the @ the field carries a few of the blog art's clay
 	 * sprites (tools/blog-images/sprites/), shrunk to 256px WebP and dimmed to 80%
@@ -36,9 +38,16 @@
 		cellMobile?: number;
 		/** Turn the dither off to see the raw composition. */
 		dither?: boolean;
+		/** Called when a sprite fails to load or frames cost more than the budget; unmount and keep the still. */
+		onfail?: () => void;
 	}
 
-	let { cell = heroLayouts.desktop.cell, cellMobile = heroLayouts.mobile.cell, dither = true }: Props = $props();
+	let {
+		cell = heroLayouts.desktop.cell,
+		cellMobile = heroLayouts.mobile.cell,
+		dither = true,
+		onfail
+	}: Props = $props();
 
 	// Clicks mark envelopes open, so each mount works on its own copy of the layouts
 	const copy = (layout: Layout): Layout => ({ ...layout, sprites: layout.sprites.map((s) => ({ ...s })) });
@@ -52,6 +61,7 @@
 	let canvas: HTMLCanvasElement | undefined = $state();
 	let faceCanvas: HTMLCanvasElement | undefined = $state();
 	let isOverEnvelope = $state(false);
+	let isReady = $state(false);
 
 	onMount(() => {
 		if (!wrapper || !canvas || !faceCanvas) return;
@@ -63,21 +73,43 @@
 		if (!ctx || !octx) return;
 
 		const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-		const start = performance.now();
+		let start = performance.now();
+
+		// The drift is slow, so ~30 redraws a second look the same as one per display frame.
+		// The slack keeps a 60 Hz screen on every second frame despite timing jitter.
+		const minFrameGap = 1000 / 30 - 4;
+		// Average main-thread ms per frame, over the first frames, above which the device
+		// is too slow for the live field and the still underneath is kept instead.
+		const frameBudget = 8;
+		const budgetFrames = 60;
+		let lastDraw = -Infinity;
+		let measured = 0;
+		let workMs = 0;
 
 		const faceImg = new Image();
 		const openImg = new Image();
 		const spriteImgs = {} as Record<Exclude<Kind, 'face'>, HTMLImageElement>;
+		// Stay invisible until every sprite is in, then restart the clock so the first visible
+		// frame is the designed layout, the same frame as the still it fades in over.
+		let pending = 2 + Object.keys(SPRITE_SRC).length;
 		const onLoad = () => {
-			if (reducedMotion) render(performance.now());
+			if (--pending > 0) return;
+			start = performance.now();
+			isReady = true;
+			render(start);
+			sync();
 		};
-		faceImg.onload = onLoad;
-		openImg.onload = onLoad;
+		const onError = () => onfail?.();
+		for (const img of [faceImg, openImg]) {
+			img.onload = onLoad;
+			img.onerror = onError;
+		}
 		faceImg.src = heroFaceSource;
 		openImg.src = '/hero/sprites/envelope-open.png';
 		for (const key of Object.keys(SPRITE_SRC) as Exclude<Kind, 'face'>[]) {
 			const img = new Image();
 			img.onload = onLoad;
+			img.onerror = onError;
 			img.src = SPRITE_SRC[key];
 			spriteImgs[key] = img;
 		}
@@ -91,6 +123,8 @@
 		let layout = DESKTOP;
 		let trail = new Float32Array(0);
 		let trailNext = new Float32Array(0);
+		/** Whether any cell of the pointer trail is still lit; diffusion is skipped otherwise. */
+		let trailLive = false;
 		let stampR = 12;
 		let out: ImageData | null = null;
 		let raf = 0;
@@ -221,6 +255,7 @@
 		function diffuse() {
 			const w = cols;
 			const h = rows;
+			let lit = false;
 			for (let y = 0; y < h; y++) {
 				const up = (y > 0 ? y - 1 : y) * w;
 				const dn = (y < h - 1 ? y + 1 : y) * w;
@@ -230,8 +265,10 @@
 						trail[up + x] + trail[dn + x] + trail[i - (x > 0 ? 1 : 0)] + trail[i + (x < w - 1 ? 1 : 0)];
 					const v = (trail[i] * 0.5 + n * 0.07) * 0.94;
 					trailNext[i] = v < 0.003 ? 0 : v;
+					if (v >= 0.003) lit = true;
 				}
 			}
+			trailLive = lit;
 			const tmp = trail;
 			trail = trailNext;
 			trailNext = tmp;
@@ -258,14 +295,21 @@
 					const v = f * f * (3 - 2 * f);
 					const i = y * cols + x;
 					if (v > trail[i]) trail[i] = v;
+					trailLive = true;
 				}
 			}
 		}
 
 		function render(now: number) {
+			if (running && now - lastDraw < minFrameGap) {
+				raf = requestAnimationFrame(render);
+				return;
+			}
+			lastDraw = now;
+			const began = performance.now();
 			const t = reducedMotion ? 0 : (now - start) / 1000;
 			drawScene(t);
-			if (!reducedMotion) diffuse();
+			if (!reducedMotion && trailLive) diffuse();
 			const src = octx!.getImageData(0, 0, cols, rows).data;
 			const dst = out!.data;
 			for (let y = 0; y < rows; y++) {
@@ -298,7 +342,27 @@
 				}
 			}
 			ctx!.putImageData(out!, 0, 0);
-			if (!reducedMotion) raf = requestAnimationFrame(render);
+			if (running && measured < budgetFrames) {
+				workMs += performance.now() - began;
+				if (++measured === budgetFrames && workMs / measured > frameBudget) {
+					running = false;
+					raf = 0;
+					onfail?.();
+					return;
+				}
+			}
+			raf = running ? requestAnimationFrame(render) : 0;
+		}
+
+		// Animate only once ready, while the field is on screen and the tab is visible.
+		let visible = false;
+		let running = false;
+		function sync() {
+			const next = isReady && !reducedMotion && visible && !document.hidden;
+			if (next === running) return;
+			running = next;
+			if (running) raf = requestAnimationFrame(render);
+			else cancelAnimationFrame(raf);
 		}
 
 		function onPointerMove(ev: PointerEvent) {
@@ -355,9 +419,15 @@
 
 		const ro = new ResizeObserver(() => {
 			resize();
-			if (reducedMotion) render(performance.now());
+			if (!running) render(performance.now());
 		});
 		ro.observe(host);
+		const io = new IntersectionObserver(([entry]) => {
+			visible = entry.isIntersecting;
+			sync();
+		});
+		io.observe(host);
+		document.addEventListener('visibilitychange', sync);
 		host.addEventListener('pointermove', onPointerMove, { passive: true });
 		host.addEventListener('pointerleave', onPointerLeave);
 		host.addEventListener('pointerdown', onPointerDown);
@@ -366,6 +436,8 @@
 		return () => {
 			cancelAnimationFrame(raf);
 			ro.disconnect();
+			io.disconnect();
+			document.removeEventListener('visibilitychange', sync);
 			host.removeEventListener('pointermove', onPointerMove);
 			host.removeEventListener('pointerleave', onPointerLeave);
 			host.removeEventListener('pointerdown', onPointerDown);
@@ -376,7 +448,9 @@
 
 <div
 	bind:this={wrapper}
-	class="relative h-[320px] w-full overflow-hidden bg-[#23020B] md:h-[430px] {isOverEnvelope ? 'cursor-pointer' : ''}"
+	class="relative h-[320px] w-full overflow-hidden bg-[#23020B] transition-opacity duration-700 md:h-[430px] {isReady
+		? 'opacity-100'
+		: 'opacity-0'} {isOverEnvelope ? 'cursor-pointer' : ''}"
 	aria-hidden="true"
 >
 	<canvas
