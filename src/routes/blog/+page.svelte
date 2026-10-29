@@ -19,6 +19,12 @@
 		{ category: 'Case study', label: 'Case studies' }
 	].map((topic) => ({ ...topic, count: posts.filter((post) => post.category === topic.category).length }));
 
+	/**
+	 * Experiment: the index at the homepage's full content width instead of the
+	 * 848px column articles use. Set to false to go back; nothing else changes.
+	 */
+	const wide = true;
+
 	const [featured, ...afterFeatured] = posts;
 	const latest = afterFeatured.slice(0, 6);
 	const archive = afterFeatured.slice(6);
@@ -111,7 +117,7 @@
 	</li>
 {/snippet}
 
-<section class="mx-auto max-w-[848px] pt-24 pb-24 md:pt-32">
+<section class="mx-auto pt-24 pb-24 md:pt-32 {wide ? 'max-w-none' : 'max-w-[848px]'}">
 	<header class="flex flex-col gap-5 pb-6 md:flex-row md:items-end md:justify-between md:gap-8 md:pb-7">
 		<div>
 			<h1 class="text-[30px] leading-[1.2] tracking-[-0.02em] text-surface md:text-[40px] md:leading-[1.15]">
@@ -187,7 +193,11 @@
 			{/if}
 		</div>
 	{:else}
-		<div class="grid gap-10 pt-8 pb-12 md:grid-cols-[520px_1fr] md:gap-8 md:pb-14">
+		<div
+			class="grid gap-10 pt-8 pb-12 md:gap-8 md:pb-14 {wide
+				? 'md:grid-cols-[minmax(0,1.7fr)_minmax(0,1fr)] lg:gap-12'
+				: 'md:grid-cols-[520px_1fr]'}"
+		>
 			<a href="/blog/{featured.slug}/" class="group flex flex-col gap-4">
 				<ArtImage slug={featured.slug} category={featured.category} art={featured.art} variant="cover" decorative loading="eager" class="w-full" />
 				<div class="flex flex-col gap-2.5">
