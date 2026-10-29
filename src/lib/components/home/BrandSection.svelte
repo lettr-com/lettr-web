@@ -5,25 +5,7 @@
 	import GetStartedButton from './GetStartedButton.svelte';
 	import { createScrollRevealCleanup } from '$lib/utils/gsap';
 	import { capturePosthogEvent } from '$lib/analytics/posthog';
-	import {
-		brands,
-		defaultLayout,
-		initialBrandIds,
-		pickBrands,
-		randomLayout,
-		type Brand,
-		type EmailKind,
-		type Layout
-	} from '$lib/home/brands';
-
-	interface Slot {
-		kind: EmailKind;
-		label: string;
-		brand: Brand;
-		layout: Layout;
-		/** Bumped on every rebrand so the email re-mounts and replays its entrance. */
-		run: number;
-	}
+	import { brands, type EmailKind } from '$lib/home/brands';
 
 	const FONTS_HREF =
 		'https://fonts.googleapis.com/css2?family=Archivo+Black&family=Bricolage+Grotesque:wght@500;700&family=DM+Serif+Display&family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600&family=Lora:ital,wght@0,500;1,500&family=Playfair+Display:ital,wght@0,600;1,600&family=Sora:wght@600;700&family=Space+Grotesk:wght@500;700&family=Syne:wght@700;800&display=swap';
@@ -34,25 +16,15 @@
 		{ kind: 'transactional', label: 'Transactional email' }
 	];
 
-	let slots: Slot[] = $state(
-		kinds.map(({ kind, label }, i) => {
-			const brand = brands.find((b) => b.id === initialBrandIds[i]) ?? brands[i];
-			return { kind, label, brand, layout: defaultLayout(brand), run: 0 };
-		})
-	);
+	let brandIndex = $state(0);
+	const brand = $derived(brands[brandIndex]);
 	let section: HTMLElement | undefined = $state();
 	let announcement = $state('');
 
 	function rebrand() {
-		const next = pickBrands(slots.length, slots.map((s) => s.brand.id));
-		slots = slots.map((slot, i) => ({
-			...slot,
-			brand: next[i],
-			layout: randomLayout(next[i]),
-			run: slot.run + 1
-		}));
-		announcement = `Rebranded as ${next.map((b) => b.name).join(', ')}`;
-		void capturePosthogEvent('brand_demo_rebranded', { brands: next.map((b) => b.id).join(',') });
+		brandIndex = (brandIndex + 1) % brands.length;
+		announcement = `Rebranded as ${brand.name}`;
+		void capturePosthogEvent('brand_demo_rebranded', { brands: brand.id });
 	}
 
 	function loadFonts() {
@@ -125,14 +97,14 @@
 		<div
 			class="-mx-6 flex w-[calc(100%+3rem)] snap-x snap-mandatory gap-3 overflow-x-auto px-6 pb-2 lg:mx-0 lg:grid lg:w-full lg:snap-none lg:grid-cols-3 lg:gap-4 lg:overflow-visible lg:px-0 lg:pb-0"
 		>
-			{#each slots as slot, i (slot.kind)}
+			{#each kinds as { kind, label }, i (kind)}
 				<figure
 					class="relative m-0 h-[400px] w-[min(86vw,340px)] shrink-0 snap-center overflow-hidden bg-primary-soft lg:w-auto"
-					aria-label="{slot.label}, {slot.brand.name}"
+					aria-label="{label}, {brand.name}"
 				>
-					{#key slot.run}
+					{#key brand.id}
 						<div class="email-enter absolute top-9 left-1/2 -ml-[150px]" style="animation-delay: {i * 70}ms">
-							<BrandedEmail brand={slot.brand} kind={slot.kind} layout={slot.layout} />
+							<BrandedEmail {brand} {kind} />
 						</div>
 					{/key}
 				</figure>

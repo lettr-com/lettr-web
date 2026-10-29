@@ -1,19 +1,19 @@
 <script lang="ts">
-	import type { Brand, EmailKind, Layout } from '$lib/home/brands';
+	import type { Brand, EmailKind } from '$lib/home/brands';
 
 	/*
-	 * One fictional email, drawn from a Brand (colours, type, logo, copy) and a
-	 * Layout (header, hero, alignment, button and code styles). The same three
-	 * templates are re-skinned by swapping the brand and layout.
+	 * One fictional email, drawn from a Brand (colours, type, logo, copy and
+	 * layout). The same three templates are re-skinned by swapping the brand.
+	 * The email is always taller than the frame that crops it, so its bottom
+	 * edge never shows.
 	 */
 
 	interface Props {
 		brand: Brand;
 		kind: EmailKind;
-		layout: Layout;
 	}
 
-	let { brand, kind, layout }: Props = $props();
+	let { brand, kind }: Props = $props();
 
 	function luminance(hex: string) {
 		const channel = (i: number) => {
@@ -31,6 +31,7 @@
 	const c = $derived(brand.colors);
 	const f = $derived(brand.fonts);
 	const logo = $derived(brand.logo);
+	const layout = $derived(brand.layout);
 	const centered = $derived(layout.align === 'center');
 
 	/** Accent used as text or marks on the email background, falling back to ink when it would vanish. */
@@ -129,7 +130,7 @@
 {/snippet}
 
 {#snippet footer(suffix?: string)}
-	<div class="mt-1 border-t px-[18px] pt-2.5 pb-4 {centered ? 'text-center' : ''}" style:border-color={c.line}>
+	<div class="mt-auto border-t px-[18px] pt-2.5 pb-4 {centered ? 'text-center' : ''}" style:border-color={c.line}>
 		<span class="text-[10px] leading-[14px]" style:color={c.muted} style:font-family={f.body}>
 			{brand.footer}{suffix ? ` · ${suffix}` : ''}
 		</span>
@@ -138,7 +139,7 @@
 
 <div
 	aria-hidden="true"
-	class="w-[300px] text-left shadow-[0_0_40px_-12px_rgba(17,24,39,0.2)]"
+	class="flex min-h-[440px] w-[300px] flex-col text-left shadow-[0_0_40px_-12px_rgba(17,24,39,0.2)]"
 	style:background-color={c.bg}
 	style:color={c.ink}
 	style:font-family={f.body}
@@ -223,6 +224,12 @@
 			{/if}
 		{/if}
 		<div class="flex flex-col px-[18px] pb-3.5">{@render cta(copy.cta)}</div>
+		{#if copy.link}
+			<div class="mx-[18px] mb-3.5 flex flex-col gap-1 border-y py-3 {centered ? 'items-center text-center' : ''}" style:border-color={c.line}>
+				<span class="text-[11px] leading-4" style:color={c.muted}>Button not working? Paste this link:</span>
+				<span class="text-[11px] leading-4 break-all" style:color={accentText} style:font-family={f.mono}>https://{copy.link}</span>
+			</div>
+		{/if}
 		<p class="m-0 px-[18px] pb-[18px] text-[11px] leading-4 {centered ? 'text-center' : ''}" style:color={c.muted}>{copy.note}</p>
 		{@render footer()}
 	{/if}
