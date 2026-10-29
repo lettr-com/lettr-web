@@ -78,6 +78,8 @@ export interface TransactionalCopy {
   body: string;
   /** Digits shown in the code block, spaces allowed. Omit for link-style emails. */
   code?: string;
+  /** Fallback link printed under the button of link-style emails. */
+  link?: string;
   cta: string;
   note: string;
 }
@@ -89,14 +91,8 @@ export interface Brand {
   fonts: BrandFonts;
   logo: BrandLogo;
   footer: string;
-  /** Layout options this brand may be shown with; the first value is the default. */
-  layouts: {
-    header: HeaderLayout[];
-    hero: HeroLayout[];
-    align: Align[];
-    cta: CtaStyle[];
-    code: CodeStyle[];
-  };
+  /** One layout for all three emails, so the set reads as one brand. */
+  layout: Layout;
   copy: {
     marketing: MarketingCopy;
     ecommerce: EcommerceCopy;
@@ -137,12 +133,12 @@ export const brands: Brand[] = [
       size: 12,
     },
     footer: "Northwind Outdoor · Oslo",
-    layouts: {
-      header: ["left", "center"],
-      hero: ["band", "plain"],
-      align: ["left"],
-      cta: ["solid", "block"],
-      code: ["box"],
+    layout: {
+      header: "left",
+      hero: "band",
+      align: "left",
+      cta: "solid",
+      code: "box",
     },
     copy: {
       marketing: {
@@ -169,6 +165,7 @@ export const brands: Brand[] = [
         headline: "Reset your password",
         body: "Someone asked to reset the password for your Northwind account. This link works for 30 minutes.",
         cta: "Choose a new password",
+        link: "northwind.no/reset/k7qp2x",
         note: "Didn't ask for this? You can safely ignore the message.",
       },
     },
@@ -205,12 +202,12 @@ export const brands: Brand[] = [
       wordmark: "accent",
     },
     footer: "Rosa Atelier · Lisbon",
-    layouts: {
-      header: ["center", "left"],
-      hero: ["plain", "band"],
-      align: ["left", "center"],
-      cta: ["block", "solid"],
-      code: ["box"],
+    layout: {
+      header: "center",
+      hero: "plain",
+      align: "left",
+      cta: "block",
+      code: "box",
     },
     copy: {
       marketing: {
@@ -228,15 +225,16 @@ export const brands: Brand[] = [
         eyebrow: "ORDER #RA-20418",
         headline: "Thanks for your order, Sarah.",
         sub: "Your parcel leaves our Lisbon studio tomorrow.",
-        item: { name: "Linen Wrap Dress", meta: "Size M · Qty 1", price: "$148" },
+        item: { name: "Linen Wrap Dress", meta: "Size M · Qty 1", price: "€148" },
         totalLabel: "Total",
-        total: "$148",
+        total: "€148",
         cta: "Track your order",
       },
       transactional: {
         headline: "Welcome to Rosa",
         body: "Confirm your email to save favourites and follow your orders.",
         cta: "Confirm email",
+        link: "rosa-atelier.pt/confirm/8fk2m",
         note: "If this was not you, no action is needed.",
       },
     },
@@ -270,12 +268,12 @@ export const brands: Brand[] = [
       size: 14,
     },
     footer: "Sprout Labs",
-    layouts: {
-      header: ["left", "band"],
-      hero: ["plain", "band"],
-      align: ["left", "center"],
-      cta: ["block", "solid"],
-      code: ["box", "tiles"],
+    layout: {
+      header: "left",
+      hero: "plain",
+      align: "left",
+      cta: "block",
+      code: "box",
     },
     copy: {
       marketing: {
@@ -337,12 +335,12 @@ export const brands: Brand[] = [
       size: 13,
     },
     footer: "Kiln Coffee · Berlin",
-    layouts: {
-      header: ["center", "left"],
-      hero: ["band", "plain"],
-      align: ["center", "left"],
-      cta: ["outline", "block"],
-      code: ["box"],
+    layout: {
+      header: "center",
+      hero: "band",
+      align: "center",
+      cta: "outline",
+      code: "box",
     },
     copy: {
       marketing: {
@@ -369,6 +367,7 @@ export const brands: Brand[] = [
         headline: "Verify your email",
         body: "Tap below and you're in. Then it's coffee all the way.",
         cta: "VERIFY EMAIL →",
+        link: "kiln.coffee/v/3xr9",
         note: "Not you? Ignore this and nothing happens.",
       },
     },
@@ -402,12 +401,12 @@ export const brands: Brand[] = [
       size: 14,
     },
     footer: "Maru Home · Copenhagen",
-    layouts: {
-      header: ["left", "center"],
-      hero: ["plain"],
-      align: ["left"],
-      cta: ["outline", "solid"],
-      code: ["box", "tiles"],
+    layout: {
+      header: "left",
+      hero: "plain",
+      align: "left",
+      cta: "outline",
+      code: "box",
     },
     copy: {
       marketing: {
@@ -468,12 +467,12 @@ export const brands: Brand[] = [
       size: 13,
     },
     footer: "Lumen · Amsterdam",
-    layouts: {
-      header: ["band", "left"],
-      hero: ["plain", "band"],
-      align: ["center", "left"],
-      cta: ["solid", "block"],
-      code: ["tiles", "box"],
+    layout: {
+      header: "band",
+      hero: "plain",
+      align: "center",
+      cta: "solid",
+      code: "tiles",
     },
     copy: {
       marketing: {
@@ -535,12 +534,12 @@ export const brands: Brand[] = [
       size: 17,
     },
     footer: "Harbor & Co · Falmouth",
-    layouts: {
-      header: ["center", "left"],
-      hero: ["plain", "band"],
-      align: ["center", "left"],
-      cta: ["solid", "outline"],
-      code: ["box", "tiles"],
+    layout: {
+      header: "center",
+      hero: "plain",
+      align: "center",
+      cta: "solid",
+      code: "box",
     },
     copy: {
       marketing: {
@@ -601,12 +600,12 @@ export const brands: Brand[] = [
       size: 18,
     },
     footer: "Blip Stickers · Austin",
-    layouts: {
-      header: ["left", "band"],
-      hero: ["band", "plain"],
-      align: ["left", "center"],
-      cta: ["solid", "block"],
-      code: ["tiles", "box"],
+    layout: {
+      header: "left",
+      hero: "band",
+      align: "left",
+      cta: "solid",
+      code: "tiles",
     },
     copy: {
       marketing: {
@@ -639,46 +638,3 @@ export const brands: Brand[] = [
     },
   },
 ];
-
-/** First three brands are the ones shown on page load: marketing, e-commerce, transactional. */
-export const initialBrandIds = ["northwind", "rosa", "sprout"] as const;
-
-export function defaultLayout(brand: Brand): Layout {
-  const l = brand.layouts;
-  return {
-    header: l.header[0],
-    hero: l.hero[0],
-    align: l.align[0],
-    cta: l.cta[0],
-    code: l.code[0],
-  };
-}
-
-function pick<T>(list: T[], random: () => number): T {
-  return list[Math.floor(random() * list.length)];
-}
-
-export function randomLayout(brand: Brand, random: () => number = Math.random): Layout {
-  const l = brand.layouts;
-  return {
-    header: pick(l.header, random),
-    hero: pick(l.hero, random),
-    align: pick(l.align, random),
-    cta: pick(l.cta, random),
-    code: pick(l.code, random),
-  };
-}
-
-/** Pick `count` distinct brands that are not in `exclude`. */
-export function pickBrands(
-  count: number,
-  exclude: string[],
-  random: () => number = Math.random,
-): Brand[] {
-  const pool = brands.filter((b) => !exclude.includes(b.id));
-  for (let i = pool.length - 1; i > 0; i--) {
-    const j = Math.floor(random() * (i + 1));
-    [pool[i], pool[j]] = [pool[j], pool[i]];
-  }
-  return pool.slice(0, count);
-}

@@ -136,3 +136,10 @@ The first developer feature concept was **three large visual stories** (send, au
 - **Lesson to retain:** for this hero, restraint reads as quality. Motion should be ambient and one interaction should be a clear reward; physics, shake and impact effects pushed the page toward a toy.
 - **Roll back:** swap `EnvelopeDither` for `DitherHero` in `HomeHero.svelte`. Reduced motion renders a still frame and ignores clicks.
 - **Status:** implemented; ready for owner visual review.
+
+### 2026-10-29 — Brand section: one brand per click
+
+- **Owner request:** show one brand per click instead of three different brands side by side, with three emails for each brand. The emails must always run past the bottom of their frame, never end in mid-air.
+- **Response:** each click now moves every slot (marketing, order, transactional) to the same next brand, in a fixed order through all eight. Each brand has one fixed layout, so its three emails read as one set. The email is at least 440px tall, with the footer pinned to its bottom, so the 400px frame always crops it. Link-style transactional emails (Northwind, Rosa, Kiln) gained a fallback link block. Rosa's order email now uses euros, matching its other emails.
+- **Analytics note:** `brand_demo_rebranded` now sends one brand id in `brands`, not three.
+- **Status:** implemented; ready for owner visual review.
