@@ -22,7 +22,7 @@ export interface Collection {
 }
 
 export const deliverabilityPath: Collection = {
-  title: "Reach the inbox, in four reads",
+  title: "Set up a sending domain in four reads",
   description: "The order we'd hand a new engineer setting up a sending domain.",
   slugs: [
     "spf-dkim-dmarc-explained-for-developers",

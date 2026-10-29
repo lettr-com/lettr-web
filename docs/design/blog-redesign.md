@@ -165,7 +165,7 @@ Two places where I'm pushing back on the brief: **there is no dark-green or ligh
 
 ### Blog index
 
-Compact header (title, one-line intro, search), topic filter with counts, featured post (defaults to the newest) next to **"Most read this quarter"** from PostHog, a 2-column "Latest" grid with dithered covers, a dark **"Reach the inbox, in four reads"** collection ending in a product link, and a dense archive list with thumbnails. It stays inside the 896px site frame.
+Compact header (title, one-line intro, search), topic filter with counts, featured post (defaults to the newest) next to **"Most read this quarter"** from PostHog, a 2-column "Latest" grid with dithered covers, a dark **"Set up a sending domain in four reads"** collection ending in a product link, and a dense archive list with thumbnails. It stays inside the 896px site frame.
 
 ### Article
 

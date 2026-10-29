@@ -17,7 +17,7 @@
 		{ category: 'Engineering', label: 'Engineering' },
 		{ category: 'Fundamentals', label: 'Fundamentals' },
 		{ category: 'Case study', label: 'Case studies' }
-	].map((topic) => ({ ...topic, count: posts.filter((post) => post.category === topic.category).length }));
+	];
 
 	/**
 	 * Experiment: the index at the homepage's full content width instead of the
@@ -39,14 +39,18 @@
 
 	const filtering = $derived(topic !== null || query.trim() !== '');
 	const archiveInOrder = $derived(newestFirst ? archive : [...archive].reverse());
-	const results = $derived.by(() => {
+	/** Posts matching the search, before the topic filter, so the tab counts follow the search. */
+	const matching = $derived.by(() => {
 		const words = query.trim().toLowerCase().split(/\s+/).filter(Boolean);
-		const ordered = newestFirst ? posts : [...posts].reverse();
-		return ordered.filter((post) => {
-			if (topic && post.category !== topic) return false;
+		return posts.filter((post) => {
 			const haystack = `${noWidow(post.title)} ${post.excerpt} ${post.category}`.toLowerCase();
 			return words.every((word) => haystack.includes(word));
 		});
+	});
+	const countFor = (category: string) => matching.filter((post) => post.category === category).length;
+	const results = $derived.by(() => {
+		const inTopic = topic ? matching.filter((post) => post.category === topic) : matching;
+		return newestFirst ? inTopic : [...inTopic].reverse();
 	});
 
 	function shortDate(post: PostMeta) {
@@ -150,7 +154,7 @@
 					aria-pressed={topic === null}
 					class="topic {topic === null ? 'is-active' : ''}"
 				>
-					All <span class="count">{posts.length}</span>
+					All <span class="count">{matching.length}</span>
 				</button>
 			</li>
 			{#each topics as item (item.category)}
@@ -161,7 +165,7 @@
 						aria-pressed={topic === item.category}
 						class="topic {topic === item.category ? 'is-active' : ''}"
 					>
-						{item.label} <span class="count">{item.count}</span>
+						{item.label} <span class="count">{countFor(item.category)}</span>
 					</button>
 				</li>
 			{/each}
@@ -169,9 +173,9 @@
 	</nav>
 
 	{#if filtering}
-		<div class="pt-8" aria-live="polite">
+		<div class="pt-8">
 			<div class="flex items-baseline justify-between gap-4 border-b border-surface pb-3">
-				<p class="text-sm text-subtle">
+				<p class="text-sm text-subtle" aria-live="polite">
 					{results.length}
 					{results.length === 1 ? 'article' : 'articles'}{query.trim() ? ` matching “${query.trim()}”` : ''}
 				</p>
@@ -257,7 +261,7 @@
 			<div class="flex flex-col gap-4 md:w-60 md:shrink-0">
 				<ArtImage slug={path[path.length - 1].slug} category={path[path.length - 1].category} art={path[path.length - 1].art} variant="thumb" decorative class="size-20 md:size-24" />
 				<h2 id="path-heading" class="text-[24px] leading-[1.25] tracking-[-0.015em] text-balance text-background">{noWidow(deliverabilityPath.title)}</h2>
-				<p class="text-[15px] leading-[1.55] text-pretty text-gray-400">{deliverabilityPath.description}</p>
+				<p class="text-[15px] leading-[1.55] text-balance text-gray-400">{noWidow(deliverabilityPath.description)}</p>
 			</div>
 			<div class="flex-1">
 				<ol>
@@ -265,13 +269,13 @@
 						<li>
 							<a href="/blog/{post.slug}/" class="group flex items-baseline gap-4 border-b border-white/10 py-3.5">
 								<span class="w-6 shrink-0 font-code text-[13px] text-green">0{index + 1}</span>
-								<span class="flex-1 text-[15px] font-semibold text-balance text-background transition-colors group-hover:text-primary-outline md:text-base">{noWidow(post.title)}</span>
+								<span class="flex-1 text-[15px] font-semibold text-balance text-background transition-colors group-hover:text-green md:text-base">{noWidow(post.title)}</span>
 								<span class="w-14 shrink-0 text-right text-[13px] text-gray-400">{post.readTime.replace(' read', '')}</span>
 							</a>
 						</li>
 					{/each}
 				</ol>
-				<a href={deliverabilityPath.next.href} class="group mt-4 inline-flex items-center gap-1 text-sm font-semibold text-background">
+				<a href={deliverabilityPath.next.href} class="group mt-4 inline-flex items-center gap-1 text-sm font-semibold text-background transition-colors hover:text-green">
 					{deliverabilityPath.next.label}
 					<ArrowRightIcon size={14} class="transition-transform group-hover:translate-x-0.5" />
 				</a>
