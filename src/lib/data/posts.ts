@@ -46,7 +46,7 @@ export const posts: PostMeta[] = [
     author: "Jack Zagorski",
     date: "October 6, 2026",
     readTime: "5 min read",
-    art: { object: "cursor", rotate: -8, palette: "green" },
+    art: { object: "cursor", rotate: -8 },
   },
   {
     slug: "mailgun-alternatives",
