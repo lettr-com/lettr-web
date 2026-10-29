@@ -12,15 +12,12 @@
 		FaqItem,
 		ProductNote
 	} from '$lib/components/blog';
+	import type { PageProps } from './$types';
 
 	// Every post is just data + composed typography components.
-	// Copy this file as a starting point for the next post.
-	const phpExample = `use Lettr\\Laravel\\Facades\\Lettr;
-
-Lettr::to($user->email)
-    ->template('welcome')
-    ->with(['name' => $user->name])
-    ->send();`;
+	// Copy this file as a starting point for the next post. Code in a highlighted
+	// language lives in +page.server.ts, which colours it at prerender time.
+	let { data }: PageProps = $props();
 </script>
 
 <BlogPost
@@ -63,7 +60,7 @@ Lettr::to($user->email)
 		calls, and it stays that small no matter how the product grows:
 	</Paragraph>
 
-	<Code lang="php" filename="app/Notifications/WelcomeMail.php" code={phpExample} />
+	<Code filename="app/Notifications/WelcomeMail.php" {...data.code.phpExample} />
 
 	<Paragraph>
 		That snippet never gets more complicated. <strong>Everything around it does</strong>: the

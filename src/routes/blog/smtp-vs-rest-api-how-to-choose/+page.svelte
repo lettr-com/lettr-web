@@ -12,19 +12,9 @@
 		FaqItem,
 		ProductNote
 	} from '$lib/components/blog';
+	import type { PageProps } from './$types';
 
-	const restTemplateExample = `POST /emails
-{
-  "to": "user@example.com",
-  "template_id": "order-confirmation",
-  "merge_data": {
-    "name": "Alex",
-    "order_id": "ORD-4821",
-    "items": [
-      { "name": "Widget Pro", "qty": 2, "price": "$24.00" }
-    ]
-  }
-}`;
+	let { data }: PageProps = $props();
 
 	const smtpPythonExample = `import smtplib
 from email.mime.multipart import MIMEMultipart
@@ -43,12 +33,6 @@ with smtplib.SMTP("smtp.provider.com", 587) as server:
     server.starttls()
     server.login("apikey", "your-api-key")
     server.send_message(msg)`;
-
-	const restErrorExample = `{
-  "status": 422,
-  "error": "invalid_recipient",
-  "message": "The address user@invalid-domain.test could not be validated. Check the domain exists and has MX records."
-}`;
 
 	const smtpErrorExample = `550 5.1.1 The email account that you tried to reach does not exist.`;
 </script>
@@ -162,7 +146,7 @@ with smtplib.SMTP("smtp.provider.com", 587) as server:
 		layout</strong>, and non-developers can edit templates without a code deploy.
 	</Paragraph>
 
-	<Code lang="javascript" code={restTemplateExample} />
+	<Code {...data.code.restTemplateExample} />
 
 	<Paragraph>
 		The <strong>SMTP equivalent</strong> builds the HTML in application code before handing it to an SMTP library:
@@ -216,7 +200,7 @@ with smtplib.SMTP("smtp.provider.com", 587) as server:
 		code, an error type, and a readable message</strong>:
 	</Paragraph>
 
-	<Code lang="javascript" code={restErrorExample} />
+	<Code {...data.code.restErrorExample} />
 
 	<Paragraph>
 		Switch on the error type and route it to an alert channel. Same pattern as any other API in your

@@ -12,6 +12,9 @@
 		FaqItem,
 		ProductNote
 	} from '$lib/components/blog';
+	import type { PageProps } from './$types';
+
+	let { data }: PageProps = $props();
 
 	// Visual email mockups for the "examples" section, modeled on the card design
 	// in /platform/templates ("Start from a template"). Each renders as a shrunk
@@ -126,32 +129,6 @@ Need to change it? {{cta_button: Reschedule}}
 
 See you then,
 {{business}}`;
-
-	const sendTemplate = `import { Lettr } from 'lettr';
-
-const lettr = new Lettr(process.env.LETTR_API_KEY);
-
-const result = await lettr.emails.send({
-  from: 'onboarding@yourapp.com',
-  to: [user.email],
-  template_slug: 'welcome',
-  substitution_data: {
-    first_name: user.firstName,
-    product: 'Acme',
-    first_action: 'import your first contact list'
-  }
-});`;
-
-	const scheduleSend = `// Step 2 of the sequence: a setup nudge, three days later.
-const sendAt = new Date(Date.now() + 3 * 24 * 60 * 60 * 1000);
-
-await lettr.emails.schedule({
-  from: 'onboarding@yourapp.com',
-  to: [user.email],
-  template_slug: 'finish-setup',
-  substitution_data: { first_name: user.firstName },
-  scheduled_at: sendAt.toISOString()
-});`;
 </script>
 
 <BlogPost
@@ -426,7 +403,7 @@ await lettr.emails.schedule({
 		template from the signup handler looks like this:
 	</Paragraph>
 
-	<Code lang="javascript" code={sendTemplate} />
+	<Code {...data.code.sendTemplate} />
 
 	<Paragraph>
 		The template lives in Lettr and the call passes only the data, so <strong>the copy can change
@@ -441,7 +418,7 @@ await lettr.emails.schedule({
 		send into a drip. Queue the day-three setup nudge from the same signup handler:
 	</Paragraph>
 
-	<Code lang="javascript" code={scheduleSend} />
+	<Code {...data.code.scheduleSend} />
 
 	<Paragraph>
 		Behavioral triggering layers on top. <strong>Cancel a scheduled nudge when the user completes the
