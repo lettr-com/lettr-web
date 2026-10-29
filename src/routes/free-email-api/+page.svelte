@@ -20,6 +20,9 @@
 	import { capturePosthogEvent, trackSignupClick } from '$lib/analytics/posthog';
 	import { jsonLdScript } from '$lib/utils/jsonLd';
 	import { productPageJsonLd } from '$lib/utils/pageJsonLd';
+	import type { PageProps } from './$types';
+
+	let { data }: PageProps = $props();
 
 	const metaDescription =
 		'Get a free email API key and send up to 3,000 emails a month, no credit card. REST API and SMTP, SDKs for every language, deliverability built in.';
@@ -266,7 +269,8 @@
 		</div>
 
 		<div>
-			<CodeSnippet primaryTabIndices={[2, 5]} moreTabIndices={[0, 1, 3, 4, 6]} />
+			<CodeSnippet tabs={data.codeTabs} primaryTabIndices={[2, 5]} moreTabIndices={[0, 1, 3, 4, 6]} />
+
 		</div>
 	</div>
 </section>
@@ -303,7 +307,7 @@
 		</div>
 
 		<div data-reveal>
-			<CodeSnippet primaryTabIndices={[2, 5]} moreTabIndices={[0, 1, 3, 4, 6]} shadow={false} />
+			<CodeSnippet tabs={data.codeTabs} primaryTabIndices={[2, 5]} moreTabIndices={[0, 1, 3, 4, 6]} shadow={false} />
 		</div>
 	</div>
 </section>

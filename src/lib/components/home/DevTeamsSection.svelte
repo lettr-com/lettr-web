@@ -6,6 +6,13 @@
 	import TooltipWord from '$lib/components/TooltipWord.svelte';
 	import GetStartedButton from './GetStartedButton.svelte';
 	import { createScrollRevealCleanup } from '$lib/utils/reveal';
+	import type { HighlightedTab } from '$lib/utils/shiki';
+
+	interface Props {
+		codeTabs: HighlightedTab[];
+	}
+
+	let { codeTabs }: Props = $props();
 
 	let section: HTMLElement | undefined = $state();
 
@@ -74,7 +81,7 @@
 					Dev integrate.
 				</h3>
 				<div class="w-full max-w-[560px] lg:absolute lg:top-1/2 lg:left-[125px] lg:w-[529px] lg:max-w-none lg:-translate-y-1/2">
-					<CodeSnippet copyable moreTabIndices={[1, 4, 5, 6]} />
+					<CodeSnippet tabs={codeTabs} copyable moreTabIndices={[1, 4, 5, 6]} />
 				</div>
 				<p class="m-0 text-[1.25rem] leading-[1.3] text-white sm:text-[1.375rem] lg:absolute lg:bottom-6 lg:left-6 lg:text-2xl lg:leading-[1.4]">
 					Hook it up once,<br />
