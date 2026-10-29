@@ -1,3 +1,8 @@
+<script lang="ts" module>
+	/** Set when the live field ran too slowly; holds until the next full page load. */
+	let liveArtTooSlow = false;
+</script>
+
 <script lang="ts">
 	import { onMount, type Component } from 'svelte';
 	import Button from '$lib/components/Button.svelte';
@@ -9,9 +14,6 @@
 	let artHost: HTMLElement | undefined = $state();
 	let LiveArt: Component<{ onfail?: () => void }> | null = $state(null);
 
-	/** Session flag set when the live field was too slow here, so it is not loaded again. */
-	const liveArtOffKey = 'lettr:hero-live-off';
-
 	onMount(() => {
 		registerHref = buildRegisterUrl(new URL(window.location.href), document.cookie);
 		return enhanceArt();
@@ -20,60 +22,62 @@
 	/*
 	 * The baked stills are the hero. On a large screen with a mouse, once the art is in view
 	 * and the browser is idle, the live canvas (its own chunk, with its sprites) loads over
-	 * them. Phones, reduced motion and Save-Data never download it.
+	 * them. Phones, reduced motion and Save-Data never download it. The media query is
+	 * followed live, so resizing or toggling reduced motion switches between the two.
 	 */
 	function enhanceArt(): (() => void) | undefined {
-		const capable = window.matchMedia(
-			'(min-width: 1024px) and (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference)'
-		).matches;
+		const host = artHost;
 		const saveData = (navigator as Navigator & { connection?: { saveData?: boolean } }).connection?.saveData;
-		if (!capable || saveData || !artHost || liveArtWasTooSlow()) return;
+		if (!host || saveData) return;
+		const query = window.matchMedia(
+			'(min-width: 1024px) and (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference)'
+		);
 
-		let cancelled = false;
+		let io: IntersectionObserver | undefined;
 		let cancelIdle: (() => void) | undefined;
 		const load = () => {
 			import('./EnvelopeDither.svelte')
 				.then((module) => {
-					if (!cancelled) LiveArt = module.default;
+					if (query.matches && !liveArtTooSlow) LiveArt = module.default;
 				})
 				.catch(() => {});
 		};
-		const io = new IntersectionObserver(([entry]) => {
-			if (!entry.isIntersecting) return;
-			io.disconnect();
-			// Safari has no requestIdleCallback
-			if ('requestIdleCallback' in window) {
-				const handle = requestIdleCallback(load, { timeout: 3000 });
-				cancelIdle = () => cancelIdleCallback(handle);
-			} else {
-				const handle = setTimeout(load, 200);
-				cancelIdle = () => clearTimeout(handle);
-			}
-		});
-		io.observe(artHost);
-
-		return () => {
-			cancelled = true;
-			io.disconnect();
+		const arm = () => {
+			if (io || LiveArt || liveArtTooSlow) return;
+			io = new IntersectionObserver(([entry]) => {
+				if (!entry.isIntersecting) return;
+				io?.disconnect();
+				// Safari has no requestIdleCallback
+				if ('requestIdleCallback' in window) {
+					const handle = requestIdleCallback(load, { timeout: 3000 });
+					cancelIdle = () => cancelIdleCallback(handle);
+				} else {
+					const handle = setTimeout(load, 200);
+					cancelIdle = () => clearTimeout(handle);
+				}
+			});
+			io.observe(host);
+		};
+		const disarm = () => {
+			io?.disconnect();
+			io = undefined;
 			cancelIdle?.();
+			cancelIdle = undefined;
+			LiveArt = null;
+		};
+		const onChange = () => (query.matches ? arm() : disarm());
+
+		onChange();
+		query.addEventListener('change', onChange);
+		return () => {
+			query.removeEventListener('change', onChange);
+			disarm();
 		};
 	}
 
-	function liveArtWasTooSlow(): boolean {
-		try {
-			return sessionStorage.getItem(liveArtOffKey) === '1';
-		} catch {
-			return false;
-		}
-	}
-
 	function stopLiveArt() {
+		liveArtTooSlow = true;
 		LiveArt = null;
-		try {
-			sessionStorage.setItem(liveArtOffKey, '1');
-		} catch {
-			// private mode: it simply retries on the next page view
-		}
 	}
 
 	function trackHeroCta(label: string, href: string, variant: 'primary' | 'secondary') {

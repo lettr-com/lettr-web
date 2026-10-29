@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
+	import { createFramePacer } from '$lib/utils/framePacer';
 
 	/*
 	 * Animated ordered-dither strip that runs down the right edge of a card (or
@@ -39,13 +40,10 @@
 
 		const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 		const thickness = Math.max(1, Math.round(width / cell));
-		// The bands drift slowly, so ~30 redraws a second look the same as one per display frame.
-		// The slack keeps a 60 Hz screen on every second frame despite timing jitter.
-		const minFrameGap = 1000 / 30 - 4;
+		const pacer = createFramePacer();
 		let cols = 1;
 		let rows = 1;
 		let raf = 0;
-		let lastDraw = -Infinity;
 		const start = performance.now();
 
 		function resize() {
@@ -73,11 +71,10 @@
 		}
 
 		function render(now: number) {
-			if (running && now - lastDraw < minFrameGap) {
+			if (running && !pacer.shouldDraw(now)) {
 				raf = requestAnimationFrame(render);
 				return;
 			}
-			lastDraw = now;
 			const t = reducedMotion ? 0 : (now - start) / 1000;
 			ctx!.clearRect(0, 0, cols, rows);
 			ctx!.fillStyle = color;
@@ -102,6 +99,7 @@
 			const next = !reducedMotion && visible && !document.hidden;
 			if (next === running) return;
 			running = next;
+			pacer.reset();
 			if (running) raf = requestAnimationFrame(render);
 			else cancelAnimationFrame(raf);
 		}
