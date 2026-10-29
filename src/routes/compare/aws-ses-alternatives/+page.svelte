@@ -9,7 +9,7 @@
 	import XIcon from 'phosphor-svelte/lib/XIcon';
 	import MinusIcon from 'phosphor-svelte/lib/MinusIcon';
 	import CaretDownIcon from 'phosphor-svelte/lib/CaretDownIcon';
-	import { createFromAnimationCleanup, createScrollRevealCleanup } from '$lib/utils/gsap';
+	import { createScrollRevealCleanup } from '$lib/utils/reveal';
 	import { buildRegisterUrl, registerUrl } from '$lib/utils/utm';
 	import { capturePosthogEvent, trackSignupClick } from '$lib/analytics/posthog';
 	import { jsonLdScript } from '$lib/utils/jsonLd';
@@ -18,7 +18,6 @@
 	const metaDescription =
 		'Looking for an AWS SES alternative? Compare Lettr, SES, SendGrid, and Postmark on setup, analytics, templates, deliverability, and pricing.';
 
-	let hero: HTMLElement | undefined = $state();
 	let reasonsSection: HTMLElement | undefined = $state();
 	let tableSection: HTMLElement | undefined = $state();
 	let breakdownSection: HTMLElement | undefined = $state();
@@ -210,16 +209,6 @@
 
 		const cleanups: (() => void)[] = [];
 
-		if (hero) {
-			cleanups.push(
-				createFromAnimationCleanup({
-					scope: hero,
-					targets: '[data-animate]',
-					vars: { y: 30, opacity: 0, duration: 0.7, stagger: 0.12, ease: 'power3.out' }
-				})
-			);
-		}
-
 		for (const section of [
 			reasonsSection,
 			tableSection,
@@ -270,7 +259,7 @@
 </svelte:head>
 
 <!-- Hero -->
-<section bind:this={hero} class="pt-30 pb-20 border-b border-border/30">
+<section class="pt-30 pb-20 border-b border-border/30">
 	<a
 		href="/compare/"
 		class="mb-10 flex w-fit items-center gap-1.5 text-sm font-medium text-muted transition-colors hover:text-surface"
@@ -279,16 +268,16 @@
 		All comparisons
 	</a>
 
-	<h1 data-animate class="text-surface mb-5 max-w-[16ch]">
+	<h1 class="text-surface mb-5 max-w-[16ch]">
 		Looking for an <span class="text-primary">AWS SES alternative?</span>
 	</h1>
-	<p data-animate class="max-w-[58ch] text-body text-muted mb-8">
+	<p class="max-w-[58ch] text-body text-muted mb-8">
 		SES is a cheap, reliable sending engine. But the moment you want a dashboard, a template editor, or
 		logs you can search, you're building it yourself. Here's an honest look at your options — including
 		where SES is still the right call.
 	</p>
 
-	<div data-animate class="flex flex-wrap items-center gap-2">
+	<div class="flex flex-wrap items-center gap-2">
 		<Button
 			variant="primary"
 			href={registerHref}

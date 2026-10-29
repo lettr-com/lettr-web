@@ -11,7 +11,7 @@
 		summarizeMatches,
 		type FilterToken
 	} from '$lib/changelog/filter';
-	import { createScrollRevealCleanup } from '$lib/utils/gsap';
+	import { createScrollRevealCleanup } from '$lib/utils/reveal';
 	import type { ChangelogMonth as ChangelogMonthData } from '$lib/changelog/types';
 	import ChangelogMonth from './ChangelogMonth.svelte';
 
@@ -86,7 +86,8 @@
 		if (isInstant) return;
 		await tick();
 		const element = container?.querySelector(`[data-month="${id}"]`);
-		if (!element) return;
+		// A filter picked during the tick has already retired the reveal.
+		if (!element || isInstant) return;
 		revealCleanups.push(createScrollRevealCleanup({ scope: element, targets: '[data-reveal]' }));
 	}
 
@@ -129,8 +130,7 @@
 		untrack(() => {
 			if (!isInstant) {
 				isInstant = true;
-				// Reverting the contexts drops the inline opacity gsap set, handing the
-				// elements back to the `[data-reveal-instant]` rule in app.css.
+				// The cleanups show every entry still waiting below the fold at once.
 				revealCleanups.forEach((fn) => fn());
 				revealCleanups.length = 0;
 			}
@@ -193,7 +193,7 @@
 	});
 </script>
 
-<div bind:this={container} data-reveal-instant={isInstant ? '' : undefined} class="divide-y divide-border/50">
+<div bind:this={container} class="divide-y divide-border/50">
 	{#each visible as month (month.id)}
 		<div class="py-16 first:pt-0">
 			<ChangelogMonth {month} isLatest={month.id === initial.id} {filter} />

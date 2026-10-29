@@ -5,7 +5,7 @@
 	import PaperPlaneTiltIcon from 'phosphor-svelte/lib/PaperPlaneTiltIcon';
 	import ChartLineUpIcon from 'phosphor-svelte/lib/ChartLineUpIcon';
 	import ArrowRightIcon from 'phosphor-svelte/lib/ArrowRightIcon';
-	import { createScrollRevealCleanup } from '$lib/utils/gsap';
+	import { createScrollRevealCleanup } from '$lib/utils/reveal';
 	import { capturePosthogEvent } from '$lib/analytics/posthog';
 	import { topolCompanies } from '$lib/data/company';
 

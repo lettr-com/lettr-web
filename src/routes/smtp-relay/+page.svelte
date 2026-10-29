@@ -19,7 +19,7 @@
 	import StackIcon from 'phosphor-svelte/lib/StackIcon';
 	import CheckIcon from 'phosphor-svelte/lib/CheckIcon';
 	import CaretDownIcon from 'phosphor-svelte/lib/CaretDownIcon';
-	import { createFromAnimationCleanup, createScrollRevealCleanup } from '$lib/utils/gsap';
+	import { createScrollRevealCleanup } from '$lib/utils/reveal';
 	import { buildRegisterUrl, registerUrl } from '$lib/utils/utm';
 	import { capturePosthogEvent, trackSignupClick } from '$lib/analytics/posthog';
 	import type { CodeTab } from '$lib/utils/shiki';
@@ -31,7 +31,6 @@
 
 	const SMTP_DOCS_URL = 'https://docs.lettr.com/quickstart/smtp/introduction';
 
-	let hero: HTMLElement | undefined = $state();
 	let definitionSection: HTMLElement | undefined = $state();
 	let whenSection: HTMLElement | undefined = $state();
 	let featuresSection: HTMLElement | undefined = $state();
@@ -320,16 +319,6 @@ func main() {
 
 		const cleanups: (() => void)[] = [];
 
-		if (hero) {
-			cleanups.push(
-				createFromAnimationCleanup({
-					scope: hero,
-					targets: '[data-animate]',
-					vars: { y: 30, opacity: 0, duration: 0.7, stagger: 0.12, ease: 'power3.out' }
-				})
-			);
-		}
-
 		for (const section of [
 			definitionSection,
 			whenSection,
@@ -379,22 +368,21 @@ func main() {
 </svelte:head>
 
 <!-- Hero -->
-<section bind:this={hero} class="pt-30 pb-16 border-b border-border/30">
+<section class="pt-30 pb-16 border-b border-border/30">
 	<div class="grid gap-12 lg:grid-cols-1">
 		<div class="flex flex-col">
 			<div
-				data-animate
 				class="mb-4 inline-flex items-center gap-2 text-[11px] font-medium tracking-[0.18em] uppercase text-primary/80"
 			>
 				<span class="block w-6 h-px bg-primary/60"></span>
 				SMTP relay
 			</div>
-			<h1 data-animate class="text-surface mb-4">
+			<h1 class="text-surface mb-4">
 				The SMTP relay<br />
 				<span class="text-primary">your app can rely on.</span>
 			</h1>
 
-			<p data-animate class="max-w-[650px] text-body text-muted mb-10">
+			<p class="max-w-[650px] text-body text-muted mb-10">
 				A drop-in replacement for your mail server or SMTP provider, <span
 					class="font-semibold text-surface">EU-hosted on every plan</span> — the same sending
 				infrastructure, logs, and webhooks as the API, reachable from any stack that speaks SMTP.
@@ -403,7 +391,7 @@ func main() {
 				encrypted ports, real-time analytics, and searchable logs — without changing a line of code.
 			</p>
 
-			<div data-animate class="flex flex-wrap items-center mb-3 gap-2">
+			<div class="flex flex-wrap items-center mb-3 gap-2">
 				<Button
 					variant="primary"
 					href={registerHref}
@@ -417,12 +405,12 @@ func main() {
 					onclick={() => trackCta('smtp_relay_hero', 'See SMTP docs', SMTP_DOCS_URL, 'secondary')}
 				>See SMTP docs</Button>
 			</div>
-			<p data-animate class="max-w-md text-sm text-muted">
+			<p class="max-w-md text-sm text-muted">
 				3,000 emails/month free. No credit card required.
 			</p>
 		</div>
 
-		<div data-animate>
+		<div>
 			<CodeSnippet
 				tabs={smtpTabs}
 				primaryTabIndices={[0, 1]}

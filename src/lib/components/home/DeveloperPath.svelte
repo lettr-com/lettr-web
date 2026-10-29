@@ -4,7 +4,7 @@
 	import CheckIcon from 'phosphor-svelte/lib/CheckIcon';
 	import MagnifyingGlassIcon from 'phosphor-svelte/lib/MagnifyingGlassIcon';
 	import LargeFeatureCard from './LargeFeatureCard.svelte';
-	import { createScrollRevealCleanup } from '$lib/utils/gsap';
+	import { createScrollRevealCleanup } from '$lib/utils/reveal';
 
 	let section: HTMLElement | undefined = $state();
 

@@ -3,7 +3,7 @@
 	import Button from '$lib/components/Button.svelte';
 	import BrandedEmail from './BrandedEmail.svelte';
 	import GetStartedButton from './GetStartedButton.svelte';
-	import { createScrollRevealCleanup } from '$lib/utils/gsap';
+	import { createScrollRevealCleanup } from '$lib/utils/reveal';
 	import { capturePosthogEvent } from '$lib/analytics/posthog';
 	import { brands, type EmailKind } from '$lib/home/brands';
 

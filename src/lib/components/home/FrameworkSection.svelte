@@ -2,7 +2,7 @@
 	import { onMount } from 'svelte';
 	import TerminalDemo from './TerminalDemo.svelte';
 	import StageGlow from './StageGlow.svelte';
-	import { createScrollRevealCleanup } from '$lib/utils/gsap';
+	import { createScrollRevealCleanup } from '$lib/utils/reveal';
 	import { terminalScripts } from '$lib/home/terminalScripts';
 
 	let section: HTMLElement | undefined = $state();

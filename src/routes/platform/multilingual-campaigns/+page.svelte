@@ -12,7 +12,7 @@
 	import SlidersHorizontalIcon from 'phosphor-svelte/lib/SlidersHorizontalIcon';
 	import TagIcon from 'phosphor-svelte/lib/TagIcon';
 	import FeaturePageLayout from '$lib/components/FeaturePageLayout.svelte';
-	import { createScrollRevealCleanup } from '$lib/utils/gsap';
+	import { createScrollRevealCleanup } from '$lib/utils/reveal';
 
 	let stepsSection: HTMLElement | undefined = $state();
 	let matcherSection: HTMLElement | undefined = $state();

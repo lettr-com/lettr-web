@@ -4,7 +4,7 @@
 	import UsersIcon from 'phosphor-svelte/lib/UsersIcon';
 	import GlobeIcon from 'phosphor-svelte/lib/GlobeIcon';
 	import ShieldCheckIcon from 'phosphor-svelte/lib/ShieldCheckIcon';
-	import { createScrollRevealCleanup } from '$lib/utils/gsap';
+	import { createScrollRevealCleanup } from '$lib/utils/reveal';
 
 	let section: HTMLElement | undefined = $state();
 

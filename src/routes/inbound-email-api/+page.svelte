@@ -18,7 +18,7 @@
 	import PaperPlaneTiltIcon from 'phosphor-svelte/lib/PaperPlaneTiltIcon';
 	import CheckIcon from 'phosphor-svelte/lib/CheckIcon';
 	import CaretDownIcon from 'phosphor-svelte/lib/CaretDownIcon';
-	import { createFromAnimationCleanup, createScrollRevealCleanup } from '$lib/utils/gsap';
+	import { createScrollRevealCleanup } from '$lib/utils/reveal';
 	import { buildRegisterUrl, registerUrl } from '$lib/utils/utm';
 	import { capturePosthogEvent, trackSignupClick } from '$lib/analytics/posthog';
 	import type { CodeTab } from '$lib/utils/shiki';
@@ -30,7 +30,6 @@
 
 	const INBOUND_DOCS_URL = 'https://docs.lettr.com/learn/receiving/introduction';
 
-	let hero: HTMLElement | undefined = $state();
 	let definitionSection: HTMLElement | undefined = $state();
 	let useCasesSection: HTMLElement | undefined = $state();
 	let flowSection: HTMLElement | undefined = $state();
@@ -255,16 +254,6 @@ end`
 
 		const cleanups: (() => void)[] = [];
 
-		if (hero) {
-			cleanups.push(
-				createFromAnimationCleanup({
-					scope: hero,
-					targets: '[data-animate]',
-					vars: { y: 30, opacity: 0, duration: 0.7, stagger: 0.12, ease: 'power3.out' }
-				})
-			);
-		}
-
 		for (const section of [
 			definitionSection,
 			useCasesSection,
@@ -315,22 +304,21 @@ end`
 </svelte:head>
 
 <!-- Hero -->
-<section bind:this={hero} class="pt-30 pb-16 border-b border-border/30">
+<section class="pt-30 pb-16 border-b border-border/30">
 	<div class="grid gap-12 lg:grid-cols-1">
 		<div class="flex flex-col">
 			<div
-				data-animate
 				class="mb-4 inline-flex items-center gap-2 text-[11px] font-medium tracking-[0.18em] uppercase text-primary/80"
 			>
 				<span class="block w-6 h-px bg-primary/60"></span>
 				Inbound email API
 			</div>
-			<h1 data-animate class="text-surface mb-4">
+			<h1 class="text-surface mb-4">
 				Inbound Email API<br />
 				<span class="text-primary">receive and parse email in your app.</span>
 			</h1>
 
-			<p data-animate class="max-w-[650px] text-body text-muted mb-10">
+			<p class="max-w-[650px] text-body text-muted mb-10">
 				Lettr's inbound email API receives and parses incoming email programmatically — set a route,
 				get structured JSON on your webhook. Every message arrives as clean JSON — sender, subject,
 				body, headers, and attachments — in real time. No IMAP polling, no MIME parsing. Build
@@ -338,7 +326,7 @@ end`
 				from.
 			</p>
 
-			<div data-animate class="flex flex-wrap items-center mb-3 gap-2">
+			<div class="flex flex-wrap items-center mb-3 gap-2">
 				<Button
 					variant="primary"
 					href={registerHref}
@@ -352,12 +340,12 @@ end`
 					onclick={() => trackCta('inbound_api_hero', 'Read inbound docs', INBOUND_DOCS_URL, 'secondary')}
 				>Read inbound docs</Button>
 			</div>
-			<p data-animate class="max-w-md text-sm text-muted">
+			<p class="max-w-md text-sm text-muted">
 				Send and receive on one platform. <a class="text-primary underline underline-offset-2" href="/email-api/">See the email API</a>.
 			</p>
 		</div>
 
-		<div data-animate>
+		<div>
 			<CodeSnippet
 				tabs={handlerTabs}
 				primaryTabIndices={[0, 1]}

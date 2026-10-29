@@ -19,7 +19,7 @@
 	import Pricing from '$lib/components/Pricing.svelte';
 	import FAQSection from '$lib/components/FAQSection.svelte';
 	import RelatedFeatures from '$lib/components/RelatedFeatures.svelte';
-	import { createFromAnimationCleanup, createScrollRevealCleanup } from '$lib/utils/gsap';
+	import { createScrollRevealCleanup } from '$lib/utils/reveal';
 	import { buildRegisterUrl, registerUrl } from '$lib/utils/utm';
 	import { capturePosthogEvent, trackSignupClick } from '$lib/analytics/posthog';
 	import { jsonLdScript } from '$lib/utils/jsonLd';
@@ -28,7 +28,6 @@
 	const metaDescription =
 		'Send transactional email from your SaaS via a clean REST API and SMTP relay — with sub-second delivery, automatic retries, webhooks, and searchable logs.';
 
-	let hero: HTMLElement | undefined = $state();
 	let featuresSection: HTMLElement | undefined = $state();
 	let eventsSection: HTMLElement | undefined = $state();
 	let useCasesSection: HTMLElement | undefined = $state();
@@ -191,16 +190,6 @@ Lettr::emails()->sendHtml(
 
 		const cleanups: (() => void)[] = [];
 
-		if (hero) {
-			cleanups.push(
-				createFromAnimationCleanup({
-					scope: hero,
-					targets: '[data-animate]',
-					vars: { y: 30, opacity: 0, duration: 0.7, stagger: 0.12, ease: 'power3.out' }
-				})
-			);
-		}
-
 		for (const section of [featuresSection, eventsSection, useCasesSection]) {
 			if (section) {
 				cleanups.push(
@@ -232,22 +221,22 @@ Lettr::emails()->sendHtml(
 	)}
 </svelte:head>
 
-<section bind:this={hero} class="pt-30 pb-16 border-b border-border/30">
+<section class="pt-30 pb-16 border-b border-border/30">
 	<div class="grid gap-12 lg:grid-cols-1">
 		<div class="flex flex-col">
-			<h1 data-animate class="text-surface mb-4">
+			<h1 class="text-surface mb-4">
 				Transactional email<br />
 				<span class="text-primary">your product can rely on.</span>
 			</h1>
 
-			<p data-animate class="max-w-[650px] text-body text-muted mb-10">
+			<p class="max-w-[650px] text-body text-muted mb-10">
 				Lettr is an <span class="font-semibold text-surface">EU-hosted</span> transactional email API
 				for developers — REST API and SMTP relay with tracking, templates, and webhooks, on every
 				plan. Fire password resets, receipts, and alerts with sub-second delivery, automatic retries,
 				and a drag-and-drop editor your team owns — no dev ticket to change a button.
 			</p>
 
-			<div data-animate class="flex flex-wrap items-center mb-3 gap-2">
+			<div class="flex flex-wrap items-center mb-3 gap-2">
 				<Button
 					variant="primary"
 					href={registerHref}
@@ -261,13 +250,13 @@ Lettr::emails()->sendHtml(
 					onclick={() => trackHeroCta('See docs', 'https://docs.lettr.com/introduction', 'secondary')}
 				>See docs</Button>
 			</div>
-			<p data-animate class="max-w-md text-sm text-muted">
+			<p class="max-w-md text-sm text-muted">
 				3,000 emails/month free. No credit card required. See the
 				<a class="text-primary underline underline-offset-2" href="/free-email-api/">free email API</a>.
 			</p>
 		</div>
 
-		<div data-animate>
+		<div>
 			<CodeSnippet
 				tabs={sendTabs}
 				primaryTabIndices={[0, 1]}

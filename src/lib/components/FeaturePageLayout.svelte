@@ -1,7 +1,6 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import type { Snippet } from 'svelte';
-	import { createFromAnimationCleanup } from '$lib/utils/gsap';
 	import { buildRegisterUrl, registerUrl } from '$lib/utils/utm';
 	import { capturePosthogEvent, trackSignupClick } from '$lib/analytics/posthog';
 	import { page } from '$app/state';
@@ -27,25 +26,10 @@
 
 	const pageTitle = $derived(seoTitle ?? title);
 
-	let hero: HTMLElement | undefined = $state();
 	let registerHref: string = $state(registerUrl);
 
 	onMount(() => {
 		registerHref = buildRegisterUrl(new URL(window.location.href), document.cookie);
-
-		if (!hero) return;
-
-		return createFromAnimationCleanup({
-			scope: hero,
-			targets: '[data-animate]',
-			vars: {
-				y: 20,
-				opacity: 0,
-				duration: 0.6,
-				stagger: 0.1,
-				ease: 'power3.out'
-			}
-		});
 	});
 </script>
 
@@ -58,14 +42,14 @@
 </svelte:head>
 
 <section class="pt-32 pb-24">
-	<div bind:this={hero} class="text-center">
-		<span data-animate class="mb-4 inline-block font-heading text-xs tracking-[0.15em] text-primary uppercase">
+	<div class="text-center">
+		<span class="mb-4 inline-block font-heading text-xs tracking-[0.15em] text-primary uppercase">
 			{label}
 		</span>
-		<h1 data-animate class="mt-2">
+		<h1 class="mt-2">
 			{@render heading()}
 		</h1>
-		<p data-animate class="mx-auto mt-5 max-w-xl text-body text-muted">
+		<p class="mx-auto mt-5 max-w-xl text-body text-muted">
 			{description}
 		</p>
 	</div>

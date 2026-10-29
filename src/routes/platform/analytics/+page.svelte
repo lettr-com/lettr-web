@@ -7,7 +7,7 @@
 	import EyeIcon from 'phosphor-svelte/lib/EyeIcon';
 	import ShieldWarningIcon from 'phosphor-svelte/lib/ShieldWarningIcon';
 	import FeaturePageLayout from '$lib/components/FeaturePageLayout.svelte';
-	import { createScrollRevealCleanup } from '$lib/utils/gsap';
+	import { createScrollRevealCleanup } from '$lib/utils/reveal';
 
 	let metricsSection: HTMLElement | undefined = $state();
 	let tableSection: HTMLElement | undefined = $state();

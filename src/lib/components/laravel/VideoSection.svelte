@@ -2,7 +2,7 @@
 	import { onMount } from 'svelte';
 	import PlayIcon from 'phosphor-svelte/lib/PlayIcon';
 	import { capturePosthogEvent } from '$lib/analytics/posthog';
-	import { createScrollRevealCleanup } from '$lib/utils/gsap';
+	import { createScrollRevealCleanup } from '$lib/utils/reveal';
 
 	const videoId = 'rOOBEdd-1jE';
 	const title = 'Custom Laravel Email Templates with DTOs/Enums: Lettr Example';

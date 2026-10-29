@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import { createScrollRevealCleanup } from '$lib/utils/gsap';
+	import { createScrollRevealCleanup } from '$lib/utils/reveal';
 	import { ecomailOrganizations, emailInfraYears, topolCompanies } from '$lib/data/company';
 
 	let section: HTMLElement | undefined = $state();

@@ -3,7 +3,7 @@
 	import DitherSide from './DitherSide.svelte';
 	import GetStartedButton from './GetStartedButton.svelte';
 	import FeatureAccordion, { type AccordionItem } from './FeatureAccordion.svelte';
-	import { createScrollRevealCleanup } from '$lib/utils/gsap';
+	import { createScrollRevealCleanup } from '$lib/utils/reveal';
 
 	let section: HTMLElement | undefined = $state();
 

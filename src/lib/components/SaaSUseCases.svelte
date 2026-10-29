@@ -6,7 +6,7 @@
 	import BellIcon from 'phosphor-svelte/lib/BellIcon';
 	import MegaphoneIcon from 'phosphor-svelte/lib/MegaphoneIcon';
 	import RocketLaunchIcon from 'phosphor-svelte/lib/RocketLaunchIcon';
-	import { createScrollRevealCleanup } from '$lib/utils/gsap';
+	import { createScrollRevealCleanup } from '$lib/utils/reveal';
 
 	let section: HTMLElement | undefined = $state();
 

@@ -4,13 +4,13 @@
 	import X from 'phosphor-svelte/lib/X';
 	import ArrowRight from 'phosphor-svelte/lib/ArrowRight';
 	import Slider from './Slider.svelte';
-	import { createScrollRevealCleanup, createFromAnimationCleanup } from '$lib/utils/gsap';
+	import { createScrollRevealCleanup } from '$lib/utils/reveal';
 	import { buildRegisterUrl, registerUrl } from '$lib/utils/utm';
 	import { capturePosthogEvent, trackSignupClick } from '$lib/analytics/posthog';
 	import { createChangeTracker } from '$lib/analytics/changeTracker';
 	import { comparisonRows, transactionalPlans, transactionalSteps, type PlanKey } from '$lib/data/pricing';
 
-	let { sectionClass = 'py-16', animateOnMount = false }: { sectionClass?: string; animateOnMount?: boolean } = $props();
+	let { sectionClass = 'py-16' }: { sectionClass?: string } = $props();
 
 	let section: HTMLElement | undefined = $state();
 	let sliderValue: number = $state(1);
@@ -73,17 +73,10 @@
 	onMount(() => {
 		registerHref = buildRegisterUrl(new URL(window.location.href), document.cookie);
 		if (!section) return;
-		if (animateOnMount) {
-			return createFromAnimationCleanup({
-				scope: section,
-				targets: '[data-pricing-animate]',
-				vars: { y: 30, opacity: 0, duration: 0.6, stagger: 0.1, ease: 'power3.out', clearProps: 'opacity,transform' }
-			});
-		}
 		return createScrollRevealCleanup({
 			scope: section,
 			targets: '[data-pricing-animate]',
-			vars: { y: 40, duration: 0.7, stagger: 0.1 }
+			stagger: 100
 		});
 	});
 </script>

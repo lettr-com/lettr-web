@@ -12,7 +12,7 @@
 	import TalkToExpert from '$lib/components/TalkToExpert.svelte';
 	import FAQSection from '$lib/components/FAQSection.svelte';
 	import RelatedFeatures from '$lib/components/RelatedFeatures.svelte';
-	import { createFromAnimationCleanup, createScrollRevealCleanup } from '$lib/utils/gsap';
+	import { createScrollRevealCleanup } from '$lib/utils/reveal';
 	import { buildRegisterUrl, registerUrl } from '$lib/utils/utm';
 	import { capturePosthogEvent, trackSignupClick } from '$lib/analytics/posthog';
 	import { jsonLdScript } from '$lib/utils/jsonLd';
@@ -22,7 +22,6 @@
 	const metaDescription =
 		'Run marketing campaigns from the same platform as your transactional email: drag-and-drop editor, contact lists, segmentation, and automations.';
 
-	let hero: HTMLElement | undefined = $state();
 	let featuresSection: HTMLElement | undefined = $state();
 	let listsSection: HTMLElement | undefined = $state();
 	let registerHref: string = $state(registerUrl);
@@ -86,16 +85,6 @@
 
 		const cleanups: (() => void)[] = [];
 
-		if (hero) {
-			cleanups.push(
-				createFromAnimationCleanup({
-					scope: hero,
-					targets: '[data-animate]',
-					vars: { y: 30, opacity: 0, duration: 0.7, stagger: 0.12, ease: 'power3.out' }
-				})
-			);
-		}
-
 		for (const section of [featuresSection, listsSection]) {
 			if (section) {
 				cleanups.push(
@@ -128,11 +117,10 @@
 </svelte:head>
 
 <div>
-<section bind:this={hero} class="pt-30 pb-16 border-b border-border/30">
+<section class="pt-30 pb-16 border-b border-border/30">
 	<div class="grid gap-12 lg:grid-cols-1">
 		<div class="flex flex-col">
 			<a
-				data-animate
 				href="/platform/multilingual-campaigns/"
 				class="group mb-6 inline-flex w-fit items-center gap-2 border border-primary/20 bg-primary/5 p-1.5 text-sm text-primary transition-colors hover:bg-primary/10"
 			>
@@ -140,17 +128,17 @@
 				Multilingual campaigns — each contact gets the email in their language
 				<span class="transition-transform group-hover:translate-x-0.5">&rarr;</span>
 			</a>
-			<h1 data-animate class="text-surface mb-4">
+			<h1 class="text-surface mb-4">
 				Marketing campaigns,<br />
 				<span class="text-primary">in the same editor.</span>
 			</h1>
 
-			<p data-animate class="max-w-[650px] text-body text-muted mb-10">
+			<p class="max-w-[650px] text-body text-muted mb-10">
 				Run newsletters, product launches, and re-engagement series from the same platform that
 				sends your transactional email. One editor, one bill.
 			</p>
 
-			<div data-animate class="flex flex-wrap items-center mb-3 gap-2">
+			<div class="flex flex-wrap items-center mb-3 gap-2">
 				<Button
 					variant="primary"
 					href={registerHref}
@@ -162,12 +150,12 @@
 					onclick={() => trackHeroCta('See pricing', '/pricing/', 'secondary')}
 				>See pricing</Button>
 			</div>
-			<p data-animate class="max-w-md text-sm text-muted">
+			<p class="max-w-md text-sm text-muted">
 				Priced per contact. Bundle with Transactional for a discount.
 			</p>
 		</div>
 
-		<div data-animate class="campaigns-theme">
+		<div class="campaigns-theme">
 			<CampaignEditorPreview />
 		</div>
 	</div>

@@ -39,7 +39,7 @@
 	);
 </script>
 
-<Card data-animate-intro>
+<Card>
 	<CardHeader>
 		<CardTitle>See how Lettr handles your email volume</CardTitle>
 		<CardDescription>We'll match you with the right plan and a dedicated specialist.</CardDescription>

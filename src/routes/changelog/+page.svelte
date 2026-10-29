@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
 	import Seo from '$lib/components/Seo.svelte';
 	import ChangelogFeed from '$lib/components/changelog/ChangelogFeed.svelte';
 	import ChangelogFilter from '$lib/components/changelog/ChangelogFilter.svelte';
@@ -8,7 +7,6 @@
 	import { MONTHS } from '$lib/changelog/months';
 	import { FEED_URL, INDEX_DESCRIPTION, INDEX_TITLE, indexJsonLd } from '$lib/changelog/seo';
 	import { jsonLdScript } from '$lib/utils/jsonLd';
-	import { createFromAnimationCleanup } from '$lib/utils/gsap';
 	import type { PageData } from './$types';
 
 	interface Props {
@@ -17,7 +15,6 @@
 
 	let { data }: Props = $props();
 
-	let header: HTMLElement | undefined = $state();
 	// Owned here rather than inside the filter panel because the feed below is
 	// what the selection actually acts on.
 	let filter = $state<FilterToken[]>([]);
@@ -25,15 +22,6 @@
 	// months it has read — and the panel above states them, so the selection is
 	// described once rather than twice.
 	let filterStatus = $state<string | undefined>();
-
-	onMount(() => {
-		if (!header) return;
-		return createFromAnimationCleanup({
-			scope: header,
-			targets: '[data-animate]',
-			vars: { y: 20, opacity: 0, duration: 0.6, stagger: 0.08, ease: 'power3.out' }
-		});
-	});
 </script>
 
 <Seo title={INDEX_TITLE} description={INDEX_DESCRIPTION} ogTitle="Lettr Changelog" canonical="/changelog/" />
@@ -44,26 +32,25 @@
 </svelte:head>
 
 <section id="top" class="pt-32 pb-24">
-	<div bind:this={header}>
+	<div>
 		<span
-			data-animate
 			class="mb-4 inline-block font-heading text-sm text-primary"
 		>
 			Changelog
 		</span>
-		<h1 data-animate>Everything we ship to Lettr,<br class="hidden sm:inline" />month by month</h1>
-		<p data-animate class="mt-6 max-w-[45ch] text-body leading-[1.8] text-muted">
+		<h1>Everything we ship to Lettr,<br class="hidden sm:inline" />month by month</h1>
+		<p class="mt-6 max-w-[45ch] text-body leading-[1.8] text-muted">
 			Every month we post a summary of what's new in Lettr: features, improvements and
 			bugfixes. Each entry is tagged with the part of the app it affects.
 		</p>
 
 		{#if MONTHS.length > 1}
-			<div data-animate class="mt-8 border-y border-border/50 py-3">
+			<div class="mt-8 border-y border-border/50 py-3">
 				<ChangelogArchive {filter} />
 			</div>
 		{/if}
 
-		<div data-animate class="mt-6">
+		<div class="mt-6">
 			<ChangelogFilter bind:tokens={filter} status={filterStatus} />
 		</div>
 	</div>

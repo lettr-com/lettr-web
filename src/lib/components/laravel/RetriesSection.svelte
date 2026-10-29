@@ -2,7 +2,7 @@
 	import { onMount } from 'svelte';
 	import ArrowClockwiseIcon from 'phosphor-svelte/lib/ArrowClockwiseIcon';
 	import { capturePosthogEvent } from '$lib/analytics/posthog';
-	import { createScrollRevealCleanup } from '$lib/utils/gsap';
+	import { createScrollRevealCleanup } from '$lib/utils/reveal';
 
 	interface Props {
 		/** The synchronous send snippet, one highlighted HTML line per entry. */

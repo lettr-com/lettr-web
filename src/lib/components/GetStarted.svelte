@@ -3,7 +3,7 @@
 	import ArrowSquareOutIcon from 'phosphor-svelte/lib/ArrowSquareOutIcon';
 	import CodeSnippet from './CodeSnippet.svelte';
 	import TerminalCommand from './TerminalCommand.svelte';
-	import { createScrollRevealCleanup } from '$lib/utils/gsap';
+	import { createScrollRevealCleanup } from '$lib/utils/reveal';
 	import type { CodeTab } from '$lib/utils/shiki';
 
 	let section: HTMLElement | undefined = $state();
@@ -110,9 +110,7 @@ console.log(response.requestId);`,
 		return createScrollRevealCleanup({
 			scope: section,
 			targets: '[data-step]',
-			vars: {
-				stagger: 0.12
-			}
+			stagger: 120
 		});
 	});
 </script>
