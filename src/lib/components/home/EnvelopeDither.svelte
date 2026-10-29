@@ -21,8 +21,9 @@
 	 * image-rendering: pixelated. The pointer leaves a faint, quickly fading flicker of specks,
 	 * same as DitherHero. The homepage shows HeroArtStatic, the same field baked into
 	 * still images, and HomeHero loads this live version over it only on desktops with
-	 * a mouse. It fades in once its sprites are in, draws ~30 frames a second, pauses
-	 * off screen, and calls `onfail` if the first frames cost too much.
+	 * a mouse. It appears once its sprites are decoded, starting from the still's exact
+	 * frame, draws ~30 frames a second, pauses off screen, and calls `onfail` if its
+	 * frames cost too much.
 	 *
 	 * Besides envelopes and the @ the field carries a few of the blog art's clay
 	 * sprites (tools/blog-images/sprites/), shrunk to 256px WebP and dimmed to 80%
@@ -78,41 +79,41 @@
 		// The drift is slow, so ~30 redraws a second look the same as one per display frame.
 		// The slack keeps a 60 Hz screen on every second frame despite timing jitter.
 		const minFrameGap = 1000 / 30 - 4;
-		// Average main-thread ms per frame, over the first frames, above which the device
-		// is too slow for the live field and the still underneath is kept instead.
+		// Main-thread ms per frame above which the device is too slow for the live field and the
+		// still underneath is kept. Judged on the median of the frames after a short warm-up, so
+		// a single slow frame (a GC pause, the page still busy loading) cannot trip it.
 		const frameBudget = 8;
+		const warmupFrames = 10;
 		const budgetFrames = 60;
 		let lastDraw = -Infinity;
-		let measured = 0;
-		let workMs = 0;
+		let drawn = 0;
+		const frameCosts: number[] = [];
 
 		const faceImg = new Image();
 		const openImg = new Image();
 		const spriteImgs = {} as Record<Exclude<Kind, 'face'>, HTMLImageElement>;
-		// Stay invisible until every sprite is in, then restart the clock so the first visible
-		// frame is the designed layout, the same frame as the still it fades in over.
-		let pending = 2 + Object.keys(SPRITE_SRC).length;
-		const onLoad = () => {
-			if (--pending > 0) return;
-			start = performance.now();
-			isReady = true;
-			render(start);
-			sync();
-		};
-		const onError = () => onfail?.();
-		for (const img of [faceImg, openImg]) {
-			img.onload = onLoad;
-			img.onerror = onError;
-		}
 		faceImg.src = heroFaceSource;
 		openImg.src = '/hero/sprites/envelope-open.png';
 		for (const key of Object.keys(SPRITE_SRC) as Exclude<Kind, 'face'>[]) {
 			const img = new Image();
-			img.onload = onLoad;
-			img.onerror = onError;
 			img.src = SPRITE_SRC[key];
 			spriteImgs[key] = img;
 		}
+		// Stay invisible until every sprite is loaded and decoded, then start the clock. The first
+		// visible frame is then the designed layout, the same frame as the still underneath, so
+		// the canvas can replace it without a crossfade.
+		let cancelled = false;
+		Promise.all([faceImg, openImg, ...Object.values(spriteImgs)].map((img) => img.decode()))
+			.then(() => {
+				if (cancelled) return;
+				start = performance.now();
+				isReady = true;
+				render(start);
+				sync();
+			})
+			.catch(() => {
+				if (!cancelled) onfail?.();
+			});
 		// view transform of the last drawn frame, for hit-testing clicks
 		let viewScale = 1;
 		let viewOx = 0;
@@ -149,18 +150,23 @@
 
 		// The designed centre, bobbing and drifting upward over time
 		function spriteCenter(s: Sprite, t: number) {
-			const bob = reducedMotion || s.speed === 0 ? 0 : Math.sin(t * 0.7 + s.phase * 1.3) * 5;
+			// Bob and sway are offsets from the designed pose, so at t = 0 the field matches the still
+			const bob = reducedMotion || s.speed === 0 ? 0 : (Math.sin(t * 0.7 + s.phase * 1.3) - Math.sin(s.phase * 1.3)) * 5;
 			const { cx, cy: rest, rad } = designCenter(s);
 			let cy = rest + bob;
 			if (s.speed > 0 && !reducedMotion) cy = wrapY(cy, s, t);
 			return { cx, cy, rad };
 		}
 
+		function spriteSway(s: Sprite, t: number) {
+			return (Math.sin(t * 0.5 + s.phase) - Math.sin(s.phase)) * 0.05;
+		}
+
 		function drawSprite(s: Sprite, t: number, scale: number, ox: number, oy: number) {
 			const isOpen = s.kind === 'envelope' && (s.openUntil ?? 0) > t;
 			const img = s.kind === 'face' ? faceImg : isOpen ? openImg : spriteImgs[s.kind];
 			if (!img.complete || !img.naturalWidth) return;
-			const sway = reducedMotion ? 0 : Math.sin(t * 0.5 + s.phase) * 0.05;
+			const sway = reducedMotion ? 0 : spriteSway(s, t);
 			const { cx, cy, rad } = spriteCenter(s, t);
 			const w = s.w * scale;
 			const h = s.h * scale;
@@ -194,7 +200,7 @@
 				const s = sprites[i];
 				if (s.kind !== 'envelope') continue;
 				const { cx, cy, rad } = spriteCenter(s, t);
-				const a = rad + Math.sin(t * 0.5 + s.phase) * 0.05;
+				const a = rad + (reducedMotion ? 0 : spriteSway(s, t));
 				const dx = lx - cx;
 				const dy = ly - cy;
 				const x = dx * Math.cos(-a) - dy * Math.sin(-a);
@@ -220,7 +226,7 @@
 			}
 			fctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 			fctx.clearRect(0, 0, host.clientWidth, host.clientHeight);
-			const sway = reducedMotion ? 0 : Math.sin(t * 0.9 + face.phase) * 0.12;
+			const sway = reducedMotion ? 0 : (Math.sin(t * 0.9 + face.phase) - Math.sin(face.phase)) * 0.12;
 			const { cx, cy: rest, rad } = designCenter(face);
 			const cy = reducedMotion ? rest : wrapY(rest, face, t);
 			const w = face.w * scale * px;
@@ -342,9 +348,10 @@
 				}
 			}
 			ctx!.putImageData(out!, 0, 0);
-			if (running && measured < budgetFrames) {
-				workMs += performance.now() - began;
-				if (++measured === budgetFrames && workMs / measured > frameBudget) {
+			if (running && frameCosts.length < budgetFrames && ++drawn > warmupFrames) {
+				frameCosts.push(performance.now() - began);
+				const median = () => [...frameCosts].sort((a, b) => a - b)[budgetFrames / 2];
+				if (frameCosts.length === budgetFrames && median() > frameBudget) {
 					running = false;
 					raf = 0;
 					onfail?.();
@@ -434,6 +441,7 @@
 		host.addEventListener('pointerup', onPointerUp);
 
 		return () => {
+			cancelled = true;
 			cancelAnimationFrame(raf);
 			ro.disconnect();
 			io.disconnect();
@@ -448,7 +456,7 @@
 
 <div
 	bind:this={wrapper}
-	class="relative h-[320px] w-full overflow-hidden bg-[#23020B] transition-opacity duration-700 md:h-[430px] {isReady
+	class="relative h-[320px] w-full overflow-hidden bg-[#23020B] md:h-[430px] {isReady
 		? 'opacity-100'
 		: 'opacity-0'} {isOverEnvelope ? 'cursor-pointer' : ''}"
 	aria-hidden="true"
