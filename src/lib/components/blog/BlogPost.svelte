@@ -235,7 +235,8 @@
 			</div>
 			{#if slug}
 				<!-- Sits in the page margin beside the column; after the body so its container is bound. -->
-				<div class="absolute top-9 bottom-0 -left-14 xl:-left-20">
+				<!-- z-30: the sticky child is its own stacking context, so the column itself must sit above the article blocks that follow it. -->
+				<div class="absolute top-9 bottom-0 -left-14 z-30 xl:-left-20">
 					<div class="sticky top-40">
 						<TableOfContents
 							container={body}

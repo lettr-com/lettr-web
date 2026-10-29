@@ -43,7 +43,7 @@
 			copy makes the card the art reaches both edges without stretching.
 		-->
 		<div
-			class="relative hidden w-[232px] shrink-0 self-stretch overflow-hidden sm:block"
+			class="hidden w-[232px] shrink-0 items-end self-stretch overflow-hidden sm:flex"
 			style:background-color={groundColor(post.category, post.art)}
 		>
 			<ArtImage
@@ -52,7 +52,7 @@
 				art={post.art}
 				variant="square"
 				decorative
-				class="absolute bottom-0 left-0 size-[232px]"
+				class="size-[232px] shrink-0"
 			/>
 		</div>
 		<div class="flex flex-col justify-center gap-2.5 p-6 sm:min-h-[232px] sm:px-7">

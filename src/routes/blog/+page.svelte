@@ -2,6 +2,7 @@
 	import { onMount } from 'svelte';
 	import MagnifyingGlassIcon from 'phosphor-svelte/lib/MagnifyingGlassIcon';
 	import ArrowRightIcon from 'phosphor-svelte/lib/ArrowRightIcon';
+	import ArrowDownIcon from 'phosphor-svelte/lib/ArrowDownIcon';
 	import Seo from '$lib/components/Seo.svelte';
 	import ArtImage from '$lib/components/blog/ArtImage.svelte';
 	import { posts, type PostMeta } from '$lib/data/posts';
@@ -25,13 +26,17 @@
 	const path = postsBySlug(deliverabilityPath.slugs);
 
 	let topic = $state<string | null>(null);
+	/** posts.ts is newest first; the archive and results lists can be flipped. */
+	let newestFirst = $state(true);
 	let query = $state('');
 	let search: HTMLInputElement | undefined = $state();
 
 	const filtering = $derived(topic !== null || query.trim() !== '');
+	const archiveInOrder = $derived(newestFirst ? archive : [...archive].reverse());
 	const results = $derived.by(() => {
 		const words = query.trim().toLowerCase().split(/\s+/).filter(Boolean);
-		return posts.filter((post) => {
+		const ordered = newestFirst ? posts : [...posts].reverse();
+		return ordered.filter((post) => {
 			if (topic && post.category !== topic) return false;
 			const haystack = `${noWidow(post.title)} ${post.excerpt} ${post.category}`.toLowerCase();
 			return words.every((word) => haystack.includes(word));
@@ -76,6 +81,18 @@
 <svelte:head>
 	{@html jsonLdScript(basicPageJsonLd({ path: '/blog/', name: 'Lettr Blog', type: 'CollectionPage' }))}
 </svelte:head>
+
+{#snippet sortToggle()}
+	<button
+		type="button"
+		onclick={() => (newestFirst = !newestFirst)}
+		aria-label={newestFirst ? 'Sorted newest first. Show oldest first' : 'Sorted oldest first. Show newest first'}
+		class="inline-flex items-center gap-1.5 text-sm text-subtle transition-colors hover:text-primary"
+	>
+		{newestFirst ? 'Newest first' : 'Oldest first'}
+		<ArrowDownIcon size={13} class="transition-transform duration-200 {newestFirst ? '' : 'rotate-180'}" />
+	</button>
+{/snippet}
 
 {#snippet meta(post: PostMeta)}
 	<span class="text-[13px] font-medium text-subtle">{post.category} · {shortDate(post)} · {post.readTime}</span>
@@ -147,10 +164,13 @@
 
 	{#if filtering}
 		<div class="pt-8" aria-live="polite">
-			<p class="border-b border-surface pb-3 text-sm text-subtle">
-				{results.length}
-				{results.length === 1 ? 'article' : 'articles'}{query.trim() ? ` matching “${query.trim()}”` : ''}
-			</p>
+			<div class="flex items-baseline justify-between gap-4 border-b border-surface pb-3">
+				<p class="text-sm text-subtle">
+					{results.length}
+					{results.length === 1 ? 'article' : 'articles'}{query.trim() ? ` matching “${query.trim()}”` : ''}
+				</p>
+				{@render sortToggle()}
+			</div>
 			{#if results.length}
 				<ul>
 					{#each results as post (post.slug)}
@@ -251,10 +271,10 @@
 		<section aria-labelledby="archive-heading" class="pt-14">
 			<div class="flex items-baseline justify-between border-t border-surface pt-3.5 pb-2">
 				<h2 id="archive-heading" class="text-[22px] leading-[1.3] text-surface">All articles</h2>
-				<span class="text-sm text-subtle">Newest first</span>
+				{@render sortToggle()}
 			</div>
 			<ul>
-				{#each archive as post (post.slug)}
+				{#each archiveInOrder as post (post.slug)}
 					{@render row(post)}
 				{/each}
 			</ul>
