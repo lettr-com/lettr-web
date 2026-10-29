@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import ArrowRightIcon from 'phosphor-svelte/lib/ArrowRightIcon';
+	import { groundColor } from '$lib/blog/art';
 	import { endCtaFor, getArticle } from '$lib/blog/article';
 	import { trackCtaViewed } from '$lib/analytics/blog';
 	import { buildRegisterUrl, registerUrl } from '$lib/utils/utm';
@@ -36,15 +37,25 @@
 		data-markdown="skip"
 		class="flex flex-col sm:flex-row {cta.kind === 'compare' ? 'border border-border/60 bg-white' : 'bg-plum'}"
 	>
-		<ArtImage
-			slug={post.slug}
-			category={post.category}
-			art={post.art}
-			variant="thumb"
-			decorative
-			class="hidden size-[168px] shrink-0 sm:block"
-		/>
-		<div class="flex flex-col justify-center gap-2.5 p-6 sm:px-7">
+		<!--
+			The art column runs the full height of the card in the art's own ground
+			colour, and the square tile sits on its bottom edge, so however tall the
+			copy makes the card the art reaches both edges without stretching.
+		-->
+		<div
+			class="relative hidden w-[232px] shrink-0 self-stretch overflow-hidden sm:block"
+			style:background-color={groundColor(post.category, post.art)}
+		>
+			<ArtImage
+				slug={post.slug}
+				category={post.category}
+				art={post.art}
+				variant="square"
+				decorative
+				class="absolute bottom-0 left-0 size-[232px]"
+			/>
+		</div>
+		<div class="flex flex-col justify-center gap-2.5 p-6 sm:min-h-[232px] sm:px-7">
 			{#if cta.kind === 'compare'}
 				<p class="font-heading text-[21px] leading-[1.3] text-surface">Price your own volume</p>
 				<p class="text-[15px] leading-[1.5] text-subtle">
