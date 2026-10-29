@@ -12,6 +12,7 @@ const post: PostMeta = {
   author: "Jack Zagorski",
   date: "September 18, 2026",
   readTime: "5 min read",
+  art: { object: "key", rotate: 0 },
 };
 
 describe("blog feed", () => {

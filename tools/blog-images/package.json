@@ -1,0 +1,14 @@
+{
+  "name": "lettr-blog-images",
+  "private": true,
+  "description": "Renders blog cover, thumbnail and Open Graph images from the art scenes in posts.ts",
+  "type": "module",
+  "scripts": {
+    "render": "node render.mjs"
+  },
+  "dependencies": {
+    "@resvg/resvg-js": "^2.6.2",
+    "satori": "^0.63.2",
+    "sharp": "^0.35.5"
+  }
+}

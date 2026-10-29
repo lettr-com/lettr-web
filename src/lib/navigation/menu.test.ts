@@ -42,6 +42,7 @@ describe("featuredPost", () => {
     author: "",
     date: "",
     readTime: "",
+    art: { object: "key", rotate: 0 },
   });
 
   it("picks the newest case study or product post", () => {

@@ -1,3 +1,5 @@
+import type { PostArt } from "$lib/blog/art";
+
 export interface PostMeta {
   slug: string;
   category: string;
@@ -6,6 +8,8 @@ export interface PostMeta {
   author: string;
   date: string;
   readTime: string;
+  /** The object on the post's cover; tools/blog-images renders it into every image size. */
+  art: PostArt;
 }
 
 // Single source of truth for blog post metadata (newest first).
@@ -20,6 +24,7 @@ export const posts: PostMeta[] = [
     author: "Jack Zagorski",
     date: "October 21, 2026",
     readTime: "4 min read",
+    art: { object: "paper-plane", rotate: -8 },
   },
   {
     slug: "mcp-api-key-scopes",
@@ -30,6 +35,7 @@ export const posts: PostMeta[] = [
     author: "Jack Zagorski",
     date: "October 16, 2026",
     readTime: "5 min read",
+    art: { object: "key", rotate: -24 },
   },
   {
     slug: "lettr-mcp-server-tools",
@@ -40,6 +46,7 @@ export const posts: PostMeta[] = [
     author: "Jack Zagorski",
     date: "October 6, 2026",
     readTime: "5 min read",
+    art: { object: "cursor", rotate: -8, palette: "green" },
   },
   {
     slug: "mailgun-alternatives",
@@ -50,6 +57,7 @@ export const posts: PostMeta[] = [
     author: "Jack Zagorski",
     date: "September 18, 2026",
     readTime: "8 min read",
+    art: { object: "envelope-open", rotate: -10 },
   },
   {
     slug: "introducing-multilingual-campaigns",
@@ -60,6 +68,7 @@ export const posts: PostMeta[] = [
     author: "Erik Vlčák",
     date: "September 16, 2026",
     readTime: "5 min read",
+    art: { object: "globe", rotate: 10 },
   },
   {
     slug: "zaptime-cut-deliverability-tickets-to-zero",
@@ -70,6 +79,7 @@ export const posts: PostMeta[] = [
     author: "Jack Zagorski",
     date: "September 11, 2026",
     readTime: "4 min read",
+    art: { object: "check", rotate: 8, palette: "green" },
   },
   {
     slug: "sendgrid-alternatives",
@@ -80,6 +90,7 @@ export const posts: PostMeta[] = [
     author: "Jack Zagorski",
     date: "September 10, 2026",
     readTime: "8 min read",
+    art: { object: "paper-plane", rotate: 14 },
   },
   {
     slug: "why-lettr-runs-on-lambda-with-bref",
@@ -90,6 +101,7 @@ export const posts: PostMeta[] = [
     author: "Jakub Gause",
     date: "September 4, 2026",
     readTime: "6 min read",
+    art: { object: "lightning", rotate: -12 },
   },
   {
     slug: "meet-adamko",
@@ -100,6 +112,7 @@ export const posts: PostMeta[] = [
     author: "Erik Vlčák",
     date: "August 14, 2026",
     readTime: "5 min read",
+    art: { object: "at-sign", rotate: -12 },
   },
   {
     slug: "why-we-built-lettr-on-laravel",
@@ -110,6 +123,7 @@ export const posts: PostMeta[] = [
     author: "Jakub Gause",
     date: "August 11, 2026",
     readTime: "6 min read",
+    art: { object: "server", rotate: 6 },
   },
   {
     slug: "why-emails-go-to-spam",
@@ -120,6 +134,7 @@ export const posts: PostMeta[] = [
     author: "Erik Vlčák",
     date: "July 7, 2026",
     readTime: "10 min read",
+    art: { object: "inbox-tray", rotate: 8 },
   },
   {
     slug: "how-to-send-bulk-email",
@@ -130,6 +145,7 @@ export const posts: PostMeta[] = [
     author: "Erik Vlčák",
     date: "July 4, 2026",
     readTime: "9 min read",
+    art: { object: "paper-plane", rotate: -20 },
   },
   {
     slug: "what-is-an-email-api",
@@ -140,6 +156,7 @@ export const posts: PostMeta[] = [
     author: "Erik Vlčák",
     date: "July 1, 2026",
     readTime: "8 min read",
+    art: { object: "plug", rotate: -10 },
   },
   {
     slug: "best-transactional-email-services",
@@ -150,6 +167,7 @@ export const posts: PostMeta[] = [
     author: "Erik Vlčák",
     date: "June 29, 2026",
     readTime: "11 min read",
+    art: { object: "check", rotate: -8 },
   },
   {
     slug: "smtp-relay",
@@ -160,6 +178,7 @@ export const posts: PostMeta[] = [
     author: "Erik Vlčák",
     date: "June 26, 2026",
     readTime: "9 min read",
+    art: { object: "server", rotate: -8 },
   },
   {
     slug: "hard-bounce-vs-soft-bounce",
@@ -170,6 +189,7 @@ export const posts: PostMeta[] = [
     author: "Erik Vlčák",
     date: "June 24, 2026",
     readTime: "7 min read",
+    art: { object: "envelope-open", rotate: -16 },
   },
   {
     slug: "mailer-daemon-mail-delivery-subsystem",
@@ -180,6 +200,7 @@ export const posts: PostMeta[] = [
     author: "Erik Vlčák",
     date: "June 19, 2026",
     readTime: "8 min read",
+    art: { object: "mailbox", rotate: 6 },
   },
   {
     slug: "email-attachment-size-limits",
@@ -190,6 +211,7 @@ export const posts: PostMeta[] = [
     author: "Erik Vlčák",
     date: "June 15, 2026",
     readTime: "6 min read",
+    art: { object: "document", rotate: -10 },
   },
   {
     slug: "onboarding-email-best-practices",
@@ -200,6 +222,7 @@ export const posts: PostMeta[] = [
     author: "Erik Vlčák",
     date: "June 12, 2026",
     readTime: "9 min read",
+    art: { object: "bell", rotate: 10 },
   },
   {
     slug: "email-deliverability-checklist",
@@ -210,6 +233,7 @@ export const posts: PostMeta[] = [
     author: "Erik Vlčák",
     date: "June 9, 2026",
     readTime: "9 min read",
+    art: { object: "check", rotate: -10 },
   },
   {
     slug: "email-signature-size-and-dimensions",
@@ -220,6 +244,7 @@ export const posts: PostMeta[] = [
     author: "Erik Vlčák",
     date: "June 6, 2026",
     readTime: "5 min read",
+    art: { object: "at-sign", rotate: 10 },
   },
   {
     slug: "introducing-lettr-marketing-audiences-and-campaigns",
@@ -230,6 +255,7 @@ export const posts: PostMeta[] = [
     author: "Erik Vlčák",
     date: "June 2, 2026",
     readTime: "7 min read",
+    art: { object: "megaphone", rotate: -8 },
   },
   {
     slug: "managing-lettr-from-your-ai-assistant",
@@ -240,6 +266,7 @@ export const posts: PostMeta[] = [
     author: "Erik Vlčák",
     date: "May 27, 2026",
     readTime: "5 min read",
+    art: { object: "cursor", rotate: 12 },
   },
   {
     slug: "the-hidden-cost-of-diy-transactional-email",
@@ -250,6 +277,7 @@ export const posts: PostMeta[] = [
     author: "Erik Vlčák",
     date: "May 13, 2026",
     readTime: "5 min read",
+    art: { object: "bar-chart", rotate: -6 },
   },
   {
     slug: "how-to-warm-up-a-sending-domain",
@@ -260,6 +288,7 @@ export const posts: PostMeta[] = [
     author: "Erik Vlčák",
     date: "April 22, 2026",
     readTime: "9 min read",
+    art: { object: "clock", rotate: 10 },
   },
   {
     slug: "separate-transactional-and-marketing-email",
@@ -270,6 +299,7 @@ export const posts: PostMeta[] = [
     author: "Erik Vlčák",
     date: "April 8, 2026",
     readTime: "7 min read",
+    art: { object: "folder", rotate: -8 },
   },
   {
     slug: "smtp-vs-rest-api-how-to-choose",
@@ -280,6 +310,7 @@ export const posts: PostMeta[] = [
     author: "Erik Vlčák",
     date: "March 18, 2026",
     readTime: "8 min read",
+    art: { object: "at-sign", rotate: 14 },
   },
   {
     slug: "spf-dkim-dmarc-explained-for-developers",
@@ -290,6 +321,7 @@ export const posts: PostMeta[] = [
     author: "Erik Vlčák",
     date: "March 4, 2026",
     readTime: "10 min read",
+    art: { object: "shield", rotate: 8 },
   },
   {
     slug: "the-journey-of-an-email",
@@ -300,6 +332,7 @@ export const posts: PostMeta[] = [
     author: "Erik Vlčák",
     date: "February 18, 2026",
     readTime: "11 min read",
+    art: { object: "paper-plane", rotate: -14 },
   },
   {
     slug: "what-is-transactional-email",
@@ -310,6 +343,7 @@ export const posts: PostMeta[] = [
     author: "Erik Vlčák",
     date: "February 4, 2026",
     readTime: "6 min read",
+    art: { object: "envelope-open", rotate: 6 },
   },
 ];
 
