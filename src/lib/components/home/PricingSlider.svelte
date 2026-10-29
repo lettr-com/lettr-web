@@ -5,7 +5,7 @@
 	import DitherEdge from './DitherEdge.svelte';
 	import { marketingSteps, transactionalSteps, transactionalZones, type Mode } from '$lib/data/pricing';
 	import { capturePosthogEvent } from '$lib/analytics/posthog';
-	import { createScrollRevealCleanup } from '$lib/utils/gsap';
+	import { createScrollRevealCleanup } from '$lib/utils/reveal';
 
 	interface Props {
 		/** Sent with the analytics events. */

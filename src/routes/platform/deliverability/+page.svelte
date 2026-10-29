@@ -7,7 +7,7 @@
 	import ListChecksIcon from 'phosphor-svelte/lib/ListChecksIcon';
 	import LockKeyIcon from 'phosphor-svelte/lib/LockKeyIcon';
 	import FeaturePageLayout from '$lib/components/FeaturePageLayout.svelte';
-	import { createScrollRevealCleanup } from '$lib/utils/gsap';
+	import { createScrollRevealCleanup } from '$lib/utils/reveal';
 	import { ecomailOrganizations, emailInfraYears } from '$lib/data/company';
 
 	let scoreSection: HTMLElement | undefined = $state();

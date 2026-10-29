@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import CodeSnippet from './CodeSnippet.svelte';
-	import { createScrollRevealCleanup } from '$lib/utils/gsap';
+	import { createScrollRevealCleanup } from '$lib/utils/reveal';
 
 	let section: HTMLElement | undefined = $state();
 
@@ -11,9 +11,7 @@
 		return createScrollRevealCleanup({
 			scope: section,
 			targets: '[data-animate]',
-			vars: {
-				stagger: 0.1
-			}
+			stagger: 100
 		});
 	});
 </script>

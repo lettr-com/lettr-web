@@ -15,7 +15,7 @@
 	import LockKeyIcon from 'phosphor-svelte/lib/LockKeyIcon';
 	import RobotIcon from 'phosphor-svelte/lib/RobotIcon';
 	import FeaturePageLayout from '$lib/components/FeaturePageLayout.svelte';
-	import { createScrollRevealCleanup } from '$lib/utils/gsap';
+	import { createScrollRevealCleanup } from '$lib/utils/reveal';
 
 	let toolsSection: HTMLElement | undefined = $state();
 	let conversationSection: HTMLElement | undefined = $state();

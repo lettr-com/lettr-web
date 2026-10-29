@@ -1,11 +1,9 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
 	import ArrowLeftIcon from 'phosphor-svelte/lib/ArrowLeftIcon';
 	import Seo from '$lib/components/Seo.svelte';
 	import GlossaryLinkGrid from '$lib/components/glossary/GlossaryLinkGrid.svelte';
 	import GlossaryStepper from '$lib/components/glossary/GlossaryStepper.svelte';
 	import { formatTermDate, jsonLdScript, termJsonLd, termTitle } from '$lib/glossary/seo';
-	import { createFromAnimationCleanup } from '$lib/utils/gsap';
 	import type { PageData } from './$types';
 
 	interface Props {
@@ -14,21 +12,10 @@
 
 	let { data }: Props = $props();
 
-	let header: HTMLElement | undefined = $state();
-
 	const readingLinks = $derived(data.term.reading.map(({ href, title }) => ({ href, label: title })));
 	const relatedLinks = $derived(data.related.map(({ href, term }) => ({ href, label: term })));
 	// the product page and the blog post this term leads into
 	const lettrLinks = $derived(data.lettr ? [data.lettr.product, data.lettr.post] : []);
-
-	onMount(() => {
-		if (!header) return;
-		return createFromAnimationCleanup({
-			scope: header,
-			targets: '[data-animate]',
-			vars: { y: 20, opacity: 0, duration: 0.6, stagger: 0.08, ease: 'power3.out' }
-		});
-	});
 </script>
 
 <Seo
@@ -47,9 +34,8 @@
 
 <article class="pt-32 pb-24">
 	<div class="max-w-[800px]">
-		<header bind:this={header}>
+		<header>
 			<a
-				data-animate
 				href="/glossary/"
 				class="group inline-flex items-center gap-1.5 text-sm font-medium text-muted transition-colors hover:text-primary"
 			>
@@ -59,11 +45,11 @@
 				/>
 				All terms
 			</a>
-			<span data-animate class="mt-8 block font-heading text-sm text-primary">
+			<span class="mt-8 block font-heading text-sm text-primary">
 				Glossary
 			</span>
-			<h1 data-animate class="mt-3">{data.term.heading}</h1>
-			<p data-animate class="mt-4 text-xs text-muted">
+			<h1 class="mt-3">{data.term.heading}</h1>
+			<p class="mt-4 text-xs text-muted">
 				Updated <time datetime={data.term.updated}>{formatTermDate(data.term.updated)}</time>
 			</p>
 		</header>

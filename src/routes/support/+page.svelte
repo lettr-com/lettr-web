@@ -6,13 +6,12 @@
 	import ClockIcon from 'phosphor-svelte/lib/ClockIcon';
 	import ArrowSquareOutIcon from 'phosphor-svelte/lib/ArrowSquareOutIcon';
 	import ChatCircleTextIcon from 'phosphor-svelte/lib/ChatCircleTextIcon';
-	import { createFromAnimationCleanup, createScrollRevealCleanup } from '$lib/utils/gsap';
+	import { createScrollRevealCleanup } from '$lib/utils/reveal';
 	import { capturePosthogEvent } from '$lib/analytics/posthog';
 	import { openIntercomNewMessage } from '$lib/intercom';
 	import { jsonLdScript } from '$lib/utils/jsonLd';
 	import { basicPageJsonLd } from '$lib/utils/pageJsonLd';
 
-	let hero: HTMLElement | undefined = $state();
 	let channelsSection: HTMLElement | undefined = $state();
 	let contactSection: HTMLElement | undefined = $state();
 
@@ -81,16 +80,6 @@
 	onMount(() => {
 		const cleanups: (() => void)[] = [];
 
-		if (hero) {
-			cleanups.push(
-				createFromAnimationCleanup({
-					scope: hero,
-					targets: '[data-animate]',
-					vars: { y: 20, opacity: 0, duration: 0.6, stagger: 0.1, ease: 'power3.out' }
-				})
-			);
-		}
-
 		for (const section of [channelsSection, contactSection]) {
 			if (section) {
 				cleanups.push(
@@ -118,17 +107,16 @@
 
 <section class="pt-32 pb-24">
 	<!-- Hero -->
-	<div bind:this={hero} class="text-center">
+	<div class="text-center">
 		<span
-			data-animate
 			class="mb-4 inline-block font-heading text-xs tracking-[0.15em] text-primary uppercase"
 		>
 			SUPPORT
 		</span>
-		<h1 data-animate>
+		<h1>
 			How can we<br />help you?
 		</h1>
-		<p data-animate class="mx-auto mt-5 max-w-xl text-body leading-[1.7] text-muted">
+		<p class="mx-auto mt-5 max-w-xl text-body leading-[1.7] text-muted">
 			We're a small team that cares about every developer using Lettr. Reach out — we typically respond
 			within a few hours.
 		</p>

@@ -133,7 +133,7 @@ Operational guide for coding agents working in `lettr-web`.
 ## Performance Guidelines
 
 - Avoid re-creating expensive objects repeatedly (see singleton highlighter pattern).
-- Keep animation work scoped and kill/reuse GSAP tweens where needed.
+- Keep animation work scoped: CSS first, the Web Animations API (`element.animate`) for JS-driven motion, and cancel animations you replace. Scroll reveals go through `createScrollRevealCleanup` in `src/lib/utils/reveal.ts`, which starts content visible and honours reduced motion.
 - Avoid unnecessary reactive churn; derive values with `$derived` when suitable.
 - Defer heavy client-only behavior to `onMount`.
 

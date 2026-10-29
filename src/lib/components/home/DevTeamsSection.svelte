@@ -5,7 +5,7 @@
 	import EditorPreview from '$lib/components/EditorPreview.svelte';
 	import TooltipWord from '$lib/components/TooltipWord.svelte';
 	import GetStartedButton from './GetStartedButton.svelte';
-	import { createScrollRevealCleanup } from '$lib/utils/gsap';
+	import { createScrollRevealCleanup } from '$lib/utils/reveal';
 
 	let section: HTMLElement | undefined = $state();
 

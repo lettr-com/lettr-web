@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import ChatCircleDotsIcon from 'phosphor-svelte/lib/ChatCircleDotsIcon';
-	import { createScrollRevealCleanup } from '$lib/utils/gsap';
+	import { createScrollRevealCleanup } from '$lib/utils/reveal';
 	import { capturePosthogEvent } from '$lib/analytics/posthog';
 
 	let section: HTMLElement | undefined = $state();

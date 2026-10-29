@@ -95,29 +95,6 @@
     border-radius: 0;
   }
 
-  /*
-   * Scroll-reveal elements are animated in via gsap, which now loads lazily in
-   * its own chunk. Start them hidden so they don't paint visible and then snap
-   * to opacity:0 once gsap arrives (a flash). Guarded by `scripting: enabled`
-   * so no-JS clients still see all content; gsap (or its fail-safe) reveals
-   * them once the chunk loads.
-   */
-  @media (scripting: enabled) {
-    [data-reveal] {
-      opacity: 0;
-    }
-
-    /*
-     * Filtering the changelog re-renders entries in response to a click. Fading
-     * them in again on scroll would animate content the click just asked to
-     * see, so a filtered view opts out: the reveal contexts are reverted (which
-     * removes the inline opacity gsap set) and this rule takes over.
-     */
-    [data-reveal-instant] [data-reveal] {
-      opacity: 1;
-    }
-  }
-
   html {
     scroll-behavior: smooth;
     -webkit-font-smoothing: antialiased;
@@ -919,6 +896,18 @@ html:has(.bleed) {
         opacity 100ms linear,
         visibility 0s;
     }
+  }
+}
+
+/*
+ * Scroll reveals (src/lib/utils/reveal.ts) start visible. Only an element that
+ * was still below the fold when the page set up gets this attribute, and it
+ * keeps it until it scrolls in. Unlayered so an opacity utility on the element
+ * cannot show it early; screen only so printing shows everything.
+ */
+@media screen {
+  [data-reveal-pending] {
+    opacity: 0;
   }
 }
 

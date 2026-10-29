@@ -2,7 +2,7 @@
 	import { onMount } from 'svelte';
 	import LargeFeatureCard from './LargeFeatureCard.svelte';
 	import { capturePosthogEvent } from '$lib/analytics/posthog';
-	import { createScrollRevealCleanup } from '$lib/utils/gsap';
+	import { createScrollRevealCleanup } from '$lib/utils/reveal';
 
 	let section: HTMLElement | undefined = $state();
 

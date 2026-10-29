@@ -8,7 +8,6 @@
 	import SelfServeCard from '$lib/components/booking/SelfServeCard.svelte';
 	import SlotPicker from '$lib/components/booking/SlotPicker.svelte';
 	import VolumePicker from '$lib/components/booking/VolumePicker.svelte';
-	import { createFromAnimationCleanup } from '$lib/utils/gsap';
 	import { bookZaptimeSlot, fetchZaptimeConfig, fetchZaptimeSlots } from '$lib/zaptime/client';
 	import type { InitData, TimeSlot } from '$lib/zaptime/types';
 	import { jsonLdScript } from '$lib/utils/jsonLd';
@@ -19,7 +18,6 @@
 	let selectedDay: string = $state('');
 	let selectedSlot: TimeSlot | null = $state(null);
 	let isVolumePickerCollapsed: boolean = $state(false);
-	let section: HTMLElement | undefined = $state();
 	let selectedVolumeRange: string = $state('');
 	let routingDecision: 'pending' | 'qualified' | 'selfServe' = $state('pending');
 	let hasInitializedBooking: boolean = $state(false);
@@ -159,29 +157,9 @@
 	);
 
 	onMount(() => {
-		let animationCleanup = () => {};
-
 		trackBookingEvent('book_page_viewed', {
 			step_number: 1
 		});
-
-		if (section) {
-			animationCleanup = createFromAnimationCleanup({
-				scope: section,
-				targets: '[data-animate-intro]',
-				vars: {
-					y: 18,
-					opacity: 0,
-					duration: 0.55,
-					stagger: 0.08,
-					ease: 'power3.out'
-				}
-			});
-		}
-
-		return () => {
-			animationCleanup();
-		};
 	});
 
 	async function initializeBooking() {
@@ -440,7 +418,7 @@
 </svelte:head>
 
 <section class="border-b border-border/30 pb-16 pt-30">
-	<div bind:this={section} class="space-y-5">
+	<div class="space-y-5">
 		{#if isConfirmed}
 			<BookingSuccessCard
 				slotSummary={selectedSlotSummary}
@@ -455,7 +433,7 @@
 				]}
 			/>
 		{:else}
-			<header data-animate-intro class="space-y-3">
+			<header class="space-y-3">
 				<p class="text-sm font-medium uppercase tracking-[0.14em] text-primary">Step {isVolumePickerCollapsed ? '2 of 2' : '1 of 2'}</p>
 				<h1 class="text-3xl text-surface">Book your Lettr demo</h1>
 				<p class="text-body text-muted">

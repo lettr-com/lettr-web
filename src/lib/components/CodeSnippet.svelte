@@ -1,6 +1,5 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import { loadGsap } from '$lib/utils/gsap';
 	import CaretDownIcon from 'phosphor-svelte/lib/CaretDownIcon';
 	import CheckIcon from 'phosphor-svelte/lib/CheckIcon';
 	import CopyIcon from 'phosphor-svelte/lib/CopyIcon';
@@ -34,6 +33,8 @@
 	let moreOpen: boolean = $state(false);
 	let didCopy: boolean = $state(false);
 	let copyTimer: number | undefined;
+	/** The fade-out of the latest tab switch. */
+	let codeSwap: Animation | undefined;
 
 	const tabPadding = $derived(copyable ? 'px-4' : 'px-8');
 
@@ -66,35 +67,36 @@
 		moreOpen = false;
 		activeTab = index;
 
-		if (!codeEl) {
-			highlight(tabs[index]);
+		const target = codeEl;
+		if (!target || window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+			void highlight(tabs[index]);
 			return;
 		}
 
-		const target = codeEl;
-		// gsap loads on demand (first tab switch); fall back to an instant swap
-		// if the chunk isn't available.
-		void loadGsap()
-			.then(({ gsap }) => {
-				gsap.killTweensOf(target);
-				gsap.to(target, {
-					opacity: 0,
-					y: 4,
-					duration: 0.15,
-					ease: 'power2.in',
-					onComplete: () => {
-						highlight(tabs[index]).then(() => {
-							gsap.fromTo(target, { opacity: 0, y: -4 }, {
-								opacity: 1,
-								y: 0,
-								duration: 0.2,
-								ease: 'power2.out'
-							});
-						});
-					}
-				});
-			})
-			.catch(() => void highlight(tabs[index]));
+		// Fade the old code out, swap it, fade the new code in. The fade-out starts
+		// from wherever a previous switch left the code, so quick clicks stay smooth.
+		const fadeOut = target.animate([{ opacity: 0, transform: 'translateY(4px)' }], {
+			duration: 150,
+			easing: 'cubic-bezier(0.55, 0.055, 0.675, 0.19)',
+			fill: 'forwards'
+		});
+		codeSwap = fadeOut;
+		void fadeOut.finished
+			.then(() => highlight(tabs[index]))
+			.then(() => {
+				// A later switch owns the swap now.
+				if (codeSwap !== fadeOut) return;
+				const fadeIn = target.animate(
+					[
+						{ opacity: 0, transform: 'translateY(-4px)' },
+						{ opacity: 1, transform: 'none' }
+					],
+					{ duration: 200, easing: 'cubic-bezier(0.215, 0.61, 0.355, 1)' }
+				);
+				for (const animation of target.getAnimations()) {
+					if (animation !== fadeIn) animation.cancel();
+				}
+			});
 	}
 
 	async function copyCode() {

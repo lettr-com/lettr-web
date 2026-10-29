@@ -8,7 +8,7 @@
 	import BracketsAngleIcon from 'phosphor-svelte/lib/BracketsAngleIcon';
 	import FeaturePageLayout from '$lib/components/FeaturePageLayout.svelte';
 	import EditorPreview from '$lib/components/EditorPreview.svelte';
-	import { createScrollRevealCleanup } from '$lib/utils/gsap';
+	import { createScrollRevealCleanup } from '$lib/utils/reveal';
 	import { topolCompanies } from '$lib/data/company';
 
 	let editorSection: HTMLElement | undefined = $state();

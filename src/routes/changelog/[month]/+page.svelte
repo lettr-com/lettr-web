@@ -20,7 +20,7 @@
 	import { FEED_URL, formatDate, monthDescription, monthJsonLd, monthTitle } from '$lib/changelog/seo';
 	import { summarizeMonthHtml } from '$lib/changelog/summary';
 	import { jsonLdScript } from '$lib/utils/jsonLd';
-	import { createFromAnimationCleanup, createScrollRevealCleanup } from '$lib/utils/gsap';
+	import { createScrollRevealCleanup } from '$lib/utils/reveal';
 	import { untrack } from 'svelte';
 	import type { PageData } from './$types';
 
@@ -30,7 +30,6 @@
 
 	let { data }: Props = $props();
 
-	let header: HTMLElement | undefined = $state();
 	let body: HTMLElement | undefined = $state();
 	let filter = $state<FilterToken[]>([]);
 
@@ -53,16 +52,6 @@
 	onMount(() => {
 		const cleanups: (() => void)[] = [];
 
-		if (header) {
-			cleanups.push(
-				createFromAnimationCleanup({
-					scope: header,
-					targets: '[data-animate]',
-					vars: { y: 20, opacity: 0, duration: 0.6, stagger: 0.08, ease: 'power3.out' }
-				})
-			);
-		}
-
 		if (body) {
 			const element = body;
 			element.addEventListener('click', trackChangelogLinkClick);
@@ -82,11 +71,9 @@
 	});
 
 	// Moving between months reuses this component, so onMount fires only for the
-	// first one — while every entry below is replaced and starts at opacity 0
-	// (see `[data-reveal]` in app.css). Re-running the reveal per month is what
-	// makes the new entries appear at all; without it they stay invisible.
-	// Retiring it reverts the contexts, handing the entries to the
-	// `[data-reveal-instant]` rule instead.
+	// first one, while every entry below is replaced. Re-running the reveal per
+	// month is what animates the new entries in. Retiring it runs the cleanup,
+	// which shows any entry still waiting below the fold at once.
 	$effect(() => {
 		void data.month.id;
 		const element = body;
@@ -112,9 +99,8 @@
 </svelte:head>
 
 <section class="pt-32 pb-24">
-	<div bind:this={header}>
+	<div>
 		<a
-			data-animate
 			href="/changelog/"
 			class="inline-flex items-center gap-1.5 text-sm font-medium text-muted transition-colors hover:text-primary"
 		>
@@ -123,31 +109,29 @@
 		</a>
 
 		<span
-			data-animate
 			class="mt-8 block font-heading text-sm text-primary"
 		>
 			Lettr changelog
 		</span>
-		<h1 data-animate class="mt-3">What's new in {label}</h1>
-		<p data-animate class="mt-5 max-w-xl text-body leading-[1.8] text-muted">
+		<h1 class="mt-3">What's new in {label}</h1>
+		<p class="mt-5 max-w-xl text-body leading-[1.8] text-muted">
 			{@html descriptionHtml}
 		</p>
-		<p data-animate class="mt-4 text-xs text-muted">
+		<p class="mt-4 text-xs text-muted">
 			Published <time datetime={data.month.published}>{formatDate(data.month.published)}</time>
 		</p>
 
-		<div data-animate class="mt-10 border-t border-border/50 py-3">
+		<div class="mt-10 border-t border-border/50 py-3">
 			<ChangelogArchive current={data.month.id} {filter} />
 		</div>
 
-		<div data-animate class="mt-6">
+		<div class="mt-6">
 			<ChangelogFilter bind:tokens={filter} status={filterStatus} />
 		</div>
 	</div>
 
 	<div
 		bind:this={body}
-		data-reveal-instant={isInstant ? '' : undefined}
 		class="mt-10 border-t border-border/50 pt-12"
 	>
 		{#if filter.length && matches === 0}

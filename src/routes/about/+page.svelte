@@ -6,7 +6,7 @@
 	import EnvelopeSimpleIcon from 'phosphor-svelte/lib/EnvelopeSimpleIcon';
 	import GlobeSimpleIcon from 'phosphor-svelte/lib/GlobeSimpleIcon';
 	import ArrowRightIcon from 'phosphor-svelte/lib/ArrowRightIcon';
-	import { createFromAnimationCleanup, createScrollRevealCleanup } from '$lib/utils/gsap';
+	import { createScrollRevealCleanup } from '$lib/utils/reveal';
 	import { buildRegisterUrl, registerUrl } from '$lib/utils/utm';
 	import { capturePosthogEvent, trackSignupClick } from '$lib/analytics/posthog';
 	import { jsonLdScript } from '$lib/utils/jsonLd';
@@ -25,7 +25,6 @@
 		}
 	}
 
-	let hero: HTMLElement | undefined = $state();
 	let statsSection: HTMLElement | undefined = $state();
 	let storySection: HTMLElement | undefined = $state();
 	let valuesSection: HTMLElement | undefined = $state();
@@ -37,16 +36,6 @@
 		registerHref = buildRegisterUrl(new URL(window.location.href), document.cookie);
 
 		const cleanups: (() => void)[] = [];
-
-		if (hero) {
-			cleanups.push(
-				createFromAnimationCleanup({
-					scope: hero,
-					targets: '[data-animate]',
-					vars: { y: 20, opacity: 0, duration: 0.6, stagger: 0.1, ease: 'power3.out' }
-				})
-			);
-		}
 
 		for (const section of [statsSection, storySection, valuesSection, productsSection, ctaSection]) {
 			if (section) {
@@ -133,14 +122,14 @@
 
 <section class="pt-32 pb-24">
 	<!-- Hero -->
-	<div bind:this={hero}>
-		<span data-animate class="mb-4 inline-block font-heading text-xs tracking-[0.15em] text-primary uppercase">
+	<div>
+		<span class="mb-4 inline-block font-heading text-xs tracking-[0.15em] text-primary uppercase">
 			ABOUT
 		</span>
-		<h1 data-animate>
+		<h1>
 			We've been doing<br />email for a while
 		</h1>
-		<p data-animate class="mt-6 text-body leading-[1.8] text-muted">
+		<p class="mt-6 text-body leading-[1.8] text-muted">
 			Lettr is built by a European company that's been running an email marketing and automation platform for
 			{emailInfraYears} years. Our infrastructure handles {monthlyEmails} emails a month across the globe — built by passionate
 			developers who genuinely enjoy what they do.

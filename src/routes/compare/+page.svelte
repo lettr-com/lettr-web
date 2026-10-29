@@ -2,7 +2,7 @@
 	import { onMount } from 'svelte';
 	import Seo from '$lib/components/Seo.svelte';
 	import ArrowRightIcon from 'phosphor-svelte/lib/ArrowRightIcon';
-	import { createFromAnimationCleanup, createScrollRevealCleanup } from '$lib/utils/gsap';
+	import { createScrollRevealCleanup } from '$lib/utils/reveal';
 	import { buildRegisterUrl, registerUrl } from '$lib/utils/utm';
 	import { providerList } from '$lib/data/providers';
 	import { capturePosthogEvent, trackSignupClick } from '$lib/analytics/posthog';
@@ -54,7 +54,6 @@
 		}
 	];
 
-	let hero: HTMLElement | undefined = $state();
 	let gridSection: HTMLElement | undefined = $state();
 	let guidesSection: HTMLElement | undefined = $state();
 	let ctaSection: HTMLElement | undefined = $state();
@@ -64,16 +63,6 @@
 		registerHref = buildRegisterUrl(new URL(window.location.href), document.cookie);
 
 		const cleanups: (() => void)[] = [];
-
-		if (hero) {
-			cleanups.push(
-				createFromAnimationCleanup({
-					scope: hero,
-					targets: '[data-animate]',
-					vars: { y: 20, opacity: 0, duration: 0.6, stagger: 0.1, ease: 'power3.out' }
-				})
-			);
-		}
 
 		for (const section of [gridSection, guidesSection, ctaSection]) {
 			if (section) {
@@ -105,14 +94,14 @@
 
 <section class="pt-32 pb-24">
 	<!-- Hero -->
-	<div bind:this={hero}>
-		<span data-animate class="mb-4 inline-block font-heading text-xs tracking-[0.15em] text-primary uppercase">
+	<div>
+		<span class="mb-4 inline-block font-heading text-xs tracking-[0.15em] text-primary uppercase">
 			COMPARE & MIGRATE
 		</span>
-		<h1 data-animate>
+		<h1>
 			Switch to Lettr from<br />any provider
 		</h1>
-		<p data-animate class="mt-6 text-body leading-[1.8] text-muted">
+		<p class="mt-6 text-body leading-[1.8] text-muted">
 			See how Lettr stacks up against the most popular transactional email providers. Better features, better
 			pricing, and a migration path that takes minutes.
 		</p>

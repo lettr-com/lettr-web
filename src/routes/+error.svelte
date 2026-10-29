@@ -1,11 +1,6 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
 	import { page } from '$app/state';
 	import Button from '$lib/components/Button.svelte';
-	import { createFromAnimationCleanup, loadGsap } from '$lib/utils/gsap';
-
-	let section: HTMLElement | undefined = $state();
-	let envelope: HTMLElement | undefined = $state();
 
 	const status = $derived(page.status);
 	const isNotFound = $derived(status === 404);
@@ -26,43 +21,6 @@
 	const smtpReason = $derived(
 		isNotFound ? 'Page not found: the requested route does not exist' : (page.error?.message ?? 'Temporary server failure')
 	);
-
-	let floatTween: { kill: () => void } | undefined;
-
-	onMount(() => {
-		// Gently float the envelope, like a letter drifting back to the sender.
-		const floatTarget = envelope;
-		if (floatTarget) {
-			void loadGsap().then(({ gsap }) => {
-				floatTween = gsap.to(floatTarget, {
-					y: -10,
-					rotation: 2,
-					duration: 2.4,
-					ease: 'sine.inOut',
-					repeat: -1,
-					yoyo: true
-				});
-			});
-		}
-
-		if (!section) return;
-		const cleanup = createFromAnimationCleanup({
-			scope: section,
-			targets: '[data-animate]',
-			vars: {
-				y: 30,
-				opacity: 0,
-				duration: 0.7,
-				stagger: 0.1,
-				ease: 'power3.out'
-			}
-		});
-
-		return () => {
-			floatTween?.kill();
-			cleanup();
-		};
-	});
 </script>
 
 <svelte:head>
@@ -70,10 +28,10 @@
 	<meta name="robots" content="noindex" />
 </svelte:head>
 
-<section bind:this={section} class="flex flex-col items-center py-24 text-center sm:py-32">
+<section class="flex flex-col items-center py-24 text-center sm:py-32">
 	<!-- Bouncing envelope with a RETURN TO SENDER stamp -->
-	<div data-animate class="relative mb-10">
-		<div bind:this={envelope} class="relative">
+	<div class="relative mb-10">
+		<div class="envelope-float relative">
 			<svg
 				width="200"
 				height="150"
@@ -105,22 +63,20 @@
 
 	<!-- Big status code -->
 	<p
-		data-animate
 		class="text-primary mb-2 font-bold tracking-tight"
 		style="font-family: var(--font-heading); font-size: clamp(4rem, 16vw, 7rem); line-height: 1;"
 	>
 		{status}
 	</p>
 
-	<h1 data-animate class="text-surface mb-4">{heading}</h1>
+	<h1 class="text-surface mb-4">{heading}</h1>
 
-	<p data-animate class="text-body text-muted mb-8 max-w-[520px]">
+	<p class="text-body text-muted mb-8 max-w-[520px]">
 		{blurb}
 	</p>
 
 	<!-- Mock SMTP bounce log -->
 	<div
-		data-animate
 		class="mb-10 w-full max-w-[560px] border border-border/70 bg-surface px-5 py-4 text-left"
 		style="font-family: var(--font-code);"
 	>
@@ -136,7 +92,7 @@
 <span class="text-white/40">&lt;</span> <span class="text-white/40">connection closed.</span></pre>
 	</div>
 
-	<div data-animate class="flex flex-wrap items-center justify-center gap-2">
+	<div class="flex flex-wrap items-center justify-center gap-2">
 		<Button variant="primary" href="/">Back to safety</Button>
 		<Button
 			variant="secondary"
@@ -146,10 +102,29 @@
 		>
 	</div>
 
-	<p data-animate class="text-muted mt-6 text-sm">
+	<p class="text-muted mt-6 text-sm">
 		Think this address should exist? <a
 			href="mailto:support@lettr.com"
 			class="text-primary font-semibold hover:underline">Let us know</a
 		>.
 	</p>
 </section>
+
+<style>
+	/* Gently float the envelope, like a letter drifting back to the sender. */
+	.envelope-float {
+		animation: envelope-float 2.4s cubic-bezier(0.37, 0, 0.63, 1) infinite alternate;
+	}
+
+	@keyframes envelope-float {
+		to {
+			transform: translateY(-10px) rotate(2deg);
+		}
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.envelope-float {
+			animation: none;
+		}
+	}
+</style>

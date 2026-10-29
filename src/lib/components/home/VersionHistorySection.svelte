@@ -2,7 +2,7 @@
 	import { onMount } from 'svelte';
 	import GetStartedButton from './GetStartedButton.svelte';
 	import StageGlow from './StageGlow.svelte';
-	import { createScrollRevealCleanup } from '$lib/utils/gsap';
+	import { createScrollRevealCleanup } from '$lib/utils/reveal';
 	import { capturePosthogEvent } from '$lib/analytics/posthog';
 
 	type Target = 'headline' | 'intro' | 'button' | 'image';

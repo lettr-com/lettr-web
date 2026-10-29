@@ -15,7 +15,7 @@
 	import ListChecksIcon from 'phosphor-svelte/lib/ListChecksIcon';
 	import RocketLaunchIcon from 'phosphor-svelte/lib/RocketLaunchIcon';
 	import ArrowRightIcon from 'phosphor-svelte/lib/ArrowRightIcon';
-	import { createFromAnimationCleanup, createScrollRevealCleanup } from '$lib/utils/gsap';
+	import { createScrollRevealCleanup } from '$lib/utils/reveal';
 	import { buildRegisterUrl, registerUrl } from '$lib/utils/utm';
 	import { capturePosthogEvent, trackSignupClick } from '$lib/analytics/posthog';
 	import { jsonLdScript } from '$lib/utils/jsonLd';
@@ -26,7 +26,6 @@
 
 	const DOCS_URL = 'https://docs.lettr.com/introduction';
 
-	let hero: HTMLElement | undefined = $state();
 	let quickStartSection: HTMLElement | undefined = $state();
 	let includedSection: HTMLElement | undefined = $state();
 	let sdkSection: HTMLElement | undefined = $state();
@@ -172,16 +171,6 @@
 
 		const cleanups: (() => void)[] = [];
 
-		if (hero) {
-			cleanups.push(
-				createFromAnimationCleanup({
-					scope: hero,
-					targets: '[data-animate]',
-					vars: { y: 30, opacity: 0, duration: 0.7, stagger: 0.12, ease: 'power3.out' }
-				})
-			);
-		}
-
 		for (const section of [
 			quickStartSection,
 			includedSection,
@@ -232,33 +221,32 @@
 </svelte:head>
 
 <!-- Hero -->
-<section bind:this={hero} class="pt-30 pb-16 border-b border-border/30">
+<section class="pt-30 pb-16 border-b border-border/30">
 	<div class="grid gap-12 lg:grid-cols-1">
 		<div class="flex flex-col">
 			<div
-				data-animate
 				class="mb-4 inline-flex items-center gap-2 text-[11px] font-medium tracking-[0.18em] uppercase text-primary/80"
 			>
 				<span class="block w-6 h-px bg-primary/60"></span>
 				Free email API
 			</div>
-			<h1 data-animate class="text-surface mb-4">
+			<h1 class="text-surface mb-4">
 				Send up to 3,000 emails<br />
 				<span class="text-primary">a month, free.</span>
 			</h1>
 
-			<p data-animate class="max-w-[650px] text-body text-muted mb-8">
+			<p class="max-w-[650px] text-body text-muted mb-8">
 				Get a free email API key and send your first email in one request. REST API and SMTP, SDKs
 				for every language, and deliverability built in — <span class="text-surface">no credit card required.</span>
 			</p>
 
-			<div data-animate class="mb-8 flex flex-wrap gap-2">
+			<div class="mb-8 flex flex-wrap gap-2">
 				<span class="border border-border/40 bg-white px-3 py-1.5 text-sm font-medium text-surface">3,000 emails / month</span>
 				<span class="border border-border/40 bg-white px-3 py-1.5 text-sm font-medium text-surface">No credit card</span>
 				<span class="border border-border/40 bg-white px-3 py-1.5 text-sm font-medium text-surface">REST API + SMTP</span>
 			</div>
 
-			<div data-animate class="flex flex-wrap items-center mb-3 gap-2">
+			<div class="flex flex-wrap items-center mb-3 gap-2">
 				<Button
 					variant="primary"
 					href={registerHref}
@@ -272,12 +260,12 @@
 					onclick={() => trackCta('free_api_hero', 'See docs', DOCS_URL, 'secondary')}
 				>See docs</Button>
 			</div>
-			<p data-animate class="max-w-md text-sm text-muted">
+			<p class="max-w-md text-sm text-muted">
 				Free forever — no credit card, no expiry.
 			</p>
 		</div>
 
-		<div data-animate>
+		<div>
 			<CodeSnippet primaryTabIndices={[2, 5]} moreTabIndices={[0, 1, 3, 4, 6]} />
 		</div>
 	</div>

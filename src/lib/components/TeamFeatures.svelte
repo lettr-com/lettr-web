@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import ArrowRightIcon from 'phosphor-svelte/lib/ArrowRightIcon';
-	import { createScrollRevealCleanup } from '$lib/utils/gsap';
+	import { createScrollRevealCleanup } from '$lib/utils/reveal';
 
 	type Feature = 'build' | 'translate';
 	type Block = 'text' | 'button' | 'divider';

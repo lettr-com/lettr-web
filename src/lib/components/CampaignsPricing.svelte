@@ -2,12 +2,10 @@
 	import { onMount } from 'svelte';
 	import ArrowRight from 'phosphor-svelte/lib/ArrowRight';
 	import Slider from './Slider.svelte';
-	import { createFromAnimationCleanup } from '$lib/utils/gsap';
 	import { buildRegisterUrl, registerUrl } from '$lib/utils/utm';
 	import { capturePosthogEvent, trackSignupClick } from '$lib/analytics/posthog';
 	import { createChangeTracker } from '$lib/analytics/changeTracker';
 
-	let section: HTMLElement | undefined = $state();
 	let sliderValue: number = $state(1);
 	let registerHref: string = $state(registerUrl);
 
@@ -74,17 +72,11 @@
 
 	onMount(() => {
 		registerHref = buildRegisterUrl(new URL(window.location.href), document.cookie);
-		if (!section) return;
-		return createFromAnimationCleanup({
-			scope: section,
-			targets: '[data-pricing-animate]',
-			vars: { y: 30, opacity: 0, duration: 0.6, stagger: 0.1, ease: 'power3.out', clearProps: 'opacity,transform' }
-		});
 	});
 </script>
 
-<section bind:this={section} id="campaigns-pricing" class="pt-6 pb-16">
-	<div class="mb-8" data-pricing-animate>
+<section id="campaigns-pricing" class="pt-6 pb-16">
+	<div class="mb-8">
 		<span class="mb-3 block text-sm text-muted">How many contacts do you have?</span>
 		<Slider
 			min={0}
@@ -95,7 +87,7 @@
 		/>
 	</div>
 
-	<div data-pricing-animate class="flex flex-col p-5 border transition-colors duration-300 {isEnterprise ? 'border-border/30 bg-white' : 'border-primary bg-white shadow-lg shadow-primary/5'}">
+	<div class="flex flex-col p-5 border transition-colors duration-300 {isEnterprise ? 'border-border/30 bg-white' : 'border-primary bg-white shadow-lg shadow-primary/5'}">
 		<div class="flex items-baseline gap-1 mb-1">
 			<span class="text-3xl font-bold text-surface">{currentTier.price}</span>
 			<span class="text-sm text-muted">/mo</span>
@@ -120,7 +112,7 @@
 		</a>
 	</div>
 
-	<div data-pricing-animate class="mt-3 border bg-white p-5 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 transition-colors duration-300 {isEnterprise ? 'border-primary shadow-lg shadow-primary/5' : 'border-border/30'}">
+	<div class="mt-3 border bg-white p-5 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 transition-colors duration-300 {isEnterprise ? 'border-primary shadow-lg shadow-primary/5' : 'border-border/30'}">
 		<div>
 			<h3 class="text-sm font-semibold mb-1 {isEnterprise ? 'text-primary' : 'text-surface'}">Enterprise</h3>
 			<p class="text-[13px] text-muted">

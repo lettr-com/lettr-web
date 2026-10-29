@@ -2,7 +2,7 @@
 	import { onMount } from 'svelte';
 	import ArrowClockwiseIcon from 'phosphor-svelte/lib/ArrowClockwiseIcon';
 	import { capturePosthogEvent } from '$lib/analytics/posthog';
-	import { createScrollRevealCleanup } from '$lib/utils/gsap';
+	import { createScrollRevealCleanup } from '$lib/utils/reveal';
 
 	type Tag = 'customer_name' | 'order_number' | 'tracking_url';
 

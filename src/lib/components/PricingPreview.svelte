@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import ArrowRight from 'phosphor-svelte/lib/ArrowRight';
-	import { createScrollRevealCleanup } from '$lib/utils/gsap';
+	import { createScrollRevealCleanup } from '$lib/utils/reveal';
 	import { capturePosthogEvent } from '$lib/analytics/posthog';
 
 	let { sectionClass = 'py-20 sm:py-24' }: { sectionClass?: string } = $props();
