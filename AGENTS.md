@@ -35,6 +35,7 @@ Operational guide for coding agents working in `lettr-web`.
 - Build production app: `pnpm build`
 - Preview production build: `pnpm preview`
 - Sync SvelteKit types/config: `pnpm prepare`
+- Render blog art (cover, thumbnail, strip, OG) from each post's `art` in `posts.ts`: `vp run blog:images -- <slug>`; leave out the slug for every post. One-time setup and details in `tools/blog-images/README.md`. Commit the files it writes to `static/blog/<slug>/`.
 
 ## Lint / Typecheck / Test Commands
 

@@ -8,7 +8,8 @@
 		TldrList,
 		Callout,
 		Faq,
-		FaqItem
+		FaqItem,
+		ProductNote
 	} from '$lib/components/blog';
 </script>
 
@@ -97,6 +98,8 @@
 		stored. Anyone arriving from a Mailchimp-style marketing platform should expect that model
 		change, and it usually works in the sender's favor for transactional traffic.
 	</Paragraph>
+
+	<ProductNote />
 
 	<Heading level={2}>Pricing at a glance</Heading>
 

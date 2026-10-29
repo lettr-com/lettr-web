@@ -8,7 +8,8 @@
 		Callout,
 		Figure,
 		Faq,
-		FaqItem
+		FaqItem,
+		ProductNote
 	} from '$lib/components/blog';
 </script>
 
@@ -115,6 +116,8 @@
 		alt="The two features of Lettr's Marketing module: Campaigns and Audiences."
 		caption="Audiences decide who you reach; Campaigns decide what you send."
 	/>
+
+	<ProductNote />
 
 	<Heading level={2}>Introducing Campaigns</Heading>
 

@@ -8,7 +8,8 @@
 		TldrList,
 		Callout,
 		Faq,
-		FaqItem
+		FaqItem,
+		ProductNote
 	} from '$lib/components/blog';
 </script>
 
@@ -104,6 +105,8 @@
 		the intended size with <code>width</code> and <code>height</code> attributes on the image so the
 		layout holds even before the image loads.
 	</Paragraph>
+
+	<ProductNote />
 
 	<Heading level={2}>File size and format</Heading>
 

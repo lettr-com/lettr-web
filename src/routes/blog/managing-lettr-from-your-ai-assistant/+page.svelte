@@ -9,7 +9,8 @@
 		Callout,
 		Code,
 		Faq,
-		FaqItem
+		FaqItem,
+		ProductNote
 	} from '$lib/components/blog';
 
 	const mcpJsonExample = `{
@@ -73,6 +74,8 @@
 		description). The assistant reads the list, picks the one that matches the request, fills in the
 		arguments, and surfaces the response, with the raw JSON hidden unless asked for.
 	</Paragraph>
+
+	<ProductNote />
 
 	<Heading level={2}>What it looks like in practice</Heading>
 

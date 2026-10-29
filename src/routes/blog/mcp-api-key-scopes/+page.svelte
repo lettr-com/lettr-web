@@ -9,7 +9,8 @@
 		Callout,
 		Code,
 		Faq,
-		FaqItem
+		FaqItem,
+		ProductNote
 	} from '$lib/components/blog';
 
 	const clientConfig = `{
@@ -111,6 +112,8 @@
 		is the better fit. A signed-in connection acts as the person who signed in, so it can reach every
 		team they belong to.
 	</Paragraph>
+
+	<ProductNote />
 
 	<Heading level={2}>Which tools does each permission level give an agent?</Heading>
 

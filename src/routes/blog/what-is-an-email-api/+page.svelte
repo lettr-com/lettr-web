@@ -9,7 +9,8 @@
 		Callout,
 		Code,
 		Faq,
-		FaqItem
+		FaqItem,
+		ProductNote
 	} from '$lib/components/blog';
 
 	const sendExample = `curl -X POST https://app.lettr.com/api/emails \\
@@ -96,6 +97,8 @@
 		<a href="/blog/the-journey-of-an-email/">journey of an email</a> traces what happens between
 		those two moments.
 	</Paragraph>
+
+	<ProductNote />
 
 	<Heading level={2}>Email API vs. SMTP relay</Heading>
 

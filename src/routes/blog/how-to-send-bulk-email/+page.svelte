@@ -9,7 +9,8 @@
 		Callout,
 		Code,
 		Faq,
-		FaqItem
+		FaqItem,
+		ProductNote
 	} from '$lib/components/blog';
 
 	const oneClickHeaders = `List-Unsubscribe: <https://yourapp.com/unsubscribe?c=123&u=456>
@@ -82,6 +83,8 @@ List-Unsubscribe-Post: List-Unsubscribe=One-Click`;
 		providers and regulated differently by law, which is why they belong on
 		<a href="/blog/separate-transactional-and-marketing-email/">separate sending domains</a>.
 	</Paragraph>
+
+	<ProductNote />
 
 	<Heading level={2}>Why a mailbox account can't send mass email</Heading>
 

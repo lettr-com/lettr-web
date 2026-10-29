@@ -4,6 +4,6 @@
 	let { children }: { children: Snippet } = $props();
 </script>
 
-<p data-reveal class="text-h3 leading-[1.6] text-surface">
+<p class="text-[17px] leading-[1.6] text-surface md:text-[19px]">
 	{@render children()}
 </p>

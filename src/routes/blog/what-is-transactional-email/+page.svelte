@@ -8,7 +8,8 @@
 		TldrList,
 		Callout,
 		Faq,
-		FaqItem
+		FaqItem,
+		ProductNote
 	} from '$lib/components/blog';
 </script>
 
@@ -60,6 +61,8 @@
 	<Paragraph>
 This distinction matters because Gmail, spam filters, and privacy regulators all depend on it, so the same HTML template can behave very differently depending on its category.
 	</Paragraph>
+
+	<ProductNote />
 
 	<Heading level={2}>Why inboxes treat them differently</Heading>
 

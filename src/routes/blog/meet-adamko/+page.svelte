@@ -8,7 +8,8 @@
 		TldrList,
 		Callout,
 		Faq,
-		FaqItem
+		FaqItem,
+		ProductNote
 	} from '$lib/components/blog';
 </script>
 
@@ -67,6 +68,8 @@
 		one. Adamko lives inside the dashboard, needs no setup, and can do things an API call cannot,
 		like highlighting the exact button a task needs next.
 	</Paragraph>
+
+	<ProductNote />
 
 	<Heading level={2}>Account setup from a website URL</Heading>
 

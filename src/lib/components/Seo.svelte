@@ -15,6 +15,8 @@
 		type?: 'website' | 'article';
 		/** Social share image — absolute URL or root-relative path. */
 		image?: string;
+		/** What the share image shows, for og:image:alt and twitter:image:alt. */
+		imageAlt?: string;
 		/** Canonical path (e.g. "/about/") or absolute URL. Defaults to the current route. */
 		canonical?: string;
 		/** Byline name for `<meta name="author">`, e.g. a blog post's author. */
@@ -28,6 +30,7 @@
 		ogDescription,
 		type = 'website',
 		image = DEFAULT_IMAGE,
+		imageAlt,
 		canonical,
 		author
 	}: Props = $props();
@@ -53,6 +56,9 @@
 	<meta property="og:image" content={imageUrl} />
 	<meta property="og:image:width" content="1200" />
 	<meta property="og:image:height" content="630" />
+	{#if imageAlt}
+		<meta property="og:image:alt" content={imageAlt} />
+	{/if}
 	<meta property="og:site_name" content="Lettr" />
 	<meta property="og:locale" content="en_US" />
 
@@ -61,4 +67,7 @@
 	<meta name="twitter:title" content={socialTitle} />
 	<meta name="twitter:description" content={socialDescription} />
 	<meta name="twitter:image" content={imageUrl} />
+	{#if imageAlt}
+		<meta name="twitter:image:alt" content={imageAlt} />
+	{/if}
 </svelte:head>

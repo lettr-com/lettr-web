@@ -20,7 +20,7 @@
 -->
 <details class="group">
 	<summary
-		class="flex cursor-pointer list-none items-start justify-between gap-3 p-5 font-semibold text-surface sm:px-6 [&::-webkit-details-marker]:hidden"
+		class="flex cursor-pointer list-none items-start justify-between gap-3 p-5 text-[16px] font-semibold text-surface sm:px-6 [&::-webkit-details-marker]:hidden"
 	>
 		<span>{question}</span>
 		<CaretDownIcon
@@ -28,7 +28,7 @@
 			class="mt-0.5 shrink-0 text-muted transition-transform duration-200 group-open:rotate-180"
 		/>
 	</summary>
-	<div class="px-5 pb-5 text-body leading-[1.8] text-muted sm:px-6">
+	<div class="px-5 pb-5 text-[16px] leading-[1.65] text-muted sm:px-6">
 		{@render children()}
 	</div>
 </details>

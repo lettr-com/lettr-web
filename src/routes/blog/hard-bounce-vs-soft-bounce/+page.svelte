@@ -8,7 +8,8 @@
 		TldrList,
 		Callout,
 		Faq,
-		FaqItem
+		FaqItem,
+		ProductNote
 	} from '$lib/components/blog';
 </script>
 
@@ -67,6 +68,8 @@
 		code starting with 4 is a temporary one (a soft bounce)</strong>. That single digit is what
 		separates a problem to fix now from one that often resolves on its own.
 	</Paragraph>
+
+	<ProductNote />
 
 	<Heading level={2}>Hard bounce vs. soft bounce</Heading>
 

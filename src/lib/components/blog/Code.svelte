@@ -4,40 +4,60 @@
 
 	interface Props {
 		code: string;
-		/** One of the languages loaded by the shiki highlighter (php, javascript, go, ruby, java, bash, shell). */
+		/** A language loaded by the shiki highlighter; `ts` and `text` are accepted aliases. */
 		lang?: string;
 		filename?: string;
 	}
 
 	let { code, lang = 'bash', filename }: Props = $props();
 
-	const supported = ['php', 'javascript', 'go', 'ruby', 'java', 'bash', 'shell'];
+	const aliases: Record<string, string> = { ts: 'typescript', js: 'javascript', sh: 'bash' };
+	const supported = ['php', 'javascript', 'typescript', 'json', 'python', 'go', 'ruby', 'java', 'bash', 'shell'];
+	const grammar = $derived(aliases[lang] ?? lang);
+	const label = $derived(filename ?? (lang === 'text' ? '' : lang));
+
 	let highlighted: string = $state('');
+	let copied = $state(false);
+
+	async function copy() {
+		try {
+			await navigator.clipboard.writeText(code.trim());
+			copied = true;
+			setTimeout(() => (copied = false), 1600);
+		} catch {
+			copied = false;
+		}
+	}
 
 	onMount(() => {
-		if (!supported.includes(lang)) return;
+		if (!supported.includes(grammar)) return;
 		getHighlighter().then((hl) => {
-			highlighted = hl.codeToHtml(code.trim(), { lang, theme: 'lettr' });
+			highlighted = hl.codeToHtml(code.trim(), { lang: grammar, theme: 'lettr' });
 		});
 	});
 </script>
 
-<div
-	data-reveal
-	class="overflow-hidden bg-gray-950 p-[6px] pt-[2px] shadow-[0_0_40px_-10px_rgba(236,16,75,0.15)]"
->
-	{#if filename}
-		<div class="px-3 py-2 text-[12px] text-gray-300">{filename}</div>
-	{/if}
-	<div class="overflow-x-auto border-t border-gray-700 bg-gray-800 p-4">
+<div class="bg-surface">
+	<div class="flex items-center justify-between gap-4 border-b border-white/10 px-4 py-2">
+		<span class="font-code text-[13px] text-gray-400">{label}</span>
+		<button
+			type="button"
+			onclick={copy}
+			class="text-[13px] font-semibold text-background transition-colors hover:text-primary-outline"
+			aria-label={copied ? 'Copied' : 'Copy code'}
+		>
+			{copied ? 'Copied' : 'Copy'}
+		</button>
+	</div>
+	<div class="overflow-x-auto p-4">
 		{#if highlighted}
 			<div
-				class="font-code [&_code]:!text-[13px] [&_code]:!leading-[1.6] [&_pre]:!bg-transparent [&_pre]:!p-0 [&_pre]:!leading-[1.6]"
+				class="font-code [&_code]:!text-[14px] [&_code]:!leading-[1.65] [&_pre]:!bg-transparent [&_pre]:!p-0 [&_pre]:!leading-[1.65]"
 			>
 				{@html highlighted}
 			</div>
 		{:else}
-			<pre class="font-code text-[13px] leading-[1.6] text-gray-100"><code>{code.trim()}</code></pre>
+			<pre class="font-code text-[14px] leading-[1.65] text-gray-100"><code>{code.trim()}</code></pre>
 		{/if}
 	</div>
 </div>

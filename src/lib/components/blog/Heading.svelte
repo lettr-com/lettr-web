@@ -13,11 +13,11 @@
 </script>
 
 {#if level === 2}
-	<h2 data-reveal {id} class="scroll-mt-28 text-surface">
+	<h2 {id} class="scroll-mt-40 text-[24px] leading-[1.25] tracking-[-0.015em] text-balance text-surface md:text-[28px]">
 		{@render children()}
 	</h2>
 {:else}
-	<h3 data-reveal {id} class="scroll-mt-28 text-surface">
+	<h3 {id} class="scroll-mt-40 text-[20px] leading-[1.35] font-medium text-balance text-surface">
 		{@render children()}
 	</h3>
 {/if}

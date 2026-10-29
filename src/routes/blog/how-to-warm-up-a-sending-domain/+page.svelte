@@ -8,7 +8,8 @@
 		TldrList,
 		Callout,
 		Faq,
-		FaqItem
+		FaqItem,
+		ProductNote
 	} from '$lib/components/blog';
 </script>
 
@@ -66,6 +67,8 @@
 		fifty thousand from the same new domain are alarming, and overshooting earns deferrals, rate-limiting,
 		or in the worst case a blocklist that takes months to get removed from.
 	</Paragraph>
+
+	<ProductNote />
 
 	<Heading level={2}>Who needs to warm up</Heading>
 

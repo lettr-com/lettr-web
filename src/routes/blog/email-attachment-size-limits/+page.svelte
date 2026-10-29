@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { BlogPost, Lead, Heading, Paragraph, List, TldrList, Callout, Faq, FaqItem } from '$lib/components/blog';
+	import { BlogPost, Lead, Heading, Paragraph, List, TldrList, Callout, Faq, FaqItem, ProductNote } from '$lib/components/blog';
 </script>
 
 <BlogPost
@@ -88,6 +88,8 @@
 		own ceiling. The consumer figures above are the safe assumption when the recipient is unknown,
 		since a file that fits Gmail and Outlook fits almost everywhere.
 	</Paragraph>
+
+	<ProductNote />
 
 	<Heading level={2}>Why the limits exist and what counts toward them</Heading>
 

@@ -1,6 +1,10 @@
 node_modules
 
 # Output
+# Untouched image-model output, kept to re-process sprites without paying again
+/tools/blog-images/raw
+# Sprite candidates waiting for review (tools/blog-images/new-object.mjs --candidate)
+/tools/blog-images/candidates
 .output
 .vercel
 .netlify

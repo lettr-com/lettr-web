@@ -267,6 +267,387 @@
     margin-top: 2.25rem;
   }
 
+  /* Blog art hover (ArtImage.svelte). The object layer moves over a still
+     ground when its card, or the art itself, is hovered or focused. Each object
+     has its own motion (objectMotion in src/lib/blog/art.ts) and some throw a
+     burst of dither sprinkles (objectSprinkles). Every motion ends where it
+     started, so leaving mid-way never snaps; none run for reduced motion. */
+  .art {
+    container-type: inline-size;
+  }
+
+  .art-object {
+    transform-origin: var(--art-pivot, 50% 50%);
+    transition-property: rotate, scale, translate;
+    transition-duration: 450ms;
+    transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  /* A key in a lock: it levels out, then turns twice on its own axis. */
+  :is(.group:hover, .group:focus-visible) .art-lock .art-object,
+  .art-lock:hover .art-object {
+    animation: art-lock 2000ms linear;
+  }
+
+  /* A check confirming: a small pop that overshoots and settles. */
+  :is(.group:hover, .group:focus-visible) .art-pop .art-object,
+  .art-pop:hover .art-object {
+    scale: 1.07;
+    transition-timing-function: cubic-bezier(0.34, 1.8, 0.64, 1);
+  }
+
+  /* An envelope being picked up. */
+  :is(.group:hover, .group:focus-visible) .art-lift .art-object,
+  .art-lift:hover .art-object {
+    translate: 0 -6%;
+    rotate: -3deg;
+    transition-delay: 60ms;
+  }
+
+  /* A globe turning a little toward the reader. */
+  :is(.group:hover, .group:focus-visible) .art-turn .art-object,
+  .art-turn:hover .art-object {
+    rotate: -10deg;
+    transition-delay: 90ms;
+  }
+
+  /* A paper plane: out through the top, back in from the bottom. */
+  :is(.group:hover, .group:focus-visible) .art-swoosh .art-object,
+  .art-swoosh:hover .art-object {
+    animation: art-swoosh 1100ms;
+  }
+
+  /* An @ that can't keep still. */
+  :is(.group:hover, .group:focus-visible) .art-wiggle .art-object,
+  .art-wiggle:hover .art-object {
+    animation: art-wiggle 650ms ease-in-out;
+  }
+
+  /* A bell ringing: it swings from its hanger. */
+  :is(.group:hover, .group:focus-visible) .art-swing .art-object,
+  .art-swing:hover .art-object {
+    animation: art-swing 800ms ease-in-out;
+  }
+
+  /* A padlock being tried: a short sideways rattle. */
+  :is(.group:hover, .group:focus-visible) .art-shake .art-object,
+  .art-shake:hover .art-object {
+    animation: art-shake 420ms ease-in-out;
+  }
+
+  /* An alarm clock going off. */
+  :is(.group:hover, .group:focus-visible) .art-ring .art-object,
+  .art-ring:hover .art-object {
+    animation: art-ring 700ms linear;
+  }
+
+  /* A cursor clicking: press, release, and the click throws sprinkles. */
+  :is(.group:hover, .group:focus-visible) .art-click .art-object,
+  .art-click:hover .art-object {
+    animation: art-click 600ms linear;
+  }
+
+  /* A plug pushed home, sparking at the prongs. */
+  :is(.group:hover, .group:focus-visible) .art-spark .art-object,
+  .art-spark:hover .art-object {
+    animation: art-spark 600ms cubic-bezier(0.3, 0, 0.2, 1);
+  }
+
+  /* A chart's bars growing from the baseline. */
+  :is(.group:hover, .group:focus-visible) .art-grow .art-object,
+  .art-grow:hover .art-object {
+    animation: art-grow 750ms cubic-bezier(0.3, 0, 0.2, 1);
+  }
+
+  /* A megaphone blasting: a recoil and a cone of sprinkles out of its mouth. */
+  :is(.group:hover, .group:focus-visible) .art-blast .art-object,
+  .art-blast:hover .art-object {
+    animation: art-blast 600ms cubic-bezier(0.3, 0, 0.2, 1);
+  }
+
+  /* A stamp catching the light: a band passes through the dither itself,
+     played from a strip of pre-rendered frames. 8 = sweepFrames in art.ts. */
+  .art-frames {
+    visibility: hidden;
+    background-repeat: no-repeat;
+    background-size: 100% calc(var(--art-frames) * 100%);
+  }
+
+  :is(.group:hover, .group:focus-visible) .art-frames,
+  .art:hover .art-frames {
+    visibility: visible;
+    animation: art-sweep 720ms steps(8, jump-none);
+  }
+
+  /* Sprinkles: pixel squares two dither cells wide, thrown from a point and
+     stepping out in a few jumps, the way dither would. */
+  .art-sprinkles {
+    position: absolute;
+    width: 0;
+    height: 0;
+  }
+
+  .art-sprinkle {
+    position: absolute;
+    left: calc(var(--art-cell) * -1);
+    top: calc(var(--art-cell) * -1);
+    width: calc(var(--art-cell) * 2);
+    height: calc(var(--art-cell) * 2);
+    opacity: 0;
+  }
+
+  :is(.group:hover, .group:focus-visible) .art-sprinkle,
+  .art:hover .art-sprinkle {
+    /* jump-start: the first step is already outward, so the burst leaves the moment it starts. */
+    animation: art-sprinkle 480ms steps(5, jump-start);
+    animation-delay: calc(var(--sprinkle-delay, 0ms) + var(--delay, 0ms));
+  }
+
+  .art-click {
+    /* The moment the press bottoms out: 18% of the 600ms click. */
+    --sprinkle-delay: 108ms;
+  }
+
+  .art-spark {
+    --sprinkle-delay: 150ms;
+  }
+
+  .art-blast {
+    --sprinkle-delay: 120ms;
+  }
+
+  .art-pop {
+    --sprinkle-delay: 80ms;
+  }
+
+  /* Each step eases in and out on its own, so the key settles between turns. */
+  @keyframes art-lock {
+    0% {
+      transform: perspective(900px) rotateX(0deg) rotate(0deg);
+      animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    28% {
+      transform: perspective(900px) rotateX(0deg) rotate(var(--art-level));
+      animation-timing-function: cubic-bezier(0.45, 0, 0.55, 1);
+    }
+    44% {
+      transform: perspective(900px) rotateX(38deg) rotate(var(--art-level));
+      animation-timing-function: cubic-bezier(0.45, 0, 0.55, 1);
+    }
+    56% {
+      transform: perspective(900px) rotateX(0deg) rotate(var(--art-level));
+      animation-timing-function: cubic-bezier(0.45, 0, 0.55, 1);
+    }
+    70% {
+      transform: perspective(900px) rotateX(38deg) rotate(var(--art-level));
+      animation-timing-function: cubic-bezier(0.45, 0, 0.55, 1);
+    }
+    80% {
+      transform: perspective(900px) rotateX(0deg) rotate(var(--art-level));
+      animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    100% {
+      transform: perspective(900px) rotateX(0deg) rotate(0deg);
+    }
+  }
+
+  @keyframes art-swoosh {
+    0% {
+      translate: 0 0;
+      rotate: 0deg;
+      animation-timing-function: cubic-bezier(0.5, 0, 0.9, 0.4);
+    }
+    42% {
+      translate: 55% -115%;
+      rotate: -14deg;
+    }
+    42.01% {
+      translate: -55% 115%;
+      rotate: -14deg;
+      animation-timing-function: cubic-bezier(0.15, 0.7, 0.3, 1);
+    }
+    100% {
+      translate: 0 0;
+      rotate: 0deg;
+    }
+  }
+
+  @keyframes art-wiggle {
+    20% {
+      rotate: -7deg;
+    }
+    45% {
+      rotate: 6deg;
+    }
+    70% {
+      rotate: -3deg;
+    }
+    85% {
+      rotate: 1.5deg;
+    }
+  }
+
+  @keyframes art-swing {
+    20% {
+      rotate: 9deg;
+    }
+    45% {
+      rotate: -7deg;
+    }
+    65% {
+      rotate: 4deg;
+    }
+    85% {
+      rotate: -2deg;
+    }
+  }
+
+  @keyframes art-shake {
+    20% {
+      translate: -2.5% 0;
+    }
+    40% {
+      translate: 2.5% 0;
+    }
+    60% {
+      translate: -1.5% 0;
+    }
+    80% {
+      translate: 1% 0;
+    }
+  }
+
+  @keyframes art-ring {
+    10%,
+    30%,
+    50%,
+    70% {
+      rotate: -5deg;
+    }
+    20%,
+    40%,
+    60%,
+    80% {
+      rotate: 5deg;
+    }
+    90% {
+      rotate: -2deg;
+    }
+  }
+
+  @keyframes art-click {
+    0% {
+      scale: 1;
+      animation-timing-function: cubic-bezier(0.5, 0, 0.75, 0.4);
+    }
+    18% {
+      scale: 0.93;
+      animation-timing-function: cubic-bezier(0.2, 0.6, 0.35, 1);
+    }
+    55% {
+      scale: 1.015;
+      animation-timing-function: cubic-bezier(0.45, 0, 0.55, 1);
+    }
+    100% {
+      scale: 1;
+    }
+  }
+
+  @keyframes art-spark {
+    25% {
+      translate: 3% -3%;
+    }
+    40% {
+      translate: 1% -1%;
+    }
+    55% {
+      translate: 2% -2%;
+    }
+  }
+
+  @keyframes art-grow {
+    25% {
+      scale: 1 0.72;
+    }
+    60% {
+      scale: 1 1.1;
+    }
+    80% {
+      scale: 1 0.97;
+    }
+  }
+
+  @keyframes art-blast {
+    20% {
+      scale: 0.93;
+      rotate: 3deg;
+    }
+    45% {
+      scale: 1.08;
+      rotate: -3deg;
+    }
+    70% {
+      scale: 0.99;
+      rotate: 0deg;
+    }
+  }
+
+  @keyframes art-sweep {
+    from {
+      background-position: 0 0;
+    }
+    to {
+      background-position: 0 100%;
+    }
+  }
+
+  @keyframes art-sprinkle {
+    0% {
+      opacity: 1;
+      translate: 0 0;
+    }
+    70% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+      translate: var(--dx) var(--dy);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .art .art-object {
+      transition: none;
+      animation: none !important;
+      rotate: none !important;
+      scale: none !important;
+      translate: none !important;
+    }
+
+    .art :is(.art-frames, .art-sprinkles) {
+      display: none;
+    }
+  }
+
+  /* Article rhythm (BlogPost only; glossary pages keep the .blog-prose spacing).
+     Tighter between paragraphs, more air before a section, and a heading stays
+     close to the text it introduces. */
+  .article-prose > * + * {
+    margin-top: 1.25rem;
+  }
+
+  .article-prose > h2 {
+    margin-top: 2.75rem;
+  }
+
+  .article-prose > h3 {
+    margin-top: 2rem;
+  }
+
+  .article-prose > :is(h2, h3) + * {
+    margin-top: 0.875rem;
+  }
+
   .blog-prose a {
     color: var(--color-primary);
     text-decoration: underline;

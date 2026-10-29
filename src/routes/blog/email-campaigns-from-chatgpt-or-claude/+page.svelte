@@ -8,7 +8,8 @@
 		TldrList,
 		Callout,
 		Faq,
-		FaqItem
+		FaqItem,
+		ProductNote
 	} from '$lib/components/blog';
 
 	// Single source for the visible FAQ and the FAQPage structured data.
@@ -119,6 +120,8 @@
 		such as Claude Code, Cursor, and GitHub Copilot. API keys are for unattended automation, which
 		<a href="/blog/lettr-mcp-server-tools/">our MCP server article</a> covers.
 	</Callout>
+
+	<ProductNote />
 
 	<Heading level={2}>How did the campaign perform?</Heading>
 

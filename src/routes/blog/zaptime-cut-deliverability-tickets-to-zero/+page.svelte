@@ -8,7 +8,8 @@
 		Quote,
 		Callout,
 		Faq,
-		FaqItem
+		FaqItem,
+		ProductNote
 	} from '$lib/components/blog';
 </script>
 
@@ -81,6 +82,8 @@
 		teams, and its EU data residency did not meet the needs of a customer base that is mostly
 		European.
 	</Paragraph>
+
+	<ProductNote />
 
 	<Heading level={2}>The solution: one platform for booking emails and marketing</Heading>
 

@@ -8,7 +8,8 @@
 		TldrList,
 		Callout,
 		Faq,
-		FaqItem
+		FaqItem,
+		ProductNote
 	} from '$lib/components/blog';
 
 	// Single source for the visible FAQ and the FAQPage structured data.
@@ -106,6 +107,8 @@
 			of the text, and the campaign setup stays the same.
 		</li>
 	</List>
+
+	<ProductNote />
 
 	<Heading level={2}>One campaign instead of one per language</Heading>
 
