@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
+	import { createFramePacer } from '$lib/utils/framePacer';
 	import {
 		bayer8 as BAYER,
 		designCenter,
@@ -76,16 +77,13 @@
 		const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 		let start = performance.now();
 
-		// The drift is slow, so ~30 redraws a second look the same as one per display frame.
-		// The slack keeps a 60 Hz screen on every second frame despite timing jitter.
-		const minFrameGap = 1000 / 30 - 4;
+		const pacer = createFramePacer();
 		// Main-thread ms per frame above which the device is too slow for the live field and the
 		// still underneath is kept. Judged on the median of the frames after a short warm-up, so
 		// a single slow frame (a GC pause, the page still busy loading) cannot trip it.
 		const frameBudget = 8;
 		const warmupFrames = 10;
 		const budgetFrames = 60;
-		let lastDraw = -Infinity;
 		let drawn = 0;
 		const frameCosts: number[] = [];
 
@@ -307,11 +305,10 @@
 		}
 
 		function render(now: number) {
-			if (running && now - lastDraw < minFrameGap) {
+			if (running && !pacer.shouldDraw(now)) {
 				raf = requestAnimationFrame(render);
 				return;
 			}
-			lastDraw = now;
 			const began = performance.now();
 			const t = reducedMotion ? 0 : (now - start) / 1000;
 			drawScene(t);
@@ -368,6 +365,7 @@
 			const next = isReady && !reducedMotion && visible && !document.hidden;
 			if (next === running) return;
 			running = next;
+			pacer.reset();
 			if (running) raf = requestAnimationFrame(render);
 			else cancelAnimationFrame(raf);
 		}
