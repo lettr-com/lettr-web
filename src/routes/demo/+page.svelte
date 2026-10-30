@@ -439,7 +439,7 @@
 	{@html jsonLdScript(basicPageJsonLd({ path: '/demo/', name: 'Book a Demo' }))}
 </svelte:head>
 
-<section class="border-b border-border/30 pb-16 pt-30">
+<section class="border-b border-border/30 pb-16 pt-page">
 	<div bind:this={section} class="space-y-5">
 		{#if isConfirmed}
 			<BookingSuccessCard

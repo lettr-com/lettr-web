@@ -121,7 +121,7 @@
 	</li>
 {/snippet}
 
-<section class="mx-auto pt-24 pb-24 md:pt-32 {wide ? 'max-w-none' : 'max-w-[848px]'}">
+<section class="mx-auto pt-page pb-24 {wide ? 'max-w-none' : 'max-w-[848px]'}">
 	<header class="flex flex-col gap-5 pb-6 md:flex-row md:items-end md:justify-between md:gap-8 md:pb-7">
 		<div>
 			<h1 class="text-[30px] leading-[1.2] tracking-[-0.02em] text-surface md:text-[40px] md:leading-[1.15]">

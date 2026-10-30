@@ -819,6 +819,15 @@
     --tw-gradient-via, --tw-gradient-to, --fade-bg;
 }
 
+/* Where a page's first content starts, measured from the top of the page. */
+@utility pt-page {
+  padding-top: 6rem;
+
+  @media (width >= 48rem) {
+    padding-top: 8rem;
+  }
+}
+
 /* Full-bleed band inside the 1200px page frame. Pages that use it clip the
    scrollbar's width of overflow that 100vw leaves on the root. */
 @utility bleed {

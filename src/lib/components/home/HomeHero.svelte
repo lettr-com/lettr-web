@@ -52,7 +52,7 @@
 
 </style>
 
-<section id="hero" class="relative -mx-6 overflow-hidden border-b border-border/30 px-6 pt-16 pb-0 md:pt-32">
+<section id="hero" class="relative -mx-6 overflow-hidden border-b border-border/30 px-6 pt-page pb-0">
 	<div class="pointer-events-none absolute -top-48 left-1/2 h-[360px] w-[min(1100px,140%)] -translate-x-1/2 bg-primary opacity-35 blur-[130px]" aria-hidden="true"></div>
 
 	<div class="relative mx-auto flex max-w-[820px] flex-col items-center text-center">

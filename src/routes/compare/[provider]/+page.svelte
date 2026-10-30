@@ -96,7 +96,7 @@
 	)}
 </svelte:head>
 
-<section class="pt-32 pb-24">
+<section class="pt-page pb-24">
 		<!-- Back Link -->
 		<a
 			href="/compare/"

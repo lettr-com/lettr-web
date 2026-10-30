@@ -57,7 +57,7 @@
 	)}
 </svelte:head>
 
-<section class="pt-32 pb-24">
+<section class="pt-page pb-24">
 	<div bind:this={hero} class="text-center">
 		<span data-animate class="mb-4 inline-block font-heading text-xs tracking-[0.15em] text-primary uppercase">
 			{label}

@@ -116,7 +116,7 @@
 	{@html jsonLdScript(basicPageJsonLd({ path: '/support/', name: 'Support & Contact' }))}
 </svelte:head>
 
-<section class="pt-32 pb-24">
+<section class="pt-page pb-24">
 	<!-- Hero -->
 	<div bind:this={hero} class="text-center">
 		<span

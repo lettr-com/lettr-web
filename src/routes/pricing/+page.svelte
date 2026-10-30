@@ -46,7 +46,7 @@
 	)}
 </svelte:head>
 
-<section class="pt-24 pb-10 md:pb-14 min-[1200px]:pt-[98px]">
+<section class="pt-page pb-10 md:pb-14">
 	<div class="mx-auto flex max-w-[700px] flex-col items-center gap-5 text-center md:gap-6">
 		<h1 class="m-0 flex flex-col items-center font-heading text-[clamp(2rem,10.2vw,2.5rem)] leading-[1.1] font-normal tracking-[-0.025em] text-surface md:text-[3.75rem] md:leading-[66px]">
 			Email API pricing

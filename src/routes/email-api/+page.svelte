@@ -232,7 +232,7 @@ Lettr::emails()->sendHtml(
 	)}
 </svelte:head>
 
-<section bind:this={hero} class="pt-30 pb-16 border-b border-border/30">
+<section bind:this={hero} class="pt-page pb-16 border-b border-border/30">
 	<div class="grid gap-12 lg:grid-cols-1">
 		<div class="flex flex-col">
 			<h1 data-animate class="text-surface mb-4">

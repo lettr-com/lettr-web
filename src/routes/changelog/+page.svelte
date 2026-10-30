@@ -43,7 +43,7 @@
 	{@html jsonLdScript(indexJsonLd(data.month))}
 </svelte:head>
 
-<section id="top" class="pt-32 pb-24">
+<section id="top" class="pt-page pb-24">
 	<div bind:this={header}>
 		<span
 			data-animate
