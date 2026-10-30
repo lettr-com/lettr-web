@@ -12,13 +12,9 @@
 		FaqItem,
 		ProductNote
 	} from '$lib/components/blog';
+	import type { PageProps } from './$types';
 
-	const clientConfig = `{
-  "url": "https://app.lettr.com/mcp",
-  "headers": {
-    "Authorization": "Bearer lttr_xxxxxxxxx"
-  }
-}`;
+	let { data }: PageProps = $props();
 
 	// Single source for the visible FAQ and the FAQPage structured data.
 	const faqItems = [
@@ -92,7 +88,7 @@
 		needs the server URL and the key in an Authorization header:
 	</Paragraph>
 
-	<Code lang="json" filename="mcp.json" code={clientConfig} />
+	<Code filename="mcp.json" {...data.code.clientConfig} />
 
 	<Paragraph>
 		Anyone who can read a client config file can use the key in it, so

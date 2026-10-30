@@ -12,6 +12,9 @@
 		FaqItem,
 		ProductNote
 	} from '$lib/components/blog';
+	import type { PageProps } from './$types';
+
+	let { data }: PageProps = $props();
 
 	const topolServerless = `service: topol-app
 
@@ -84,19 +87,6 @@ functions:
         runtime: php-85-console
         events:
             - schedule: { rate: rate(1 minute), input: '"schedule:run"' }`;
-
-	const webhookHandler = `return new class extends S3Handler
-{
-    public function handleS3(S3Event $event, Context $context): void
-    {
-        foreach ($event->getRecords() as $record) {
-            app(ProcessWebhookBatch::class)(
-                $record->getBucket()->getName(),
-                urldecode($record->getObject()->getKey()),
-            );
-        }
-    }
-};`;
 </script>
 
 <BlogPost
@@ -248,7 +238,7 @@ functions:
 		object. The handler is forty lines:
 	</Paragraph>
 
-	<Code lang="php" filename="handlers/webhooks.php" code={webhookHandler} />
+	<Code filename="handlers/webhooks.php" {...data.code.webhookHandler} />
 
 	<Paragraph>
 		<strong>Scheduler.</strong> One console function runs <code>schedule:run</code> every minute,

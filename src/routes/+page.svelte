@@ -9,11 +9,14 @@
 	import FrameworkSection from '$lib/components/home/FrameworkSection.svelte';
 	import BrandSection from '$lib/components/home/BrandSection.svelte';
 	import PricingSlider from '$lib/components/home/PricingSlider.svelte';
+	import type { PageProps } from './$types';
+
+	let { data }: PageProps = $props();
 </script>
 
 <HomeHero />
 <ProofStrip />
-<DevTeamsSection />
+<DevTeamsSection codeTabs={data.codeTabs} />
 <MarqueeBand />
 <SendingLanesSection />
 <BrandSection />

@@ -1,22 +1,17 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
-	import { getHighlighter } from '$lib/utils/shiki';
-
 	interface Props {
 		code: string;
-		/** A language loaded by the shiki highlighter; `ts` and `text` are accepted aliases. */
+		/** Shown as the label when there is no filename; `text` shows none. */
 		lang?: string;
 		filename?: string;
+		/** `code` highlighted at prerender time (`highlightCode` in the page's server load); without it the code shows uncoloured. */
+		html?: string;
 	}
 
-	let { code, lang = 'bash', filename }: Props = $props();
+	let { code, lang = 'bash', filename, html }: Props = $props();
 
-	const aliases: Record<string, string> = { ts: 'typescript', js: 'javascript', sh: 'bash' };
-	const supported = ['php', 'javascript', 'typescript', 'json', 'python', 'go', 'ruby', 'java', 'bash', 'shell'];
-	const grammar = $derived(aliases[lang] ?? lang);
 	const label = $derived(filename ?? (lang === 'text' ? '' : lang));
 
-	let highlighted: string = $state('');
 	let copied = $state(false);
 
 	async function copy() {
@@ -28,13 +23,6 @@
 			copied = false;
 		}
 	}
-
-	onMount(() => {
-		if (!supported.includes(grammar)) return;
-		getHighlighter().then((hl) => {
-			highlighted = hl.codeToHtml(code.trim(), { lang: grammar, theme: 'lettr' });
-		});
-	});
 </script>
 
 <div class="bg-surface">
@@ -50,11 +38,11 @@
 		</button>
 	</div>
 	<div class="overflow-x-auto p-4">
-		{#if highlighted}
+		{#if html}
 			<div
 				class="font-code [&_code]:!text-[14px] [&_code]:!leading-[1.65] [&_pre]:!bg-transparent [&_pre]:!p-0 [&_pre]:!leading-[1.65]"
 			>
-				{@html highlighted}
+				{@html html}
 			</div>
 		{:else}
 			<pre class="font-code text-[14px] leading-[1.65] text-gray-100"><code>{code.trim()}</code></pre>
