@@ -37,7 +37,7 @@
 	/** The fade-out of the latest tab switch. */
 	let codeSwap: Animation | undefined;
 
-	const tabPadding = $derived(copyable ? 'px-4' : 'px-8');
+	const tabPadding = $derived(copyable ? 'px-4' : 'px-8 narrow:px-6');
 
 	let isMoreActive = $derived(moreTabIndices.includes(activeTab));
 
