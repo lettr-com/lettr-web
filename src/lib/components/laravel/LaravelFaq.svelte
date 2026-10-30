@@ -1,7 +1,5 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
 	import { capturePosthogEvent } from '$lib/analytics/posthog';
-	import { createScrollRevealCleanup } from '$lib/utils/reveal';
 	import { laravelFaqs } from '$lib/laravel/faqs';
 
 	interface Props {
@@ -11,7 +9,6 @@
 
 	let { highlighted }: Props = $props();
 
-	let section: HTMLElement | undefined = $state();
 	let openIndex: number | null = $state(0);
 
 	function toggle(i: number) {
@@ -24,18 +21,13 @@
 			opened: !wasOpen
 		});
 	}
-
-	onMount(() => {
-		if (!section) return;
-		return createScrollRevealCleanup({ scope: section, targets: '[data-reveal]' });
-	});
 </script>
 
-<section bind:this={section} id="faq" aria-labelledby="faq-heading" class="bleed bg-white">
+<section id="faq" aria-labelledby="faq-heading" class="bleed bg-white">
 	<!-- Same frame as the page layout, so its side borders run through the band. -->
 	<div class="mx-auto max-w-[1200px] border-x border-border/30 px-6 narrow:max-w-none narrow:border-x-0">
 		<div class="mx-auto flex w-full max-w-[1100px] flex-col gap-10 py-16 md:pt-32 md:pb-36 lg:flex-row lg:gap-20">
-			<div data-reveal class="flex flex-col lg:w-[420px] lg:shrink-0">
+			<div class="flex flex-col lg:w-[420px] lg:shrink-0">
 				<h2
 					id="faq-heading"
 					class="m-0 pb-8 font-heading text-[1.875rem] leading-[38px] text-balance tracking-[-0.02em] text-surface md:pb-10 md:text-[2.625rem] md:leading-[50px]"
@@ -73,7 +65,7 @@
 				</aside>
 			</div>
 
-			<div data-reveal class="grow border-t border-surface" data-markdown="faq">
+			<div class="grow border-t border-surface" data-markdown="faq">
 				{#each laravelFaqs as faq, i}
 					{@const open = openIndex === i}
 					<div class="border-b border-[#e5e7eb]">

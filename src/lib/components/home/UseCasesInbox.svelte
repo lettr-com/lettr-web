@@ -1,14 +1,10 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
 	import UserPlusIcon from 'phosphor-svelte/lib/UserPlusIcon';
 	import LockKeyIcon from 'phosphor-svelte/lib/LockKeyIcon';
 	import HourglassHighIcon from 'phosphor-svelte/lib/HourglassHighIcon';
 	import BellIcon from 'phosphor-svelte/lib/BellIcon';
 	import MegaphoneIcon from 'phosphor-svelte/lib/MegaphoneIcon';
 	import RocketLaunchIcon from 'phosphor-svelte/lib/RocketLaunchIcon';
-	import { createScrollRevealCleanup } from '$lib/utils/reveal';
-
-	let section: HTMLElement | undefined = $state();
 
 	const useCases = [
 		{ icon: UserPlusIcon, title: 'Onboarding sequences', sender: 'Looplex', subject: 'Welcome to Looplex, Sarah', badge: 'Day 1 of 5', time: '12:40' },
@@ -18,22 +14,17 @@
 		{ icon: MegaphoneIcon, title: 'Product updates & changelogs', sender: 'Pilot', subject: "What's new in Pilot: September", badge: 'No deploy required', time: 'Yesterday' },
 		{ icon: RocketLaunchIcon, title: 'Feature announcements', sender: 'Meridian', subject: 'Introducing AI commands (Pro)', badge: 'Targeted by usage', time: 'Yesterday' }
 	];
-
-	onMount(() => {
-		if (!section) return;
-		return createScrollRevealCleanup({ scope: section, targets: '[data-reveal]' });
-	});
 </script>
 
-<section bind:this={section} class="border-b border-border/30 py-20">
-	<div data-reveal class="mb-10 max-w-[720px]">
+<section class="border-b border-border/30 py-20">
+	<div class="mb-10 max-w-[720px]">
 		<h2 class="home-section-heading mb-4 text-surface">
 			Built for the emails <span class="block text-primary">SaaS companies actually send.</span>
 		</h2>
 		<p class="text-body text-muted">Designed for the emails your product already sends.</p>
 	</div>
 
-	<div data-reveal class="border border-border/40 bg-white">
+	<div class="border border-border/40 bg-white">
 		<div class="flex items-center justify-between border-b border-border/30 px-5 py-3 text-sm text-muted">
 			<span class="font-medium text-surface">Inbox</span>
 			<span>6 templates, one account</span>

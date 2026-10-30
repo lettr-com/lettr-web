@@ -3,7 +3,6 @@
 	import Button from '$lib/components/Button.svelte';
 	import BrandedEmail from './BrandedEmail.svelte';
 	import GetStartedButton from './GetStartedButton.svelte';
-	import { createScrollRevealCleanup } from '$lib/utils/reveal';
 	import { capturePosthogEvent } from '$lib/analytics/posthog';
 	import { brands, type EmailKind } from '$lib/home/brands';
 
@@ -48,11 +47,7 @@
 			{ rootMargin: '900px 0px' }
 		);
 		observer.observe(section);
-		const cleanupReveal = createScrollRevealCleanup({ scope: section, targets: '[data-reveal]' });
-		return () => {
-			observer.disconnect();
-			cleanupReveal?.();
-		};
+		return () => observer.disconnect();
 	});
 </script>
 
@@ -80,7 +75,7 @@
 </style>
 
 <section bind:this={section} aria-labelledby="brand-heading" class="pt-14 pb-14 md:pt-24 md:pb-16">
-	<div data-reveal class="mx-auto mb-10 flex max-w-[860px] flex-col items-center gap-4 text-center md:mb-14">
+	<div class="mx-auto mb-10 flex max-w-[860px] flex-col items-center gap-4 text-center md:mb-14">
 		<h2
 			id="brand-heading"
 			class="font-heading text-balance text-[1.875rem] leading-[1.27] tracking-[-0.02em] text-surface md:text-[2.625rem] md:leading-[50px]"
@@ -93,7 +88,7 @@
 		</p>
 	</div>
 
-	<div data-reveal class="mx-auto flex max-w-[1100px] flex-col items-center gap-8 md:gap-10">
+	<div class="mx-auto flex max-w-[1100px] flex-col items-center gap-8 md:gap-10">
 		<div
 			class="-mx-6 flex w-[calc(100%+3rem)] snap-x snap-mandatory gap-3 overflow-x-auto px-6 pb-2 lg:mx-0 lg:grid lg:w-full lg:snap-none lg:grid-cols-3 lg:gap-4 lg:overflow-visible lg:px-0 lg:pb-0"
 		>

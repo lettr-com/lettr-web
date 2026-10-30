@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
 	import DotsSixVerticalIcon from 'phosphor-svelte/lib/DotsSixVerticalIcon';
 	import SparkleIcon from 'phosphor-svelte/lib/SparkleIcon';
 	import StackIcon from 'phosphor-svelte/lib/StackIcon';
@@ -8,29 +7,7 @@
 	import BracketsAngleIcon from 'phosphor-svelte/lib/BracketsAngleIcon';
 	import FeaturePageLayout from '$lib/components/FeaturePageLayout.svelte';
 	import EditorPreview from '$lib/components/EditorPreview.svelte';
-	import { createScrollRevealCleanup } from '$lib/utils/reveal';
 	import { topolCompanies } from '$lib/data/company';
-
-	let editorSection: HTMLElement | undefined = $state();
-	let featuresSection: HTMLElement | undefined = $state();
-	let gallerySection: HTMLElement | undefined = $state();
-
-	onMount(() => {
-		const cleanups: (() => void)[] = [];
-
-		for (const section of [editorSection, featuresSection, gallerySection]) {
-			if (section) {
-				cleanups.push(
-					createScrollRevealCleanup({
-						scope: section,
-						targets: '[data-reveal]'
-					})
-				);
-			}
-		}
-
-		return () => cleanups.forEach((fn) => fn());
-	});
 
 	const features = [
 		{
@@ -251,22 +228,22 @@
 
 	{#snippet children()}
 		<!-- Editor Mockup -->
-		<div bind:this={editorSection} class="mx-auto">
-			<h2 data-reveal class="mb-8 text-center">Drag-and-drop editor powered by Topol</h2>
-			<div data-reveal>
+		<div class="mx-auto">
+			<h2 class="mb-8 text-center">Drag-and-drop editor powered by Topol</h2>
+			<div>
 				<EditorPreview />
 			</div>
 		</div>
 
 		<!-- Feature Cards -->
-		<div bind:this={featuresSection} class="mx-auto mt-20 md:mt-28">
-			<h2 data-reveal class="mb-3 text-center">Everything your team needs</h2>
-			<p data-reveal class="mx-auto mb-8 max-w-lg text-center text-body text-muted">
+		<div class="mx-auto mt-20 md:mt-28">
+			<h2 class="mb-3 text-center">Everything your team needs</h2>
+			<p class="mx-auto mb-8 max-w-lg text-center text-body text-muted">
 				A complete template toolkit your whole team can use — designers, marketers, and product people. Powered by the Topol editor trusted by {topolCompanies} companies.
 			</p>
 			<div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
 				{#each features as feature}
-					<div data-reveal class="border border-border/50 bg-white p-6">
+					<div class="border border-border/50 bg-white p-6">
 						<div class="mb-3 flex h-10 w-10 items-center justify-center border border-border/50 bg-background">
 							<feature.icon size={20} class="text-primary" />
 						</div>
@@ -278,14 +255,14 @@
 		</div>
 
 		<!-- Template Gallery -->
-		<div bind:this={gallerySection} class="mx-auto mt-20 md:mt-28">
-			<h2 data-reveal class="mb-3 text-center">Start from a template</h2>
-			<p data-reveal class="mx-auto mb-10 max-w-lg text-center text-body text-muted">
+		<div class="mx-auto mt-20 md:mt-28">
+			<h2 class="mb-3 text-center">Start from a template</h2>
+			<p class="mx-auto mb-10 max-w-lg text-center text-body text-muted">
 				Professionally designed SaaS emails — ready to customize for onboarding, billing, authentication, and team workflows.
 			</p>
 			<div class="grid gap-6 sm:grid-cols-2">
 				{#each templates as template}
-					<div data-reveal class="flex flex-col">
+					<div class="flex flex-col">
 						<article class="flex flex-1 flex-col border border-border/50 bg-white transition-colors hover:border-primary/40">
 							<div class="flex-1 p-5 text-[11px] leading-relaxed text-muted">
 								<!-- Category pill + divider -->

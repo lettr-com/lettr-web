@@ -9,7 +9,6 @@
 	import XIcon from 'phosphor-svelte/lib/XIcon';
 	import MinusIcon from 'phosphor-svelte/lib/MinusIcon';
 	import CaretDownIcon from 'phosphor-svelte/lib/CaretDownIcon';
-	import { createScrollRevealCleanup } from '$lib/utils/reveal';
 	import { buildRegisterUrl, registerUrl } from '$lib/utils/utm';
 	import { capturePosthogEvent, trackSignupClick } from '$lib/analytics/posthog';
 	import { jsonLdScript } from '$lib/utils/jsonLd';
@@ -18,12 +17,6 @@
 	const metaDescription =
 		'Thinking of leaving MailerLite? An honest, plain-English look at the best alternatives — Lettr, Brevo, Resend and MailerSend — and how to switch in minutes.';
 
-	let reasonsSection: HTMLElement | undefined = $state();
-	let tableSection: HTMLElement | undefined = $state();
-	let breakdownSection: HTMLElement | undefined = $state();
-	let migrationSection: HTMLElement | undefined = $state();
-	let faqSection: HTMLElement | undefined = $state();
-	let finalCtaSection: HTMLElement | undefined = $state();
 	let registerHref: string = $state(registerUrl);
 	let openFaq: number | null = $state(null);
 
@@ -186,27 +179,6 @@
 	onMount(() => {
 		registerHref = buildRegisterUrl(new URL(window.location.href), document.cookie);
 
-		const cleanups: (() => void)[] = [];
-
-		for (const section of [
-			reasonsSection,
-			tableSection,
-			breakdownSection,
-			migrationSection,
-			faqSection,
-			finalCtaSection
-		]) {
-			if (section) {
-				cleanups.push(
-					createScrollRevealCleanup({
-						scope: section,
-						targets: '[data-reveal]'
-					})
-				);
-			}
-		}
-
-		return () => cleanups.forEach((fn) => fn());
 	});
 </script>
 
@@ -271,17 +243,17 @@
 </section>
 
 <!-- Why people leave -->
-<section bind:this={reasonsSection} class="py-20 border-b border-border/30">
-	<h2 data-reveal class="mb-3 text-surface max-w-[18ch]">
+<section class="py-20 border-b border-border/30">
+	<h2 class="mb-3 text-surface max-w-[18ch]">
 		Why people start looking around
 	</h2>
-	<p data-reveal class="text-body text-muted max-w-[55ch] mb-12">
+	<p class="text-body text-muted max-w-[55ch] mb-12">
 		MailerLite earns its fans for easy newsletters. The friction tends to show up in three places.
 	</p>
 
 	<div class="grid gap-8 sm:grid-cols-3">
 		{#each reasons as reason, i}
-			<div data-reveal>
+			<div>
 				<div class="mb-3 font-code text-sm text-primary">0{i + 1}</div>
 				<h3 class="mb-2 text-base font-semibold text-surface">{reason.title}</h3>
 				<p class="text-sm leading-relaxed text-muted">{reason.body}</p>
@@ -291,15 +263,15 @@
 </section>
 
 <!-- Comparison table -->
-<section bind:this={tableSection} id="comparison" class="py-20 border-b border-border/30">
-	<h2 data-reveal class="mb-3 text-surface max-w-[20ch]">
+<section id="comparison" class="py-20 border-b border-border/30">
+	<h2 class="mb-3 text-surface max-w-[20ch]">
 		The short version
 	</h2>
-	<p data-reveal class="text-body text-muted max-w-[55ch] mb-12">
+	<p class="text-body text-muted max-w-[55ch] mb-12">
 		Just the things that actually decide a switch — no 40-row feature matrix.
 	</p>
 
-	<div data-reveal class="overflow-x-auto border border-border/40 bg-white">
+	<div class="overflow-x-auto border border-border/40 bg-white">
 		<table class="w-full min-w-[720px] border-collapse text-left">
 			<thead>
 				<tr class="border-b border-border/40">
@@ -332,7 +304,7 @@
 			</tbody>
 		</table>
 	</div>
-	<p data-reveal class="mt-4 text-xs text-muted/70">
+	<p class="mt-4 text-xs text-muted/70">
 		Based on publicly documented features and pricing as of 2026; details change. See the full
 		<a href="/compare/resend/" class="text-primary underline underline-offset-2">Lettr vs Resend</a>
 		breakdown for more.
@@ -340,18 +312,17 @@
 </section>
 
 <!-- Per-alternative breakdown -->
-<section bind:this={breakdownSection} class="py-20 border-b border-border/30">
-	<h2 data-reveal class="mb-3 text-surface max-w-[20ch]">
+<section class="py-20 border-b border-border/30">
+	<h2 class="mb-3 text-surface max-w-[20ch]">
 		A quick, honest take on each
 	</h2>
-	<p data-reveal class="text-body text-muted max-w-[55ch] mb-12">
+	<p class="text-body text-muted max-w-[55ch] mb-12">
 		No tool wins for everyone — ours included. Here's where each one shines and where it doesn't.
 	</p>
 
 	<div class="grid gap-4 sm:grid-cols-2">
 		{#each breakdown as option}
 			<div
-				data-reveal
 				class="border bg-white p-6 {option.highlight ? 'border-primary/40' : 'border-border/40'}"
 			>
 				<div class="mb-2 flex items-center gap-3">
@@ -376,7 +347,7 @@
 		{/each}
 	</div>
 
-	<p data-reveal class="mt-8 text-body text-muted max-w-[60ch]">
+	<p class="mt-8 text-body text-muted max-w-[60ch]">
 		The reason most switchers land on Lettr is simple: it sends your transactional and marketing email
 		from <span class="text-surface">one platform</span> — a clean
 		<a class="text-primary underline underline-offset-2" href="/email-api/">developer API</a>
@@ -388,9 +359,9 @@
 </section>
 
 <!-- Migration note -->
-<section bind:this={migrationSection} class="py-20 border-b border-border/30">
+<section class="py-20 border-b border-border/30">
 	<div class="grid gap-12 lg:grid-cols-2 lg:items-center">
-		<div data-reveal>
+		<div>
 			<h2 class="mb-4 text-surface max-w-[16ch]">Switching is mostly a settings change</h2>
 			<p class="text-body text-muted mb-8 max-w-[50ch]">
 				Moving off MailerLite — and MailerSend — doesn't mean rewriting anything. Point your app at
@@ -424,7 +395,7 @@
 			</div>
 		</div>
 
-		<div data-reveal class="border border-border/40 bg-white p-6">
+		<div class="border border-border/40 bg-white p-6">
 			<p class="text-sm leading-relaxed text-muted">
 				<span class="text-surface">The short version:</span> your sending code stays the same. One set
 				of credentials now covers both transactional and marketing, you retire the second MailerSend
@@ -437,12 +408,12 @@
 <TalkToExpert />
 
 <!-- FAQ -->
-<section bind:this={faqSection} class="py-16 border-b border-border/30">
-	<h2 data-reveal class="mb-10 text-surface">A few common questions</h2>
+<section class="py-16 border-b border-border/30">
+	<h2 class="mb-10 text-surface">A few common questions</h2>
 
 	<div class="space-y-0" data-markdown="faq">
 		{#each faqs as faq, i}
-			<div data-reveal class="{i < faqs.length - 1 ? 'border-b border-border/20' : ''}">
+			<div class="{i < faqs.length - 1 ? 'border-b border-border/20' : ''}">
 				<button
 					onclick={() => toggleFaq(i)}
 					class="flex w-full items-center justify-between py-5 text-left"
@@ -464,8 +435,8 @@
 </section>
 
 <!-- Final CTA -->
-<section bind:this={finalCtaSection} class="py-20">
-	<div data-reveal class="flex flex-col items-center text-center">
+<section class="py-20">
+	<div class="flex flex-col items-center text-center">
 		<h2 class="mb-3 text-surface max-w-[16ch]">
 			Both kinds of email, <span class="text-primary">one place.</span>
 		</h2>

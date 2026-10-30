@@ -1,13 +1,9 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
 	import CodeSnippet from '$lib/components/CodeSnippet.svelte';
 	import FeatureAccordion, { type AccordionItem } from './FeatureAccordion.svelte';
 	import EditorPreview from '$lib/components/EditorPreview.svelte';
 	import TooltipWord from '$lib/components/TooltipWord.svelte';
 	import GetStartedButton from './GetStartedButton.svelte';
-	import { createScrollRevealCleanup } from '$lib/utils/reveal';
-
-	let section: HTMLElement | undefined = $state();
 
 	const devItems: AccordionItem[] = [
 		{
@@ -43,15 +39,10 @@
 			description: 'Names, plans, dates: drop them in and each email fills itself in.'
 		}
 	];
-
-	onMount(() => {
-		if (!section) return;
-		return createScrollRevealCleanup({ scope: section, targets: '[data-reveal]' });
-	});
 </script>
 
-<section bind:this={section} id="features" aria-labelledby="dev-teams-heading" class="pt-14 pb-14 md:pt-24 md:pb-16">
-	<div data-reveal class="mx-auto mb-10 flex max-w-[860px] flex-col items-center gap-4 text-center md:mb-14">
+<section id="features" aria-labelledby="dev-teams-heading" class="pt-14 pb-14 md:pt-24 md:pb-16">
+	<div class="mx-auto mb-10 flex max-w-[860px] flex-col items-center gap-4 text-center md:mb-14">
 		<h2
 			id="dev-teams-heading"
 			class="font-heading text-balance text-[1.875rem] leading-[1.27] tracking-[-0.02em] text-surface md:text-[2.625rem] md:leading-[50px]"
@@ -68,7 +59,7 @@
 
 	<div class="mx-auto grid max-w-[1100px] items-start gap-6 lg:grid-cols-2 lg:gap-4">
 		<!-- Developers -->
-		<div data-reveal class="flex min-w-0 flex-col gap-6 md:gap-4">
+		<div class="flex min-w-0 flex-col gap-6 md:gap-4">
 			<div class="relative flex flex-col gap-6 overflow-hidden bg-surface p-6 lg:block lg:h-[560px]">
 				<h3 class="relative font-heading text-[1.75rem] leading-[1.2] tracking-[-0.05em] text-white md:text-[2rem]">
 					Dev integrate.
@@ -85,7 +76,7 @@
 		</div>
 
 		<!-- Teams -->
-		<div data-reveal class="flex min-w-0 flex-col gap-6 md:gap-4">
+		<div class="flex min-w-0 flex-col gap-6 md:gap-4">
 			<div class="relative flex flex-col gap-6 overflow-hidden bg-primary p-6 lg:block lg:h-[560px]">
 				<h3 class="relative font-serif text-4xl leading-[1.2] tracking-[-0.04em] text-white md:text-[2.5rem]">
 					Teams create.
@@ -103,7 +94,7 @@
 		</div>
 	</div>
 
-	<div data-reveal class="mt-10 flex justify-center md:mt-14">
+	<div class="mt-10 flex justify-center md:mt-14">
 		<GetStartedButton placement="home_dev_teams" />
 	</div>
 </section>

@@ -1,12 +1,8 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
 	import ArrowSquareOutIcon from 'phosphor-svelte/lib/ArrowSquareOutIcon';
 	import CodeSnippet from './CodeSnippet.svelte';
 	import TerminalCommand from './TerminalCommand.svelte';
-	import { createScrollRevealCleanup } from '$lib/utils/reveal';
 	import type { CodeTab } from '$lib/utils/shiki';
-
-	let section: HTMLElement | undefined = $state();
 
 	type Framework = 'laravel' | 'nodejs';
 	let activeFramework: Framework = $state('laravel');
@@ -103,19 +99,9 @@ console.log(response.requestId);`,
 		const code = Array.isArray(content) ? content.join('\n') : content;
 		return [{ label: activeLabel, lang: getLang(step), code }];
 	}
-
-	onMount(() => {
-		if (!section) return;
-
-		return createScrollRevealCleanup({
-			scope: section,
-			targets: '[data-step]',
-			stagger: 120
-		});
-	});
 </script>
 
-<section bind:this={section} class="py-16 border-b border-border/30">
+<section class="py-16 border-b border-border/30">
 		<div class="mb-12" data-step>
 			<h2 class="mb-3 text-surface">Integrate <span class="text-primary">in minutes</span></h2>
 			<p class="text-body text-muted">

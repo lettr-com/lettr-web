@@ -1,7 +1,6 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import AnimatedInstallTerminal from './AnimatedInstallTerminal.svelte';
-	import { createScrollRevealCleanup } from '$lib/utils/reveal';
 
 	let section: HTMLElement | undefined = $state();
 	let activeMode: 'devs' | 'teams' = $state('devs');
@@ -16,9 +15,7 @@
 	}
 
 	onMount(() => {
-		if (!section) return;
-		const cleanupReveal = createScrollRevealCleanup({ scope: section, targets: '[data-reveal]' });
-		if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return cleanupReveal;
+		if (!section || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
 		isAutoPlaying = true;
 		let frame: number;
@@ -43,7 +40,6 @@
 		return () => {
 			window.cancelAnimationFrame(frame);
 			observer.disconnect();
-			cleanupReveal();
 		};
 	});
 </script>
@@ -55,13 +51,13 @@
 	onfocusout={() => (isPaused = false)}
 	class="border-b border-border/30 py-20 sm:py-24"
 >
-	<div data-reveal class="mb-10 max-w-[800px]">
+	<div class="mb-10 max-w-[800px]">
 		<h2 id="two-products-heading" class="home-section-heading text-surface">
 			Devs integrate. <span class="block text-primary">Teams create.</span>
 		</h2>
 	</div>
 
-	<div data-reveal class="border border-border/40 bg-background">
+	<div class="border border-border/40 bg-background">
 		<div class="relative grid grid-cols-2 border-b border-border/40">
 			<button
 				type="button"

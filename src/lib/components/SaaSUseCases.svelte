@@ -1,14 +1,10 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
 	import UserPlusIcon from 'phosphor-svelte/lib/UserPlusIcon';
 	import LockKeyIcon from 'phosphor-svelte/lib/LockKeyIcon';
 	import HourglassHighIcon from 'phosphor-svelte/lib/HourglassHighIcon';
 	import BellIcon from 'phosphor-svelte/lib/BellIcon';
 	import MegaphoneIcon from 'phosphor-svelte/lib/MegaphoneIcon';
 	import RocketLaunchIcon from 'phosphor-svelte/lib/RocketLaunchIcon';
-	import { createScrollRevealCleanup } from '$lib/utils/reveal';
-
-	let section: HTMLElement | undefined = $state();
 
 	const useCases = [
 		{
@@ -54,18 +50,9 @@
 			badge: 'Targeted by usage'
 		}
 	];
-
-	onMount(() => {
-		if (!section) return;
-
-		return createScrollRevealCleanup({
-			scope: section,
-			targets: '[data-usecase]'
-		});
-	});
 </script>
 
-<section bind:this={section} class="pt-24 pb-16 border-b border-border/30">
+<section class="pt-24 pb-16 border-b border-border/30">
 		<div class="mb-8" data-usecase>
 			<h2 class="mb-3 text-surface">Built for the emails <span class="text-primary">SaaS companies actually send.</span></h2>
 			<p class="text-body text-muted max-w-[55ch]">

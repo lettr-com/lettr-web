@@ -1,14 +1,11 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
 	import PlayIcon from 'phosphor-svelte/lib/PlayIcon';
 	import { capturePosthogEvent } from '$lib/analytics/posthog';
-	import { createScrollRevealCleanup } from '$lib/utils/reveal';
 
 	const videoId = 'rOOBEdd-1jE';
 	const title = 'Custom Laravel Email Templates with DTOs/Enums: Lettr Example';
 	const watchUrl = `https://www.youtube.com/watch?v=${videoId}`;
 
-	let section: HTMLElement | undefined = $state();
 	let playing = $state(false);
 
 	// YouTube loads only on request, from the no-cookie domain.
@@ -16,16 +13,11 @@
 		playing = true;
 		void capturePosthogEvent('video_played', { placement: 'laravel_video', video_id: videoId });
 	}
-
-	onMount(() => {
-		if (!section) return;
-		return createScrollRevealCleanup({ scope: section, targets: '[data-reveal]' });
-	});
 </script>
 
-<section bind:this={section} aria-labelledby="video-heading" class="bleed bg-[#23020b] text-white">
+<section aria-labelledby="video-heading" class="bleed bg-[#23020b] text-white">
 	<div class="mx-auto flex w-full max-w-[1148px] flex-col gap-8 px-6 py-16 md:gap-10 md:pt-[120px] md:pb-32">
-		<div data-reveal class="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between sm:gap-8">
+		<div class="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between sm:gap-8">
 			<h2
 				id="video-heading"
 				class="m-0 font-heading text-[1.875rem] leading-[38px] text-balance tracking-[-0.02em] text-white md:text-[2.625rem] md:leading-[50px]"
@@ -37,7 +29,7 @@
 			</p>
 		</div>
 
-		<div data-reveal class="relative aspect-video w-full overflow-hidden bg-[#0c111d]">
+		<div class="relative aspect-video w-full overflow-hidden bg-[#0c111d]">
 			{#if playing}
 				<iframe
 					class="absolute inset-0 h-full w-full"

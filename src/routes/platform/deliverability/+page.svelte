@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
 	import ShieldCheckIcon from 'phosphor-svelte/lib/ShieldCheckIcon';
 	import ChartLineUpIcon from 'phosphor-svelte/lib/ChartLineUpIcon';
 	import HardDrivesIcon from 'phosphor-svelte/lib/HardDrivesIcon';
@@ -7,30 +6,7 @@
 	import ListChecksIcon from 'phosphor-svelte/lib/ListChecksIcon';
 	import LockKeyIcon from 'phosphor-svelte/lib/LockKeyIcon';
 	import FeaturePageLayout from '$lib/components/FeaturePageLayout.svelte';
-	import { createScrollRevealCleanup } from '$lib/utils/reveal';
 	import { ecomailOrganizations, emailInfraYears } from '$lib/data/company';
-
-	let scoreSection: HTMLElement | undefined = $state();
-	let dnsSection: HTMLElement | undefined = $state();
-	let blocklistSection: HTMLElement | undefined = $state();
-	let featuresSection: HTMLElement | undefined = $state();
-
-	onMount(() => {
-		const cleanups: (() => void)[] = [];
-
-		for (const section of [scoreSection, dnsSection, blocklistSection, featuresSection]) {
-			if (section) {
-				cleanups.push(
-					createScrollRevealCleanup({
-						scope: section,
-						targets: '[data-reveal]'
-					})
-				);
-			}
-		}
-
-		return () => cleanups.forEach((fn) => fn());
-	});
 
 	const scorePercentage = 99.9;
 	const circumference = 2 * Math.PI * 80;
@@ -130,8 +106,8 @@
 
 	{#snippet children()}
 		<!-- Deliverability Score -->
-		<div bind:this={scoreSection} class="mx-auto max-w-3xl">
-			<div data-reveal class="border border-border/50 bg-white p-8 md:p-12">
+		<div class="mx-auto max-w-3xl">
+			<div class="border border-border/50 bg-white p-8 md:p-12">
 				<div class="flex flex-col items-center gap-8 sm:flex-row sm:gap-12">
 					<div class="shrink-0">
 						<svg width="180" height="180" viewBox="0 0 200 200" class="block">
@@ -191,12 +167,12 @@
 		</div>
 
 		<!-- DNS Setup Card -->
-		<div bind:this={dnsSection} class="mx-auto mt-20 max-w-3xl md:mt-28">
-			<h2 data-reveal class="mb-3 text-center">DNS authentication</h2>
-			<p data-reveal class="mx-auto mb-8 max-w-lg text-center text-body text-muted">
+		<div class="mx-auto mt-20 max-w-3xl md:mt-28">
+			<h2 class="mb-3 text-center">DNS authentication</h2>
+			<p class="mx-auto mb-8 max-w-lg text-center text-body text-muted">
 				All your email authentication records in one place. Guided setup with real-time verification.
 			</p>
-			<div data-reveal class="border border-border/50 bg-white">
+			<div class="border border-border/50 bg-white">
 				<div class="border-b border-border/50 px-5 py-3">
 					<div class="flex items-center gap-2">
 						<span class="font-heading text-sm font-semibold text-surface">DNS Records</span>
@@ -229,14 +205,14 @@
 		</div>
 
 		<!-- Blocklist Monitor -->
-		<div bind:this={blocklistSection} class="mx-auto mt-20 max-w-3xl md:mt-28">
-			<h2 data-reveal class="mb-3 text-center">Blocklist monitoring</h2>
-			<p data-reveal class="mx-auto mb-8 max-w-lg text-center text-body text-muted">
+		<div class="mx-auto mt-20 max-w-3xl md:mt-28">
+			<h2 class="mb-3 text-center">Blocklist monitoring</h2>
+			<p class="mx-auto mb-8 max-w-lg text-center text-body text-muted">
 				Continuous scanning across major blocklists. Get alerted the moment something changes.
 			</p>
 			<div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
 				{#each blocklists as list}
-					<div data-reveal class="flex items-center justify-between border border-border/50 bg-white px-5 py-4">
+					<div class="flex items-center justify-between border border-border/50 bg-white px-5 py-4">
 						<span class="text-sm font-medium text-surface">{list.name}</span>
 						<div class="flex items-center gap-1.5">
 							<div class="h-2 w-2 bg-green-500"></div>
@@ -248,10 +224,10 @@
 		</div>
 
 		<!-- Feature Cards -->
-		<div bind:this={featuresSection} class="mx-auto mt-20 max-w-3xl md:mt-28">
+		<div class="mx-auto mt-20 max-w-3xl md:mt-28">
 			<div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
 				{#each features as feature}
-					<div data-reveal class="border border-border/50 bg-white p-6">
+					<div class="border border-border/50 bg-white p-6">
 						<div class="mb-3 flex h-10 w-10 items-center justify-center border border-border/50 bg-background">
 							<feature.icon size={20} class="text-primary" />
 						</div>

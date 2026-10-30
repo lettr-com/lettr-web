@@ -17,7 +17,6 @@
 <!-- data-entry-title is read by the delegated PostHog handler on the container. -->
 <article
 	{id}
-	data-reveal
 	data-entry-title={entry.title}
 	class="scroll-mt-28 border border-border/50 bg-white p-6 shadow-[0_20px_50px_-45px_rgba(17,24,39,0.6)] md:p-8"
 >

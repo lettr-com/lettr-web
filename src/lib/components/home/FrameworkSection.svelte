@@ -1,11 +1,8 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
 	import TerminalDemo from './TerminalDemo.svelte';
 	import StageGlow from './StageGlow.svelte';
-	import { createScrollRevealCleanup } from '$lib/utils/reveal';
 	import { terminalScripts } from '$lib/home/terminalScripts';
 
-	let section: HTMLElement | undefined = $state();
 	let activeId = $state(terminalScripts[0].id);
 
 	const active = $derived(terminalScripts.find((s) => s.id === activeId) ?? terminalScripts[0]);
@@ -18,15 +15,10 @@
 		activeId = next.id;
 		document.getElementById(`framework-tab-${next.id}`)?.focus();
 	}
-
-	onMount(() => {
-		if (!section) return;
-		return createScrollRevealCleanup({ scope: section, targets: '[data-reveal]' });
-	});
 </script>
 
-<section bind:this={section} aria-labelledby="framework-heading" class="py-14 md:py-24">
-	<div data-reveal class="mx-auto mb-10 flex max-w-[860px] flex-col items-center gap-4 text-center md:mb-14">
+<section aria-labelledby="framework-heading" class="py-14 md:py-24">
+	<div class="mx-auto mb-10 flex max-w-[860px] flex-col items-center gap-4 text-center md:mb-14">
 		<h2
 			id="framework-heading"
 			class="font-heading text-balance text-[1.875rem] leading-[1.27] tracking-[-0.02em] text-surface md:text-[2.625rem] md:leading-[50px]"
@@ -41,7 +33,7 @@
 		</p>
 	</div>
 
-	<div data-reveal class="relative mx-auto max-w-[1100px] overflow-hidden bg-surface px-4 pt-5 sm:px-6">
+	<div class="relative mx-auto max-w-[1100px] overflow-hidden bg-surface px-4 pt-5 sm:px-6">
 		<StageGlow />
 		<div class="relative flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
 			<div role="tablist" aria-label="Framework" class="-mx-1 flex gap-1 overflow-x-auto">

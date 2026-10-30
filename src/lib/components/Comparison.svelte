@@ -1,23 +1,9 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
 	import CodeSnippet from './CodeSnippet.svelte';
-	import { createScrollRevealCleanup } from '$lib/utils/reveal';
-
-	let section: HTMLElement | undefined = $state();
-
-	onMount(() => {
-		if (!section) return;
-
-		return createScrollRevealCleanup({
-			scope: section,
-			targets: '[data-animate]',
-			stagger: 100
-		});
-	});
 </script>
 
-<section bind:this={section} class="-mx-6 px-6 py-16 bg-surface border-b border-white/10">
-		<div class="mb-10" data-animate>
+<section class="-mx-6 px-6 py-16 bg-surface border-b border-white/10">
+		<div class="mb-10">
 			<h2 class="mb-3 text-white">
 				Devs integrate. <span class="text-primary">Teams create.</span>
 			</h2>
@@ -26,7 +12,7 @@
 			</p>
 		</div>
 
-		<div data-animate>
+		<div>
 			<CodeSnippet />
 		</div>
 </section>

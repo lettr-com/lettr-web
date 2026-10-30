@@ -15,7 +15,6 @@
 	import ListChecksIcon from 'phosphor-svelte/lib/ListChecksIcon';
 	import RocketLaunchIcon from 'phosphor-svelte/lib/RocketLaunchIcon';
 	import ArrowRightIcon from 'phosphor-svelte/lib/ArrowRightIcon';
-	import { createScrollRevealCleanup } from '$lib/utils/reveal';
 	import { buildRegisterUrl, registerUrl } from '$lib/utils/utm';
 	import { capturePosthogEvent, trackSignupClick } from '$lib/analytics/posthog';
 	import { jsonLdScript } from '$lib/utils/jsonLd';
@@ -26,14 +25,6 @@
 
 	const DOCS_URL = 'https://docs.lettr.com/introduction';
 
-	let quickStartSection: HTMLElement | undefined = $state();
-	let includedSection: HTMLElement | undefined = $state();
-	let sdkSection: HTMLElement | undefined = $state();
-	let upgradeSection: HTMLElement | undefined = $state();
-	let competitorSection: HTMLElement | undefined = $state();
-	let deliverabilitySection: HTMLElement | undefined = $state();
-	let faqSection: HTMLElement | undefined = $state();
-	let finalCtaSection: HTMLElement | undefined = $state();
 	let registerHref: string = $state(registerUrl);
 	let openFaq: number | null = $state(null);
 
@@ -169,29 +160,6 @@
 	onMount(() => {
 		registerHref = buildRegisterUrl(new URL(window.location.href), document.cookie);
 
-		const cleanups: (() => void)[] = [];
-
-		for (const section of [
-			quickStartSection,
-			includedSection,
-			sdkSection,
-			upgradeSection,
-			competitorSection,
-			deliverabilitySection,
-			faqSection,
-			finalCtaSection
-		]) {
-			if (section) {
-				cleanups.push(
-					createScrollRevealCleanup({
-						scope: section,
-						targets: '[data-reveal]'
-					})
-				);
-			}
-		}
-
-		return () => cleanups.forEach((fn) => fn());
 	});
 </script>
 
@@ -272,9 +240,9 @@
 </section>
 
 <!-- Quick start -->
-<section bind:this={quickStartSection} class="py-20 border-b border-border/30">
+<section class="py-20 border-b border-border/30">
 	<div class="grid gap-12 lg:grid-cols-2 lg:items-center">
-		<div data-reveal>
+		<div>
 			<div class="mb-4 inline-flex items-center gap-2 text-[11px] font-medium tracking-[0.18em] uppercase text-primary/80">
 				<span class="block w-6 h-px bg-primary/60"></span>
 				Quick start
@@ -302,15 +270,15 @@
 			</ol>
 		</div>
 
-		<div data-reveal>
+		<div>
 			<CodeSnippet primaryTabIndices={[2, 5]} moreTabIndices={[0, 1, 3, 4, 6]} shadow={false} />
 		</div>
 	</div>
 </section>
 
 <!-- What's included free -->
-<section bind:this={includedSection} class="py-20 border-b border-border/30">
-	<div class="mb-12" data-reveal>
+<section class="py-20 border-b border-border/30">
+	<div class="mb-12">
 		<div class="mb-4 inline-flex items-center gap-2 text-[11px] font-medium tracking-[0.18em] uppercase text-primary/80">
 			<span class="block w-6 h-px bg-primary/60"></span>
 			What's included free
@@ -325,7 +293,7 @@
 
 	<div class="grid gap-x-8 gap-y-3 sm:grid-cols-2">
 		{#each included as item}
-			<div data-reveal class="flex items-start gap-3 border-b border-border/20 py-3">
+			<div class="flex items-start gap-3 border-b border-border/20 py-3">
 				<CheckIcon size={18} class="mt-0.5 shrink-0 text-primary" />
 				<span class="text-sm text-surface">{item}</span>
 			</div>
@@ -334,8 +302,8 @@
 </section>
 
 <!-- SDKs -->
-<section bind:this={sdkSection} class="py-20 border-b border-border/30">
-	<div class="mb-12" data-reveal>
+<section class="py-20 border-b border-border/30">
+	<div class="mb-12">
 		<div class="mb-4 inline-flex items-center gap-2 text-[11px] font-medium tracking-[0.18em] uppercase text-primary/80">
 			<span class="block w-6 h-px bg-primary/60"></span>
 			SDKs for every language
@@ -352,7 +320,6 @@
 	<div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
 		{#each sdks as sdk}
 			<a
-				data-reveal
 				href={sdk.href}
 				target="_blank"
 				rel="noopener noreferrer"
@@ -372,8 +339,8 @@
 </section>
 
 <!-- Free vs paid -->
-<section bind:this={upgradeSection} class="py-20 border-b border-border/30">
-	<div class="mb-12" data-reveal>
+<section class="py-20 border-b border-border/30">
+	<div class="mb-12">
 		<div class="mb-4 inline-flex items-center gap-2 text-[11px] font-medium tracking-[0.18em] uppercase text-primary/80">
 			<span class="block w-6 h-px bg-primary/60"></span>
 			Free vs. paid
@@ -388,7 +355,7 @@
 	</div>
 
 	<div class="grid gap-5 lg:grid-cols-2">
-		<div data-reveal class="border border-border/40 bg-white p-6">
+		<div class="border border-border/40 bg-white p-6">
 			<div class="mb-4 flex items-center gap-2">
 				<CheckIcon size={18} class="text-primary" />
 				<h3 class="text-base font-semibold text-surface">The free tier is enough when…</h3>
@@ -403,7 +370,7 @@
 			</ul>
 		</div>
 
-		<div data-reveal class="border border-border/40 bg-white p-6">
+		<div class="border border-border/40 bg-white p-6">
 			<div class="mb-4 flex items-center gap-2">
 				<RocketLaunchIcon size={18} class="text-primary" />
 				<h3 class="text-base font-semibold text-surface">Time to upgrade when…</h3>
@@ -419,7 +386,7 @@
 		</div>
 	</div>
 
-	<p data-reveal class="mt-6 text-sm text-muted">
+	<p class="mt-6 text-sm text-muted">
 		See the full breakdown on the
 		<a class="text-primary underline underline-offset-2" href="/pricing/">pricing page</a>, or read how the
 		<a class="text-primary underline underline-offset-2" href="/email-api/">transactional email API</a> works
@@ -428,8 +395,8 @@
 </section>
 
 <!-- Lettr vs other free email APIs -->
-<section bind:this={competitorSection} class="py-20 border-b border-border/30">
-	<div class="mb-12" data-reveal>
+<section class="py-20 border-b border-border/30">
+	<div class="mb-12">
 		<div class="mb-4 inline-flex items-center gap-2 text-[11px] font-medium tracking-[0.18em] uppercase text-primary/80">
 			<span class="block w-6 h-px bg-primary/60"></span>
 			Lettr vs. other free email APIs
@@ -443,7 +410,7 @@
 		</p>
 	</div>
 
-	<div data-reveal class="overflow-x-auto border border-border/40 bg-white">
+	<div class="overflow-x-auto border border-border/40 bg-white">
 		<table class="w-full min-w-[560px] border-collapse text-left">
 			<thead>
 				<tr class="border-b border-border/40">
@@ -480,15 +447,15 @@
 			</tbody>
 		</table>
 	</div>
-	<p data-reveal class="mt-4 text-xs text-muted/70">
+	<p class="mt-4 text-xs text-muted/70">
 		Comparison reflects publicly documented free-tier behavior and may change. AWS and Amazon SES are
 		trademarks of Amazon.com, Inc.
 	</p>
 </section>
 
 <!-- Deliverability -->
-<section bind:this={deliverabilitySection} class="py-20 border-b border-border/30">
-	<div class="mb-12" data-reveal>
+<section class="py-20 border-b border-border/30">
+	<div class="mb-12">
 		<div class="mb-4 inline-flex items-center gap-2 text-[11px] font-medium tracking-[0.18em] uppercase text-primary/80">
 			<span class="block w-6 h-px bg-primary/60"></span>
 			Deliverability built in
@@ -504,7 +471,7 @@
 
 	<div class="grid gap-5 sm:grid-cols-3">
 		{#each deliverability as item}
-			<div data-reveal class="border border-border/40 bg-white p-6">
+			<div class="border border-border/40 bg-white p-6">
 				<div class="mb-4 flex h-10 w-10 items-center justify-center border border-border/50 bg-background">
 					<item.icon size={20} class="text-primary" />
 				</div>
@@ -518,8 +485,8 @@
 <TalkToExpert />
 
 <!-- FAQ -->
-<section bind:this={faqSection} class="py-16 border-b border-border/30">
-	<div class="mb-10" data-reveal>
+<section class="py-16 border-b border-border/30">
+	<div class="mb-10">
 		<div class="mb-4 inline-flex items-center gap-2 text-[11px] font-medium tracking-[0.18em] uppercase text-primary/80">
 			<span class="block w-6 h-px bg-primary/60"></span>
 			FAQ
@@ -532,7 +499,7 @@
 
 	<div class="space-y-0" data-markdown="faq">
 		{#each faqs as faq, i}
-			<div data-reveal class="{i < faqs.length - 1 ? 'border-b border-border/20' : ''}">
+			<div class="{i < faqs.length - 1 ? 'border-b border-border/20' : ''}">
 				<button
 					onclick={() => toggleFaq(i)}
 					class="flex w-full items-center justify-between py-5 text-left"
@@ -558,8 +525,8 @@
 </div>
 
 <!-- Final CTA -->
-<section bind:this={finalCtaSection} class="py-20">
-	<div data-reveal class="flex flex-col items-center text-center">
+<section class="py-20">
+	<div class="flex flex-col items-center text-center">
 		<h2 class="mb-3 text-surface">
 			Get your <span class="text-primary">free API key.</span>
 		</h2>

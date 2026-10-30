@@ -1,8 +1,6 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
 	import GetStartedButton from './GetStartedButton.svelte';
 	import StageGlow from './StageGlow.svelte';
-	import { createScrollRevealCleanup } from '$lib/utils/reveal';
 	import { capturePosthogEvent } from '$lib/analytics/posthog';
 
 	type Target = 'headline' | 'intro' | 'button' | 'image';
@@ -72,11 +70,6 @@
 		selected.target === target
 			? `outline-2 outline-dashed outline-primary ${target === 'image' ? 'outline-offset-0' : 'outline-offset-4'}`
 			: '';
-
-	onMount(() => {
-		if (!section) return;
-		return createScrollRevealCleanup({ scope: section, targets: '[data-reveal]' });
-	});
 </script>
 
 {#snippet tag(target: Target)}
@@ -89,7 +82,7 @@
 {/snippet}
 
 <section bind:this={section} aria-labelledby="versions-heading" class="pt-14 pb-14 md:pt-24 md:pb-16">
-	<div data-reveal class="mx-auto mb-10 flex max-w-[860px] flex-col items-center gap-4 text-center md:mb-14">
+	<div class="mx-auto mb-10 flex max-w-[860px] flex-col items-center gap-4 text-center md:mb-14">
 		<p class="m-0 font-code text-[0.8125rem] leading-4 tracking-[0.08em] text-primary-strong uppercase">Version history</p>
 		<h2
 			id="versions-heading"
@@ -104,7 +97,7 @@
 		</p>
 	</div>
 
-	<div data-reveal class="mx-auto max-w-[1100px]">
+	<div class="mx-auto max-w-[1100px]">
 		<div data-markdown="skip" class="relative overflow-hidden bg-[#23020b] px-5 pt-10 pb-8 md:px-12 lg:h-[516px] lg:pt-12 lg:pb-0">
 			<StageGlow />
 			<div class="relative mx-auto flex max-w-[902px] flex-col gap-10 lg:h-full lg:flex-row lg:items-start lg:gap-7">
@@ -198,7 +191,7 @@
 		</div>
 	</div>
 
-	<div data-reveal class="mt-10 flex justify-center md:mt-14">
+	<div class="mt-10 flex justify-center md:mt-14">
 		<GetStartedButton placement="home_version_history" />
 	</div>
 </section>

@@ -1,12 +1,9 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
 	import { slide } from 'svelte/transition';
 	import CaretDownIcon from 'phosphor-svelte/lib/CaretDownIcon';
-	import { createScrollRevealCleanup } from '$lib/utils/reveal';
 	import { capturePosthogEvent } from '$lib/analytics/posthog';
 	import { faqs } from '$lib/data/faqs';
 
-	let section: HTMLElement | undefined = $state();
 	let openIndex: number | null = $state(null);
 
 	function toggle(i: number) {
@@ -20,14 +17,6 @@
 	}
 
 
-	onMount(() => {
-		if (!section) return;
-
-		return createScrollRevealCleanup({
-			scope: section,
-			targets: '[data-faq]'
-		});
-	});
 </script>
 
 <svelte:head>
@@ -45,7 +34,7 @@
 	})}<\/script>`}
 </svelte:head>
 
-<section bind:this={section} id="faq" class="py-16 border-b border-border/30">
+<section id="faq" class="py-16 border-b border-border/30">
 	<div class="mb-10" data-faq>
 		<h2 class="mb-3 font-medium text-surface">Frequently asked <span class="block text-primary">questions</span></h2>
 		<p class="text-body text-muted max-w-[55ch]">

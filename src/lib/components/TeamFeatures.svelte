@@ -1,13 +1,10 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
 	import ArrowRightIcon from 'phosphor-svelte/lib/ArrowRightIcon';
-	import { createScrollRevealCleanup } from '$lib/utils/reveal';
 
 	type Feature = 'build' | 'translate';
 	type Block = 'text' | 'button' | 'divider';
 	type Language = 'en' | 'de';
 
-	let section: HTMLElement | undefined = $state();
 	let feature = $state<Feature>('build');
 	let selectedBlock = $state<Block>('button');
 	let language = $state<Language>('en');
@@ -38,26 +35,21 @@
 		feature = next;
 		if (next === 'translate') language = 'de';
 	}
-
-	onMount(() => {
-		if (!section) return;
-		return createScrollRevealCleanup({ scope: section, targets: '[data-reveal]' });
-	});
 </script>
 
-<section bind:this={section} class="border-b border-border/30 py-20 sm:py-24">
-	<div data-reveal class="mb-9 max-w-[760px]">
+<section class="border-b border-border/30 py-20 sm:py-24">
+	<div class="mb-9 max-w-[760px]">
 		<h2 class="home-section-heading text-surface">
 			Build visually. <span class="block text-primary">Translate in place.</span>
 		</h2>
 	</div>
 
-	<div data-reveal class="mb-5 flex gap-2" aria-label="Explore editor capabilities">
+	<div class="mb-5 flex gap-2" aria-label="Explore editor capabilities">
 		<button type="button" onclick={() => showFeature('build')} aria-pressed={feature === 'build'} class="min-w-32 border px-5 py-3 text-sm font-semibold transition-colors {feature === 'build' ? 'border-primary bg-primary text-white' : 'border-border/50 bg-white text-surface hover:border-primary'}">Build</button>
 		<button type="button" onclick={() => showFeature('translate')} aria-pressed={feature === 'translate'} class="min-w-32 border px-5 py-3 text-sm font-semibold transition-colors {feature === 'translate' ? 'border-primary bg-primary text-white' : 'border-border/50 bg-white text-surface hover:border-primary'}">Translate</button>
 	</div>
 
-	<div data-reveal class="overflow-hidden border border-border/40 bg-white" aria-label="Interactive Lettr email editor demonstration">
+	<div class="overflow-hidden border border-border/40 bg-white" aria-label="Interactive Lettr email editor demonstration">
 		<div class="flex items-center justify-between gap-4 border-b border-border/40 px-4 py-3 sm:px-6">
 			<div class="flex min-w-0 items-center gap-3"><span class="truncate text-sm font-medium text-surface">Welcome email</span><span class="hidden border border-primary/30 px-2 py-0.5 text-xs text-primary sm:inline">Draft</span></div>
 			<span class="border border-border/40 px-3 py-1.5 text-xs text-surface">Preview</span>
@@ -98,7 +90,7 @@
 		</div>
 	</div>
 
-	<div data-reveal class="mt-6 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+	<div class="mt-6 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
 		<p class="max-w-[46ch] text-sm text-muted sm:text-base" aria-live="polite">{feature === 'build' ? 'Arrange content without touching HTML.' : 'Keep each language in the same template.'}</p>
 		<a href="/platform/templates/" class="inline-flex items-center gap-2 text-sm font-semibold text-primary hover:underline">Explore the editor <ArrowRightIcon size={18} /></a>
 	</div>

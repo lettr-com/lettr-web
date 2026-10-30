@@ -1,15 +1,11 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
 	import PaintBrushIcon from 'phosphor-svelte/lib/PaintBrushIcon';
 	import UsersThreeIcon from 'phosphor-svelte/lib/UsersThreeIcon';
 	import PaperPlaneTiltIcon from 'phosphor-svelte/lib/PaperPlaneTiltIcon';
 	import ChartLineUpIcon from 'phosphor-svelte/lib/ChartLineUpIcon';
 	import ArrowRightIcon from 'phosphor-svelte/lib/ArrowRightIcon';
-	import { createScrollRevealCleanup } from '$lib/utils/reveal';
 	import { capturePosthogEvent } from '$lib/analytics/posthog';
 	import { topolCompanies } from '$lib/data/company';
-
-	let section: HTMLElement | undefined = $state();
 
 	const features = [
 		{
@@ -46,15 +42,10 @@
 			destination_type: /^https?:\/\//.test(href) ? 'external' : 'internal'
 		});
 	}
-
-	onMount(() => {
-		if (!section) return;
-		return createScrollRevealCleanup({ scope: section, targets: '[data-reveal]' });
-	});
 </script>
 
-<section bind:this={section} class="py-16 border-b border-border/30">
-	<div class="mb-10 max-w-[60ch]" data-reveal>
+<section class="py-16 border-b border-border/30">
+	<div class="mb-10 max-w-[60ch]">
 		<span class="mb-4 inline-flex items-center gap-2 border border-primary/20 bg-primary/5 px-2.5 py-1 font-heading text-[10px] tracking-[0.15em] text-primary uppercase">
 			<span class="h-1.5 w-1.5 rounded-full bg-primary"></span>
 			Campaigns
@@ -68,7 +59,7 @@
 		</p>
 	</div>
 
-	<div class="grid gap-3 sm:grid-cols-2" data-reveal>
+	<div class="grid gap-3 sm:grid-cols-2">
 		{#each features as feature}
 			<div class="flex items-start gap-4 border border-border/40 bg-white p-5">
 				<div class="flex h-10 w-10 shrink-0 items-center justify-center border border-border/40 bg-background">
@@ -82,7 +73,7 @@
 		{/each}
 	</div>
 
-	<div class="mt-8 flex flex-col items-start gap-4 border border-border/40 bg-white p-6 sm:flex-row sm:items-center sm:justify-between" data-reveal>
+	<div class="mt-8 flex flex-col items-start gap-4 border border-border/40 bg-white p-6 sm:flex-row sm:items-center sm:justify-between">
 		<div class="max-w-[55ch]">
 			<p class="text-[13px] font-medium text-surface">
 				Your team builds. Engineering keeps shipping.

@@ -2,11 +2,9 @@
 	import { onMount } from 'svelte';
 	import ArrowClockwiseIcon from 'phosphor-svelte/lib/ArrowClockwiseIcon';
 	import { capturePosthogEvent } from '$lib/analytics/posthog';
-	import { createScrollRevealCleanup } from '$lib/utils/reveal';
 
 	type Tag = 'customer_name' | 'order_number' | 'tracking_url';
 
-	let section: HTMLElement | undefined = $state();
 	let terminal: HTMLElement | undefined = $state();
 
 	const mergeTags: { tag: Tag; type: string; sample: string }[] = [
@@ -66,7 +64,6 @@
 	onMount(() => {
 		reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 		const cleanups: (() => void)[] = [];
-		if (section) cleanups.push(createScrollRevealCleanup({ scope: section, targets: '[data-reveal]' }));
 
 		if (terminal && !reduced) {
 			pulledCount = 0;
@@ -109,8 +106,8 @@
 	</span>
 {/snippet}
 
-<section bind:this={section} aria-labelledby="workflow-heading" class="mx-auto max-w-[1100px] py-16 md:pt-[136px] md:pb-32">
-	<div data-reveal class="mb-10 flex flex-col gap-4 md:mb-16 lg:flex-row lg:items-end lg:justify-between lg:gap-16">
+<section aria-labelledby="workflow-heading" class="mx-auto max-w-[1100px] py-16 md:pt-[136px] md:pb-32">
+	<div class="mb-10 flex flex-col gap-4 md:mb-16 lg:flex-row lg:items-end lg:justify-between lg:gap-16">
 		<h2
 			id="workflow-heading"
 			class="m-0 font-heading text-[1.875rem] leading-[38px] text-balance tracking-[-0.02em] text-surface md:text-[2.625rem] md:leading-[50px]"
@@ -125,7 +122,6 @@
 	</div>
 
 	<div
-		data-reveal
 		data-markdown="skip"
 		class="relative grid gap-4 overflow-hidden bg-[linear-gradient(180deg,#23020b_0%,#3a0716_55%,#8e1b33_100%)] p-4 sm:p-8 md:grid-cols-2 md:items-start xl:block xl:h-[600px] xl:p-0"
 	>
