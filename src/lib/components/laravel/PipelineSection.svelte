@@ -1,9 +1,4 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
-	import { createScrollRevealCleanup } from '$lib/utils/reveal';
-
-	let section: HTMLElement | undefined = $state();
-
 	interface Step {
 		command: string[];
 		description: string;
@@ -47,15 +42,10 @@
 			sends: true
 		}
 	];
-
-	onMount(() => {
-		if (!section) return;
-		return createScrollRevealCleanup({ scope: section, targets: '[data-reveal]' });
-	});
 </script>
 
-<section bind:this={section} aria-labelledby="pipeline-heading" class="mx-auto max-w-[1100px] py-16 md:pt-[136px] md:pb-32">
-	<div data-reveal class="mb-10 flex flex-col gap-4 md:mb-[72px] lg:flex-row lg:items-end lg:justify-between lg:gap-16">
+<section aria-labelledby="pipeline-heading" class="mx-auto max-w-[1100px] py-16 md:pt-[136px] md:pb-32">
+	<div class="mb-10 flex flex-col gap-4 md:mb-[72px] lg:flex-row lg:items-end lg:justify-between lg:gap-16">
 		<h2
 			id="pipeline-heading"
 			class="m-0 font-heading text-[1.875rem] leading-[38px] text-balance tracking-[-0.02em] text-surface md:text-[2.625rem] md:leading-[50px]"
@@ -68,7 +58,7 @@
 		</p>
 	</div>
 
-	<ol data-reveal class="m-0 grid list-none border-t border-surface p-0 sm:grid-cols-2 lg:grid-cols-4">
+	<ol class="m-0 grid list-none border-t border-surface p-0 sm:grid-cols-2 lg:grid-cols-4">
 		{#each steps as step, i}
 			<li
 				class="flex flex-col gap-4 border-b border-[#e2d8dc] py-6 sm:gap-5 sm:py-7 lg:border-b-0 {i % 2 === 1 ? 'sm:border-l sm:pl-7' : 'sm:pr-7'} {i > 0 ? 'lg:border-l lg:pl-7' : ''} {i < 3 ? 'lg:pr-7' : ''}"

@@ -1,12 +1,8 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
 	import ArrowRight from 'phosphor-svelte/lib/ArrowRight';
-	import { createScrollRevealCleanup } from '$lib/utils/reveal';
 	import { capturePosthogEvent } from '$lib/analytics/posthog';
 
 	let { sectionClass = 'py-20 sm:py-24' }: { sectionClass?: string } = $props();
-
-	let section: HTMLElement | undefined = $state();
 
 	type Tile = {
 		key: 'transactional' | 'marketing';
@@ -47,15 +43,10 @@
 			destination_type: 'internal'
 		});
 	}
-
-	onMount(() => {
-		if (!section) return;
-		return createScrollRevealCleanup({ scope: section, targets: '[data-reveal]' });
-	});
 </script>
 
-<section bind:this={section} id="pricing" class={sectionClass}>
-	<div class="mb-10 sm:mb-12 max-w-2xl" data-reveal>
+<section id="pricing" class={sectionClass}>
+	<div class="mb-10 sm:mb-12 max-w-2xl">
 		<div class="mb-4 inline-flex items-center gap-2 text-[11px] font-medium tracking-[0.18em] uppercase text-primary/80">
 			<span class="block w-6 h-px bg-primary/60"></span>
 			Pricing
@@ -74,7 +65,6 @@
 			{@const isTransactional = tile.key === 'transactional'}
 			<a
 				href="/pricing/"
-				data-reveal
 				onclick={() => trackTileCta(tile)}
 				class="group flex flex-col p-6 border border-border/30 bg-white transition duration-300
 					hover:border-primary/40 hover:shadow-lg hover:shadow-primary/5"

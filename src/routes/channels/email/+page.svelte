@@ -8,7 +8,6 @@
 	import ChartLineUpIcon from 'phosphor-svelte/lib/ChartLineUpIcon';
 	import CheckCircleIcon from 'phosphor-svelte/lib/CheckCircleIcon';
 	import FeaturePageLayout from '$lib/components/FeaturePageLayout.svelte';
-	import { createScrollRevealCleanup } from '$lib/utils/reveal';
 	import { buildRegisterUrl, registerUrl } from '$lib/utils/utm';
 	import { capturePosthogEvent, trackSignupClick } from '$lib/analytics/posthog';
 	import { monthlyEmails } from '$lib/data/company';
@@ -25,29 +24,11 @@
 		}
 	}
 
-	let statsSection: HTMLElement | undefined = $state();
-	let infraSection: HTMLElement | undefined = $state();
-	let deliverabilitySection: HTMLElement | undefined = $state();
-	let ctaSection: HTMLElement | undefined = $state();
 	let registerHref: string = $state(registerUrl);
 
 	onMount(() => {
 		registerHref = buildRegisterUrl(new URL(window.location.href), document.cookie);
 
-		const cleanups: (() => void)[] = [];
-
-		for (const section of [statsSection, infraSection, deliverabilitySection, ctaSection]) {
-			if (section) {
-				cleanups.push(
-					createScrollRevealCleanup({
-						scope: section,
-						targets: '[data-reveal]'
-					})
-				);
-			}
-		}
-
-		return () => cleanups.forEach((fn) => fn());
 	});
 
 	const stats = [
@@ -124,10 +105,10 @@
 
 	{#snippet children()}
 		<!-- Stat Cards -->
-		<div bind:this={statsSection} class="mx-auto max-w-3xl">
+		<div class="mx-auto max-w-3xl">
 			<div class="grid gap-4 sm:grid-cols-3">
 				{#each stats as stat}
-					<div data-reveal class="border border-border/50 bg-white p-5 text-center">
+					<div class="border border-border/50 bg-white p-5 text-center">
 						<div class="font-heading text-2xl text-primary">{stat.value}</div>
 						<p class="mt-2 text-xs leading-relaxed text-muted">{stat.label}</p>
 					</div>
@@ -136,14 +117,14 @@
 		</div>
 
 		<!-- Infrastructure Cards -->
-		<div bind:this={infraSection} class="mx-auto mt-20 max-w-3xl md:mt-28">
-			<h2 data-reveal class="mb-3 text-center">Built for scale</h2>
-			<p data-reveal class="mx-auto mb-8 max-w-lg text-center text-body text-muted">
+		<div class="mx-auto mt-20 max-w-3xl md:mt-28">
+			<h2 class="mb-3 text-center">Built for scale</h2>
+			<p class="mx-auto mb-8 max-w-lg text-center text-body text-muted">
 				Infrastructure designed to deliver billions of emails with consistent performance and reliability.
 			</p>
 			<div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
 				{#each infrastructure as item}
-					<div data-reveal class="border border-border/50 bg-white p-6">
+					<div class="border border-border/50 bg-white p-6">
 						<div class="mb-3 flex h-10 w-10 items-center justify-center border border-border/50 bg-background">
 							<item.icon size={20} class="text-primary" />
 						</div>
@@ -155,14 +136,14 @@
 		</div>
 
 		<!-- Deliverability Section -->
-		<div bind:this={deliverabilitySection} class="mx-auto mt-20 max-w-3xl md:mt-28">
-			<h2 data-reveal class="mb-3 text-center">Deliverability built in</h2>
-			<p data-reveal class="mx-auto mb-8 max-w-lg text-center text-body text-muted">
+		<div class="mx-auto mt-20 max-w-3xl md:mt-28">
+			<h2 class="mb-3 text-center">Deliverability built in</h2>
+			<p class="mx-auto mb-8 max-w-lg text-center text-body text-muted">
 				Every email is authenticated, tracked, and optimized for inbox placement from day one.
 			</p>
 			<div class="grid gap-5 sm:grid-cols-2">
 				<!-- Authentication & Security -->
-				<div data-reveal class="border border-border/50 bg-white p-6">
+				<div class="border border-border/50 bg-white p-6">
 					<h3 class="mb-4 text-base font-semibold text-surface">Authentication & Security</h3>
 					<ul class="space-y-3">
 						{#each authItems as item}
@@ -175,7 +156,7 @@
 				</div>
 
 				<!-- Visibility -->
-				<div data-reveal class="border border-border/50 bg-white p-6">
+				<div class="border border-border/50 bg-white p-6">
 					<h3 class="mb-4 text-base font-semibold text-surface">Visibility & Tracking</h3>
 					<ul class="space-y-3">
 						{#each visibilityItems as item}
@@ -190,8 +171,8 @@
 		</div>
 
 		<!-- CTA Section -->
-		<div bind:this={ctaSection} class="mx-auto mt-20 max-w-3xl md:mt-28">
-			<div data-reveal class="border border-border/50 bg-white p-8 text-center md:p-12">
+		<div class="mx-auto mt-20 max-w-3xl md:mt-28">
+			<div class="border border-border/50 bg-white p-8 text-center md:p-12">
 				<h2>Ready to send?</h2>
 				<p class="mx-auto mt-3 max-w-lg text-body leading-relaxed text-muted">
 					Get started with 3,000 free emails per month. No credit card required. Full access to every feature from day one.

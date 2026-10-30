@@ -1,11 +1,10 @@
 <script lang="ts">
-	import { onMount, type Snippet } from 'svelte';
+	import { type Snippet } from 'svelte';
 	import ArrowRightIcon from 'phosphor-svelte/lib/ArrowRightIcon';
 	import DitherSide from './DitherSide.svelte';
 	import DitherEdge from './DitherEdge.svelte';
 	import { marketingSteps, transactionalSteps, transactionalZones, type Mode } from '$lib/data/pricing';
 	import { capturePosthogEvent } from '$lib/analytics/posthog';
-	import { createScrollRevealCleanup } from '$lib/utils/reveal';
 
 	interface Props {
 		/** Sent with the analytics events. */
@@ -24,8 +23,6 @@
 		transactionalQuestion = 'How many emails per month?',
 		dither = 'side'
 	}: Props = $props();
-
-	let section: HTMLElement | undefined = $state();
 
 	/*
 	 * The stops and prices come from $lib/data/pricing, the same data the
@@ -108,11 +105,6 @@
 			destination_type: 'internal'
 		});
 	}
-
-	onMount(() => {
-		if (!section) return;
-		return createScrollRevealCleanup({ scope: section, targets: '[data-reveal]' });
-	});
 </script>
 
 <style>
@@ -169,11 +161,11 @@
 	}
 </style>
 
-<section bind:this={section} id="pricing" aria-labelledby="pricing-heading" class="py-14 md:py-24">
+<section id="pricing" aria-labelledby="pricing-heading" class="py-14 md:py-24">
 	{#if header}
 		{@render header()}
 	{:else}
-		<div data-reveal class="mx-auto mb-10 flex max-w-[860px] flex-col items-center gap-4 text-center md:mb-14">
+		<div class="mx-auto mb-10 flex max-w-[860px] flex-col items-center gap-4 text-center md:mb-14">
 			<h2
 				id="pricing-heading"
 				class="font-heading text-balance text-[1.875rem] leading-[1.27] tracking-[-0.02em] text-surface md:text-[2.625rem] md:leading-[50px]"
@@ -187,7 +179,7 @@
 		</div>
 	{/if}
 
-	<div data-reveal class="mx-auto flex max-w-[1100px] flex-col gap-4">
+	<div class="mx-auto flex max-w-[1100px] flex-col gap-4">
 		<div
 			data-markdown="skip"
 			class="flex flex-col gap-8 bg-white px-5 py-6 md:gap-9 md:p-10"

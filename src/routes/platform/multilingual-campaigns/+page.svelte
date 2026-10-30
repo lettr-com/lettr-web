@@ -12,37 +12,14 @@
 	import SlidersHorizontalIcon from 'phosphor-svelte/lib/SlidersHorizontalIcon';
 	import TagIcon from 'phosphor-svelte/lib/TagIcon';
 	import FeaturePageLayout from '$lib/components/FeaturePageLayout.svelte';
-	import { createScrollRevealCleanup } from '$lib/utils/reveal';
-
-	let stepsSection: HTMLElement | undefined = $state();
-	let matcherSection: HTMLElement | undefined = $state();
-	let reviewSection: HTMLElement | undefined = $state();
-	let composeSection: HTMLElement | undefined = $state();
-	let travelsSection: HTMLElement | undefined = $state();
 
 	onMount(() => {
-		const cleanups: (() => void)[] = [];
-
-		for (const section of [stepsSection, matcherSection, reviewSection, composeSection, travelsSection]) {
-			if (section) {
-				cleanups.push(
-					createScrollRevealCleanup({
-						scope: section,
-						targets: '[data-reveal]'
-					})
-				);
-			}
-		}
-
 		// Observing fires the callback once straight away, so no explicit first measure.
 		const observer = new ResizeObserver(measureRoutes);
 		if (routesEl) observer.observe(routesEl);
 		inboxEls.forEach((el) => observer.observe(el));
 
-		return () => {
-			observer.disconnect();
-			cleanups.forEach((fn) => fn());
-		};
+		return () => observer.disconnect();
 	});
 
 	/* ---------- Hero routing diagram ---------- */
@@ -320,14 +297,14 @@
 		</div>
 
 		<!-- How It Works -->
-		<div bind:this={stepsSection} class="mx-auto mt-20 max-w-3xl md:mt-28">
-			<h2 data-reveal class="mb-3 text-center">How it works</h2>
-			<p data-reveal class="mx-auto mb-8 max-w-lg text-center text-body text-muted">
+		<div class="mx-auto mt-20 max-w-3xl md:mt-28">
+			<h2 class="mb-3 text-center">How it works</h2>
+			<p class="mx-auto mb-8 max-w-lg text-center text-body text-muted">
 				Add languages to a template, mark which contact property holds the language, and send once.
 			</p>
 			<ol class="grid gap-5 md:grid-cols-3">
 				{#each steps as step}
-					<li data-reveal class="border border-border/50 bg-white p-6">
+					<li class="border border-border/50 bg-white p-6">
 						<div class="mb-3 flex h-10 w-10 items-center justify-center border border-border/50 bg-background">
 							<step.icon size={20} class="text-primary" />
 						</div>
@@ -339,13 +316,13 @@
 		</div>
 
 		<!-- Live Matcher -->
-		<div bind:this={matcherSection} class="mx-auto mt-20 max-w-3xl md:mt-28">
-			<h2 data-reveal class="mb-3 text-center">Language matching</h2>
-			<p data-reveal class="mx-auto mb-8 max-w-lg text-center text-body text-muted">
+		<div class="mx-auto mt-20 max-w-3xl md:mt-28">
+			<h2 class="mb-3 text-center">Language matching</h2>
+			<p class="mx-auto mb-8 max-w-lg text-center text-body text-muted">
 				de_AT, Deutsch, and German all get the German version. Three rules run strictest first, and a value that matches nothing gets the <a class="text-primary underline underline-offset-2" href="/glossary/primary-language/">primary language</a>.
 			</p>
 
-			<div data-reveal class="border border-border/50 bg-white">
+			<div class="border border-border/50 bg-white">
 				<div class="flex flex-wrap items-baseline justify-between gap-2 border-b border-border/50 bg-background px-5 py-3">
 					<span class="font-heading text-xs font-semibold text-surface uppercase">Try a value</span>
 					<span class="flex items-baseline gap-1.5 text-xs text-muted">
@@ -413,13 +390,13 @@
 		</div>
 
 		<!-- Review & Send -->
-		<div bind:this={reviewSection} class="mx-auto mt-20 max-w-3xl min-w-0 md:mt-28">
-			<h2 data-reveal class="mb-3 text-center">Review before sending</h2>
-			<p data-reveal class="mx-auto mb-8 max-w-lg text-center text-body text-muted">
+		<div class="mx-auto mt-20 max-w-3xl min-w-0 md:mt-28">
+			<h2 class="mb-3 text-center">Review before sending</h2>
+			<p class="mx-auto mb-8 max-w-lg text-center text-body text-muted">
 				See who gets which language, the subject and sender each version uses, and who falls back to the primary language.
 			</p>
 
-			<div data-reveal class="max-w-full min-w-0 border border-border/50 bg-white">
+			<div class="max-w-full min-w-0 border border-border/50 bg-white">
 				<div class="flex flex-wrap items-baseline justify-between gap-2 border-b border-border/50 bg-background px-5 py-3">
 					<span class="font-heading text-xs font-semibold text-surface uppercase">Multi-language send</span>
 					<span class="text-xs text-muted">
@@ -507,13 +484,13 @@
 		</div>
 
 		<!-- Per-Language Subject and Sender -->
-		<div bind:this={composeSection} class="mx-auto mt-20 max-w-3xl md:mt-28">
-			<h2 data-reveal class="mb-3 text-center">Translate the subject, inherit the rest</h2>
-			<p data-reveal class="mx-auto mb-8 max-w-lg text-center text-body text-muted">
+		<div class="mx-auto mt-20 max-w-3xl md:mt-28">
+			<h2 class="mb-3 text-center">Translate the subject, inherit the rest</h2>
+			<p class="mx-auto mb-8 max-w-lg text-center text-body text-muted">
 				Each secondary language has an optional subject, from name, from email, and reply-to. Empty fields take the primary value.
 			</p>
 
-			<div data-reveal class="border border-border/50 bg-white">
+			<div class="border border-border/50 bg-white">
 				<div class="border-b border-border/50 bg-background px-5 py-3">
 					<span class="font-heading text-xs font-semibold text-surface uppercase">Per-language subject and sender</span>
 				</div>
@@ -539,14 +516,14 @@
 		</div>
 
 		<!-- What Recipients Get -->
-		<div bind:this={travelsSection} class="mx-auto mt-20 max-w-3xl md:mt-28">
-			<h2 data-reveal class="mb-3 text-center">Everything in their language</h2>
-			<p data-reveal class="mx-auto mb-8 max-w-lg text-center text-body text-muted">
+		<div class="mx-auto mt-20 max-w-3xl md:mt-28">
+			<h2 class="mb-3 text-center">Everything in their language</h2>
+			<p class="mx-auto mb-8 max-w-lg text-center text-body text-muted">
 				The footer, web version, and hosted pages follow the same language, recorded per recipient at send time. The <a class="text-primary underline underline-offset-2" href="/blog/introducing-multilingual-campaigns/">launch post</a> covers the details.
 			</p>
 			<div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
 				{#each travels as item}
-					<div data-reveal class="border border-border/50 bg-white p-6">
+					<div class="border border-border/50 bg-white p-6">
 						<div class="mb-3 flex h-10 w-10 items-center justify-center border border-border/50 bg-background">
 							<item.icon size={20} class="text-primary" />
 						</div>

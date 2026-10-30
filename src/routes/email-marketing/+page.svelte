@@ -12,7 +12,6 @@
 	import TalkToExpert from '$lib/components/TalkToExpert.svelte';
 	import FAQSection from '$lib/components/FAQSection.svelte';
 	import RelatedFeatures from '$lib/components/RelatedFeatures.svelte';
-	import { createScrollRevealCleanup } from '$lib/utils/reveal';
 	import { buildRegisterUrl, registerUrl } from '$lib/utils/utm';
 	import { capturePosthogEvent, trackSignupClick } from '$lib/analytics/posthog';
 	import { jsonLdScript } from '$lib/utils/jsonLd';
@@ -22,8 +21,6 @@
 	const metaDescription =
 		'Run marketing campaigns from the same platform as your transactional email: drag-and-drop editor, contact lists, segmentation, and automations.';
 
-	let featuresSection: HTMLElement | undefined = $state();
-	let listsSection: HTMLElement | undefined = $state();
 	let registerHref: string = $state(registerUrl);
 
 	function trackHeroCta(label: string, href: string, variant: 'primary' | 'secondary') {
@@ -83,20 +80,6 @@
 	onMount(() => {
 		registerHref = buildRegisterUrl(new URL(window.location.href), document.cookie);
 
-		const cleanups: (() => void)[] = [];
-
-		for (const section of [featuresSection, listsSection]) {
-			if (section) {
-				cleanups.push(
-					createScrollRevealCleanup({
-						scope: section,
-						targets: '[data-reveal]'
-					})
-				);
-			}
-		}
-
-		return () => cleanups.forEach((fn) => fn());
 	});
 </script>
 
@@ -161,8 +144,8 @@
 	</div>
 </section>
 
-<section bind:this={featuresSection} class="py-20 border-b border-border/30">
-	<div class="mb-12" data-reveal>
+<section class="py-20 border-b border-border/30">
+	<div class="mb-12">
 		<div class="mb-4 inline-flex items-center gap-2 text-[11px] font-medium tracking-[0.18em] uppercase text-primary/80">
 			<span class="block w-6 h-px bg-primary/60"></span>
 			What's inside
@@ -177,7 +160,7 @@
 
 	<div class="grid gap-5 sm:grid-cols-2">
 		{#each features as feature}
-			<div data-reveal class="flex items-start gap-5 border border-border/40 bg-white p-6">
+			<div class="flex items-start gap-5 border border-border/40 bg-white p-6">
 				<div class="flex h-10 w-10 shrink-0 items-center justify-center border border-border/50 bg-background">
 					<feature.icon size={20} class="text-primary" />
 				</div>
@@ -190,9 +173,9 @@
 	</div>
 </section>
 
-<section bind:this={listsSection} class="py-20 border-b border-border/30">
+<section class="py-20 border-b border-border/30">
 	<div class="grid gap-12 lg:grid-cols-2 lg:items-center">
-		<div data-reveal>
+		<div>
 			<div class="mb-4 inline-flex items-center gap-2 text-[11px] font-medium tracking-[0.18em] uppercase text-primary/80">
 				<span class="block w-6 h-px bg-primary/60"></span>
 				Lists &amp; segmentation
@@ -214,7 +197,7 @@
 			</ul>
 		</div>
 
-		<div data-reveal class="border border-border/40 bg-white p-6">
+		<div class="border border-border/40 bg-white p-6">
 			<div class="mb-4 flex items-center gap-2">
 				<PaperPlaneTiltIcon size={16} class="text-primary" />
 				<span class="font-code text-xs text-muted">contacts.add</span>

@@ -1,9 +1,5 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
 	import DitherEdge from '$lib/components/home/DitherEdge.svelte';
-	import { createScrollRevealCleanup } from '$lib/utils/reveal';
-
-	let section: HTMLElement | undefined = $state();
 
 	// Each row is checked against lettr/lettr-laravel 2.8.0.
 	const rows = [
@@ -15,20 +11,15 @@
 		{ title: 'Typed errors', code: 'RateLimitException', description: 'One exception class per failure, with retryAfter.' },
 		{ title: 'Marketing, same account', code: 'Lettr::campaigns()', description: 'Audiences, segments and campaigns too.' }
 	];
-
-	onMount(() => {
-		if (!section) return;
-		return createScrollRevealCleanup({ scope: section, targets: '[data-reveal]' });
-	});
 </script>
 
-<section bind:this={section} aria-labelledby="index-heading" class="bleed relative bg-white">
+<section aria-labelledby="index-heading" class="bleed relative bg-white">
 	<div class="absolute inset-x-0 top-0 h-6 rotate-180" aria-hidden="true">
 		<DitherEdge placement="inside" color="#23020b" cell={8} />
 	</div>
 
 	<div class="mx-auto flex w-full max-w-[1148px] flex-col gap-10 px-6 py-16 md:gap-14 md:pt-[136px] md:pb-[120px]">
-		<div data-reveal class="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between lg:gap-16">
+		<div class="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between lg:gap-16">
 			<h2
 				id="index-heading"
 				class="m-0 font-heading text-[1.875rem] leading-[38px] text-balance tracking-[-0.02em] text-surface md:text-[2.625rem] md:leading-[50px]"
@@ -41,7 +32,7 @@
 			</p>
 		</div>
 
-		<ol data-reveal class="m-0 flex list-none flex-col border-t border-surface p-0">
+		<ol class="m-0 flex list-none flex-col border-t border-surface p-0">
 			{#each rows as row, i}
 				<li
 					class="grid grid-cols-[32px_1fr] items-baseline gap-x-4 gap-y-2 border-b border-[#eee7ea] py-5 md:grid-cols-[40px_300px_1fr] md:gap-x-6 lg:grid-cols-[40px_300px_300px_1fr]"

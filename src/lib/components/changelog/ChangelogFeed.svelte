@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { onMount, tick, untrack } from 'svelte';
+	import { onMount, untrack } from 'svelte';
 	import ArrowUpIcon from 'phosphor-svelte/lib/ArrowUpIcon';
 	import { MONTHS, formatMonth, loadMonth } from '$lib/changelog/months';
 	import { trackChangelogLinkClick } from '$lib/changelog/analytics';
@@ -11,7 +11,6 @@
 		summarizeMatches,
 		type FilterToken
 	} from '$lib/changelog/filter';
-	import { createScrollRevealCleanup } from '$lib/utils/reveal';
 	import type { ChangelogMonth as ChangelogMonthData } from '$lib/changelog/types';
 	import ChangelogMonth from './ChangelogMonth.svelte';
 
@@ -75,22 +74,6 @@
 		status = filter.length ? matchSummary : undefined;
 	});
 
-	const revealCleanups: (() => void)[] = [];
-	// Reveal-on-scroll is a first-impression device. Once the reader starts
-	// filtering, entries appear because they clicked, so the animation is
-	// retired for the rest of the visit rather than replayed on every toggle.
-	let isInstant = $state(false);
-
-	/** Reveal one month's entries, once it is in the DOM. */
-	async function revealMonth(id: string) {
-		if (isInstant) return;
-		await tick();
-		const element = container?.querySelector(`[data-month="${id}"]`);
-		// A filter picked during the tick has already retired the reveal.
-		if (!element || isInstant) return;
-		revealCleanups.push(createScrollRevealCleanup({ scope: element, targets: '[data-reveal]' }));
-	}
-
 	/** Keeps `older` in registry order however the months arrived. */
 	function addMonths(months: ChangelogMonthData[]) {
 		const byId = new Map(older.map((month) => [month.id, month]));
@@ -127,16 +110,7 @@
 	$effect(() => {
 		if (filter.length === 0) return;
 
-		untrack(() => {
-			if (!isInstant) {
-				isInstant = true;
-				// The cleanups show every entry still waiting below the fold at once.
-				revealCleanups.forEach((fn) => fn());
-				revealCleanups.length = 0;
-			}
-
-			void searchWholeLog();
-		});
+		untrack(() => void searchWholeLog());
 	});
 
 	async function loadNextMonth(observer: IntersectionObserver) {
@@ -147,7 +121,6 @@
 
 		try {
 			addMonths([await loadMonth(id)]);
-			await revealMonth(id);
 		} catch {
 			// A month that will not load is still reachable at its own page, so
 			// offer that rather than retrying the same import forever.
@@ -172,7 +145,6 @@
 			const element = container;
 			element.addEventListener('click', trackChangelogLinkClick);
 			cleanups.push(() => element.removeEventListener('click', trackChangelogLinkClick));
-			void revealMonth(initial.id);
 		}
 
 		if (sentinel) {
@@ -186,10 +158,7 @@
 			cleanups.push(() => observer.disconnect());
 		}
 
-		return () => {
-			cleanups.forEach((fn) => fn());
-			revealCleanups.forEach((fn) => fn());
-		};
+		return () => cleanups.forEach((fn) => fn());
 	});
 </script>
 

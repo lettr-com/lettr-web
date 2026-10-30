@@ -1,19 +1,14 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
 	import Seo from '$lib/components/Seo.svelte';
 	import EnvelopeSimpleIcon from 'phosphor-svelte/lib/EnvelopeSimpleIcon';
 	import BookOpenIcon from 'phosphor-svelte/lib/BookOpenIcon';
 	import ClockIcon from 'phosphor-svelte/lib/ClockIcon';
 	import ArrowSquareOutIcon from 'phosphor-svelte/lib/ArrowSquareOutIcon';
 	import ChatCircleTextIcon from 'phosphor-svelte/lib/ChatCircleTextIcon';
-	import { createScrollRevealCleanup } from '$lib/utils/reveal';
 	import { capturePosthogEvent } from '$lib/analytics/posthog';
 	import { openIntercomNewMessage } from '$lib/intercom';
 	import { jsonLdScript } from '$lib/utils/jsonLd';
 	import { basicPageJsonLd } from '$lib/utils/pageJsonLd';
-
-	let channelsSection: HTMLElement | undefined = $state();
-	let contactSection: HTMLElement | undefined = $state();
 
 	const channels = [
 		{
@@ -76,23 +71,6 @@
 	function trackFaqLinkClick(question: string, href: string) {
 		void capturePosthogEvent('support_faq_link_clicked', { question, href });
 	}
-
-	onMount(() => {
-		const cleanups: (() => void)[] = [];
-
-		for (const section of [channelsSection, contactSection]) {
-			if (section) {
-				cleanups.push(
-					createScrollRevealCleanup({
-						scope: section,
-						targets: '[data-reveal]'
-					})
-				);
-			}
-		}
-
-		return () => cleanups.forEach((fn) => fn());
-	});
 </script>
 
 <Seo
@@ -123,10 +101,9 @@
 	</div>
 
 	<!-- Channel Cards -->
-	<div bind:this={channelsSection} class="mt-16 grid gap-5 md:mt-20">
+	<div class="mt-16 grid gap-5 md:mt-20">
 		{#each channels as channel}
 			<a
-				data-reveal
 				href={channel.actionHref}
 				target={channel.external ? '_blank' : undefined}
 				rel={channel.external ? 'noopener noreferrer' : undefined}
@@ -156,9 +133,9 @@
 	</div>
 
 	<!-- Chat + FAQ -->
-	<div bind:this={contactSection} class="mx-auto mt-20 max-w-3xl md:mt-28">
+	<div class="mx-auto mt-20 max-w-3xl md:mt-28">
 		<!-- Common questions -->
-		<div data-reveal class="mb-16">
+		<div class="mb-16">
 			<div class="border border-border/50 bg-white p-6">
 				<h3 class="mb-4 text-sm font-semibold text-surface">Common questions</h3>
 				<div class="space-y-3">
@@ -179,7 +156,7 @@
 		</div>
 
 		<!-- Live chat CTA -->
-		<div data-reveal class="border border-border/50 bg-white p-8 text-center">
+		<div class="border border-border/50 bg-white p-8 text-center">
 			<div class="mx-auto mb-5 flex h-14 w-14 items-center justify-center rounded-full bg-primary/10">
 				<ChatCircleTextIcon size={28} class="text-primary" />
 			</div>

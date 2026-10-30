@@ -1,10 +1,6 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
 	import ChatCircleDotsIcon from 'phosphor-svelte/lib/ChatCircleDotsIcon';
-	import { createScrollRevealCleanup } from '$lib/utils/reveal';
 	import { capturePosthogEvent } from '$lib/analytics/posthog';
-
-	let section: HTMLElement | undefined = $state();
 
 	function trackTalkToExpert() {
 		void capturePosthogEvent('cta_clicked', {
@@ -14,19 +10,10 @@
 			destination_type: 'internal'
 		});
 	}
-
-	onMount(() => {
-		if (!section) return;
-
-		return createScrollRevealCleanup({
-			scope: section,
-			targets: '[data-reveal]'
-		});
-	});
 </script>
 
-<section bind:this={section} class="border-b border-border/30 py-8 md:py-16">
-	<div data-reveal class="flex flex-col items-center text-center">
+<section class="border-b border-border/30 py-8 md:py-16">
+	<div class="flex flex-col items-center text-center">
 		<ChatCircleDotsIcon size={24} class="mb-4 text-primary" />
 		<h2 class="mb-2 text-surface">Need help deciding?</h2>
 		<p class="mb-6 max-w-[40ch] text-sm text-muted">

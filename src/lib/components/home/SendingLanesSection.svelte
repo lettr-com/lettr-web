@@ -1,11 +1,7 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
 	import DitherSide from './DitherSide.svelte';
 	import GetStartedButton from './GetStartedButton.svelte';
 	import FeatureAccordion, { type AccordionItem } from './FeatureAccordion.svelte';
-	import { createScrollRevealCleanup } from '$lib/utils/reveal';
-
-	let section: HTMLElement | undefined = $state();
 
 	const transactionalItems: AccordionItem[] = [
 		{
@@ -41,15 +37,10 @@
 			description: 'See what was delivered, opened and clicked across every email, in one place.'
 		}
 	];
-
-	onMount(() => {
-		if (!section) return;
-		return createScrollRevealCleanup({ scope: section, targets: '[data-reveal]' });
-	});
 </script>
 
-<section bind:this={section} aria-labelledby="lanes-heading" class="pt-14 pb-14 md:pt-24 md:pb-16">
-	<div data-reveal class="mx-auto mb-10 flex max-w-[860px] flex-col items-center gap-4 text-center md:mb-14">
+<section aria-labelledby="lanes-heading" class="pt-14 pb-14 md:pt-24 md:pb-16">
+	<div class="mx-auto mb-10 flex max-w-[860px] flex-col items-center gap-4 text-center md:mb-14">
 		<h2
 			id="lanes-heading"
 			class="font-heading text-balance text-[1.875rem] leading-[1.27] tracking-[-0.02em] text-surface md:text-[2.625rem] md:leading-[50px]"
@@ -65,7 +56,7 @@
 
 	<div class="mx-auto grid max-w-[1100px] items-start gap-6 md:grid-cols-2 md:gap-4">
 		<!-- Transactional -->
-		<div data-reveal class="flex flex-col gap-6 md:gap-4">
+		<div class="flex flex-col gap-6 md:gap-4">
 			<div class="relative flex h-[480px] flex-col justify-between overflow-hidden bg-[#23020b] p-6 md:h-[560px]">
 				<DitherSide color="#ec104b" variant="ripple" width={20} />
 				<h3 class="relative font-heading text-[1.75rem] leading-[1.2] tracking-[-0.05em] text-white md:text-[2rem]">
@@ -100,7 +91,7 @@
 		</div>
 
 		<!-- Marketing -->
-		<div data-reveal class="flex flex-col gap-6 md:gap-4">
+		<div class="flex flex-col gap-6 md:gap-4">
 			<div class="relative flex h-[480px] flex-col justify-between overflow-hidden bg-[#002010] p-6 md:h-[560px]">
 				<DitherSide color="#00c851" variant="noise" width={40} />
 				<h3 class="relative font-serif text-4xl leading-[1.2] tracking-[-0.04em] text-white md:text-[2.25rem]">
@@ -135,7 +126,7 @@
 		</div>
 	</div>
 
-	<div data-reveal class="mt-10 flex justify-center md:mt-14">
+	<div class="mt-10 flex justify-center md:mt-14">
 		<GetStartedButton placement="home_sending_lanes" />
 	</div>
 </section>

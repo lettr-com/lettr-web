@@ -2,7 +2,6 @@
 	import { onMount } from 'svelte';
 	import ArrowClockwiseIcon from 'phosphor-svelte/lib/ArrowClockwiseIcon';
 	import { capturePosthogEvent } from '$lib/analytics/posthog';
-	import { createScrollRevealCleanup } from '$lib/utils/reveal';
 
 	interface Props {
 		/** The synchronous send snippet, one highlighted HTML line per entry. */
@@ -11,7 +10,6 @@
 
 	let { syncSend }: Props = $props();
 
-	let section: HTMLElement | undefined = $state();
 	let stage: HTMLElement | undefined = $state();
 
 	const facts = [
@@ -74,7 +72,6 @@
 	onMount(() => {
 		reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 		const cleanups: (() => void)[] = [];
-		if (section) cleanups.push(createScrollRevealCleanup({ scope: section, targets: '[data-reveal]' }));
 
 		if (stage && !reduced) {
 			// Play once when the graphic comes into view; it sits below the fold, so the reset is unseen.
@@ -98,9 +95,9 @@
 	});
 </script>
 
-<section bind:this={section} aria-labelledby="retries-heading" class="bleed bg-white">
+<section aria-labelledby="retries-heading" class="bleed bg-white">
 	<div class="mx-auto flex w-full max-w-[1148px] flex-col gap-12 px-6 py-16 md:py-[136px] xl:flex-row xl:gap-[72px]">
-		<div data-reveal class="flex flex-col xl:w-[440px] xl:shrink-0">
+		<div class="flex flex-col xl:w-[440px] xl:shrink-0">
 			<h2
 				id="retries-heading"
 				class="m-0 pb-5 font-heading text-[1.875rem] leading-[38px] text-balance tracking-[-0.02em] text-surface md:pb-6 md:text-[2.625rem] md:leading-[50px]"
@@ -126,7 +123,7 @@
 				class="m-0 mt-7 max-w-[560px] overflow-x-auto bg-[#0c111d] px-5 py-[18px] font-code text-[13px] leading-[1.7] text-[#f0f0f0]"><code>{@html syncSend.join('\n')}</code></pre>
 		</div>
 
-		<div bind:this={stage} data-reveal data-markdown="skip" class="relative flex grow flex-col gap-4 xl:block xl:h-[600px]">
+		<div bind:this={stage} data-markdown="skip" class="relative flex grow flex-col gap-4 xl:block xl:h-[600px]">
 			<p class="sr-only">
 				A queue worker runs SendQueuedMailable, times out after 30 seconds and retries. With the idempotency key, the Lettr API
 				answers the retry with the first result, marked replayed, and the customer's inbox holds one email. Without it, the

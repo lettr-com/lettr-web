@@ -20,8 +20,6 @@
 	import { FEED_URL, formatDate, monthDescription, monthJsonLd, monthTitle } from '$lib/changelog/seo';
 	import { summarizeMonthHtml } from '$lib/changelog/summary';
 	import { jsonLdScript } from '$lib/utils/jsonLd';
-	import { createScrollRevealCleanup } from '$lib/utils/reveal';
-	import { untrack } from 'svelte';
 	import type { PageData } from './$types';
 
 	interface Props {
@@ -59,27 +57,6 @@
 		}
 
 		return () => cleanups.forEach((fn) => fn());
-	});
-
-	// Reveal-on-scroll is a first-impression device. Once the reader starts
-	// filtering, entries appear because they clicked, so the animation is
-	// retired for the rest of the visit rather than replayed on every toggle.
-	let isInstant = $state(false);
-
-	$effect(() => {
-		if (filter.length > 0 && !untrack(() => isInstant)) isInstant = true;
-	});
-
-	// Moving between months reuses this component, so onMount fires only for the
-	// first one, while every entry below is replaced. Re-running the reveal per
-	// month is what animates the new entries in. Retiring it runs the cleanup,
-	// which shows any entry still waiting below the fold at once.
-	$effect(() => {
-		void data.month.id;
-		const element = body;
-		if (!element || isInstant) return;
-
-		return createScrollRevealCleanup({ scope: element, targets: '[data-reveal]' });
 	});
 </script>
 

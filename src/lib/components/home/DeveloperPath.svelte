@@ -1,21 +1,12 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
 	import ArrowRightIcon from 'phosphor-svelte/lib/ArrowRightIcon';
 	import CheckIcon from 'phosphor-svelte/lib/CheckIcon';
 	import MagnifyingGlassIcon from 'phosphor-svelte/lib/MagnifyingGlassIcon';
 	import LargeFeatureCard from './LargeFeatureCard.svelte';
-	import { createScrollRevealCleanup } from '$lib/utils/reveal';
-
-	let section: HTMLElement | undefined = $state();
-
-	onMount(() => {
-		if (!section) return;
-		return createScrollRevealCleanup({ scope: section, targets: '[data-reveal]' });
-	});
 </script>
 
-<section bind:this={section} id="features" class="-mx-6 border-b border-white/10 bg-surface px-6 py-20 sm:py-24">
-	<div data-reveal class="mb-12 max-w-[850px]">
+<section id="features" class="-mx-6 border-b border-white/10 bg-surface px-6 py-20 sm:py-24">
+	<div class="mb-12 max-w-[850px]">
 		<h2 class="home-section-heading text-white">
 			Integrate in minutes.<span class="block text-primary">Forget about it forever.</span>
 		</h2>

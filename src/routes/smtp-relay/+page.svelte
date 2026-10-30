@@ -19,7 +19,6 @@
 	import StackIcon from 'phosphor-svelte/lib/StackIcon';
 	import CheckIcon from 'phosphor-svelte/lib/CheckIcon';
 	import CaretDownIcon from 'phosphor-svelte/lib/CaretDownIcon';
-	import { createScrollRevealCleanup } from '$lib/utils/reveal';
 	import { buildRegisterUrl, registerUrl } from '$lib/utils/utm';
 	import { capturePosthogEvent, trackSignupClick } from '$lib/analytics/posthog';
 	import { jsonLdScript } from '$lib/utils/jsonLd';
@@ -33,13 +32,6 @@
 
 	const SMTP_DOCS_URL = 'https://docs.lettr.com/quickstart/smtp/introduction';
 
-	let definitionSection: HTMLElement | undefined = $state();
-	let whenSection: HTMLElement | undefined = $state();
-	let featuresSection: HTMLElement | undefined = $state();
-	let setupSection: HTMLElement | undefined = $state();
-	let compareSection: HTMLElement | undefined = $state();
-	let faqSection: HTMLElement | undefined = $state();
-	let finalCtaSection: HTMLElement | undefined = $state();
 	let registerHref: string = $state(registerUrl);
 	let openFaq: number | null = $state(null);
 
@@ -207,28 +199,6 @@
 	onMount(() => {
 		registerHref = buildRegisterUrl(new URL(window.location.href), document.cookie);
 
-		const cleanups: (() => void)[] = [];
-
-		for (const section of [
-			definitionSection,
-			whenSection,
-			featuresSection,
-			setupSection,
-			compareSection,
-			faqSection,
-			finalCtaSection
-		]) {
-			if (section) {
-				cleanups.push(
-					createScrollRevealCleanup({
-						scope: section,
-						targets: '[data-reveal]'
-					})
-				);
-			}
-		}
-
-		return () => cleanups.forEach((fn) => fn());
 	});
 </script>
 
@@ -312,9 +282,9 @@
 </section>
 
 <!-- What is an SMTP relay -->
-<section bind:this={definitionSection} class="py-20 border-b border-border/30">
+<section class="py-20 border-b border-border/30">
 	<div class="grid gap-12 lg:grid-cols-2 lg:items-start">
-		<div data-reveal>
+		<div>
 			<div class="mb-4 inline-flex items-center gap-2 text-[11px] font-medium tracking-[0.18em] uppercase text-primary/80">
 				<span class="block w-6 h-px bg-primary/60"></span>
 				The basics
@@ -333,7 +303,7 @@
 			</p>
 		</div>
 
-		<div data-reveal class="border border-border/40 bg-white p-6">
+		<div class="border border-border/40 bg-white p-6">
 			<div class="text-[11px] uppercase tracking-wider text-muted/70 mb-4">How the hops work</div>
 			<ol class="space-y-4">
 				<li class="flex items-start gap-3">
@@ -360,8 +330,8 @@
 </section>
 
 <!-- When you need one -->
-<section bind:this={whenSection} class="py-20 border-b border-border/30">
-	<div class="mb-12" data-reveal>
+<section class="py-20 border-b border-border/30">
+	<div class="mb-12">
 		<div class="mb-4 inline-flex items-center gap-2 text-[11px] font-medium tracking-[0.18em] uppercase text-primary/80">
 			<span class="block w-6 h-px bg-primary/60"></span>
 			When you need one
@@ -377,7 +347,7 @@
 
 	<div class="grid gap-5 sm:grid-cols-2">
 		{#each whenYouNeedIt as item}
-			<div data-reveal class="flex items-start gap-5 border border-border/40 bg-white p-6">
+			<div class="flex items-start gap-5 border border-border/40 bg-white p-6">
 				<div class="flex h-10 w-10 shrink-0 items-center justify-center border border-border/50 bg-background">
 					<item.icon size={20} class="text-primary" />
 				</div>
@@ -391,8 +361,8 @@
 </section>
 
 <!-- How Lettr's SMTP relay works -->
-<section bind:this={featuresSection} class="py-20 border-b border-border/30">
-	<div class="mb-12" data-reveal>
+<section class="py-20 border-b border-border/30">
+	<div class="mb-12">
 		<div class="mb-4 inline-flex items-center gap-2 text-[11px] font-medium tracking-[0.18em] uppercase text-primary/80">
 			<span class="block w-6 h-px bg-primary/60"></span>
 			How it works
@@ -408,7 +378,7 @@
 
 	<div class="grid gap-5 sm:grid-cols-2">
 		{#each features as feature}
-			<div data-reveal class="flex items-start gap-5 border border-border/40 bg-white p-6">
+			<div class="flex items-start gap-5 border border-border/40 bg-white p-6">
 				<div class="flex h-10 w-10 shrink-0 items-center justify-center border border-border/50 bg-background">
 					<feature.icon size={20} class="text-primary" />
 				</div>
@@ -422,8 +392,8 @@
 </section>
 
 <!-- Setup — quick start -->
-<section bind:this={setupSection} class="py-20 border-b border-border/30">
-	<div class="mb-12" data-reveal>
+<section class="py-20 border-b border-border/30">
+	<div class="mb-12">
 		<div class="mb-4 inline-flex items-center gap-2 text-[11px] font-medium tracking-[0.18em] uppercase text-primary/80">
 			<span class="block w-6 h-px bg-primary/60"></span>
 			Quick start
@@ -438,7 +408,7 @@
 	</div>
 
 	<div class="grid gap-12 lg:grid-cols-2 lg:items-start">
-		<div data-reveal class="flex flex-col gap-6">
+		<div class="flex flex-col gap-6">
 			<div class="flex items-start gap-4">
 				<span class="flex h-8 w-8 shrink-0 items-center justify-center border border-border/50 bg-background font-code text-sm text-primary">1</span>
 				<div>
@@ -476,7 +446,7 @@
 			</div>
 		</div>
 
-		<div data-reveal class="min-w-0">
+		<div class="min-w-0">
 			<CodeSnippet
 				tabs={data.smtpTabs}
 				primaryTabIndices={[0, 1]}
@@ -489,8 +459,8 @@
 </section>
 
 <!-- SMTP relay vs API -->
-<section bind:this={compareSection} class="py-20 border-b border-border/30">
-	<div class="mb-12" data-reveal>
+<section class="py-20 border-b border-border/30">
+	<div class="mb-12">
 		<div class="mb-4 inline-flex items-center gap-2 text-[11px] font-medium tracking-[0.18em] uppercase text-primary/80">
 			<span class="block w-6 h-px bg-primary/60"></span>
 			SMTP relay vs. API
@@ -505,7 +475,7 @@
 	</div>
 
 	<div class="grid gap-5 lg:grid-cols-2">
-		<div data-reveal class="border border-border/40 bg-white p-6">
+		<div class="border border-border/40 bg-white p-6">
 			<div class="mb-4 flex items-center gap-2">
 				<ArrowsClockwiseIcon size={18} class="text-primary" />
 				<h3 class="text-base font-semibold text-surface">Use the SMTP relay when…</h3>
@@ -520,7 +490,7 @@
 			</ul>
 		</div>
 
-		<div data-reveal class="border border-border/40 bg-white p-6">
+		<div class="border border-border/40 bg-white p-6">
 			<div class="mb-4 flex items-center gap-2">
 				<TerminalWindowIcon size={18} class="text-primary" />
 				<h3 class="text-base font-semibold text-surface">Use the REST API when…</h3>
@@ -536,7 +506,7 @@
 		</div>
 	</div>
 
-	<p data-reveal class="mt-6 text-sm text-muted">
+	<p class="mt-6 text-sm text-muted">
 		Need the full breakdown? Read
 		<a class="text-primary underline underline-offset-2" href="/blog/smtp-vs-rest-api-how-to-choose/">SMTP vs. REST API: how to choose</a>.
 	</p>
@@ -546,8 +516,8 @@
 <Pricing />
 
 <!-- FAQ -->
-<section bind:this={faqSection} class="py-16 border-b border-border/30">
-	<div class="mb-10" data-reveal>
+<section class="py-16 border-b border-border/30">
+	<div class="mb-10">
 		<div class="mb-4 inline-flex items-center gap-2 text-[11px] font-medium tracking-[0.18em] uppercase text-primary/80">
 			<span class="block w-6 h-px bg-primary/60"></span>
 			FAQ
@@ -560,7 +530,7 @@
 
 	<div class="space-y-0" data-markdown="faq">
 		{#each faqs as faq, i}
-			<div data-reveal class="{i < faqs.length - 1 ? 'border-b border-border/20' : ''}">
+			<div class="{i < faqs.length - 1 ? 'border-b border-border/20' : ''}">
 				<button
 					onclick={() => toggleFaq(i)}
 					class="flex w-full items-center justify-between py-5 text-left"
@@ -592,8 +562,8 @@
 </div>
 
 <!-- Final CTA -->
-<section bind:this={finalCtaSection} class="py-20">
-	<div data-reveal class="flex flex-col items-center text-center">
+<section class="py-20">
+	<div class="flex flex-col items-center text-center">
 		<h2 class="mb-3 text-surface">
 			Point your app at <span class="text-primary">smtp.lettr.com.</span>
 		</h2>

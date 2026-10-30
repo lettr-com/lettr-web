@@ -899,18 +899,6 @@ html:has(.bleed) {
   }
 }
 
-/*
- * Scroll reveals (src/lib/utils/reveal.ts) start visible. Only an element that
- * was still below the fold when the page set up gets this attribute, and it
- * keeps it until it scrolls in. Unlayered so an opacity utility on the element
- * cannot show it early; screen only so printing shows everything.
- */
-@media screen {
-  [data-reveal-pending] {
-    opacity: 0;
-  }
-}
-
 @keyframes nav-scale-in {
   from {
     opacity: 0;

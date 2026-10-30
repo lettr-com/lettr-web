@@ -1,10 +1,6 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
 	import LargeFeatureCard from './LargeFeatureCard.svelte';
 	import { capturePosthogEvent } from '$lib/analytics/posthog';
-	import { createScrollRevealCleanup } from '$lib/utils/reveal';
-
-	let section: HTMLElement | undefined = $state();
 
 	function trackCard(label: string, href: string) {
 		void capturePosthogEvent('cta_clicked', {
@@ -14,15 +10,10 @@
 			destination_type: 'internal'
 		});
 	}
-
-	onMount(() => {
-		if (!section) return;
-		return createScrollRevealCleanup({ scope: section, targets: '[data-reveal]' });
-	});
 </script>
 
-<section bind:this={section} class="border-b border-border/30 py-20 sm:py-24">
-	<div data-reveal class="mb-12 max-w-[760px]">
+<section class="border-b border-border/30 py-20 sm:py-24">
+	<div class="mb-12 max-w-[760px]">
 		<h2 class="home-section-heading text-surface">
 			Every email you send. <span class="block text-primary">One platform.</span>
 		</h2>

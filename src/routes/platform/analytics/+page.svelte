@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
 	import ChartBarIcon from 'phosphor-svelte/lib/ChartBarIcon';
 	import BellIcon from 'phosphor-svelte/lib/BellIcon';
 	import TrendUpIcon from 'phosphor-svelte/lib/TrendUpIcon';
@@ -7,29 +6,6 @@
 	import EyeIcon from 'phosphor-svelte/lib/EyeIcon';
 	import ShieldWarningIcon from 'phosphor-svelte/lib/ShieldWarningIcon';
 	import FeaturePageLayout from '$lib/components/FeaturePageLayout.svelte';
-	import { createScrollRevealCleanup } from '$lib/utils/reveal';
-
-	let metricsSection: HTMLElement | undefined = $state();
-	let tableSection: HTMLElement | undefined = $state();
-	let chartSection: HTMLElement | undefined = $state();
-	let featuresSection: HTMLElement | undefined = $state();
-
-	onMount(() => {
-		const cleanups: (() => void)[] = [];
-
-		for (const section of [metricsSection, tableSection, chartSection, featuresSection]) {
-			if (section) {
-				cleanups.push(
-					createScrollRevealCleanup({
-						scope: section,
-						targets: '[data-reveal]'
-					})
-				);
-			}
-		}
-
-		return () => cleanups.forEach((fn) => fn());
-	});
 
 	const metrics = [
 		{ label: 'Emails Sent', value: '76,970', change: '+12%', positive: true },
@@ -163,10 +139,10 @@
 
 	{#snippet children()}
 		<!-- Metric Cards -->
-		<div bind:this={metricsSection} class="mx-auto max-w-3xl">
+		<div class="mx-auto max-w-3xl">
 			<div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
 				{#each metrics as metric}
-					<div data-reveal class="border border-border/50 bg-white p-5">
+					<div class="border border-border/50 bg-white p-5">
 						<p class="text-xs font-medium text-muted uppercase">{metric.label}</p>
 						<p class="mt-1 font-heading text-2xl text-surface">{metric.value}</p>
 						<p
@@ -180,12 +156,12 @@
 		</div>
 
 		<!-- Email Types Table -->
-		<div bind:this={tableSection} class="mx-auto mt-20 max-w-3xl md:mt-28">
-			<h2 data-reveal class="mb-3 text-center">Per-template performance</h2>
-			<p data-reveal class="mx-auto mb-8 max-w-lg text-center text-body text-muted">
+		<div class="mx-auto mt-20 max-w-3xl md:mt-28">
+			<h2 class="mb-3 text-center">Per-template performance</h2>
+			<p class="mx-auto mb-8 max-w-lg text-center text-body text-muted">
 				Every email type tracked individually so you know exactly where to focus.
 			</p>
-			<div data-reveal class="overflow-x-auto border border-border/50 bg-white">
+			<div class="overflow-x-auto border border-border/50 bg-white">
 				<table class="w-full text-left text-sm">
 					<thead>
 						<tr class="border-b border-border/50 bg-background">
@@ -221,12 +197,12 @@
 		</div>
 
 		<!-- Delivery Chart -->
-		<div bind:this={chartSection} class="mx-auto mt-20 max-w-3xl md:mt-28">
-			<h2 data-reveal class="mb-3 text-center">Daily delivery overview</h2>
-			<p data-reveal class="mx-auto mb-8 max-w-lg text-center text-body text-muted">
+		<div class="mx-auto mt-20 max-w-3xl md:mt-28">
+			<h2 class="mb-3 text-center">Daily delivery overview</h2>
+			<p class="mx-auto mb-8 max-w-lg text-center text-body text-muted">
 				Track your sending volume and delivery rates day by day.
 			</p>
-			<div data-reveal class="border border-border/50 bg-white p-6">
+			<div class="border border-border/50 bg-white p-6">
 				<div class="mb-4 flex items-center justify-between">
 					<span class="text-sm font-medium text-surface">Delivery Rate</span>
 					<span class="font-code text-xs text-muted">Last 7 days</span>
@@ -247,10 +223,10 @@
 		</div>
 
 		<!-- Feature Cards -->
-		<div bind:this={featuresSection} class="mx-auto mt-20 max-w-3xl md:mt-28">
+		<div class="mx-auto mt-20 max-w-3xl md:mt-28">
 			<div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
 				{#each features as feature}
-					<div data-reveal class="border border-border/50 bg-white p-6">
+					<div class="border border-border/50 bg-white p-6">
 						<div class="mb-3 flex h-10 w-10 items-center justify-center border border-border/50 bg-background">
 							<feature.icon size={20} class="text-primary" />
 						</div>

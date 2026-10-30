@@ -18,7 +18,6 @@
 	import Pricing from '$lib/components/Pricing.svelte';
 	import FAQSection from '$lib/components/FAQSection.svelte';
 	import RelatedFeatures from '$lib/components/RelatedFeatures.svelte';
-	import { createScrollRevealCleanup } from '$lib/utils/reveal';
 	import { buildRegisterUrl, registerUrl } from '$lib/utils/utm';
 	import { capturePosthogEvent, trackSignupClick } from '$lib/analytics/posthog';
 	import { jsonLdScript } from '$lib/utils/jsonLd';
@@ -30,9 +29,6 @@
 	const metaDescription =
 		'Send transactional email from your SaaS via a clean REST API and SMTP relay — with sub-second delivery, automatic retries, webhooks, and searchable logs.';
 
-	let featuresSection: HTMLElement | undefined = $state();
-	let eventsSection: HTMLElement | undefined = $state();
-	let useCasesSection: HTMLElement | undefined = $state();
 	let registerHref: string = $state(registerUrl);
 
 	function trackHeroCta(label: string, href: string, variant: 'primary' | 'secondary') {
@@ -107,20 +103,6 @@
 	onMount(() => {
 		registerHref = buildRegisterUrl(new URL(window.location.href), document.cookie);
 
-		const cleanups: (() => void)[] = [];
-
-		for (const section of [featuresSection, eventsSection, useCasesSection]) {
-			if (section) {
-				cleanups.push(
-					createScrollRevealCleanup({
-						scope: section,
-						targets: '[data-reveal]'
-					})
-				);
-			}
-		}
-
-		return () => cleanups.forEach((fn) => fn());
 	});
 </script>
 
@@ -185,8 +167,8 @@
 	</div>
 </section>
 
-<section bind:this={featuresSection} class="py-20 border-b border-border/30">
-	<div class="mb-12" data-reveal>
+<section class="py-20 border-b border-border/30">
+	<div class="mb-12">
 		<div class="mb-4 inline-flex items-center gap-2 text-[11px] font-medium tracking-[0.18em] uppercase text-primary/80">
 			<span class="block w-6 h-px bg-primary/60"></span>
 			Built for transactional
@@ -202,7 +184,7 @@
 
 	<div class="grid gap-5 sm:grid-cols-2">
 		{#each features as feature}
-			<div data-reveal class="flex items-start gap-5 border border-border/40 bg-white p-6">
+			<div class="flex items-start gap-5 border border-border/40 bg-white p-6">
 				<div class="flex h-10 w-10 shrink-0 items-center justify-center border border-border/50 bg-background">
 					<feature.icon size={20} class="text-primary" />
 				</div>
@@ -215,9 +197,9 @@
 	</div>
 </section>
 
-<section bind:this={eventsSection} class="py-20 border-b border-border/30">
+<section class="py-20 border-b border-border/30">
 	<div class="grid gap-12 lg:grid-cols-2 lg:items-center">
-		<div data-reveal>
+		<div>
 			<div class="mb-4 inline-flex items-center gap-2 text-[11px] font-medium tracking-[0.18em] uppercase text-primary/80">
 				<span class="block w-6 h-px bg-primary/60"></span>
 				Events &amp; webhooks
@@ -239,7 +221,7 @@
 			</ul>
 		</div>
 
-		<div data-reveal class="border border-border/40 bg-white p-6">
+		<div class="border border-border/40 bg-white p-6">
 			<div class="mb-4 flex items-center gap-2">
 				<LinkIcon size={16} class="text-primary" />
 				<span class="font-code text-xs text-muted">POST your-app.com/webhooks/lettr</span>
@@ -268,8 +250,8 @@
 	</div>
 </section>
 
-<section bind:this={useCasesSection} class="py-20 border-b border-border/30">
-	<div class="mb-10" data-reveal>
+<section class="py-20 border-b border-border/30">
+	<div class="mb-10">
 		<div class="mb-4 inline-flex items-center gap-2 text-[11px] font-medium tracking-[0.18em] uppercase text-primary/80">
 			<span class="block w-6 h-px bg-primary/60"></span>
 			Use cases
@@ -284,7 +266,7 @@
 
 	<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
 		{#each useCases as useCase}
-			<div data-reveal class="flex items-center gap-4 border border-border/40 bg-white p-5">
+			<div class="flex items-center gap-4 border border-border/40 bg-white p-5">
 				<div class="flex h-10 w-10 shrink-0 items-center justify-center border border-border/50 bg-background">
 					<useCase.icon size={20} class="text-primary" />
 				</div>

@@ -6,7 +6,6 @@
 	import ArrowRightIcon from 'phosphor-svelte/lib/ArrowRightIcon';
 	import CheckIcon from 'phosphor-svelte/lib/CheckIcon';
 	import XIcon from 'phosphor-svelte/lib/XIcon';
-	import { createScrollRevealCleanup } from '$lib/utils/reveal';
 	import { buildRegisterUrl, registerUrl } from '$lib/utils/utm';
 	import { providers } from '$lib/data/providers';
 	import { capturePosthogEvent, trackSignupClick } from '$lib/analytics/posthog';
@@ -42,28 +41,11 @@
 		Object.values(providers).filter((p) => p.slug !== data.provider)
 	);
 
-	let featuresSection: HTMLElement | undefined = $state();
-	let pricingSection: HTMLElement | undefined = $state();
-	let ctaSection: HTMLElement | undefined = $state();
 	let registerHref: string = $state(registerUrl);
 
 	onMount(() => {
 		registerHref = buildRegisterUrl(new URL(window.location.href), document.cookie);
 
-		const cleanups: (() => void)[] = [];
-
-		for (const section of [featuresSection, pricingSection, ctaSection]) {
-			if (section) {
-				cleanups.push(
-					createScrollRevealCleanup({
-						scope: section,
-						targets: '[data-reveal]'
-					})
-				);
-			}
-		}
-
-		return () => cleanups.forEach((fn) => fn());
 	});
 </script>
 
@@ -121,11 +103,11 @@
 		</div>
 
 		<!-- Features -->
-		<div bind:this={featuresSection} class="mt-16">
-			<h2 data-reveal class="mb-6">Feature comparison</h2>
+		<div class="mt-16">
+			<h2 class="mb-6">Feature comparison</h2>
 			<div class="space-y-3">
 				{#each provider.features as feature}
-					<div data-reveal class="border border-border/50 bg-white p-5">
+					<div class="border border-border/50 bg-white p-5">
 						<div class="mb-3 flex items-start justify-between gap-4">
 							<div>
 								<h3 class="text-base font-semibold text-surface">{feature.label}</h3>
@@ -160,13 +142,13 @@
 		</div>
 
 		<!-- Pricing -->
-		<div bind:this={pricingSection} class="mt-16">
-			<h2 data-reveal class="mb-2">Pricing comparison</h2>
-			<p data-reveal class="mb-6 text-sm text-muted">
+		<div class="mt-16">
+			<h2 class="mb-2">Pricing comparison</h2>
+			<p class="mb-6 text-sm text-muted">
 				Monthly pricing at different email volumes. Save up to {provider.averageSavings}% compared to {provider.name}.
 			</p>
 
-			<div data-reveal class="border border-border/50 bg-white">
+			<div class="border border-border/50 bg-white">
 				<!-- Table Header -->
 				<div class="grid grid-cols-3 border-b border-border/50 bg-background px-5 py-3 text-xs font-semibold tracking-wide text-muted uppercase">
 					<span>Volume</span>
@@ -220,8 +202,8 @@
 		{/if}
 
 		<!-- Migration CTA -->
-		<div bind:this={ctaSection} class="mt-20">
-			<div data-reveal class="border border-border/50 bg-white p-8 text-center md:p-12">
+		<div class="mt-20">
+			<div class="border border-border/50 bg-white p-8 text-center md:p-12">
 				<h2>Switch from {provider.name} in minutes</h2>
 				<p class="mx-auto mt-3 max-w-lg text-body leading-[1.7] text-muted">
 					Swap your mail driver, verify your domain, and start sending — over our

@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
 	import PaperPlaneRightIcon from 'phosphor-svelte/lib/PaperPlaneRightIcon';
 	import BugIcon from 'phosphor-svelte/lib/BugIcon';
 	import GlobeIcon from 'phosphor-svelte/lib/GlobeIcon';
@@ -15,31 +14,6 @@
 	import LockKeyIcon from 'phosphor-svelte/lib/LockKeyIcon';
 	import RobotIcon from 'phosphor-svelte/lib/RobotIcon';
 	import FeaturePageLayout from '$lib/components/FeaturePageLayout.svelte';
-	import { createScrollRevealCleanup } from '$lib/utils/reveal';
-
-	let toolsSection: HTMLElement | undefined = $state();
-	let conversationSection: HTMLElement | undefined = $state();
-	let actionsSection: HTMLElement | undefined = $state();
-	let flowSection: HTMLElement | undefined = $state();
-	let setupSection: HTMLElement | undefined = $state();
-	let securitySection: HTMLElement | undefined = $state();
-
-	onMount(() => {
-		const cleanups: (() => void)[] = [];
-
-		for (const section of [toolsSection, conversationSection, actionsSection, flowSection, setupSection, securitySection]) {
-			if (section) {
-				cleanups.push(
-					createScrollRevealCleanup({
-						scope: section,
-						targets: '[data-reveal]'
-					})
-				);
-			}
-		}
-
-		return () => cleanups.forEach((fn) => fn());
-	});
 
 	const compatibleTools = [
 		{ name: 'Claude', icon: '/images/icons/claude.svg' },
@@ -145,8 +119,8 @@
 
 	{#snippet children()}
 		<!-- Compatible Tools Bar -->
-		<div bind:this={toolsSection} class="mx-auto max-w-3xl">
-			<div data-reveal class="border border-border/50 bg-white p-6">
+		<div class="mx-auto max-w-3xl">
+			<div class="border border-border/50 bg-white p-6">
 				<p class="mb-4 text-center text-xs font-medium text-muted uppercase">Works with your favorite AI tools</p>
 				<div class="flex items-center justify-center gap-8">
 					{#each compatibleTools as tool}
@@ -162,14 +136,14 @@
 		</div>
 
 		<!-- Conversation Demo Panels -->
-		<div bind:this={conversationSection} class="mx-auto mt-20 max-w-3xl md:mt-28">
-			<h2 data-reveal class="mb-3 text-center">Talk to your email infrastructure</h2>
-			<p data-reveal class="mx-auto mb-8 max-w-lg text-center text-body text-muted">
+		<div class="mx-auto mt-20 max-w-3xl md:mt-28">
+			<h2 class="mb-3 text-center">Talk to your email infrastructure</h2>
+			<p class="mx-auto mb-8 max-w-lg text-center text-body text-muted">
 				Natural language commands that translate into real API actions.
 			</p>
 			<div class="grid gap-5 sm:grid-cols-2">
 				{#each conversations as convo}
-					<div data-reveal class="border border-border/50 bg-white">
+					<div class="border border-border/50 bg-white">
 						<div class="border-b border-border/50 bg-background px-4 py-2.5">
 							<span class="font-heading text-xs font-semibold text-surface uppercase">{convo.label}</span>
 						</div>
@@ -191,14 +165,14 @@
 		</div>
 
 		<!-- Available Actions Grid -->
-		<div bind:this={actionsSection} class="mx-auto mt-20 max-w-3xl md:mt-28">
-			<h2 data-reveal class="mb-3 text-center">Available actions</h2>
-			<p data-reveal class="mx-auto mb-8 max-w-lg text-center text-body text-muted">
+		<div class="mx-auto mt-20 max-w-3xl md:mt-28">
+			<h2 class="mb-3 text-center">Available actions</h2>
+			<p class="mx-auto mb-8 max-w-lg text-center text-body text-muted">
 				Every action maps to a real Lettr API endpoint. Your AI agent gets the same capabilities as your code.
 			</p>
 			<div class="grid gap-4 sm:grid-cols-2">
 				{#each actions as action}
-					<div data-reveal class="flex items-start gap-3 border border-border/50 bg-white px-4 py-3.5">
+					<div class="flex items-start gap-3 border border-border/50 bg-white px-4 py-3.5">
 						<div class="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center border border-border/50 bg-background">
 							<action.icon size={16} class="text-primary" />
 						</div>
@@ -212,14 +186,14 @@
 		</div>
 
 		<!-- Agent Flow Cards -->
-		<div bind:this={flowSection} class="mx-auto mt-20 max-w-3xl md:mt-28">
-			<h2 data-reveal class="mb-3 text-center">What you can build</h2>
-			<p data-reveal class="mx-auto mb-8 max-w-lg text-center text-body text-muted">
+		<div class="mx-auto mt-20 max-w-3xl md:mt-28">
+			<h2 class="mb-3 text-center">What you can build</h2>
+			<p class="mx-auto mb-8 max-w-lg text-center text-body text-muted">
 				Use the <a class="text-primary underline underline-offset-2" href="/glossary/mcp/">MCP</a> server as a building block for AI-powered email workflows.
 			</p>
 			<div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
 				{#each useCases as useCase}
-					<div data-reveal class="border border-border/50 bg-white p-6">
+					<div class="border border-border/50 bg-white p-6">
 						<div class="mb-3 flex h-10 w-10 items-center justify-center border border-border/50 bg-background">
 							<useCase.icon size={20} class="text-primary" />
 						</div>
@@ -231,12 +205,12 @@
 		</div>
 
 		<!-- Setup Steps -->
-		<div bind:this={setupSection} class="mx-auto mt-20 max-w-2xl md:mt-28">
-			<h2 data-reveal class="mb-3 text-center">Get started in 30 seconds</h2>
-			<p data-reveal class="mx-auto mb-8 max-w-lg text-center text-body text-muted">
+		<div class="mx-auto mt-20 max-w-2xl md:mt-28">
+			<h2 class="mb-3 text-center">Get started in 30 seconds</h2>
+			<p class="mx-auto mb-8 max-w-lg text-center text-body text-muted">
 				Add the Lettr MCP server to your AI tool configuration. One endpoint, one API key.
 			</p>
-			<div data-reveal class="border border-border/50 bg-surface p-6">
+			<div class="border border-border/50 bg-surface p-6">
 				<div class="mb-3 flex items-center gap-2">
 					<div class="h-2.5 w-2.5 bg-primary/60"></div>
 					<span class="font-code text-xs text-white/50">mcp.json</span>
@@ -246,8 +220,8 @@
 		</div>
 
 		<!-- Security Note -->
-		<div bind:this={securitySection} class="mx-auto mt-12 max-w-2xl">
-			<div data-reveal class="flex items-start gap-4 border border-border/50 bg-white p-6">
+		<div class="mx-auto mt-12 max-w-2xl">
+			<div class="flex items-start gap-4 border border-border/50 bg-white p-6">
 				<div class="flex h-10 w-10 shrink-0 items-center justify-center border border-border/50 bg-background">
 					<LockKeyIcon size={20} class="text-primary" />
 				</div>

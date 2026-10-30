@@ -1,12 +1,8 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
 	import PaperPlaneTiltIcon from 'phosphor-svelte/lib/PaperPlaneTiltIcon';
 	import UsersIcon from 'phosphor-svelte/lib/UsersIcon';
 	import GlobeIcon from 'phosphor-svelte/lib/GlobeIcon';
 	import ShieldCheckIcon from 'phosphor-svelte/lib/ShieldCheckIcon';
-	import { createScrollRevealCleanup } from '$lib/utils/reveal';
-
-	let section: HTMLElement | undefined = $state();
 
 	const points = [
 		{
@@ -30,18 +26,9 @@
 			description: 'Build and protect one sender reputation instead of managing two.'
 		}
 	];
-
-	onMount(() => {
-		if (!section) return;
-
-		return createScrollRevealCleanup({
-			scope: section,
-			targets: '[data-unified]'
-		});
-	});
 </script>
 
-<section bind:this={section} class="py-16 border-b border-border/30">
+<section class="py-16 border-b border-border/30">
 		<div class="mb-8" data-unified>
 			<h2 class="mb-3 text-surface">One platform. <span class="text-primary">One place to send.</span></h2>
 			<p class="text-body text-muted max-w-[55ch]">

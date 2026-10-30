@@ -6,7 +6,6 @@
 	import EnvelopeSimpleIcon from 'phosphor-svelte/lib/EnvelopeSimpleIcon';
 	import GlobeSimpleIcon from 'phosphor-svelte/lib/GlobeSimpleIcon';
 	import ArrowRightIcon from 'phosphor-svelte/lib/ArrowRightIcon';
-	import { createScrollRevealCleanup } from '$lib/utils/reveal';
 	import { buildRegisterUrl, registerUrl } from '$lib/utils/utm';
 	import { capturePosthogEvent, trackSignupClick } from '$lib/analytics/posthog';
 	import { jsonLdScript } from '$lib/utils/jsonLd';
@@ -25,30 +24,11 @@
 		}
 	}
 
-	let statsSection: HTMLElement | undefined = $state();
-	let storySection: HTMLElement | undefined = $state();
-	let valuesSection: HTMLElement | undefined = $state();
-	let productsSection: HTMLElement | undefined = $state();
-	let ctaSection: HTMLElement | undefined = $state();
 	let registerHref: string = $state(registerUrl);
 
 	onMount(() => {
 		registerHref = buildRegisterUrl(new URL(window.location.href), document.cookie);
 
-		const cleanups: (() => void)[] = [];
-
-		for (const section of [statsSection, storySection, valuesSection, productsSection, ctaSection]) {
-			if (section) {
-				cleanups.push(
-					createScrollRevealCleanup({
-						scope: section,
-						targets: '[data-reveal]'
-					})
-				);
-			}
-		}
-
-		return () => cleanups.forEach((fn) => fn());
 	});
 
 	const stats = [
@@ -137,9 +117,9 @@
 	</div>
 
 	<!-- Stats -->
-	<div bind:this={statsSection} class="mt-16 grid gap-4 sm:grid-cols-3">
+	<div class="mt-16 grid gap-4 sm:grid-cols-3">
 		{#each stats as stat}
-			<div data-reveal class="border border-border/50 bg-white p-6 text-center">
+			<div class="border border-border/50 bg-white p-6 text-center">
 				<div class="font-heading text-3xl text-primary">{stat.value}</div>
 				<div class="mt-2 text-sm text-muted">{stat.label}</div>
 			</div>
@@ -147,8 +127,8 @@
 	</div>
 
 	<!-- Story: Where we come from -->
-	<div bind:this={storySection} class="mt-20 md:mt-28">
-		<div data-reveal class="space-y-6 text-body leading-[1.8] text-muted">
+	<div class="mt-20 md:mt-28">
+		<div class="space-y-6 text-body leading-[1.8] text-muted">
 			<h2>Where we come from</h2>
 			<p>
 				Along the way, we built tools that thousands of companies rely on every day.
@@ -180,7 +160,7 @@
 			</p>
 		</div>
 
-		<div data-reveal class="mt-12 space-y-6 text-body leading-[1.8] text-muted">
+		<div class="mt-12 space-y-6 text-body leading-[1.8] text-muted">
 			<h2>Why we built Lettr</h2>
 			<p>
 				We wanted something different. Something that felt like it belonged in the Laravel ecosystem — elegant, opinionated,
@@ -195,11 +175,11 @@
 		</div>
 
 		<!-- Values -->
-		<div bind:this={valuesSection} class="mt-16">
+		<div class="mt-16">
 			<h2 class="mb-8">What we believe in</h2>
 			<div class="grid gap-5 sm:grid-cols-2">
 				{#each values as value}
-					<div data-reveal class="border border-border/50 bg-white p-6">
+					<div class="border border-border/50 bg-white p-6">
 						<div class="mb-3 flex h-10 w-10 items-center justify-center border border-border/50 bg-background">
 							<value.icon size={20} class="text-primary" />
 						</div>
@@ -211,7 +191,7 @@
 		</div>
 
 		<!-- Products -->
-		<div bind:this={productsSection} class="mt-16">
+		<div class="mt-16">
 			<h2 class="mb-3">Our products</h2>
 			<p class="mb-8 text-body leading-[1.8] text-muted">
 				Lettr is part of a family of email tools, each focused on solving a specific problem really well.
@@ -219,7 +199,6 @@
 			<div class="space-y-4">
 				{#each products as product}
 					<a
-						data-reveal
 						href={product.href}
 						target="_blank"
 						rel="noopener noreferrer"
@@ -244,8 +223,8 @@
 		</div>
 
 		<!-- CTA -->
-		<div bind:this={ctaSection} class="mt-20">
-			<div data-reveal class="border border-border/50 bg-white p-8 text-center md:p-12">
+		<div class="mt-20">
+			<div class="border border-border/50 bg-white p-8 text-center md:p-12">
 				<h2>We'd love to hear from you</h2>
 				<p class="mx-auto mt-3 max-w-lg text-body leading-[1.7] text-muted">
 					Whether you have questions, feedback, or just want to say hi — our inbox is always open.
