@@ -14,7 +14,6 @@
 	import PaperPlaneTiltIcon from 'phosphor-svelte/lib/PaperPlaneTiltIcon';
 	import Button from '$lib/components/Button.svelte';
 	import CodeSnippet from '$lib/components/CodeSnippet.svelte';
-	import type { CodeTab } from '$lib/utils/shiki';
 	import TalkToExpert from '$lib/components/TalkToExpert.svelte';
 	import Pricing from '$lib/components/Pricing.svelte';
 	import FAQSection from '$lib/components/FAQSection.svelte';
@@ -23,6 +22,9 @@
 	import { capturePosthogEvent, trackSignupClick } from '$lib/analytics/posthog';
 	import { jsonLdScript } from '$lib/utils/jsonLd';
 	import { productPageJsonLd } from '$lib/utils/pageJsonLd';
+	import type { PageProps } from './$types';
+
+	let { data }: PageProps = $props();
 
 	const metaDescription =
 		'Send transactional email from your SaaS via a clean REST API and SMTP relay — with sub-second delivery, automatic retries, webhooks, and searchable logs.';
@@ -41,89 +43,6 @@
 			trackSignupClick('transactional_hero', href);
 		}
 	}
-
-	// Real send examples, verified against docs.lettr.com on 2026-08-19:
-	// POST https://app.lettr.com/api/emails, Node `lettr` package,
-	// Python `lettr.Lettr(...).emails.send(from_email=...)`, PHP
-	// `Lettr::client(...)->emails()->sendHtml(...)`.
-	const sendTabs: CodeTab[] = [
-		{
-			label: 'cURL',
-			lang: 'bash',
-			code: `curl -X POST https://app.lettr.com/api/emails \\
-  -H "Authorization: Bearer $LETTR_API_KEY" \\
-  -H "Content-Type: application/json" \\
-  -d '{
-    "from": "sender@yourdomain.com",
-    "from_name": "Your App",
-    "to": ["recipient@example.com"],
-    "subject": "Hello from Lettr",
-    "html": "<h1>Welcome!</h1><p>Thanks for signing up.</p>"
-  }'`
-		},
-		{
-			label: 'Node.js',
-			lang: 'javascript',
-			code: `import { Lettr } from "lettr";
-
-const client = new Lettr(process.env.LETTR_API_KEY);
-
-const { data, error } = await client.emails.send({
-  from: "sender@yourdomain.com",
-  from_name: "Your App",
-  to: ["recipient@example.com"],
-  subject: "Hello from Lettr",
-  html: "<h1>Welcome!</h1><p>Thanks for signing up.</p>",
-});
-
-if (error) console.error(error.message);
-else console.log(data.request_id);`
-		},
-		{
-			label: 'Python',
-			lang: 'python',
-			code: `import os
-import lettr
-
-client = lettr.Lettr(os.environ["LETTR_API_KEY"])
-
-response = client.emails.send(
-    from_email="sender@yourdomain.com",
-    from_name="Your App",
-    to=["recipient@example.com"],
-    subject="Hello from Lettr",
-    html="<h1>Welcome!</h1><p>Thanks for signing up.</p>",
-)
-
-print(response.request_id)`
-		},
-		{
-			label: 'PHP',
-			lang: 'php',
-			code: `use Lettr\\Lettr;
-
-$lettr = Lettr::client(getenv('LETTR_API_KEY'));
-
-$response = $lettr->emails()->sendHtml(
-    from: 'sender@yourdomain.com',
-    to: 'recipient@example.com',
-    subject: 'Hello from Lettr',
-    html: '<h1>Welcome!</h1><p>Thanks for signing up.</p>',
-);`
-		},
-		{
-			label: 'Laravel',
-			lang: 'php',
-			code: `use Lettr\\Laravel\\Facades\\Lettr;
-
-Lettr::emails()->sendHtml(
-    from: 'sender@yourdomain.com',
-    to: 'recipient@example.com',
-    subject: 'Hello from Lettr',
-    html: '<h1>Welcome!</h1><p>Thanks for signing up.</p>',
-);`
-		}
-	];
 
 	const features = [
 		{
@@ -240,7 +159,7 @@ Lettr::emails()->sendHtml(
 
 		<div>
 			<CodeSnippet
-				tabs={sendTabs}
+				tabs={data.sendTabs}
 				primaryTabIndices={[0, 1]}
 				moreTabIndices={[2, 3, 4]}
 			/>

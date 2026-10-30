@@ -22,7 +22,8 @@ Operational guide for coding agents working in `lettr-web`.
 - `src/routes/+layout.svelte`: global page shell, SEO/meta tags, navbar, canvas, spline footer wrapper.
 - `src/routes/+page.svelte`: homepage composition of section components.
 - `src/lib/components/*.svelte`: reusable UI sections and widgets.
-- `src/lib/utils/shiki.ts`: syntax highlighting theme + singleton highlighter + sample code tabs.
+- `src/lib/utils/shiki.ts`: syntax highlighting theme + sample code tabs.
+- `src/lib/server/highlight.ts`: singleton Shiki highlighter, run from server loads at prerender time; the browser never loads Shiki. `CodeSnippet` takes tabs from `highlightTabs`; the blog's `Code` takes props from `highlightCode` in the post's `+page.server.ts` (a block without them shows uncoloured).
 - `src/lib/utils/spline.ts`: spline loader + visibility gating helpers.
 - `src/styles/app.css`: Tailwind import, custom theme tokens, base rules, and utility classes.
 - `src/lib/agents/`: build step writing an `index.md` twin of every prerendered page (from `<main>`), which CloudFront serves for `Accept: text/markdown`. Mark UI mockups with `data-markdown="skip"`; mark FAQ accordions whose answers only live in FAQPage JSON-LD with `data-markdown="faq"`; give meaningful icons an `aria-label`.

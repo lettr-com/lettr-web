@@ -12,23 +12,9 @@
 		FaqItem,
 		ProductNote
 	} from '$lib/components/blog';
+	import type { PageProps } from './$types';
 
-	const sendExample = `curl -X POST https://app.lettr.com/api/emails \\
-  -H "Authorization: Bearer lttr_your_api_key" \\
-  -H "Content-Type: application/json" \\
-  -d '{
-    "from": "orders@yourapp.com",
-    "to": ["user@example.com"],
-    "subject": "Your order shipped",
-    "template_slug": "order-shipped",
-    "substitution_data": { "tracking_number": "1Z999AA1" }
-  }'`;
-
-	const responseExample = `{
-  "request_id": "b7e2a1c4-93f0-4d2e-8a51-6c0f3d9e7b21",
-  "accepted": 1,
-  "rejected": 0
-}`;
+	let { data }: PageProps = $props();
 </script>
 
 <BlogPost
@@ -81,11 +67,11 @@
 		and bounce processing. A complete send through Lettr's API looks like this:
 	</Paragraph>
 
-	<Code lang="bash" code={sendExample} />
+	<Code {...data.code.sendExample} />
 
 	<Paragraph>The response arrives in milliseconds:</Paragraph>
 
-	<Code lang="json" code={responseExample} />
+	<Code {...data.code.responseExample} />
 
 	<Paragraph>
 		The <code>request_id</code> is the handle for everything that follows.
