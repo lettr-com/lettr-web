@@ -26,7 +26,7 @@
 		{
 			label: 'Send emails',
 			prompt: 'Send a welcome email to john@example.com using the welcome-v2 template with their name and activation link.',
-			response: 'Email sent successfully to john@example.com using template welcome-v2. Message ID: msg_a1b2c3d4. Delivery status: accepted.'
+			response: 'Email sent successfully to john@example.com using template welcome-v2. Request ID: 12345678901234567890. Delivery status: accepted.'
 		},
 		{
 			label: 'Debug delivery',

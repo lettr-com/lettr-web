@@ -47,13 +47,13 @@
 			icon: UsersThreeIcon,
 			title: 'Contact lists and segmentation',
 			description:
-				'Manage audiences without a spreadsheet. Filter by attributes, behavior, or custom events. Segments update in real time as your data changes.'
+				'Manage audiences without a spreadsheet. Filter by status, topic, list, or your own contact properties. Segments update automatically as your data changes.'
 		},
 		{
 			icon: ChartLineIcon,
 			title: 'Campaign analytics',
 			description:
-				'Opens, clicks, conversions, unsubscribes — per campaign and per contact. Compare variants, surface what works, and feed insights back into your product.'
+				'Opens, clicks, bounces, unsubscribes — per campaign, with activity for each recipient. Compare sent campaigns side by side and see what works.'
 		},
 		{
 			icon: ShieldCheckIcon,
@@ -63,18 +63,18 @@
 		},
 		{
 			icon: ClockCounterClockwiseIcon,
-			title: 'Version history and approvals',
+			title: 'Version history',
 			description:
-				'Roll back any change. Add reviewers before a campaign goes out. Audit every send to a known author and a known template version.'
+				'Compare template versions, publish one now or schedule it for later, and go back by publishing an earlier one. Sends use the active version until you change it.'
 		}
 	];
 
 	const listFeatures = [
-		'Import via CSV, API, or webhook',
+		'Import via CSV or API',
 		'Double opt-in flows out of the box',
 		'GDPR-aware unsubscribe and consent tracking',
 		'Custom fields and dynamic placeholders',
-		'Real-time segments — no nightly batch'
+		'Segments that update automatically — no nightly batch'
 	];
 
 	onMount(() => {
@@ -184,8 +184,8 @@
 				Audiences that<br /><span class="text-primary">stay in sync.</span>
 			</h2>
 			<p class="text-body text-muted mb-6 max-w-[52ch]">
-				Push contacts from your product via API or webhook. Segments update in real time as
-				attributes and events change — no nightly export, no stale lists.
+				Push contacts from your product via API. Segments update automatically as contact data
+				and subscriptions change — no nightly export, no stale lists.
 			</p>
 			<ul class="space-y-3">
 				{#each listFeatures as item}

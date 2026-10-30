@@ -85,7 +85,7 @@
 
 	const eventFeatures = [
 		'delivered, opened, clicked, bounced, and complained events',
-		'HMAC-signed payloads you can verify',
+		'Basic Auth or OAuth 2.0 on each endpoint',
 		'Automatic retries with exponential backoff',
 		'Up to unlimited endpoints, filtered by event type',
 		'Every send searchable in the logs for up to 90 days'
@@ -226,24 +226,27 @@
 				<LinkIcon size={16} class="text-primary" />
 				<span class="font-code text-xs text-muted">POST your-app.com/webhooks/lettr</span>
 			</div>
-			<pre class="overflow-x-auto font-code text-[13px] leading-relaxed text-surface">{`{
-  "event": "email.delivered",
-  "email_id": "msg_8f21c0",
-  "to": "alex@example.com",
-  "subject": "Your login code",
-  "tags": ["auth", "2fa"],
-  "timestamp": "2026-04-18T09:21:04Z"
-}`}</pre>
+			<pre class="overflow-x-auto font-code text-[13px] leading-relaxed text-surface">{`[{
+  "msys": {
+    "message_event": {
+      "type": "delivery",
+      "event_id": "92356927693813856",
+      "rcpt_to": "alex@example.com",
+      "subject": "Your login code",
+      "timestamp": "1776504064"
+    }
+  }
+}]`}</pre>
 			<div class="mt-4 border-t border-border/30 pt-4">
 				<div class="text-[11px] uppercase tracking-wider text-muted/70 mb-2">
 					Events you can subscribe to
 				</div>
 				<div class="flex flex-wrap gap-2">
-					<span class="border border-border/40 bg-background px-2 py-0.5 text-[12px] text-surface">delivered</span>
-					<span class="border border-border/40 bg-background px-2 py-0.5 text-[12px] text-surface">opened</span>
-					<span class="border border-border/40 bg-background px-2 py-0.5 text-[12px] text-surface">clicked</span>
-					<span class="border border-border/40 bg-background px-2 py-0.5 text-[12px] text-surface">bounced</span>
-					<span class="border border-border/40 bg-background px-2 py-0.5 text-[12px] text-surface">complained</span>
+					<span class="border border-border/40 bg-background px-2 py-0.5 text-[12px] text-surface">message.delivery</span>
+					<span class="border border-border/40 bg-background px-2 py-0.5 text-[12px] text-surface">engagement.open</span>
+					<span class="border border-border/40 bg-background px-2 py-0.5 text-[12px] text-surface">engagement.click</span>
+					<span class="border border-border/40 bg-background px-2 py-0.5 text-[12px] text-surface">message.bounce</span>
+					<span class="border border-border/40 bg-background px-2 py-0.5 text-[12px] text-surface">message.spam_complaint</span>
 				</div>
 			</div>
 		</div>
