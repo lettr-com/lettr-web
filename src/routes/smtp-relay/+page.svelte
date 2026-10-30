@@ -270,7 +270,7 @@
 			</p>
 		</div>
 
-		<div>
+		<div class="min-w-0">
 			<CodeSnippet
 				tabs={data.smtpTabs}
 				primaryTabIndices={[0, 1]}
@@ -446,7 +446,7 @@
 			</div>
 		</div>
 
-		<div>
+		<div class="min-w-0">
 			<CodeSnippet
 				tabs={data.smtpTabs}
 				primaryTabIndices={[0, 1]}

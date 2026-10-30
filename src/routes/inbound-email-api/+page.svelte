@@ -237,7 +237,7 @@
 			</p>
 		</div>
 
-		<div>
+		<div class="min-w-0">
 			<CodeSnippet
 				tabs={data.handlerTabs}
 				primaryTabIndices={[0, 1]}
@@ -325,7 +325,7 @@
 				</div>
 				<div>
 					<h3 class="mb-1 text-base font-semibold text-surface">{item.title}</h3>
-					<p class="text-sm leading-relaxed text-muted">{item.description}</p>
+					<p class="text-sm leading-relaxed text-muted wrap-anywhere">{item.description}</p>
 				</div>
 			</div>
 		{/each}
@@ -411,7 +411,7 @@
 			</ul>
 		</div>
 
-		<div class="border border-border/40 bg-white p-6">
+		<div class="min-w-0 border border-border/40 bg-white p-6">
 			<div class="mb-4 flex items-center gap-2">
 				<LinkIcon size={16} class="text-primary" />
 				<span class="font-code text-xs text-muted">POST your-app.com/webhooks/inbound</span>
@@ -496,7 +496,7 @@
 			</div>
 		</div>
 
-		<div>
+		<div class="min-w-0">
 			<CodeSnippet
 				tabs={data.handlerTabs}
 				primaryTabIndices={[0, 1]}

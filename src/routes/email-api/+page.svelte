@@ -157,7 +157,7 @@
 			</p>
 		</div>
 
-		<div>
+		<div class="min-w-0">
 			<CodeSnippet
 				tabs={data.sendTabs}
 				primaryTabIndices={[0, 1]}
