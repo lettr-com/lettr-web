@@ -46,19 +46,15 @@
 	)}
 </svelte:head>
 
-<section class="pt-32 pb-10 md:pt-[148px] md:pb-14">
+<section class="pt-24 pb-10 md:pb-14 min-[1200px]:pt-[98px]">
 	<div class="mx-auto flex max-w-[700px] flex-col items-center gap-5 text-center md:gap-6">
-		<p class="m-0 font-code text-[0.8125rem] leading-4 tracking-[0.08em] text-primary-strong uppercase md:hidden">Pricing</p>
-		<h1 class="m-0 flex flex-col items-center font-heading text-[2.5rem] leading-[1.1] font-normal tracking-[-0.025em] text-surface md:text-[3.75rem] md:leading-[66px]">
+		<h1 class="m-0 flex flex-col items-center font-heading text-[clamp(2rem,10.2vw,2.5rem)] leading-[1.1] font-normal tracking-[-0.025em] text-surface md:text-[3.75rem] md:leading-[66px]">
 			Email API pricing
-			<em class="font-serif text-[2.75rem] leading-[1.1] font-medium tracking-[-0.02em] text-primary md:text-[4.125rem] md:leading-[66px]">that grows with&nbsp;you.</em>
+			<em class="font-serif text-[clamp(2rem,10.3vw,2.75rem)] leading-[1.1] font-medium tracking-[-0.02em] whitespace-nowrap text-primary md:text-[4.125rem] md:leading-[66px]">that grows with you.</em>
 		</h1>
 		<p class="m-0 max-w-[534px] text-[1.0625rem] leading-[1.6] text-muted md:text-[1.1875rem] md:leading-[30px]">
 			Pay per email for transactional. Pay per contact for marketing.
 		</p>
-		<div class="max-w-[340px] md:hidden" data-markdown="skip">
-			<EuNote />
-		</div>
 	</div>
 </section>
 
@@ -80,7 +76,7 @@
 
 <PricingTables />
 
-<div class="mx-auto mt-10 hidden max-w-[1100px] md:block">
+<div class="mx-auto mt-10 max-w-[340px] md:max-w-[1100px]">
 	<EuNote />
 </div>
 
