@@ -117,33 +117,6 @@ export const month: ChangelogMonth = {
       },
     },
     {
-      title: "Email Editor Upgraded To Topol Email Editor v4",
-      modules: ["transactional", "campaigns"],
-      tags: ["UI/UX"],
-      lead:
-        "The email editor in Lettr now runs Topol Email Editor v4 for every team, with a new" +
-        " interface and the same features as before.",
-      body: [
-        "The editor shows which teammates have the same email open. It doesn't merge their" +
-          " edits, so two people saving the same email can still overwrite each other's changes." +
-          " The `?version=` in the editor's address is now the version number shown on the email" +
-          " page, and it follows each save. A reload no longer reopens an older version, and" +
-          " saving from there no longer writes old content over the new.",
-        "A new email made with “Create from scratch” now opens on the editor's start screen" +
-          " until it is first edited, and its “Start from predefined template” option offers" +
-          " Lettr's own premade library. The premade folders work as the category filter, and you" +
-          " can search by name. Synced sections in a picked premade come in as plain sections, as" +
-          " they do when you create an email from a premade.",
-        "A failed editor sign-in now shows an error instead of loading forever, reloading after" +
-          " a save in the custom HTML editor no longer shows an error page, and the “Sign in" +
-          " again” button on the expired-session banner is now readable.",
-      ],
-      docs: {
-        label: "Topol Email Editor",
-        href: "https://docs.lettr.com/learn/templates/topol-editor",
-      },
-    },
-    {
       title: "Passkeys As A Standalone Two-Factor Method",
       modules: ["platform"],
       tags: ["Security"],
