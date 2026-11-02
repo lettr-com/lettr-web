@@ -13,14 +13,14 @@ export const month: ChangelogMonth = {
         "Teammates can now comment on an email in the Topol editor, with each comment thread" +
         " pinned to a block or section.",
       body: [
-        "A thread supports replies, thumbs-up and thumbs-down reactions, and read or unread" +
-          " status, and it can be resolved and reopened. Only a comment's author can edit or" +
-          " delete it. The comments panel lists every thread by date or with unread threads" +
-          " first, and hides resolved threads by default.",
-        "New comments and changes appear for teammates who have the same email open, without a" +
-          " reload. Teammates you @mention in a new comment get an email, and mentions only reach" +
-          " members of your team. Deleting an email deletes its comments. Comments are available" +
-          " to every team.",
+        "Threads have replies, thumbs-up and thumbs-down reactions and a read or unread status," +
+          " and they can be resolved and reopened. Only a comment's author can edit or delete it." +
+          " The comments panel sorts threads by date or puts unread ones first, and hides" +
+          " resolved threads by default.",
+        "New comments and changes appear without a reload for teammates who have the same email" +
+          " open. A teammate @mentioned in a new comment gets an email, and only members of your" +
+          " team can be notified this way. Comments are available to every team, and deleting an" +
+          " email deletes its comments.",
       ],
       docs: {
         label: "Comments",
@@ -42,12 +42,12 @@ export const month: ChangelogMonth = {
           " `json_content`, or a `template_id`, whose HTML is copied onto the campaign. The" +
           " request can also set the name or just the subject, the sender fields, `reply_to`, the" +
           " audience in `audience_config` (`all_contacts`, `list_ids`, `segment_ids`, `topic_id`)" +
-          " and `language_overrides` for the secondary languages of a multilingual email. Every" +
-          " email, list, segment and topic must belong to your team. Unknown `audience_config`" +
-          " keys return a 422, as does a language override for anything other than the email's" +
-          " secondary languages, and that error lists the allowed ones. The endpoint needs the" +
-          " `campaigns:write` scope, which full-access keys include, and sandbox keys can't use" +
-          " it.",
+          " and `language_overrides` for the secondary languages of a multilingual email.",
+        "Every email, list, segment and topic must belong to your team. Unknown" +
+          " `audience_config` keys return a 422, as does a language override for anything other" +
+          " than the email's secondary languages, and that error lists the allowed ones. The" +
+          " endpoint needs the `campaigns:write` scope, which full-access keys include, and" +
+          " sandbox keys can't use it.",
         "An optional `Idempotency-Key` header works as it does on `POST /emails`. Repeating the" +
           " request with the same key and payload within 24 hours returns the original draft with" +
           " `Idempotency-Replayed: true`, whatever the order of the fields. A different payload" +
@@ -100,12 +100,12 @@ export const month: ChangelogMonth = {
         "Emails sent with `template_slug`, including double opt-in confirmations, and all" +
         " campaigns now go out with a plain-text version that Lettr generates from their HTML.",
       body: [
-        "They used to be HTML only, which spam filters can count against an email and which" +
-          " leaves text-only mail clients with nothing to show. The text is generated for every" +
-          " campaign language and for test emails too. Merge tags survive the conversion," +
-          " including inside links, the hidden preview text is left out, and sections set to show" +
-          " only on mobile are kept. If the conversion can't produce usable text, the email goes" +
-          " out HTML-only rather than failing.",
+        "They used to be HTML only. Spam filters can count that against an email, and text-only" +
+          " mail clients had nothing to show. The text is generated for every campaign language" +
+          " and for test emails too. Merge tags survive the conversion, including inside links." +
+          " The hidden preview text is left out, while sections set to show only on mobile are" +
+          " kept. If the conversion can't produce usable text, the email goes out HTML-only" +
+          " rather than failing.",
         "A `text` field passed on an API send still takes precedence, and emails sent with your" +
           " own `html` are unchanged. There is no setting to turn it off. The email page has a" +
           " new Plain text preview tab, next to Desktop and Mobile, that shows the text that will" +
@@ -126,10 +126,9 @@ export const month: ChangelogMonth = {
       body: [
         "The editor shows which teammates have the same email open. It doesn't merge their" +
           " edits, so two people saving the same email can still overwrite each other's changes." +
-          " The version in the editor's address (`?version=`) is now the version number shown on" +
-          " the email page, and after a save the address follows the version just saved, so a" +
-          " reload no longer reopens an older version and saving from there no longer writes old" +
-          " content over the new.",
+          " The `?version=` in the editor's address is now the version number shown on the email" +
+          " page, and it follows each save. A reload no longer reopens an older version, and" +
+          " saving from there no longer writes old content over the new.",
         "A new email made with “Create from scratch” now opens on the editor's start screen" +
           " until it is first edited, and its “Start from predefined template” option offers" +
           " Lettr's own premade library. The premade folders work as the category filter, and you" +
@@ -197,13 +196,6 @@ export const month: ChangelogMonth = {
         label: "Multilingual campaigns",
         href: "https://docs.lettr.com/learn/multilingual-campaigns/introduction",
       },
-    },
-    {
-      title: "Single Password Field On The Signup Form",
-      modules: ["platform"],
-      tags: ["UI/UX"],
-      lead: "The signup form now asks for your password once, without a “Confirm password” field.",
-      body: ["Password reset and changing your password in Settings still ask for it twice."],
     },
   ],
 
