@@ -1,5 +1,5 @@
 <script lang="ts">
-	import HomeHero from '$lib/components/home/HomeHero.svelte';
+	import HomeHeroOrbit from '$lib/components/home/HomeHeroOrbit.svelte';
 	import ProofStrip from '$lib/components/home/ProofStrip.svelte';
 	import DevTeamsSection from '$lib/components/home/DevTeamsSection.svelte';
 	import MarqueeBand from '$lib/components/home/MarqueeBand.svelte';
@@ -11,7 +11,7 @@
 	import PricingSlider from '$lib/components/home/PricingSlider.svelte';
 </script>
 
-<HomeHero />
+<HomeHeroOrbit />
 <ProofStrip />
 <DevTeamsSection />
 <MarqueeBand />
