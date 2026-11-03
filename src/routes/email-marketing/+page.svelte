@@ -12,7 +12,6 @@
 	import TalkToExpert from '$lib/components/TalkToExpert.svelte';
 	import FAQSection from '$lib/components/FAQSection.svelte';
 	import RelatedFeatures from '$lib/components/RelatedFeatures.svelte';
-	import { createFromAnimationCleanup, createScrollRevealCleanup } from '$lib/utils/gsap';
 	import { buildRegisterUrl, registerUrl } from '$lib/utils/utm';
 	import { capturePosthogEvent, trackSignupClick } from '$lib/analytics/posthog';
 	import { jsonLdScript } from '$lib/utils/jsonLd';
@@ -22,9 +21,6 @@
 	const metaDescription =
 		'Run marketing campaigns from the same platform as your transactional email: drag-and-drop editor, contact lists, segmentation, and automations.';
 
-	let hero: HTMLElement | undefined = $state();
-	let featuresSection: HTMLElement | undefined = $state();
-	let listsSection: HTMLElement | undefined = $state();
 	let registerHref: string = $state(registerUrl);
 
 	function trackHeroCta(label: string, href: string, variant: 'primary' | 'secondary') {
@@ -51,13 +47,13 @@
 			icon: UsersThreeIcon,
 			title: 'Contact lists and segmentation',
 			description:
-				'Manage audiences without a spreadsheet. Filter by attributes, behavior, or custom events. Segments update in real time as your data changes.'
+				'Manage audiences without a spreadsheet. Filter by status, topic, list, or your own contact properties. Segments update automatically as your data changes.'
 		},
 		{
 			icon: ChartLineIcon,
 			title: 'Campaign analytics',
 			description:
-				'Opens, clicks, conversions, unsubscribes — per campaign and per contact. Compare variants, surface what works, and feed insights back into your product.'
+				'Opens, clicks, bounces, unsubscribes — per campaign, with activity for each recipient. Compare sent campaigns side by side and see what works.'
 		},
 		{
 			icon: ShieldCheckIcon,
@@ -67,47 +63,23 @@
 		},
 		{
 			icon: ClockCounterClockwiseIcon,
-			title: 'Version history and approvals',
+			title: 'Version history',
 			description:
-				'Roll back any change. Add reviewers before a campaign goes out. Audit every send to a known author and a known template version.'
+				'Compare template versions, publish one now or schedule it for later, and go back by publishing an earlier one. Sends use the active version until you change it.'
 		}
 	];
 
 	const listFeatures = [
-		'Import via CSV, API, or webhook',
+		'Import via CSV or API',
 		'Double opt-in flows out of the box',
 		'GDPR-aware unsubscribe and consent tracking',
 		'Custom fields and dynamic placeholders',
-		'Real-time segments — no nightly batch'
+		'Segments that update automatically — no nightly batch'
 	];
 
 	onMount(() => {
 		registerHref = buildRegisterUrl(new URL(window.location.href), document.cookie);
 
-		const cleanups: (() => void)[] = [];
-
-		if (hero) {
-			cleanups.push(
-				createFromAnimationCleanup({
-					scope: hero,
-					targets: '[data-animate]',
-					vars: { y: 30, opacity: 0, duration: 0.7, stagger: 0.12, ease: 'power3.out' }
-				})
-			);
-		}
-
-		for (const section of [featuresSection, listsSection]) {
-			if (section) {
-				cleanups.push(
-					createScrollRevealCleanup({
-						scope: section,
-						targets: '[data-reveal]'
-					})
-				);
-			}
-		}
-
-		return () => cleanups.forEach((fn) => fn());
 	});
 </script>
 
@@ -128,11 +100,10 @@
 </svelte:head>
 
 <div>
-<section bind:this={hero} class="pt-page pb-16 border-b border-border/30">
+<section class="pt-page pb-16 border-b border-border/30">
 	<div class="grid gap-12 lg:grid-cols-1">
 		<div class="flex flex-col">
 			<a
-				data-animate
 				href="/platform/multilingual-campaigns/"
 				class="group mb-6 inline-flex w-fit items-center gap-2 border border-primary/20 bg-primary/5 p-1.5 text-sm text-primary transition-colors hover:bg-primary/10"
 			>
@@ -140,17 +111,17 @@
 				Multilingual campaigns — each contact gets the email in their language
 				<span class="transition-transform group-hover:translate-x-0.5">&rarr;</span>
 			</a>
-			<h1 data-animate class="text-surface mb-4">
+			<h1 class="text-surface mb-4">
 				Marketing campaigns,<br />
 				<span class="text-primary">in the same editor.</span>
 			</h1>
 
-			<p data-animate class="max-w-[650px] text-body text-muted mb-10">
+			<p class="max-w-[650px] text-body text-muted mb-10">
 				Run newsletters, product launches, and re-engagement series from the same platform that
 				sends your transactional email. One editor, one bill.
 			</p>
 
-			<div data-animate class="flex flex-wrap items-center mb-3 gap-2">
+			<div class="flex flex-wrap items-center mb-3 gap-2">
 				<Button
 					variant="primary"
 					href={registerHref}
@@ -162,19 +133,19 @@
 					onclick={() => trackHeroCta('See pricing', '/pricing/', 'secondary')}
 				>See pricing</Button>
 			</div>
-			<p data-animate class="max-w-md text-sm text-muted">
+			<p class="max-w-md text-sm text-muted">
 				Priced per contact. Bundle with Transactional for a discount.
 			</p>
 		</div>
 
-		<div data-animate class="campaigns-theme">
+		<div class="campaigns-theme">
 			<CampaignEditorPreview />
 		</div>
 	</div>
 </section>
 
-<section bind:this={featuresSection} class="py-20 border-b border-border/30">
-	<div class="mb-12" data-reveal>
+<section class="py-20 border-b border-border/30">
+	<div class="mb-12">
 		<div class="mb-4 inline-flex items-center gap-2 text-[11px] font-medium tracking-[0.18em] uppercase text-primary/80">
 			<span class="block w-6 h-px bg-primary/60"></span>
 			What's inside
@@ -189,7 +160,7 @@
 
 	<div class="grid gap-5 sm:grid-cols-2">
 		{#each features as feature}
-			<div data-reveal class="flex items-start gap-5 border border-border/40 bg-white p-6">
+			<div class="flex items-start gap-5 border border-border/40 bg-white p-6">
 				<div class="flex h-10 w-10 shrink-0 items-center justify-center border border-border/50 bg-background">
 					<feature.icon size={20} class="text-primary" />
 				</div>
@@ -202,9 +173,9 @@
 	</div>
 </section>
 
-<section bind:this={listsSection} class="py-20 border-b border-border/30">
+<section class="py-20 border-b border-border/30">
 	<div class="grid gap-12 lg:grid-cols-2 lg:items-center">
-		<div data-reveal>
+		<div>
 			<div class="mb-4 inline-flex items-center gap-2 text-[11px] font-medium tracking-[0.18em] uppercase text-primary/80">
 				<span class="block w-6 h-px bg-primary/60"></span>
 				Lists &amp; segmentation
@@ -213,8 +184,8 @@
 				Audiences that<br /><span class="text-primary">stay in sync.</span>
 			</h2>
 			<p class="text-body text-muted mb-6 max-w-[52ch]">
-				Push contacts from your product via API or webhook. Segments update in real time as
-				attributes and events change — no nightly export, no stale lists.
+				Push contacts from your product via API. Segments update automatically as contact data
+				and subscriptions change — no nightly export, no stale lists.
 			</p>
 			<ul class="space-y-3">
 				{#each listFeatures as item}
@@ -226,7 +197,7 @@
 			</ul>
 		</div>
 
-		<div data-reveal class="border border-border/40 bg-white p-6">
+		<div class="border border-border/40 bg-white p-6">
 			<div class="mb-4 flex items-center gap-2">
 				<PaperPlaneTiltIcon size={16} class="text-primary" />
 				<span class="font-code text-xs text-muted">contacts.add</span>

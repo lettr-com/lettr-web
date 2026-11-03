@@ -1,15 +1,14 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import { loadGsap } from '$lib/utils/gsap';
 	import CaretDownIcon from 'phosphor-svelte/lib/CaretDownIcon';
 	import CheckIcon from 'phosphor-svelte/lib/CheckIcon';
 	import CopyIcon from 'phosphor-svelte/lib/CopyIcon';
-	import { codeTabs as defaultTabs, type CodeTab } from '$lib/utils/shiki';
-	import { getHighlighter } from '$lib/utils/shiki';
+	import type { HighlightedTab } from '$lib/utils/shiki';
 	import { capturePosthogEvent } from '$lib/analytics/posthog';
 
 	interface Props {
-		tabs?: CodeTab[];
+		/** Highlighted in the page's server load (`highlightTabs`), so no highlighter runs here. */
+		tabs: HighlightedTab[];
 		primaryTabIndices?: number[];
 		moreTabIndices?: number[];
 		shadow?: boolean;
@@ -19,7 +18,7 @@
 	}
 
 	let {
-		tabs = defaultTabs,
+		tabs,
 		primaryTabIndices = [0, 2],
 		moreTabIndices = [1, 3, 4, 5, 6],
 		shadow = true,
@@ -28,30 +27,19 @@
 	}: Props = $props();
 
 	let activeTab: number = $state(0);
-	let highlightedCode: string = $state('');
+	// The tab whose code is on screen; it trails activeTab while the old code fades out.
+	let shownTab: number = $state(0);
 	let container: HTMLElement | undefined = $state();
 	let codeEl: HTMLElement | undefined = $state();
 	let moreOpen: boolean = $state(false);
 	let didCopy: boolean = $state(false);
 	let copyTimer: number | undefined;
+	/** The fade-out of the latest tab switch. */
+	let codeSwap: Animation | undefined;
 
-	const tabPadding = $derived(copyable ? 'px-4' : 'px-8');
+	const tabPadding = $derived(copyable ? 'px-4' : 'px-8 narrow:px-6');
 
 	let isMoreActive = $derived(moreTabIndices.includes(activeTab));
-
-	async function highlight(tab: CodeTab) {
-		const highlighter = await getHighlighter();
-		const isPhp = tab.lang === 'php' && !tab.code.trimStart().startsWith('<?');
-		const code = isPhp ? `<?php\n${tab.code}` : tab.code;
-		let html = highlighter.codeToHtml(code, {
-			lang: tab.lang,
-			theme: 'lettr'
-		});
-		if (isPhp) {
-			html = html.replace(/(<code[^>]*>).*?\n/, '$1');
-		}
-		highlightedCode = html;
-	}
 
 	function selectTab(index: number) {
 		if (index === activeTab) return;
@@ -66,35 +54,36 @@
 		moreOpen = false;
 		activeTab = index;
 
-		if (!codeEl) {
-			highlight(tabs[index]);
+		const target = codeEl;
+		if (!target || window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+			shownTab = index;
 			return;
 		}
 
-		const target = codeEl;
-		// gsap loads on demand (first tab switch); fall back to an instant swap
-		// if the chunk isn't available.
-		void loadGsap()
-			.then(({ gsap }) => {
-				gsap.killTweensOf(target);
-				gsap.to(target, {
-					opacity: 0,
-					y: 4,
-					duration: 0.15,
-					ease: 'power2.in',
-					onComplete: () => {
-						highlight(tabs[index]).then(() => {
-							gsap.fromTo(target, { opacity: 0, y: -4 }, {
-								opacity: 1,
-								y: 0,
-								duration: 0.2,
-								ease: 'power2.out'
-							});
-						});
-					}
-				});
-			})
-			.catch(() => void highlight(tabs[index]));
+		// Fade the old code out, swap it, fade the new code in. The fade-out starts
+		// from wherever a previous switch left the code, so quick clicks stay smooth.
+		const fadeOut = target.animate([{ opacity: 0, transform: 'translateY(4px)' }], {
+			duration: 150,
+			easing: 'cubic-bezier(0.55, 0.055, 0.675, 0.19)',
+			fill: 'forwards'
+		});
+		codeSwap = fadeOut;
+		void fadeOut.finished
+			.then(() => {
+				// A later switch owns the swap now.
+				if (codeSwap !== fadeOut) return;
+				shownTab = index;
+				const fadeIn = target.animate(
+					[
+						{ opacity: 0, transform: 'translateY(-4px)' },
+						{ opacity: 1, transform: 'none' }
+					],
+					{ duration: 200, easing: 'cubic-bezier(0.215, 0.61, 0.355, 1)' }
+				);
+				for (const animation of target.getAnimations()) {
+					if (animation !== fadeIn) animation.cancel();
+				}
+			});
 	}
 
 	async function copyCode() {
@@ -123,7 +112,6 @@
 	}
 
 	onMount(() => {
-		highlight(tabs[0]);
 		document.addEventListener('click', handleClickOutside);
 		return () => {
 			document.removeEventListener('click', handleClickOutside);
@@ -193,7 +181,7 @@
 
 	<div class="overflow-x-auto border-t border-gray-700 p-4 pb-8 bg-gray-800">
 		<div bind:this={codeEl} class="font-code [&_pre]:!bg-transparent [&_pre]:!p-0 [&_pre]:!leading-[1.5] [&_code]:!text-[13px] [&_code]:!leading-[1.5]">
-			{@html highlightedCode}
+			{@html tabs[shownTab].html}
 		</div>
 	</div>
 </div>

@@ -18,27 +18,19 @@
 	import PaperPlaneTiltIcon from 'phosphor-svelte/lib/PaperPlaneTiltIcon';
 	import CheckIcon from 'phosphor-svelte/lib/CheckIcon';
 	import CaretDownIcon from 'phosphor-svelte/lib/CaretDownIcon';
-	import { createFromAnimationCleanup, createScrollRevealCleanup } from '$lib/utils/gsap';
 	import { buildRegisterUrl, registerUrl } from '$lib/utils/utm';
 	import { capturePosthogEvent, trackSignupClick } from '$lib/analytics/posthog';
-	import type { CodeTab } from '$lib/utils/shiki';
 	import { jsonLdScript } from '$lib/utils/jsonLd';
 	import { productPageJsonLd } from '$lib/utils/pageJsonLd';
+	import type { PageProps } from './$types';
+
+	let { data }: PageProps = $props();
 
 	const metaDescription =
 		'Receive and parse inbound email via API and webhooks. Point your domain at Lettr and get every message as clean JSON fired to your endpoint.';
 
 	const INBOUND_DOCS_URL = 'https://docs.lettr.com/learn/receiving/introduction';
 
-	let hero: HTMLElement | undefined = $state();
-	let definitionSection: HTMLElement | undefined = $state();
-	let useCasesSection: HTMLElement | undefined = $state();
-	let flowSection: HTMLElement | undefined = $state();
-	let payloadSection: HTMLElement | undefined = $state();
-	let setupSection: HTMLElement | undefined = $state();
-	let bothWaysSection: HTMLElement | undefined = $state();
-	let faqSection: HTMLElement | undefined = $state();
-	let finalCtaSection: HTMLElement | undefined = $state();
 	let registerHref: string = $state(registerUrl);
 	let openFaq: number | null = $state(null);
 
@@ -69,84 +61,6 @@
 			opened: !wasOpen
 		});
 	}
-
-	// What developers actually write — a webhook receiver that turns a parsed
-	// inbound email into a ticket. The parsed payload lands as JSON on `data`;
-	// every handler reads the same from / subject / text / attachments shape.
-	const handlerTabs: CodeTab[] = [
-		{
-			label: 'Node.js',
-			lang: 'javascript',
-			code: `import express from 'express';
-
-const app = express();
-
-// Lettr POSTs a parsed inbound email to your endpoint
-app.post('/webhooks/inbound', express.json(), (req, res) => {
-  const { from, to, subject, text, attachments } = req.body.data;
-
-  // Turn the email into a ticket, reply, or workflow
-  createTicket({ from, subject, body: text, attachments });
-
-  // Respond 200 fast; dedupe on the message id
-  res.sendStatus(200);
-});`
-		},
-		{
-			label: 'PHP',
-			lang: 'php',
-			code: `// POST /webhooks/inbound
-$payload = json_decode(file_get_contents('php://input'), true);
-$email   = $payload['data'];
-
-// Turn the parsed inbound email into a ticket
-createTicket(
-    from:        $email['from'],
-    subject:     $email['subject'],
-    body:        $email['text'],
-    attachments: $email['attachments'],
-);
-
-// Respond 200 fast; dedupe on the message id
-http_response_code(200);`
-		},
-		{
-			label: 'Ruby',
-			lang: 'ruby',
-			code: `# POST /webhooks/inbound
-post '/webhooks/inbound' do
-  email = JSON.parse(request.body.read)['data']
-
-  Ticket.create!(
-    from:    email['from'],
-    subject: email['subject'],
-    body:    email['text']
-  )
-
-  # Respond 200 fast; dedupe on the message id
-  status 200
-end`
-		},
-		{
-			label: 'Go',
-			lang: 'go',
-			code: `func inbound(w http.ResponseWriter, r *http.Request) {
-    var payload struct {
-        Data struct {
-            From    string \`json:"from"\`
-            Subject string \`json:"subject"\`
-            Text    string \`json:"text"\`
-        } \`json:"data"\`
-    }
-    json.NewDecoder(r.Body).Decode(&payload)
-
-    // Turn the parsed inbound email into a ticket
-    createTicket(payload.Data.From, payload.Data.Subject, payload.Data.Text)
-
-    w.WriteHeader(http.StatusOK)
-}`
-		}
-	];
 
 	const useCases = [
 		{
@@ -253,39 +167,6 @@ end`
 	onMount(() => {
 		registerHref = buildRegisterUrl(new URL(window.location.href), document.cookie);
 
-		const cleanups: (() => void)[] = [];
-
-		if (hero) {
-			cleanups.push(
-				createFromAnimationCleanup({
-					scope: hero,
-					targets: '[data-animate]',
-					vars: { y: 30, opacity: 0, duration: 0.7, stagger: 0.12, ease: 'power3.out' }
-				})
-			);
-		}
-
-		for (const section of [
-			definitionSection,
-			useCasesSection,
-			flowSection,
-			payloadSection,
-			setupSection,
-			bothWaysSection,
-			faqSection,
-			finalCtaSection
-		]) {
-			if (section) {
-				cleanups.push(
-					createScrollRevealCleanup({
-						scope: section,
-						targets: '[data-reveal]'
-					})
-				);
-			}
-		}
-
-		return () => cleanups.forEach((fn) => fn());
 	});
 </script>
 
@@ -315,22 +196,21 @@ end`
 </svelte:head>
 
 <!-- Hero -->
-<section bind:this={hero} class="pt-page pb-16 border-b border-border/30">
+<section class="pt-page pb-16 border-b border-border/30">
 	<div class="grid gap-12 lg:grid-cols-1">
 		<div class="flex flex-col">
 			<div
-				data-animate
 				class="mb-4 inline-flex items-center gap-2 text-[11px] font-medium tracking-[0.18em] uppercase text-primary/80"
 			>
 				<span class="block w-6 h-px bg-primary/60"></span>
 				Inbound email API
 			</div>
-			<h1 data-animate class="text-surface mb-4">
+			<h1 class="text-surface mb-4">
 				Inbound Email API<br />
 				<span class="text-primary">receive and parse email in your app.</span>
 			</h1>
 
-			<p data-animate class="max-w-[650px] text-body text-muted mb-10">
+			<p class="max-w-[650px] text-body text-muted mb-10">
 				Lettr's inbound email API receives and parses incoming email programmatically — set a route,
 				get structured JSON on your webhook. Every message arrives as clean JSON — sender, subject,
 				body, headers, and attachments — in real time. No IMAP polling, no MIME parsing. Build
@@ -338,7 +218,7 @@ end`
 				from.
 			</p>
 
-			<div data-animate class="flex flex-wrap items-center mb-3 gap-2">
+			<div class="flex flex-wrap items-center mb-3 gap-2">
 				<Button
 					variant="primary"
 					href={registerHref}
@@ -352,14 +232,14 @@ end`
 					onclick={() => trackCta('inbound_api_hero', 'Read inbound docs', INBOUND_DOCS_URL, 'secondary')}
 				>Read inbound docs</Button>
 			</div>
-			<p data-animate class="max-w-md text-sm text-muted">
+			<p class="max-w-md text-sm text-muted">
 				Send and receive on one platform. <a class="text-primary underline underline-offset-2" href="/email-api/">See the email API</a>.
 			</p>
 		</div>
 
-		<div data-animate>
+		<div class="min-w-0">
 			<CodeSnippet
-				tabs={handlerTabs}
+				tabs={data.handlerTabs}
 				primaryTabIndices={[0, 1]}
 				moreTabIndices={[2, 3]}
 				filename={undefined}
@@ -369,9 +249,9 @@ end`
 </section>
 
 <!-- What is an inbound email API -->
-<section bind:this={definitionSection} class="py-20 border-b border-border/30">
+<section class="py-20 border-b border-border/30">
 	<div class="grid gap-12 lg:grid-cols-2 lg:items-start">
-		<div data-reveal>
+		<div>
 			<div class="mb-4 inline-flex items-center gap-2 text-[11px] font-medium tracking-[0.18em] uppercase text-primary/80">
 				<span class="block w-6 h-px bg-primary/60"></span>
 				The basics
@@ -391,7 +271,7 @@ end`
 			</p>
 		</div>
 
-		<div data-reveal class="border border-border/40 bg-white p-6">
+		<div class="border border-border/40 bg-white p-6">
 			<div class="text-[11px] uppercase tracking-wider text-muted/70 mb-4">From mailbox to your code</div>
 			<ol class="space-y-4">
 				<li class="flex items-start gap-3">
@@ -422,8 +302,8 @@ end`
 </section>
 
 <!-- What you can build -->
-<section bind:this={useCasesSection} class="py-20 border-b border-border/30">
-	<div class="mb-12" data-reveal>
+<section class="py-20 border-b border-border/30">
+	<div class="mb-12">
 		<div class="mb-4 inline-flex items-center gap-2 text-[11px] font-medium tracking-[0.18em] uppercase text-primary/80">
 			<span class="block w-6 h-px bg-primary/60"></span>
 			What you can build
@@ -439,13 +319,13 @@ end`
 
 	<div class="grid gap-5 sm:grid-cols-2">
 		{#each useCases as item}
-			<div data-reveal class="flex items-start gap-5 border border-border/40 bg-white p-6">
+			<div class="flex items-start gap-5 border border-border/40 bg-white p-6">
 				<div class="flex h-10 w-10 shrink-0 items-center justify-center border border-border/50 bg-background">
 					<item.icon size={20} class="text-primary" />
 				</div>
 				<div>
 					<h3 class="mb-1 text-base font-semibold text-surface">{item.title}</h3>
-					<p class="text-sm leading-relaxed text-muted">{item.description}</p>
+					<p class="text-sm leading-relaxed text-muted wrap-anywhere">{item.description}</p>
 				</div>
 			</div>
 		{/each}
@@ -453,8 +333,8 @@ end`
 </section>
 
 <!-- How Lettr's inbound works -->
-<section bind:this={flowSection} class="py-20 border-b border-border/30">
-	<div class="mb-12" data-reveal>
+<section class="py-20 border-b border-border/30">
+	<div class="mb-12">
 		<div class="mb-4 inline-flex items-center gap-2 text-[11px] font-medium tracking-[0.18em] uppercase text-primary/80">
 			<span class="block w-6 h-px bg-primary/60"></span>
 			How it works
@@ -470,7 +350,7 @@ end`
 	</div>
 
 	<div class="grid gap-5 sm:grid-cols-3">
-		<div data-reveal class="border border-border/40 bg-white p-6">
+		<div class="border border-border/40 bg-white p-6">
 			<div class="mb-4 flex h-10 w-10 items-center justify-center border border-border/50 bg-background">
 				<GlobeIcon size={20} class="text-primary" />
 			</div>
@@ -481,7 +361,7 @@ end`
 				and add the MX records Lettr shows you to its DNS.
 			</p>
 		</div>
-		<div data-reveal class="border border-border/40 bg-white p-6">
+		<div class="border border-border/40 bg-white p-6">
 			<div class="mb-4 flex h-10 w-10 items-center justify-center border border-border/50 bg-background">
 				<TrayIcon size={20} class="text-primary" />
 			</div>
@@ -492,7 +372,7 @@ end`
 				attachments separated out for you.
 			</p>
 		</div>
-		<div data-reveal class="border border-border/40 bg-white p-6">
+		<div class="border border-border/40 bg-white p-6">
 			<div class="mb-4 flex h-10 w-10 items-center justify-center border border-border/50 bg-background">
 				<LinkIcon size={20} class="text-primary" />
 			</div>
@@ -507,9 +387,9 @@ end`
 </section>
 
 <!-- Webhook payload example -->
-<section bind:this={payloadSection} class="py-20 border-b border-border/30">
+<section class="py-20 border-b border-border/30">
 	<div class="grid gap-12 lg:grid-cols-2 lg:items-center">
-		<div data-reveal>
+		<div>
 			<div class="mb-4 inline-flex items-center gap-2 text-[11px] font-medium tracking-[0.18em] uppercase text-primary/80">
 				<span class="block w-6 h-px bg-primary/60"></span>
 				Webhook payload
@@ -531,7 +411,7 @@ end`
 			</ul>
 		</div>
 
-		<div data-reveal class="border border-border/40 bg-white p-6">
+		<div class="min-w-0 border border-border/40 bg-white p-6">
 			<div class="mb-4 flex items-center gap-2">
 				<LinkIcon size={16} class="text-primary" />
 				<span class="font-code text-xs text-muted">POST your-app.com/webhooks/inbound</span>
@@ -564,8 +444,8 @@ end`
 </section>
 
 <!-- Quick start -->
-<section bind:this={setupSection} class="py-20 border-b border-border/30">
-	<div class="mb-12" data-reveal>
+<section class="py-20 border-b border-border/30">
+	<div class="mb-12">
 		<div class="mb-4 inline-flex items-center gap-2 text-[11px] font-medium tracking-[0.18em] uppercase text-primary/80">
 			<span class="block w-6 h-px bg-primary/60"></span>
 			Quick start
@@ -580,7 +460,7 @@ end`
 	</div>
 
 	<div class="grid gap-12 lg:grid-cols-2 lg:items-start">
-		<div data-reveal class="flex flex-col gap-6">
+		<div class="flex flex-col gap-6">
 			<div class="flex items-start gap-4">
 				<span class="flex h-8 w-8 shrink-0 items-center justify-center border border-border/50 bg-background font-code text-sm text-primary">1</span>
 				<div>
@@ -616,9 +496,9 @@ end`
 			</div>
 		</div>
 
-		<div data-reveal>
+		<div class="min-w-0">
 			<CodeSnippet
-				tabs={handlerTabs}
+				tabs={data.handlerTabs}
 				primaryTabIndices={[0, 1]}
 				moreTabIndices={[2, 3]}
 				shadow={false}
@@ -629,8 +509,8 @@ end`
 </section>
 
 <!-- Inbound + outbound in one -->
-<section bind:this={bothWaysSection} class="py-20 border-b border-border/30">
-	<div class="mb-12" data-reveal>
+<section class="py-20 border-b border-border/30">
+	<div class="mb-12">
 		<div class="mb-4 inline-flex items-center gap-2 text-[11px] font-medium tracking-[0.18em] uppercase text-primary/80">
 			<span class="block w-6 h-px bg-primary/60"></span>
 			Send + receive
@@ -645,7 +525,7 @@ end`
 	</div>
 
 	<div class="grid gap-5 lg:grid-cols-2">
-		<div data-reveal class="border border-border/40 bg-white p-6">
+		<div class="border border-border/40 bg-white p-6">
 			<div class="mb-4 flex items-center gap-2">
 				<PaperPlaneTiltIcon size={18} class="text-primary" />
 				<h3 class="text-base font-semibold text-surface">Outbound — send</h3>
@@ -660,7 +540,7 @@ end`
 			</ul>
 		</div>
 
-		<div data-reveal class="border border-border/40 bg-white p-6">
+		<div class="border border-border/40 bg-white p-6">
 			<div class="mb-4 flex items-center gap-2">
 				<TrayIcon size={18} class="text-primary" />
 				<h3 class="text-base font-semibold text-surface">Inbound — receive</h3>
@@ -676,7 +556,7 @@ end`
 		</div>
 	</div>
 
-	<p data-reveal class="mt-6 text-sm text-muted">
+	<p class="mt-6 text-sm text-muted">
 		Already sending with Lettr? Add receiving to the same setup — see the
 		<a class="text-primary underline underline-offset-2" href="/email-api/">transactional email API</a> and
 		<a class="text-primary underline underline-offset-2" href="/smtp-relay/">SMTP relay</a>.
@@ -687,8 +567,8 @@ end`
 <Pricing />
 
 <!-- FAQ -->
-<section bind:this={faqSection} class="py-16 border-b border-border/30">
-	<div class="mb-10" data-reveal>
+<section class="py-16 border-b border-border/30">
+	<div class="mb-10">
 		<div class="mb-4 inline-flex items-center gap-2 text-[11px] font-medium tracking-[0.18em] uppercase text-primary/80">
 			<span class="block w-6 h-px bg-primary/60"></span>
 			FAQ
@@ -701,7 +581,7 @@ end`
 
 	<div class="space-y-0" data-markdown="faq">
 		{#each faqs as faq, i}
-			<div data-reveal class="{i < faqs.length - 1 ? 'border-b border-border/20' : ''}">
+			<div class="{i < faqs.length - 1 ? 'border-b border-border/20' : ''}">
 				<button
 					onclick={() => toggleFaq(i)}
 					class="flex w-full items-center justify-between py-5 text-left"
@@ -733,8 +613,8 @@ end`
 </div>
 
 <!-- Final CTA -->
-<section bind:this={finalCtaSection} class="py-20">
-	<div data-reveal class="flex flex-col items-center text-center">
+<section class="py-20">
+	<div class="flex flex-col items-center text-center">
 		<h2 class="mb-3 text-surface">
 			Start <span class="text-primary">receiving email</span> in your app.
 		</h2>

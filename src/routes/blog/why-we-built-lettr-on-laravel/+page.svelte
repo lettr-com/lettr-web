@@ -12,17 +12,12 @@
 		FaqItem,
 		ProductNote
 	} from '$lib/components/blog';
+	import type { PageProps } from './$types';
 
-	const installCommands = `composer require lettr/lettr-laravel
-php artisan lettr:init`;
+	let { data }: PageProps = $props();
 
 	const envConfig = `MAIL_MAILER=lettr
 LETTR_API_KEY=...`;
-
-	const mailableExample = `use App\\Mail\\WelcomeEmail;
-use Illuminate\\Support\\Facades\\Mail;
-
-Mail::to('user@example.com')->queue(new WelcomeEmail());`;
 </script>
 
 <BlogPost
@@ -104,13 +99,13 @@ Mail::to('user@example.com')->queue(new WelcomeEmail());`;
 		rather than asking you to rewrite anything:
 	</Paragraph>
 
-	<Code lang="bash" code={installCommands} />
+	<Code {...data.code.installCommands} />
 
 	<Code lang="text" filename=".env" code={envConfig} />
 
 	<Paragraph>Existing Mailables keep working unchanged:</Paragraph>
 
-	<Code lang="php" code={mailableExample} />
+	<Code {...data.code.mailableExample} />
 
 	<Paragraph>
 		There is a second reason mail and Laravel fit together. Sending at volume is <strong>a queue

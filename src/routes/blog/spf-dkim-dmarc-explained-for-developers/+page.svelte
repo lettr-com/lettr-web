@@ -11,17 +11,16 @@
 		FaqItem,
 		ProductNote
 	} from '$lib/components/blog';
+	import type { PageProps } from './$types';
+
+	let { data }: PageProps = $props();
 
 	const spfRecord = `v=spf1 include:spf.lettr.com include:_spf.google.com ~all`;
-
-	const spfDig = `dig TXT yourapp.com +short`;
 
 	const dkimSignature = `DKIM-Signature: v=1; a=rsa-sha256; d=yourapp.com; s=lettr;
 h=from:to:subject:date:message-id;
 bh=2jUSOH9NhtVGCQWNr9BrIAPreKQjO6Sn7XIkfJVOzv8=;
 b=AuUoFEfDxTDkHlLXSZEpZj79LICEps6eda7W3deTVFOk2...`;
-
-	const dkimDig = `dig TXT lettr._domainkey.yourapp.com +short`;
 
 	const dmarcRecord = `v=DMARC1; p=none; rua=mailto:dmarc-reports@yourapp.com`;
 
@@ -39,15 +38,6 @@ b=AuUoFEfDxTDkHlLXSZEpZj79LICEps6eda7W3deTVFOk2...`;
 <header_from>yourapp.com</header_from>
 </identifiers>
 </record>`;
-
-	const verifyDig = `# Check SPF
-dig TXT yourapp.com +short | grep spf
-
-# Check DKIM (replace 'lettr' with your selector)
-dig TXT lettr._domainkey.yourapp.com +short
-
-# Check DMARC
-dig TXT _dmarc.yourapp.com +short`;
 
 	const authResults = `Authentication-Results: mx.google.com;
 dkim=pass header.d=yourapp.com header.s=lettr;
@@ -111,7 +101,7 @@ dmarc=pass (p=REJECT dis=NONE) header.from=yourapp.com`;
 
 	<Paragraph>Check the record with <code>dig</code>, and confirm there's exactly one:</Paragraph>
 
-	<Code lang="bash" code={spfDig} />
+	<Code {...data.code.spfDig} />
 
 	<Paragraph>
 		Unfortunately, SPF has <strong>one structural weakness</strong> worth remembering: <strong>it checks the envelope sender</strong> (the <code
@@ -141,7 +131,7 @@ dmarc=pass (p=REJECT dis=NONE) header.from=yourapp.com`;
 		signature <strong>no longer matches</strong>. Fetch the public key yourself:
 	</Paragraph>
 
-	<Code lang="bash" code={dkimDig} />
+	<Code {...data.code.dkimDig} />
 
 	<Paragraph>
 		The selector exists to enable key rotation: providers publish a new key under a new selector, start
@@ -224,7 +214,7 @@ dmarc=pass (p=REJECT dis=NONE) header.from=yourapp.com`;
 		with <code>dig</code>:
 	</Paragraph>
 
-	<Code lang="bash" code={verifyDig} />
+	<Code {...data.code.verifyDig} />
 
 	<Paragraph>
 		Then send yourself a test email and open "Show original" in Gmail. The recipient adds an

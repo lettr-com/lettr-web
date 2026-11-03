@@ -12,9 +12,9 @@
 		FaqItem,
 		ProductNote
 	} from '$lib/components/blog';
+	import type { PageProps } from './$types';
 
-	const apiKeyConnect = `claude mcp add --transport http lettr https://app.lettr.com/mcp \\
-  --header "Authorization: Bearer lttr_xxxxxxxxx"`;
+	let { data }: PageProps = $props();
 
 	// Single source for the visible FAQ and the FAQPage structured data.
 	const faqItems = [
@@ -144,7 +144,7 @@
 		command:
 	</Paragraph>
 
-	<Code lang="bash" filename="terminal" code={apiKeyConnect} />
+	<Code filename="terminal" {...data.code.apiKeyConnect} />
 
 	<Paragraph>
 		The same server can be connected twice, signed in for chat and with a scoped key for automation,

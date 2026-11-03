@@ -1,4 +1,4 @@
-import type { Highlighter, ThemeRegistration } from "shiki";
+import type { ThemeRegistration } from "shiki";
 
 export const lettrTheme: ThemeRegistration = {
   name: "lettr",
@@ -67,36 +67,15 @@ export const lettrTheme: ThemeRegistration = {
   ],
 };
 
-let highlighter: Highlighter | null = null;
-
-export async function getHighlighter(): Promise<Highlighter> {
-  if (!highlighter) {
-    // Dynamic import so the ~760 KB shiki bundle is split into its own lazy
-    // chunk instead of being pulled into the initial page load.
-    const { createHighlighter } = await import("shiki");
-    highlighter = await createHighlighter({
-      themes: [lettrTheme],
-      langs: [
-        "php",
-        "javascript",
-        "typescript",
-        "json",
-        "python",
-        "go",
-        "ruby",
-        "java",
-        "bash",
-        "shell",
-      ],
-    });
-  }
-  return highlighter;
-}
-
 export interface CodeTab {
   label: string;
   lang: string;
   code: string;
+}
+
+/** A tab with its code highlighted at prerender time by `$lib/server/highlight`. */
+export interface HighlightedTab extends CodeTab {
+  html: string;
 }
 
 export const codeTabs: CodeTab[] = [

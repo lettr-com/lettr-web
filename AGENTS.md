@@ -22,7 +22,8 @@ Operational guide for coding agents working in `lettr-web`.
 - `src/routes/+layout.svelte`: global page shell, SEO/meta tags, navbar, canvas, spline footer wrapper.
 - `src/routes/+page.svelte`: homepage composition of section components.
 - `src/lib/components/*.svelte`: reusable UI sections and widgets.
-- `src/lib/utils/shiki.ts`: syntax highlighting theme + singleton highlighter + sample code tabs.
+- `src/lib/utils/shiki.ts`: syntax highlighting theme + sample code tabs.
+- `src/lib/server/highlight.ts`: singleton Shiki highlighter, run from server loads at prerender time; the browser never loads Shiki. `CodeSnippet` takes tabs from `highlightTabs`; the blog's `Code` takes props from `highlightCode` in the post's `+page.server.ts` (a block without them shows uncoloured).
 - `src/lib/utils/spline.ts`: spline loader + visibility gating helpers.
 - `src/styles/app.css`: Tailwind import, custom theme tokens, base rules, and utility classes.
 - `src/lib/agents/`: build step writing an `index.md` twin of every prerendered page (from `<main>`), which CloudFront serves for `Accept: text/markdown`. Mark UI mockups with `data-markdown="skip"`; mark FAQ accordions whose answers only live in FAQPage JSON-LD with `data-markdown="faq"`; give meaningful icons an `aria-label`.
@@ -36,6 +37,7 @@ Operational guide for coding agents working in `lettr-web`.
 - Preview production build: `pnpm preview`
 - Sync SvelteKit types/config: `pnpm prepare`
 - Render blog art (cover, thumbnail, strip, OG) from each post's `art` in `posts.ts`: `vp run blog:images -- <slug>`; leave out the slug for every post. One-time setup and details in `tools/blog-images/README.md`. Commit the files it writes to `static/blog/<slug>/`.
+- Bake the homepage hero stills from the layout in `src/lib/hero/envelopeField.ts`: `vp run hero:bake`. Re-run it whenever that layout or the hero sprites change, and commit the files it writes to `static/hero/baked/`. One-time setup in `tools/dither/README.md`.
 - Render the homepage accordion art from the scenes in `tools/blog-images/accordion.mjs`: `vp run accordion:images`. Commit the files it writes to `static/home/accordion/`.
 
 ## Lint / Typecheck / Test Commands
@@ -133,7 +135,7 @@ Operational guide for coding agents working in `lettr-web`.
 ## Performance Guidelines
 
 - Avoid re-creating expensive objects repeatedly (see singleton highlighter pattern).
-- Keep animation work scoped and kill/reuse GSAP tweens where needed.
+- Keep animation work scoped: CSS first, the Web Animations API (`element.animate`) for JS-driven motion, and cancel animations you replace. Sections do not fade in on scroll: content is always visible, and new scroll-reveal effects should not be added.
 - Avoid unnecessary reactive churn; derive values with `$derived` when suitable.
 - Defer heavy client-only behavior to `onMount`.
 

@@ -2,7 +2,6 @@
 	import { onMount } from 'svelte';
 	import Seo from '$lib/components/Seo.svelte';
 	import ArrowRightIcon from 'phosphor-svelte/lib/ArrowRightIcon';
-	import { createFromAnimationCleanup, createScrollRevealCleanup } from '$lib/utils/gsap';
 	import { buildRegisterUrl, registerUrl } from '$lib/utils/utm';
 	import { providerList } from '$lib/data/providers';
 	import { capturePosthogEvent, trackSignupClick } from '$lib/analytics/posthog';
@@ -54,39 +53,11 @@
 		}
 	];
 
-	let hero: HTMLElement | undefined = $state();
-	let gridSection: HTMLElement | undefined = $state();
-	let guidesSection: HTMLElement | undefined = $state();
-	let ctaSection: HTMLElement | undefined = $state();
 	let registerHref: string = $state(registerUrl);
 
 	onMount(() => {
 		registerHref = buildRegisterUrl(new URL(window.location.href), document.cookie);
 
-		const cleanups: (() => void)[] = [];
-
-		if (hero) {
-			cleanups.push(
-				createFromAnimationCleanup({
-					scope: hero,
-					targets: '[data-animate]',
-					vars: { y: 20, opacity: 0, duration: 0.6, stagger: 0.1, ease: 'power3.out' }
-				})
-			);
-		}
-
-		for (const section of [gridSection, guidesSection, ctaSection]) {
-			if (section) {
-				cleanups.push(
-					createScrollRevealCleanup({
-						scope: section,
-						targets: '[data-reveal]'
-					})
-				);
-			}
-		}
-
-		return () => cleanups.forEach((fn) => fn());
 	});
 </script>
 
@@ -105,25 +76,24 @@
 
 <section class="pt-page pb-24">
 	<!-- Hero -->
-	<div bind:this={hero}>
-		<span data-animate class="mb-4 inline-block font-heading text-xs tracking-[0.15em] text-primary uppercase">
+	<div>
+		<span class="mb-4 inline-block font-heading text-xs tracking-[0.15em] text-primary uppercase">
 			COMPARE & MIGRATE
 		</span>
-		<h1 data-animate>
+		<h1>
 			Switch to Lettr from<br />any provider
 		</h1>
-		<p data-animate class="mt-6 text-body leading-[1.8] text-muted">
+		<p class="mt-6 text-body leading-[1.8] text-muted">
 			See how Lettr stacks up against the most popular transactional email providers. Better features, better
 			pricing, and a migration path that takes minutes.
 		</p>
 	</div>
 
 	<!-- Provider Grid -->
-	<div bind:this={gridSection} class="mt-16">
+	<div class="mt-16">
 		<div class="grid gap-4 sm:grid-cols-2">
 			{#each providerList as provider}
 				<a
-					data-reveal
 					href="/compare/{provider.slug}/"
 					class="group flex flex-col border border-border/50 bg-white p-6 transition-colors hover:border-primary/30"
 					onclick={() => trackProviderClick(provider.slug, provider.name, provider.averageSavings)}
@@ -155,15 +125,14 @@
 	</div>
 
 	<!-- Switching guides -->
-	<div bind:this={guidesSection} class="mt-20">
-		<h2 data-reveal class="mb-2">Switching guides</h2>
-		<p data-reveal class="mb-6 text-sm text-muted">
+	<div class="mt-20">
+		<h2 class="mb-2">Switching guides</h2>
+		<p class="mb-6 text-sm text-muted">
 			Honest, multi-tool roundups for teams shopping to move off a specific provider.
 		</p>
 		<div class="grid gap-4 sm:grid-cols-2">
 			{#each guides as guide}
 				<a
-					data-reveal
 					href="/compare/{guide.slug}/"
 					class="group flex flex-col border border-border/50 bg-white p-6 transition-colors hover:border-primary/30"
 					onclick={() => trackGuideClick(guide.slug, guide.title)}
@@ -187,8 +156,8 @@
 	</div>
 
 	<!-- CTA -->
-	<div bind:this={ctaSection} class="mt-20">
-		<div data-reveal class="border border-border/50 bg-white p-8 text-center md:p-12">
+	<div class="mt-20">
+		<div class="border border-border/50 bg-white p-8 text-center md:p-12">
 			<h2>Ready to switch?</h2>
 			<p class="mx-auto mt-3 max-w-lg text-body leading-[1.7] text-muted">
 				Migrating to Lettr takes less than 5 minutes. Swap out your mail driver, verify your domain, and you're

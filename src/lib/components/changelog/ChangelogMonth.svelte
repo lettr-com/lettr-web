@@ -51,7 +51,7 @@
 		It sits to the right of the entries on wide screens (as the blog's does),
 		but stays first in the DOM so it leads on phones, where it stacks above.
 	-->
-	<aside data-reveal class="mb-10 lg:sticky lg:top-32 lg:order-last lg:mb-0 lg:self-start">
+	<aside class="mb-10 lg:sticky lg:top-32 lg:order-last lg:mb-0 lg:self-start">
 		<div class="flex items-center gap-2 font-heading text-sm text-primary">
 			<span class="block h-px w-6 bg-primary/60"></span>
 			{railEyebrow}
@@ -104,7 +104,7 @@
 	<div class="min-w-0">
 		{#if shown.features.length || !hideEmpty}
 			<section id={sectionAnchor(month, 'features')} class="scroll-mt-28 first:mt-0">
-				<h2 data-reveal class="font-heading text-sm text-primary">
+				<h2 class="font-heading text-sm text-primary">
 					New features
 				</h2>
 				{#if shown.features.length}
@@ -114,7 +114,7 @@
 						{/each}
 					</div>
 				{:else}
-					<p data-reveal class="mt-4 text-sm text-muted">No new features shipped in {label}.</p>
+					<p class="mt-4 text-sm text-muted">No new features shipped in {label}.</p>
 				{/if}
 			</section>
 		{/if}
@@ -124,7 +124,7 @@
 				id={sectionAnchor(month, 'improvements')}
 				class="mt-14 scroll-mt-28 first:mt-0"
 			>
-				<h2 data-reveal class="font-heading text-sm text-primary">
+				<h2 class="font-heading text-sm text-primary">
 					Improvements
 				</h2>
 				{#if shown.improvements.length}
@@ -134,7 +134,7 @@
 						{/each}
 					</div>
 				{:else}
-					<p data-reveal class="mt-4 text-sm text-muted">No improvements recorded in {label}.</p>
+					<p class="mt-4 text-sm text-muted">No improvements recorded in {label}.</p>
 				{/if}
 			</section>
 		{/if}
@@ -144,14 +144,13 @@
 				id={sectionAnchor(month, 'bugfixes')}
 				class="mt-14 scroll-mt-28 first:mt-0"
 			>
-				<h2 data-reveal class="font-heading text-sm text-primary">
+				<h2 class="font-heading text-sm text-primary">
 					Bugfixes
 				</h2>
 				{#if shown.bugfixes.length}
 					<ul class="mt-5 divide-y divide-border/40 border border-border/50 bg-white">
 						{#each shown.bugfixes as fix (fix.text)}
 							<li
-								data-reveal
 								data-entry-title={fix.text}
 								class="grid gap-x-5 gap-y-2 px-5 py-4 sm:grid-cols-[9.5rem_minmax(0,1fr)]"
 							>
@@ -168,7 +167,7 @@
 						{/each}
 					</ul>
 				{:else}
-					<p data-reveal class="mt-4 text-sm text-muted">No bugfixes recorded in {label}.</p>
+					<p class="mt-4 text-sm text-muted">No bugfixes recorded in {label}.</p>
 				{/if}
 			</section>
 		{/if}

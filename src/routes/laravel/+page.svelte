@@ -63,7 +63,7 @@
 <IndexSection />
 <PricingSlider placement="laravel_pricing" transactionalQuestion="How many emails does your app send per month?" dither="edge">
 	{#snippet header()}
-		<div data-reveal class="mx-auto mb-10 flex max-w-[1100px] flex-col gap-4 lg:flex-row lg:items-end lg:justify-between lg:gap-16">
+		<div class="mx-auto mb-10 flex max-w-[1100px] flex-col gap-4 lg:flex-row lg:items-end lg:justify-between lg:gap-16">
 			<h2
 				id="pricing-heading"
 				class="m-0 font-heading text-[1.875rem] leading-[38px] text-balance tracking-[-0.02em] text-surface md:text-[2.625rem] md:leading-[50px]"

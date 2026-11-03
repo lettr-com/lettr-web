@@ -14,24 +14,21 @@
 	import PaperPlaneTiltIcon from 'phosphor-svelte/lib/PaperPlaneTiltIcon';
 	import Button from '$lib/components/Button.svelte';
 	import CodeSnippet from '$lib/components/CodeSnippet.svelte';
-	import type { CodeTab } from '$lib/utils/shiki';
 	import TalkToExpert from '$lib/components/TalkToExpert.svelte';
 	import Pricing from '$lib/components/Pricing.svelte';
 	import FAQSection from '$lib/components/FAQSection.svelte';
 	import RelatedFeatures from '$lib/components/RelatedFeatures.svelte';
-	import { createFromAnimationCleanup, createScrollRevealCleanup } from '$lib/utils/gsap';
 	import { buildRegisterUrl, registerUrl } from '$lib/utils/utm';
 	import { capturePosthogEvent, trackSignupClick } from '$lib/analytics/posthog';
 	import { jsonLdScript } from '$lib/utils/jsonLd';
 	import { productPageJsonLd } from '$lib/utils/pageJsonLd';
+	import type { PageProps } from './$types';
+
+	let { data }: PageProps = $props();
 
 	const metaDescription =
 		'Send transactional email from your SaaS via a clean REST API and SMTP relay — with sub-second delivery, automatic retries, webhooks, and searchable logs.';
 
-	let hero: HTMLElement | undefined = $state();
-	let featuresSection: HTMLElement | undefined = $state();
-	let eventsSection: HTMLElement | undefined = $state();
-	let useCasesSection: HTMLElement | undefined = $state();
 	let registerHref: string = $state(registerUrl);
 
 	function trackHeroCta(label: string, href: string, variant: 'primary' | 'secondary') {
@@ -46,89 +43,6 @@
 			trackSignupClick('transactional_hero', href);
 		}
 	}
-
-	// Real send examples, verified against docs.lettr.com on 2026-08-19:
-	// POST https://app.lettr.com/api/emails, Node `lettr` package,
-	// Python `lettr.Lettr(...).emails.send(from_email=...)`, PHP
-	// `Lettr::client(...)->emails()->sendHtml(...)`.
-	const sendTabs: CodeTab[] = [
-		{
-			label: 'cURL',
-			lang: 'bash',
-			code: `curl -X POST https://app.lettr.com/api/emails \\
-  -H "Authorization: Bearer $LETTR_API_KEY" \\
-  -H "Content-Type: application/json" \\
-  -d '{
-    "from": "sender@yourdomain.com",
-    "from_name": "Your App",
-    "to": ["recipient@example.com"],
-    "subject": "Hello from Lettr",
-    "html": "<h1>Welcome!</h1><p>Thanks for signing up.</p>"
-  }'`
-		},
-		{
-			label: 'Node.js',
-			lang: 'javascript',
-			code: `import { Lettr } from "lettr";
-
-const client = new Lettr(process.env.LETTR_API_KEY);
-
-const { data, error } = await client.emails.send({
-  from: "sender@yourdomain.com",
-  from_name: "Your App",
-  to: ["recipient@example.com"],
-  subject: "Hello from Lettr",
-  html: "<h1>Welcome!</h1><p>Thanks for signing up.</p>",
-});
-
-if (error) console.error(error.message);
-else console.log(data.request_id);`
-		},
-		{
-			label: 'Python',
-			lang: 'python',
-			code: `import os
-import lettr
-
-client = lettr.Lettr(os.environ["LETTR_API_KEY"])
-
-response = client.emails.send(
-    from_email="sender@yourdomain.com",
-    from_name="Your App",
-    to=["recipient@example.com"],
-    subject="Hello from Lettr",
-    html="<h1>Welcome!</h1><p>Thanks for signing up.</p>",
-)
-
-print(response.request_id)`
-		},
-		{
-			label: 'PHP',
-			lang: 'php',
-			code: `use Lettr\\Lettr;
-
-$lettr = Lettr::client(getenv('LETTR_API_KEY'));
-
-$response = $lettr->emails()->sendHtml(
-    from: 'sender@yourdomain.com',
-    to: 'recipient@example.com',
-    subject: 'Hello from Lettr',
-    html: '<h1>Welcome!</h1><p>Thanks for signing up.</p>',
-);`
-		},
-		{
-			label: 'Laravel',
-			lang: 'php',
-			code: `use Lettr\\Laravel\\Facades\\Lettr;
-
-Lettr::emails()->sendHtml(
-    from: 'sender@yourdomain.com',
-    to: 'recipient@example.com',
-    subject: 'Hello from Lettr',
-    html: '<h1>Welcome!</h1><p>Thanks for signing up.</p>',
-);`
-		}
-	];
 
 	const features = [
 		{
@@ -171,7 +85,7 @@ Lettr::emails()->sendHtml(
 
 	const eventFeatures = [
 		'delivered, opened, clicked, bounced, and complained events',
-		'HMAC-signed payloads you can verify',
+		'Basic Auth or OAuth 2.0 on each endpoint',
 		'Automatic retries with exponential backoff',
 		'Up to unlimited endpoints, filtered by event type',
 		'Every send searchable in the logs for up to 90 days'
@@ -189,30 +103,6 @@ Lettr::emails()->sendHtml(
 	onMount(() => {
 		registerHref = buildRegisterUrl(new URL(window.location.href), document.cookie);
 
-		const cleanups: (() => void)[] = [];
-
-		if (hero) {
-			cleanups.push(
-				createFromAnimationCleanup({
-					scope: hero,
-					targets: '[data-animate]',
-					vars: { y: 30, opacity: 0, duration: 0.7, stagger: 0.12, ease: 'power3.out' }
-				})
-			);
-		}
-
-		for (const section of [featuresSection, eventsSection, useCasesSection]) {
-			if (section) {
-				cleanups.push(
-					createScrollRevealCleanup({
-						scope: section,
-						targets: '[data-reveal]'
-					})
-				);
-			}
-		}
-
-		return () => cleanups.forEach((fn) => fn());
 	});
 </script>
 
@@ -232,22 +122,22 @@ Lettr::emails()->sendHtml(
 	)}
 </svelte:head>
 
-<section bind:this={hero} class="pt-page pb-16 border-b border-border/30">
+<section class="pt-page pb-16 border-b border-border/30">
 	<div class="grid gap-12 lg:grid-cols-1">
 		<div class="flex flex-col">
-			<h1 data-animate class="text-surface mb-4">
+			<h1 class="text-surface mb-4">
 				Transactional email<br />
 				<span class="text-primary">your product can rely on.</span>
 			</h1>
 
-			<p data-animate class="max-w-[650px] text-body text-muted mb-10">
+			<p class="max-w-[650px] text-body text-muted mb-10">
 				Lettr is an <span class="font-semibold text-surface">EU-hosted</span> transactional email API
 				for developers — REST API and SMTP relay with tracking, templates, and webhooks, on every
 				plan. Fire password resets, receipts, and alerts with sub-second delivery, automatic retries,
 				and a drag-and-drop editor your team owns — no dev ticket to change a button.
 			</p>
 
-			<div data-animate class="flex flex-wrap items-center mb-3 gap-2">
+			<div class="flex flex-wrap items-center mb-3 gap-2">
 				<Button
 					variant="primary"
 					href={registerHref}
@@ -261,15 +151,15 @@ Lettr::emails()->sendHtml(
 					onclick={() => trackHeroCta('See docs', 'https://docs.lettr.com/introduction', 'secondary')}
 				>See docs</Button>
 			</div>
-			<p data-animate class="max-w-md text-sm text-muted">
+			<p class="max-w-md text-sm text-muted">
 				3,000 emails/month free. No credit card required. See the
 				<a class="text-primary underline underline-offset-2" href="/free-email-api/">free email API</a>.
 			</p>
 		</div>
 
-		<div data-animate>
+		<div class="min-w-0">
 			<CodeSnippet
-				tabs={sendTabs}
+				tabs={data.sendTabs}
 				primaryTabIndices={[0, 1]}
 				moreTabIndices={[2, 3, 4]}
 			/>
@@ -277,8 +167,8 @@ Lettr::emails()->sendHtml(
 	</div>
 </section>
 
-<section bind:this={featuresSection} class="py-20 border-b border-border/30">
-	<div class="mb-12" data-reveal>
+<section class="py-20 border-b border-border/30">
+	<div class="mb-12">
 		<div class="mb-4 inline-flex items-center gap-2 text-[11px] font-medium tracking-[0.18em] uppercase text-primary/80">
 			<span class="block w-6 h-px bg-primary/60"></span>
 			Built for transactional
@@ -294,7 +184,7 @@ Lettr::emails()->sendHtml(
 
 	<div class="grid gap-5 sm:grid-cols-2">
 		{#each features as feature}
-			<div data-reveal class="flex items-start gap-5 border border-border/40 bg-white p-6">
+			<div class="flex items-start gap-5 border border-border/40 bg-white p-6">
 				<div class="flex h-10 w-10 shrink-0 items-center justify-center border border-border/50 bg-background">
 					<feature.icon size={20} class="text-primary" />
 				</div>
@@ -307,9 +197,9 @@ Lettr::emails()->sendHtml(
 	</div>
 </section>
 
-<section bind:this={eventsSection} class="py-20 border-b border-border/30">
+<section class="py-20 border-b border-border/30">
 	<div class="grid gap-12 lg:grid-cols-2 lg:items-center">
-		<div data-reveal>
+		<div>
 			<div class="mb-4 inline-flex items-center gap-2 text-[11px] font-medium tracking-[0.18em] uppercase text-primary/80">
 				<span class="block w-6 h-px bg-primary/60"></span>
 				Events &amp; webhooks
@@ -331,37 +221,40 @@ Lettr::emails()->sendHtml(
 			</ul>
 		</div>
 
-		<div data-reveal class="border border-border/40 bg-white p-6">
+		<div class="border border-border/40 bg-white p-6">
 			<div class="mb-4 flex items-center gap-2">
 				<LinkIcon size={16} class="text-primary" />
 				<span class="font-code text-xs text-muted">POST your-app.com/webhooks/lettr</span>
 			</div>
-			<pre class="overflow-x-auto font-code text-[13px] leading-relaxed text-surface">{`{
-  "event": "email.delivered",
-  "email_id": "msg_8f21c0",
-  "to": "alex@example.com",
-  "subject": "Your login code",
-  "tags": ["auth", "2fa"],
-  "timestamp": "2026-04-18T09:21:04Z"
-}`}</pre>
+			<pre class="overflow-x-auto font-code text-[13px] leading-relaxed text-surface">{`[{
+  "msys": {
+    "message_event": {
+      "type": "delivery",
+      "event_id": "92356927693813856",
+      "rcpt_to": "alex@example.com",
+      "subject": "Your login code",
+      "timestamp": "1776504064"
+    }
+  }
+}]`}</pre>
 			<div class="mt-4 border-t border-border/30 pt-4">
 				<div class="text-[11px] uppercase tracking-wider text-muted/70 mb-2">
 					Events you can subscribe to
 				</div>
 				<div class="flex flex-wrap gap-2">
-					<span class="border border-border/40 bg-background px-2 py-0.5 text-[12px] text-surface">delivered</span>
-					<span class="border border-border/40 bg-background px-2 py-0.5 text-[12px] text-surface">opened</span>
-					<span class="border border-border/40 bg-background px-2 py-0.5 text-[12px] text-surface">clicked</span>
-					<span class="border border-border/40 bg-background px-2 py-0.5 text-[12px] text-surface">bounced</span>
-					<span class="border border-border/40 bg-background px-2 py-0.5 text-[12px] text-surface">complained</span>
+					<span class="border border-border/40 bg-background px-2 py-0.5 text-[12px] text-surface">message.delivery</span>
+					<span class="border border-border/40 bg-background px-2 py-0.5 text-[12px] text-surface">engagement.open</span>
+					<span class="border border-border/40 bg-background px-2 py-0.5 text-[12px] text-surface">engagement.click</span>
+					<span class="border border-border/40 bg-background px-2 py-0.5 text-[12px] text-surface">message.bounce</span>
+					<span class="border border-border/40 bg-background px-2 py-0.5 text-[12px] text-surface">message.spam_complaint</span>
 				</div>
 			</div>
 		</div>
 	</div>
 </section>
 
-<section bind:this={useCasesSection} class="py-20 border-b border-border/30">
-	<div class="mb-10" data-reveal>
+<section class="py-20 border-b border-border/30">
+	<div class="mb-10">
 		<div class="mb-4 inline-flex items-center gap-2 text-[11px] font-medium tracking-[0.18em] uppercase text-primary/80">
 			<span class="block w-6 h-px bg-primary/60"></span>
 			Use cases
@@ -376,7 +269,7 @@ Lettr::emails()->sendHtml(
 
 	<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
 		{#each useCases as useCase}
-			<div data-reveal class="flex items-center gap-4 border border-border/40 bg-white p-5">
+			<div class="flex items-center gap-4 border border-border/40 bg-white p-5">
 				<div class="flex h-10 w-10 shrink-0 items-center justify-center border border-border/50 bg-background">
 					<useCase.icon size={20} class="text-primary" />
 				</div>

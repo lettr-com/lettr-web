@@ -122,7 +122,7 @@
 		key and expose the full API. Which to reach for depends on where the work is happening.
 	</Paragraph>
 
-	<div data-reveal class="grid gap-4 sm:grid-cols-2">
+	<div class="grid gap-4 sm:grid-cols-2">
 		<div class="border border-border/50 bg-white p-5 shadow-[0_20px_50px_-45px_rgba(17,24,39,0.6)]">
 			<div class="mb-3 text-base font-semibold text-surface">Remote server</div>
 			<dl class="space-y-2.5 text-sm text-muted">

@@ -4,15 +4,13 @@
 	import X from 'phosphor-svelte/lib/X';
 	import ArrowRight from 'phosphor-svelte/lib/ArrowRight';
 	import Slider from './Slider.svelte';
-	import { createScrollRevealCleanup, createFromAnimationCleanup } from '$lib/utils/gsap';
 	import { buildRegisterUrl, registerUrl } from '$lib/utils/utm';
 	import { capturePosthogEvent, trackSignupClick } from '$lib/analytics/posthog';
 	import { createChangeTracker } from '$lib/analytics/changeTracker';
 	import { comparisonRows, transactionalPlans, transactionalSteps, type PlanKey } from '$lib/data/pricing';
 
-	let { sectionClass = 'py-16', animateOnMount = false }: { sectionClass?: string; animateOnMount?: boolean } = $props();
+	let { sectionClass = 'py-16' }: { sectionClass?: string } = $props();
 
-	let section: HTMLElement | undefined = $state();
 	let sliderValue: number = $state(1);
 	let registerHref: string = $state(registerUrl);
 
@@ -72,24 +70,11 @@
 
 	onMount(() => {
 		registerHref = buildRegisterUrl(new URL(window.location.href), document.cookie);
-		if (!section) return;
-		if (animateOnMount) {
-			return createFromAnimationCleanup({
-				scope: section,
-				targets: '[data-pricing-animate]',
-				vars: { y: 30, opacity: 0, duration: 0.6, stagger: 0.1, ease: 'power3.out', clearProps: 'opacity,transform' }
-			});
-		}
-		return createScrollRevealCleanup({
-			scope: section,
-			targets: '[data-pricing-animate]',
-			vars: { y: 40, duration: 0.7, stagger: 0.1 }
-		});
 	});
 </script>
 
-<section bind:this={section} id="pricing" class={sectionClass}>
-	<div class="mb-8" data-pricing-animate>
+<section id="pricing" class={sectionClass}>
+	<div class="mb-8">
 		<span class="mb-3 block text-sm text-muted">How many emails do you send per month?</span>
 		<Slider
 			min={0}
@@ -101,7 +86,7 @@
 	</div>
 
 	<!-- Pricing cards -->
-	<div class="grid grid-cols-1 sm:grid-cols-3 gap-3 items-stretch" data-pricing-animate>
+	<div class="grid grid-cols-1 sm:grid-cols-3 gap-3 items-stretch">
 		{#each plans as plan}
 			{@const isHighlighted = highlightedPlan === plan.key}
 			{@const isMobileVisible = mobileVisiblePlan === plan.key}
@@ -155,7 +140,7 @@
 	</div>
 
 	<!-- Enterprise row -->
-	<div data-pricing-animate class="mt-3 border bg-white p-5 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 transition-colors duration-300 {highlightedPlan === 'enterprise' ? 'border-primary shadow-lg shadow-primary/5' : 'border-border/30'}">
+	<div class="mt-3 border bg-white p-5 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 transition-colors duration-300 {highlightedPlan === 'enterprise' ? 'border-primary shadow-lg shadow-primary/5' : 'border-border/30'}">
 		<div>
 			<h3 class="text-sm font-semibold mb-1 {highlightedPlan === 'enterprise' ? 'text-primary' : 'text-surface'}">Enterprise</h3>
 			<p class="text-[13px] text-muted">
@@ -176,7 +161,7 @@
 	</div>
 
 	<!-- Compare plans -->
-	<div data-pricing-animate class="mt-8 border border-border/30 bg-white p-4 sm:p-6">
+	<div class="mt-8 border border-border/30 bg-white p-4 sm:p-6">
 		<div class="mb-6 flex items-baseline justify-between gap-3">
 			<h3 class="text-sm font-bold text-surface">Compare plans</h3>
 			<span class="text-[11px] text-muted/70 md:hidden">Swipe to compare &rarr;</span>

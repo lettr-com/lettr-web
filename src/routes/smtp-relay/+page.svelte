@@ -19,26 +19,19 @@
 	import StackIcon from 'phosphor-svelte/lib/StackIcon';
 	import CheckIcon from 'phosphor-svelte/lib/CheckIcon';
 	import CaretDownIcon from 'phosphor-svelte/lib/CaretDownIcon';
-	import { createFromAnimationCleanup, createScrollRevealCleanup } from '$lib/utils/gsap';
 	import { buildRegisterUrl, registerUrl } from '$lib/utils/utm';
 	import { capturePosthogEvent, trackSignupClick } from '$lib/analytics/posthog';
-	import type { CodeTab } from '$lib/utils/shiki';
 	import { jsonLdScript } from '$lib/utils/jsonLd';
 	import { productPageJsonLd } from '$lib/utils/pageJsonLd';
+	import type { PageProps } from './$types';
+
+	let { data }: PageProps = $props();
 
 	const metaDescription =
 		'A drop-in SMTP relay for your app: point it at smtp.lettr.com for better deliverability, encrypted ports, analytics, and a free tier.';
 
 	const SMTP_DOCS_URL = 'https://docs.lettr.com/quickstart/smtp/introduction';
 
-	let hero: HTMLElement | undefined = $state();
-	let definitionSection: HTMLElement | undefined = $state();
-	let whenSection: HTMLElement | undefined = $state();
-	let featuresSection: HTMLElement | undefined = $state();
-	let setupSection: HTMLElement | undefined = $state();
-	let compareSection: HTMLElement | undefined = $state();
-	let faqSection: HTMLElement | undefined = $state();
-	let finalCtaSection: HTMLElement | undefined = $state();
 	let registerHref: string = $state(registerUrl);
 	let openFaq: number | null = $state(null);
 
@@ -69,118 +62,6 @@
 			opened: !wasOpen
 		});
 	}
-
-	// Real, copy-paste SMTP relay configuration. Username is always the literal
-	// word "lettr"; the password is a Lettr API key (starts with "lttr_"). Host
-	// and ports are the live relay endpoints — 465 implicit TLS (recommended),
-	// 587 STARTTLS, with 2465 / 2587 as firewall-friendly alternates.
-	const smtpTabs: CodeTab[] = [
-		{
-			label: 'SMTP settings',
-			lang: 'bash',
-			code: `# Point any app, server, or framework at Lettr
-SMTP_HOST=smtp.lettr.com
-SMTP_PORT=465            # implicit TLS (587 STARTTLS; 2465/2587 alt)
-SMTP_USERNAME=lettr      # always the literal word "lettr"
-SMTP_PASSWORD=lttr_your_api_key_here       # your Lettr API key
-SMTP_SECURE=true`
-		},
-		{
-			label: 'Laravel',
-			lang: 'bash',
-			code: `# .env — then run: php artisan config:clear
-MAIL_MAILER=smtp
-MAIL_HOST=smtp.lettr.com
-MAIL_PORT=587                              # or 465 with MAIL_ENCRYPTION=ssl
-MAIL_USERNAME=lettr                        # always the literal word "lettr"
-MAIL_PASSWORD=lttr_your_api_key_here       # your Lettr API key
-MAIL_ENCRYPTION=tls
-MAIL_FROM_ADDRESS=you@yourdomain.com
-MAIL_FROM_NAME="\${APP_NAME}"`
-		},
-		{
-			label: 'Node.js',
-			lang: 'javascript',
-			code: `import nodemailer from 'nodemailer';
-
-const transport = nodemailer.createTransport({
-  host: 'smtp.lettr.com',
-  port: 465,
-  secure: true,
-  auth: { user: 'lettr', pass: process.env.LETTR_API_KEY }
-});
-
-await transport.sendMail({
-  from: 'you@yourdomain.com',
-  to: 'user@example.com',
-  subject: 'Your login code',
-  text: 'Your code is 123456'
-});`
-		},
-		{
-			label: 'PHP',
-			lang: 'php',
-			code: `$mail = new PHPMailer(true);
-
-$mail->isSMTP();
-$mail->Host       = 'smtp.lettr.com';
-$mail->Port       = 465;
-$mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
-$mail->SMTPAuth   = true;
-$mail->Username   = 'lettr';
-$mail->Password   = getenv('LETTR_API_KEY');
-
-$mail->setFrom('you@yourdomain.com');
-$mail->addAddress('user@example.com');
-$mail->Subject = 'Your login code';
-$mail->Body    = 'Your code is 123456';
-$mail->send();`
-		},
-		{
-			label: 'Ruby',
-			lang: 'ruby',
-			code: `require 'mail'
-
-Mail.defaults do
-  delivery_method :smtp,
-    address:   'smtp.lettr.com',
-    port:      465,
-    user_name: 'lettr',
-    password:  ENV['LETTR_API_KEY'],
-    tls:       true
-end
-
-Mail.deliver do
-  from    'you@yourdomain.com'
-  to      'user@example.com'
-  subject 'Your login code'
-  body    'Your code is 123456'
-end`
-		},
-		{
-			label: 'Go',
-			lang: 'go',
-			code: `package main
-
-import (
-    "net/smtp"
-    "os"
-)
-
-func main() {
-    auth := smtp.PlainAuth("", "lettr",
-        os.Getenv("LETTR_API_KEY"), "smtp.lettr.com")
-
-    msg := []byte("To: user@example.com\\r\\n" +
-        "Subject: Your login code\\r\\n\\r\\n" +
-        "Your code is 123456\\r\\n")
-
-    smtp.SendMail("smtp.lettr.com:587", auth,
-        "you@yourdomain.com",
-        []string{"user@example.com"}, msg)
-}`
-		}
-	];
 
 	const features = [
 		{
@@ -318,38 +199,6 @@ func main() {
 	onMount(() => {
 		registerHref = buildRegisterUrl(new URL(window.location.href), document.cookie);
 
-		const cleanups: (() => void)[] = [];
-
-		if (hero) {
-			cleanups.push(
-				createFromAnimationCleanup({
-					scope: hero,
-					targets: '[data-animate]',
-					vars: { y: 30, opacity: 0, duration: 0.7, stagger: 0.12, ease: 'power3.out' }
-				})
-			);
-		}
-
-		for (const section of [
-			definitionSection,
-			whenSection,
-			featuresSection,
-			setupSection,
-			compareSection,
-			faqSection,
-			finalCtaSection
-		]) {
-			if (section) {
-				cleanups.push(
-					createScrollRevealCleanup({
-						scope: section,
-						targets: '[data-reveal]'
-					})
-				);
-			}
-		}
-
-		return () => cleanups.forEach((fn) => fn());
 	});
 </script>
 
@@ -379,22 +228,21 @@ func main() {
 </svelte:head>
 
 <!-- Hero -->
-<section bind:this={hero} class="pt-page pb-16 border-b border-border/30">
+<section class="pt-page pb-16 border-b border-border/30">
 	<div class="grid gap-12 lg:grid-cols-1">
 		<div class="flex flex-col">
 			<div
-				data-animate
 				class="mb-4 inline-flex items-center gap-2 text-[11px] font-medium tracking-[0.18em] uppercase text-primary/80"
 			>
 				<span class="block w-6 h-px bg-primary/60"></span>
 				SMTP relay
 			</div>
-			<h1 data-animate class="text-surface mb-4">
+			<h1 class="text-surface mb-4">
 				The SMTP relay<br />
 				<span class="text-primary">your app can rely on.</span>
 			</h1>
 
-			<p data-animate class="max-w-[650px] text-body text-muted mb-10">
+			<p class="max-w-[650px] text-body text-muted mb-10">
 				A drop-in replacement for your mail server or SMTP provider, <span
 					class="font-semibold text-surface">EU-hosted on every plan</span> — the same sending
 				infrastructure, logs, and webhooks as the API, reachable from any stack that speaks SMTP.
@@ -403,7 +251,7 @@ func main() {
 				encrypted ports, real-time analytics, and searchable logs — without changing a line of code.
 			</p>
 
-			<div data-animate class="flex flex-wrap items-center mb-3 gap-2">
+			<div class="flex flex-wrap items-center mb-3 gap-2">
 				<Button
 					variant="primary"
 					href={registerHref}
@@ -417,14 +265,14 @@ func main() {
 					onclick={() => trackCta('smtp_relay_hero', 'See SMTP docs', SMTP_DOCS_URL, 'secondary')}
 				>See SMTP docs</Button>
 			</div>
-			<p data-animate class="max-w-md text-sm text-muted">
+			<p class="max-w-md text-sm text-muted">
 				3,000 emails/month free. No credit card required.
 			</p>
 		</div>
 
-		<div data-animate>
+		<div class="min-w-0">
 			<CodeSnippet
-				tabs={smtpTabs}
+				tabs={data.smtpTabs}
 				primaryTabIndices={[0, 1]}
 				moreTabIndices={[2, 3, 4, 5]}
 				filename={undefined}
@@ -434,9 +282,9 @@ func main() {
 </section>
 
 <!-- What is an SMTP relay -->
-<section bind:this={definitionSection} class="py-20 border-b border-border/30">
+<section class="py-20 border-b border-border/30">
 	<div class="grid gap-12 lg:grid-cols-2 lg:items-start">
-		<div data-reveal>
+		<div>
 			<div class="mb-4 inline-flex items-center gap-2 text-[11px] font-medium tracking-[0.18em] uppercase text-primary/80">
 				<span class="block w-6 h-px bg-primary/60"></span>
 				The basics
@@ -455,7 +303,7 @@ func main() {
 			</p>
 		</div>
 
-		<div data-reveal class="border border-border/40 bg-white p-6">
+		<div class="border border-border/40 bg-white p-6">
 			<div class="text-[11px] uppercase tracking-wider text-muted/70 mb-4">How the hops work</div>
 			<ol class="space-y-4">
 				<li class="flex items-start gap-3">
@@ -482,8 +330,8 @@ func main() {
 </section>
 
 <!-- When you need one -->
-<section bind:this={whenSection} class="py-20 border-b border-border/30">
-	<div class="mb-12" data-reveal>
+<section class="py-20 border-b border-border/30">
+	<div class="mb-12">
 		<div class="mb-4 inline-flex items-center gap-2 text-[11px] font-medium tracking-[0.18em] uppercase text-primary/80">
 			<span class="block w-6 h-px bg-primary/60"></span>
 			When you need one
@@ -499,7 +347,7 @@ func main() {
 
 	<div class="grid gap-5 sm:grid-cols-2">
 		{#each whenYouNeedIt as item}
-			<div data-reveal class="flex items-start gap-5 border border-border/40 bg-white p-6">
+			<div class="flex items-start gap-5 border border-border/40 bg-white p-6">
 				<div class="flex h-10 w-10 shrink-0 items-center justify-center border border-border/50 bg-background">
 					<item.icon size={20} class="text-primary" />
 				</div>
@@ -513,8 +361,8 @@ func main() {
 </section>
 
 <!-- How Lettr's SMTP relay works -->
-<section bind:this={featuresSection} class="py-20 border-b border-border/30">
-	<div class="mb-12" data-reveal>
+<section class="py-20 border-b border-border/30">
+	<div class="mb-12">
 		<div class="mb-4 inline-flex items-center gap-2 text-[11px] font-medium tracking-[0.18em] uppercase text-primary/80">
 			<span class="block w-6 h-px bg-primary/60"></span>
 			How it works
@@ -530,7 +378,7 @@ func main() {
 
 	<div class="grid gap-5 sm:grid-cols-2">
 		{#each features as feature}
-			<div data-reveal class="flex items-start gap-5 border border-border/40 bg-white p-6">
+			<div class="flex items-start gap-5 border border-border/40 bg-white p-6">
 				<div class="flex h-10 w-10 shrink-0 items-center justify-center border border-border/50 bg-background">
 					<feature.icon size={20} class="text-primary" />
 				</div>
@@ -544,8 +392,8 @@ func main() {
 </section>
 
 <!-- Setup — quick start -->
-<section bind:this={setupSection} class="py-20 border-b border-border/30">
-	<div class="mb-12" data-reveal>
+<section class="py-20 border-b border-border/30">
+	<div class="mb-12">
 		<div class="mb-4 inline-flex items-center gap-2 text-[11px] font-medium tracking-[0.18em] uppercase text-primary/80">
 			<span class="block w-6 h-px bg-primary/60"></span>
 			Quick start
@@ -560,7 +408,7 @@ func main() {
 	</div>
 
 	<div class="grid gap-12 lg:grid-cols-2 lg:items-start">
-		<div data-reveal class="flex flex-col gap-6">
+		<div class="flex flex-col gap-6">
 			<div class="flex items-start gap-4">
 				<span class="flex h-8 w-8 shrink-0 items-center justify-center border border-border/50 bg-background font-code text-sm text-primary">1</span>
 				<div>
@@ -598,9 +446,9 @@ func main() {
 			</div>
 		</div>
 
-		<div data-reveal>
+		<div class="min-w-0">
 			<CodeSnippet
-				tabs={smtpTabs}
+				tabs={data.smtpTabs}
 				primaryTabIndices={[0, 1]}
 				moreTabIndices={[2, 3, 4, 5]}
 				shadow={false}
@@ -611,8 +459,8 @@ func main() {
 </section>
 
 <!-- SMTP relay vs API -->
-<section bind:this={compareSection} class="py-20 border-b border-border/30">
-	<div class="mb-12" data-reveal>
+<section class="py-20 border-b border-border/30">
+	<div class="mb-12">
 		<div class="mb-4 inline-flex items-center gap-2 text-[11px] font-medium tracking-[0.18em] uppercase text-primary/80">
 			<span class="block w-6 h-px bg-primary/60"></span>
 			SMTP relay vs. API
@@ -627,7 +475,7 @@ func main() {
 	</div>
 
 	<div class="grid gap-5 lg:grid-cols-2">
-		<div data-reveal class="border border-border/40 bg-white p-6">
+		<div class="border border-border/40 bg-white p-6">
 			<div class="mb-4 flex items-center gap-2">
 				<ArrowsClockwiseIcon size={18} class="text-primary" />
 				<h3 class="text-base font-semibold text-surface">Use the SMTP relay when…</h3>
@@ -642,7 +490,7 @@ func main() {
 			</ul>
 		</div>
 
-		<div data-reveal class="border border-border/40 bg-white p-6">
+		<div class="border border-border/40 bg-white p-6">
 			<div class="mb-4 flex items-center gap-2">
 				<TerminalWindowIcon size={18} class="text-primary" />
 				<h3 class="text-base font-semibold text-surface">Use the REST API when…</h3>
@@ -658,7 +506,7 @@ func main() {
 		</div>
 	</div>
 
-	<p data-reveal class="mt-6 text-sm text-muted">
+	<p class="mt-6 text-sm text-muted">
 		Need the full breakdown? Read
 		<a class="text-primary underline underline-offset-2" href="/blog/smtp-vs-rest-api-how-to-choose/">SMTP vs. REST API: how to choose</a>.
 	</p>
@@ -668,8 +516,8 @@ func main() {
 <Pricing />
 
 <!-- FAQ -->
-<section bind:this={faqSection} class="py-16 border-b border-border/30">
-	<div class="mb-10" data-reveal>
+<section class="py-16 border-b border-border/30">
+	<div class="mb-10">
 		<div class="mb-4 inline-flex items-center gap-2 text-[11px] font-medium tracking-[0.18em] uppercase text-primary/80">
 			<span class="block w-6 h-px bg-primary/60"></span>
 			FAQ
@@ -682,7 +530,7 @@ func main() {
 
 	<div class="space-y-0" data-markdown="faq">
 		{#each faqs as faq, i}
-			<div data-reveal class="{i < faqs.length - 1 ? 'border-b border-border/20' : ''}">
+			<div class="{i < faqs.length - 1 ? 'border-b border-border/20' : ''}">
 				<button
 					onclick={() => toggleFaq(i)}
 					class="flex w-full items-center justify-between py-5 text-left"
@@ -714,8 +562,8 @@ func main() {
 </div>
 
 <!-- Final CTA -->
-<section bind:this={finalCtaSection} class="py-20">
-	<div data-reveal class="flex flex-col items-center text-center">
+<section class="py-20">
+	<div class="flex flex-col items-center text-center">
 		<h2 class="mb-3 text-surface">
 			Point your app at <span class="text-primary">smtp.lettr.com.</span>
 		</h2>

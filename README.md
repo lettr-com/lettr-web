@@ -7,7 +7,7 @@ Landing site for Lettr, built with SvelteKit 2, Svelte 5, TypeScript, and Tailwi
 - SvelteKit + Svelte 5 (runes)
 - TypeScript (strict mode)
 - Tailwind CSS v4
-- GSAP animations
+- CSS and Web Animations API motion (no animation library)
 - Vitest unit tests
 
 ## Setup

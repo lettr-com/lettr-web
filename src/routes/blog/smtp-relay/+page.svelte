@@ -12,30 +12,14 @@
 		FaqItem,
 		ProductNote
 	} from '$lib/components/blog';
+	import type { PageProps } from './$types';
+
+	let { data }: PageProps = $props();
 
 	const relayEnvExample = `SMTP_HOST=smtp.lettr.com
 SMTP_PORT=465            # implicit TLS (587 STARTTLS; 2465/2587 alt)
 SMTP_USERNAME=lettr      # always the literal word "lettr"
 SMTP_PASSWORD=lttr_your_api_key_here   # your Lettr API key`;
-
-	const nodemailerExample = `import nodemailer from 'nodemailer';
-
-const transport = nodemailer.createTransport({
-  host: 'smtp.lettr.com',
-  port: 465,
-  secure: true, // implicit TLS on 465
-  auth: {
-    user: 'lettr',
-    pass: process.env.LETTR_API_KEY
-  }
-});
-
-await transport.sendMail({
-  from: 'orders@yourapp.com',
-  to: 'user@example.com',
-  subject: 'Your order shipped',
-  html: '<p>Tracking number: 1Z999AA1</p>'
-});`;
 
 	const authFailureExample = `535 5.7.8 Authentication credentials invalid`;
 </script>
@@ -212,7 +196,7 @@ await transport.sendMail({
 		like this</strong>:
 	</Paragraph>
 
-	<Code lang="javascript" code={nodemailerExample} />
+	<Code {...data.code.nodemailerExample} />
 
 	<Paragraph>
 		For an off-the-shelf system with no code path to edit, the same values go into its SMTP settings

@@ -15,7 +15,6 @@
 </script>
 
 <a
-	data-reveal
 	{href}
 	onclick={onselect}
 	class="group flex min-h-[450px] min-w-0 flex-col overflow-hidden border p-7 transition-colors hover:border-primary/50 sm:min-h-[540px] sm:p-9 {surface === 'dark' ? 'border-white/15 bg-muted' : surface === 'white' ? 'border-border/40 bg-white' : 'border-border/40 bg-background'}"

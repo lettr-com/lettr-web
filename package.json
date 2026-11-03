@@ -14,12 +14,12 @@
     "test:unit:watch": "vp test",
     "seo:check": "node src/lib/seo/gate/check.ts",
     "blog:images": "node tools/blog-images/render.mjs",
-    "accordion:images": "node tools/blog-images/accordion.mjs"
+    "accordion:images": "node tools/blog-images/accordion.mjs",
+    "hero:bake": "node tools/dither/bake-hero.mjs"
   },
   "dependencies": {
     "@splinetool/loader": "^1.12.52",
     "@tailwindcss/vite": "^4.2.4",
-    "gsap": "^3.14.2",
     "js-yaml": "^4.2.0",
     "marked": "^17.0.2",
     "phosphor-svelte": "^3.1.0",
