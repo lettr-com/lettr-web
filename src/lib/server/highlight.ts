@@ -1,6 +1,6 @@
 import { createHighlighter, type Highlighter } from "shiki";
 
-import { lettrTheme, type CodeTab, type HighlightedTab } from "$lib/utils/shiki";
+import { lettrMintTheme, lettrTheme, type CodeTab, type HighlightedTab } from "$lib/utils/shiki";
 
 const langs = [
   "php",
@@ -20,7 +20,7 @@ let highlighter: Promise<Highlighter> | undefined;
 
 /** One highlighter for every page in the prerender, created on first use. */
 function getHighlighter(): Promise<Highlighter> {
-  highlighter ??= createHighlighter({ themes: [lettrTheme], langs });
+  highlighter ??= createHighlighter({ themes: [lettrTheme, lettrMintTheme], langs });
   return highlighter;
 }
 
@@ -29,12 +29,18 @@ function getHighlighter(): Promise<Highlighter> {
  * coloured HTML and no highlighter. A PHP fragment without an opening tag is
  * highlighted with one, then the tag's line is dropped.
  */
-export async function highlight(code: string, lang: string): Promise<string> {
+export type CodeTheme = "lettr" | "lettr-mint";
+
+export async function highlight(
+  code: string,
+  lang: string,
+  theme: CodeTheme = "lettr",
+): Promise<string> {
   const shiki = await getHighlighter();
   const isPhpFragment = lang === "php" && !code.trimStart().startsWith("<?");
   const html = shiki.codeToHtml(isPhpFragment ? `<?php\n${code}` : code, {
     lang,
-    theme: "lettr",
+    theme,
   });
   return isPhpFragment ? html.replace(/(<code[^>]*>).*?\n/, "$1") : html;
 }
@@ -52,9 +58,12 @@ export async function highlightCode(
   };
 }
 
-/** Highlights every tab of a `CodeSnippet`, the ones behind "More" included. */
-export function highlightTabs(tabs: CodeTab[]): Promise<HighlightedTab[]> {
+/** Highlights every tab of a `CodeSnippet` or `CodeSwitcher`, the ones behind "More" included. */
+export function highlightTabs<T extends CodeTab>(
+  tabs: T[],
+  theme: CodeTheme = "lettr",
+): Promise<(T & HighlightedTab)[]> {
   return Promise.all(
-    tabs.map(async (tab) => ({ ...tab, html: await highlight(tab.code, tab.lang) })),
+    tabs.map(async (tab) => ({ ...tab, html: await highlight(tab.code, tab.lang, theme) })),
   );
 }

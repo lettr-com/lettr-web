@@ -1,5 +1,5 @@
 <script lang="ts">
-	import TerminalDemo from './TerminalDemo.svelte';
+	import TerminalSession from './TerminalSession.svelte';
 	import StageGlow from './StageGlow.svelte';
 	import { terminalScripts } from '$lib/home/terminalScripts';
 
@@ -62,7 +62,7 @@
 			aria-labelledby="framework-tab-{active.id}"
 			class="relative mx-auto mt-8 -mb-px max-w-[600px] sm:mt-12"
 		>
-			<TerminalDemo script={active} />
+			<TerminalSession script={active} />
 		</div>
 	</div>
 </section>

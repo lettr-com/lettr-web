@@ -67,6 +67,91 @@ export const lettrTheme: ThemeRegistration = {
   ],
 };
 
+/**
+ * Rose & Mint, from the code lab: crimson keywords, brand-green strings and
+ * pink types, with neutrals for structure, so the values a reader edits stand
+ * apart from the syntax. Tuned for the slate panel (#1c2434).
+ */
+export const lettrMintTheme: ThemeRegistration = {
+  name: "lettr-mint",
+  type: "dark",
+  colors: {
+    "editor.background": "#1c2434",
+    "editor.foreground": "#e8e3e6",
+  },
+  settings: [
+    { scope: [], settings: { foreground: "#e8e3e6" } },
+    {
+      scope: [
+        "keyword",
+        "storage.type",
+        "storage.modifier",
+        "keyword.control",
+        "keyword.other.use",
+        "keyword.other.new",
+      ],
+      settings: { foreground: "#ff6b8f" },
+    },
+    {
+      scope: ["string", "string.quoted", "string.template", "punctuation.definition.string"],
+      settings: { foreground: "#8ee3b5" },
+    },
+    {
+      scope: ["entity.name.function", "support.function", "variable.function"],
+      settings: { foreground: "#ffffff" },
+    },
+    {
+      scope: [
+        "entity.name.type",
+        "entity.name.class",
+        "support.class",
+        "entity.name.namespace",
+        "support.other.namespace",
+        "support.type",
+      ],
+      settings: { foreground: "#f9a8b8" },
+    },
+    {
+      scope: ["constant.numeric", "constant.language", "constant.character.escape"],
+      settings: { foreground: "#f5c38e" },
+    },
+    {
+      scope: [
+        "support.type.property-name",
+        "meta.object-literal.key",
+        "variable.other.property",
+        "variable.other.object.property",
+        "entity.name.variable.parameter",
+      ],
+      settings: { foreground: "#cdd2db" },
+    },
+    {
+      scope: [
+        "punctuation",
+        "meta.brace",
+        "keyword.operator",
+        "punctuation.separator",
+        "punctuation.terminator",
+        "punctuation.accessor",
+      ],
+      settings: { foreground: "#8b93a3" },
+    },
+    { scope: ["comment", "punctuation.definition.comment"], settings: { foreground: "#7c8494" } },
+    {
+      scope: [
+        "variable",
+        "variable.other",
+        "variable.parameter",
+        "variable.other.php",
+        "punctuation.definition.variable",
+        "string.unquoted.argument.shell",
+      ],
+      settings: { foreground: "#e8e3e6" },
+    },
+    { scope: ["constant.other.option"], settings: { foreground: "#b5bcc8" } },
+  ],
+};
+
 export interface CodeTab {
   label: string;
   lang: string;
