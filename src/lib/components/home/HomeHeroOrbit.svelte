@@ -229,6 +229,26 @@
 		}
 	}
 
+	/*
+	 * Too narrow to sit beside the copy: grow, keep to the right and rise into the space
+	 * beside it. The wider the window, the further right the globe sits and the higher it
+	 * can rise; the margin keeps the disc about 40px clear of the text at every width.
+	 */
+	@media (min-width: 768px) and (max-width: 1199.98px) {
+		.orbit-hero {
+			--stage: min(92vw, 880px);
+		}
+
+		.orbit-stage {
+			height: calc(var(--stage) * 0.76);
+			margin-top: calc(317px - 50vw);
+		}
+
+		.orbit-square {
+			left: calc(100% - var(--stage) * 0.36);
+		}
+	}
+
 	@media (min-width: 1200px) {
 		.orbit-hero {
 			--stage: clamp(640px, min(60vw, 105vh), 1040px);
