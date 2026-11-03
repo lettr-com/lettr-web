@@ -100,7 +100,7 @@
 </svelte:head>
 
 <div>
-<section class="pt-30 pb-16 border-b border-border/30">
+<section class="pt-page pb-16 border-b border-border/30">
 	<div class="grid gap-12 lg:grid-cols-1">
 		<div class="flex flex-col">
 			<a

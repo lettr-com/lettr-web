@@ -170,7 +170,7 @@
 
 <!-- Click tracking only: the links inside stay the interactive elements. -->
 <!-- svelte-ignore a11y_click_events_have_key_events, a11y_no_noninteractive_element_interactions -->
-<article class="pb-24 pt-[60px] md:pt-28" onclick={handleClick}>
+<article class="pb-24 pt-[60px] md:pt-page" onclick={handleClick}>
 	{#if post}
 		<div class="-mx-6 md:hidden" data-markdown="skip">
 			<ArtImage slug={post.slug} category={post.category} art={post.art} variant="strip" decorative loading="eager" class="w-full" />

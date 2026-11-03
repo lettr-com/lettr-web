@@ -41,7 +41,7 @@
 	)}
 </svelte:head>
 
-<section class="pt-32 pb-24">
+<section class="pt-page pb-24">
 	<div class="text-center">
 		<span class="mb-4 inline-block font-heading text-xs tracking-[0.15em] text-primary uppercase">
 			{label}

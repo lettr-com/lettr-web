@@ -210,7 +210,7 @@
 </svelte:head>
 
 <!-- Hero -->
-<section class="pt-30 pb-20 border-b border-border/30">
+<section class="pt-page pb-20 border-b border-border/30">
 	<a
 		href="/compare/"
 		class="mb-10 flex w-fit items-center gap-1.5 text-sm font-medium text-muted transition-colors hover:text-surface"

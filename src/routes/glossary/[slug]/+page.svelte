@@ -32,7 +32,7 @@
 	{@html jsonLdScript(termJsonLd(data.term))}
 </svelte:head>
 
-<article class="pt-32 pb-24">
+<article class="pt-page pb-24">
 	<div class="max-w-[800px]">
 		<header>
 			<a

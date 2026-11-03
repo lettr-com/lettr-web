@@ -28,7 +28,7 @@
 	<meta name="robots" content="noindex" />
 </svelte:head>
 
-<section class="flex flex-col items-center py-24 text-center sm:py-32">
+<section class="flex flex-col items-center pt-page pb-24 text-center sm:pb-32">
 	<!-- Bouncing envelope with a RETURN TO SENDER stamp -->
 	<div class="relative mb-10">
 		<div class="envelope-float relative">
