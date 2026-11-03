@@ -21,6 +21,7 @@
 	/*
 	 * Dark panels shown inside the open accordion rows. Authored at the fixed
 	 * 490x180 size from the Paper boards and scaled down to fit narrow cards.
+	 * The art on the right is rendered by tools/blog-images/accordion.mjs.
 	 */
 
 	interface Props {
@@ -92,37 +93,37 @@
 		]
 	};
 
-	const isGreen = $derived(id === 'segments' || id === 'campaigns' || id === 'analytics');
+	const onInk = $derived(
+		id === 'rest-smtp' || id === 'sdks' || id === 'webhooks' || id === 'segments' || id === 'campaigns' || id === 'analytics'
+	);
 	const rowList = $derived(rows[id]);
 	const chipList = $derived(id === 'sdks' ? sdks : id === 'multilingual' ? languages : null);
 	const activeChip = $derived(id === 'sdks' ? 0 : 1);
-	const tileLayout = $derived(
-		id === 'rest-smtp' || id === 'sdks' ? 'center' : id === 'analytics' ? 'bars' : 'text'
-	);
+	const line = $derived(onInk ? 'border-[#5a6576]' : 'border-primary-outline/30');
 </script>
 
 <div bind:clientWidth={available} class="w-full" style="height: {HEIGHT * scale}px" aria-hidden="true">
 	<div
-		class="flex h-[180px] w-[490px] origin-top-left items-center gap-[18px] bg-surface p-5"
+		class="relative flex h-[180px] w-[490px] origin-top-left items-center gap-[18px] overflow-hidden p-5 {onInk ? 'bg-surface' : 'bg-[#23020b]'}"
 		style="transform: scale({scale})"
 	>
 		<!-- left column -->
 		{#if id === 'rest-smtp'}
 			<div class="flex w-[210px] shrink-0 flex-col gap-2.5">
 				{#each ['REST API', 'SMTP'] as label}
-					<div class="flex h-[62px] items-center border border-[#5a6576] px-4 font-code text-[15px] leading-5 text-white">{label}</div>
+					<div class="flex h-[62px] items-center border {line} px-4 font-code text-[15px] leading-5 text-white">{label}</div>
 				{/each}
 			</div>
 		{:else if chipList}
 			<div class="flex w-[210px] shrink-0 flex-wrap gap-2.5">
 				{#each chipList as label, i}
-					<div class="flex h-10 w-[100px] items-center border px-3 font-code text-sm leading-5 text-white {i === activeChip ? 'border-primary bg-primary/12' : 'border-[#5a6576]'}">{label}</div>
+					<div class="flex h-10 w-[100px] items-center border px-3 font-code text-sm leading-5 text-white {i === activeChip ? 'border-primary bg-primary/12' : line}">{label}</div>
 				{/each}
 			</div>
 		{:else if id === 'webhooks'}
 			<div class="flex w-[210px] shrink-0 flex-col gap-2.5">
 				{#each events as event}
-					<div class="flex h-10 items-center gap-3 border border-[#5a6576] px-3 font-code text-sm leading-5 text-white">
+					<div class="flex h-10 items-center gap-3 border {line} px-3 font-code text-sm leading-5 text-white">
 						<span class="h-2 w-2 shrink-0 {event.color}"></span>{event.label}
 					</div>
 				{/each}
@@ -130,7 +131,7 @@
 		{:else if id === 'security'}
 			<div class="flex w-[210px] shrink-0 flex-col gap-2.5">
 				{#each securityEvents as label}
-					<div class="flex h-10 items-center gap-3 border border-[#5a6576] px-3 font-code text-[13px] leading-5 text-white">
+					<div class="flex h-10 items-center gap-3 border {line} px-3 font-code text-[13px] leading-5 text-white">
 						<span class="h-2 w-2 shrink-0 bg-primary"></span>{label}
 					</div>
 				{/each}
@@ -138,8 +139,8 @@
 		{:else if id === 'synced'}
 			<div class="flex w-[210px] shrink-0 flex-col gap-2.5">
 				{#each syncedBars as bar}
-					<div class="flex h-10 flex-col justify-between border border-[#5a6576] px-1.5 pt-1.5">
-						<span class="h-1.5 bg-[#5a6576] {bar}"></span>
+					<div class="flex h-10 flex-col justify-between border {line} px-1.5 pt-1.5">
+						<span class="h-1.5 bg-primary-outline/40 {bar}"></span>
 						<span class="h-3.5 w-full bg-primary"></span>
 					</div>
 				{/each}
@@ -152,7 +153,7 @@
 							? 'border-primary bg-primary/12'
 							: row.active === 'green'
 								? 'border-green bg-green/12'
-								: 'border-[#5a6576]'}"
+								: line}"
 					>
 						<span class={row.labelTone === 'pink' ? 'text-code-string' : 'text-white'}>{row.label}</span>
 						{#if row.dot}
@@ -166,65 +167,11 @@
 		{/if}
 
 		<!-- arrow -->
-		<div class="flex h-[140px] w-7 shrink-0 items-center justify-center text-[28px] leading-8 font-medium text-border">
+		<div class="flex h-[140px] w-7 shrink-0 items-center justify-center text-[28px] leading-8 font-medium {onInk ? 'text-border' : 'text-primary-outline'}">
 			{#if id === 'synced'}<ArrowLeftIcon size={28} />{:else}<ArrowRightIcon size={28} />{/if}
 		</div>
 
-		<!-- right tile -->
-		<div
-			class="flex h-[140px] w-[176px] shrink-0 {isGreen ? 'bg-green text-white' : 'bg-primary text-white'} {tileLayout === 'center'
-				? 'items-center justify-center'
-				: tileLayout === 'bars'
-					? 'items-end gap-2.5 px-[22px] py-6'
-					: 'flex-col justify-center gap-2.5 px-4'}"
-		>
-			{#if id === 'rest-smtp'}
-				<svg width="76" height="56" viewBox="0 0 76 56" xmlns="http://www.w3.org/2000/svg">
-					<rect x="2" y="2" width="72" height="52" fill="none" stroke="#fff" stroke-width="3" />
-					<path d="M3 4L38 31L73 4" fill="none" stroke="#fff" stroke-width="3" />
-				</svg>
-			{:else if id === 'sdks'}
-				<svg width="84" height="56" viewBox="0 0 84 56" xmlns="http://www.w3.org/2000/svg">
-					<path d="M26 10L6 28L26 46" fill="none" stroke="#fff" stroke-width="5" />
-					<path d="M58 10L78 28L58 46" fill="none" stroke="#fff" stroke-width="5" />
-					<path d="M48 6L36 50" fill="none" stroke="#fff" stroke-width="5" />
-				</svg>
-			{:else if id === 'webhooks'}
-				<span class="w-fit text-[13px] leading-[18px] opacity-70">Your app</span>
-				<span class="font-code text-sm leading-5">POST /webhooks</span>
-				<span class="flex items-center gap-2 font-code text-xs leading-4"><span class="h-2 w-2 shrink-0 bg-white"></span>signed</span>
-			{:else if id === 'synced'}
-				<span class="w-fit text-[13px] leading-[18px] opacity-70">Shared footer</span>
-				<span class="font-heading text-[17px] leading-5 font-semibold tracking-[-0.01em]">Edit once, updates everywhere</span>
-			{:else if id === 'multilingual'}
-				<span class="w-fit text-[13px] leading-[18px] opacity-70">Hallo Sarah,</span>
-				<span class="font-heading text-[17px] leading-5 font-semibold tracking-[-0.01em]">Dein Testzeitraum läuft.</span>
-				<span class="h-2 w-20 bg-white/40"></span>
-			{:else if id === 'placeholders'}
-				<span class="font-heading text-[17px] leading-5 font-semibold tracking-[-0.01em]">Hi Sarah, your Pro trial has 14 days left.</span>
-				<span class="h-2 w-20 bg-white/40"></span>
-			{:else if id === 'onboarding'}
-				<span class="w-fit text-[13px] leading-[18px] opacity-70">Sign-up sequence</span>
-				<span class="font-heading text-[17px] leading-5 font-semibold tracking-[-0.01em]">Sends itself, day by day</span>
-				<span class="h-2 w-20 bg-white/40"></span>
-			{:else if id === 'security'}
-				<span class="w-fit text-[13px] leading-[18px] opacity-70">Priority lane</span>
-				<span class="font-heading text-[17px] leading-5 font-semibold tracking-[-0.01em]">Never stuck behind a campaign</span>
-			{:else if id === 'trial'}
-				<span class="font-heading text-[17px] leading-5 font-semibold tracking-[-0.01em]">Your trial ends tomorrow.</span>
-				<span class="w-fit bg-white px-3.5 py-2 text-[13px] leading-4 font-bold text-primary">Upgrade to Pro</span>
-			{:else if id === 'segments'}
-				<span class="w-fit text-[13px] leading-[18px] opacity-70">Segment</span>
-				<span class="font-heading text-[17px] leading-5 font-semibold tracking-[-0.01em]">Trial users, 1,320 people</span>
-				<span class="h-2 w-20 bg-white/40"></span>
-			{:else if id === 'campaigns'}
-				<span class="font-heading text-[56px] leading-[56px] font-semibold tracking-[-0.02em]">∞</span>
-				<span class="text-[15px] leading-5 font-semibold">Send as many as you like</span>
-			{:else}
-				{#each [40, 64, 52, 92, 76] as bar, i}
-					<span class="w-5 {i === 3 ? 'bg-white' : 'bg-white/50'}" style="height: {bar}px"></span>
-				{/each}
-			{/if}
-		</div>
+		<!-- art, one pixel per dither cell -->
+		<img src="/home/accordion/{id}.png" alt="" width="216" height="180" class="absolute top-0 right-0 [image-rendering:pixelated]" />
 	</div>
 </div>

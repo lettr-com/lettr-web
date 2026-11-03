@@ -13,7 +13,8 @@
     "test:unit": "vp test run",
     "test:unit:watch": "vp test",
     "seo:check": "node src/lib/seo/gate/check.ts",
-    "blog:images": "node tools/blog-images/render.mjs"
+    "blog:images": "node tools/blog-images/render.mjs",
+    "accordion:images": "node tools/blog-images/accordion.mjs"
   },
   "dependencies": {
     "@splinetool/loader": "^1.12.52",

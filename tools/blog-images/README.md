@@ -39,6 +39,16 @@ image adds the title in Zalando Sans SemiExpanded, with balanced line breaks.
 
 The output is deterministic: the same scene renders the same bytes.
 
+## Homepage accordion art
+
+`accordion.mjs` runs the same dither for the graphics in the homepage's open
+accordion rows. Each row's object, tilt, palette and crop is in its `scenes`
+table, and the files land in `static/home/accordion/`:
+
+```bash
+vp run accordion:images
+```
+
 ## Adding an object
 
 Draw it with an image model, in the library's style, using two existing sprites
