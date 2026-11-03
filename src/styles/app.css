@@ -57,6 +57,10 @@
   --color-hairline: #eee7ea;
   --color-plum: #23020b;
   --color-plum-raised: #3a0716;
+  /* Product UI inside marketing cards: the inset panel and the "verified" status. */
+  --color-inset: #fbf8f9;
+  --color-live: #0f766e;
+  --color-live-soft: #e6f2f0;
 
   /* Changelog module badges: one hue per product area, plus a warning hue
      reserved for the "Breaking" tag. Tinted backgrounds are produced with

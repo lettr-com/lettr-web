@@ -4,7 +4,7 @@
 	import DevTeamsSection from '$lib/components/home/DevTeamsSection.svelte';
 	import MarqueeBand from '$lib/components/home/MarqueeBand.svelte';
 	import SendingLanesSection from '$lib/components/home/SendingLanesSection.svelte';
-	import AssistantSection from '$lib/components/home/AssistantSection.svelte';
+	import DomainCtaSection from '$lib/components/home/DomainCtaSection.svelte';
 	import VersionHistorySection from '$lib/components/home/VersionHistorySection.svelte';
 	import FrameworkSection from '$lib/components/home/FrameworkSection.svelte';
 	import BrandSection from '$lib/components/home/BrandSection.svelte';
@@ -23,4 +23,4 @@
 <VersionHistorySection />
 <FrameworkSection />
 <PricingSlider />
-<AssistantSection />
+<DomainCtaSection />
