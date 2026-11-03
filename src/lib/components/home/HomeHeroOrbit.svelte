@@ -232,7 +232,8 @@
 	/*
 	 * Too narrow to sit beside the copy: grow, keep to the right and rise into the space
 	 * beside it. The wider the window, the further right the globe sits and the higher it
-	 * can rise; the margin keeps the disc about 40px clear of the text at every width.
+	 * can rise, slowly until it clears the buttons and quickly after; each line follows one
+	 * of those stretches, keeping the disc about 40px clear of the copy at every width.
 	 */
 	@media (min-width: 768px) and (max-width: 1199.98px) {
 		.orbit-hero {
@@ -241,7 +242,7 @@
 
 		.orbit-stage {
 			height: calc(var(--stage) * 0.76);
-			margin-top: calc(317px - 50vw);
+			margin-top: min(-7px - 4.3vw, 618px - 68.4vw);
 		}
 
 		.orbit-square {
@@ -295,13 +296,13 @@
 		<div data-animate style="animation-delay:0.12s" class="flex w-full flex-col gap-3 sm:w-auto sm:flex-row">
 			<Button
 				variant="primary"
-				class="h-16 w-full text-body sm:w-[200px]"
+				size="hero"
 				href={registerHref}
 				onclick={() => trackHeroCta('Get started', registerHref, 'primary')}
 			>Get started</Button>
 			<Button
 				variant="secondary"
-				class="h-16 w-full text-body sm:w-[200px]"
+				size="hero"
 				href="https://docs.lettr.com/introduction"
 				target="_blank"
 				rel="noopener noreferrer"
