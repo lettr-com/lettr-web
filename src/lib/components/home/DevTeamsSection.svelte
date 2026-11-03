@@ -1,13 +1,14 @@
 <script lang="ts">
-	import CodeSnippet from '$lib/components/CodeSnippet.svelte';
+	import CodeSwitcher from './CodeSwitcher.svelte';
 	import FeatureAccordion, { type AccordionItem } from './FeatureAccordion.svelte';
 	import EditorPreview from '$lib/components/EditorPreview.svelte';
 	import TooltipWord from '$lib/components/TooltipWord.svelte';
 	import GetStartedButton from './GetStartedButton.svelte';
+	import type { SwitcherTab } from '$lib/home/codeSamples';
 	import type { HighlightedTab } from '$lib/utils/shiki';
 
 	interface Props {
-		codeTabs: HighlightedTab[];
+		codeTabs: (SwitcherTab & HighlightedTab)[];
 	}
 
 	let { codeTabs }: Props = $props();
@@ -71,8 +72,9 @@
 				<h3 class="relative font-heading text-[1.75rem] leading-[1.2] tracking-[-0.05em] text-white md:text-[2rem]">
 					Dev integrate.
 				</h3>
-				<div class="w-full max-w-[560px] lg:absolute lg:top-1/2 lg:left-[125px] lg:w-[529px] lg:max-w-none lg:-translate-y-1/2">
-					<CodeSnippet tabs={codeTabs} copyable moreTabIndices={[1, 4, 5, 6]} />
+				<!-- Centred in the card; the switcher holds its tallest sample's height, so switching never moves it. -->
+				<div class="w-full lg:absolute lg:top-1/2 lg:right-0 lg:left-[72px] lg:w-auto lg:-translate-y-1/2">
+					<CodeSwitcher tabs={codeTabs} label="Send an email" />
 				</div>
 				<p class="m-0 text-[1.25rem] leading-[1.3] text-white sm:text-[1.375rem] lg:absolute lg:bottom-6 lg:left-6 lg:text-2xl lg:leading-[1.4]">
 					Hook it up once,<br />
