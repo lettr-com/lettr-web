@@ -1,92 +1,120 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
 	import Seo from '$lib/components/Seo.svelte';
-	import SparkleIcon from 'phosphor-svelte/lib/SparkleIcon';
-	import ShieldCheckIcon from 'phosphor-svelte/lib/ShieldCheckIcon';
-	import EnvelopeSimpleIcon from 'phosphor-svelte/lib/EnvelopeSimpleIcon';
-	import GlobeSimpleIcon from 'phosphor-svelte/lib/GlobeSimpleIcon';
-	import ArrowRightIcon from 'phosphor-svelte/lib/ArrowRightIcon';
-	import { buildRegisterUrl, registerUrl } from '$lib/utils/utm';
-	import { capturePosthogEvent, trackSignupClick } from '$lib/analytics/posthog';
+	import Button from '$lib/components/Button.svelte';
+	import GetStartedButton from '$lib/components/home/GetStartedButton.svelte';
+	import ProofStrip from '$lib/components/home/ProofStrip.svelte';
+	import DitherSide from '$lib/components/home/DitherSide.svelte';
+	import { capturePosthogEvent } from '$lib/analytics/posthog';
 	import { jsonLdScript } from '$lib/utils/jsonLd';
 	import { basicPageJsonLd } from '$lib/utils/pageJsonLd';
-	import { emailInfraYears, monthlyEmails } from '$lib/data/company';
+	import {
+		ecomailOrganizations,
+		emailInfraSince,
+		emailInfraYears,
+		monthlyEmails,
+		topolCompanies
+	} from '$lib/data/company';
 
-	function trackAboutCta(label: string, href: string) {
-		void capturePosthogEvent('cta_clicked', {
-			placement: 'about_bottom',
-			label,
-			href,
-			destination_type: /^https?:\/\/|^mailto:/.test(href) ? 'external' : 'internal'
-		});
-		if (label === 'Try Lettr free') {
-			trackSignupClick('about_bottom', href);
-		}
-	}
-
-	let registerHref: string = $state(registerUrl);
-
-	onMount(() => {
-		registerHref = buildRegisterUrl(new URL(window.location.href), document.cookie);
-
-	});
-
-	const stats = [
-		{ value: `${emailInfraYears}`, label: 'Years in email infrastructure' },
-		{ value: monthlyEmails, label: 'Emails sent per month' },
-		{ value: 'Global', label: 'Multi-region delivery' }
+	const team = [
+		{ name: 'Jakub', role: 'CEO', photo: '/about/team/jakub.webp' },
+		{ name: 'Tomas', role: 'CTO', photo: '/about/team/tomas.webp' },
+		{ name: 'Martin', role: 'CCO, Commercial', photo: '/about/team/martin.webp' },
+		{ name: 'Erik', role: 'Customer Success Engineer', photo: '/about/team/erik.webp' },
+		{ name: 'Adam', role: 'Head of Design & Creative', photo: '/about/team/adam.webp' }
 	];
 
-	const values = [
-		{
-			icon: SparkleIcon,
-			title: 'Developer experience first',
-			description:
-				'Every feature starts with "how would a developer want this to work?" If it takes more than 60 seconds to set up, we failed.'
-		},
-		{
-			icon: ShieldCheckIcon,
-			title: 'Deliverability is not optional',
-			description:
-				"Sending an email means nothing if it doesn't reach the inbox. We bake deliverability best practices into every layer."
-		},
-		{
-			icon: EnvelopeSimpleIcon,
-			title: 'Visibility over black boxes',
-			description:
-				'You should see exactly what your app sends, how it performs, and when something goes wrong. No more guessing.'
-		},
-		{
-			icon: GlobeSimpleIcon,
-			title: 'Honest and transparent',
-			description:
-				"Simple pricing, no vendor lock-in, open about our limitations. We'd rather tell you what we can't do yet than pretend."
-		}
+	const stats = [
+		{ value: monthlyEmails, label: 'emails our servers send a month', shortLabel: 'emails a month' },
+		{ value: topolCompanies, label: 'companies use our email editor', shortLabel: 'companies use Topol' },
+		{ value: ecomailOrganizations, label: 'organizations run campaigns with us', shortLabel: 'organizations on Ecomail' }
+	];
+
+	const before = [
+		'Two integrations.',
+		'Two bills.',
+		'Two places to edit a template.',
+		'A ticket for every button change.'
+	];
+	const withLettr = [
+		'One account.',
+		'One integration for developers.',
+		'One editor for everyone else.',
+		'Separate lanes, so a campaign never holds up a password reset.'
 	];
 
 	const products = [
 		{
-			icon: '/images/logos/lettr-icon.svg',
-			name: 'Lettr',
-			description:
-				'The email API for developer artisans. Send transactional emails, monitor deliverability, and manage templates — all from a single platform built for Laravel.',
-			href: 'https://lettr.com'
+			name: 'Ecomail',
+			icon: '/images/logos/ecomail-icon.svg',
+			domain: 'ecomail.cz',
+			href: 'https://ecomail.cz',
+			description: `Email marketing for ${ecomailOrganizations} organizations since ${emailInfraSince}. It taught us to send at volume.`
 		},
 		{
+			name: 'Topol',
 			icon: '/images/logos/topol-icon.svg',
-			name: 'Topol.io',
-			description:
-				'Drag-and-drop email template editor used by thousands of companies. Design beautiful, responsive emails without touching HTML tables.',
-			href: 'https://topol.io'
+			domain: 'topol.io',
+			href: 'https://topol.io',
+			description: `The drag-and-drop editor ${topolCompanies} companies use, and the one inside Lettr.`
 		},
 		{
-			icon: '/images/logos/dmarceye-icon.svg',
 			name: 'DMARCeye',
-			description:
-				'Email security and deliverability monitoring. DMARC reporting, SPF and DKIM management, and sender reputation protection.',
-			href: 'https://dmarceye.com'
+			icon: '/images/logos/dmarceye-icon.svg',
+			domain: 'dmarceye.com',
+			href: 'https://dmarceye.com',
+			description: 'DMARC monitoring and reporting. It’s why every Lettr domain gets SPF, DKIM and DMARC.'
 		}
 	];
+
+	const principles = [
+		{
+			title: 'Email is infrastructure.',
+			description:
+				'A password reset that arrives ten minutes late is a broken product. We treat sending and logs that way.'
+		},
+		{
+			title: 'Developers integrate once.',
+			description:
+				'REST API, SMTP relay and SDKs for seven languages. Wire it up once and get back to your product.'
+		},
+		{
+			title: 'Everyone else gets an editor.',
+			description:
+				'Product and marketing change templates and send campaigns themselves, without a developer ticket.'
+		},
+		{
+			title: 'Your data stays in the EU.',
+			description:
+				'Every plan runs on EU-hosted infrastructure, including the free one, so your data stays under EU jurisdiction.'
+		}
+	];
+
+	function trackTalkToUs() {
+		void capturePosthogEvent('cta_clicked', {
+			placement: 'about_hero',
+			label: 'Talk to us',
+			href: '/demo/',
+			variant: 'secondary',
+			destination_type: 'internal'
+		});
+	}
+
+	function trackProductClick(name: string, href: string) {
+		void capturePosthogEvent('cta_clicked', {
+			placement: 'about_family',
+			label: name,
+			href,
+			destination_type: 'external'
+		});
+	}
+
+	const h2Class =
+		'font-heading text-balance text-[1.875rem] leading-[1.27] tracking-[-0.02em] text-surface md:text-[2.625rem] md:leading-[48px]';
+	const accentClass = 'font-serif text-[2.125rem] leading-none font-medium text-primary md:text-[3rem]';
+	// One cell of the 72-cell art is 2px on phones and 3px from md up.
+	const artClass =
+		'pointer-events-none -my-2 w-36 self-end [image-rendering:pixelated] md:absolute md:top-6 md:my-0 md:w-[216px]';
+	const introClass = 'text-pretty text-[1.0625rem] leading-[1.6] text-muted md:text-body md:leading-[30px]';
 </script>
 
 <Seo
@@ -100,153 +128,146 @@
 	{@html jsonLdScript(basicPageJsonLd({ path: '/about/', name: 'About Lettr', type: 'AboutPage' }))}
 </svelte:head>
 
-<section class="pt-page pb-24">
-	<!-- Hero -->
-	<div>
-		<span class="mb-4 inline-block font-heading text-xs tracking-[0.15em] text-primary uppercase">
-			ABOUT
-		</span>
-		<h1>
-			We've been doing<br />email for a while
+<section aria-labelledby="about-heading" class="relative -mx-6 overflow-hidden border-b border-border/30 px-6 pt-page pb-14 md:pb-24">
+	<div class="pointer-events-none absolute -top-48 left-1/2 h-[360px] w-[min(1100px,140%)] -translate-x-1/2 bg-primary opacity-[0.28] blur-[130px]" aria-hidden="true"></div>
+
+	<div class="relative mx-auto flex max-w-[820px] flex-col items-center text-center">
+		<h1
+			id="about-heading"
+			class="mb-6 text-balance text-[2.25rem] leading-[1.06] font-normal tracking-[-0.025em] text-surface sm:text-[3.5rem] lg:text-[4rem]"
+		>
+			We’ve been doing email<br />
+			<span class="font-serif text-[2.625rem] font-medium text-primary italic sm:text-[4rem] lg:text-[4.5rem]">since {emailInfraSince}.</span>
 		</h1>
-		<p class="mt-6 text-body leading-[1.8] text-muted">
-			Lettr is built by a European company that's been running an email marketing and automation platform for
-			{emailInfraYears} years. Our infrastructure handles {monthlyEmails} emails a month across the globe — built by passionate
-			developers who genuinely enjoy what they do.
+
+		<p class="mb-8 max-w-[620px] text-[1.0625rem] text-muted md:text-body md:leading-[30px]">
+			Lettr is the email platform for SaaS. We build it in Europe, as the team behind Ecomail, Topol and DMARCeye.
+		</p>
+
+		<div class="flex w-full flex-col items-stretch justify-center gap-3 sm:w-auto sm:flex-row sm:items-center">
+			<GetStartedButton placement="about_hero" />
+			<Button variant="secondary" size="hero" href="/demo/" onclick={trackTalkToUs}>Talk to us</Button>
+		</div>
+	</div>
+
+	<ul aria-label="The Lettr team" class="relative mx-auto mt-14 grid max-w-[1100px] grid-cols-2 gap-x-3 gap-y-7 sm:grid-cols-3 sm:gap-x-5 md:mt-20 lg:grid-cols-5">
+		{#each team as person}
+			<li class="flex flex-col gap-3.5">
+				<img
+					src={person.photo}
+					alt=""
+					width="480"
+					height="480"
+					decoding="async"
+					class="aspect-square w-full bg-hairline object-cover"
+				/>
+				<div class="flex flex-col gap-0.5">
+					<p class="font-heading text-lg leading-6 text-surface">{person.name}</p>
+					<p class="text-sm leading-5 text-subtle">{person.role}</p>
+				</div>
+			</li>
+		{/each}
+	</ul>
+</section>
+
+<div class="-mx-6 border-b border-border/30 px-6">
+	<ProofStrip {stats} />
+</div>
+
+<section aria-labelledby="why-heading" class="py-14 md:pt-28 md:pb-26">
+	<div class="mx-auto mb-10 flex max-w-[600px] flex-col items-center gap-4 text-center md:mb-14">
+		<h2 id="why-heading" class={h2Class}>
+			Email shouldn’t need<br />
+			<em class={accentClass}>two separate tools.</em>
+		</h2>
+		<p class={introClass}>
+			Setting up email for a SaaS product used to mean an API for password resets and a marketing platform for everything
+			else. We built the one platform we wanted instead.
 		</p>
 	</div>
 
-	<!-- Stats -->
-	<div class="mt-16 grid gap-4 sm:grid-cols-3">
-		{#each stats as stat}
-			<div class="border border-border/50 bg-white p-6 text-center">
-				<div class="font-heading text-3xl text-primary">{stat.value}</div>
-				<div class="mt-2 text-sm text-muted">{stat.label}</div>
-			</div>
-		{/each}
+	<div class="mx-auto grid max-w-[1100px] gap-4 md:grid-cols-2 md:gap-5">
+		<div class="relative flex min-h-[340px] flex-col justify-between gap-6 overflow-hidden border border-white/15 bg-muted p-6 md:h-[440px] md:gap-10 md:p-9">
+			<h3 class="font-heading text-[1.75rem] leading-[1.15] tracking-[-0.02em] text-white md:text-[2.125rem] md:leading-[38px]">
+				Before.
+			</h3>
+			<img src="/about/before.png" alt="" width="72" height="72" class="{artClass} md:right-6" />
+			<ul class="flex flex-col gap-3 md:gap-3.5">
+				{#each before as line}
+					<li class="font-heading text-lg leading-6 text-white/72 md:text-[1.375rem] md:leading-7">{line}</li>
+				{/each}
+			</ul>
+		</div>
+
+		<div class="relative flex min-h-[340px] flex-col justify-between gap-6 overflow-hidden bg-primary p-6 md:h-[440px] md:gap-10 md:p-9">
+			<DitherSide color="#d40e43" variant="ripple" width={20} />
+			<h3 class="relative font-serif text-4xl leading-none text-white italic md:text-[2.5rem]">With Lettr.</h3>
+			<img src="/about/with-lettr.png" alt="" width="72" height="72" class="{artClass} md:right-10" />
+			<ul class="relative flex flex-col gap-3 pr-4 md:gap-3.5">
+				{#each withLettr as line}
+					<li class="font-heading text-lg leading-6 text-white md:text-[1.375rem] md:leading-7">{line}</li>
+				{/each}
+			</ul>
+		</div>
+	</div>
+</section>
+
+<section aria-labelledby="family-heading" class="-mx-6 border-t border-border/30 px-6 py-14 md:py-26">
+	<div class="mx-auto mb-10 flex max-w-[760px] flex-col items-center gap-4 text-center md:mb-14">
+		<h2 id="family-heading" class={h2Class}>
+			From the team behind<br />
+			<em class={accentClass}>Ecomail, Topol and DMARCeye.</em>
+		</h2>
+		<p class="max-w-[560px] {introClass}">
+			Lettr is part of the Big Good group. Each of our other products taught us something Lettr is built on.
+		</p>
 	</div>
 
-	<!-- Story: Where we come from -->
-	<div class="mt-20 md:mt-28">
-		<div class="space-y-6 text-body leading-[1.8] text-muted">
-			<h2>Where we come from</h2>
-			<p>
-				Along the way, we built tools that thousands of companies rely on every day.
+	<ul class="mx-auto grid max-w-[1100px] gap-4 md:grid-cols-3 md:gap-5">
+		{#each products as product}
+			<li>
 				<a
-					href="https://topol.io"
+					href={product.href}
 					target="_blank"
 					rel="noopener noreferrer"
-					class="text-primary underline underline-offset-4 transition-colors hover:text-primary/80"
+					class="group flex h-full flex-col gap-7 border border-border/40 bg-white p-6 transition-colors hover:border-primary/30 md:p-8"
+					onclick={() => trackProductClick(product.name, product.href)}
 				>
-					Topol.io
-				</a>
-				— a drag-and-drop email template editor used by teams who need to design beautiful emails without wrestling with HTML
-				tables and inline CSS. And
-				<a
-					href="https://dmarceye.com"
-					target="_blank"
-					rel="noopener noreferrer"
-					class="text-primary underline underline-offset-4 transition-colors hover:text-primary/80"
-				>
-					DMARCeye.com
-				</a>
-				— helping businesses protect their sender reputation through DMARC monitoring, SPF, and DKIM management.
-			</p>
-			<p>
-				Through all of that, we kept running into the same frustration. Setting up transactional email in a new project was
-				always the worst part. Wire up a mail driver, pick a third-party service, wrestle with DNS records, design templates
-				in some clunky external tool, and then just… hope for the best. No easy way to see what your app is actually sending.
-				No way to know if your welcome emails are landing in inboxes or spam folders. No alerts when something breaks.
-			</p>
-		</div>
-
-		<div class="mt-12 space-y-6 text-body leading-[1.8] text-muted">
-			<h2>Why we built Lettr</h2>
-			<p>
-				We wanted something different. Something that felt like it belonged in the Laravel ecosystem — elegant, opinionated,
-				and just works. Not a generic email API with a PHP wrapper bolted on, but a tool built by people who are passionate
-				about getting email right.
-			</p>
-			<p>
-				So we built Lettr. We combined everything we know about email templates from Topol.io, everything we know about
-				deliverability from DMARCeye, and over a decade of running email infrastructure at scale into a single, cohesive
-				platform.
-			</p>
-		</div>
-
-		<!-- Values -->
-		<div class="mt-16">
-			<h2 class="mb-8">What we believe in</h2>
-			<div class="grid gap-5 sm:grid-cols-2">
-				{#each values as value}
-					<div class="border border-border/50 bg-white p-6">
-						<div class="mb-3 flex h-10 w-10 items-center justify-center border border-border/50 bg-background">
-							<value.icon size={20} class="text-primary" />
-						</div>
-						<h3 class="mb-2 text-base font-semibold text-surface">{value.title}</h3>
-						<p class="text-sm leading-relaxed text-muted">{value.description}</p>
+					<div class="flex items-center justify-between">
+						<span class="flex h-11 w-11 shrink-0 items-center justify-center border border-border/50 bg-background">
+							<img src={product.icon} alt="" class="h-[22px] w-[22px] object-contain" />
+						</span>
+						<span class="text-sm font-semibold text-primary">
+							{product.domain}
+							<span class="inline-block transition-transform group-hover:translate-x-0.5" aria-hidden="true">&rarr;</span>
+						</span>
 					</div>
-				{/each}
-			</div>
-		</div>
+					<div class="flex flex-col gap-2.5">
+						<h3 class="font-heading text-2xl leading-[30px] tracking-[-0.015em] text-surface">{product.name}</h3>
+						<p class="text-base leading-[25px] text-pretty text-muted">{product.description}</p>
+					</div>
+				</a>
+			</li>
+		{/each}
+	</ul>
+</section>
 
-		<!-- Products -->
-		<div class="mt-16">
-			<h2 class="mb-3">Our products</h2>
-			<p class="mb-8 text-body leading-[1.8] text-muted">
-				Lettr is part of a family of email tools, each focused on solving a specific problem really well.
-			</p>
-			<div class="space-y-4">
-				{#each products as product}
-					<a
-						href={product.href}
-						target="_blank"
-						rel="noopener noreferrer"
-						class="group flex items-start gap-4 border border-border/50 bg-white p-6 transition-colors hover:border-primary/30"
-					>
-						<div class="flex h-12 w-12 shrink-0 items-center justify-center border border-border/50 bg-background">
-							<img src={product.icon} alt="" class="h-6 w-6" />
-						</div>
-						<div>
-							<div class="flex items-center gap-2">
-								<span class="text-base font-semibold text-surface">{product.name}</span>
-								<ArrowRightIcon
-									size={14}
-									class="text-muted transition-transform duration-200 group-hover:translate-x-1 group-hover:text-primary"
-								/>
-							</div>
-							<p class="mt-1 text-sm leading-relaxed text-muted">{product.description}</p>
-						</div>
-					</a>
-				{/each}
-			</div>
-		</div>
-
-		<!-- CTA -->
-		<div class="mt-20">
-			<div class="border border-border/50 bg-white p-8 text-center md:p-12">
-				<h2>We'd love to hear from you</h2>
-				<p class="mx-auto mt-3 max-w-lg text-body leading-[1.7] text-muted">
-					Whether you have questions, feedback, or just want to say hi — our inbox is always open.
-				</p>
-				<div class="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row">
-					<a
-						href={registerHref}
-						class="bg-primary px-7 py-3 text-[15px] font-semibold text-white transition-colors hover:bg-primary/90"
-						onclick={() => trackAboutCta('Try Lettr free', registerHref)}
-					>
-						Try Lettr free &rarr;
-					</a>
-					<a
-						href="mailto:hello@lettr.com"
-						class="flex items-center gap-2 px-4 py-3 text-[15px] font-medium text-muted transition-colors hover:text-surface"
-						onclick={() => trackAboutCta('Email hello@lettr.com', 'mailto:hello@lettr.com')}
-					>
-						<EnvelopeSimpleIcon size={16} />
-						hello@lettr.com
-					</a>
-				</div>
-			</div>
-		</div>
+<section aria-labelledby="principles-heading" class="-mx-6 border-t border-border/30 px-6 pt-14 pb-16 md:pt-26 md:pb-30">
+	<div class="mx-auto mb-10 flex max-w-[560px] flex-col items-center gap-4 text-center md:mb-14">
+		<h2 id="principles-heading" class={h2Class}>
+			How we <em class={accentClass}>work.</em>
+		</h2>
+		<p class={introClass}>People notice email only when it breaks. These are the rules we build Lettr by.</p>
 	</div>
+
+	<ul class="mx-auto grid max-w-[1100px] gap-4 md:grid-cols-2 md:gap-5">
+		{#each principles as principle}
+			<li class="flex flex-col gap-3 border border-border/40 bg-white p-6 md:p-9">
+				<h3 class="font-heading text-balance text-[1.375rem] leading-7 tracking-[-0.015em] text-surface md:text-[1.625rem] md:leading-8">
+					{principle.title}
+				</h3>
+				<p class="text-base leading-[1.6] text-pretty text-muted md:text-[1.0625rem] md:leading-[27px]">{principle.description}</p>
+			</li>
+		{/each}
+	</ul>
 </section>
