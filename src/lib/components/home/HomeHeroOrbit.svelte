@@ -287,10 +287,10 @@
 			<span class="type-accent leading-[1.15] text-primary">built for SaaS</span>
 		</h1>
 
-		<p data-animate style="animation-delay:0.06s" class="max-w-[489px] type-lead text-surface">
+		<p data-animate style="animation-delay:0.06s" class="max-w-[489px] type-lead text-pretty text-surface">
 			Your team builds every email in one editor.<br class="hidden sm:inline" />
-			You send <span class="font-semibold">transactional</span> by API and <span class="font-semibold">marketing</span> by campaign.<br class="hidden sm:inline" />
-			One platform, one bill.
+			You send <span class="font-semibold">transactional</span> by API and <span class="font-semibold">marketing</span> by campaign.
+			<span class="whitespace-nowrap">One platform, one bill.</span>
 		</p>
 
 		<div data-animate style="animation-delay:0.12s" class="flex w-full flex-col gap-3 sm:w-auto sm:flex-row">
