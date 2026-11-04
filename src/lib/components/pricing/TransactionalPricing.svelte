@@ -67,7 +67,7 @@
 		activePlan={highlighted}
 	/>
 
-	<div class="grid gap-4 max-md:order-2 md:grid-cols-3">
+	<div class="grid order-2 gap-4 md:grid-cols-3">
 		{#each plans as plan}
 			{@const selected = highlighted === plan.key}
 			<div
@@ -120,8 +120,8 @@
 		{/each}
 	</div>
 
-	<!-- on phones the selected plan sits right under the slider -->
-	<div class={highlighted === 'enterprise' ? 'max-md:order-1' : 'max-md:order-3'}>
+	<!-- the selected plan sits right under the slider -->
+	<div class={highlighted === 'enterprise' ? 'order-1' : 'order-3'}>
 		<EnterpriseRow
 			description="Unlimited emails, dedicated IPs, SLA guarantee, SSO/SAML, and a dedicated account manager."
 			selected={highlighted === 'enterprise'}

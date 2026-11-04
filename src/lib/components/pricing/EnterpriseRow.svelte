@@ -38,7 +38,7 @@
 	<Button
 		href="/demo/"
 		onclick={track}
-		variant={selected ? (tone === 'primary' ? 'primary' : 'green') : 'outline'}
+		variant={tone === 'primary' ? (selected ? 'primary' : 'outline') : selected ? 'green' : 'green-outline'}
 		class="shrink-0"
 	>
 		Contact sales

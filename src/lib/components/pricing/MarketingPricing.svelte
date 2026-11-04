@@ -52,7 +52,7 @@
 	/>
 
 	<div
-		class="flex flex-col gap-8 p-6 transition-colors duration-300 max-md:order-2 sm:p-10 lg:flex-row lg:justify-between lg:gap-12 {isEnterprise
+		class="flex flex-col gap-8 p-6 order-2 transition-colors duration-300 sm:p-10 lg:flex-row lg:justify-between lg:gap-12 {isEnterprise
 			? 'bg-white'
 			: 'bg-[#002010]'}"
 	>
@@ -64,7 +64,7 @@
 				</p>
 				<p class="m-0 text-lg leading-[26px] {isEnterprise ? 'text-muted' : 'text-[#aaffd5]'}">{current.contacts}</p>
 			</div>
-			<Button href={registerHref} onclick={trackPlanCta} variant={isEnterprise ? 'outline' : 'green'} class="w-full">
+			<Button href={registerHref} onclick={trackPlanCta} variant={isEnterprise ? 'green-outline' : 'green'} class="w-full">
 				{cta}
 			</Button>
 		</div>
@@ -78,8 +78,8 @@
 		</ul>
 	</div>
 
-	<!-- on phones the selected plan sits right under the slider -->
-	<div class={isEnterprise ? 'max-md:order-1' : 'max-md:order-3'}>
+	<!-- the selected plan sits right under the slider -->
+	<div class={isEnterprise ? 'order-1' : 'order-3'}>
 		<EnterpriseRow
 			description="40,000+ contacts, dedicated IPs, SLA, SSO/SAML, and a dedicated account manager."
 			selected={isEnterprise}
