@@ -1,9 +1,12 @@
 <script lang="ts">
+	import VolumeRange from './VolumeRange.svelte';
 	import type { PlanKey, PlanZone } from '$lib/data/pricing';
 
 	interface Props {
 		/** The question above the big number. */
 		question: string;
+		/** The other tab's question; the question box is sized to fit the longer of the two. */
+		sizingQuestion?: string;
 		/** Slider stop labels, in order. */
 		labels: string[];
 		/** Big number for the current stop. */
@@ -20,10 +23,13 @@
 		zones?: PlanZone[];
 		/** Plan of the current stop, whose zone label is highlighted. */
 		activePlan?: PlanKey;
+		/** Keeps the zone row's height without zones, so this card matches the one beside it in the other tab. */
+		holdZoneRow?: boolean;
 	}
 
 	let {
 		question,
+		sizingQuestion,
 		labels,
 		volume,
 		planName,
@@ -33,76 +39,22 @@
 		value = $bindable(),
 		valueText,
 		zones = [],
-		activePlan
+		activePlan,
+		holdZoneRow = false
 	}: Props = $props();
 
-	const THUMB = 28;
-	const last = $derived(labels.length - 1);
-	const at = (i: number) => `calc(${THUMB / 2}px + (100% - ${THUMB}px) * ${i / last})`;
 </script>
-
-<style>
-	/* Native range input, restyled to the Paper slider: square thumb, slim grey track that fills as it moves */
-	.range {
-		-webkit-appearance: none;
-		appearance: none;
-		width: 100%;
-		height: 28px;
-		margin: 0;
-		background: transparent;
-		cursor: pointer;
-	}
-
-	.range::-webkit-slider-runnable-track {
-		height: 8px;
-		background: linear-gradient(to right, var(--accent) var(--fill), #e5e7eb var(--fill));
-	}
-
-	.range::-moz-range-track {
-		height: 8px;
-		background: #e5e7eb;
-	}
-
-	.range::-moz-range-progress {
-		height: 8px;
-		background: var(--accent);
-	}
-
-	.range::-webkit-slider-thumb {
-		-webkit-appearance: none;
-		appearance: none;
-		width: 28px;
-		height: 28px;
-		margin-top: -10px;
-		background: var(--accent);
-		border: 4px solid var(--halo);
-		border-radius: 0;
-		box-sizing: border-box;
-	}
-
-	.range::-moz-range-thumb {
-		width: 28px;
-		height: 28px;
-		background: var(--accent);
-		border: 4px solid var(--halo);
-		border-radius: 0;
-		box-sizing: border-box;
-	}
-
-	.range:focus-visible {
-		outline: 2px solid var(--accent);
-		outline-offset: 6px;
-	}
-</style>
 
 <div
 	data-markdown="skip"
 	class="bg-white p-5 sm:p-10"
-	style="--accent: {accent === 'primary' ? '#ec104b' : '#00c851'}; --halo: {accent === 'primary' ? '#fde7ed' : '#d9f7e6'}"
 >
 	<div class="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
 		<div class="flex flex-col gap-2.5">
-			<label for="volume-range" class="text-base leading-6 text-muted">{question}</label>
+			<div class="grid text-base leading-6 text-muted">
+				<label for="volume-range" class="col-start-1 row-start-1">{question}</label>
+				{#if sizingQuestion}<span class="invisible col-start-1 row-start-1" aria-hidden="true">{sizingQuestion}</span>{/if}
+			</div>
 			<p class="m-0 font-heading text-[2.75rem] leading-[46px] tracking-[-0.025em] text-surface md:text-[4rem] md:leading-[64px]" aria-live="polite">
 				{volume}
 			</p>
@@ -124,46 +76,7 @@
 		</div>
 	</div>
 
-	<div class="mt-8 flex flex-col gap-3.5 md:mt-9">
-		{#if zones.length}
-			<div class="relative h-[18px]" aria-hidden="true">
-				{#each zones as zone}
-					<span
-						class="absolute top-0 text-[11px] leading-[14px] tracking-[0.06em] transition-colors {zone.plan === activePlan ? 'text-[#d40e43]' : 'text-muted'}"
-						style="left: {zone.align === 'left' ? '0' : zone.align === 'right' ? 'auto' : at(zone.step)}; right: {zone.align === 'right' ? '0' : 'auto'}; transform: translateX({zone.align === 'center' ? '-50%' : '0'})"
-					>
-						{zone.label}
-					</span>
-				{/each}
-			</div>
-		{/if}
-		<div class="relative">
-			<div class="pointer-events-none absolute inset-x-0 top-1 h-5" aria-hidden="true">
-				{#each labels as _, i}
-					<span class="absolute top-0 h-5 w-0.5 -translate-x-1/2 bg-border" style="left: {at(i)}"></span>
-				{/each}
-			</div>
-			<input
-				id="volume-range"
-				type="range"
-				min={0}
-				max={last}
-				step={1}
-				bind:value
-				class="range relative"
-				style="--fill: {at(value)}"
-				aria-valuetext={valueText}
-			/>
-		</div>
-		<div class="relative h-[18px]" aria-hidden="true">
-			{#each labels as label, i}
-				<span
-					class="absolute top-0 w-10 -translate-x-1/2 text-center font-code text-[13px] leading-4 {i === value ? 'text-surface' : 'text-muted'} {i % 2 === 1 ? 'hidden sm:block' : ''}"
-					style="left: {at(i)}"
-				>
-					{label}
-				</span>
-			{/each}
-		</div>
+	<div class="mt-8 md:mt-9">
+		<VolumeRange id="volume-range" {labels} bind:value {valueText} {accent} {zones} {activePlan} {holdZoneRow} />
 	</div>
 </div>

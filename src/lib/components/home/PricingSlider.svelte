@@ -3,7 +3,9 @@
 	import ArrowRightIcon from 'phosphor-svelte/lib/ArrowRightIcon';
 	import DitherSide from './DitherSide.svelte';
 	import DitherEdge from './DitherEdge.svelte';
-	import { marketingSteps, transactionalSteps, transactionalZones, type Mode } from '$lib/data/pricing';
+	import GetStartedButton from './GetStartedButton.svelte';
+	import VolumeRange from '$lib/components/pricing/VolumeRange.svelte';
+	import { marketingSteps, transactionalSteps, transactionalZones, type Mode, type PlanKey } from '$lib/data/pricing';
 	import { capturePosthogEvent } from '$lib/analytics/posthog';
 
 	interface Props {
@@ -28,7 +30,6 @@
 	 * The stops and prices come from $lib/data/pricing, the same data the
 	 * /pricing page uses, so the two can't drift apart.
 	 */
-	const THUMB = 28;
 	const modes: Mode[] = ['transactional', 'marketing'];
 
 	// each mode opens on a paid-looking stop: 50,000 emails (Pro) or 2,000 contacts
@@ -42,9 +43,6 @@
 	const last = $derived(steps.length - 1);
 	const current = $derived(steps[Math.min(stepIndex, last)]);
 	const isEnterprise = $derived(stepIndex >= last);
-
-	/** Horizontal position of step `i` along the track, matching where the native thumb centres. */
-	const at = (i: number) => `calc(${THUMB / 2}px + (100% - ${THUMB}px) * ${i / last})`;
 
 	// plan zones above the transactional track; marketing has a single plan, so none
 	const zones = $derived(isTransactional ? transactionalZones : []);
@@ -107,60 +105,6 @@
 	}
 </script>
 
-<style>
-	/* Native range input, restyled: square crimson thumb on a slim gray track that fills as it moves */
-	.volume-range {
-		-webkit-appearance: none;
-		appearance: none;
-		width: 100%;
-		height: 28px;
-		margin: 0;
-		background: transparent;
-		cursor: pointer;
-	}
-
-	.volume-range::-webkit-slider-runnable-track {
-		height: 8px;
-		background: linear-gradient(to right, var(--accent) var(--fill), #e5e7eb var(--fill));
-	}
-
-	.volume-range::-moz-range-track {
-		height: 8px;
-		background: #e5e7eb;
-	}
-
-	.volume-range::-moz-range-progress {
-		height: 8px;
-		background: var(--accent);
-	}
-
-	.volume-range::-webkit-slider-thumb {
-		-webkit-appearance: none;
-		appearance: none;
-		width: 28px;
-		height: 28px;
-		margin-top: -10px;
-		background: var(--accent);
-		border: 4px solid var(--halo);
-		border-radius: 0;
-		box-sizing: border-box;
-	}
-
-	.volume-range::-moz-range-thumb {
-		width: 28px;
-		height: 28px;
-		background: var(--accent);
-		border: 4px solid var(--halo);
-		border-radius: 0;
-		box-sizing: border-box;
-	}
-
-	.volume-range:focus-visible {
-		outline: 2px solid var(--accent);
-		outline-offset: 6px;
-	}
-</style>
-
 <section id="pricing" aria-labelledby="pricing-heading" class="py-14 md:py-24">
 	{#if header}
 		{@render header()}
@@ -183,9 +127,8 @@
 		<div
 			data-markdown="skip"
 			class="flex flex-col gap-8 bg-white px-5 py-6 md:gap-9 md:p-10"
-			style="--accent: {isTransactional ? '#ec104b' : '#00c851'}; --halo: {isTransactional ? '#fde7ed' : '#d9f7e6'}"
 		>
-			<div class="grid gap-x-6 gap-y-5 md:grid-cols-[1fr_auto] md:gap-y-3">
+			<div class="grid gap-x-6 gap-y-5 md:grid-cols-[1fr_auto] md:gap-y-6">
 				<div role="tablist" aria-label="Pricing mode" class="order-first grid grid-cols-2 gap-1.5 md:order-none md:col-start-2 md:row-start-1 md:flex md:justify-self-end md:self-center">
 					{#each modes as m, i}
 						{@const active = mode === m}
@@ -201,7 +144,7 @@
 								? m === 'transactional'
 									? 'border-primary bg-[#23020b] text-white'
 									: 'border-green bg-[#002010] text-white'
-								: 'border-border/60 bg-white text-muted hover:border-primary-outline hover:text-surface'}"
+								: `border-border/60 bg-white text-muted hover:text-surface ${m === 'transactional' ? 'hover:border-primary-outline' : 'hover:border-[#7ee2a8]'}`}"
 						>
 							{m === 'transactional' ? 'Transactional' : 'Marketing'}
 						</button>
@@ -229,48 +172,23 @@
 				</div>
 			</div>
 
-			<div class="flex flex-col gap-3.5">
-				<div class="relative h-[18px]" aria-hidden="true">
-					{#each zones as zone}
-						<span
-							class="absolute top-0 text-[11px] leading-[14px] tracking-[0.06em] transition-colors {zone.plan === (current as { plan?: string }).plan ? 'text-[#d40e43]' : 'text-muted'}"
-							style="left: {zone.align === 'left' ? '0' : zone.align === 'right' ? 'auto' : at(zone.step)}; right: {zone.align === 'right' ? '0' : 'auto'}; transform: translateX({zone.align === 'center' ? '-50%' : '0'})"
-						>
-							{zone.label}
-						</span>
-					{/each}
-				</div>
+			<VolumeRange
+				id="volume-range"
+				labels={steps.map((s) => s.label)}
+				bind:value={stepIndex}
+				{valueText}
+				accent={isTransactional ? 'primary' : 'green'}
+				{zones}
+				activePlan={(current as { plan?: PlanKey }).plan}
+				holdZoneRow
+			/>
 
-				<div class="relative">
-					<div class="pointer-events-none absolute inset-x-0 top-1 h-5" aria-hidden="true">
-						{#each steps as _, i}
-							<span class="absolute top-0 h-5 w-0.5 -translate-x-1/2 bg-border" style="left: {at(i)}"></span>
-						{/each}
-					</div>
-					<input
-						id="volume-range"
-						type="range"
-						min={0}
-						max={last}
-						step={1}
-						bind:value={stepIndex}
-						class="volume-range relative"
-						style="--fill: {at(stepIndex)}"
-						aria-valuetext={valueText}
-					/>
-				</div>
-
-				<div class="relative h-4" aria-hidden="true">
-					{#each steps as step, i}
-						<span
-							class="absolute top-0 w-10 -translate-x-1/2 text-center font-code text-[11px] leading-4 md:text-[13px] {i === stepIndex ? 'text-surface' : 'text-muted'} {i % 2 === 1 ? 'hidden sm:block' : ''}"
-							style="left: {at(i)}"
-						>
-							{step.label}
-						</span>
-					{/each}
-				</div>
-			</div>
+			<GetStartedButton
+				placement="{placement}_mobile"
+				variant={isTransactional ? 'primary' : 'green'}
+				size="default"
+				class="w-full py-4 text-lg md:hidden"
+			/>
 		</div>
 
 		<div class="grid gap-4 md:grid-cols-2">

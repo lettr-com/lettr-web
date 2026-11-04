@@ -27,7 +27,7 @@
 	}
 </script>
 
-<div role="tablist" aria-label="Pricing mode" class="grid gap-2 sm:grid-cols-2 sm:gap-4">
+<div role="tablist" aria-label="Pricing mode" class="grid grid-cols-2 gap-2 sm:gap-4">
 	{#each modes as mode, index}
 		{@const isActive = value === mode}
 		{@const isTransactional = mode === 'transactional'}
@@ -39,15 +39,15 @@
 			tabindex={isActive ? 0 : -1}
 			onclick={() => select(mode)}
 			onkeydown={(event) => onKeydown(event, index)}
-			class="relative flex cursor-pointer items-center gap-4 overflow-hidden border-2 p-4 text-left transition-colors sm:gap-5 sm:px-6 sm:py-[22px] {isActive
+			class="relative flex cursor-pointer flex-col items-start gap-3 overflow-hidden border-2 px-4 pt-4 pb-6 text-left transition-colors sm:flex-row sm:items-center sm:gap-5 sm:px-6 sm:py-[22px] {isActive
 				? isTransactional
 					? 'border-primary bg-[#23020b]'
 					: 'border-green bg-[#002010]'
-				: 'border-white bg-white hover:border-primary-outline'}"
+				: `border-white bg-white ${isTransactional ? 'hover:border-primary-outline' : 'hover:border-[#7ee2a8]'}`}"
 		>
 			<span
 				aria-hidden="true"
-				class="relative flex h-12 w-12 shrink-0 items-center justify-center {isTransactional ? 'bg-primary' : 'bg-green'}"
+				class="relative flex h-10 w-10 shrink-0 items-center justify-center sm:h-12 sm:w-12 {isTransactional ? 'bg-primary' : 'bg-green'}"
 			>
 				{#if isTransactional}
 					<svg width="20" height="26" viewBox="0 0 19 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -70,7 +70,7 @@
 					color={isTransactional ? '#ec104b' : '#00c851'}
 					variant={isTransactional ? 'ripple' : 'noise'}
 					edge="bottom"
-					width={18}
+					width={12}
 					cell={6}
 				/>
 			{/if}
@@ -83,7 +83,7 @@
 					{isTransactional ? 'Transactional' : 'Marketing'}
 				</span>
 				<span
-					class="text-[0.9375rem] leading-[22px] {isActive ? (isTransactional ? 'text-primary-outline' : 'text-[#aaffd5]') : 'text-muted'}"
+					class="text-[0.8125rem] leading-[18px] sm:text-[0.9375rem] sm:leading-[22px] {isActive ? (isTransactional ? 'text-primary-outline' : 'text-[#aaffd5]') : 'text-muted'}"
 				>
 					{isTransactional ? 'Automated, event-triggered emails.' : 'Campaigns to promote your SaaS.'}
 				</span>

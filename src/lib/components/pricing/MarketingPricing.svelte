@@ -3,7 +3,7 @@
 	import Button from '$lib/components/Button.svelte';
 	import VolumeCard from './VolumeCard.svelte';
 	import EnterpriseRow from './EnterpriseRow.svelte';
-	import { marketingFeatures, marketingSteps } from '$lib/data/pricing';
+	import { marketingFeatures, marketingQuestion, marketingSteps, transactionalQuestion } from '$lib/data/pricing';
 	import { buildRegisterUrl, registerUrl } from '$lib/utils/utm';
 	import { capturePosthogEvent, trackSignupClick } from '$lib/analytics/posthog';
 	import { createChangeTracker } from '$lib/analytics/changeTracker';
@@ -38,7 +38,8 @@
 <div class="mx-auto flex max-w-[1100px] flex-col gap-4">
 	<h2 class="sr-only">Marketing plan</h2>
 	<VolumeCard
-		question="How many contacts do you have?"
+		question={marketingQuestion}
+		sizingQuestion={transactionalQuestion}
 		labels={marketingSteps.map((s) => s.label)}
 		volume={current.volume}
 		planName={isEnterprise ? 'Enterprise' : undefined}
@@ -47,10 +48,11 @@
 		accent="green"
 		bind:value={step}
 		valueText="{current.volume} contacts, {isEnterprise ? 'Enterprise' : 'Marketing'} plan"
+		holdZoneRow
 	/>
 
 	<div
-		class="flex flex-col gap-8 p-6 transition-colors duration-300 sm:p-10 lg:flex-row lg:justify-between lg:gap-12 {isEnterprise
+		class="flex flex-col gap-8 p-6 transition-colors duration-300 max-md:order-2 sm:p-10 lg:flex-row lg:justify-between lg:gap-12 {isEnterprise
 			? 'bg-white'
 			: 'bg-[#002010]'}"
 	>
@@ -76,11 +78,14 @@
 		</ul>
 	</div>
 
-	<EnterpriseRow
-		description="40,000+ contacts, dedicated IPs, SLA, SSO/SAML, and a dedicated account manager."
-		selected={isEnterprise}
-		tone="green"
-		placement="campaigns_pricing_enterprise"
-		volumeLabel={current.label}
-	/>
+	<!-- on phones the selected plan sits right under the slider -->
+	<div class={isEnterprise ? 'max-md:order-1' : 'max-md:order-3'}>
+		<EnterpriseRow
+			description="40,000+ contacts, dedicated IPs, SLA, SSO/SAML, and a dedicated account manager."
+			selected={isEnterprise}
+			tone="green"
+			placement="campaigns_pricing_enterprise"
+			volumeLabel={current.label}
+		/>
+	</div>
 </div>
