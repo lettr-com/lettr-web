@@ -1,6 +1,6 @@
 <script lang="ts">
 	import TerminalSession from './TerminalSession.svelte';
-	import StageGlow from './StageGlow.svelte';
+	import StageDither from './StageDither.svelte';
 	import { terminalScripts } from '$lib/home/terminalScripts';
 
 	let activeId = $state(terminalScripts[0].id);
@@ -34,7 +34,7 @@
 	</div>
 
 	<div class="relative mx-auto max-w-wide overflow-hidden bg-surface px-4 pt-5 sm:px-6">
-		<StageGlow />
+		<StageDither tone="var(--color-muted)" />
 		<div class="relative flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
 			<div role="tablist" aria-label="Framework" class="-mx-1 flex gap-1 overflow-x-auto">
 				{#each terminalScripts as script, index}
