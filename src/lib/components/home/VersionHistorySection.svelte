@@ -1,6 +1,6 @@
 <script lang="ts">
 	import GetStartedButton from './GetStartedButton.svelte';
-	import StageGlow from './StageGlow.svelte';
+	import StageDither from './StageDither.svelte';
 	import { capturePosthogEvent } from '$lib/analytics/posthog';
 
 	type Target = 'headline' | 'intro' | 'button' | 'image';
@@ -99,7 +99,7 @@
 
 	<div class="mx-auto max-w-wide">
 		<div data-markdown="skip" class="relative overflow-hidden bg-[#23020b] px-5 pt-10 pb-8 md:px-12 lg:h-[516px] lg:pt-12 lg:pb-0">
-			<StageGlow />
+			<StageDither tone="var(--color-plum-raised)" />
 			<div class="relative mx-auto flex max-w-[902px] flex-col gap-10 lg:h-full lg:flex-row lg:items-start lg:gap-7">
 				<!-- Email, cropped at the stage edge -->
 				<div class="flex h-[380px] justify-center overflow-hidden lg:h-full lg:w-[494px] lg:shrink-0" role="img" aria-label="An email with the section changed by the selected version highlighted">
