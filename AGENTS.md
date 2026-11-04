@@ -109,6 +109,15 @@ Operational guide for coding agents working in `lettr-web`.
 - Use theme tokens from `src/styles/app.css` (`--color-*`, `--font-*`, `--text-*`).
 - Only add comments when intent is non-obvious; avoid commentary noise.
 
+## Design System
+
+- Typography, spacing and button rules: `docs/design/design-system.md`. Live specimen: `/design-system/` on the dev server (dev-only route, never prerendered).
+- Headings use role utilities (`type-display`, `type-h1` … `type-h6`); bare `h1`–`h6` get them by default. Body/UI sizes use tokens (`type-lead`, `text-body`, `text-prose`, `text-base`, `text-body-sm`, `text-sm`, `text-caption`, `text-xs`, `type-label`). Do not add literal `text-[..px]` sizes outside product-UI illustrations.
+- Zalando Sans is always weight 400. Accents use `type-accent` (Redaction italic) or `type-accent-pixel`; never give an accent its own size.
+- Redaction 20 (`font-pixel`) is the only pixelated Redaction cut; do not add 10, 35, 50, 70 or 100.
+- Actions use `Button.svelte` with `size="lg" | "md" | "sm"`; no hand-rolled CTA anchors.
+- Spacing stays on the 8px grid (4px for compact UI); sections use `section-y`, `section-y-sm` or `section-y-lg`.
+
 ## Tailwind / CSS Rules
 
 - Favor utility classes in markup for component-level styling.
