@@ -52,7 +52,7 @@
 	class="border-b border-border/30 py-20 sm:py-24"
 >
 	<div class="mb-10 max-w-[800px]">
-		<h2 id="two-products-heading" class="home-section-heading text-surface">
+		<h2 id="two-products-heading" class="type-h2 text-surface">
 			Devs integrate. <span class="block text-primary">Teams create.</span>
 		</h2>
 	</div>

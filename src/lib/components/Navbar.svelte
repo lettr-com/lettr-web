@@ -5,6 +5,7 @@
 	import CaretDown from 'phosphor-svelte/lib/CaretDown';
 	import List from 'phosphor-svelte/lib/List';
 	import X from 'phosphor-svelte/lib/X';
+	import Button from '$lib/components/Button.svelte';
 	import MobileMenu from '$lib/components/nav/MobileMenu.svelte';
 	import NavPanel from '$lib/components/nav/NavPanel.svelte';
 	import SalesStrip from '$lib/components/nav/SalesStrip.svelte';
@@ -378,7 +379,7 @@
 			: 'border-transparent'}"
 	>
 		<div
-			class="mx-auto flex h-[55px] max-w-[1200px] items-center justify-between pr-3 pl-4 lg:h-[59px] lg:px-6"
+			class="mx-auto flex h-[55px] max-w-page items-center justify-between pr-3 pl-4 lg:h-[59px] lg:px-6"
 		>
 			<div class="flex items-center gap-9">
 				<a
@@ -457,9 +458,10 @@
 					Sign in
 				</a>
 
-				<a
+				<Button
+					size="sm"
 					href={registerHref}
-					class="flex items-center bg-fade-primary-strong px-3 py-[7px] text-[13px] leading-5 font-semibold text-white transition-colors hover:bg-fade-primary-strong/90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-surface max-[359px]:hidden lg:px-4 lg:py-2 lg:text-sm lg:leading-[21px]"
+					class="max-[359px]:hidden"
 					onclick={() =>
 						trackCta(
 							'Get started',
@@ -468,7 +470,7 @@
 						)}
 				>
 					Get started
-				</a>
+				</Button>
 
 				<button
 					bind:this={mobileToggle}

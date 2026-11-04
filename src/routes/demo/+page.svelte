@@ -434,8 +434,8 @@
 			/>
 		{:else}
 			<header class="space-y-3">
-				<p class="text-sm font-medium uppercase tracking-[0.14em] text-primary">Step {isVolumePickerCollapsed ? '2 of 2' : '1 of 2'}</p>
-				<h1 class="text-3xl text-surface">Book your Lettr demo</h1>
+				<p class="text-sm font-medium uppercase tracking-label text-primary">Step {isVolumePickerCollapsed ? '2 of 2' : '1 of 2'}</p>
+				<h1 class="text-surface">Book your Lettr demo</h1>
 				<p class="text-body text-muted">
 					Tell us your monthly email volume and pick a time that works — or get started self-serve in minutes.
 				</p>

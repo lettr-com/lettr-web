@@ -44,16 +44,16 @@
 	];
 </script>
 
-<section aria-labelledby="pipeline-heading" class="mx-auto max-w-[1100px] py-16 md:pt-[136px] md:pb-32">
+<section aria-labelledby="pipeline-heading" class="mx-auto max-w-wide py-16 md:pt-[136px] md:pb-32">
 	<div class="mb-10 flex flex-col gap-4 md:mb-[72px] lg:flex-row lg:items-end lg:justify-between lg:gap-16">
 		<h2
 			id="pipeline-heading"
-			class="m-0 font-heading text-[1.875rem] leading-[38px] text-balance tracking-[-0.02em] text-surface md:text-[2.625rem] md:leading-[50px]"
+			class="m-0 type-h2 text-balance text-surface"
 		>
 			From install to a<br class="hidden sm:block" />
 			typed, queued send.
 		</h2>
-		<p class="m-0 text-pretty max-w-[400px] shrink-0 text-[1.0625rem] leading-[27.2px] text-muted md:text-[1.1875rem] md:leading-[30.4px]">
+		<p class="m-0 text-pretty max-w-[400px] shrink-0 type-lead text-muted">
 			Four steps. Two of them are artisan commands, and the last one is the code you already write.
 		</p>
 	</div>
@@ -73,9 +73,9 @@
 						</g>
 					{/each}
 				</svg>
-				<span class="font-code text-[13px] leading-4 text-primary" aria-hidden="true">0{i + 1}</span>
+				<span class="font-code text-caption leading-4 text-primary" aria-hidden="true">0{i + 1}</span>
 				<code
-					class="block font-code leading-[1.5] whitespace-pre text-surface {step.sends ? 'text-sm lg:text-[13px]' : 'text-base'}"
+					class="block font-code leading-[1.5] whitespace-pre text-surface {step.sends ? 'text-sm lg:text-caption' : 'text-base'}"
 				>{step.command.join('\n')}</code>
 				<p class="m-0 text-pretty text-base leading-[25px] text-muted">{step.description}</p>
 			</li>

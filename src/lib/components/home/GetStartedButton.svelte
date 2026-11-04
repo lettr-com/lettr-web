@@ -8,11 +8,11 @@
 		/** Where the button sits, sent with the click events (for example `home_brand`). */
 		placement: string;
 		variant?: 'primary' | 'secondary' | 'green';
-		size?: 'default' | 'hero';
+		size?: 'sm' | 'md' | 'lg';
 		class?: string;
 	}
 
-	let { placement, variant = 'primary', size = 'hero', class: className = '' }: Props = $props();
+	let { placement, variant = 'primary', size = 'lg', class: className = '' }: Props = $props();
 
 	let registerHref: string = $state(registerUrl);
 

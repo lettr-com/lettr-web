@@ -21,10 +21,10 @@
 	class="nav-strip absolute inset-x-0 top-full z-0 border-b border-primary-outline bg-primary-soft"
 >
 	<div
-		class="mx-auto flex h-11 max-w-[1200px] items-center justify-between gap-4 pr-1 pl-4 lg:px-6"
+		class="mx-auto flex h-11 max-w-page items-center justify-between gap-4 pr-1 pl-4 lg:px-6"
 	>
 		<p class="flex min-w-0 items-baseline gap-2">
-			<span class="truncate text-[13px] leading-[18px] font-medium text-surface lg:hidden">
+			<span class="truncate text-caption leading-[18px] font-medium text-surface lg:hidden">
 				{prompt.short}
 			</span>
 			<span class="hidden text-sm leading-[21px] font-medium text-surface lg:inline">{prompt.question}</span>
@@ -35,7 +35,7 @@
 		<div class="flex shrink-0 items-center gap-0.5 lg:gap-2">
 			<a
 				href={salesHref}
-				class="group flex items-center gap-1.5 px-2 py-1.5 text-[13px] leading-[19px] font-semibold text-primary-strong transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-surface lg:border lg:border-primary-strong lg:bg-fade-white lg:px-3 lg:py-[5px] lg:hover:bg-fade-primary-strong lg:hover:text-white"
+				class="group flex items-center gap-1.5 px-2 py-1.5 text-caption leading-[19px] font-semibold text-primary-strong transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-surface lg:border lg:border-primary-strong lg:bg-fade-white lg:px-3 lg:py-[5px] lg:hover:bg-fade-primary-strong lg:hover:text-white"
 				onclick={onContact}
 			>
 				Contact sales

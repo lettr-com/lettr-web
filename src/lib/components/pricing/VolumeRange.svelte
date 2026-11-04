@@ -221,7 +221,7 @@
 		<div class="relative h-4">
 			{#each labels as label, i}
 				<span
-					class="absolute top-0 w-10 -translate-x-1/2 text-center font-code text-[11px] leading-4 transition-colors md:text-[13px] {i === value ? 'text-surface' : 'text-muted/70'} {i % 2 === 1 ? 'hidden sm:block' : ''}"
+					class="absolute top-0 w-10 -translate-x-1/2 text-center font-code text-[11px] leading-4 transition-colors md:text-caption {i === value ? 'text-surface' : 'text-muted/70'} {i % 2 === 1 ? 'hidden sm:block' : ''}"
 					style="left: {at(i)}"
 				>
 					{label}

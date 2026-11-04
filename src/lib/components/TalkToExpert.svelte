@@ -1,4 +1,5 @@
 <script lang="ts">
+	import Button from '$lib/components/Button.svelte';
 	import ChatCircleDotsIcon from 'phosphor-svelte/lib/ChatCircleDotsIcon';
 	import { capturePosthogEvent } from '$lib/analytics/posthog';
 
@@ -19,12 +20,6 @@
 		<p class="mb-6 max-w-[40ch] text-sm text-muted">
 			Talk to our team about your email infrastructure, volume needs, or migration from another provider.
 		</p>
-		<a
-			href="/demo/"
-			class="bg-surface px-6 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-surface/90"
-			onclick={trackTalkToExpert}
-		>
-			Talk to an expert
-		</a>
+		<Button size="sm" variant="ink" href="/demo/" onclick={trackTalkToExpert}>Talk to an expert</Button>
 	</div>
 </section>

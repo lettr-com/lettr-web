@@ -37,9 +37,9 @@
 	}
 </script>
 
-<section class="border-b border-border/30 py-20 sm:py-24">
+<section class="border-b border-border/30 section-y">
 	<div class="mb-9 max-w-[760px]">
-		<h2 class="home-section-heading text-surface">
+		<h2 class="type-h2 text-surface">
 			Build visually. <span class="block text-primary">Translate in place.</span>
 		</h2>
 	</div>

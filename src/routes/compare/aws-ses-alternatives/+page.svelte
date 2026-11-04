@@ -240,7 +240,7 @@
 		All comparisons
 	</a>
 
-	<h1 class="text-surface mb-5 max-w-[16ch]">
+	<h1 class="type-display text-surface mb-5 max-w-[16ch]">
 		Looking for an <span class="text-primary">AWS SES alternative?</span>
 	</h1>
 	<p class="max-w-[58ch] text-body text-muted mb-8">
@@ -251,11 +251,13 @@
 
 	<div class="flex flex-wrap items-center gap-2">
 		<Button
+			size="lg"
 			variant="primary"
 			href={registerHref}
 			onclick={() => trackCta('aws_ses_alt_hero', 'Try Lettr free', registerHref, 'primary')}
 		>Try Lettr free</Button>
 		<Button
+			size="lg"
 			variant="secondary"
 			href="#comparison"
 			onclick={() => trackCta('aws_ses_alt_hero', 'See the comparison', '#comparison', 'secondary')}
@@ -264,7 +266,7 @@
 </section>
 
 <!-- Why people look past SES -->
-<section class="py-20 border-b border-border/30">
+<section class="section-y border-b border-border/30">
 	<h2 class="mb-3 text-surface max-w-[18ch]">
 		Why teams start looking elsewhere
 	</h2>
@@ -276,7 +278,7 @@
 		{#each reasons as reason, i}
 			<div>
 				<div class="mb-3 font-code text-sm text-primary">0{i + 1}</div>
-				<h3 class="mb-2 text-base font-semibold text-surface">{reason.title}</h3>
+				<h3 class="mb-2 text-base text-surface">{reason.title}</h3>
 				<p class="text-sm leading-relaxed text-muted">{reason.body}</p>
 			</div>
 		{/each}
@@ -284,7 +286,7 @@
 </section>
 
 <!-- Comparison table -->
-<section id="comparison" class="py-20 border-b border-border/30">
+<section id="comparison" class="section-y border-b border-border/30">
 	<h2 class="mb-3 text-surface max-w-[20ch]">
 		The short version
 	</h2>
@@ -337,7 +339,7 @@
 </section>
 
 <!-- Per-alternative breakdown -->
-<section class="py-20 border-b border-border/30">
+<section class="section-y border-b border-border/30">
 	<h2 class="mb-3 text-surface max-w-[20ch]">
 		A quick, honest take on each
 	</h2>
@@ -351,7 +353,7 @@
 				class="border bg-white p-6 {option.highlight ? 'border-primary/40' : 'border-border/40'}"
 			>
 				<div class="mb-2 flex items-center gap-3">
-					<h3 class="text-base font-semibold text-surface">{option.name}</h3>
+					<h3 class="text-base text-surface">{option.name}</h3>
 					{#if option.highlight}
 						<span class="border border-primary/20 bg-primary/5 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-primary">
 							Our pick
@@ -383,7 +385,7 @@
 </section>
 
 <!-- Migration note -->
-<section class="py-20 border-b border-border/30">
+<section class="section-y border-b border-border/30">
 	<div class="grid gap-12 lg:grid-cols-2 lg:items-center">
 		<div>
 			<h2 class="mb-4 text-surface max-w-[16ch]">Switching is mostly a settings change</h2>
@@ -442,7 +444,7 @@
 					onclick={() => toggleFaq(i)}
 					class="flex w-full items-center justify-between py-5 text-left"
 				>
-					<h3 class="text-sm font-medium text-surface">{faq.question}</h3>
+					<h3 class="text-sm text-surface">{faq.question}</h3>
 					<CaretDownIcon
 						size={14}
 						class="shrink-0 ml-4 text-muted transition-transform duration-200 {openFaq === i ? 'rotate-180' : ''}"
@@ -450,7 +452,7 @@
 				</button>
 				{#if openFaq === i}
 					<div transition:slide={{ duration: 200 }}>
-						<p class="text-[13px] text-muted leading-relaxed max-w-[65ch] pb-5">{faq.answer}</p>
+						<p class="text-caption text-muted leading-relaxed max-w-[65ch] pb-5">{faq.answer}</p>
 					</div>
 				{/if}
 			</div>
@@ -459,7 +461,7 @@
 </section>
 
 <!-- Final CTA -->
-<section class="py-20">
+<section class="section-y">
 	<div class="flex flex-col items-center text-center">
 		<h2 class="mb-3 text-surface max-w-[16ch]">
 			SES sending, <span class="text-primary">tooling included.</span>
@@ -470,11 +472,13 @@
 		</p>
 		<div class="flex flex-wrap items-center justify-center gap-2">
 			<Button
+				size="lg"
 				variant="primary"
 				href={registerHref}
 				onclick={() => trackCta('aws_ses_alt_footer', 'Try Lettr free', registerHref, 'primary')}
 			>Try Lettr free</Button>
 			<Button
+				size="lg"
 				variant="secondary"
 				href="/compare/"
 				onclick={() => trackCta('aws_ses_alt_footer', 'View all comparisons', '/compare/', 'secondary')}

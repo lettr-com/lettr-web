@@ -123,12 +123,12 @@
 <div bind:this={container} class="relative max-w-2xl w-full overflow-visible bg-gray-950 p-[6px] pt-[2px] {shadow ? 'shadow-[0_0_40px_-10px_rgba(236,16,75,0.15)]' : ''}">
 	<div class="flex items-center {copyable ? 'flex-wrap gap-x-2 gap-y-1 sm:gap-x-3' : 'justify-between'}">
 		{#if filename}
-			<div class="px-3 py-2 text-[12px] text-gray-300">{filename}</div>
+			<div class="px-3 py-2 text-xs text-gray-300">{filename}</div>
 		{:else}
 			<div class="flex items-center gap-0">
 				{#each primaryTabIndices as tabIndex}
 					<button
-						class="whitespace-nowrap border-b-2 {tabPadding} py-2 text-[13px] transition-colors {activeTab === tabIndex
+						class="whitespace-nowrap border-b-2 {tabPadding} py-2 text-caption transition-colors {activeTab === tabIndex
 							? 'border-primary text-white'
 							: 'border-transparent text-gray-300 hover:text-gray-200'}"
 						onclick={() => selectTab(tabIndex)}
@@ -138,7 +138,7 @@
 				{/each}
 				<div class="relative">
 					<button
-						class="flex items-center gap-1 whitespace-nowrap border-b-2 {tabPadding} py-2 text-[13px] transition-colors {isMoreActive
+						class="flex items-center gap-1 whitespace-nowrap border-b-2 {tabPadding} py-2 text-caption transition-colors {isMoreActive
 							? 'border-primary text-white'
 							: 'border-transparent text-gray-300 hover:text-gray-200'}"
 						onclick={toggleMore}
@@ -150,7 +150,7 @@
 						<div class="absolute top-full left-0 z-50 mt-1 min-w-[140px] border border-white/10 bg-surface/95 py-1 shadow-xl backdrop-blur-xl">
 							{#each moreTabIndices as tabIndex}
 								<button
-									class="block w-full px-3 py-1.5 text-left text-[13px] transition-colors {activeTab === tabIndex
+									class="block w-full px-3 py-1.5 text-left text-caption transition-colors {activeTab === tabIndex
 										? 'text-white'
 										: 'text-gray-300 hover:text-white'}"
 									onclick={() => selectTab(tabIndex)}
@@ -167,7 +167,7 @@
 			<button
 				type="button"
 				onclick={copyCode}
-				class="ml-auto flex h-7 shrink-0 cursor-pointer items-center justify-center gap-1.5 border border-white/15 px-2 text-[12px] font-medium sm:px-2.5 text-white/80 transition-colors hover:border-primary hover:text-white"
+				class="ml-auto flex h-7 shrink-0 cursor-pointer items-center justify-center gap-1.5 border border-white/15 px-2 text-xs font-medium sm:px-2.5 text-white/80 transition-colors hover:border-primary hover:text-white"
 				aria-label={didCopy ? 'Copied to clipboard' : `Copy ${tabs[activeTab].label} code`}
 			>
 				{#if didCopy}
@@ -180,7 +180,7 @@
 	</div>
 
 	<div class="overflow-x-auto border-t border-gray-700 p-4 pb-8 bg-gray-800">
-		<div bind:this={codeEl} class="font-code [&_pre]:!bg-transparent [&_pre]:!p-0 [&_pre]:!leading-[1.5] [&_code]:!text-[13px] [&_code]:!leading-[1.5]">
+		<div bind:this={codeEl} class="font-code [&_pre]:!bg-transparent [&_pre]:!p-0 [&_pre]:!leading-[1.5] [&_code]:!text-caption [&_code]:!leading-[1.5]">
 			{@html tabs[shownTab].html}
 		</div>
 	</div>

@@ -93,8 +93,9 @@
 	</div>
 
 	<div class="flex flex-wrap items-center justify-center gap-2">
-		<Button variant="primary" href="/">Back to safety</Button>
+		<Button size="lg" variant="primary" href="/">Back to safety</Button>
 		<Button
+			size="lg"
 			variant="secondary"
 			href="https://docs.lettr.com/introduction"
 			target="_blank"

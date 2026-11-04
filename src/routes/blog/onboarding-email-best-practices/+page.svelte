@@ -331,11 +331,11 @@ See you then,
 
 				<div class="p-5 text-[11px] leading-relaxed text-muted sm:p-6">
 					<!-- Subject -->
-					<p class="mb-1 text-[8px] font-semibold tracking-[0.12em] text-muted uppercase">Subject</p>
-					<p class="mb-4 text-[12px] font-semibold text-surface">{example.subject}</p>
+					<p class="mb-1 text-[8px] font-semibold tracking-label text-muted uppercase">Subject</p>
+					<p class="mb-4 text-xs font-semibold text-surface">{example.subject}</p>
 
 					<!-- Heading -->
-					<p class="mb-2 text-[13px] font-bold text-surface">{example.title}</p>
+					<p class="mb-2 text-caption font-bold text-surface">{example.title}</p>
 
 					<!-- Greeting + body -->
 					<p class="mb-2">{example.greeting}</p>
@@ -349,7 +349,7 @@ See you then,
 					{#if example.detail}
 						<!-- Detail block -->
 						<div class="border border-border/40 bg-background/60 p-2.5">
-							<p class="mb-1 text-[8px] font-semibold tracking-[0.12em] text-muted uppercase">{example.detail.label}</p>
+							<p class="mb-1 text-[8px] font-semibold tracking-label text-muted uppercase">{example.detail.label}</p>
 							<p class="text-[9px] text-surface">{example.detail.value}</p>
 						</div>
 					{/if}

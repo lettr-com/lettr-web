@@ -49,18 +49,18 @@
 			{/if}
 		</span>
 		{#if item.description}
-			<span class="mt-0.5 block text-[13px] leading-[19px] text-subtle">{item.description}</span>
+			<span class="mt-0.5 block text-caption leading-[19px] text-subtle">{item.description}</span>
 		{/if}
 	</a>
 {/snippet}
 
 {#snippet columnLabel(text: string)}
-	<p class="px-3 pb-2.5 font-code text-[11px] tracking-[0.12em] text-subtle uppercase">{text}</p>
+	<p class="px-3 pb-2.5 font-code text-[11px] tracking-label text-subtle uppercase">{text}</p>
 {/snippet}
 
 <div {id}>
 	{#if menu.key === 'product'}
-		<div class="mx-auto grid max-w-[1200px] grid-cols-[1fr_1fr_1.85fr] gap-10 px-6 py-7">
+		<div class="mx-auto grid max-w-page grid-cols-[1fr_1fr_1.85fr] gap-10 px-6 py-7">
 			{#each menu.sections as lane (lane.id)}
 				<div class="flex flex-col gap-1 {lane.lane === 'shared' ? 'border-l border-hairline pl-10' : ''}">
 					<div class="flex items-center gap-3 px-3 pb-3.5">
@@ -92,7 +92,7 @@
 		</div>
 		<div class="bg-background">
 			<div
-				class="mx-auto flex h-13 max-w-[1200px] items-center justify-between px-6 text-[13px] leading-[19px]"
+				class="mx-auto flex h-13 max-w-page items-center justify-between px-6 text-caption leading-[19px]"
 			>
 				<p class="flex items-center gap-2.5 px-3 text-subtle">
 					<span class="size-1.5 bg-primary" aria-hidden="true"></span>
@@ -119,7 +119,7 @@
 		{@const docs = section('docs')?.items[0]}
 		{@const reference = section('reference')}
 		{@const quickstarts = section('quickstarts')}
-		<div class="mx-auto grid max-w-[1200px] grid-cols-[1fr_1fr_1.4fr] gap-10 px-6 pt-7 pb-8">
+		<div class="mx-auto grid max-w-page grid-cols-[1fr_1fr_1.4fr] gap-10 px-6 pt-7 pb-8">
 			{#if docs}
 				<a
 					href={docs.href}
@@ -129,7 +129,7 @@
 					onclick={() => onLinkClick(docs)}
 				>
 					<span class="flex flex-col gap-2">
-						<span class="font-code text-[11px] tracking-[0.12em] text-primary-outline uppercase">
+						<span class="font-code text-[11px] tracking-label text-primary-outline uppercase">
 							Documentation
 						</span>
 						<span class="font-heading text-[22px] leading-7 tracking-[-0.02em] text-white">
@@ -141,7 +141,7 @@
 							class="block overflow-hidden bg-plum-raised px-3 py-2.5 text-xs leading-[18px] text-ellipsis whitespace-nowrap text-[#F9A8B8]"
 							aria-hidden="true">$ composer require lettr/lettr-laravel</code
 						>
-						<span class="flex items-center gap-1.5 text-[13px] font-semibold text-white">
+						<span class="flex items-center gap-1.5 text-caption font-semibold text-white">
 							Open docs.lettr.com
 							<ArrowUpRight
 								size={12}
@@ -165,7 +165,7 @@
 			{/if}
 			{#if quickstarts}
 				<div class="flex flex-col gap-1">
-					<p class="pb-2.5 font-code text-[11px] tracking-[0.12em] text-subtle uppercase">
+					<p class="pb-2.5 font-code text-[11px] tracking-label text-subtle uppercase">
 						{quickstarts.title}
 					</p>
 					<ul class="grid grid-cols-2 gap-2 xl:grid-cols-3">
@@ -189,7 +189,7 @@
 							</li>
 						{/each}
 					</ul>
-					<p class="pt-3 text-[13px] leading-[19px] text-subtle">
+					<p class="pt-3 text-caption leading-[19px] text-subtle">
 						Another language? The <a
 							href="{docsUrl}/api-reference/introduction"
 							target="_blank"
@@ -204,7 +204,7 @@
 			{/if}
 		</div>
 	{:else}
-		<div class="mx-auto grid max-w-[1200px] grid-cols-[1fr_1fr_1.6fr] gap-10 px-6 pt-7 pb-8">
+		<div class="mx-auto grid max-w-page grid-cols-[1fr_1fr_1.6fr] gap-10 px-6 pt-7 pb-8">
 			{#each menu.sections as group (group.id)}
 				<div class="flex flex-col gap-1">
 					{@render columnLabel(group.title)}
@@ -222,13 +222,13 @@
 						class="group flex flex-col gap-3 bg-background p-6 transition-colors hover:bg-primary-soft {focusRing}"
 						onclick={() => onLinkClick({ label: post.title, href: `/blog/${post.slug}/` })}
 					>
-						<span class="font-code text-[11px] tracking-[0.12em] text-primary uppercase">
+						<span class="font-code text-[11px] tracking-label text-primary uppercase">
 							From the blog · {post.readTime}
 						</span>
 						<span class="font-heading text-xl leading-[27px] tracking-[-0.02em] text-surface">
 							{post.title}
 						</span>
-						<span class="flex items-center gap-1.5 pt-1 text-[13px] font-semibold text-surface">
+						<span class="flex items-center gap-1.5 pt-1 text-caption font-semibold text-surface">
 							Read the article
 							<ArrowRight size={12} class="transition-transform group-hover:translate-x-0.5" aria-hidden="true" />
 						</span>
@@ -241,7 +241,7 @@
 							href={product.href}
 							target="_blank"
 							rel="noopener noreferrer"
-							class="flex items-center gap-2 text-[13px] font-semibold text-surface underline-offset-4 hover:underline {focusRing}"
+							class="flex items-center gap-2 text-caption font-semibold text-surface underline-offset-4 hover:underline {focusRing}"
 							onclick={() => onLinkClick(product)}
 						>
 							{#if product.icon}

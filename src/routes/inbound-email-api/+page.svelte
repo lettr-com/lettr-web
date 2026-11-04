@@ -200,12 +200,12 @@
 	<div class="grid gap-12 lg:grid-cols-1">
 		<div class="flex flex-col">
 			<div
-				class="mb-4 inline-flex items-center gap-2 text-[11px] font-medium tracking-[0.18em] uppercase text-primary/80"
+				class="mb-4 inline-flex items-center gap-2 text-[11px] font-medium tracking-label uppercase text-primary/80"
 			>
 				<span class="block w-6 h-px bg-primary/60"></span>
 				Inbound email API
 			</div>
-			<h1 class="text-surface mb-4">
+			<h1 class="type-display text-surface mb-4">
 				Inbound Email API<br />
 				<span class="text-primary">receive and parse email in your app.</span>
 			</h1>
@@ -220,11 +220,13 @@
 
 			<div class="flex flex-wrap items-center mb-3 gap-2">
 				<Button
+					size="lg"
 					variant="primary"
 					href={registerHref}
 					onclick={() => trackCta('inbound_api_hero', 'Get started free', registerHref, 'primary')}
 				>Get started free</Button>
 				<Button
+					size="lg"
 					variant="secondary"
 					href={INBOUND_DOCS_URL}
 					target="_blank"
@@ -249,10 +251,10 @@
 </section>
 
 <!-- What is an inbound email API -->
-<section class="py-20 border-b border-border/30">
+<section class="section-y border-b border-border/30">
 	<div class="grid gap-12 lg:grid-cols-2 lg:items-start">
 		<div>
-			<div class="mb-4 inline-flex items-center gap-2 text-[11px] font-medium tracking-[0.18em] uppercase text-primary/80">
+			<div class="mb-4 inline-flex items-center gap-2 text-[11px] font-medium tracking-label uppercase text-primary/80">
 				<span class="block w-6 h-px bg-primary/60"></span>
 				The basics
 			</div>
@@ -292,7 +294,7 @@
 				</li>
 			</ol>
 			<div class="mt-5 border-t border-border/30 pt-4">
-				<p class="text-[13px] text-muted leading-relaxed">
+				<p class="text-caption text-muted leading-relaxed">
 					The inbound API does the receiving and parsing; the <strong class="text-surface">email webhook</strong>
 					is how the parsed result reaches your code in real time.
 				</p>
@@ -302,9 +304,9 @@
 </section>
 
 <!-- What you can build -->
-<section class="py-20 border-b border-border/30">
+<section class="section-y border-b border-border/30">
 	<div class="mb-12">
-		<div class="mb-4 inline-flex items-center gap-2 text-[11px] font-medium tracking-[0.18em] uppercase text-primary/80">
+		<div class="mb-4 inline-flex items-center gap-2 text-[11px] font-medium tracking-label uppercase text-primary/80">
 			<span class="block w-6 h-px bg-primary/60"></span>
 			What you can build
 		</div>
@@ -324,7 +326,7 @@
 					<item.icon size={20} class="text-primary" />
 				</div>
 				<div>
-					<h3 class="mb-1 text-base font-semibold text-surface">{item.title}</h3>
+					<h3 class="mb-1 text-base text-surface">{item.title}</h3>
 					<p class="text-sm leading-relaxed text-muted wrap-anywhere">{item.description}</p>
 				</div>
 			</div>
@@ -333,9 +335,9 @@
 </section>
 
 <!-- How Lettr's inbound works -->
-<section class="py-20 border-b border-border/30">
+<section class="section-y border-b border-border/30">
 	<div class="mb-12">
-		<div class="mb-4 inline-flex items-center gap-2 text-[11px] font-medium tracking-[0.18em] uppercase text-primary/80">
+		<div class="mb-4 inline-flex items-center gap-2 text-[11px] font-medium tracking-label uppercase text-primary/80">
 			<span class="block w-6 h-px bg-primary/60"></span>
 			How it works
 		</div>
@@ -355,7 +357,7 @@
 				<GlobeIcon size={20} class="text-primary" />
 			</div>
 			<div class="font-code text-xs text-primary mb-1">01</div>
-			<h3 class="mb-1 text-base font-semibold text-surface">Add an inbound route</h3>
+			<h3 class="mb-1 text-base text-surface">Add an inbound route</h3>
 			<p class="text-sm leading-relaxed text-muted">
 				Create a route for a domain or subdomain like <span class="font-code text-surface">inbound.yourdomain.com</span>
 				and add the MX records Lettr shows you to its DNS.
@@ -366,7 +368,7 @@
 				<TrayIcon size={20} class="text-primary" />
 			</div>
 			<div class="font-code text-xs text-primary mb-1">02</div>
-			<h3 class="mb-1 text-base font-semibold text-surface">Lettr parses the email</h3>
+			<h3 class="mb-1 text-base text-surface">Lettr parses the email</h3>
 			<p class="text-sm leading-relaxed text-muted">
 				Incoming mail is received, validated, and parsed into structured JSON — body, headers, and
 				attachments separated out for you.
@@ -377,7 +379,7 @@
 				<LinkIcon size={20} class="text-primary" />
 			</div>
 			<div class="font-code text-xs text-primary mb-1">03</div>
-			<h3 class="mb-1 text-base font-semibold text-surface">A webhook hits your app</h3>
+			<h3 class="mb-1 text-base text-surface">A webhook hits your app</h3>
 			<p class="text-sm leading-relaxed text-muted">
 				Lettr POSTs the parsed message to your HTTPS endpoint in real time. Verify the credentials,
 				respond 200, and act on the data.
@@ -387,10 +389,10 @@
 </section>
 
 <!-- Webhook payload example -->
-<section class="py-20 border-b border-border/30">
+<section class="section-y border-b border-border/30">
 	<div class="grid gap-12 lg:grid-cols-2 lg:items-center">
 		<div>
-			<div class="mb-4 inline-flex items-center gap-2 text-[11px] font-medium tracking-[0.18em] uppercase text-primary/80">
+			<div class="mb-4 inline-flex items-center gap-2 text-[11px] font-medium tracking-label uppercase text-primary/80">
 				<span class="block w-6 h-px bg-primary/60"></span>
 				Webhook payload
 			</div>
@@ -416,7 +418,7 @@
 				<LinkIcon size={16} class="text-primary" />
 				<span class="font-code text-xs text-muted">POST your-app.com/webhooks/inbound</span>
 			</div>
-			<pre class="overflow-x-auto font-code text-[13px] leading-relaxed text-surface">{`{
+			<pre class="overflow-x-auto font-code text-caption leading-relaxed text-surface">{`{
   "event": "inbound",
   "timestamp": "2026-06-18T10:30:00Z",
   "data": {
@@ -444,9 +446,9 @@
 </section>
 
 <!-- Quick start -->
-<section class="py-20 border-b border-border/30">
+<section class="section-y border-b border-border/30">
 	<div class="mb-12">
-		<div class="mb-4 inline-flex items-center gap-2 text-[11px] font-medium tracking-[0.18em] uppercase text-primary/80">
+		<div class="mb-4 inline-flex items-center gap-2 text-[11px] font-medium tracking-label uppercase text-primary/80">
 			<span class="block w-6 h-px bg-primary/60"></span>
 			Quick start
 		</div>
@@ -464,21 +466,21 @@
 			<div class="flex items-start gap-4">
 				<span class="flex h-8 w-8 shrink-0 items-center justify-center border border-border/50 bg-background font-code text-sm text-primary">1</span>
 				<div>
-					<h3 class="mb-1 text-base font-semibold text-surface">Expose a webhook endpoint</h3>
+					<h3 class="mb-1 text-base text-surface">Expose a webhook endpoint</h3>
 					<p class="text-sm leading-relaxed text-muted">Add an HTTPS route in your app that accepts a JSON POST — the handler on the right is all you need.</p>
 				</div>
 			</div>
 			<div class="flex items-start gap-4">
 				<span class="flex h-8 w-8 shrink-0 items-center justify-center border border-border/50 bg-background font-code text-sm text-primary">2</span>
 				<div>
-					<h3 class="mb-1 text-base font-semibold text-surface">Create an inbound route</h3>
+					<h3 class="mb-1 text-base text-surface">Create an inbound route</h3>
 					<p class="text-sm leading-relaxed text-muted">In the dashboard, add a route for your domain, paste your endpoint URL, and add the MX records to your DNS.</p>
 				</div>
 			</div>
 			<div class="flex items-start gap-4">
 				<span class="flex h-8 w-8 shrink-0 items-center justify-center border border-border/50 bg-background font-code text-sm text-primary">3</span>
 				<div>
-					<h3 class="mb-1 text-base font-semibold text-surface">Send a test email</h3>
+					<h3 class="mb-1 text-base text-surface">Send a test email</h3>
 					<p class="text-sm leading-relaxed text-muted">Email an address on your inbound domain and watch the parsed payload hit your endpoint within seconds.</p>
 				</div>
 			</div>
@@ -509,9 +511,9 @@
 </section>
 
 <!-- Inbound + outbound in one -->
-<section class="py-20 border-b border-border/30">
+<section class="section-y border-b border-border/30">
 	<div class="mb-12">
-		<div class="mb-4 inline-flex items-center gap-2 text-[11px] font-medium tracking-[0.18em] uppercase text-primary/80">
+		<div class="mb-4 inline-flex items-center gap-2 text-[11px] font-medium tracking-label uppercase text-primary/80">
 			<span class="block w-6 h-px bg-primary/60"></span>
 			Send + receive
 		</div>
@@ -528,7 +530,7 @@
 		<div class="border border-border/40 bg-white p-6">
 			<div class="mb-4 flex items-center gap-2">
 				<PaperPlaneTiltIcon size={18} class="text-primary" />
-				<h3 class="text-base font-semibold text-surface">Outbound — send</h3>
+				<h3 class="text-base text-surface">Outbound — send</h3>
 			</div>
 			<ul class="space-y-3">
 				{#each bothWays.send as item}
@@ -543,7 +545,7 @@
 		<div class="border border-border/40 bg-white p-6">
 			<div class="mb-4 flex items-center gap-2">
 				<TrayIcon size={18} class="text-primary" />
-				<h3 class="text-base font-semibold text-surface">Inbound — receive</h3>
+				<h3 class="text-base text-surface">Inbound — receive</h3>
 			</div>
 			<ul class="space-y-3">
 				{#each bothWays.receive as item}
@@ -569,7 +571,7 @@
 <!-- FAQ -->
 <section class="py-16 border-b border-border/30">
 	<div class="mb-10">
-		<div class="mb-4 inline-flex items-center gap-2 text-[11px] font-medium tracking-[0.18em] uppercase text-primary/80">
+		<div class="mb-4 inline-flex items-center gap-2 text-[11px] font-medium tracking-label uppercase text-primary/80">
 			<span class="block w-6 h-px bg-primary/60"></span>
 			FAQ
 		</div>
@@ -586,7 +588,7 @@
 					onclick={() => toggleFaq(i)}
 					class="flex w-full items-center justify-between py-5 text-left"
 				>
-					<h3 class="text-sm font-medium text-surface">{faq.question}</h3>
+					<h3 class="text-sm text-surface">{faq.question}</h3>
 					<CaretDownIcon
 						size={14}
 						class="shrink-0 ml-4 text-muted transition-transform duration-200 {openFaq === i ? 'rotate-180' : ''}"
@@ -594,7 +596,7 @@
 				</button>
 				{#if openFaq === i}
 					<div transition:slide={{ duration: 200 }}>
-						<p class="text-[13px] text-muted leading-relaxed max-w-[65ch] pb-5">{faq.answer}</p>
+						<p class="text-caption text-muted leading-relaxed max-w-[65ch] pb-5">{faq.answer}</p>
 					</div>
 				{/if}
 			</div>
@@ -613,7 +615,7 @@
 </div>
 
 <!-- Final CTA -->
-<section class="py-20">
+<section class="section-y">
 	<div class="flex flex-col items-center text-center">
 		<h2 class="mb-3 text-surface">
 			Start <span class="text-primary">receiving email</span> in your app.
@@ -624,11 +626,13 @@
 		</p>
 		<div class="flex flex-wrap items-center justify-center gap-2">
 			<Button
+				size="lg"
 				variant="primary"
 				href={registerHref}
 				onclick={() => trackCta('inbound_api_footer', 'Get started free', registerHref, 'primary')}
 			>Get started free</Button>
 			<Button
+				size="lg"
 				variant="secondary"
 				href={INBOUND_DOCS_URL}
 				target="_blank"

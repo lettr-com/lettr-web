@@ -83,21 +83,21 @@
 
 <section bind:this={section} aria-labelledby="versions-heading" class="pt-14 pb-14 md:pt-24 md:pb-16">
 	<div class="mx-auto mb-10 flex max-w-[860px] flex-col items-center gap-4 text-center md:mb-14">
-		<p class="m-0 font-code text-[0.8125rem] leading-4 tracking-[0.08em] text-primary-strong uppercase">Version history</p>
+		<p class="m-0 font-code text-caption leading-4 tracking-[0.08em] text-primary-strong uppercase">Version history</p>
 		<h2
 			id="versions-heading"
-			class="font-heading text-balance text-[1.875rem] leading-[1.27] tracking-[-0.02em] text-surface md:text-[2.625rem] md:leading-[50px]"
+			class="type-h2 text-balance text-surface"
 		>
 			Every edit is saved.<br />
 			Roll back in
-			<em class="block font-serif text-[2.125rem] leading-none font-medium text-primary md:inline md:text-[2.875rem]">one click.</em>
+			<em class="block type-accent text-primary md:inline">one click.</em>
 		</h2>
-		<p class="max-w-[440px] text-[1.0625rem] leading-[1.5] text-surface md:text-[1.1875rem]">
+		<p class="max-w-[440px] text-[1.0625rem] leading-[1.5] text-surface md:text-body">
 			See who changed what and when. Restore any earlier version if a change didn't work out.
 		</p>
 	</div>
 
-	<div class="mx-auto max-w-[1100px]">
+	<div class="mx-auto max-w-wide">
 		<div data-markdown="skip" class="relative overflow-hidden bg-[#23020b] px-5 pt-10 pb-8 md:px-12 lg:h-[516px] lg:pt-12 lg:pb-0">
 			<StageGlow />
 			<div class="relative mx-auto flex max-w-[902px] flex-col gap-10 lg:h-full lg:flex-row lg:items-start lg:gap-7">
@@ -106,7 +106,7 @@
 					<div class="flex h-full w-full max-w-[494px] shrink-0 flex-col bg-white" aria-hidden="true">
 						<div class="flex items-center gap-2 px-[22px] py-4">
 							<span class="h-[18px] w-[18px] bg-green"></span>
-							<span class="font-heading text-[15px] leading-5 font-semibold text-surface">sprout</span>
+							<span class="font-heading text-body-sm leading-5 font-semibold text-surface">sprout</span>
 						</div>
 						<div class="flex flex-col gap-2.5 px-[22px] pt-3.5 pb-[18px]">
 							<div class="relative {highlight('headline')}">
@@ -117,7 +117,7 @@
 							</div>
 							<div class="relative {highlight('intro')}">
 								{@render tag('intro')}
-								<p class="m-0 max-w-[285px] text-[13px] leading-5 text-muted">
+								<p class="m-0 max-w-[285px] text-caption leading-5 text-muted">
 									Your workspace is ready. Add your first project and invite your team in under two minutes.
 								</p>
 							</div>
@@ -125,7 +125,7 @@
 						<div class="px-[22px] pt-1 pb-6">
 							<div class="relative inline-flex {highlight('button')}">
 								{@render tag('button')}
-								<span class="bg-surface px-5 py-3 text-[13px] leading-[18px] font-bold text-white">Start your first project</span>
+								<span class="bg-surface px-5 py-3 text-caption leading-[18px] font-bold text-white">Start your first project</span>
 							</div>
 						</div>
 						<div class="min-h-0 flex-1 px-[18px] pb-[18px]">
@@ -154,7 +154,7 @@
 									aria-pressed={isSelected}
 									class="flex w-full cursor-pointer items-center gap-3.5 border-l-[3px] px-6 py-4 text-left transition-colors {isSelected ? 'border-primary bg-primary-soft' : 'border-transparent hover:bg-primary-soft/50'}"
 								>
-									<span class="relative flex h-8 w-8 shrink-0 items-center justify-center overflow-hidden text-[13px] font-bold text-white {authors[version.author].bg}">
+									<span class="relative flex h-8 w-8 shrink-0 items-center justify-center overflow-hidden text-caption font-bold text-white {authors[version.author].bg}">
 										{#if authors[version.author].src && !brokenAvatars.includes(version.author)}
 											<img
 												src={authors[version.author].src}
@@ -166,8 +166,8 @@
 										{version.author[0]}
 									</span>
 									<span class="flex min-w-0 flex-1 flex-col gap-0.5">
-										<span class="truncate text-[15px] leading-5 {isSelected ? 'font-bold' : 'font-semibold'} text-surface">{version.title}</span>
-										<span class="text-[13px] leading-[18px] text-muted">{version.author} · {version.when}</span>
+										<span class="truncate text-body-sm leading-5 {isSelected ? 'font-bold' : 'font-semibold'} text-surface">{version.title}</span>
+										<span class="text-caption leading-[18px] text-muted">{version.author} · {version.when}</span>
 									</span>
 									<span class="w-16 shrink-0 text-right font-code text-[11px] leading-[14px] tracking-[0.08em] text-primary">
 										{#if i === 0}CURRENT{:else if isSelected}VIEWING{/if}
@@ -181,7 +181,7 @@
 							type="button"
 							onclick={restore}
 							disabled={isCurrent}
-							class="relative after:absolute after:inset-x-0 after:top-full after:h-0.5 after:content-[''] flex w-full cursor-pointer items-center justify-center bg-fade-primary-strong px-6 py-3.5 text-[15px] leading-5 font-bold text-white will-change-transform transition-[translate,color,--fade-bg] duration-200 ease-out enabled:hover:-translate-y-0.5 enabled:hover:bg-fade-primary-strong/90 disabled:cursor-default disabled:bg-border disabled:text-muted motion-reduce:transition-none"
+							class="relative after:absolute after:inset-x-0 after:top-full after:h-0.5 after:content-[''] flex w-full cursor-pointer items-center justify-center bg-fade-primary-strong px-6 py-3.5 text-body-sm leading-5 font-bold text-white will-change-transform transition-[translate,color,--fade-bg] duration-200 ease-out enabled:hover:-translate-y-0.5 enabled:hover:bg-fade-primary-strong/90 disabled:cursor-default disabled:bg-border disabled:text-muted motion-reduce:transition-none"
 						>
 							{isCurrent ? 'This is the current version' : 'Restore this version'}
 						</button>

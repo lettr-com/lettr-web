@@ -40,7 +40,7 @@
 			{#each points as point}
 				<div data-unified>
 					<point.icon size={18} class="text-primary mb-2" />
-					<h3 class="text-base text-surface font-medium mb-1">{point.title}</h3>
+					<h3 class="text-base text-surface mb-1">{point.title}</h3>
 					<p class="max-w-[30ch] text-sm text-muted leading-relaxed">{point.description}</p>
 				</div>
 			{/each}

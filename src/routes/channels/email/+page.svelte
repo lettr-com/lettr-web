@@ -1,4 +1,5 @@
 <script lang="ts">
+	import Button from '$lib/components/Button.svelte';
 	import { onMount } from 'svelte';
 	import GlobeSimpleIcon from 'phosphor-svelte/lib/GlobeSimpleIcon';
 	import ArrowsSplitIcon from 'phosphor-svelte/lib/ArrowsSplitIcon';
@@ -128,7 +129,7 @@
 						<div class="mb-3 flex h-10 w-10 items-center justify-center border border-border/50 bg-background">
 							<item.icon size={20} class="text-primary" />
 						</div>
-						<h3 class="mb-2 text-base font-semibold text-surface">{item.title}</h3>
+						<h3 class="mb-2 text-base text-surface">{item.title}</h3>
 						<p class="text-sm leading-relaxed text-muted">{item.description}</p>
 					</div>
 				{/each}
@@ -144,7 +145,7 @@
 			<div class="grid gap-5 sm:grid-cols-2">
 				<!-- Authentication & Security -->
 				<div class="border border-border/50 bg-white p-6">
-					<h3 class="mb-4 text-base font-semibold text-surface">Authentication & Security</h3>
+					<h3 class="mb-4 text-base text-surface">Authentication & Security</h3>
 					<ul class="space-y-3">
 						{#each authItems as item}
 							<li class="flex items-start gap-2.5">
@@ -157,7 +158,7 @@
 
 				<!-- Visibility -->
 				<div class="border border-border/50 bg-white p-6">
-					<h3 class="mb-4 text-base font-semibold text-surface">Visibility & Tracking</h3>
+					<h3 class="mb-4 text-base text-surface">Visibility & Tracking</h3>
 					<ul class="space-y-3">
 						{#each visibilityItems as item}
 							<li class="flex items-start gap-2.5">
@@ -178,16 +179,16 @@
 					Get started with 3,000 free emails per month. No credit card required. Full access to every feature from day one.
 				</p>
 				<div class="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row">
-					<a
+					<Button
 						href={registerHref}
-						class="bg-primary px-7 py-3 text-[15px] font-semibold text-white transition-colors hover:bg-primary/90"
+						size="lg"
 						onclick={() => trackChannelCta('Start sending for free', registerHref)}
 					>
 						Start sending for free &rarr;
-					</a>
+					</Button>
 					<a
 						href="/demo/"
-						class="px-4 py-3 text-[15px] font-medium text-muted transition-colors hover:text-surface"
+						class="px-4 py-3 text-body-sm font-medium text-muted transition-colors hover:text-surface"
 						onclick={() => trackChannelCta('Book a demo', '/demo/')}
 					>
 						Book a demo

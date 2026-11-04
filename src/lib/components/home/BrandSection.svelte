@@ -78,17 +78,17 @@
 	<div class="mx-auto mb-10 flex max-w-[860px] flex-col items-center gap-4 text-center md:mb-14">
 		<h2
 			id="brand-heading"
-			class="font-heading text-balance text-[1.875rem] leading-[1.27] tracking-[-0.02em] text-surface md:text-[2.625rem] md:leading-[50px]"
+			class="type-h2 text-balance text-surface"
 		>
 			Brand all your emails,
-			<em class="block font-serif text-[2.125rem] leading-none font-medium text-primary md:text-[2.875rem]">with a click of a button.</em>
+			<em class="block type-accent text-primary">with a click of a button.</em>
 		</h2>
-		<p class="max-w-[480px] text-[1.0625rem] leading-[1.5] text-surface md:text-[1.1875rem]">
+		<p class="max-w-[480px] text-[1.0625rem] leading-[1.5] text-surface md:text-body">
 			Set your brand once. Every email, marketing or transactional, picks it up.
 		</p>
 	</div>
 
-	<div class="mx-auto flex max-w-[1100px] flex-col items-center gap-8 md:gap-10">
+	<div class="mx-auto flex max-w-wide flex-col items-center gap-8 md:gap-10">
 		<div
 			class="-mx-6 flex w-[calc(100%+3rem)] snap-x snap-mandatory gap-3 overflow-x-auto px-6 pb-2 lg:mx-0 lg:grid lg:w-full lg:snap-none lg:grid-cols-3 lg:gap-4 lg:overflow-visible lg:px-0 lg:pb-0"
 		>
@@ -107,7 +107,7 @@
 		</div>
 
 		<div class="flex flex-col items-stretch gap-3 sm:flex-row sm:items-center">
-			<Button variant="secondary" size="hero" onclick={rebrand}>Try another brand</Button>
+			<Button variant="secondary" size="lg" onclick={rebrand}>Try another brand</Button>
 			<GetStartedButton placement="home_brand" />
 		</div>
 		<p class="sr-only" aria-live="polite">{announcement}</p>

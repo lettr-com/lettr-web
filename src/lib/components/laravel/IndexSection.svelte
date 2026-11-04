@@ -22,12 +22,12 @@
 		<div class="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between lg:gap-16">
 			<h2
 				id="index-heading"
-				class="m-0 font-heading text-[1.875rem] leading-[38px] text-balance tracking-[-0.02em] text-surface md:text-[2.625rem] md:leading-[50px]"
+				class="m-0 type-h2 text-balance text-surface"
 			>
 				Everything else<br />
 				stays Laravel.
 			</h2>
-			<p class="m-0 text-pretty max-w-[400px] shrink-0 text-[1.0625rem] leading-[27.2px] text-muted md:text-[1.1875rem] md:leading-[30.4px]">
+			<p class="m-0 text-pretty max-w-[400px] shrink-0 type-lead text-muted">
 				Lettr is a mail transport and a facade. Everything else in your app stays where it is.
 			</p>
 		</div>
@@ -37,12 +37,12 @@
 				<li
 					class="grid grid-cols-[32px_1fr] items-baseline gap-x-4 gap-y-2 border-b border-[#eee7ea] py-5 md:grid-cols-[40px_300px_1fr] md:gap-x-6 lg:grid-cols-[40px_300px_300px_1fr]"
 				>
-					<span class="font-code text-[13px] leading-4 text-primary" aria-hidden="true">0{i + 1}</span>
+					<span class="font-code text-caption leading-4 text-primary" aria-hidden="true">0{i + 1}</span>
 					<h3 class="m-0 font-heading text-[1.25rem] leading-[1.4] font-normal text-surface md:text-[1.375rem] md:leading-[30.8px]">
 						{row.title}
 					</h3>
 					<code class="col-start-2 font-code text-sm leading-[18px] break-all text-surface md:col-start-3 lg:col-start-auto">{row.code}</code>
-					<p class="col-start-2 m-0 text-[0.9375rem] leading-[1.5] text-muted md:col-start-3 lg:col-start-auto">{row.description}</p>
+					<p class="col-start-2 m-0 text-body-sm leading-[1.5] text-muted md:col-start-3 lg:col-start-auto">{row.description}</p>
 				</li>
 			{/each}
 		</ol>

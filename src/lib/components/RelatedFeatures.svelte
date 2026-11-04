@@ -21,7 +21,7 @@
 {#if links.length}
 	<div class="mx-auto max-w-[1064px] px-4">
 		<div class="border-t border-border/50 pt-12">
-			<h2 class="font-heading text-xs tracking-[0.15em] text-primary uppercase">
+			<h2 class="type-h5 text-surface">
 				{heading}
 			</h2>
 			<div class="mt-6 grid gap-4 sm:grid-cols-3">

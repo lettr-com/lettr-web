@@ -125,7 +125,7 @@
 <section class="pt-page pb-16 border-b border-border/30">
 	<div class="grid gap-12 lg:grid-cols-1">
 		<div class="flex flex-col">
-			<h1 class="text-surface mb-4">
+			<h1 class="type-display text-surface mb-4">
 				Transactional email<br />
 				<span class="text-primary">your product can rely on.</span>
 			</h1>
@@ -139,11 +139,13 @@
 
 			<div class="flex flex-wrap items-center mb-3 gap-2">
 				<Button
+					size="lg"
 					variant="primary"
 					href={registerHref}
 					onclick={() => trackHeroCta('Start sending', registerHref, 'primary')}
 				>Start sending</Button>
 				<Button
+					size="lg"
 					variant="secondary"
 					href="https://docs.lettr.com/introduction"
 					target="_blank"
@@ -167,9 +169,9 @@
 	</div>
 </section>
 
-<section class="py-20 border-b border-border/30">
+<section class="section-y border-b border-border/30">
 	<div class="mb-12">
-		<div class="mb-4 inline-flex items-center gap-2 text-[11px] font-medium tracking-[0.18em] uppercase text-primary/80">
+		<div class="mb-4 inline-flex items-center gap-2 text-[11px] font-medium tracking-label uppercase text-primary/80">
 			<span class="block w-6 h-px bg-primary/60"></span>
 			Built for transactional
 		</div>
@@ -189,7 +191,7 @@
 					<feature.icon size={20} class="text-primary" />
 				</div>
 				<div>
-					<h3 class="mb-1 text-base font-semibold text-surface">{feature.title}</h3>
+					<h3 class="mb-1 text-base text-surface">{feature.title}</h3>
 					<p class="text-sm leading-relaxed text-muted">{feature.description}</p>
 				</div>
 			</div>
@@ -197,10 +199,10 @@
 	</div>
 </section>
 
-<section class="py-20 border-b border-border/30">
+<section class="section-y border-b border-border/30">
 	<div class="grid gap-12 lg:grid-cols-2 lg:items-center">
 		<div>
-			<div class="mb-4 inline-flex items-center gap-2 text-[11px] font-medium tracking-[0.18em] uppercase text-primary/80">
+			<div class="mb-4 inline-flex items-center gap-2 text-[11px] font-medium tracking-label uppercase text-primary/80">
 				<span class="block w-6 h-px bg-primary/60"></span>
 				Events &amp; webhooks
 			</div>
@@ -226,7 +228,7 @@
 				<LinkIcon size={16} class="text-primary" />
 				<span class="font-code text-xs text-muted">POST your-app.com/webhooks/lettr</span>
 			</div>
-			<pre class="overflow-x-auto font-code text-[13px] leading-relaxed text-surface">{`[{
+			<pre class="overflow-x-auto font-code text-caption leading-relaxed text-surface">{`[{
   "msys": {
     "message_event": {
       "type": "delivery",
@@ -242,20 +244,20 @@
 					Events you can subscribe to
 				</div>
 				<div class="flex flex-wrap gap-2">
-					<span class="border border-border/40 bg-background px-2 py-0.5 text-[12px] text-surface">message.delivery</span>
-					<span class="border border-border/40 bg-background px-2 py-0.5 text-[12px] text-surface">engagement.open</span>
-					<span class="border border-border/40 bg-background px-2 py-0.5 text-[12px] text-surface">engagement.click</span>
-					<span class="border border-border/40 bg-background px-2 py-0.5 text-[12px] text-surface">message.bounce</span>
-					<span class="border border-border/40 bg-background px-2 py-0.5 text-[12px] text-surface">message.spam_complaint</span>
+					<span class="border border-border/40 bg-background px-2 py-0.5 text-xs text-surface">message.delivery</span>
+					<span class="border border-border/40 bg-background px-2 py-0.5 text-xs text-surface">engagement.open</span>
+					<span class="border border-border/40 bg-background px-2 py-0.5 text-xs text-surface">engagement.click</span>
+					<span class="border border-border/40 bg-background px-2 py-0.5 text-xs text-surface">message.bounce</span>
+					<span class="border border-border/40 bg-background px-2 py-0.5 text-xs text-surface">message.spam_complaint</span>
 				</div>
 			</div>
 		</div>
 	</div>
 </section>
 
-<section class="py-20 border-b border-border/30">
+<section class="section-y border-b border-border/30">
 	<div class="mb-10">
-		<div class="mb-4 inline-flex items-center gap-2 text-[11px] font-medium tracking-[0.18em] uppercase text-primary/80">
+		<div class="mb-4 inline-flex items-center gap-2 text-[11px] font-medium tracking-label uppercase text-primary/80">
 			<span class="block w-6 h-px bg-primary/60"></span>
 			Use cases
 		</div>

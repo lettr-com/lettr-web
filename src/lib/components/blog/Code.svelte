@@ -27,11 +27,11 @@
 
 <div class="bg-surface">
 	<div class="flex items-center justify-between gap-4 border-b border-white/10 px-4 py-2">
-		<span class="font-code text-[13px] text-gray-400">{label}</span>
+		<span class="font-code text-caption text-gray-400">{label}</span>
 		<button
 			type="button"
 			onclick={copy}
-			class="text-[13px] font-semibold text-background transition-colors hover:text-primary-outline"
+			class="text-caption font-semibold text-background transition-colors hover:text-primary-outline"
 			aria-label={copied ? 'Copied' : 'Copy code'}
 		>
 			{copied ? 'Copied' : 'Copy'}
@@ -40,12 +40,12 @@
 	<div class="overflow-x-auto p-4">
 		{#if html}
 			<div
-				class="font-code [&_code]:!text-[14px] [&_code]:!leading-[1.65] [&_pre]:!bg-transparent [&_pre]:!p-0 [&_pre]:!leading-[1.65]"
+				class="font-code [&_code]:!text-sm [&_code]:!leading-[1.65] [&_pre]:!bg-transparent [&_pre]:!p-0 [&_pre]:!leading-[1.65]"
 			>
 				{@html html}
 			</div>
 		{:else}
-			<pre class="font-code text-[14px] leading-[1.65] text-gray-100"><code>{code.trim()}</code></pre>
+			<pre class="font-code text-sm leading-[1.65] text-gray-100"><code>{code.trim()}</code></pre>
 		{/if}
 	</div>
 </div>

@@ -20,11 +20,11 @@
 		<div class="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between sm:gap-8">
 			<h2
 				id="video-heading"
-				class="m-0 font-heading text-[1.875rem] leading-[38px] text-balance tracking-[-0.02em] text-white md:text-[2.625rem] md:leading-[50px]"
+				class="m-0 type-h2 text-balance text-white"
 			>
 				Eleven minutes, one real app.
 			</h2>
-			<p class="m-0 text-pretty shrink-0 font-code text-[13px] leading-[1.7] text-white/55">
+			<p class="m-0 text-pretty shrink-0 font-code text-caption leading-[1.7] text-white/55">
 				Laravel Daily<br />Templates, DTOs, enums · 11:00
 			</p>
 		</div>

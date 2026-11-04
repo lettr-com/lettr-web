@@ -318,7 +318,7 @@
 
 	<div class="checklist not-prose my-8 border border-border/50 bg-white p-6 shadow-[0_20px_50px_-45px_rgba(17,24,39,0.6)] sm:p-8">
 		<div class="mb-6 flex items-center justify-between gap-3 border-b border-border/50 pb-4">
-			<span class="font-heading text-xs tracking-[0.15em] text-primary uppercase">
+			<span class="font-heading text-xs tracking-label text-primary uppercase">
 				Pre-send checklist
 			</span>
 			<ChecksIcon size={18} class="text-primary" />
@@ -326,7 +326,7 @@
 
 		<div class="grid gap-7">
 			<div>
-				<h3 class="mb-3 text-sm font-semibold text-surface">Authentication</h3>
+				<h3 class="mb-3 text-sm text-surface">Authentication</h3>
 				<ul class="space-y-2.5 text-sm leading-snug text-muted">
 					<li class="flex gap-2.5"><span class="mt-0.5 shrink-0 text-primary">&#10003;</span><span>Exactly one SPF record published, including every sending service, ending in <code>~all</code>.</span></li>
 					<li class="flex gap-2.5"><span class="mt-0.5 shrink-0 text-primary">&#10003;</span><span>DKIM signing enabled, with the public key published under your provider's selector.</span></li>
@@ -337,7 +337,7 @@
 			</div>
 
 			<div>
-				<h3 class="mb-3 text-sm font-semibold text-surface">List hygiene</h3>
+				<h3 class="mb-3 text-sm text-surface">List hygiene</h3>
 				<ul class="space-y-2.5 text-sm leading-snug text-muted">
 					<li class="flex gap-2.5"><span class="mt-0.5 shrink-0 text-primary">&#10003;</span><span>Addresses collected through confirmed opt-in, never purchased or scraped.</span></li>
 					<li class="flex gap-2.5"><span class="mt-0.5 shrink-0 text-primary">&#10003;</span><span>Hard bounces suppressed automatically on the first failure.</span></li>
@@ -347,7 +347,7 @@
 			</div>
 
 			<div>
-				<h3 class="mb-3 text-sm font-semibold text-surface">Content</h3>
+				<h3 class="mb-3 text-sm text-surface">Content</h3>
 				<ul class="space-y-2.5 text-sm leading-snug text-muted">
 					<li class="flex gap-2.5"><span class="mt-0.5 shrink-0 text-primary">&#10003;</span><span>Subject line honest and matching the body, with no bait or ALL CAPS.</span></li>
 					<li class="flex gap-2.5"><span class="mt-0.5 shrink-0 text-primary">&#10003;</span><span>Real text leading the message, images supporting rather than replacing it.</span></li>
@@ -358,7 +358,7 @@
 			</div>
 
 			<div>
-				<h3 class="mb-3 text-sm font-semibold text-surface">Reputation and warmup</h3>
+				<h3 class="mb-3 text-sm text-surface">Reputation and warmup</h3>
 				<ul class="space-y-2.5 text-sm leading-snug text-muted">
 					<li class="flex gap-2.5"><span class="mt-0.5 shrink-0 text-primary">&#10003;</span><span>New domains and IPs warmed up gradually over two to six weeks.</span></li>
 					<li class="flex gap-2.5"><span class="mt-0.5 shrink-0 text-primary">&#10003;</span><span>Early sends directed at the most engaged recipients.</span></li>
@@ -368,7 +368,7 @@
 			</div>
 
 			<div>
-				<h3 class="mb-3 text-sm font-semibold text-surface">Monitoring</h3>
+				<h3 class="mb-3 text-sm text-surface">Monitoring</h3>
 				<ul class="space-y-2.5 text-sm leading-snug text-muted">
 					<li class="flex gap-2.5"><span class="mt-0.5 shrink-0 text-primary">&#10003;</span><span>Hard bounce rate watched and kept under roughly 2%.</span></li>
 					<li class="flex gap-2.5"><span class="mt-0.5 shrink-0 text-primary">&#10003;</span><span>Complaint rate watched and kept well under 0.3%.</span></li>

@@ -1,4 +1,5 @@
 <script lang="ts">
+	import Button from '$lib/components/Button.svelte';
 	import { onMount } from 'svelte';
 	import type { Snippet } from 'svelte';
 	import { buildRegisterUrl, registerUrl } from '$lib/utils/utm';
@@ -43,10 +44,10 @@
 
 <section class="pt-page pb-24">
 	<div class="text-center">
-		<span class="mb-4 inline-block font-heading text-xs tracking-[0.15em] text-primary uppercase">
+		<span class="mb-4 inline-block font-heading text-xs tracking-label text-primary uppercase">
 			{label}
 		</span>
-		<h1 class="mt-2">
+		<h1 class="mt-2 type-display">
 			{@render heading()}
 		</h1>
 		<p class="mx-auto mt-5 max-w-xl text-body text-muted">
@@ -65,9 +66,9 @@
 	{/if}
 
 	<div class="mt-20 text-center md:mt-32">
-		<a
+		<Button
 			href={registerHref}
-			class="inline-flex items-center gap-2 bg-primary px-8 py-3.5 text-[15px] font-semibold text-white transition-colors hover:bg-primary/90"
+			size="lg"
 			onclick={() => {
 				void capturePosthogEvent('cta_clicked', {
 					placement: 'feature_page_bottom',
@@ -80,7 +81,7 @@
 			}}
 		>
 			Start sending for free &rarr;
-		</a>
+		</Button>
 		<p class="mt-3 text-sm text-muted">3,000 emails/month free. No credit card required.</p>
 	</div>
 </section>

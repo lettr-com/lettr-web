@@ -17,23 +17,23 @@
 	}
 </script>
 
-<section aria-labelledby="framework-heading" class="py-14 md:py-24">
+<section aria-labelledby="framework-heading" class="section-y">
 	<div class="mx-auto mb-10 flex max-w-[860px] flex-col items-center gap-4 text-center md:mb-14">
 		<h2
 			id="framework-heading"
-			class="font-heading text-balance text-[1.875rem] leading-[1.27] tracking-[-0.02em] text-surface md:text-[2.625rem] md:leading-[50px]"
+			class="type-h2 text-balance text-surface"
 		>
 			Built for
-			<em class="font-pixel text-[2.125rem] leading-none font-medium text-primary md:text-[2.875rem]">Laravel.</em><br />
+			<em class="type-accent-pixel text-primary">Laravel.</em><br />
 			Compatible with most.
 		</h2>
-		<p class="max-w-[480px] text-[1.0625rem] leading-[1.5] text-surface md:text-[1.1875rem]">
+		<p class="max-w-[480px] text-[1.0625rem] leading-[1.5] text-surface md:text-body">
 			<a href="/laravel/" class="underline decoration-primary-outline underline-offset-4 hover:decoration-primary">Laravel gets a first-party package.</a>
 			Everything else works with our SDKs, REST API or SMTP.
 		</p>
 	</div>
 
-	<div class="relative mx-auto max-w-[1100px] overflow-hidden bg-surface px-4 pt-5 sm:px-6">
+	<div class="relative mx-auto max-w-wide overflow-hidden bg-surface px-4 pt-5 sm:px-6">
 		<StageGlow />
 		<div class="relative flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
 			<div role="tablist" aria-label="Framework" class="-mx-1 flex gap-1 overflow-x-auto">

@@ -63,15 +63,15 @@
 <IndexSection />
 <PricingSlider placement="laravel_pricing" transactionalQuestion="How many emails does your app send per month?" dither="edge">
 	{#snippet header()}
-		<div class="mx-auto mb-10 flex max-w-[1100px] flex-col gap-4 lg:flex-row lg:items-end lg:justify-between lg:gap-16">
+		<div class="mx-auto mb-10 flex max-w-wide flex-col gap-4 lg:flex-row lg:items-end lg:justify-between lg:gap-16">
 			<h2
 				id="pricing-heading"
-				class="m-0 font-heading text-[1.875rem] leading-[38px] text-balance tracking-[-0.02em] text-surface md:text-[2.625rem] md:leading-[50px]"
+				class="m-0 type-h2 text-balance text-surface"
 			>
 				Start free.
-				<em class="block font-serif text-[2.125rem] leading-[1.1] text-primary md:text-[2.875rem] md:leading-[50px]">Pay per email after.</em>
+				<em class="block type-accent text-primary">Pay per email after.</em>
 			</h2>
-			<p class="m-0 text-pretty max-w-[400px] shrink-0 text-[1.0625rem] leading-[27.2px] text-surface md:text-[1.1875rem] md:leading-[30.4px]">
+			<p class="m-0 text-pretty max-w-[400px] shrink-0 type-lead text-surface">
 				Transactional email is billed per email, campaigns per contact, both from the same account.
 			</p>
 		</div>

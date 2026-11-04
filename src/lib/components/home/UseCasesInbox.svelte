@@ -16,9 +16,9 @@
 	];
 </script>
 
-<section class="border-b border-border/30 py-20">
+<section class="border-b border-border/30 section-y">
 	<div class="mb-10 max-w-[720px]">
-		<h2 class="home-section-heading mb-4 text-surface">
+		<h2 class="type-h2 mb-4 text-surface">
 			Built for the emails <span class="block text-primary">SaaS companies actually send.</span>
 		</h2>
 		<p class="text-body text-muted">Designed for the emails your product already sends.</p>

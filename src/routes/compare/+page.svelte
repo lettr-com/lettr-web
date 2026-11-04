@@ -1,4 +1,5 @@
 <script lang="ts">
+	import Button from '$lib/components/Button.svelte';
 	import { onMount } from 'svelte';
 	import Seo from '$lib/components/Seo.svelte';
 	import ArrowRightIcon from 'phosphor-svelte/lib/ArrowRightIcon';
@@ -77,7 +78,7 @@
 <section class="pt-page pb-24">
 	<!-- Hero -->
 	<div>
-		<span class="mb-4 inline-block font-heading text-xs tracking-[0.15em] text-primary uppercase">
+		<span class="mb-4 inline-block font-heading text-xs tracking-label text-primary uppercase">
 			COMPARE & MIGRATE
 		</span>
 		<h1>
@@ -164,13 +165,13 @@
 				live.
 			</p>
 			<div class="mt-8">
-				<a
+				<Button
 					href={registerHref}
-					class="bg-primary px-7 py-3 text-[15px] font-semibold text-white transition-colors hover:bg-primary/90"
+					size="lg"
 					onclick={trackCompareCta}
 				>
 					Try Lettr free &rarr;
-				</a>
+				</Button>
 			</div>
 		</div>
 	</div>

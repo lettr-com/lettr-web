@@ -21,7 +21,7 @@
 	}: Props = $props();
 </script>
 
-<section aria-label="Email infrastructure experience" class="py-10 md:py-16">
+<section aria-label="Email infrastructure experience" class="section-y-sm">
 	<div class="mx-auto grid max-w-[900px] grid-cols-3">
 		{#each stats as stat}
 			<div

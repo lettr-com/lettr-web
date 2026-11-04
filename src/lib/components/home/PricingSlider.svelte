@@ -112,18 +112,18 @@
 		<div class="mx-auto mb-10 flex max-w-[860px] flex-col items-center gap-4 text-center md:mb-14">
 			<h2
 				id="pricing-heading"
-				class="font-heading text-balance text-[1.875rem] leading-[1.27] tracking-[-0.02em] text-surface md:text-[2.625rem] md:leading-[50px]"
+				class="type-h2 text-balance text-surface"
 			>
 				Simple, usage-based
-				<em class="block font-serif text-[2.125rem] leading-none font-medium text-primary md:text-[2.875rem]">pricing.</em>
+				<em class="block type-accent text-primary">pricing.</em>
 			</h2>
-			<p class="max-w-[520px] text-[1.0625rem] leading-[1.5] text-surface md:text-[1.1875rem]">
+			<p class="max-w-[520px] text-[1.0625rem] leading-[1.5] text-surface md:text-body">
 				Start free. Transactional is billed per email, Marketing per contact.
 			</p>
 		</div>
 	{/if}
 
-	<div class="mx-auto flex max-w-[1100px] flex-col gap-4">
+	<div class="mx-auto flex max-w-wide flex-col gap-4">
 		<div
 			data-markdown="skip"
 			class="flex flex-col gap-8 bg-white px-5 py-6 md:gap-9 md:p-10"
@@ -140,7 +140,7 @@
 							tabindex={active ? 0 : -1}
 							onclick={() => setMode(m)}
 							onkeydown={(event) => onModeKeydown(event, i)}
-							class="cursor-pointer border-2 px-3.5 py-1.5 text-center font-heading text-[13px] leading-5 transition-colors {active
+							class="cursor-pointer border-2 px-3.5 py-1.5 text-center font-heading text-caption leading-5 transition-colors {active
 								? m === 'transactional'
 									? 'border-primary bg-[#23020b] text-white'
 									: 'border-green bg-[#002010] text-white'
@@ -151,7 +151,7 @@
 					{/each}
 				</div>
 
-				<label for="volume-range" class="text-[0.9375rem] leading-[22px] text-muted md:col-start-1 md:row-start-1 md:self-center md:text-base md:leading-6">{question}</label>
+				<label for="volume-range" class="text-body-sm leading-[22px] text-muted md:col-start-1 md:row-start-1 md:self-center md:text-base md:leading-6">{question}</label>
 				<p class="m-0 font-heading text-[2.75rem] leading-[46px] tracking-[-0.025em] text-surface md:col-start-1 md:row-start-2 md:self-end md:text-[4rem] md:leading-[64px]" aria-live="polite">
 					{current.volume}
 				</p>
@@ -186,8 +186,7 @@
 			<GetStartedButton
 				placement="{placement}_mobile"
 				variant={isTransactional ? 'primary' : 'green'}
-				size="default"
-				class="w-full py-4 text-lg md:hidden"
+				class="w-full md:hidden"
 			/>
 		</div>
 
@@ -213,7 +212,7 @@
 								<span class="lg:hidden" data-markdown="skip">{tile.unitShort}</span><span class="hidden lg:inline">{tile.unit}</span>
 							</span>
 						</div>
-						<p class="m-0 text-[1.1875rem] leading-[1.4] text-white md:text-[1.375rem]">
+						<p class="m-0 text-body leading-[1.4] text-white md:text-[1.375rem]">
 							{tile.description[0]}<br class="hidden lg:block" />
 							<span class="lg:hidden"> </span>{tile.description[1]}
 						</p>
@@ -232,7 +231,7 @@
 						<a
 							href="/pricing/?plan={tile.key}"
 							onclick={() => trackTile(tile.key)}
-							class="text-[0.9375rem] font-semibold text-white underline-offset-4 hover:underline md:text-base"
+							class="text-body-sm font-semibold text-white underline-offset-4 hover:underline md:text-base"
 						>
 							See full pricing
 						</a>

@@ -145,7 +145,7 @@
 				{#each conversations as convo}
 					<div class="border border-border/50 bg-white">
 						<div class="border-b border-border/50 bg-background px-4 py-2.5">
-							<span class="font-heading text-xs font-semibold text-surface uppercase">{convo.label}</span>
+							<span class="font-heading text-xs text-surface uppercase">{convo.label}</span>
 						</div>
 						<div class="space-y-3 p-4">
 							<!-- User message -->
@@ -197,7 +197,7 @@
 						<div class="mb-3 flex h-10 w-10 items-center justify-center border border-border/50 bg-background">
 							<useCase.icon size={20} class="text-primary" />
 						</div>
-						<h3 class="mb-2 text-base font-semibold text-surface">{useCase.title}</h3>
+						<h3 class="mb-2 text-base text-surface">{useCase.title}</h3>
 						<p class="text-sm leading-relaxed text-muted">{useCase.description}</p>
 					</div>
 				{/each}
@@ -226,7 +226,7 @@
 					<LockKeyIcon size={20} class="text-primary" />
 				</div>
 				<div>
-					<h3 class="mb-1 text-base font-semibold text-surface">Security by design</h3>
+					<h3 class="mb-1 text-base text-surface">Security by design</h3>
 					<p class="text-sm leading-relaxed text-muted">
 						The MCP server uses your existing API key with the same permissions and rate limits as direct API calls. All actions are logged and auditable. Scoped API keys let you limit what your AI agent can do -- read-only access for monitoring, or full write access for automation.
 					</p>

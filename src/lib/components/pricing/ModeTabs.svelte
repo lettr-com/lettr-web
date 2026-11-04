@@ -39,7 +39,7 @@
 			tabindex={isActive ? 0 : -1}
 			onclick={() => select(mode)}
 			onkeydown={(event) => onKeydown(event, index)}
-			class="relative flex cursor-pointer flex-col items-start gap-3 overflow-hidden border-2 px-4 pt-4 pb-6 text-left transition-colors sm:flex-row sm:items-center sm:gap-5 sm:px-6 sm:py-[22px] {isActive
+			class="relative flex cursor-pointer flex-col items-start gap-3 overflow-hidden border-2 px-4 pt-4 pb-6 text-left transition-colors sm:flex-row sm:items-center sm:gap-5 sm:px-6 sm:py-6 {isActive
 				? isTransactional
 					? 'border-primary bg-[#23020b]'
 					: 'border-green bg-[#002010]'
@@ -83,7 +83,7 @@
 					{isTransactional ? 'Transactional' : 'Marketing'}
 				</span>
 				<span
-					class="text-[0.8125rem] leading-[18px] sm:text-[0.9375rem] sm:leading-[22px] {isActive ? (isTransactional ? 'text-primary-outline' : 'text-[#aaffd5]') : 'text-muted'}"
+					class="text-caption leading-[18px] sm:text-body-sm sm:leading-[22px] {isActive ? (isTransactional ? 'text-primary-outline' : 'text-[#aaffd5]') : 'text-muted'}"
 				>
 					{isTransactional ? 'Automated, event-triggered emails.' : 'Campaigns to promote your SaaS.'}
 				</span>

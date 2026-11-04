@@ -116,7 +116,7 @@
 
 <div bind:this={host} class="term">
 	<div class="term-bar">
-		<span class="flex items-center gap-2 font-code text-[12px] text-white/60">
+		<span class="flex items-center gap-2 font-code text-xs text-white/60">
 			<TerminalWindowIcon size={15} aria-hidden="true" />{script.title}
 		</span>
 		<button

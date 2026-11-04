@@ -99,7 +99,7 @@
 <section id="hero" class="relative -mx-6 overflow-hidden border-b border-border/30 px-6 pt-page pb-0">
 	<div class="pointer-events-none absolute -top-48 left-1/2 h-[360px] w-[min(1100px,140%)] -translate-x-1/2 bg-primary opacity-35 blur-[130px]" aria-hidden="true"></div>
 
-	<div class="relative mx-auto flex max-w-[820px] flex-col items-center text-center">
+	<div class="relative mx-auto flex max-w-content flex-col items-center text-center">
 		<a
 			href="/email-marketing/"
 			class="group mb-8 inline-flex items-center gap-2 border border-primary/20 bg-white p-1 pr-3 text-sm text-surface transition-colors hover:border-primary/50"
@@ -117,7 +117,7 @@
 			<span class="font-serif text-[2.625rem] font-medium text-primary italic sm:text-[4rem] lg:text-[4.5rem]">built for SaaS</span>
 		</h1>
 
-		<p class="mb-8 max-w-[640px] text-[1.0625rem] text-muted md:text-body">
+		<p class="mb-8 max-w-measure type-lead text-muted">
 			Your team builds every email in one editor. You send transactional by API and marketing by
 			campaign. One platform, one bill.
 		</p>
@@ -125,13 +125,13 @@
 		<div class="mb-5 flex w-full flex-col items-stretch justify-center gap-3 sm:w-auto sm:flex-row sm:items-center">
 			<Button
 				variant="primary"
-				size="hero"
+				size="lg"
 				href={registerHref}
 				onclick={() => trackHeroCta('Get started', registerHref, 'primary')}
 			>Get started</Button>
 			<Button
 				variant="secondary"
-				size="hero"
+				size="lg"
 				href="https://docs.lettr.com/introduction"
 				target="_blank"
 				rel="noopener noreferrer"
