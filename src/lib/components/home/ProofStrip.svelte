@@ -1,11 +1,24 @@
 <script lang="ts">
 	import { ecomailOrganizations, emailInfraYears, topolCompanies } from '$lib/data/company';
 
-	const stats = [
-		{ value: topolCompanies, label: 'companies use our email editor' },
-		{ value: ecomailOrganizations, label: 'organizations run campaigns with us' },
-		{ value: `${emailInfraYears} years`, label: 'running email infrastructure' }
-	];
+	interface Stat {
+		value: string;
+		label: string;
+		/** Shown instead of `label` on phones, where three columns leave little room. */
+		shortLabel?: string;
+	}
+
+	interface Props {
+		stats?: Stat[];
+	}
+
+	let {
+		stats = [
+			{ value: topolCompanies, label: 'companies use our email editor' },
+			{ value: ecomailOrganizations, label: 'organizations run campaigns with us' },
+			{ value: `${emailInfraYears} years`, label: 'running email infrastructure' }
+		]
+	}: Props = $props();
 </script>
 
 <section aria-label="Email infrastructure experience" class="py-10 md:py-16">
@@ -20,7 +33,12 @@
 					{stat.value}
 				</p>
 				<p class="mt-2 text-xs leading-snug text-muted sm:text-sm">
-					{stat.label}
+					{#if stat.shortLabel}
+						<span class="sm:hidden" data-markdown="skip">{stat.shortLabel}</span>
+						<span class="hidden sm:inline">{stat.label}</span>
+					{:else}
+						{stat.label}
+					{/if}
 				</p>
 			</div>
 		{/each}

@@ -15,6 +15,7 @@
     "seo:check": "node src/lib/seo/gate/check.ts",
     "blog:images": "node tools/blog-images/render.mjs",
     "accordion:images": "node tools/blog-images/accordion.mjs",
+    "about:images": "node tools/blog-images/about.mjs",
     "hero:bake": "node tools/dither/bake-hero.mjs"
   },
   "dependencies": {

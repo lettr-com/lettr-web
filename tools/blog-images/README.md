@@ -49,6 +49,15 @@ table, and the files land in `static/home/accordion/`:
 vp run accordion:images
 ```
 
+## About page art
+
+`about.mjs` renders the objects in the About page's "Before." and "With
+Lettr." cards the same way, into `static/about/`:
+
+```bash
+vp run about:images
+```
+
 ## Adding an object
 
 Draw it with an image model, in the library's style, using two existing sprites
