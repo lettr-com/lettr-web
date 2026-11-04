@@ -53,19 +53,19 @@
 	<div class="mx-auto mb-10 flex max-w-[860px] flex-col items-center gap-4 text-center md:mb-14">
 		<h2
 			id="dev-teams-heading"
-			class="font-heading text-balance text-[1.875rem] leading-[1.27] tracking-[-0.02em] text-surface md:text-[2.625rem] md:leading-[50px]"
+			class="type-h2 text-balance text-surface"
 		>
-			Make <em class="font-serif text-[2.125rem] leading-none font-medium text-primary md:text-[2.875rem]">all</em>
+			Make <em class="type-accent text-primary">all</em>
 			your emails<br class="hidden md:block" />
 			<TooltipWord tip="Everyone on your team can edit, send, and track all emails.">accessible</TooltipWord> to
-			<em class="block font-serif text-[2.125rem] leading-none font-medium text-primary md:inline md:text-[2.875rem]">everyone</em>
+			<em class="block type-accent text-primary md:inline">everyone</em>
 		</h2>
-		<p class="max-w-[364px] text-[1.0625rem] leading-[1.5] text-surface md:text-[1.1875rem]">
+		<p class="max-w-[364px] text-[1.0625rem] leading-[1.5] text-surface md:text-body">
 			Your devs connect sending once. After that, your team owns the emails.
 		</p>
 	</div>
 
-	<div class="mx-auto grid max-w-[1100px] items-start gap-6 lg:grid-cols-2 lg:gap-4">
+	<div class="mx-auto grid max-w-wide items-start gap-6 lg:grid-cols-2 lg:gap-4">
 		<!-- Developers -->
 		<div class="flex min-w-0 flex-col gap-6 md:gap-4">
 			<div class="relative flex flex-col gap-6 overflow-hidden bg-surface p-6 lg:block lg:h-[560px]">

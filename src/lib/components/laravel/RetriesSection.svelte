@@ -103,9 +103,9 @@
 				class="m-0 pb-5 font-heading text-[1.875rem] leading-[38px] text-balance tracking-[-0.02em] text-surface md:pb-6 md:text-[2.625rem] md:leading-[50px]"
 			>
 				A retried job
-				<em class="block font-serif text-[2.125rem] leading-[1.1] text-primary md:text-[2.875rem] md:leading-[50px]">never sends twice.</em>
+				<em class="block type-accent text-primary">never sends twice.</em>
 			</h2>
-			<p class="m-0 text-pretty max-w-[560px] text-[1.0625rem] leading-[27.2px] text-muted md:text-[1.1875rem] md:leading-[30.4px]">
+			<p class="m-0 text-pretty max-w-[560px] type-lead text-muted">
 				Queued sends carry an idempotency key built from the job's uuid. When the API accepted an email but the response timed out,
 				the retry replays the original result instead of emailing your customer again. Nothing to configure.
 			</p>
@@ -114,13 +114,13 @@
 				{#each facts as fact}
 					<div class="flex items-baseline justify-between gap-4 border-b border-[#eee7ea] py-3">
 						<dt class="text-sm leading-[18px] text-muted">{fact.label}</dt>
-						<dd class="m-0 text-right font-code text-[13px] leading-4 text-surface">{fact.value}</dd>
+						<dd class="m-0 text-right font-code text-caption leading-4 text-surface">{fact.value}</dd>
 					</div>
 				{/each}
 			</dl>
 
 			<pre
-				class="m-0 mt-7 max-w-[560px] overflow-x-auto bg-[#0c111d] px-5 py-[18px] font-code text-[13px] leading-[1.7] text-[#f0f0f0]"><code>{@html syncSend.join('\n')}</code></pre>
+				class="m-0 mt-7 max-w-[560px] overflow-x-auto bg-[#0c111d] px-5 py-4 font-code text-caption leading-[1.7] text-[#f0f0f0]"><code>{@html syncSend.join('\n')}</code></pre>
 		</div>
 
 		<div bind:this={stage} data-markdown="skip" class="relative flex grow flex-col gap-4 xl:block xl:h-[600px]">
@@ -133,7 +133,7 @@
 
 			<!-- queue:work -->
 			<div class="flex flex-col bg-[#0c111d] xl:absolute xl:top-0 xl:left-0 xl:w-[588px]">
-				<div class="flex items-center gap-2.5 border-b border-white/10 py-2 pr-2 pl-[18px]">
+				<div class="flex items-center gap-2.5 border-b border-white/10 py-2 pr-2 pl-4">
 					<span class="h-2 w-2 shrink-0 bg-primary {playing ? 'animate-pulse' : ''}" aria-hidden="true"></span>
 					<span class="font-code text-xs leading-4 text-[#f0f0f0]/50" aria-hidden="true">php artisan queue:work</span>
 					<button
@@ -146,7 +146,7 @@
 						REPLAY
 					</button>
 				</div>
-				<div class="flex flex-col gap-2 px-[18px] pt-[18px] pb-5" aria-hidden="true">
+				<div class="flex flex-col gap-2 px-4 pt-4 pb-5" aria-hidden="true">
 					{#each worker as row, i}
 						<div class="flex justify-between gap-3 font-code text-[11px] leading-[1.5] transition-[opacity,translate] duration-300 motion-reduce:transition-none sm:text-xs {shown(i + 1)}">
 							<span class="min-w-0 truncate {i === worker.length - 1 ? 'text-white' : 'text-[#f0f0f0]/75'}">
@@ -200,8 +200,8 @@
 
 			<!-- Inbox -->
 			<div class="flex flex-col bg-white shadow-[0_0_0_1px_#eee7ea,0_24px_48px_rgb(17_24_39/0.08)] sm:max-w-[400px] xl:absolute xl:top-[446px] xl:left-0 xl:w-[400px]" aria-hidden="true">
-				<div class="flex items-center justify-between border-b border-[#eee7ea] px-[18px] py-3.5">
-					<span class="text-[13px] leading-4 font-semibold text-surface">jana@northwind.io</span>
+				<div class="flex items-center justify-between border-b border-[#eee7ea] px-4 py-3.5">
+					<span class="text-caption leading-4 font-semibold text-surface">jana@northwind.io</span>
 					<span class="flex items-center gap-1.5">
 						<span class="h-1.5 w-1.5 shrink-0 {emails > 1 ? 'bg-[#b45309]' : 'bg-green'}"></span>
 						<span class="font-code text-[11px] leading-[14px] {emails > 1 ? 'text-[#b45309]' : 'text-muted'}">
@@ -212,13 +212,13 @@
 				{#each [0, 1] as copy}
 					{#if copy < emails || (copy === 0 && step < 2)}
 						<div
-							class="flex flex-col gap-1 px-[18px] py-3.5 transition-opacity duration-300 motion-reduce:transition-none {copy === 1 ? 'border-t border-[#eee7ea] bg-[#fff4e5]' : ''} {copy < emails ? 'opacity-100' : 'opacity-0'}"
+							class="flex flex-col gap-1 px-4 py-3.5 transition-opacity duration-300 motion-reduce:transition-none {copy === 1 ? 'border-t border-[#eee7ea] bg-[#fff4e5]' : ''} {copy < emails ? 'opacity-100' : 'opacity-0'}"
 						>
 							<span class="flex justify-between">
 								<span class="text-sm leading-[18px] font-bold text-surface">Northwind</span>
 								<span class="text-xs leading-4 text-muted">{copy === 0 ? '14:02' : '14:03'}</span>
 							</span>
-							<span class="text-[13px] leading-4 text-surface">Your order is on its way</span>
+							<span class="text-caption leading-4 text-surface">Your order is on its way</span>
 							<span class="truncate text-xs leading-4 text-muted">Hi Jana, good news. Order NW-20418 left our warehouse today.</span>
 						</div>
 					{/if}

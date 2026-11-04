@@ -43,18 +43,18 @@
 	<div class="mx-auto mb-10 flex max-w-[860px] flex-col items-center gap-4 text-center md:mb-14">
 		<h2
 			id="lanes-heading"
-			class="font-heading text-balance text-[1.875rem] leading-[1.27] tracking-[-0.02em] text-surface md:text-[2.625rem] md:leading-[50px]"
+			class="type-h2 text-balance text-surface"
 		>
 			One platform.<br />
 			Separate
-			<em class="block font-serif text-[2.125rem] leading-none font-medium text-primary md:inline md:text-[2.875rem]">sending lanes.</em>
+			<em class="block type-accent text-primary md:inline">sending lanes.</em>
 		</h2>
-		<p class="max-w-[480px] text-[1.0625rem] leading-[1.5] text-surface md:text-[1.1875rem]">
+		<p class="max-w-[480px] text-[1.0625rem] leading-[1.5] text-surface md:text-body">
 			A big campaign never holds up a password reset.
 		</p>
 	</div>
 
-	<div class="mx-auto grid max-w-[1100px] items-start gap-6 md:grid-cols-2 md:gap-4">
+	<div class="mx-auto grid max-w-wide items-start gap-6 md:grid-cols-2 md:gap-4">
 		<!-- Transactional -->
 		<div class="flex flex-col gap-6 md:gap-4">
 			<div class="relative flex h-[480px] flex-col justify-between overflow-hidden bg-[#23020b] p-6 md:h-[560px]">

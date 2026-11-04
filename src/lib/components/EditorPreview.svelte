@@ -108,7 +108,7 @@
 	<!-- Top bar -->
 	<div class="flex items-center justify-between border-b border-border/30 bg-white px-3 py-2">
 		<div class="flex min-w-0 items-center gap-2">
-			<span class="truncate text-[12px] font-medium text-surface">trial-welcome-email</span>
+			<span class="truncate text-xs font-medium text-surface">trial-welcome-email</span>
 			<PencilSimpleIcon aria-hidden="true" size={12} class="shrink-0 text-muted" />
 			<span class="hidden shrink-0 border border-green-200 bg-green-50 px-1.5 py-0.5 text-[9px] font-semibold tracking-wide text-green-800 uppercase sm:inline">Draft</span>
 		</div>
@@ -176,7 +176,7 @@
 			<div class="mx-auto max-w-[420px]">
 				<!-- Store name header block (selected-variable look) -->
 				<div class="border border-dashed border-primary/40 px-3 py-3">
-					<p class="font-code text-[13px] font-semibold text-surface">{'{{store_name}}'}</p>
+					<p class="font-code text-caption font-semibold text-surface">{'{{store_name}}'}</p>
 					<p class="mt-0.5 text-[10px] text-muted/80">One quick step, then you're all set.</p>
 				</div>
 
@@ -186,14 +186,14 @@
 				</p>
 
 				<!-- Body -->
-				<p class="mt-3 text-[12px] leading-relaxed text-muted min-h-[44px]">
+				<p class="mt-3 text-xs leading-relaxed text-muted min-h-[44px]">
 					{bodyPrefix}{#if showVariable}<span class="inline-flex items-center border border-dashed border-primary/50 bg-primary/[0.04] px-1 font-code text-[11px] text-[#c70d3f] variable-pop">{'{{first_name}}'}</span>{/if}{bodySuffix}{#if cursorTarget === 'body'}<span class="typing-cursor"></span>{/if}
 				</p>
 
 				<!-- CTA button slot (reserves space to prevent layout shift) -->
 				<div class="mt-6 min-h-[44px]">
 					{#if showButton}
-						<div class="bg-surface px-5 py-3 text-center text-[13px] font-semibold text-white button-drop-in">
+						<div class="bg-surface px-5 py-3 text-center text-caption font-semibold text-white button-drop-in">
 							Open your dashboard
 						</div>
 					{/if}

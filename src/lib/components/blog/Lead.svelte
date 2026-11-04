@@ -4,6 +4,6 @@
 	let { children }: { children: Snippet } = $props();
 </script>
 
-<p class="text-[17px] leading-[1.6] text-surface md:text-[19px]">
+<p class="type-lead text-surface">
 	{@render children()}
 </p>

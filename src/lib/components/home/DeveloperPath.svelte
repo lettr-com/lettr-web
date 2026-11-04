@@ -5,9 +5,9 @@
 	import LargeFeatureCard from './LargeFeatureCard.svelte';
 </script>
 
-<section id="features" class="-mx-6 border-b border-white/10 bg-surface px-6 py-20 sm:py-24">
+<section id="features" class="-mx-6 border-b border-white/10 bg-surface px-6 section-y">
 	<div class="mb-12 max-w-[850px]">
-		<h2 class="home-section-heading text-white">
+		<h2 class="type-h2 text-white">
 			Integrate in minutes.<span class="block text-primary">Forget about it forever.</span>
 		</h2>
 	</div>

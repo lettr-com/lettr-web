@@ -83,7 +83,7 @@
 					Multilingual campaigns — each contact gets the email in their language
 					<span class="transition-transform group-hover:translate-x-0.5">&rarr;</span>
 				</a>
-				<h1 data-animate style="animation-delay:0.06s" class="text-surface mb-4">
+				<h1 data-animate style="animation-delay:0.06s" class="type-display text-surface mb-4">
 					The email platform<br />
 					<span class="text-primary">built for SaaS</span>
 				</h1>

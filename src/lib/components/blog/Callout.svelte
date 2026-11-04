@@ -17,9 +17,9 @@
 	const rules = { info: 'border-primary', tip: 'border-green', warning: 'border-warning' };
 </script>
 
-<aside class="border-l-2 py-0.5 pl-5 text-[16px] leading-[1.6] text-muted {rules[variant]}">
+<aside class="border-l-2 py-0.5 pl-5 text-base leading-[1.6] text-muted {rules[variant]}">
 	{#if title}
-		<div class="mb-1.5 flex items-center gap-1.5 text-[15px] font-bold text-surface">
+		<div class="mb-1.5 flex items-center gap-1.5 text-body-sm font-bold text-surface">
 			{#if variant !== 'info'}
 				<Icon size={15} class="text-subtle" />
 			{/if}

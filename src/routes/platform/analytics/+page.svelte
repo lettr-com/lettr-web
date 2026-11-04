@@ -230,7 +230,7 @@
 						<div class="mb-3 flex h-10 w-10 items-center justify-center border border-border/50 bg-background">
 							<feature.icon size={20} class="text-primary" />
 						</div>
-						<h3 class="mb-2 text-base font-semibold text-surface">{feature.title}</h3>
+						<h3 class="mb-2 text-base text-surface">{feature.title}</h3>
 						<p class="text-sm leading-relaxed text-muted">{feature.description}</p>
 					</div>
 				{/each}

@@ -32,8 +32,8 @@
 	});
 </script>
 
-<section aria-labelledby="domain-heading" class="py-14 md:py-24">
-	<div class="mx-auto flex max-w-[1100px] flex-col overflow-hidden bg-white xl:min-h-[480px] xl:flex-row">
+<section aria-labelledby="domain-heading" class="section-y">
+	<div class="mx-auto flex max-w-wide flex-col overflow-hidden bg-white xl:min-h-[480px] xl:flex-row">
 		<div class="flex flex-col justify-between gap-12 p-8 sm:p-12 xl:flex-1 xl:p-16">
 			<h2
 				id="domain-heading"
@@ -43,7 +43,7 @@
 			</h2>
 			<div class="flex flex-col items-start gap-6">
 				<p class="m-0 text-base leading-6 text-pretty text-subtle">Add three DNS records. Lettr checks them.</p>
-				<Button variant="primary" size="hero" href={registerHref} onclick={trackCta}>Add your domain</Button>
+				<Button variant="primary" size="lg" href={registerHref} onclick={trackCta}>Add your domain</Button>
 			</div>
 		</div>
 

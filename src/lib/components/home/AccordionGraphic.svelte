@@ -111,7 +111,7 @@
 		{#if id === 'rest-smtp'}
 			<div class="flex w-[210px] shrink-0 flex-col gap-2.5">
 				{#each ['REST API', 'SMTP'] as label}
-					<div class="flex h-[62px] items-center border {line} px-4 font-code text-[15px] leading-5 text-white">{label}</div>
+					<div class="flex h-[62px] items-center border {line} px-4 font-code text-body-sm leading-5 text-white">{label}</div>
 				{/each}
 			</div>
 		{:else if chipList}
@@ -131,7 +131,7 @@
 		{:else if id === 'security'}
 			<div class="flex w-[210px] shrink-0 flex-col gap-2.5">
 				{#each securityEvents as label}
-					<div class="flex h-10 items-center gap-3 border {line} px-3 font-code text-[13px] leading-5 text-white">
+					<div class="flex h-10 items-center gap-3 border {line} px-3 font-code text-caption leading-5 text-white">
 						<span class="h-2 w-2 shrink-0 bg-primary"></span>{label}
 					</div>
 				{/each}
@@ -149,7 +149,7 @@
 			<div class="flex w-[210px] shrink-0 flex-col gap-2.5">
 				{#each rowList as row}
 					<div
-						class="flex h-10 items-center justify-between border px-3.5 font-code text-[13px] leading-5 {row.active === 'primary'
+						class="flex h-10 items-center justify-between border px-3.5 font-code text-caption leading-5 {row.active === 'primary'
 							? 'border-primary bg-primary/12'
 							: row.active === 'green'
 								? 'border-green bg-green/12'

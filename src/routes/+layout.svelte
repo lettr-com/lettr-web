@@ -105,7 +105,7 @@
 <Navbar />
 
 <div class="relative z-10 bg-background">
-	<div class="relative mx-auto max-w-[1200px] narrow:max-w-none border-x border-border/30 narrow:border-x-0 px-6">
+	<div class="relative mx-auto max-w-page narrow:max-w-none border-x border-border/30 narrow:border-x-0 px-6">
 		<main id="main-content" tabindex="-1" class="relative z-10 focus:outline-none">
 			{@render children()}
 		</main>

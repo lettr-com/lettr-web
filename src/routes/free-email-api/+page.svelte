@@ -196,12 +196,12 @@
 	<div class="grid gap-12 lg:grid-cols-1">
 		<div class="flex flex-col">
 			<div
-				class="mb-4 inline-flex items-center gap-2 text-[11px] font-medium tracking-[0.18em] uppercase text-primary/80"
+				class="mb-4 inline-flex items-center gap-2 text-[11px] font-medium tracking-label uppercase text-primary/80"
 			>
 				<span class="block w-6 h-px bg-primary/60"></span>
 				Free email API
 			</div>
-			<h1 class="text-surface mb-4">
+			<h1 class="type-display text-surface mb-4">
 				Send up to 3,000 emails<br />
 				<span class="text-primary">a month, free.</span>
 			</h1>
@@ -219,11 +219,13 @@
 
 			<div class="flex flex-wrap items-center mb-3 gap-2">
 				<Button
+					size="lg"
 					variant="primary"
 					href={registerHref}
 					onclick={() => trackCta('free_api_hero', 'Get a free API key', registerHref, 'primary')}
 				>Get a free API key</Button>
 				<Button
+					size="lg"
 					variant="secondary"
 					href={DOCS_URL}
 					target="_blank"
@@ -244,10 +246,10 @@
 </section>
 
 <!-- Quick start -->
-<section class="py-20 border-b border-border/30">
+<section class="section-y border-b border-border/30">
 	<div class="grid gap-12 lg:grid-cols-2 lg:items-center">
 		<div>
-			<div class="mb-4 inline-flex items-center gap-2 text-[11px] font-medium tracking-[0.18em] uppercase text-primary/80">
+			<div class="mb-4 inline-flex items-center gap-2 text-[11px] font-medium tracking-label uppercase text-primary/80">
 				<span class="block w-6 h-px bg-primary/60"></span>
 				Quick start
 			</div>
@@ -281,9 +283,9 @@
 </section>
 
 <!-- What's included free -->
-<section class="py-20 border-b border-border/30">
+<section class="section-y border-b border-border/30">
 	<div class="mb-12">
-		<div class="mb-4 inline-flex items-center gap-2 text-[11px] font-medium tracking-[0.18em] uppercase text-primary/80">
+		<div class="mb-4 inline-flex items-center gap-2 text-[11px] font-medium tracking-label uppercase text-primary/80">
 			<span class="block w-6 h-px bg-primary/60"></span>
 			What's included free
 		</div>
@@ -306,9 +308,9 @@
 </section>
 
 <!-- SDKs -->
-<section class="py-20 border-b border-border/30">
+<section class="section-y border-b border-border/30">
 	<div class="mb-12">
-		<div class="mb-4 inline-flex items-center gap-2 text-[11px] font-medium tracking-[0.18em] uppercase text-primary/80">
+		<div class="mb-4 inline-flex items-center gap-2 text-[11px] font-medium tracking-label uppercase text-primary/80">
 			<span class="block w-6 h-px bg-primary/60"></span>
 			SDKs for every language
 		</div>
@@ -343,9 +345,9 @@
 </section>
 
 <!-- Free vs paid -->
-<section class="py-20 border-b border-border/30">
+<section class="section-y border-b border-border/30">
 	<div class="mb-12">
-		<div class="mb-4 inline-flex items-center gap-2 text-[11px] font-medium tracking-[0.18em] uppercase text-primary/80">
+		<div class="mb-4 inline-flex items-center gap-2 text-[11px] font-medium tracking-label uppercase text-primary/80">
 			<span class="block w-6 h-px bg-primary/60"></span>
 			Free vs. paid
 		</div>
@@ -362,7 +364,7 @@
 		<div class="border border-border/40 bg-white p-6">
 			<div class="mb-4 flex items-center gap-2">
 				<CheckIcon size={18} class="text-primary" />
-				<h3 class="text-base font-semibold text-surface">The free tier is enough when…</h3>
+				<h3 class="text-base text-surface">The free tier is enough when…</h3>
 			</div>
 			<ul class="space-y-3">
 				{#each freeEnough as item}
@@ -377,7 +379,7 @@
 		<div class="border border-border/40 bg-white p-6">
 			<div class="mb-4 flex items-center gap-2">
 				<RocketLaunchIcon size={18} class="text-primary" />
-				<h3 class="text-base font-semibold text-surface">Time to upgrade when…</h3>
+				<h3 class="text-base text-surface">Time to upgrade when…</h3>
 			</div>
 			<ul class="space-y-3">
 				{#each timeToUpgrade as item}
@@ -399,9 +401,9 @@
 </section>
 
 <!-- Lettr vs other free email APIs -->
-<section class="py-20 border-b border-border/30">
+<section class="section-y border-b border-border/30">
 	<div class="mb-12">
-		<div class="mb-4 inline-flex items-center gap-2 text-[11px] font-medium tracking-[0.18em] uppercase text-primary/80">
+		<div class="mb-4 inline-flex items-center gap-2 text-[11px] font-medium tracking-label uppercase text-primary/80">
 			<span class="block w-6 h-px bg-primary/60"></span>
 			Lettr vs. other free email APIs
 		</div>
@@ -458,9 +460,9 @@
 </section>
 
 <!-- Deliverability -->
-<section class="py-20 border-b border-border/30">
+<section class="section-y border-b border-border/30">
 	<div class="mb-12">
-		<div class="mb-4 inline-flex items-center gap-2 text-[11px] font-medium tracking-[0.18em] uppercase text-primary/80">
+		<div class="mb-4 inline-flex items-center gap-2 text-[11px] font-medium tracking-label uppercase text-primary/80">
 			<span class="block w-6 h-px bg-primary/60"></span>
 			Deliverability built in
 		</div>
@@ -479,7 +481,7 @@
 				<div class="mb-4 flex h-10 w-10 items-center justify-center border border-border/50 bg-background">
 					<item.icon size={20} class="text-primary" />
 				</div>
-				<h3 class="mb-1 text-base font-semibold text-surface">{item.title}</h3>
+				<h3 class="mb-1 text-base text-surface">{item.title}</h3>
 				<p class="text-sm leading-relaxed text-muted">{item.description}</p>
 			</div>
 		{/each}
@@ -491,7 +493,7 @@
 <!-- FAQ -->
 <section class="py-16 border-b border-border/30">
 	<div class="mb-10">
-		<div class="mb-4 inline-flex items-center gap-2 text-[11px] font-medium tracking-[0.18em] uppercase text-primary/80">
+		<div class="mb-4 inline-flex items-center gap-2 text-[11px] font-medium tracking-label uppercase text-primary/80">
 			<span class="block w-6 h-px bg-primary/60"></span>
 			FAQ
 		</div>
@@ -508,7 +510,7 @@
 					onclick={() => toggleFaq(i)}
 					class="flex w-full items-center justify-between py-5 text-left"
 				>
-					<h3 class="text-sm font-medium text-surface">{faq.question}</h3>
+					<h3 class="text-sm text-surface">{faq.question}</h3>
 					<CaretDownIcon
 						size={14}
 						class="shrink-0 ml-4 text-muted transition-transform duration-200 {openFaq === i ? 'rotate-180' : ''}"
@@ -516,7 +518,7 @@
 				</button>
 				{#if openFaq === i}
 					<div transition:slide={{ duration: 200 }}>
-						<p class="text-[13px] text-muted leading-relaxed max-w-[65ch] pb-5">{faq.answer}</p>
+						<p class="text-caption text-muted leading-relaxed max-w-[65ch] pb-5">{faq.answer}</p>
 					</div>
 				{/if}
 			</div>
@@ -529,7 +531,7 @@
 </div>
 
 <!-- Final CTA -->
-<section class="py-20">
+<section class="section-y">
 	<div class="flex flex-col items-center text-center">
 		<h2 class="mb-3 text-surface">
 			Get your <span class="text-primary">free API key.</span>
@@ -540,11 +542,13 @@
 		</p>
 		<div class="flex flex-wrap items-center justify-center gap-2">
 			<Button
+				size="lg"
 				variant="primary"
 				href={registerHref}
 				onclick={() => trackCta('free_api_footer', 'Get a free API key', registerHref, 'primary')}
 			>Get a free API key</Button>
 			<Button
+				size="lg"
 				variant="secondary"
 				href="/email-api/"
 				onclick={() => trackCta('free_api_footer', 'Explore the email API', '/email-api/', 'secondary')}

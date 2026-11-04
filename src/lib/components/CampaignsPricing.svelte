@@ -96,7 +96,7 @@
 
 		<ul class="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-2 mb-4">
 			{#each features as feature}
-				<li class="flex items-start gap-2 text-[13px] leading-5 text-muted">
+				<li class="flex items-start gap-2 text-caption leading-5 text-muted">
 					<span class="mt-2 block w-1 h-1 rounded-full bg-border shrink-0"></span>
 					<span>{feature}</span>
 				</li>
@@ -114,8 +114,8 @@
 
 	<div class="mt-3 border bg-white p-5 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 transition-colors duration-300 {isEnterprise ? 'border-primary shadow-lg shadow-primary/5' : 'border-border/30'}">
 		<div>
-			<h3 class="text-sm font-semibold mb-1 {isEnterprise ? 'text-primary' : 'text-surface'}">Enterprise</h3>
-			<p class="text-[13px] text-muted">
+			<h3 class="text-sm mb-1 {isEnterprise ? 'text-primary' : 'text-surface'}">Enterprise</h3>
+			<p class="text-caption text-muted">
 				40,000+ contacts, dedicated IPs, SLA, SSO/SAML, and a dedicated account manager.
 			</p>
 		</div>

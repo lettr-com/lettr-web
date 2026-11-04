@@ -1,7 +1,9 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
-/* Redaction (SIL OFL): the serif accent face. "Redaction 35" and "Redaction 50" are its degraded cuts. */
+/* Redaction (SIL OFL) has a smooth cut and progressively pixelated cuts. Lettr uses
+   two: "Redaction" (smooth) for the editorial accent, and "Redaction 20" as the one
+   and only pixelated cut. Do not add other numbered cuts (10, 35, 50, 70, 100). */
 @font-face {
   font-family: "Redaction";
   src: url("/fonts/Redaction-Italic.woff2") format("woff2");
@@ -17,22 +19,15 @@
   font-display: swap;
 }
 @font-face {
-  font-family: "Redaction 35";
-  src: url("/fonts/Redaction35-Italic.woff2") format("woff2");
+  font-family: "Redaction 20";
+  src: url("/fonts/Redaction20-Italic.woff2") format("woff2");
   font-style: italic;
   font-weight: 400;
   font-display: swap;
 }
 @font-face {
-  font-family: "Redaction 50";
-  src: url("/fonts/Redaction50-Italic.woff2") format("woff2");
-  font-style: italic;
-  font-weight: 400;
-  font-display: swap;
-}
-@font-face {
-  font-family: "Redaction 50";
-  src: url("/fonts/Redaction50-Regular.woff2") format("woff2");
+  font-family: "Redaction 20";
+  src: url("/fonts/Redaction20-Regular.woff2") format("woff2");
   font-style: normal;
   font-weight: 400;
   font-display: swap;
@@ -71,25 +66,62 @@
   --color-module-platform: #1d4ed8;
   --color-warning: #b91c1c;
 
+  /* Font roles. Zalando Sans SemiExpanded is always weight 400. Redaction is the
+     editorial accent; "Redaction 20" is the only pixelated cut (font-pixel). */
   --font-heading: "Zalando Sans SemiExpanded", sans-serif;
   --font-body: "Manrope", sans-serif;
   --font-code: "DM Mono", monospace;
   --font-serif: "Redaction", serif;
-  --font-pixel: "Redaction 50", serif;
-  --font-serif-35: "Redaction 35", "Redaction", serif;
+  --font-pixel: "Redaction 20", "Redaction", serif;
 
-  --text-h1: 2.5rem;
-  --text-h1--line-height: 1.2;
-  --text-h2: 1.625rem;
-  --text-h2--line-height: 1.3;
-  --text-h3: 1.375rem;
-  --text-h3--line-height: 1.4;
+  /* Type scale. Headings are responsive roles (type-display … type-h6 below); these
+     tokens are their desktop sizes, so text-h2 etc. stay available as plain sizes.
+     Body and UI sizes are single-size tokens. See /design-system for the specimen. */
+  --text-display: clamp(2rem, 10.2vw, 3.5rem);
+  --text-display--line-height: 1.15;
+  --text-h1: 2.75rem;
+  --text-h1--line-height: 1.14;
+  --text-h2: 2.625rem;
+  --text-h2--line-height: 1.19;
+  --text-h3: 1.75rem;
+  --text-h3--line-height: 1.25;
+  --text-h4: 1.375rem;
+  --text-h4--line-height: 1.35;
+  --text-h5: 1.125rem;
+  --text-h5--line-height: 1.4;
+  --text-h6: 1rem;
+  --text-h6--line-height: 1.4;
+  --text-lead: 1.1875rem;
+  --text-lead--line-height: 1.6;
   --text-body: 1.1875rem;
   --text-body--line-height: 1.6;
+  --text-prose: 1.0625rem;
+  --text-prose--line-height: 1.65;
+  --text-body-sm: 0.9375rem;
+  --text-body-sm--line-height: 1.55;
   --text-sm: 0.875rem;
   --text-sm--line-height: 1.5;
+  --text-caption: 0.8125rem;
+  --text-caption--line-height: 1.45;
   --text-xs: 0.75rem;
   --text-xs--line-height: 1.4;
+
+  /* Letter-spacing of small uppercase labels (tracking-label). */
+  --tracking-label: 0.12em;
+
+  /* Layout. Tailwind's 4px spacing unit stays; spacing uses even steps (8px grid),
+     with 4px steps for compact UI. These name the recurring layout measures. */
+  --spacing-gutter: 1.5rem;
+  --container-page: 1200px;
+  --container-wide: 1100px;
+  --container-content: 820px;
+  --container-measure: 640px;
+  --container-article: 550px;
+
+  /* Elevation: the few shadows the system uses. Flat is the default. */
+  --shadow-panel: 0 20px 50px -45px rgb(17 24 39 / 0.6);
+  --shadow-float: 0 0 0 1px var(--color-hairline), 0 24px 48px rgb(17 24 39 / 0.08);
+  --shadow-offset: 10px 10px 0 0 rgb(236 16 75 / 0.16);
 }
 
 @layer base {
@@ -113,27 +145,30 @@
     background-color: var(--color-background);
   }
 
+  /* Bare headings get their role's style; a class (type-*, text-*) restyles a
+     heading without changing its level. */
   h1 {
-    font-family: var(--font-heading);
-    font-size: var(--text-h1);
-    line-height: var(--text-h1--line-height);
-    font-weight: 400;
-    letter-spacing: -0.02em;
+    @apply type-h1;
   }
 
   h2 {
-    font-family: var(--font-heading);
-    font-size: var(--text-h2);
-    line-height: var(--text-h2--line-height);
-    font-weight: 400;
-    letter-spacing: -0.01em;
+    @apply type-h2;
   }
 
   h3 {
-    font-family: var(--font-heading);
-    font-size: var(--text-h3);
-    line-height: var(--text-h3--line-height);
-    font-weight: 400;
+    @apply type-h3;
+  }
+
+  h4 {
+    @apply type-h4;
+  }
+
+  h5 {
+    @apply type-h5;
+  }
+
+  h6 {
+    @apply type-h6;
   }
 
   code,
@@ -144,14 +179,6 @@
 }
 
 @layer components {
-  .home-section-heading {
-    font-family: var(--font-heading);
-    font-size: clamp(2rem, 3.2vw, 2.75rem);
-    line-height: 1.12;
-    font-weight: 500;
-    letter-spacing: -0.025em;
-  }
-
   .legal-prose {
     font-family: var(--font-body);
     font-size: 0.95rem;
@@ -170,7 +197,7 @@
   .legal-prose h4 {
     font-family: var(--font-heading);
     line-height: 1.3;
-    font-weight: 500;
+    font-weight: 400;
     color: var(--color-surface);
     margin-top: 2rem;
     letter-spacing: -0.01em;
@@ -743,7 +770,7 @@
      sentence around it. */
   .changelog-count {
     font-family: var(--font-heading);
-    font-weight: 500;
+    font-weight: 400;
     color: var(--color-surface);
   }
 }
@@ -800,6 +827,162 @@
     --tw-gradient-via, --tw-gradient-to, --fade-bg;
 }
 
+/* ── Typography roles ────────────────────────────────────────────────────────
+   One utility per role sets family, weight, size, line height and tracking, with
+   the mobile → desktop step at md. Pair with colour and text-balance/pretty as
+   needed; single-property utilities (leading-*, text-*) still override a role. */
+@utility type-display {
+  --accent-scale: 1.15;
+  font-family: var(--font-heading);
+  font-weight: 400;
+  font-size: var(--text-display);
+  line-height: var(--text-display--line-height);
+  letter-spacing: -0.025em;
+}
+
+@utility type-h1 {
+  font-family: var(--font-heading);
+  font-weight: 400;
+  font-size: 2rem;
+  line-height: 1.17;
+  letter-spacing: -0.025em;
+
+  @media (width >= 48rem) {
+    font-size: var(--text-h1);
+    line-height: var(--text-h1--line-height);
+  }
+}
+
+@utility type-h2 {
+  font-family: var(--font-heading);
+  font-weight: 400;
+  font-size: 1.875rem;
+  line-height: 1.27;
+  letter-spacing: -0.02em;
+
+  @media (width >= 48rem) {
+    font-size: var(--text-h2);
+    line-height: var(--text-h2--line-height);
+  }
+}
+
+@utility type-h3 {
+  font-family: var(--font-heading);
+  font-weight: 400;
+  font-size: 1.5rem;
+  line-height: var(--text-h3--line-height);
+  letter-spacing: -0.015em;
+
+  @media (width >= 48rem) {
+    font-size: var(--text-h3);
+  }
+}
+
+@utility type-h4 {
+  font-family: var(--font-heading);
+  font-weight: 400;
+  font-size: 1.25rem;
+  line-height: var(--text-h4--line-height);
+  letter-spacing: -0.01em;
+
+  @media (width >= 48rem) {
+    font-size: var(--text-h4);
+  }
+}
+
+@utility type-h5 {
+  font-family: var(--font-heading);
+  font-weight: 400;
+  font-size: var(--text-h5);
+  line-height: var(--text-h5--line-height);
+}
+
+@utility type-h6 {
+  font-family: var(--font-heading);
+  font-weight: 400;
+  font-size: var(--text-h6);
+  line-height: var(--text-h6--line-height);
+}
+
+/* The editorial accent inside a heading ("that grows with you."): Redaction italic,
+   scaled from the heading it sits in (1.1×, 1.15× in display), so it never needs a
+   size of its own. type-accent-pixel is the same accent in Redaction 20. */
+@utility type-accent {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 400;
+  font-size: calc(var(--accent-scale, 1.1) * 1em);
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+
+@utility type-accent-pixel {
+  font-family: var(--font-pixel);
+  font-style: italic;
+  font-weight: 400;
+  font-size: calc(var(--accent-scale, 1.1) * 1em);
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+
+/* Intro paragraph under a page or section heading. */
+@utility type-lead {
+  font-family: var(--font-body);
+  font-size: 1.0625rem;
+  line-height: var(--text-lead--line-height);
+
+  @media (width >= 48rem) {
+    font-size: var(--text-lead);
+  }
+}
+
+/* Small uppercase UI label (table heads, meta). Not for eyebrows above headings. */
+@utility type-label {
+  font-family: var(--font-body);
+  font-size: var(--text-xs);
+  line-height: var(--text-xs--line-height);
+  font-weight: 600;
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+}
+
+/* ── Layout rhythm ─────────────────────────────────────────────────────────── */
+/* Vertical padding of a page section: standard, compact strip, and editorial. */
+@utility section-y {
+  padding-block: 3.5rem;
+
+  @media (width >= 48rem) {
+    padding-block: 6rem;
+  }
+}
+
+@utility section-y-sm {
+  padding-block: 2.5rem;
+
+  @media (width >= 48rem) {
+    padding-block: 4rem;
+  }
+}
+
+@utility section-y-lg {
+  padding-block: 4rem;
+
+  @media (width >= 48rem) {
+    padding-block: 8rem;
+  }
+}
+
+/* Gap between a section's heading block and its content. */
+@utility stack-section {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+
+  @media (width >= 48rem) {
+    gap: 3.5rem;
+  }
+}
+
 /* Where a page's first content starts, measured from the top of the page. */
 @utility pt-page {
   padding-top: 6rem;
@@ -815,7 +998,8 @@
   margin-inline: calc(50% - 50vw);
 }
 
-html:has(.bleed) {
+/* The orbit hero lets its globe art run past the frame at tablet widths too. */
+html:has(.bleed, .orbit-hero) {
   overflow-x: clip;
 }
 

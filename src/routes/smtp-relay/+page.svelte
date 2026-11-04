@@ -232,12 +232,12 @@
 	<div class="grid gap-12 lg:grid-cols-1">
 		<div class="flex flex-col">
 			<div
-				class="mb-4 inline-flex items-center gap-2 text-[11px] font-medium tracking-[0.18em] uppercase text-primary/80"
+				class="mb-4 inline-flex items-center gap-2 text-[11px] font-medium tracking-label uppercase text-primary/80"
 			>
 				<span class="block w-6 h-px bg-primary/60"></span>
 				SMTP relay
 			</div>
-			<h1 class="text-surface mb-4">
+			<h1 class="type-display text-surface mb-4">
 				The SMTP relay<br />
 				<span class="text-primary">your app can rely on.</span>
 			</h1>
@@ -253,11 +253,13 @@
 
 			<div class="flex flex-wrap items-center mb-3 gap-2">
 				<Button
+					size="lg"
 					variant="primary"
 					href={registerHref}
 					onclick={() => trackCta('smtp_relay_hero', 'Get SMTP credentials', registerHref, 'primary')}
 				>Get SMTP credentials</Button>
 				<Button
+					size="lg"
 					variant="secondary"
 					href={SMTP_DOCS_URL}
 					target="_blank"
@@ -282,10 +284,10 @@
 </section>
 
 <!-- What is an SMTP relay -->
-<section class="py-20 border-b border-border/30">
+<section class="section-y border-b border-border/30">
 	<div class="grid gap-12 lg:grid-cols-2 lg:items-start">
 		<div>
-			<div class="mb-4 inline-flex items-center gap-2 text-[11px] font-medium tracking-[0.18em] uppercase text-primary/80">
+			<div class="mb-4 inline-flex items-center gap-2 text-[11px] font-medium tracking-label uppercase text-primary/80">
 				<span class="block w-6 h-px bg-primary/60"></span>
 				The basics
 			</div>
@@ -320,7 +322,7 @@
 				</li>
 			</ol>
 			<div class="mt-5 border-t border-border/30 pt-4">
-				<p class="text-[13px] text-muted leading-relaxed">
+				<p class="text-caption text-muted leading-relaxed">
 					A relay (or <em>smart host</em>) is sometimes called an <strong class="text-surface">SMTP gateway</strong>.
 					The job is the same: take outbound mail and deliver it reliably.
 				</p>
@@ -330,9 +332,9 @@
 </section>
 
 <!-- When you need one -->
-<section class="py-20 border-b border-border/30">
+<section class="section-y border-b border-border/30">
 	<div class="mb-12">
-		<div class="mb-4 inline-flex items-center gap-2 text-[11px] font-medium tracking-[0.18em] uppercase text-primary/80">
+		<div class="mb-4 inline-flex items-center gap-2 text-[11px] font-medium tracking-label uppercase text-primary/80">
 			<span class="block w-6 h-px bg-primary/60"></span>
 			When you need one
 		</div>
@@ -352,7 +354,7 @@
 					<item.icon size={20} class="text-primary" />
 				</div>
 				<div>
-					<h3 class="mb-1 text-base font-semibold text-surface">{item.title}</h3>
+					<h3 class="mb-1 text-base text-surface">{item.title}</h3>
 					<p class="text-sm leading-relaxed text-muted">{item.description}</p>
 				</div>
 			</div>
@@ -361,9 +363,9 @@
 </section>
 
 <!-- How Lettr's SMTP relay works -->
-<section class="py-20 border-b border-border/30">
+<section class="section-y border-b border-border/30">
 	<div class="mb-12">
-		<div class="mb-4 inline-flex items-center gap-2 text-[11px] font-medium tracking-[0.18em] uppercase text-primary/80">
+		<div class="mb-4 inline-flex items-center gap-2 text-[11px] font-medium tracking-label uppercase text-primary/80">
 			<span class="block w-6 h-px bg-primary/60"></span>
 			How it works
 		</div>
@@ -383,7 +385,7 @@
 					<feature.icon size={20} class="text-primary" />
 				</div>
 				<div>
-					<h3 class="mb-1 text-base font-semibold text-surface">{feature.title}</h3>
+					<h3 class="mb-1 text-base text-surface">{feature.title}</h3>
 					<p class="text-sm leading-relaxed text-muted">{feature.description}</p>
 				</div>
 			</div>
@@ -392,9 +394,9 @@
 </section>
 
 <!-- Setup — quick start -->
-<section class="py-20 border-b border-border/30">
+<section class="section-y border-b border-border/30">
 	<div class="mb-12">
-		<div class="mb-4 inline-flex items-center gap-2 text-[11px] font-medium tracking-[0.18em] uppercase text-primary/80">
+		<div class="mb-4 inline-flex items-center gap-2 text-[11px] font-medium tracking-label uppercase text-primary/80">
 			<span class="block w-6 h-px bg-primary/60"></span>
 			Quick start
 		</div>
@@ -412,28 +414,28 @@
 			<div class="flex items-start gap-4">
 				<span class="flex h-8 w-8 shrink-0 items-center justify-center border border-border/50 bg-background font-code text-sm text-primary">1</span>
 				<div>
-					<h3 class="mb-1 text-base font-semibold text-surface">Create a free account</h3>
+					<h3 class="mb-1 text-base text-surface">Create a free account</h3>
 					<p class="text-sm leading-relaxed text-muted">Sign up and generate an API key from the dashboard — it doubles as your SMTP password.</p>
 				</div>
 			</div>
 			<div class="flex items-start gap-4">
 				<span class="flex h-8 w-8 shrink-0 items-center justify-center border border-border/50 bg-background font-code text-sm text-primary">2</span>
 				<div>
-					<h3 class="mb-1 text-base font-semibold text-surface">Authenticate your domain</h3>
+					<h3 class="mb-1 text-base text-surface">Authenticate your domain</h3>
 					<p class="text-sm leading-relaxed text-muted">The guided DNS wizard walks you through SPF, DKIM, and DMARC in a few minutes — no CNAME guesswork.</p>
 				</div>
 			</div>
 			<div class="flex items-start gap-4">
 				<span class="flex h-8 w-8 shrink-0 items-center justify-center border border-border/50 bg-background font-code text-sm text-primary">3</span>
 				<div>
-					<h3 class="mb-1 text-base font-semibold text-surface">Point your app at the relay</h3>
+					<h3 class="mb-1 text-base text-surface">Point your app at the relay</h3>
 					<p class="text-sm leading-relaxed text-muted">Drop in the settings on the right. Any language, framework, or app with an SMTP screen works unchanged.</p>
 				</div>
 			</div>
 
 			<div class="mt-2 border border-border/40 bg-white p-5">
 				<div class="text-[11px] uppercase tracking-wider text-muted/70 mb-3">Connection settings</div>
-				<dl class="grid grid-cols-[auto_1fr] gap-x-6 gap-y-2 font-code text-[13px]">
+				<dl class="grid grid-cols-[auto_1fr] gap-x-6 gap-y-2 font-code text-caption">
 					<dt class="text-muted">Host</dt>
 					<dd class="text-surface">smtp.lettr.com</dd>
 					<dt class="text-muted">Ports</dt>
@@ -459,9 +461,9 @@
 </section>
 
 <!-- SMTP relay vs API -->
-<section class="py-20 border-b border-border/30">
+<section class="section-y border-b border-border/30">
 	<div class="mb-12">
-		<div class="mb-4 inline-flex items-center gap-2 text-[11px] font-medium tracking-[0.18em] uppercase text-primary/80">
+		<div class="mb-4 inline-flex items-center gap-2 text-[11px] font-medium tracking-label uppercase text-primary/80">
 			<span class="block w-6 h-px bg-primary/60"></span>
 			SMTP relay vs. API
 		</div>
@@ -478,7 +480,7 @@
 		<div class="border border-border/40 bg-white p-6">
 			<div class="mb-4 flex items-center gap-2">
 				<ArrowsClockwiseIcon size={18} class="text-primary" />
-				<h3 class="text-base font-semibold text-surface">Use the SMTP relay when…</h3>
+				<h3 class="text-base text-surface">Use the SMTP relay when…</h3>
 			</div>
 			<ul class="space-y-3">
 				{#each comparison.smtp as item}
@@ -493,7 +495,7 @@
 		<div class="border border-border/40 bg-white p-6">
 			<div class="mb-4 flex items-center gap-2">
 				<TerminalWindowIcon size={18} class="text-primary" />
-				<h3 class="text-base font-semibold text-surface">Use the REST API when…</h3>
+				<h3 class="text-base text-surface">Use the REST API when…</h3>
 			</div>
 			<ul class="space-y-3">
 				{#each comparison.api as item}
@@ -518,7 +520,7 @@
 <!-- FAQ -->
 <section class="py-16 border-b border-border/30">
 	<div class="mb-10">
-		<div class="mb-4 inline-flex items-center gap-2 text-[11px] font-medium tracking-[0.18em] uppercase text-primary/80">
+		<div class="mb-4 inline-flex items-center gap-2 text-[11px] font-medium tracking-label uppercase text-primary/80">
 			<span class="block w-6 h-px bg-primary/60"></span>
 			FAQ
 		</div>
@@ -535,7 +537,7 @@
 					onclick={() => toggleFaq(i)}
 					class="flex w-full items-center justify-between py-5 text-left"
 				>
-					<h3 class="text-sm font-medium text-surface">{faq.question}</h3>
+					<h3 class="text-sm text-surface">{faq.question}</h3>
 					<CaretDownIcon
 						size={14}
 						class="shrink-0 ml-4 text-muted transition-transform duration-200 {openFaq === i ? 'rotate-180' : ''}"
@@ -543,7 +545,7 @@
 				</button>
 				{#if openFaq === i}
 					<div transition:slide={{ duration: 200 }}>
-						<p class="text-[13px] text-muted leading-relaxed max-w-[65ch] pb-5">{faq.answer}</p>
+						<p class="text-caption text-muted leading-relaxed max-w-[65ch] pb-5">{faq.answer}</p>
 					</div>
 				{/if}
 			</div>
@@ -562,7 +564,7 @@
 </div>
 
 <!-- Final CTA -->
-<section class="py-20">
+<section class="section-y">
 	<div class="flex flex-col items-center text-center">
 		<h2 class="mb-3 text-surface">
 			Point your app at <span class="text-primary">smtp.lettr.com.</span>
@@ -573,11 +575,13 @@
 		</p>
 		<div class="flex flex-wrap items-center justify-center gap-2">
 			<Button
+				size="lg"
 				variant="primary"
 				href={registerHref}
 				onclick={() => trackCta('smtp_relay_footer', 'Get SMTP credentials', registerHref, 'primary')}
 			>Get SMTP credentials</Button>
 			<Button
+				size="lg"
 				variant="secondary"
 				href={SMTP_DOCS_URL}
 				target="_blank"

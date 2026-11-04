@@ -173,7 +173,7 @@
 			<div class="w-[300px] border border-border/60 bg-white px-5 py-4 shadow-[0_24px_60px_-40px_rgba(17,24,39,0.5)]">
 			<div class="flex items-baseline justify-between pb-3">
 				<span class="text-sm font-bold text-surface">Contents</span>
-				<span class="text-[13px] text-subtle">{Math.round(progress * 100)}% read</span>
+				<span class="text-caption text-subtle">{Math.round(progress * 100)}% read</span>
 			</div>
 			<ul>
 				{#each items as item (item.id)}
@@ -191,7 +191,7 @@
 					</li>
 				{/each}
 			</ul>
-			<a href="#main-content" tabindex="-1" class="mt-3 block text-[13px] font-semibold text-surface hover:text-primary">↑ Back to top</a>
+			<a href="#main-content" tabindex="-1" class="mt-3 block text-caption font-semibold text-surface hover:text-primary">↑ Back to top</a>
 			</div>
 		</div>
 	</nav>
@@ -223,7 +223,7 @@
 								href={'#' + item.id}
 								aria-current={activeId === item.id ? 'true' : undefined}
 								onclick={() => go(item, 'blog_contents_mobile')}
-								class="block border-l-2 py-2 pl-3 text-[15px] leading-[1.35] {activeId === item.id
+								class="block border-l-2 py-2 pl-3 text-body-sm leading-[1.35] {activeId === item.id
 									? 'border-primary font-semibold text-surface'
 									: 'border-border/60 text-subtle'}"
 							>

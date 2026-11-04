@@ -19,7 +19,7 @@
 		class="group flex items-center gap-4 border-y border-border/60 py-4 no-underline!"
 	>
 		<ArtImage slug={post.slug} category={post.category} art={post.art} variant="thumb" decorative class="size-10 shrink-0" />
-		<span class="min-w-0 flex-1 text-[15px] leading-[1.5] text-pretty text-muted">
+		<span class="min-w-0 flex-1 text-body-sm leading-[1.5] text-pretty text-muted">
 			<strong>{product.label}.</strong>
 			{product.description}
 		</span>

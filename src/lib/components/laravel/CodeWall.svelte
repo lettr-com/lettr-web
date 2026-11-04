@@ -138,23 +138,23 @@
 	<div class="mx-auto flex w-full max-w-[1148px] flex-col justify-between gap-10 px-6 pt-16 md:h-full md:pt-24 md:pb-[88px]">
 		<h2
 			id="codewall-heading"
-			class="m-0 max-w-[680px] font-heading text-[1.875rem] leading-[38px] text-balance tracking-[-0.02em] text-white md:text-[2.625rem] md:leading-[50px]"
+			class="m-0 max-w-[680px] type-h2 text-balance text-white"
 		>
 			The template lives in Lettr.
-			<em class="block font-serif text-[2.125rem] leading-[1.1] text-primary-outline md:text-[2.875rem] md:leading-[50px]">The types live in your app.</em>
+			<em class="block type-accent text-primary-outline">The types live in your app.</em>
 		</h2>
 
 		<div class="flex max-w-[470px] flex-col gap-6">
-			<p class="m-0 text-pretty text-[1.0625rem] leading-[27.2px] text-white/75 md:text-[1.1875rem] md:leading-[30.4px]">
+			<p class="m-0 text-pretty type-lead text-white/75">
 				Behind this text: the enum and DTO that <code class="font-code text-[0.88em] text-white">lettr:generate-dtos</code> writes for
 				you. In front: the Mailable that uses them. Your team edits the email in Lettr, your IDE and PHPStan check every variable.
 			</p>
 			<div class="flex flex-col gap-3 sm:w-max sm:flex-row sm:items-center">
-				<Button variant="primary" size="hero" type="button" onclick={copyMailable} class="gap-3">
+				<Button variant="primary" size="lg" type="button" onclick={copyMailable} class="gap-3">
 					{#if copied}<CheckIcon size={20} weight="bold" aria-hidden="true" />{:else}<CopyIcon size={20} aria-hidden="true" />{/if}
 					{copied ? 'Copied' : 'Copy OrderShipped.php'}
 				</Button>
-				<Button variant="ghost" size="hero" href={typeSafetyHref} target="_blank" rel="noopener noreferrer" onclick={trackGuide}>
+				<Button variant="ghost" size="lg" href={typeSafetyHref} target="_blank" rel="noopener noreferrer" onclick={trackGuide}>
 					Type safety guide
 				</Button>
 			</div>

@@ -35,12 +35,12 @@
 		{/each}
 	</div>
 
-	<h3 class="mt-4 text-surface">{entry.title}</h3>
+	<h3 class="mt-4 type-h4 text-surface">{entry.title}</h3>
 
 	<p class="mt-3 text-body leading-[1.7] font-medium text-surface">{@html renderInline(entry.lead)}</p>
 
 	{#each entry.body ?? [] as paragraph}
-		<p class="mt-4 text-[15px] leading-[1.8] text-muted">{@html renderInline(paragraph)}</p>
+		<p class="mt-4 text-body-sm leading-[1.8] text-muted">{@html renderInline(paragraph)}</p>
 	{/each}
 
 	{#if entry.code}

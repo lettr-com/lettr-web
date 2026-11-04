@@ -97,7 +97,7 @@
 					? 'border-primary bg-white shadow-lg shadow-primary/5'
 					: 'border-border/30 bg-white'}"
 			>
-				<h3 class="text-sm font-semibold mb-3 {isHighlighted ? 'text-primary' : 'text-muted'}">
+				<h3 class="text-sm mb-3 {isHighlighted ? 'text-primary' : 'text-muted'}">
 					{plan.name}
 				</h3>
 
@@ -105,17 +105,17 @@
 					<span class="text-2xl font-bold text-surface">{plan.price}</span>
 					<span class="text-sm text-muted">/mo</span>
 				</div>
-				<p class="text-[12px] text-muted mb-5">{plan.blurb}</p>
+				<p class="text-xs text-muted mb-5">{plan.blurb}</p>
 
 				<ul class="flex flex-col gap-2 mb-6 flex-1">
 					{#each plan.features as feature}
 						{#if !feature.excluded}
-							<li class="flex items-start gap-2 text-[13px] leading-5 text-muted">
+							<li class="flex items-start gap-2 text-caption leading-5 text-muted">
 								<span class="mt-2 block w-1 h-1 rounded-full bg-border shrink-0"></span>
 								<span>{feature.text}</span>
 							</li>
 						{:else}
-							<li class="flex items-start gap-2 text-[13px] leading-5 text-muted/40">
+							<li class="flex items-start gap-2 text-caption leading-5 text-muted/40">
 								<span class="relative mt-2 block h-1 w-1 shrink-0">
 									<X size={10} class="absolute -left-[3px] -top-[3px] text-border" />
 								</span>
@@ -142,8 +142,8 @@
 	<!-- Enterprise row -->
 	<div class="mt-3 border bg-white p-5 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 transition-colors duration-300 {highlightedPlan === 'enterprise' ? 'border-primary shadow-lg shadow-primary/5' : 'border-border/30'}">
 		<div>
-			<h3 class="text-sm font-semibold mb-1 {highlightedPlan === 'enterprise' ? 'text-primary' : 'text-surface'}">Enterprise</h3>
-			<p class="text-[13px] text-muted">
+			<h3 class="text-sm mb-1 {highlightedPlan === 'enterprise' ? 'text-primary' : 'text-surface'}">Enterprise</h3>
+			<p class="text-caption text-muted">
 				Unlimited emails, dedicated IPs, SLA guarantee, SSO/SAML, and a dedicated account manager.
 			</p>
 		</div>
@@ -163,12 +163,12 @@
 	<!-- Compare plans -->
 	<div class="mt-8 border border-border/30 bg-white p-4 sm:p-6">
 		<div class="mb-6 flex items-baseline justify-between gap-3">
-			<h3 class="text-sm font-bold text-surface">Compare plans</h3>
+			<h3 class="text-sm text-surface">Compare plans</h3>
 			<span class="text-[11px] text-muted/70 md:hidden">Swipe to compare &rarr;</span>
 		</div>
 
 		<div class="-mx-4 overflow-x-auto px-4 sm:mx-0 sm:px-0">
-			<table class="w-full min-w-[640px] table-fixed text-[13px]">
+			<table class="w-full min-w-[640px] table-fixed text-caption">
 				<colgroup>
 					<col class="w-[28%]" />
 					<col class="w-[18%]" />

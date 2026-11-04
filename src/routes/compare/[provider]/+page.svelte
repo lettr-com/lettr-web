@@ -1,4 +1,5 @@
 <script lang="ts">
+	import Button from '$lib/components/Button.svelte';
 	import { onMount } from 'svelte';
 	import { error } from '@sveltejs/kit';
 	import Seo from '$lib/components/Seo.svelte';
@@ -90,7 +91,7 @@
 				</div>
 			</div>
 
-			<span class="mb-4 inline-block font-heading text-xs tracking-[0.15em] text-primary uppercase">
+			<span class="mb-4 inline-block font-heading text-xs tracking-label text-primary uppercase">
 				COMPARE
 			</span>
 			<h1>
@@ -110,7 +111,7 @@
 					<div class="border border-border/50 bg-white p-5">
 						<div class="mb-3 flex items-start justify-between gap-4">
 							<div>
-								<h3 class="text-base font-semibold text-surface">{feature.label}</h3>
+								<h3 class="text-base text-surface">{feature.label}</h3>
 								<p class="mt-1 text-sm leading-relaxed text-muted">{feature.description}</p>
 								{#if feature.learnMoreUrl}
 									<a
@@ -186,7 +187,7 @@
 								<img src={other.logo} alt={other.name} class="h-5 w-5" />
 							</div>
 							<div class="min-w-0">
-								<h3 class="text-sm font-semibold text-surface transition-colors group-hover:text-primary">
+								<h3 class="text-sm text-surface transition-colors group-hover:text-primary">
 									Lettr vs {other.name}
 								</h3>
 								<p class="truncate text-xs text-muted">{other.tagline}</p>
@@ -212,16 +213,16 @@
 					No complex migration scripts, no downtime.
 				</p>
 				<div class="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row">
-					<a
+					<Button
 						href={registerHref}
-						class="bg-primary px-7 py-3 text-[15px] font-semibold text-white transition-colors hover:bg-primary/90"
+						size="lg"
 						onclick={() => trackProviderCta('Try Lettr free', registerHref)}
 					>
 						Try Lettr free &rarr;
-					</a>
+					</Button>
 					<a
 						href="/compare/"
-						class="flex items-center gap-2 px-4 py-3 text-[15px] font-medium text-muted transition-colors hover:text-surface"
+						class="flex items-center gap-2 px-4 py-3 text-body-sm font-medium text-muted transition-colors hover:text-surface"
 						onclick={() => trackProviderCta('View all comparisons', '/compare/')}
 					>
 						View all comparisons

@@ -70,7 +70,7 @@
 			{/if}
 		</span>
 		{#if item.description}
-			<span class="block text-[13px] leading-[18px] text-subtle">{item.description}</span>
+			<span class="block text-caption leading-[18px] text-subtle">{item.description}</span>
 		{/if}
 	</a>
 {/snippet}
@@ -88,7 +88,7 @@
 						>
 							<span>
 								<span class="block text-lg leading-6 font-semibold text-surface">{menu.label}</span>
-								<span class="block text-[13px] leading-[18px] text-subtle">{menu.summary}</span>
+								<span class="block text-caption leading-[18px] text-subtle">{menu.summary}</span>
 							</span>
 							<CaretRight size={16} class="shrink-0 text-subtle" aria-hidden="true" />
 						</button>
@@ -105,7 +105,7 @@
 							<span class="size-[7px] bg-primary" aria-hidden="true"></span>
 							Pricing
 						</span>
-						<span class="text-[13px] text-subtle">Free up to 3,000 emails</span>
+						<span class="text-caption text-subtle">Free up to 3,000 emails</span>
 					</a>
 				</li>
 				<li>
@@ -126,7 +126,7 @@
 			<div class="nav-drill">
 				<button
 					type="button"
-					class="flex h-13 w-full items-center gap-2 border-b border-[#F0EAEC] px-4 text-[15px] font-semibold text-surface {focusRing}"
+					class="flex h-13 w-full items-center gap-2 border-b border-[#F0EAEC] px-4 text-body-sm font-semibold text-surface {focusRing}"
 					aria-label="Back to menu"
 					onclick={() => drill(null)}
 				>
@@ -136,20 +136,20 @@
 				{#each activeMenu.sections as section, index (section.id)}
 					<section class="px-4 pt-4 pb-2 {index > 0 ? 'border-t border-[#F0EAEC]' : ''}">
 						{#if section.lane}
-							<h3 class="flex items-center gap-2.5 pb-1.5">
+							<h3 class="flex items-center gap-2.5 pb-1.5 type-h6">
 								<LaneMark lane={section.lane} size="sm" />
 								<span
 									class="text-surface {section.lane === 'marketing'
 										? 'font-serif text-xl leading-6 tracking-[-0.02em]'
 										: section.lane === 'transactional'
 											? 'font-heading text-base tracking-[-0.02em]'
-											: 'text-[15px] font-semibold'}"
+											: 'text-body-sm font-semibold'}"
 								>
 									{section.title}
 								</span>
 							</h3>
 						{:else if section.id !== 'docs'}
-							<h3 class="pb-1.5 font-code text-[11px] font-normal tracking-[0.12em] text-subtle uppercase">
+							<h3 class="pb-1.5 font-code text-[11px] font-normal tracking-label text-subtle uppercase">
 								{section.title}
 							</h3>
 						{/if}
@@ -192,7 +192,7 @@
 								class="flex flex-col gap-2 bg-background p-4 {focusRing}"
 								onclick={() => onLinkClick({ label: post.title, href: `/blog/${post.slug}/` }, 'resources')}
 							>
-								<span class="font-code text-[11px] tracking-[0.12em] text-primary uppercase">
+								<span class="font-code text-[11px] tracking-label text-primary uppercase">
 									From the blog · {post.readTime}
 								</span>
 								<span class="font-heading text-base leading-[22px] tracking-[-0.02em] text-surface">
@@ -207,7 +207,7 @@
 									href={product.href}
 									target="_blank"
 									rel="noopener noreferrer"
-									class="flex min-h-10 items-center gap-2 text-[13px] font-semibold text-surface {focusRing}"
+									class="flex min-h-10 items-center gap-2 text-caption font-semibold text-surface {focusRing}"
 									onclick={() => onLinkClick(product, 'resources')}
 								>
 									{#if product.icon}
@@ -227,7 +227,7 @@
 	<div
 		class="flex flex-col gap-3 border-t border-hairline bg-white px-4 pt-4 pb-[max(1rem,env(safe-area-inset-bottom))]"
 	>
-		<p class="flex items-center justify-between gap-4 text-[13px] leading-[18px]">
+		<p class="flex items-center justify-between gap-4 text-caption leading-[18px]">
 			<span class="text-subtle">Migrating or sending at volume?</span>
 			<a
 				href={salesHref}
@@ -240,14 +240,14 @@
 		<div class="flex gap-2">
 			<a
 				href={signInHref}
-				class="flex h-12 flex-1 items-center justify-center border border-surface text-[15px] font-semibold text-surface transition-colors active:bg-background {focusRing}"
+				class="flex h-12 flex-1 items-center justify-center border border-surface text-body-sm font-semibold text-surface transition-colors active:bg-background {focusRing}"
 				onclick={() => onCta('Sign in', signInHref)}
 			>
 				Sign in
 			</a>
 			<a
 				href={registerHref}
-				class="flex h-12 flex-1 items-center justify-center bg-primary-strong text-[15px] font-semibold text-white min-[360px]:hidden {focusRing}"
+				class="flex h-12 flex-1 items-center justify-center bg-primary-strong text-body-sm font-semibold text-white min-[360px]:hidden {focusRing}"
 				onclick={() => onCta('Get started', registerHref)}
 			>
 				Get started

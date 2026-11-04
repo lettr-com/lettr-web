@@ -36,7 +36,7 @@
 
 <section id="faq" class="py-16 border-b border-border/30">
 	<div class="mb-10" data-faq>
-		<h2 class="mb-3 font-medium text-surface">Frequently asked <span class="block text-primary">questions</span></h2>
+		<h2 class="mb-3 text-surface">Frequently asked <span class="block text-primary">questions</span></h2>
 		<p class="text-body text-muted max-w-[55ch]">
 			Common questions about Lettr's email platform for SaaS companies.
 		</p>
@@ -49,7 +49,7 @@
 					onclick={() => toggle(i)}
 					class="flex w-full items-center justify-between py-5 text-left"
 				>
-					<h3 class="text-sm font-medium text-surface">{faq.question}</h3>
+					<h3 class="text-sm text-surface">{faq.question}</h3>
 					<CaretDownIcon
 						size={14}
 						class="shrink-0 ml-4 text-muted transition-transform duration-200 {openIndex === i ? 'rotate-180' : ''}"
@@ -57,7 +57,7 @@
 				</button>
 				{#if openIndex === i}
 					<div transition:slide={{ duration: 200 }}>
-						<p class="text-[13px] text-muted leading-relaxed max-w-[65ch] pb-5">{faq.answer}</p>
+						<p class="text-caption text-muted leading-relaxed max-w-[65ch] pb-5">{faq.answer}</p>
 					</div>
 				{/if}
 			</div>

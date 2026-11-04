@@ -282,12 +282,12 @@
 
 <section id="hero" class="orbit-hero relative pt-page">
 	<div class="relative z-20 flex flex-col items-start gap-6">
-		<h1 data-animate class="flex flex-col items-start text-[clamp(2rem,10.2vw,3.5rem)] leading-[1.15] font-normal tracking-[-0.025em] text-surface">
+		<h1 data-animate class="flex flex-col items-start type-display text-surface">
 			<span>Transactional and<br />marketing email</span>
-			<span class="font-serif text-[clamp(2.3rem,11.7vw,4rem)] text-primary italic">built for SaaS</span>
+			<span class="type-accent leading-[1.15] text-primary">built for SaaS</span>
 		</h1>
 
-		<p data-animate style="animation-delay:0.06s" class="max-w-[489px] text-[1.125rem] leading-[1.6] text-surface">
+		<p data-animate style="animation-delay:0.06s" class="max-w-[489px] type-lead text-surface">
 			Your team builds every email in one editor.<br class="hidden sm:inline" />
 			You send <span class="font-semibold">transactional</span> by API and <span class="font-semibold">marketing</span> by campaign.<br class="hidden sm:inline" />
 			One platform, one bill.
@@ -296,13 +296,13 @@
 		<div data-animate style="animation-delay:0.12s" class="flex w-full flex-col gap-3 sm:w-auto sm:flex-row">
 			<Button
 				variant="primary"
-				size="hero"
+				size="lg"
 				href={registerHref}
 				onclick={() => trackHeroCta('Get started', registerHref, 'primary')}
 			>Get started</Button>
 			<Button
 				variant="secondary"
-				size="hero"
+				size="lg"
 				href="https://docs.lettr.com/introduction"
 				target="_blank"
 				rel="noopener noreferrer"

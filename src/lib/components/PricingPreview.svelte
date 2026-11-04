@@ -47,7 +47,7 @@
 
 <section id="pricing" class={sectionClass}>
 	<div class="mb-10 sm:mb-12 max-w-2xl">
-		<div class="mb-4 inline-flex items-center gap-2 text-[11px] font-medium tracking-[0.18em] uppercase text-primary/80">
+		<div class="mb-4 inline-flex items-center gap-2 text-[11px] font-medium tracking-label uppercase text-primary/80">
 			<span class="block w-6 h-px bg-primary/60"></span>
 			Pricing
 		</div>
@@ -87,7 +87,7 @@
 					</span>
 					<div>
 						<h3 class="font-heading text-base leading-5 text-surface">{tile.label}</h3>
-						<span class="text-[13px] text-muted">{tile.unit}</span>
+						<span class="text-caption text-muted">{tile.unit}</span>
 					</div>
 				</div>
 
@@ -96,11 +96,11 @@
 					<span class="text-2xl font-bold text-surface">{tile.price}</span>
 					<span class="text-sm text-muted">{tile.priceNote}</span>
 				</div>
-				<p class="mb-5 text-[13px] text-muted">{tile.description}</p>
+				<p class="mb-5 text-caption text-muted">{tile.description}</p>
 
 				<ul class="mb-6 flex flex-1 flex-col gap-2">
 					{#each tile.highlights as highlight}
-						<li class="flex items-start gap-2 text-[13px] leading-5 text-muted">
+						<li class="flex items-start gap-2 text-caption leading-5 text-muted">
 							<span class="mt-2 block h-1 w-1 shrink-0 rounded-full bg-border"></span>
 							<span>{highlight}</span>
 						</li>

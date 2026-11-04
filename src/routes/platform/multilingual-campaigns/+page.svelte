@@ -308,7 +308,7 @@
 						<div class="mb-3 flex h-10 w-10 items-center justify-center border border-border/50 bg-background">
 							<step.icon size={20} class="text-primary" />
 						</div>
-						<h3 class="mb-2 text-base font-semibold text-surface">{step.title}</h3>
+						<h3 class="mb-2 text-base text-surface">{step.title}</h3>
 						<p class="text-sm leading-relaxed text-muted">{step.description}</p>
 					</li>
 				{/each}
@@ -324,7 +324,7 @@
 
 			<div class="border border-border/50 bg-white">
 				<div class="flex flex-wrap items-baseline justify-between gap-2 border-b border-border/50 bg-background px-5 py-3">
-					<span class="font-heading text-xs font-semibold text-surface uppercase">Try a value</span>
+					<span class="font-heading text-xs text-surface uppercase">Try a value</span>
 					<span class="flex items-baseline gap-1.5 text-xs text-muted">
 						Template languages
 						{#each templateLanguages as lang}
@@ -398,7 +398,7 @@
 
 			<div class="max-w-full min-w-0 border border-border/50 bg-white">
 				<div class="flex flex-wrap items-baseline justify-between gap-2 border-b border-border/50 bg-background px-5 py-3">
-					<span class="font-heading text-xs font-semibold text-surface uppercase">Multi-language send</span>
+					<span class="font-heading text-xs text-surface uppercase">Multi-language send</span>
 					<span class="text-xs text-muted">
 						Language taken from <span class="font-code text-surface">communication_language</span>
 					</span>
@@ -492,7 +492,7 @@
 
 			<div class="border border-border/50 bg-white">
 				<div class="border-b border-border/50 bg-background px-5 py-3">
-					<span class="font-heading text-xs font-semibold text-surface uppercase">Per-language subject and sender</span>
+					<span class="font-heading text-xs text-surface uppercase">Per-language subject and sender</span>
 				</div>
 				{@render composeHeader(CaretDownIcon, 'DE', 'German', composeCustomCount)}
 				<div class="divide-y divide-border/30 border-t border-border/30">
@@ -527,7 +527,7 @@
 						<div class="mb-3 flex h-10 w-10 items-center justify-center border border-border/50 bg-background">
 							<item.icon size={20} class="text-primary" />
 						</div>
-						<h3 class="mb-2 text-base font-semibold text-surface">{item.title}</h3>
+						<h3 class="mb-2 text-base text-surface">{item.title}</h3>
 						<p class="text-sm leading-relaxed text-muted">{item.description}</p>
 					</div>
 				{/each}

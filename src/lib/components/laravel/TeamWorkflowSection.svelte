@@ -106,16 +106,16 @@
 	</span>
 {/snippet}
 
-<section aria-labelledby="workflow-heading" class="mx-auto max-w-[1100px] py-16 md:pt-[136px] md:pb-32">
+<section aria-labelledby="workflow-heading" class="mx-auto max-w-wide py-16 md:pt-[136px] md:pb-32">
 	<div class="mb-10 flex flex-col gap-4 md:mb-16 lg:flex-row lg:items-end lg:justify-between lg:gap-16">
 		<h2
 			id="workflow-heading"
-			class="m-0 font-heading text-[1.875rem] leading-[38px] text-balance tracking-[-0.02em] text-surface md:text-[2.625rem] md:leading-[50px]"
+			class="m-0 type-h2 text-balance text-surface"
 		>
 			You own the code.
-			<em class="block font-serif text-[2.125rem] leading-[1.1] text-primary md:text-[2.875rem] md:leading-[50px]">Your team owns the words.</em>
+			<em class="block type-accent text-primary">Your team owns the words.</em>
 		</h2>
-		<p class="m-0 text-pretty max-w-[400px] shrink-0 text-[1.0625rem] leading-[27.2px] text-muted md:text-[1.1875rem] md:leading-[30.4px]">
+		<p class="m-0 text-pretty max-w-[400px] shrink-0 type-lead text-muted">
 			Copy changes stop being tickets. Your team edits the email in Lettr, and
 			<code class="font-code text-[0.88em] text-surface">lettr:pull</code> brings it into your repo as Blade.
 		</p>
@@ -141,7 +141,7 @@
 				</svg>
 				<span class="text-sm leading-[18px] font-semibold whitespace-nowrap text-surface" aria-hidden="true">order-shipped</span>
 				<span class="hidden px-1.5 py-[3px] font-code text-[11px] leading-[14px] tracking-[0.06em] text-primary shadow-[inset_0_0_0_1px_#f9b7c9] sm:inline" aria-hidden="true">TRANSACTIONAL</span>
-				<span class="ml-auto hidden text-[13px] leading-4 whitespace-nowrap text-muted lg:inline" aria-hidden="true">Edited 2 min ago</span>
+				<span class="ml-auto hidden text-caption leading-4 whitespace-nowrap text-muted lg:inline" aria-hidden="true">Edited 2 min ago</span>
 				<button
 					type="button"
 					aria-pressed={preview}
@@ -153,7 +153,7 @@
 				<span class="bg-primary px-3 py-1.5 text-xs leading-4 font-bold text-white" aria-hidden="true">Publish</span>
 			</div>
 			<div class="flex grow justify-center bg-[#f3eef0] p-4 sm:pt-7 sm:pb-0" aria-hidden="true">
-				<div class="flex w-full max-w-[400px] flex-col gap-4 bg-white px-5 py-6 sm:px-[30px] sm:py-7">
+				<div class="flex w-full max-w-[400px] flex-col gap-4 bg-white px-5 py-6 sm:px-8 sm:py-7">
 					<div class="flex items-center gap-2">
 						<span class="h-4 w-4 bg-surface"></span>
 						<span class="text-sm leading-[18px] font-extrabold text-surface">Northwind</span>
@@ -168,7 +168,7 @@
 					<div class="flex items-center gap-3 bg-background p-3.5">
 						<span class="h-[52px] w-[52px] shrink-0 bg-[linear-gradient(135deg,#f9b7c9_0%,#ec104b_100%)]"></span>
 						<span class="flex flex-col gap-1">
-							<span class="text-[13px] leading-4 font-semibold text-surface">Ceramic pour-over set</span>
+							<span class="text-caption leading-4 font-semibold text-surface">Ceramic pour-over set</span>
 							<span class="text-xs leading-4 text-muted">Qty 1 · Ships with DHL</span>
 						</span>
 					</div>
@@ -177,7 +177,7 @@
 							? 'shadow-[inset_0_0_0_1.5px_#ec104b]'
 							: 'shadow-[inset_0_0_0_1.5px_transparent]'}"
 					>
-						<span class="bg-surface px-[18px] py-[11px] text-[13px] leading-4 font-bold text-white">Track package</span>
+						<span class="bg-surface px-4 py-[11px] text-caption leading-4 font-bold text-white">Track package</span>
 						{@render chip('tracking_url')}
 					</div>
 				</div>
@@ -186,7 +186,7 @@
 
 		<!-- Merge tags typed by the generated DTO -->
 		<div class="flex flex-col bg-white xl:absolute xl:top-[88px] xl:left-[700px] xl:w-[336px]">
-			<div class="flex items-center justify-between border-b border-[#eee7ea] px-[22px] py-[18px]" aria-hidden="true">
+			<div class="flex items-center justify-between border-b border-[#eee7ea] px-6 py-4" aria-hidden="true">
 				<span class="font-heading text-[17px] leading-[22px] text-surface">Merge tags</span>
 				<span class="font-code text-[11px] leading-[14px] tracking-[0.06em] text-muted">3 TAGS</span>
 			</div>
@@ -201,15 +201,15 @@
 					onmouseleave={() => (hovered = null)}
 					onfocus={() => (hovered = item.tag)}
 					onblur={() => (hovered = null)}
-					class="flex cursor-pointer flex-col gap-1.5 border-b border-[#eee7ea] px-[22px] py-3.5 text-left {active
+					class="flex cursor-pointer flex-col gap-1.5 border-b border-[#eee7ea] px-6 py-3.5 text-left {active
 						? 'bg-primary-soft shadow-[inset_3px_0_0_#ec104b]'
 						: 'bg-white hover:shadow-[inset_3px_0_0_#f9b7c9]'}"
 				>
-					<span class="font-code text-[13px] leading-4 text-primary">{item.tag}</span>
+					<span class="font-code text-caption leading-4 text-primary">{item.tag}</span>
 					<span class="font-code text-xs leading-4 {active ? 'text-surface' : 'text-muted'}">{item.type}</span>
 				</button>
 			{/each}
-			<div class="flex items-center gap-2 px-[22px] py-3.5" aria-hidden="true">
+			<div class="flex items-center gap-2 px-6 py-3.5" aria-hidden="true">
 				<span class="h-1.5 w-1.5 shrink-0 bg-green"></span>
 				<span class="text-xs leading-4 text-muted">Typed in OrderShippedData by lettr:generate-dtos</span>
 			</div>
@@ -218,9 +218,9 @@
 		<!-- lettr:pull -->
 		<div
 			bind:this={terminal}
-			class="flex flex-col gap-2.5 bg-[#0c111d] py-4 pr-3 pl-[22px] shadow-[0_24px_48px_rgb(0_0_0/0.35)] xl:absolute xl:top-[426px] xl:left-[620px] xl:w-[400px]"
+			class="flex flex-col gap-2.5 bg-[#0c111d] py-4 pr-3 pl-6 shadow-[0_24px_48px_rgb(0_0_0/0.35)] xl:absolute xl:top-[426px] xl:left-[620px] xl:w-[400px]"
 		>
-			<div class="flex items-center gap-2.5 font-code text-[13px] leading-4">
+			<div class="flex items-center gap-2.5 font-code text-caption leading-4">
 				<span class="text-primary" aria-hidden="true">$</span>
 				<span class="min-w-0 text-[#f0f0f0]" aria-hidden="true">php artisan lettr:pull --with-mailables</span>
 				<button

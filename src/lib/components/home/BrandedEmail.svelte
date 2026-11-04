@@ -85,7 +85,7 @@
 		<div class="flex flex-col items-center gap-2.5 px-[18px] py-6" style:background-color={c.accent}>
 			{@render mark(c.accentInk, c.accent)}
 			{@render wordmark(c.accentInk)}
-			{#if logo.sub}<span class="text-[8px] tracking-[0.28em]" style:color={c.accentInk}>{logo.sub}</span>{/if}
+			{#if logo.sub}<span class="text-[8px] tracking-label" style:color={c.accentInk}>{logo.sub}</span>{/if}
 		</div>
 	{:else if layout.header === 'center'}
 		<div class="flex flex-col items-center gap-0.5 border-b px-[18px] py-4" style:border-color={c.line}>
@@ -93,14 +93,14 @@
 				{@render mark(accentText, c.bg)}
 				{@render wordmark(logo.wordmark === 'accent' ? accentText : c.ink)}
 			</div>
-			{#if logo.sub}<span class="text-[8px] tracking-[0.28em]" style:color={c.muted}>{logo.sub}</span>{/if}
+			{#if logo.sub}<span class="text-[8px] tracking-label" style:color={c.muted}>{logo.sub}</span>{/if}
 		</div>
 	{:else}
 		<div class="flex items-center gap-2 px-[18px] py-4">
 			{@render mark(accentText, c.bg)}
 			<div class="flex flex-col gap-0.5">
 				{@render wordmark(logo.wordmark === 'accent' ? accentText : c.ink)}
-				{#if logo.sub}<span class="text-[8px] tracking-[0.28em]" style:color={c.muted}>{logo.sub}</span>{/if}
+				{#if logo.sub}<span class="text-[8px] tracking-label" style:color={c.muted}>{logo.sub}</span>{/if}
 			</div>
 		</div>
 	{/if}
@@ -154,12 +154,12 @@
 				style:background-color={c.accent}
 				style:color={c.accentInk}
 			>
-				<span class="text-[10px] leading-[14px] tracking-[0.16em] opacity-75" style:font-family={f.body}>{copy.eyebrow}</span>
+				<span class="text-[10px] leading-[14px] tracking-label opacity-75" style:font-family={f.body}>{copy.eyebrow}</span>
 				{@render headline(copy.headline, 27, c.accentInk)}
 			</div>
 		{:else}
 			<div class="flex flex-col gap-2 px-[18px] pt-6 {centered ? 'items-center text-center' : ''}">
-				<span class="text-[10px] leading-[14px] tracking-[0.16em]" style:color={accentText} style:font-family={f.body}>{copy.eyebrow}</span>
+				<span class="text-[10px] leading-[14px] tracking-label" style:color={accentText} style:font-family={f.body}>{copy.eyebrow}</span>
 				{@render headline(copy.headline, 27, c.ink)}
 			</div>
 		{/if}
@@ -179,7 +179,7 @@
 	{:else if kind === 'ecommerce'}
 		{@const copy = brand.copy.ecommerce}
 		<div class="flex flex-col gap-1.5 px-[18px] pt-[22px] pb-4 {centered ? 'items-center text-center' : ''}">
-			<span class="text-[10px] leading-[14px] font-medium tracking-[0.12em]" style:color={accentText}>{copy.eyebrow}</span>
+			<span class="text-[10px] leading-[14px] font-medium tracking-label" style:color={accentText}>{copy.eyebrow}</span>
 			{@render headline(copy.headline, 22, c.ink)}
 			<p class="m-0 text-[11px] leading-4" style:color={c.muted}>{copy.sub}</p>
 		</div>
@@ -219,7 +219,7 @@
 				</div>
 			{:else}
 				<div class="mx-[18px] mt-1 mb-4 flex items-center justify-center border px-3 py-[18px]" style:background-color={c.soft} style:border-color={accentText}>
-					<span class="text-[30px] leading-9 font-semibold tracking-[0.18em] whitespace-pre" style:color={c.ink} style:font-family={f.body}>{copy.code}</span>
+					<span class="text-[30px] leading-9 font-semibold tracking-label whitespace-pre" style:color={c.ink} style:font-family={f.body}>{copy.code}</span>
 				</div>
 			{/if}
 		{/if}

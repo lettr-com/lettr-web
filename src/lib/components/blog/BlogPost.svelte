@@ -189,16 +189,16 @@
 				</nav>
 
 				<h1
-					class="mt-3.5 text-[30px] leading-[1.17] tracking-[-0.02em] text-balance text-surface md:mt-4 md:text-[44px] md:leading-[1.14] md:tracking-[-0.025em]"
+					class="mt-4 type-h1 text-balance text-surface"
 				>
 					{noWidow(title)}
 				</h1>
 
 				{#if dek}
-					<p class="mt-3.5 text-[17px] leading-[1.55] text-pretty text-subtle md:mt-4 md:text-[19px]">{dek}</p>
+					<p class="mt-3.5 text-[17px] leading-[1.55] text-pretty text-subtle md:mt-4 md:text-body">{dek}</p>
 				{/if}
 
-				<div class="mt-4 flex flex-wrap items-center gap-x-2 gap-y-1 text-[13px] text-subtle md:mt-5 md:text-sm">
+				<div class="mt-4 flex flex-wrap items-center gap-x-2 gap-y-1 text-caption text-subtle md:mt-5 md:text-sm">
 					<span class="flex h-7 w-7 shrink-0 items-center justify-center overflow-hidden border border-border/60 bg-background">
 						{#if author.avatar}
 							<img src={author.avatar} alt="" width="28" height="28" class="h-full w-full object-cover" />

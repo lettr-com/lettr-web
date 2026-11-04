@@ -111,7 +111,7 @@
 				Multilingual campaigns — each contact gets the email in their language
 				<span class="transition-transform group-hover:translate-x-0.5">&rarr;</span>
 			</a>
-			<h1 class="text-surface mb-4">
+			<h1 class="type-display text-surface mb-4">
 				Marketing campaigns,<br />
 				<span class="text-primary">in the same editor.</span>
 			</h1>
@@ -123,11 +123,13 @@
 
 			<div class="flex flex-wrap items-center mb-3 gap-2">
 				<Button
+					size="lg"
 					variant="primary"
 					href={registerHref}
 					onclick={() => trackHeroCta('Start sending', registerHref, 'primary')}
 				>Start sending</Button>
 				<Button
+					size="lg"
 					variant="secondary"
 					href="/pricing/"
 					onclick={() => trackHeroCta('See pricing', '/pricing/', 'secondary')}
@@ -144,9 +146,9 @@
 	</div>
 </section>
 
-<section class="py-20 border-b border-border/30">
+<section class="section-y border-b border-border/30">
 	<div class="mb-12">
-		<div class="mb-4 inline-flex items-center gap-2 text-[11px] font-medium tracking-[0.18em] uppercase text-primary/80">
+		<div class="mb-4 inline-flex items-center gap-2 text-[11px] font-medium tracking-label uppercase text-primary/80">
 			<span class="block w-6 h-px bg-primary/60"></span>
 			What's inside
 		</div>
@@ -165,7 +167,7 @@
 					<feature.icon size={20} class="text-primary" />
 				</div>
 				<div>
-					<h3 class="mb-1 text-base font-semibold text-surface">{feature.title}</h3>
+					<h3 class="mb-1 text-base text-surface">{feature.title}</h3>
 					<p class="text-sm leading-relaxed text-muted">{feature.description}</p>
 				</div>
 			</div>
@@ -173,10 +175,10 @@
 	</div>
 </section>
 
-<section class="py-20 border-b border-border/30">
+<section class="section-y border-b border-border/30">
 	<div class="grid gap-12 lg:grid-cols-2 lg:items-center">
 		<div>
-			<div class="mb-4 inline-flex items-center gap-2 text-[11px] font-medium tracking-[0.18em] uppercase text-primary/80">
+			<div class="mb-4 inline-flex items-center gap-2 text-[11px] font-medium tracking-label uppercase text-primary/80">
 				<span class="block w-6 h-px bg-primary/60"></span>
 				Lists &amp; segmentation
 			</div>
@@ -202,7 +204,7 @@
 				<PaperPlaneTiltIcon size={16} class="text-primary" />
 				<span class="font-code text-xs text-muted">contacts.add</span>
 			</div>
-			<pre class="overflow-x-auto font-code text-[13px] leading-relaxed text-surface">{`POST /v1/contacts
+			<pre class="overflow-x-auto font-code text-caption leading-relaxed text-surface">{`POST /v1/contacts
 {
   "email": "alex@example.com",
   "fields": {
@@ -216,9 +218,9 @@
 					Auto-segments updated
 				</div>
 				<div class="flex flex-wrap gap-2">
-					<span class="border border-border/40 bg-background px-2 py-0.5 text-[12px] text-surface">Pro plan</span>
-					<span class="border border-border/40 bg-background px-2 py-0.5 text-[12px] text-surface">Signed up this week</span>
-					<span class="border border-border/40 bg-background px-2 py-0.5 text-[12px] text-surface">Product news subscribers</span>
+					<span class="border border-border/40 bg-background px-2 py-0.5 text-xs text-surface">Pro plan</span>
+					<span class="border border-border/40 bg-background px-2 py-0.5 text-xs text-surface">Signed up this week</span>
+					<span class="border border-border/40 bg-background px-2 py-0.5 text-xs text-surface">Product news subscribers</span>
 				</div>
 			</div>
 		</div>

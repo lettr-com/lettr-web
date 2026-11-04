@@ -105,18 +105,18 @@
 {/snippet}
 
 {#snippet meta(post: PostMeta)}
-	<span class="text-[13px] font-medium text-subtle">{post.category} · {shortDate(post)} · {post.readTime}</span>
+	<span class="text-caption font-medium text-subtle">{post.category} · {shortDate(post)} · {post.readTime}</span>
 {/snippet}
 
 {#snippet row(post: PostMeta)}
 	<li>
 		<a href="/blog/{post.slug}/" class="group flex items-center gap-4 border-b border-border/60 py-3.5 sm:gap-5">
 			<ArtImage slug={post.slug} category={post.category} art={post.art} variant="thumb" decorative class="size-12 shrink-0" />
-			<span class="min-w-0 flex-1 text-[15px] leading-[1.4] font-semibold text-balance text-surface transition-colors group-hover:text-primary sm:text-base">
+			<span class="min-w-0 flex-1 text-body-sm leading-[1.4] font-semibold text-balance text-surface transition-colors group-hover:text-primary sm:text-base">
 				{noWidow(post.title)}
 			</span>
-			<span class="hidden w-[110px] shrink-0 text-[13px] text-subtle md:block">{post.category}</span>
-			<span class="hidden w-[90px] shrink-0 text-right text-[13px] text-subtle sm:block">{shortDate(post)}</span>
+			<span class="hidden w-[110px] shrink-0 text-caption text-subtle md:block">{post.category}</span>
+			<span class="hidden w-[90px] shrink-0 text-right text-caption text-subtle sm:block">{shortDate(post)}</span>
 		</a>
 	</li>
 {/snippet}
@@ -124,10 +124,10 @@
 <section class="mx-auto pt-page pb-24 {wide ? 'max-w-none' : 'max-w-[848px]'}">
 	<header class="flex flex-col gap-5 pb-6 md:flex-row md:items-end md:justify-between md:gap-8 md:pb-7">
 		<div>
-			<h1 class="text-[30px] leading-[1.2] tracking-[-0.02em] text-surface md:text-[40px] md:leading-[1.15]">
-				Email, <em class="font-serif text-[34px] leading-none font-medium tracking-normal text-primary md:text-[42px]">written down</em>
+			<h1 class="text-surface">
+				Email, <em class="type-accent text-primary">written down</em>
 			</h1>
-			<p class="mt-2.5 max-w-[480px] text-[15px] leading-[1.55] text-pretty text-subtle md:mt-3 md:text-base">
+			<p class="mt-2.5 max-w-[480px] text-body-sm text-pretty text-subtle md:mt-3 md:text-base">
 				Guides, product notes and engineering stories from the team that runs Lettr's sending infrastructure.
 			</p>
 		</div>
@@ -139,7 +139,7 @@
 				bind:value={query}
 				type="search"
 				placeholder="Search {posts.length} articles"
-				class="min-w-0 flex-1 bg-transparent text-[15px] text-surface outline-none placeholder:text-gray-500 md:text-sm"
+				class="min-w-0 flex-1 bg-transparent text-body-sm text-surface outline-none placeholder:text-gray-500 md:text-sm"
 			/>
 			<kbd class="hidden border border-border px-1.5 font-code text-xs text-gray-500 md:inline">/</kbd>
 		</label>
@@ -206,15 +206,15 @@
 				<ArtImage slug={featured.slug} category={featured.category} art={featured.art} variant="cover" decorative loading="eager" class="w-full" />
 				<div class="flex flex-col gap-2.5">
 					{@render meta(featured)}
-					<h2 class="text-[22px] leading-[1.25] tracking-[-0.015em] text-balance text-surface transition-colors group-hover:text-primary md:text-[28px] md:leading-[1.2]">
+					<h2 class="type-h3 text-balance text-surface transition-colors group-hover:text-primary">
 						{noWidow(featured.title)}
 					</h2>
-					<p class="line-clamp-3 text-[15px] leading-[1.55] text-pretty text-subtle md:text-base">{featured.excerpt}</p>
+					<p class="line-clamp-3 text-body-sm text-pretty text-subtle md:text-base">{featured.excerpt}</p>
 				</div>
 			</a>
 
 			<section aria-labelledby="most-read-heading">
-				<h2 id="most-read-heading" class="border-b border-surface pb-3.5 text-base leading-[1.35] text-surface">
+				<h2 id="most-read-heading" class="border-b border-surface pb-3.5 type-h6 text-surface">
 					Most read this quarter
 				</h2>
 				<ol>
@@ -223,8 +223,8 @@
 							<a href="/blog/{post.slug}/" class="group flex items-start gap-3.5 border-b border-border/60 py-4">
 								<ArtImage slug={post.slug} category={post.category} art={post.art} variant="thumb" decorative class="size-16 shrink-0" />
 								<span class="flex flex-col gap-1">
-									<span class="text-[15px] leading-[1.4] font-semibold text-balance text-surface transition-colors group-hover:text-primary">{noWidow(post.title)}</span>
-									<span class="text-[13px] text-subtle">{post.category} · {post.readTime.replace(' read', '')}</span>
+									<span class="text-body-sm leading-[1.4] font-semibold text-balance text-surface transition-colors group-hover:text-primary">{noWidow(post.title)}</span>
+									<span class="text-caption text-subtle">{post.category} · {post.readTime.replace(' read', '')}</span>
 								</span>
 							</a>
 						</li>
@@ -239,7 +239,7 @@
 
 		<section aria-labelledby="latest-heading" class="pb-14">
 			<div class="flex items-baseline justify-between border-t border-surface pt-3.5">
-				<h2 id="latest-heading" class="text-[22px] leading-[1.3] text-surface">Latest</h2>
+				<h2 id="latest-heading" class="type-h4 text-surface">Latest</h2>
 				<a href="/blog/feed.xml" class="text-sm font-semibold text-subtle hover:text-primary">RSS</a>
 			</div>
 			<ul class="mt-6 grid gap-x-8 gap-y-10 sm:grid-cols-2">
@@ -260,17 +260,17 @@
 		<section aria-labelledby="path-heading" class="-mx-6 flex flex-col gap-8 bg-surface px-6 py-9 md:mx-0 md:flex-row md:gap-10 md:p-10">
 			<div class="flex flex-col gap-4 md:w-60 md:shrink-0">
 				<ArtImage slug={path[path.length - 1].slug} category={path[path.length - 1].category} art={path[path.length - 1].art} variant="thumb" decorative class="size-20 md:size-24" />
-				<h2 id="path-heading" class="text-[24px] leading-[1.25] tracking-[-0.015em] text-balance text-background">{noWidow(deliverabilityPath.title)}</h2>
-				<p class="text-[15px] leading-[1.55] text-balance text-gray-400">{noWidow(deliverabilityPath.description)}</p>
+				<h2 id="path-heading" class="type-h3 text-balance text-background">{noWidow(deliverabilityPath.title)}</h2>
+				<p class="text-body-sm text-balance text-gray-400">{noWidow(deliverabilityPath.description)}</p>
 			</div>
 			<div class="flex-1">
 				<ol>
 					{#each path as post, index (post.slug)}
 						<li>
 							<a href="/blog/{post.slug}/" class="group flex items-baseline gap-4 border-b border-white/10 py-3.5">
-								<span class="w-6 shrink-0 font-code text-[13px] text-green">0{index + 1}</span>
-								<span class="flex-1 text-[15px] font-semibold text-balance text-background transition-colors group-hover:text-green md:text-base">{noWidow(post.title)}</span>
-								<span class="w-14 shrink-0 text-right text-[13px] text-gray-400">{post.readTime.replace(' read', '')}</span>
+								<span class="w-6 shrink-0 font-code text-caption text-green">0{index + 1}</span>
+								<span class="flex-1 text-body-sm font-semibold text-balance text-background transition-colors group-hover:text-green md:text-base">{noWidow(post.title)}</span>
+								<span class="w-14 shrink-0 text-right text-caption text-gray-400">{post.readTime.replace(' read', '')}</span>
 							</a>
 						</li>
 					{/each}
@@ -284,7 +284,7 @@
 
 		<section aria-labelledby="archive-heading" class="pt-14">
 			<div class="flex items-baseline justify-between border-t border-surface pt-3.5 pb-2">
-				<h2 id="archive-heading" class="text-[22px] leading-[1.3] text-surface">All articles</h2>
+				<h2 id="archive-heading" class="type-h4 text-surface">All articles</h2>
 				{@render sortToggle()}
 			</div>
 			<ul>

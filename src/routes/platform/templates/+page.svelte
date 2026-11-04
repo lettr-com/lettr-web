@@ -247,7 +247,7 @@
 						<div class="mb-3 flex h-10 w-10 items-center justify-center border border-border/50 bg-background">
 							<feature.icon size={20} class="text-primary" />
 						</div>
-						<h3 class="mb-2 text-base font-semibold text-surface">{feature.title}</h3>
+						<h3 class="mb-2 text-base text-surface">{feature.title}</h3>
 						<p class="text-sm leading-relaxed text-muted">{feature.description}</p>
 					</div>
 				{/each}
@@ -272,7 +272,7 @@
 								</div>
 
 								<!-- Heading -->
-								<h3 class="mb-2 text-[13px] font-bold text-surface">{template.title}</h3>
+								<h3 class="mb-2 text-caption font-bold text-surface">{template.title}</h3>
 
 								<!-- Greeting -->
 								<p class="mb-2">{template.greeting}</p>
@@ -288,13 +288,13 @@
 								<!-- Divider -->
 								<div class="my-4 flex items-center gap-2">
 									<div class="h-px flex-1 bg-border/40"></div>
-									<span class="text-[8px] font-semibold tracking-[0.15em] text-muted uppercase">Or click the link below</span>
+									<span class="text-[8px] font-semibold tracking-label text-muted uppercase">Or click the link below</span>
 									<div class="h-px flex-1 bg-border/40"></div>
 								</div>
 
 								<!-- Detail block -->
 								<div class="mb-3 border border-border/40 bg-background/60 p-2.5">
-									<p class="mb-1 text-[8px] font-semibold tracking-[0.12em] text-muted uppercase">{template.detail.label}</p>
+									<p class="mb-1 text-[8px] font-semibold tracking-label text-muted uppercase">{template.detail.label}</p>
 									{#if template.detail.kind === 'link'}
 										<p class="font-code text-[9px] break-all text-surface">{template.detail.url}</p>
 									{:else}

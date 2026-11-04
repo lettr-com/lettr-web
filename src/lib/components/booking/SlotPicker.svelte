@@ -109,7 +109,7 @@
 				<div class="border border-border/70 bg-white/70 p-3">
 					<div class="flex items-center justify-between gap-3">
 						<div>
-							<p class="text-xs uppercase tracking-[0.12em] text-muted">Selected slot</p>
+							<p class="text-xs uppercase tracking-label text-muted">Selected slot</p>
 							<p class="text-sm font-medium text-surface">{selectedSlotSummary}</p>
 						</div>
 						<Button

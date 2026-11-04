@@ -46,7 +46,7 @@
 
 <section class="py-16 border-b border-border/30">
 	<div class="mb-10 max-w-[60ch]">
-		<span class="mb-4 inline-flex items-center gap-2 border border-primary/20 bg-primary/5 px-2.5 py-1 font-heading text-[10px] tracking-[0.15em] text-primary uppercase">
+		<span class="mb-4 inline-flex items-center gap-2 border border-primary/20 bg-primary/5 px-2.5 py-1 font-heading text-[10px] tracking-label text-primary uppercase">
 			<span class="h-1.5 w-1.5 rounded-full bg-primary"></span>
 			Campaigns
 		</span>
@@ -66,8 +66,8 @@
 					<feature.icon size={18} class="text-primary" />
 				</div>
 				<div>
-					<h3 class="mb-1 text-sm font-semibold text-surface">{feature.title}</h3>
-					<p class="text-[13px] leading-relaxed text-muted">{feature.description}</p>
+					<h3 class="mb-1 text-sm text-surface">{feature.title}</h3>
+					<p class="text-caption leading-relaxed text-muted">{feature.description}</p>
 				</div>
 			</div>
 		{/each}
@@ -75,10 +75,10 @@
 
 	<div class="mt-8 flex flex-col items-start gap-4 border border-border/40 bg-white p-6 sm:flex-row sm:items-center sm:justify-between">
 		<div class="max-w-[55ch]">
-			<p class="text-[13px] font-medium text-surface">
+			<p class="text-caption font-medium text-surface">
 				Your team builds. Engineering keeps shipping.
 			</p>
-			<p class="mt-1 text-[13px] text-muted">
+			<p class="mt-1 text-caption text-muted">
 				Marketers launch campaigns in the visual editor while your transactional stack stays
 				untouched. Add Campaigns to your account in minutes — and watch every send land in the
 				inbox.

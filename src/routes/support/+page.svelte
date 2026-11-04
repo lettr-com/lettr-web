@@ -1,4 +1,5 @@
 <script lang="ts">
+	import Button from '$lib/components/Button.svelte';
 	import Seo from '$lib/components/Seo.svelte';
 	import EnvelopeSimpleIcon from 'phosphor-svelte/lib/EnvelopeSimpleIcon';
 	import BookOpenIcon from 'phosphor-svelte/lib/BookOpenIcon';
@@ -87,7 +88,7 @@
 	<!-- Hero -->
 	<div class="text-center">
 		<span
-			class="mb-4 inline-block font-heading text-xs tracking-[0.15em] text-primary uppercase"
+			class="mb-4 inline-block font-heading text-xs tracking-label text-primary uppercase"
 		>
 			SUPPORT
 		</span>
@@ -118,7 +119,7 @@
 						class="text-muted transition-colors duration-200 group-hover:text-primary"
 					/>
 				</div>
-				<h3 class="mb-1 text-base font-semibold text-surface">{channel.title}</h3>
+				<h3 class="mb-1 text-base text-surface">{channel.title}</h3>
 				<p class="mb-4 flex-1 text-sm leading-relaxed text-muted">{channel.description}</p>
 				<span
 					class="flex items-center gap-1.5 text-sm font-medium text-primary transition-colors group-hover:text-primary/80"
@@ -137,7 +138,7 @@
 		<!-- Common questions -->
 		<div class="mb-16">
 			<div class="border border-border/50 bg-white p-6">
-				<h3 class="mb-4 text-sm font-semibold text-surface">Common questions</h3>
+				<h3 class="mb-4 text-sm text-surface">Common questions</h3>
 				<div class="space-y-3">
 					{#each faqs as faq}
 						<a
@@ -165,15 +166,11 @@
 				Open a live chat with the team. We reply fast and can help with anything from setup to
 				billing.
 			</p>
-			<button
-				type="button"
-				onclick={openChat}
-				class="inline-flex items-center justify-center gap-2 bg-primary px-6 py-3.5 text-[15px] font-semibold text-white transition-colors hover:bg-primary/90"
-			>
+			<Button size="md" onclick={openChat}>
 				<ChatCircleTextIcon size={16} />
 				Start a chat
-			</button>
-			<p class="mt-6 text-[13px] text-muted">
+			</Button>
+			<p class="mt-6 text-caption text-muted">
 				Prefer email? Reach us at
 				<a
 					href="mailto:hello@lettr.com"

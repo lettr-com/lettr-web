@@ -11,7 +11,7 @@
 	let { ordered = false, items, children }: Props = $props();
 
 	const listClass = $derived(
-		'space-y-2 text-[17px] leading-[1.65] text-muted ' +
+		'space-y-2 text-prose text-muted ' +
 			(ordered ? 'list-decimal' : 'list-disc') +
 			' pl-5 marker:text-primary'
 	);

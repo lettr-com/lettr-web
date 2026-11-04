@@ -65,7 +65,7 @@
 <section
 	bind:this={section}
 	aria-labelledby="laravel-hero-heading"
-	class="bleed relative isolate mt-[61px] overflow-hidden bg-[#14010a] text-white"
+	class="bleed relative isolate mt-15 overflow-hidden bg-[#14010a] text-white"
 >
 	{#if fallback}
 		<div
@@ -88,12 +88,12 @@
 		<div class="flex max-w-[600px] flex-col">
 			<h1
 				id="laravel-hero-heading"
-				class="m-0 font-heading text-[2.25rem] leading-[38px] font-normal tracking-[-0.025em] text-white md:text-[4rem] md:leading-[67.84px]"
+				class="m-0 type-display text-white"
 			>
 				The email API
-				<span class="block pb-5 font-serif-35 text-[2.625rem] leading-[1.06] text-primary italic md:pb-6 md:text-[4.5rem]">built for Laravel.</span>
+				<span class="block pb-6 type-accent-pixel leading-[1.06] text-primary">built for Laravel.</span>
 			</h1>
-			<p class="m-0 text-pretty max-w-[540px] text-[1.0625rem] leading-[27.2px] text-white/75 md:text-[1.1875rem] md:leading-[30.4px]">
+			<p class="m-0 text-pretty max-w-[540px] type-lead text-white/75">
 				Keep your Mailables and <code class="font-code text-[0.9em] text-white">Mail::to()</code>. Lettr adds templates your team
 				edits without a deploy, generated types for every merge tag, and queued sends that never go out twice.
 			</p>
@@ -103,7 +103,7 @@
 					<GetStartedButton placement="laravel_hero" />
 					<Button
 						variant="ghost"
-						size="hero"
+						size="lg"
 						href={docsHref}
 						target="_blank"
 						rel="noopener noreferrer"
@@ -116,7 +116,7 @@
 				<button
 					type="button"
 					onclick={copyInstall}
-					class="group inline-flex w-full cursor-pointer items-center gap-2.5 bg-fade-white/5 py-3 pr-3.5 pl-4 text-left font-code text-[0.75rem] leading-[18px] sm:gap-3.5 sm:text-[0.875rem] shadow-[inset_0_0_0_1px_rgb(255_255_255/0.12)] transition-colors hover:bg-fade-white/10 sm:w-fit md:text-[0.9375rem]"
+					class="group inline-flex w-full cursor-pointer items-center gap-2.5 bg-fade-white/5 py-3 pr-3.5 pl-4 text-left font-code text-xs leading-[18px] sm:gap-3.5 sm:text-sm shadow-[inset_0_0_0_1px_rgb(255_255_255/0.12)] transition-colors hover:bg-fade-white/10 sm:w-fit md:text-body-sm"
 					aria-label="Copy install command: {installCommand}"
 				>
 					<span class="text-primary narrow:hidden" aria-hidden="true">$</span>

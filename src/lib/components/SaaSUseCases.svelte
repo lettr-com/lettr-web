@@ -63,15 +63,15 @@
 		<div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
 			{#each useCases as useCase}
 				<div data-usecase class="group">
-					<h3 class="text-sm text-surface font-medium leading-tight tracking-tight mb-3">{useCase.title}</h3>
+					<h3 class="text-sm text-surface leading-tight tracking-tight mb-3">{useCase.title}</h3>
 					<div class="border border-border/40 bg-white p-3 transition duration-200 group-hover:-translate-y-0.5 group-hover:shadow-[0_8px_24px_-12px_rgba(236,16,75,0.2)] group-hover:border-primary/40">
 						<div class="flex items-center gap-2 mb-2">
 							<div class="w-7 h-7 bg-primary/10 flex items-center justify-center flex-shrink-0">
 								<useCase.icon size={14} class="text-primary" />
 							</div>
-							<span class="text-[13px] text-surface font-medium">{useCase.sender}</span>
+							<span class="text-caption text-surface font-medium">{useCase.sender}</span>
 						</div>
-						<p class="text-[13px] text-surface font-semibold mb-2 truncate">{useCase.subject}</p>
+						<p class="text-caption text-surface font-semibold mb-2 truncate">{useCase.subject}</p>
 						<div class="inline-flex items-center gap-1 text-[10px] text-primary bg-primary/10 px-1.5 py-0.5 font-medium uppercase tracking-wide">
 							<span class="w-1 h-1 rounded-full bg-primary animate-pulse"></span>
 							{useCase.badge}

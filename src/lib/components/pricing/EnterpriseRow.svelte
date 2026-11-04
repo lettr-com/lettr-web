@@ -32,8 +32,8 @@
 		: 'bg-white'}"
 >
 	<div class="flex flex-col gap-1.5">
-		<h3 class="m-0 font-heading text-base leading-5 font-semibold {selected ? 'text-white' : 'text-surface'}">Enterprise</h3>
-		<p class="m-0 text-[0.9375rem] leading-[22px] {selected ? 'text-white/80' : 'text-muted'}">{description}</p>
+		<h3 class="m-0 font-heading text-base leading-5 {selected ? 'text-white' : 'text-surface'}">Enterprise</h3>
+		<p class="m-0 text-body-sm leading-[22px] {selected ? 'text-white/80' : 'text-muted'}">{description}</p>
 	</div>
 	<Button
 		href="/demo/"

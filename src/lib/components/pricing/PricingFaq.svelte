@@ -24,11 +24,11 @@
 	})}<\/script>`}
 </svelte:head>
 
-<section id="faq" aria-labelledby="faq-heading" class="mx-auto flex max-w-[1100px] flex-col gap-10 lg:flex-row lg:items-start lg:gap-20">
-	<div class="flex shrink-0 flex-col gap-5 lg:w-[340px]">
-		<h2 id="faq-heading" class="m-0 flex flex-col font-heading text-[1.875rem] leading-[1.2] tracking-[-0.025em] text-surface sm:text-[2.5rem] sm:leading-[46px]">
+<section id="faq" aria-labelledby="faq-heading" class="mx-auto flex max-w-wide flex-col gap-10 lg:flex-row lg:items-start lg:gap-20">
+	<div class="flex shrink-0 flex-col gap-5 lg:w-[360px]">
+		<h2 id="faq-heading" class="m-0 flex flex-col type-h2 text-surface">
 			Frequently asked
-			<em class="font-serif text-[2.125rem] leading-[1.1] font-medium text-primary sm:text-[2.875rem] sm:leading-[50px]">questions</em>
+			<em class="type-accent text-primary">questions</em>
 		</h2>
 		<p class="m-0 text-[1.0625rem] leading-[27px] text-muted">Common questions about Lettr's email platform for SaaS companies.</p>
 	</div>
@@ -37,21 +37,21 @@
 		{#each faqs as faq, i}
 			{@const isOpen = openIndex === i}
 			<div class="border-b border-border">
-				<h3 class="m-0">
+				<h3 class="m-0 type-h6">
 					<button
 						type="button"
 						onclick={() => toggle(i)}
 						aria-expanded={isOpen}
 						aria-controls="faq-panel-{i}"
-						class="flex w-full cursor-pointer items-center justify-between gap-6 py-[22px] text-left"
+						class="flex w-full cursor-pointer items-center justify-between gap-6 py-6 text-left"
 					>
-						<span class="font-heading text-base leading-[26px] font-medium text-surface sm:text-lg">{faq.question}</span>
+						<span class="font-heading text-base leading-[26px] text-surface sm:text-lg">{faq.question}</span>
 						<span class="w-5 shrink-0 text-center text-[1.625rem] leading-[26px] {isOpen ? "text-primary after:content-['−']" : "text-surface after:content-['+']"}" aria-hidden="true"></span>
 					</button>
 				</h3>
 				{#if isOpen}
 					<div id="faq-panel-{i}" transition:slide={{ duration: 200 }}>
-						<p class="m-0 pr-0 pb-[22px] text-base leading-[26px] text-muted sm:pr-11">{faq.answer}</p>
+						<p class="m-0 pr-0 pb-6 text-base leading-[26px] text-muted sm:pr-11">{faq.answer}</p>
 					</div>
 				{/if}
 			</div>

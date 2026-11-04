@@ -28,7 +28,7 @@
 				<a href="/blog/{item.slug}/" class="group flex items-start gap-4">
 					<ArtImage slug={item.slug} category={item.category} art={item.art} variant="thumb" decorative class="size-24 shrink-0" />
 					<span class="flex flex-col gap-1.5">
-						<span class="text-[13px] text-subtle">{item.category} · {item.readTime}</span>
+						<span class="text-caption text-subtle">{item.category} · {item.readTime}</span>
 						<span class="font-heading text-[17px] leading-[1.35] text-balance text-surface transition-colors group-hover:text-primary">{noWidow(item.title)}</span>
 					</span>
 				</a>
