@@ -81,5 +81,5 @@ What the overhaul found before it changed anything:
 ## Open decisions
 
 - **Eyebrows:** the older landing and platform pages still have small "— SMTP RELAY" labels above headings. The owner's rule is no eyebrows; removing them changes those pages' content, so it waits for a decision. Their tracking is unified (`tracking-label`) meanwhile.
-- **Pricing components on the open slider work** (`PricingSlider`, `MarketingPricing`, `ModeTabs`, `TransactionalPricing`, `VolumeCard`) were left untouched to avoid conflicts. Move them onto the roles after that work merges; its `GetStartedButton` call sites need `size="lg"` instead of `"hero"`.
+- **Pricing slider numerals and mode tabs** keep their own large Zalando and Redaction sizes (the 64px volume, the serif price, the serif tab label): they are data display inside an interactive control, not headings.
 - **Cookie banner** buttons keep their own neutral outline style.

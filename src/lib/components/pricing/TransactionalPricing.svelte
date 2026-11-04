@@ -50,7 +50,7 @@
 	});
 </script>
 
-<div class="mx-auto flex max-w-[1100px] flex-col gap-4">
+<div class="mx-auto flex max-w-wide flex-col gap-4">
 	<h2 class="sr-only">Transactional plans</h2>
 	<VolumeCard
 		question={transactionalQuestion}
@@ -77,7 +77,7 @@
 			>
 				<div class="flex flex-col gap-2.5">
 					<div class="flex h-[22px] items-center justify-between">
-						<h3 class="m-0 font-heading text-base leading-5 font-semibold {selected ? 'text-primary-outline' : 'text-muted'}">{plan.name}</h3>
+						<h3 class="m-0 font-heading text-base leading-5 {selected ? 'text-primary-outline' : 'text-muted'}">{plan.name}</h3>
 						{#if selected}
 							<span data-markdown="skip" class="bg-primary px-2 py-[3px] text-xs leading-4 font-semibold text-white">Your volume</span>
 						{/if}
@@ -92,7 +92,7 @@
 				<ul class="m-0 flex flex-1 list-none flex-col border-t p-0 {selected ? 'border-white/15' : 'border-border/60'}">
 					{#each plan.features as feature, i}
 						<li
-							class="flex items-center gap-3 py-[11px] text-[0.9375rem] leading-[22px] {i < plan.features.length - 1
+							class="flex items-center gap-3 py-[11px] text-body-sm leading-[22px] {i < plan.features.length - 1
 								? selected
 									? 'border-b border-white/10'
 									: 'border-b border-[#f0eaec]'

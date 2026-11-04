@@ -109,12 +109,12 @@
 	}
 
 	const h2Class =
-		'font-heading text-balance text-[1.875rem] leading-[1.27] tracking-[-0.02em] text-surface md:text-[2.625rem] md:leading-[48px]';
-	const accentClass = 'font-serif text-[2.125rem] leading-none font-medium text-primary md:text-[3rem]';
+		'type-h2 text-balance text-surface';
+	const accentClass = 'type-accent text-primary';
 	// One cell of the 72-cell art is 2px on phones and 3px from md up.
 	const artClass =
 		'pointer-events-none -my-2 w-36 self-end [image-rendering:pixelated] md:absolute md:top-6 md:my-0 md:w-[216px]';
-	const introClass = 'text-pretty text-[1.0625rem] leading-[1.6] text-muted md:text-body md:leading-[30px]';
+	const introClass = 'type-lead text-pretty text-muted';
 </script>
 
 <Seo
@@ -131,26 +131,26 @@
 <section aria-labelledby="about-heading" class="relative -mx-6 overflow-hidden border-b border-border/30 px-6 pt-page pb-14 md:pb-24">
 	<div class="pointer-events-none absolute -top-48 left-1/2 h-[360px] w-[min(1100px,140%)] -translate-x-1/2 bg-primary opacity-[0.28] blur-[130px]" aria-hidden="true"></div>
 
-	<div class="relative mx-auto flex max-w-[820px] flex-col items-center text-center">
+	<div class="relative mx-auto flex max-w-content flex-col items-center text-center">
 		<h1
 			id="about-heading"
-			class="mb-6 text-balance text-[2.25rem] leading-[1.06] font-normal tracking-[-0.025em] text-surface sm:text-[3.5rem] lg:text-[4rem]"
+			class="mb-6 type-display text-balance text-surface"
 		>
 			We’ve been doing email<br />
-			<span class="font-serif text-[2.625rem] font-medium text-primary italic sm:text-[4rem] lg:text-[4.5rem]">since {emailInfraSince}.</span>
+			<span class="type-accent leading-[1.15] text-primary">since {emailInfraSince}.</span>
 		</h1>
 
-		<p class="mb-8 max-w-[620px] text-[1.0625rem] text-muted md:text-body md:leading-[30px]">
+		<p class="mb-8 max-w-[620px] type-lead text-muted">
 			Lettr is the email platform for SaaS. We build it in Europe, as the team behind Ecomail, Topol and DMARCeye.
 		</p>
 
 		<div class="flex w-full flex-col items-stretch justify-center gap-3 sm:w-auto sm:flex-row sm:items-center">
 			<GetStartedButton placement="about_hero" />
-			<Button variant="secondary" size="hero" href="/demo/" onclick={trackTalkToUs}>Talk to us</Button>
+			<Button variant="secondary" size="lg" href="/demo/" onclick={trackTalkToUs}>Talk to us</Button>
 		</div>
 	</div>
 
-	<ul aria-label="The Lettr team" class="relative mx-auto mt-14 grid max-w-[1100px] grid-cols-2 gap-x-3 gap-y-7 sm:grid-cols-3 sm:gap-x-5 md:mt-20 lg:grid-cols-5">
+	<ul aria-label="The Lettr team" class="relative mx-auto mt-14 grid max-w-wide grid-cols-2 gap-x-3 gap-y-7 sm:grid-cols-3 sm:gap-x-5 md:mt-20 lg:grid-cols-5">
 		{#each team as person}
 			<li class="flex flex-col gap-3.5">
 				<img
@@ -186,9 +186,9 @@
 		</p>
 	</div>
 
-	<div class="mx-auto grid max-w-[1100px] gap-4 md:grid-cols-2 md:gap-5">
+	<div class="mx-auto grid max-w-wide gap-4 md:grid-cols-2 md:gap-5">
 		<div class="relative flex min-h-[340px] flex-col justify-between gap-6 overflow-hidden border border-white/15 bg-muted p-6 md:h-[440px] md:gap-10 md:p-9">
-			<h3 class="font-heading text-[1.75rem] leading-[1.15] tracking-[-0.02em] text-white md:text-[2.125rem] md:leading-[38px]">
+			<h3 class="type-h3 text-white">
 				Before.
 			</h3>
 			<img src="/about/before.png" alt="" width="72" height="72" class="{artClass} md:right-6" />
@@ -223,7 +223,7 @@
 		</p>
 	</div>
 
-	<ul class="mx-auto grid max-w-[1100px] gap-4 md:grid-cols-3 md:gap-5">
+	<ul class="mx-auto grid max-w-wide gap-4 md:grid-cols-3 md:gap-5">
 		{#each products as product}
 			<li>
 				<a
@@ -243,7 +243,7 @@
 						</span>
 					</div>
 					<div class="flex flex-col gap-2.5">
-						<h3 class="font-heading text-2xl leading-[30px] tracking-[-0.015em] text-surface">{product.name}</h3>
+						<h3 class="type-h3 text-surface">{product.name}</h3>
 						<p class="text-base leading-[25px] text-pretty text-muted">{product.description}</p>
 					</div>
 				</a>
@@ -260,10 +260,10 @@
 		<p class={introClass}>People notice email only when it breaks. These are the rules we build Lettr by.</p>
 	</div>
 
-	<ul class="mx-auto grid max-w-[1100px] gap-4 md:grid-cols-2 md:gap-5">
+	<ul class="mx-auto grid max-w-wide gap-4 md:grid-cols-2 md:gap-5">
 		{#each principles as principle}
 			<li class="flex flex-col gap-3 border border-border/40 bg-white p-6 md:p-9">
-				<h3 class="font-heading text-balance text-[1.375rem] leading-7 tracking-[-0.015em] text-surface md:text-[1.625rem] md:leading-8">
+				<h3 class="type-h3 text-balance text-surface">
 					{principle.title}
 				</h3>
 				<p class="text-base leading-[1.6] text-pretty text-muted md:text-[1.0625rem] md:leading-[27px]">{principle.description}</p>
