@@ -7,11 +7,12 @@
 	interface Props {
 		/** Where the button sits, sent with the click events (for example `home_brand`). */
 		placement: string;
-		variant?: 'primary' | 'secondary';
+		variant?: 'primary' | 'secondary' | 'green';
 		size?: 'default' | 'hero';
+		class?: string;
 	}
 
-	let { placement, variant = 'primary', size = 'hero' }: Props = $props();
+	let { placement, variant = 'primary', size = 'hero', class: className = '' }: Props = $props();
 
 	let registerHref: string = $state(registerUrl);
 
@@ -31,4 +32,4 @@
 	});
 </script>
 
-<Button {variant} {size} href={registerHref} onclick={track}>Get started</Button>
+<Button {variant} {size} href={registerHref} onclick={track} class={className}>Get started</Button>

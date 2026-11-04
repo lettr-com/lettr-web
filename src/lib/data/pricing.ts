@@ -169,6 +169,10 @@ export const comparisonRows: {
 
 // ---- Marketing ----
 
+/** Slider questions on /pricing; each tab's card reserves room for both so switching tabs keeps its height. */
+export const transactionalQuestion = "How many emails do you send per month?";
+export const marketingQuestion = "How many contacts do you have?";
+
 export const marketingSteps = [
   { label: "500", volume: "500", price: "$0", contacts: "500 contacts" },
   { label: "2k", volume: "2,000", price: "$10", contacts: "2,000 contacts" },

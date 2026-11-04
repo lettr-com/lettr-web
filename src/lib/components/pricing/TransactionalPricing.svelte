@@ -3,7 +3,7 @@
 	import Button from '$lib/components/Button.svelte';
 	import VolumeCard from './VolumeCard.svelte';
 	import EnterpriseRow from './EnterpriseRow.svelte';
-	import { transactionalPlans, transactionalSteps, transactionalZones, type PlanKey } from '$lib/data/pricing';
+	import { marketingQuestion, transactionalPlans, transactionalQuestion, transactionalSteps, transactionalZones, type PlanKey } from '$lib/data/pricing';
 	import { buildRegisterUrl, registerUrl } from '$lib/utils/utm';
 	import { capturePosthogEvent, trackSignupClick } from '$lib/analytics/posthog';
 	import { createChangeTracker } from '$lib/analytics/changeTracker';
@@ -53,7 +53,8 @@
 <div class="mx-auto flex max-w-[1100px] flex-col gap-4">
 	<h2 class="sr-only">Transactional plans</h2>
 	<VolumeCard
-		question="How many emails do you send per month?"
+		question={transactionalQuestion}
+		sizingQuestion={marketingQuestion}
 		labels={transactionalSteps.map((s) => s.label)}
 		volume={current.volume}
 		planName={current.name}
@@ -66,7 +67,7 @@
 		activePlan={highlighted}
 	/>
 
-	<div class="grid gap-4 md:grid-cols-3">
+	<div class="grid gap-4 max-md:order-2 md:grid-cols-3">
 		{#each plans as plan}
 			{@const selected = highlighted === plan.key}
 			<div
@@ -119,10 +120,13 @@
 		{/each}
 	</div>
 
-	<EnterpriseRow
-		description="Unlimited emails, dedicated IPs, SLA guarantee, SSO/SAML, and a dedicated account manager."
-		selected={highlighted === 'enterprise'}
-		placement="pricing_enterprise"
-		volumeLabel={current.label}
-	/>
+	<!-- on phones the selected plan sits right under the slider -->
+	<div class={highlighted === 'enterprise' ? 'max-md:order-1' : 'max-md:order-3'}>
+		<EnterpriseRow
+			description="Unlimited emails, dedicated IPs, SLA guarantee, SSO/SAML, and a dedicated account manager."
+			selected={highlighted === 'enterprise'}
+			placement="pricing_enterprise"
+			volumeLabel={current.label}
+		/>
+	</div>
 </div>
