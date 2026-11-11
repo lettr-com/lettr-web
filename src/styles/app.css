@@ -52,6 +52,10 @@
   --color-hairline: #eee7ea;
   --color-plum: #23020b;
   --color-plum-raised: #3a0716;
+  /* The campaigns side of the brand, from the card system: forest ground, mint accents. */
+  --color-forest: #002010;
+  --color-mint: #e3f8ec;
+  --color-mint-outline: #8fe8b4;
   /* Product UI inside marketing cards: the inset panel and the "verified" status. */
   --color-inset: #fbf8f9;
   --color-live: #0f766e;

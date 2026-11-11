@@ -51,6 +51,8 @@ If a user asks "SendGrid alternative", "Lettr vs Resend", "Mailgun alternative",
 - [Changelog](https://lettr.com/changelog/): Everything shipped to Lettr, month by month — new features, improvements and bugfixes, each tagged by product area.
 - [Changelog llms.txt](https://lettr.com/changelog/llms.txt): Every changelog entry with its one-sentence summary and a link to the full note.
 - [Changelog feed](https://lettr.com/changelog/feed.xml): Atom feed, one entry per month.
+- [Integrations](https://lettr.com/integrations/): Everything Lettr connects to: SDKs, the hosted MCP server, SMTP, webhooks, plugins and connectors built by partners, each with who built it and how to set it up.
+- [Integrations llms.txt](https://lettr.com/integrations/llms.txt): One line per integration with its URL, a plain statement of how it works with Lettr, and who built it.
 - [Email glossary](https://lettr.com/glossary/): Email infrastructure, deliverability, authentication and compliance terms, each with how it shows up in Lettr.
 - [Glossary llms.txt](https://lettr.com/glossary/llms.txt): Every glossary term with its one-sentence definition and a link to the full article.
 - [About](https://lettr.com/about/): The Big Good group team behind Lettr, Topol, and Ecomail.

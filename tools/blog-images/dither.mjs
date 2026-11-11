@@ -6,9 +6,10 @@
 
 import { existsSync } from "node:fs";
 import { join } from "node:path";
+import { fileURLToPath } from "node:url";
 import sharp from "sharp";
 
-const here = new URL(".", import.meta.url).pathname;
+const here = fileURLToPath(new URL(".", import.meta.url));
 const root = join(here, "../..");
 // Blog sprites live with the tool and win over the homepage hero's originals in static/,
 // which the blog still borrows where it has no redrawn version.
