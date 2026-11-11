@@ -103,6 +103,7 @@ export const integrations: Integration[] = [
     status: "live",
     lastChecked: checked,
     logo: "/images/icons/mcp.svg",
+    sortName: "MCP server",
     logoScale: 0.8,
   },
   {

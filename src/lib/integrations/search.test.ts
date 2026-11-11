@@ -1,7 +1,7 @@
 import { describe, expect, test } from "vite-plus/test";
 
 import { liveIntegrations } from "./index.ts";
-import { normalize, searchIntegrations } from "./search.ts";
+import { filterByLetter, letterOf, normalize, searchIntegrations } from "./search.ts";
 
 const live = liveIntegrations();
 const slugsFor = (query: string) => searchIntegrations(live, query).map((entry) => entry.slug);
@@ -42,5 +42,22 @@ describe("searchIntegrations", () => {
 
   test("held entries are never found", () => {
     expect(slugsFor("zapier")).toEqual([]);
+  });
+});
+
+describe("letters", () => {
+  test("an entry files under its sort name, else its name", () => {
+    expect(letterOf({ name: "Hosted MCP server", sortName: "MCP server" })).toBe("M");
+    expect(letterOf({ name: "n8n" })).toBe("N");
+    expect(letterOf({ name: "1Password" })).toBe("#");
+  });
+
+  test("filtering by letter keeps order, null keeps everything", () => {
+    expect(filterByLetter(live, "S").map((entry) => entry.slug)).toEqual([
+      "supabase",
+      "stripe",
+      "smtp-relay",
+    ]);
+    expect(filterByLetter(live, null)).toHaveLength(live.length);
   });
 });

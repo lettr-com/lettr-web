@@ -79,6 +79,8 @@ export interface Integration {
   related?: string[];
   /** Other words people search for this by, e.g. "javascript" for Node.js. Not shown. */
   keywords?: string[];
+  /** The name the A–Z filter files this under when `name` leads with a generic word ("MCP server"). */
+  sortName?: string;
   faq?: IntegrationFaq[];
   /** `<title>` (50–60 characters with the suffix), meta description (≤155) and H1 of the entry's page. Required for live entries. */
   seo?: { title: string; description: string; heading: string };

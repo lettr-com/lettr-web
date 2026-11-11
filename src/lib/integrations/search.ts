@@ -44,3 +44,27 @@ export function searchIntegrations<T extends Integration>(
     return terms.every((term) => words.includes(` ${term}`));
   });
 }
+
+// Written out so `Letter` is the 27 literals, not `string`.
+// prettier-ignore
+export const LETTERS = [
+  "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M",
+  "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", "#",
+] as const;
+export type Letter = (typeof LETTERS)[number];
+
+/** The A–Z bucket an entry files under: the first letter of its sort name, or "#" for a digit. */
+export function letterOf(entry: Pick<Integration, "name" | "sortName">): Letter {
+  const first = normalize(entry.sortName ?? entry.name)
+    .charAt(0)
+    .toUpperCase();
+  return (/[A-Z]/.test(first) ? first : "#") as Letter;
+}
+
+/** Entries filed under `letter`, in their original order; `null` keeps them all. */
+export function filterByLetter<T extends Integration>(
+  entries: readonly T[],
+  letter: Letter | null,
+): T[] {
+  return letter ? entries.filter((entry) => letterOf(entry) === letter) : [...entries];
+}
