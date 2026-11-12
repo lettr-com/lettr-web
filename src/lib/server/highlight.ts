@@ -11,6 +11,7 @@ const langs = [
   "go",
   "ruby",
   "java",
+  "rust",
   "bash",
   "shell",
 ];

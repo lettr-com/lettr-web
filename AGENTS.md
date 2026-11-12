@@ -40,6 +40,7 @@ Operational guide for coding agents working in `lettr-web`.
 - Bake the homepage hero stills from the layout in `src/lib/hero/envelopeField.ts`: `vp run hero:bake`. Re-run it whenever that layout or the hero sprites change, and commit the files it writes to `static/hero/baked/`. One-time setup in `tools/dither/README.md`.
 - Render the homepage accordion art from the scenes in `tools/blog-images/accordion.mjs`: `vp run accordion:images`. Commit the files it writes to `static/home/accordion/`.
 - Render the About page card art from the scenes in `tools/blog-images/about.mjs`: `vp run about:images`. Commit the files it writes to `static/about/`.
+- Render the integrations page art from the scenes in `tools/blog-images/integrations.mjs`: `vp run integrations:images`. Commit the files it writes to `static/integrations/`.
 
 ## Lint / Typecheck / Test Commands
 

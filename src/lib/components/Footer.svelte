@@ -89,6 +89,7 @@
 				{ label: 'Blog', href: '/blog/' },
 				{ label: 'Changelog', href: '/changelog/' },
 				{ label: 'Compare', href: '/compare/' },
+				{ label: 'Integrations', href: '/integrations/' },
 				{ label: 'Email glossary', href: '/glossary/' },
 				{ label: 'Status', href: 'https://status.lettr.com', external: true }
 			]

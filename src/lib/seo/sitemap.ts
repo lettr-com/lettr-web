@@ -5,6 +5,7 @@ import type { Plugin } from "vite-plus";
 import { isoDate } from "../blog/feed.ts";
 import { posts } from "../data/posts.ts";
 import { parseTermFile } from "../glossary/frontmatter.ts";
+import { integrations } from "../integrations/data.ts";
 import { escapeHtml } from "../utils/html.ts";
 
 const SITE = "https://lettr.com";
@@ -35,7 +36,7 @@ export function buildSitemap(entries: readonly SitemapEntry[]): string {
 
 const latest = (dates: string[]) => dates.sort().at(-1);
 
-/** Dates that exist in the content: when a post was published, when a glossary term was last updated. */
+/** Dates that exist in the content: when a post was published, a glossary term updated, an integration last checked. */
 export async function lastmodByPath(
   termsDir = "src/lib/glossary/terms",
 ): Promise<Map<string, string>> {
@@ -54,6 +55,11 @@ export async function lastmodByPath(
   const newestTerm = latest(updated);
   if (newestPost) dates.set("/blog/", newestPost);
   if (newestTerm) dates.set("/glossary/", newestTerm);
+
+  const live = integrations.filter((entry) => entry.status === "live");
+  for (const entry of live) dates.set(`/integrations/${entry.slug}/`, entry.lastChecked);
+  const newestCheck = latest(live.map((entry) => entry.lastChecked));
+  if (newestCheck) dates.set("/integrations/", newestCheck);
   return dates;
 }
 

@@ -4,6 +4,7 @@
 	import GlobeHemisphereWest from 'phosphor-svelte/lib/GlobeHemisphereWest';
 	import ShieldCheck from 'phosphor-svelte/lib/ShieldCheck';
 	import Button from '$lib/components/Button.svelte';
+	import HeroTooltip, { heroHoverQuery } from '$lib/components/HeroTooltip.svelte';
 	import { buildRegisterUrl, registerUrl } from '$lib/utils/utm';
 	import { capturePosthogEvent, trackSignupClick } from '$lib/analytics/posthog';
 	import { createOrbit, orbitBodies, poseAt, type OrbitBody } from './heroOrbit';
@@ -15,7 +16,7 @@
 	let registerHref: string = $state(registerUrl);
 	let stage: HTMLElement | undefined = $state();
 	let stageFrame: HTMLElement | undefined = $state();
-	const tooltips: HTMLElement[] = $state([]);
+	const tooltips: HTMLDivElement[] = $state([]);
 	let activeIndex: number | null = $state(null);
 	let isTooltipBelow = false;
 
@@ -54,6 +55,10 @@
 	];
 
 	const initial = createOrbit(orbitBodies).states;
+
+	function openTooltip(index: number) {
+		if (window.matchMedia(heroHoverQuery).matches) activeIndex = index;
+	}
 
 	function closeTooltip(index: number) {
 		if (activeIndex === index) activeIndex = null;
@@ -204,21 +209,33 @@
 		will-change: transform;
 	}
 
+	/* Same lift as the integrations board: the sprite grows a touch under the pointer. */
+	.orbit-body img {
+		transition: scale 200ms ease-out;
+	}
+
+	/* Desktop with a mouse only, like the tooltip (heroHoverQuery). */
+	@media (min-width: 1024px) and (hover: hover) {
+		.orbit-body:hover img,
+		.orbit-body:focus-visible img {
+			scale: 1.05;
+		}
+	}
+
 	.orbit-body:focus-visible {
 		outline: 2px solid var(--color-primary);
 	}
 
-	.orbit-tooltip {
+	.orbit-stage :global(.orbit-tooltip) {
 		position: absolute;
 		top: 0;
 		left: 0;
-		width: min(240px, calc(100vw - 32px));
 		pointer-events: none;
 		visibility: hidden;
 	}
 
 	/* All five stay in the prerendered markup so crawlers and the markdown twin can read them. */
-	.orbit-tooltip.is-active {
+	.orbit-stage :global(.orbit-tooltip.is-active) {
 		visibility: visible;
 		animation: tooltip-enter 0.14s ease-out;
 	}
@@ -266,8 +283,12 @@
 	}
 
 	@media (prefers-reduced-motion: reduce) {
+		.orbit-body img {
+			transition: none;
+		}
+
 		[data-animate],
-		.orbit-tooltip.is-active {
+		.orbit-stage :global(.orbit-tooltip.is-active) {
 			animation: none;
 		}
 	}
@@ -334,11 +355,11 @@
 					style:transform={transformFor(body, initial[i].angle)}
 					style:z-index={layerFor(body, initial[i].angle)}
 					style:visibility={initial[i].isParked ? 'hidden' : 'visible'}
-					onmouseenter={() => (activeIndex = i)}
+					onmouseenter={() => openTooltip(i)}
 					onmouseleave={() => closeTooltip(i)}
-					onfocus={() => (activeIndex = i)}
+					onfocus={() => openTooltip(i)}
 					onblur={() => closeTooltip(i)}
-					onclick={() => (activeIndex = i)}
+					onclick={() => openTooltip(i)}
 				>
 					<img class="block w-full" src={body.src} alt="" width="384" height="384" draggable="false" />
 				</button>
@@ -346,16 +367,14 @@
 		</div>
 
 		{#each orbitBodies as body, i (body.id)}
-			<div
-				bind:this={tooltips[i]}
+			<HeroTooltip
+				bind:ref={tooltips[i]}
 				id="orbit-tooltip-{body.id}"
 				role="tooltip"
-				class="orbit-tooltip bg-surface p-4 text-white"
-				class:is-active={activeIndex === i}
-			>
-				<p class="font-heading text-[1.0625rem] leading-[1.3] tracking-[-0.01em] text-balance">{body.title}</p>
-				<p class="mt-1.5 text-sm leading-[1.5] text-pretty text-white/80">{body.story}</p>
-			</div>
+				class="orbit-tooltip {activeIndex === i ? 'is-active' : ''}"
+				title={body.title}
+				story={body.story}
+			/>
 		{/each}
 	</div>
 </section>
