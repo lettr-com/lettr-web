@@ -8,7 +8,7 @@
 	seoTitle="Email attachment size limits by provider"
 	excerpt="The attachment size limits for Gmail, Outlook, Yahoo, and iCloud Mail, why the real ceiling is lower than the number suggests because of encoding overhead, and the practical ways to send a file that is too big to attach, including large video."
 	metaDescription="Email attachment size limits for Gmail, Outlook, Yahoo, and iCloud, why the real limit is lower than advertised, and how to send large files and videos."
-	author={{ name: 'Erik Vlčák', role: 'Customer Success Engineer', avatar: '/images/authors/erik.jpg' }}
+	author={{ name: 'Erik Vlčák', role: 'Head of Customer Engineering', avatar: '/images/authors/erik.jpg' }}
 	date="June 15, 2026"
 	datetime="2026-06-15"
 	readTime="6 min read"

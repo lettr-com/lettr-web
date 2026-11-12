@@ -50,7 +50,7 @@ Receiving server: 250 2.0.0 OK`;
 	title="The journey of an email: from API call to inbox"
 	excerpt="A step-by-step walkthrough of what happens to an email between your API call and the recipient's inbox: validation, message assembly, DKIM signing, DNS routing, the SMTP handshake, authentication, content filtering, and placement."
 	metaDescription="A step-by-step walkthrough of what happens between your API call and the inbox: validation, DKIM signing, DNS routing, the SMTP handshake, and placement."
-	author={{ name: 'Erik Vlčák', role: 'Customer Success Engineer', avatar: '/images/authors/erik.jpg' }}
+	author={{ name: 'Erik Vlčák', role: 'Head of Customer Engineering', avatar: '/images/authors/erik.jpg' }}
 	date="February 18, 2026"
 	datetime="2026-02-18"
 	dateModified="2026-06-25"

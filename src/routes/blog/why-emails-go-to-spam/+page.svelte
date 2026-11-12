@@ -18,7 +18,7 @@
 	title="Why your emails go to spam (and how to fix it)"
 	excerpt="A diagnostic guide to why emails go to spam: how spam filters actually decide, where to find the evidence (message headers, Google Postmaster Tools, Microsoft SNDS, blocklist checks), and the five causes behind most spam placement, each with the signs that identify it and the fix."
 	metaDescription="Why emails go to spam and how to find the cause: authentication, complaint rate, sender reputation, list quality or content, with a diagnostic tool for each."
-	author={{ name: 'Erik Vlčák', role: 'Customer Success Engineer', avatar: '/images/authors/erik.jpg' }}
+	author={{ name: 'Erik Vlčák', role: 'Head of Customer Engineering', avatar: '/images/authors/erik.jpg' }}
 	date="July 7, 2026"
 	datetime="2026-07-07"
 	readTime="10 min read"

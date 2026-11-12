@@ -49,7 +49,7 @@
 	seoTitle="Multilingual email campaigns in Lettr"
 	excerpt="Lettr campaigns can now send one email in several languages, and each contact receives the version that matches their language. This post covers which audiences benefit, what replaces the one-campaign-per-language setup, how messy language values like de-AT or german are handled, and what recipients see."
 	metaDescription="Lettr campaigns now send one email in several languages. Who it is for, how messy language values are matched, and what each recipient sees."
-	author={{ name: 'Erik Vlčák', role: 'Customer Success Engineer', avatar: '/images/authors/erik.jpg' }}
+	author={{ name: 'Erik Vlčák', role: 'Head of Customer Engineering', avatar: '/images/authors/erik.jpg' }}
 	date="September 16, 2026"
 	datetime="2026-09-16"
 	dateModified="2026-09-17"

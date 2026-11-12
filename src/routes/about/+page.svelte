@@ -19,7 +19,7 @@
 		{ name: 'Jakub', role: 'CEO', photo: '/about/team/jakub.webp' },
 		{ name: 'Tomas', role: 'CTO', photo: '/about/team/tomas.webp' },
 		{ name: 'Martin', role: 'CCO, Commercial', photo: '/about/team/martin.webp' },
-		{ name: 'Erik', role: 'Customer Success Engineer', photo: '/about/team/erik.webp' },
+		{ name: 'Erik', role: 'Head of Customer Engineering', photo: '/about/team/erik.webp' },
 		{ name: 'Adam', role: 'Head of Design & Creative', photo: '/about/team/adam.webp' }
 	];
 
