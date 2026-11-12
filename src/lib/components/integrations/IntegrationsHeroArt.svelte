@@ -1,10 +1,11 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
+	import HeroTooltip from '$lib/components/HeroTooltip.svelte';
 	import type { IntegrationCategory } from '$lib/integrations/types';
 
 	interface Props {
 		/** The hub's sections; each one present gets its object on the board. */
-		sections: { id: IntegrationCategory; heading: string }[];
+		sections: { id: IntegrationCategory; heading: string; intro: string }[];
 	}
 
 	let { sections }: Props = $props();
@@ -35,6 +36,13 @@
 	const nodes = $derived(
 		sections.map((section, index) => ({ ...section, ...placements[section.id], index }))
 	);
+
+	// Near the board's edges the card lines up with the sprite's side instead of its centre, so it stays on screen.
+	function tooltipAlign(x: number) {
+		if (x < 30) return 'left-0';
+		if (x > 70) return 'right-0';
+		return 'left-1/2 -translate-x-1/2';
+	}
 
 	const packets: SVGRectElement[] = $state([]);
 	const lanes = [0, 1];
@@ -127,14 +135,14 @@
 	{#each nodes as node (node.id)}
 		<a
 			href="#{node.id}"
-			class="group absolute -translate-1/2 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-surface"
+			class="group absolute -translate-1/2 hover:z-10 focus-visible:z-10 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-surface"
 			style:left="{node.x}%"
 			style:top="{node.y}%"
 			style:width="{node.size}%"
 			aria-label={node.heading}
 		>
 			<img
-				class="bob block w-full transition-transform duration-200 ease-out group-hover:scale-105 [image-rendering:pixelated] motion-reduce:transition-none"
+				class="bob block w-full transition-transform duration-200 ease-out lg:group-hover:scale-105 [image-rendering:pixelated] motion-reduce:transition-none"
 				style:rotate="{node.rotate}deg"
 				style:animation-delay="{node.index * -1.1}s"
 				src={node.src}
@@ -143,12 +151,12 @@
 				height="384"
 				draggable="false"
 			/>
-			<span
-				class="pointer-events-none absolute top-full left-1/2 -translate-x-1/2 bg-white px-2 py-1 text-caption whitespace-nowrap text-surface opacity-0 shadow-panel transition-opacity duration-150 group-hover:opacity-100 group-focus-visible:opacity-100"
+			<HeroTooltip
+				class="pointer-events-none absolute top-full {tooltipAlign(node.x)} opacity-0 transition-opacity duration-[140ms] ease-out lg:group-hover:opacity-100 lg:group-focus-visible:opacity-100 motion-reduce:transition-none"
 				aria-hidden="true"
-			>
-				{node.heading}
-			</span>
+				title={node.heading}
+				story={node.intro}
+			/>
 		</a>
 	{/each}
 </div>

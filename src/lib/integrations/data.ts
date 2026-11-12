@@ -44,6 +44,7 @@ export const integrations: Integration[] = [
   // AI agents and MCP
   {
     name: "Hosted MCP server",
+    ctaName: "a hosted MCP server",
     slug: "mcp",
     type: "AI agents and MCP",
     category: "agents",
@@ -109,6 +110,7 @@ export const integrations: Integration[] = [
   {
     name: "Agent skills",
     slug: "agent-skills",
+    lettermark: ".md",
     type: "AI agents and MCP",
     category: "agents",
     builtBy: "Lettr",
@@ -146,6 +148,7 @@ export const integrations: Integration[] = [
   {
     name: "One",
     slug: "one",
+    logo: "/images/icons/one.svg",
     type: "AI agents and MCP",
     category: "agents",
     builtBy: "One",
@@ -184,6 +187,7 @@ export const integrations: Integration[] = [
   {
     name: "Composio",
     slug: "composio",
+    logo: "/images/icons/composio.svg",
     type: "AI agents and MCP",
     category: "agents",
     builtBy: "Composio",
@@ -540,6 +544,7 @@ async fn main() -> lettr::Result<()> {
   {
     name: "Supabase",
     slug: "supabase",
+    logo: "/images/icons/supabase.svg",
     type: "Platform guide",
     category: "platforms",
     builtBy: "Lettr",
@@ -596,7 +601,6 @@ async fn main() -> lettr::Result<()> {
     status: "live",
     lastChecked: checked,
     // Supabase's brand guide: the green icon for small spaces and beside other brand icons, on light or dark.
-    brandLogo: { light: "/images/logos/supabase-icon-green-transparent.svg" },
     logoScale: 0.8,
     related: ["wordpress", "stripe", "smtp-relay"],
     faq: [
@@ -621,6 +625,7 @@ async fn main() -> lettr::Result<()> {
   {
     name: "WordPress",
     slug: "wordpress",
+    logo: "/images/icons/wordpress.svg",
     type: "Plugin",
     category: "platforms",
     builtBy: "Lettr",
@@ -682,6 +687,7 @@ async fn main() -> lettr::Result<()> {
   {
     name: "Stripe",
     slug: "stripe",
+    logo: "/images/icons/stripe.svg",
     type: "Marketplace app",
     category: "platforms",
     builtBy: "Lettr",
@@ -724,6 +730,7 @@ async fn main() -> lettr::Result<()> {
   {
     name: "n8n",
     slug: "n8n",
+    logo: "/images/icons/n8n.svg",
     type: "Automation platform",
     category: "platforms",
     builtBy: "Lettr",
@@ -786,6 +793,7 @@ async fn main() -> lettr::Result<()> {
   {
     name: "MindCloud",
     slug: "mindcloud",
+    logo: "/images/icons/mindcloud.svg",
     type: "Connector platform",
     category: "connectors",
     builtBy: "MindCloud",
@@ -822,6 +830,7 @@ async fn main() -> lettr::Result<()> {
   {
     name: "Tray.ai",
     slug: "tray",
+    logo: "/images/icons/tray.svg",
     type: "Connector platform",
     category: "connectors",
     builtBy: "Tray.ai",

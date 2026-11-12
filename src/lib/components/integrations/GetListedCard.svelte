@@ -73,7 +73,7 @@
 				<ArrowRightIcon aria-hidden="true" />
 			</Button>
 			<p class="max-w-[28ch] text-body-sm text-pretty text-white/70">
-				Found a mistake in an entry? Write to the same address.
+				Found an error? Tell us.
 			</p>
 		</div>
 	</div>

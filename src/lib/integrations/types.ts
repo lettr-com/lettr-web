@@ -66,6 +66,8 @@ export interface Integration {
   lastChecked: string;
   /** Root-relative path to a one-colour SVG glyph, tinted to the tile; entries without one get a lettermark. */
   logo?: string;
+  /** Text drawn in place of the first-letter lettermark when the entry has no glyph (".md"). */
+  lettermark?: string;
   /**
    * The company's official logo files, shown exactly as supplied (never tinted). Wins over `logo`.
    * `light` is the file for light backgrounds; `dark` for dark ones, when the brand has a separate file.
@@ -81,6 +83,8 @@ export interface Integration {
   keywords?: string[];
   /** The name the A–Z filter files this under when `name` leads with a generic word ("MCP server"). */
   sortName?: string;
+  /** How the footer CTA names the entry after "Send from", when `name` is a common noun ("a hosted MCP server"). */
+  ctaName?: string;
   faq?: IntegrationFaq[];
   /** `<title>` (50–60 characters with the suffix), meta description (≤155) and H1 of the entry's page. Required for live entries. */
   seo?: { title: string; description: string; heading: string };

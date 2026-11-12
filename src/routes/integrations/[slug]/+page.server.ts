@@ -29,7 +29,7 @@ export const load: PageServerLoad = async ({ params }) => {
     setup,
     related: relatedIntegrations(entry),
     footerCta: {
-      title: `Send from ${entry.name}`,
+      title: `Send from ${entry.ctaName ?? entry.name}`,
       accent: "for free.",
       description: "Create a Lettr account and connect it in a few steps. No credit card required.",
     },
