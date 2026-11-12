@@ -14,7 +14,7 @@ const post = {
   category: "Product",
   author: {
     name: "Erik Vlčák",
-    role: "Customer Success Engineer",
+    role: "Head of Customer Engineering",
     avatar: "/images/authors/erik.jpg",
   },
 };

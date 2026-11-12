@@ -18,7 +18,7 @@
 	title="Meet Adamko, Lettr's AI assistant"
 	excerpt="Adamko is Lettr's built-in AI assistant. He sets up a new account from nothing but a website URL, creates branded templates and campaign drafts, diagnoses DNS and delivery problems from live account data, and records every change he makes in a team-wide activity log with one-click undo."
 	metaDescription="Adamko is Lettr's built-in AI assistant: account setup from a website URL, branded templates, live deliverability diagnosis, and one-click undo."
-	author={{ name: 'Erik Vlčák', role: 'Customer Success Engineer', avatar: '/images/authors/erik.jpg' }}
+	author={{ name: 'Erik Vlčák', role: 'Head of Customer Engineering', avatar: '/images/authors/erik.jpg' }}
 	date="August 14, 2026"
 	datetime="2026-08-14"
 	readTime="5 min read"

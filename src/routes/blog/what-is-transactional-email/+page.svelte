@@ -18,7 +18,7 @@
 	title="How transactional email actually works"
 	excerpt="What separates transactional email from marketing email, why inbox providers and regulators treat them differently, and how to keep these messages reliable in production."
 	metaDescription="What separates transactional from marketing email, why inbox providers and regulators treat them differently, and how to keep them reliable in production."
-	author={{ name: 'Erik Vlčák', role: 'Customer Success Engineer', avatar: '/images/authors/erik.jpg' }}
+	author={{ name: 'Erik Vlčák', role: 'Head of Customer Engineering', avatar: '/images/authors/erik.jpg' }}
 	date="February 4, 2026"
 	datetime="2026-02-04"
 	dateModified="2026-06-25"

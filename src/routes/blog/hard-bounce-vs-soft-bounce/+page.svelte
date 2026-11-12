@@ -19,7 +19,7 @@
 	seoTitle="Hard bounce vs. soft bounce explained"
 	excerpt="What an email bounce is, the difference between a hard bounce (a permanent failure such as an address that does not exist) and a soft bounce (a temporary one such as a full mailbox), the common causes of each, why a bounce rate above roughly 2% damages sender reputation, and how to handle both kinds correctly."
 	metaDescription="Hard bounce vs. soft bounce explained: what each email bounce means, what causes them, how they affect sender reputation, and how to handle them."
-	author={{ name: 'Erik Vlčák', role: 'Customer Success Engineer', avatar: '/images/authors/erik.jpg' }}
+	author={{ name: 'Erik Vlčák', role: 'Head of Customer Engineering', avatar: '/images/authors/erik.jpg' }}
 	date="June 24, 2026"
 	datetime="2026-06-24"
 	readTime="7 min read"
