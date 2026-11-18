@@ -269,7 +269,7 @@
 
 	@media (min-width: 1200px) {
 		.orbit-hero {
-			--stage: clamp(640px, min(60vw, 105vh), 1040px);
+			--stage: clamp(560px, min(48vw, 84vh), 880px);
 			min-height: calc(var(--stage) * 0.9 + 60px);
 		}
 
