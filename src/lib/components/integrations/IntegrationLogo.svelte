@@ -9,9 +9,11 @@
 		tone?: string;
 		/** The tile is dark, so a brand's dark-background file is used where it has one. */
 		onDark?: boolean;
+		/** Extra classes for the mark itself, e.g. a responsive scale. */
+		class?: string;
 	}
 
-	let { entry, size = 48, tone = 'text-surface', onDark = false }: Props = $props();
+	let { entry, size = 48, tone = 'text-surface', onDark = false, class: className = '' }: Props = $props();
 
 	// marks that run edge to edge are drawn smaller so every logo reads the same size
 	const markSize = $derived(Math.round(size * (entry.logoScale ?? 1)));
@@ -29,7 +31,7 @@
 	<img
 		src={brandSrc}
 		alt=""
-		class="block shrink-0 object-contain opacity-75"
+		class="block shrink-0 object-contain opacity-75 {className}"
 		style:width="{markSize}px"
 		style:height="{markSize}px"
 		loading="lazy"
@@ -37,7 +39,7 @@
 	/>
 {:else if entry.logo}
 	<span
-		class="block shrink-0 bg-current opacity-75 {tone}"
+		class="block shrink-0 bg-current opacity-75 {tone} {className}"
 		style:width="{markSize}px"
 		style:height="{markSize}px"
 		style:mask="url({entry.logo}) center / contain no-repeat"
@@ -46,7 +48,7 @@
 	></span>
 {:else}
 	<span
-		class="flex shrink-0 items-center justify-center font-heading leading-none opacity-75 {tone}"
+		class="flex shrink-0 items-center justify-center font-heading leading-none opacity-75 {tone} {className}"
 		style:width="{size}px"
 		style:height="{size}px"
 		style:font-size="{Math.round(size * initialScale)}px"
