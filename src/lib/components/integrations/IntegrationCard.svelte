@@ -36,7 +36,10 @@
 			? 'aspect-square'
 			: 'aspect-[4/3]'} transition-transform duration-200 ease-out group-hover:-translate-y-0.5 motion-reduce:transition-none motion-reduce:group-hover:translate-y-0"
 	>
-		<IntegrationLogo {entry} size={isFeatured ? 96 : 56} tone={colors.logo} onDark={colors.dark} />
+		<!-- the two-column grid below lg has wider tiles, so its logos draw a fifth larger -->
+		<span class="block max-lg:scale-120">
+			<IntegrationLogo {entry} size={isFeatured ? 96 : 56} tone={colors.logo} onDark={colors.dark} />
+		</span>
 		<span class="absolute top-3 right-3 md:top-4 md:right-4 {colors.arrow}">
 			{#if external}
 				<ArrowUpRightIcon size={18} aria-label="Opens in a new tab" />

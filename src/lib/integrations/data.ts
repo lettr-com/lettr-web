@@ -225,6 +225,53 @@ export const integrations: Integration[] = [
 
   // SDKs and frameworks
   {
+    name: "Elaichi",
+    slug: "elaichi",
+    logo: "/images/icons/elaichi.svg",
+    logoScale: 1.9,
+    type: "AI agents and MCP",
+    category: "agents",
+    builtBy: "Truto",
+    statement:
+      "Lettr works with Elaichi through 71 tools on Elaichi's MCP endpoint, with access set per role.",
+    summary: "71 Lettr tools for AI assistants, with access set per role.",
+    canDo: [
+      "Connect Claude, ChatGPT, Cursor or Copilot through one MCP endpoint",
+      "Choose which Lettr tools each role can use, with every call logged",
+      "Send and schedule email",
+      "Manage contacts, lists, topics and properties",
+      "Work with templates, domains and campaigns",
+    ],
+    setup: [
+      {
+        kind: "steps",
+        steps: [
+          "Connect your Lettr account in Elaichi with a Lettr API key.",
+          "Add Elaichi's MCP endpoint to your AI assistant and sign in to Elaichi.",
+          "Choose which Lettr tools each role can use.",
+        ],
+      },
+      {
+        kind: "code",
+        label: "Add Elaichi to Claude Code",
+        lang: "bash",
+        code: "claude mcp add --transport http elaichi --scope user https://api.elaichi.ai/mcp",
+      },
+    ],
+    auth: "API key",
+    links: { listing: "https://elaichi.ai/connectors/lettr" },
+    keywords: ["mcp", "truto", "ai agents"],
+    status: "live",
+    lastChecked: "2026-11-18",
+    related: ["mcp", "truto", "one"],
+    seo: {
+      title: "Elaichi Email Integration: Lettr Tools for AI Agents | Lettr",
+      description:
+        "Lettr works with Elaichi through 71 tools on one MCP endpoint for Claude, ChatGPT and Cursor, with access set per role. Built by Truto.",
+      heading: "Use Lettr in Elaichi",
+    },
+  },
+  {
     name: "Node.js",
     slug: "nodejs",
     type: "SDK",
@@ -868,6 +915,168 @@ async fn main() -> lettr::Result<()> {
 
   // Works with everything else
   {
+    name: "FlowRunner",
+    slug: "flowrunner",
+    logo: "/images/icons/flowrunner.svg",
+    type: "Connector platform",
+    category: "connectors",
+    builtBy: "FlowRunner",
+    statement:
+      "Lettr works with FlowRunner through 45 actions and 22 email event triggers in FlowRunner's integration catalog.",
+    summary: "45 Lettr actions and 22 email event triggers for your flows.",
+    canDo: [
+      "Send, schedule and cancel email",
+      "Start flows on email events, from delivery to inbound mail",
+      "Manage templates and domains",
+      "Manage contacts, lists, topics and segments",
+      "Create, send and schedule campaigns",
+    ],
+    setup: [
+      {
+        kind: "steps",
+        steps: [
+          "Open the Lettr integration in FlowRunner.",
+          "Connect your Lettr account with a Lettr API key.",
+          "Add Lettr triggers and actions to your flows.",
+        ],
+      },
+    ],
+    auth: "API key",
+    links: { listing: "https://flowrunner.ai/integrations/lettr" },
+    keywords: ["orchestration", "workflow automation"],
+    status: "live",
+    lastChecked: "2026-11-18",
+    related: ["apiant", "tray", "mindcloud"],
+    seo: {
+      title: "FlowRunner Email Integration: Lettr Flow Actions | Lettr",
+      description:
+        "Lettr works with FlowRunner through 45 actions and 22 triggers: send and schedule email, run flows on email events, manage contacts and campaigns.",
+      heading: "Use Lettr in FlowRunner",
+    },
+  },
+  {
+    name: "Truto",
+    slug: "truto",
+    logo: "/images/icons/truto.svg",
+    logoScale: 1.3,
+    type: "Connector platform",
+    category: "connectors",
+    builtBy: "Truto",
+    statement:
+      "Lettr works with Truto through a proxy API and 71 tools in Truto's connector catalog.",
+    summary: "The Lettr API through Truto's unified API, with 71 tools.",
+    canDo: [
+      "Call the Lettr API through Truto's proxy API",
+      "Send and schedule email",
+      "Manage templates, domains and webhooks",
+      "Manage contacts, lists, topics and segments",
+      "Create, send and schedule campaigns",
+    ],
+    setup: [
+      {
+        kind: "steps",
+        steps: [
+          "Open the Lettr connector in Truto.",
+          "Link a Lettr account through Truto's connection flow.",
+          "Call Lettr through Truto's proxy API or its tools.",
+        ],
+      },
+    ],
+    auth: "Set up in the platform",
+    links: { listing: "https://truto.one/integrations/detail/lettr" },
+    keywords: ["unified api", "proxy api"],
+    status: "live",
+    lastChecked: "2026-11-18",
+    related: ["elaichi", "unified", "composio"],
+    seo: {
+      title: "Truto Email Integration: Lettr Through a Unified API | Lettr",
+      description:
+        "Lettr works with Truto through a proxy API and 71 tools: send and schedule email, manage templates, domains, contacts and campaigns. Built by Truto.",
+      heading: "Use Lettr in Truto",
+    },
+  },
+  {
+    name: "Unified.to",
+    slug: "unified",
+    logo: "/images/icons/unified.svg",
+    logoScale: 0.8,
+    type: "Connector platform",
+    category: "connectors",
+    builtBy: "Unified.to",
+    statement: "Lettr works with Unified.to through its marketing, messaging and passthrough APIs.",
+    summary: "Lists, contacts, campaigns and email through Unified.to's API.",
+    canDo: [
+      "Manage audience lists and contacts",
+      "Create and list campaigns",
+      "Read campaign reports",
+      "Send email and read sent email",
+      "Call any Lettr endpoint through the passthrough API",
+    ],
+    setup: [
+      {
+        kind: "steps",
+        steps: [
+          "Open the Lettr integration in Unified.to.",
+          "Connect a Lettr account with a Lettr API key.",
+          "Call Lettr through Unified.to's marketing, messaging or passthrough API.",
+        ],
+      },
+    ],
+    auth: "API key",
+    links: { listing: "https://docs.unified.to/integrations/lettr" },
+    keywords: ["unified api", "martech"],
+    status: "live",
+    lastChecked: "2026-11-18",
+    related: ["truto", "flowrunner", "apiant"],
+    seo: {
+      title: "Unified.to Email Integration: Lettr Through One API | Lettr",
+      description:
+        "Lettr works with Unified.to through its marketing, messaging and passthrough APIs: manage lists, contacts and campaigns, and send email.",
+      heading: "Use Lettr in Unified.to",
+    },
+  },
+  {
+    name: "APIANT",
+    slug: "apiant",
+    logo: "/images/icons/apiant.svg",
+    logoScale: 1.7,
+    type: "Connector platform",
+    category: "connectors",
+    builtBy: "APIANT",
+    statement:
+      "Lettr works with APIANT through 23 actions and an email event trigger in APIANT's connection catalog.",
+    summary: "23 Lettr actions and an email event trigger for agent-built integrations.",
+    canDo: [
+      "Send and schedule email, with or without a template",
+      "Start an integration when Lettr reports an email event",
+      "Manage contacts, audience lists and templates",
+      "Create, send and schedule campaigns",
+      "List domains and sent email",
+    ],
+    setup: [
+      {
+        kind: "steps",
+        steps: [
+          "Sign in to APIANT and describe the integration you want.",
+          "Connect your Lettr account with a Lettr API key.",
+          "Review the plan APIANT's agent writes, then approve it.",
+        ],
+      },
+    ],
+    auth: "API key",
+    links: { listing: "https://apiant.ai/connections/lettr" },
+    keywords: ["ipaas", "workflow automation"],
+    status: "live",
+    lastChecked: "2026-11-18",
+    related: ["flowrunner", "tray", "mindcloud"],
+    seo: {
+      title: "APIANT Email Integration: Lettr Actions and Trigger | Lettr",
+      description:
+        "Lettr works with APIANT through 23 actions and an email event trigger: send and schedule email, manage contacts, templates and campaigns.",
+      heading: "Use Lettr in APIANT",
+    },
+  },
+  {
     name: "SMTP relay",
     slug: "smtp-relay",
     type: "Protocol",
@@ -958,6 +1167,7 @@ async fn main() -> lettr::Result<()> {
   {
     name: "Webhooks",
     slug: "webhooks",
+    logo: "/images/icons/webhooks.svg",
     type: "Protocol",
     category: "everything",
     builtBy: "Lettr",

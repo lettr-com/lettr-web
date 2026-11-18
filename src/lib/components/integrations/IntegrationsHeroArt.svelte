@@ -162,12 +162,13 @@
 </div>
 
 <style>
-	/* Dashes about the size of a dither dot, so the cables read as part of the art. */
+	/* A hairline at every board size: width and dashes are in screen pixels, not board units. */
 	.cable {
 		fill: none;
 		stroke: var(--color-primary-outline);
-		stroke-width: 0.8;
-		stroke-dasharray: 1.6 1.6;
+		stroke-width: 2.5px;
+		stroke-dasharray: 6px 6px;
+		vector-effect: non-scaling-stroke;
 	}
 
 	.packet {
