@@ -238,11 +238,15 @@ const resourcesMenu: NavMenu = {
           href: "/compare/",
         },
         {
+          label: "Integrations",
+          description: "SDKs, MCP and partner connectors",
+          href: "/integrations/",
+        },
+        {
           label: "Email glossary",
           description: "Email terms, explained",
           href: "/glossary/",
         },
-        { label: "Changelog", description: "What shipped, month by month", href: "/changelog/" },
       ],
     },
     {
@@ -260,10 +264,19 @@ const resourcesMenu: NavMenu = {
           description: "Book a call with the team",
           href: salesHref,
         },
+        { label: "Changelog", description: "What shipped, month by month", href: "/changelog/" },
       ],
     },
   ],
-  activePrefixes: ["/blog/", "/compare/", "/glossary/", "/changelog/", "/about/", "/support/"],
+  activePrefixes: [
+    "/blog/",
+    "/compare/",
+    "/integrations/",
+    "/glossary/",
+    "/changelog/",
+    "/about/",
+    "/support/",
+  ],
 };
 
 export const menus: NavMenu[] = [productMenu, developersMenu, resourcesMenu];
