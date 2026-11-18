@@ -1,6 +1,7 @@
 <script lang="ts">
 	import ArrowRight from 'phosphor-svelte/lib/ArrowRight';
 	import ArrowUpRight from 'phosphor-svelte/lib/ArrowUpRight';
+	import Button from '$lib/components/Button.svelte';
 	import LaneMark from '$lib/components/nav/LaneMark.svelte';
 	import {
 		docsUrl,
@@ -121,37 +122,32 @@
 		{@const quickstarts = section('quickstarts')}
 		<div class="mx-auto grid max-w-page grid-cols-[1fr_1fr_1.4fr] gap-10 px-6 pt-7 pb-8">
 			{#if docs}
-				<a
-					href={docs.href}
-					target="_blank"
-					rel="noopener noreferrer"
-					class="group flex flex-col justify-between gap-5 bg-plum p-6 {focusRing}"
-					onclick={() => onLinkClick(docs)}
-				>
-					<span class="flex flex-col gap-2">
-						<span class="font-code text-[11px] tracking-label text-primary-outline uppercase">
-							Documentation
-						</span>
-						<span class="font-heading text-[22px] leading-7 tracking-[-0.02em] text-white">
-							Send your first email in a few minutes.
-						</span>
-					</span>
-					<span class="flex flex-col gap-3.5">
+				<!-- Most Developers links land in the docs, so the docs get the panel's one solid button. -->
+				<div class="flex flex-col justify-between gap-5 bg-plum p-6">
+					<div class="flex flex-col gap-2">
+						<p class="type-h3 text-white">Documentation</p>
+						<p class="text-body-sm text-pretty text-white/70">
+							Guides, API reference and quickstarts. Send your first email in a few minutes.
+						</p>
+					</div>
+					<div class="flex flex-col gap-3">
 						<code
 							class="block overflow-hidden bg-plum-raised px-3 py-2.5 text-xs leading-[18px] text-ellipsis whitespace-nowrap text-[#F9A8B8]"
 							aria-hidden="true">$ composer require lettr/lettr-laravel</code
 						>
-						<span class="flex items-center gap-1.5 text-caption font-semibold text-white">
-							Open docs.lettr.com
-							<ArrowUpRight
-								size={12}
-								class="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
-								aria-hidden="true"
-							/>
+						<Button
+							href={docs.href}
+							target="_blank"
+							rel="noopener noreferrer"
+							class="w-full"
+							onclick={() => onLinkClick(docs)}
+						>
+							Open the docs
+							<ArrowUpRight aria-hidden="true" />
 							<span class="sr-only">(opens in a new tab)</span>
-						</span>
-					</span>
-				</a>
+						</Button>
+					</div>
+				</div>
 			{/if}
 			{#if reference}
 				<div class="flex flex-col gap-1">
