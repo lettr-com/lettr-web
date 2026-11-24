@@ -46,6 +46,14 @@ const marketing = {
 };
 
 export const postLinks: Record<string, PostLinks> = {
+  "free-smtp-servers": {
+    terms: [
+      term("smtp-relay", "SMTP Relay"),
+      term("warm-up", "Warm-Up"),
+      term("shared-ip", "Shared IP"),
+    ],
+    product: smtp,
+  },
   "best-transactional-email-services": {
     terms: [
       term("transactional-email", "Transactional Email"),

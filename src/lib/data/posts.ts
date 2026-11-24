@@ -16,6 +16,17 @@ export interface PostMeta {
 // Used by the blog index listing and the "Related articles" block on each post.
 export const posts: PostMeta[] = [
   {
+    slug: "free-smtp-servers",
+    category: "Fundamentals",
+    title: "12 best free SMTP servers, compared",
+    excerpt:
+      "Twelve free SMTP servers compared on monthly and daily sending limits, with the use cases and senders each one fits.",
+    author: "Jack Zagorski",
+    date: "November 24, 2026",
+    readTime: "12 min read",
+    art: { object: "server", rotate: -12 },
+  },
+  {
     slug: "email-campaigns-from-chatgpt-or-claude",
     category: "Product",
     title: "For marketers: check, schedule, and send email campaigns from ChatGPT or Claude",
