@@ -25,3 +25,7 @@ Thumbs.db
 # Vite
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
+
+# Nix dev shell (flake.nix) — direnv cache and personal overrides
+/.direnv
+/.envrc.local
