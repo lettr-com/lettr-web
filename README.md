@@ -16,6 +16,11 @@ Landing site for Lettr, built with SvelteKit 2, Svelte 5, TypeScript, and Tailwi
 pnpm install
 ```
 
+With Nix, `flake.nix` provides Node 22 and pnpm 10 (`nix develop`, or
+`direnv allow` once to enter it automatically via `.envrc`). It also puts `vp`
+from `node_modules/.bin` on PATH and sets the dev port to 65173
+(`vp dev --port $LETTR_WEB_PORT`); personal overrides go in `.envrc.local`.
+
 ## Development
 
 ```sh
