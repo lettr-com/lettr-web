@@ -107,7 +107,7 @@ resource "aws_cloudfront_origin_access_control" "site" {
 resource "aws_cloudfront_function" "append_index" {
   name    = "${local.name}-append-index"
   runtime = "cloudfront-js-2.0"
-  comment = "One URL per page (301 to the lowercase trailing-slash path and through redirects.json), then /path/ to /path/index.html (index.md for Accept: text/markdown) so SvelteKit trailing-slash pages resolve on S3."
+  comment = "301 to one lowercase trailing-slash URL + redirects.json; /path/ to index.html or index.md"
   publish = true
   code    = replace(file("${path.module}/cloudfront/viewer-request.js"), "__REDIRECTS__", jsonencode(local.redirects))
 }
